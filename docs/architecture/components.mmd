@@ -1,0 +1,18 @@
+flowchart TD
+  core[数值与错误契约 · implemented]
+  nozzle[理想喷管模型 · implemented]
+  adapters[输入 / 输出 / 平台 · implemented]
+  cli[命令行用例编排 · implemented]
+  tooling[任务 / 质量 / 运行追溯 · implemented]
+  thermo[热化学与物性 · planned]
+  cycle[整机循环与损失 · planned]
+  nozzle --> core
+  adapters --> core
+  adapters --> nozzle
+  cli --> core
+  cli --> nozzle
+  cli --> adapters
+  thermo --> core
+  cycle --> core
+  cycle --> nozzle
+  cycle --> thermo

@@ -1,0 +1,620 @@
+{
+  "schema_version": 1,
+  "revision": 3,
+  "context": {
+    "phase": "C17教学基线可用；真实型号研究待深化",
+    "evidence_cutoff": "2026-09-29",
+    "next_tasks": [
+      "RES-001",
+      "RES-002",
+      "RES-003"
+    ],
+    "facts": [
+      "核心为定比热理想喷管，不能作为真实发动机性能预测",
+      "本机GCC Debug/Release已验证；CMake/远端CI/Linux验证状态须据实际报告",
+      "已有43份来源快照与5份PDF，来源新鲜度与文件完整性分别核验"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "ORG-001",
+      "title": "盘点与agent项目组织",
+      "status": "DONE",
+      "priority": 2,
+      "depends_on": [],
+      "required_artifacts": [
+        "AGENTS.md",
+        "taskshot/2026-10-01_001_project-foundation.md"
+      ],
+      "acceptance": [
+        "已完成；记录见下方本轮验收链接"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": {
+        "kind": "historical",
+        "reference": "taskshot/2026-10-01_003_engineering-foundation.md"
+      }
+    },
+    {
+      "id": "PLAN-001",
+      "title": "完整研究思路与执行规划",
+      "status": "DONE",
+      "priority": 2,
+      "depends_on": [
+        "ORG-001"
+      ],
+      "required_artifacts": [
+        "docs/project-plan.md",
+        "taskshot/2026-10-01_002_project-plan.md"
+      ],
+      "acceptance": [
+        "目标、模块、研究算例、数据条件、验证、分工、阶段产物和范围调整策略已整理；未执行的计算不算完成"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": {
+        "kind": "historical",
+        "reference": "taskshot/2026-10-01_003_engineering-foundation.md"
+      }
+    },
+    {
+      "id": "ENG-001",
+      "title": "工程初期基底与首个可验证纵向功能",
+      "status": "DONE",
+      "priority": 2,
+      "depends_on": [
+        "PLAN-001"
+      ],
+      "required_artifacts": [
+        "docs/engineering.md",
+        "taskshot/2026-10-01_003_engineering-foundation.md"
+      ],
+      "acceptance": [
+        "本机Debug/Release各190项核心检查+10组CLI测试通过，成功/失败运行和防覆盖已核验；CMake/远端CI未执行"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": {
+        "kind": "historical",
+        "reference": "taskshot/2026-10-01_003_engineering-foundation.md"
+      }
+    },
+    {
+      "id": "RES-001",
+      "title": "型号版本与参数证据深化",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "调研/专题/RES-001_型号版本与参数缺口.md"
+      ],
+      "acceptance": [
+        "四类级段/发动机对象的版本、采用/候选参数与缺口可追溯，不强填未知"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "RES-002",
+      "title": "开源核心代码及C移植评估",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "调研/专题/RES-002_C移植评估.md"
+      ],
+      "acceptance": [
+        "至少两个优先项目的固定版本、真实调用链、核心依赖、许可与验证范围；给路线建议"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "RES-003",
+      "title": "课程公式和基准算例抽取",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "调研/专题/RES-003_公式与基准.md"
+      ],
+      "acceptance": [
+        "符号/单位/假设及页码齐全，候选参考输入输出可定位，未复现项目明确标记"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "RES-004",
+      "title": "热化学与循环模型范围研究",
+      "status": "PLANNED",
+      "priority": 1,
+      "depends_on": [
+        "RES-001",
+        "RES-002",
+        "RES-003"
+      ],
+      "required_artifacts": [
+        "调研/专题/RES-004_热化学与循环范围.md"
+      ],
+      "acceptance": [
+        "对低/高保真选择给理由，质量/功率关系和数据需求清楚"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "RES-005",
+      "title": "变工况、冷却、复用与改进选题研究",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "调研/专题/RES-005_复用约束与改进候选.md"
+      ],
+      "acceptance": [
+        "至少两个问题明确的候选，列数据条件/代价/验证方法，不假称真实寿命"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "OPS-001",
+      "title": "工程环境与版本控制准备",
+      "status": "DONE",
+      "priority": 2,
+      "depends_on": [
+        "ORG-001"
+      ],
+      "required_artifacts": [
+        "scripts/build.ps1",
+        "docs/environment.md"
+      ],
+      "acceptance": [
+        "已真实编译/运行；无提交/远端；CMake、远端CI及Linux尚未实测"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": {
+        "kind": "historical",
+        "reference": "taskshot/2026-10-01_003_engineering-foundation.md"
+      }
+    },
+    {
+      "id": "IMP-000",
+      "title": "通用C喷管基线与首次独立检查",
+      "status": "DONE",
+      "priority": 2,
+      "depends_on": [
+        "OPS-001"
+      ],
+      "required_artifacts": [
+        "src/nozzle/ideal.c",
+        "docs/benchmarks.md",
+        "tests/test_core.c"
+      ],
+      "acceptance": [
+        "教学Mach2等解析参照及守恒/失败路径通过；不属于真实发动机验证"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": {
+        "kind": "historical",
+        "reference": "taskshot/2026-10-01_003_engineering-foundation.md"
+      }
+    },
+    {
+      "id": "DATA-001",
+      "title": "建立可计算参数集",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "RES-001",
+        "RES-003"
+      ],
+      "required_artifacts": [
+        "data/parameters/baseline.json"
+      ],
+      "acceptance": [
+        "单位、批次、边界、缺失值处理和数据角色清楚；不从调参值制造验证值"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "DES-001",
+      "title": "冻结首版模型与移植模块",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "RES-002",
+        "RES-003",
+        "RES-004",
+        "RES-005"
+      ],
+      "required_artifacts": [
+        "docs/model-design.md"
+      ],
+      "acceptance": [
+        "需求—模型—输入—输出—验证一一对应，用户选择/待确认事项不含糊"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "IMP-001",
+      "title": "C核心整合与型号/研究算例",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "DES-001",
+        "IMP-000",
+        "DATA-001"
+      ],
+      "required_artifacts": [
+        "docs/model-implementation.md"
+      ],
+      "acceptance": [
+        "核心实际为C，输入校验/异常/收敛处理与模型一致；延续基线验证后接入可追溯数据"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "VAL-001",
+      "title": "分层验证与误差分析",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "IMP-001"
+      ],
+      "required_artifacts": [
+        "docs/model-validation.md"
+      ],
+      "acceptance": [
+        "分清代码错误、模型差异、输入/数据库差异，报告适用域"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "ANA-001",
+      "title": "两型分析与改进计算",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "VAL-001",
+        "DATA-001"
+      ],
+      "required_artifacts": [
+        "docs/study-results.md"
+      ],
+      "acceptance": [
+        "完成REQ-01/02/03实质论证，改进收益和代价有条件约束"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "DOC-001",
+      "title": "研究报告与展示",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "ANA-001"
+      ],
+      "required_artifacts": [
+        "deliverables/README.md"
+      ],
+      "acceptance": [
+        "REQ-08/09/10覆盖，展示≤10分钟"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "REL-001",
+      "title": "发布和提交检查",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "IMP-001",
+        "VAL-001",
+        "DOC-001"
+      ],
+      "required_artifacts": [
+        "deliverables/release-manifest.json"
+      ],
+      "acceptance": [
+        "干净环境下可运行，报告算例可复现，源代码/发布版一致"
+      ],
+      "owner": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "verification": null
+    },
+    {
+      "id": "GOV-001",
+      "title": "任务、文档、Git、目录与架构视图重构",
+      "status": "DONE",
+      "priority": 0,
+      "depends_on": [
+        "ENG-001"
+      ],
+      "required_artifacts": [
+        "docs/governance.md",
+        "docs/architecture/README.md",
+        "docs/architecture/index.html",
+        "tools/project.py",
+        "tools/quality.py",
+        "tests/test_governance.py"
+      ],
+      "acceptance": [
+        "状态流转、依赖、验收和生成视图可自动核对",
+        "Git有可恢复基线及经过检查的治理提交，无外部推送",
+        "三张架构视图与代码/模块登记一致并经视觉检查",
+        "构建测试/运行证据不接受过期通过状态，失败和并发有明确行为"
+      ],
+      "owner": "root",
+      "note": "机械验收与产物契约完成；真实参数/热化学/循环研究仍未完成，远端CI/Linux未运行。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/GOV-001_1ee64e2e9807.json",
+        "sha256": "b6f8154d871cab72b76c181af96a80b7bac23038fcfd56956ef44777c08ad635"
+      }
+    }
+  ],
+  "events": [
+    {
+      "seq": 1,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "ORG-001",
+      "from": null,
+      "to": "DONE",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "e1e9c676f06c94cdc1407d30e4823a5b80934c9e775ebc08c17b858f2c62218b"
+    },
+    {
+      "seq": 2,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "PLAN-001",
+      "from": null,
+      "to": "DONE",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "e1e9c676f06c94cdc1407d30e4823a5b80934c9e775ebc08c17b858f2c62218b",
+      "hash": "ed59b28682ce65fb2e22c54766b216ed2a59886d9a759b58ce1d57230504d26d"
+    },
+    {
+      "seq": 3,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "ENG-001",
+      "from": null,
+      "to": "DONE",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "ed59b28682ce65fb2e22c54766b216ed2a59886d9a759b58ce1d57230504d26d",
+      "hash": "648a169d973e5facdfe5e2152ba378031b912b7b59ca73cfe38cf1c88a981d6c"
+    },
+    {
+      "seq": 4,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "RES-001",
+      "from": null,
+      "to": "READY",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "648a169d973e5facdfe5e2152ba378031b912b7b59ca73cfe38cf1c88a981d6c",
+      "hash": "1549acc5f02338ba4f40b87c3f87b25561c840540c4cb1fea3e62c1b14b5e827"
+    },
+    {
+      "seq": 5,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "RES-002",
+      "from": null,
+      "to": "READY",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "1549acc5f02338ba4f40b87c3f87b25561c840540c4cb1fea3e62c1b14b5e827",
+      "hash": "9d5a8861fff2976ec829bbddae657e9a327b877f244a729b8c51e5cfbc0babbe"
+    },
+    {
+      "seq": 6,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "RES-003",
+      "from": null,
+      "to": "READY",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "9d5a8861fff2976ec829bbddae657e9a327b877f244a729b8c51e5cfbc0babbe",
+      "hash": "ed90beb158d59ece2a99f9f62bfb3e7c53c1c5a719f8f8aac4207025a62f8862"
+    },
+    {
+      "seq": 7,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "RES-004",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "ed90beb158d59ece2a99f9f62bfb3e7c53c1c5a719f8f8aac4207025a62f8862",
+      "hash": "b2d886a6fe22ebebdf9470e1c3b2dfa7b384c9f0dd30a7834003e8f854f9f26b"
+    },
+    {
+      "seq": 8,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "RES-005",
+      "from": null,
+      "to": "READY",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "b2d886a6fe22ebebdf9470e1c3b2dfa7b384c9f0dd30a7834003e8f854f9f26b",
+      "hash": "61abf0d7a3b9682a70f46cb7c7ff1fab6f93d87aa85b4f268327c93f2f6ccec8"
+    },
+    {
+      "seq": 9,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "OPS-001",
+      "from": null,
+      "to": "DONE",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "61abf0d7a3b9682a70f46cb7c7ff1fab6f93d87aa85b4f268327c93f2f6ccec8",
+      "hash": "b6f18343f6acb0523bfb30822e7fa3eee6e3f282cf0608024e3e0ec7e4adf27b"
+    },
+    {
+      "seq": 10,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "IMP-000",
+      "from": null,
+      "to": "DONE",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "b6f18343f6acb0523bfb30822e7fa3eee6e3f282cf0608024e3e0ec7e4adf27b",
+      "hash": "8dd9e8d63886b8319a28f531714c4da67d8019cefdce232618f179b2c8b0cfae"
+    },
+    {
+      "seq": 11,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "DATA-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "8dd9e8d63886b8319a28f531714c4da67d8019cefdce232618f179b2c8b0cfae",
+      "hash": "d7d4a9084064ef530ba878762b9c3e53a57ef3b6a62d4804de15c4f9f7231ea8"
+    },
+    {
+      "seq": 12,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "DES-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "d7d4a9084064ef530ba878762b9c3e53a57ef3b6a62d4804de15c4f9f7231ea8",
+      "hash": "ad793604e64aa527e1dd3193026d91cf3a12187ec8ed7b84a117dcf4895135e5"
+    },
+    {
+      "seq": 13,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "IMP-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "ad793604e64aa527e1dd3193026d91cf3a12187ec8ed7b84a117dcf4895135e5",
+      "hash": "ecf8c6ac0ef5aeb8576eff7ad35898ef0ecc3f8d6e42dbecdb1ea4982e55fd8a"
+    },
+    {
+      "seq": 14,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "VAL-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "ecf8c6ac0ef5aeb8576eff7ad35898ef0ecc3f8d6e42dbecdb1ea4982e55fd8a",
+      "hash": "c43f212ca50d45ba88cb2ccc036f88e8a2182607ad09655b94b966ace5d5d064"
+    },
+    {
+      "seq": 15,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "ANA-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "c43f212ca50d45ba88cb2ccc036f88e8a2182607ad09655b94b966ace5d5d064",
+      "hash": "10e7b1e668f2ae87cb0f9161b3c79aa3eb4b06974959755216727e57dda75f73"
+    },
+    {
+      "seq": 16,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "DOC-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "10e7b1e668f2ae87cb0f9161b3c79aa3eb4b06974959755216727e57dda75f73",
+      "hash": "5a0aaf8c676f9b55c17d6ff576a969cdd0fd9430389901e961b88bd6ae41c44a"
+    },
+    {
+      "seq": 17,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "REL-001",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "migration",
+      "owner_after": null,
+      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "previous_hash": "5a0aaf8c676f9b55c17d6ff576a969cdd0fd9430389901e961b88bd6ae41c44a",
+      "hash": "bf45045d7b7787ae969165481534bcaa5b6d2ba112a3295a8dbb2e9beebeaf67"
+    },
+    {
+      "seq": 18,
+      "at": "2026-09-30T19:41:27+00:00",
+      "task": "GOV-001",
+      "from": null,
+      "to": "ACTIVE",
+      "actor": "migration",
+      "owner_after": "root",
+      "note": "用户已要求全面优化；本轮主任务。",
+      "previous_hash": "bf45045d7b7787ae969165481534bcaa5b6d2ba112a3295a8dbb2e9beebeaf67",
+      "hash": "7e312c4107450ddee02f792796bf6b7a062b26c96e183c46b0ac7384c12f2694"
+    },
+    {
+      "seq": 19,
+      "at": "2026-09-30T20:20:55+00:00",
+      "task": "GOV-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "任务流转、模块边界、文档与架构生成、不可变构建和运行失败语义已验证；三视图已渲染核对，CMake本机CTest通过。",
+      "previous_hash": "7e312c4107450ddee02f792796bf6b7a062b26c96e183c46b0ac7384c12f2694",
+      "hash": "bbafe7b47654e8702fd587c284cdbdb84bdaceda6efcffd9b8d2e9a6a2371933"
+    },
+    {
+      "seq": 20,
+      "at": "2026-09-30T20:20:56+00:00",
+      "task": "GOV-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "机械验收与产物契约完成；真实参数/热化学/循环研究仍未完成，远端CI/Linux未运行。",
+      "previous_hash": "bbafe7b47654e8702fd587c284cdbdb84bdaceda6efcffd9b8d2e9a6a2371933",
+      "hash": "8f968c60648d3c261e5174da8ecc3d770586627ef9a2b53202363330a0cb3d80"
+    }
+  ]
+}

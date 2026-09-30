@@ -4,6 +4,7 @@
 
 | 日期/记录 | 关联任务 | 内容 |
 |---|---|---|
+| [2026-10-01_004_governance-upgrade](2026-10-01_004_governance-upgrade.md) | GOV-001 | 结构化任务流、文档/模块单一来源、不可变构建、质量与Git护栏、架构三视图 |
 | [2026-10-01_003_engineering-foundation](2026-10-01_003_engineering-foundation.md) | ENG-001、OPS-001、IMP-000 | C17分层基底、解析基准、严格输入、构建测试和运行追溯 |
 | [2026-10-01_002_project-plan](2026-10-01_002_project-plan.md) | PLAN-001 | 完整研究思路、模块/算例/分工、时间安排和早期C基线任务 |
 | [2026-10-01_001_project-foundation](2026-10-01_001_project-foundation.md) | ORG-001 | 本地盘点、文档群建立、入口脚本修正及检查 |

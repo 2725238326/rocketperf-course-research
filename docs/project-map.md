@@ -1,85 +1,54 @@
-# 目录与文档职责
+# 目录与信息职责
 
-## 当前目录
+目录按**研究资料、计算实现、工程治理、可再生产物**组织，原始资料保持旧路径。
 
 ```text
 火发原理/
-├─ AGENTS.md                  agent自动接手入口
-├─ README.md                  给人的项目导航
-├─ worknow.md                 当前阶段、正在做什么、下一步
-├─ rules.md                   执行和证据维护规则
-├─ handoff.md                 下一位agent的接手说明
+├─ README.md / AGENTS.md       人与agent入口
+├─ worknow.md                 生成的当前工作面
+├─ rules.md / handoff.md       稳定约束与接手叙述
+├─ project/                   任务、模块、目录策略、验收证据
 ├─ docs/
-│  ├─ requirements-map.md     原始要求与交付覆盖
-│  ├─ project-plan.md         完整研究思路、模型、算例、排期与分工
-│  ├─ tasks.md                全量任务状态、依赖与验收
-│  ├─ research-agenda.md      全面调研的问题清单
-│  ├─ decisions.md            已确定、建议中、待决定的路线
-│  ├─ verification.md         证据/算法/模型/交付验证
-│  ├─ environment.md          本机环境与可执行命令
-│  ├─ project-map.md          本文件
-│  └─ templates/              研究记录与移植评估模板
-├─ taskshot/                  按日期和序号保留工作快照
-├─ scripts/check-project.ps1  离线、只读项目检查
-├─ scripts/build.ps1          GCC Debug/Release构建和源码哈希
-├─ scripts/test.ps1           核心及CLI验证
-├─ scripts/run-case.ps1       输入/二进制快照和运行追溯
-├─ include/rocketperf/        公共值类型、状态与计算API
-├─ src/                      core/nozzle/adapters/cli分层实现
-├─ tests/                    C检查、Python黑盒测试和解析参考
-├─ cases/benchmarks/         人为定义的理想空气教学算例
-├─ data/                     真实参数集契约说明，数据尚待建立
-├─ third_party/              外部代码与许可边界说明
-├─ results/local/            本地运行记录（忽略版本控制）
-├─ CMakeLists.txt            待在CMake环境验证的备用构建
-├─ .github/workflows/ci.yml  待远端执行的Windows/Linux检查
-├─ 作业要求/                  老师要求转录及两张原图
-├─ 调研/
-│  ├─ README.md               已有研究文档导航
-│  ├─ 专题/                  新一轮深入研究产出
-│  ├─ 原始来源/              网页/仓库文档/元数据快照及索引
-│  ├─ 文献/                  原始PDF与提取文本
-│  ├─ 检索记录/              Grok原始返回，含历史不完整结果
-│  ├─ prompts/               检索问题
-│  ├─ scripts/               当前支持的研究辅助脚本
-│  ├─ 工具/                  历史脚本和问题，保留但不作新入口
-│  └─ *sources*.json          来源URL清单，现有脚本依赖此位置
-└─ 第2章推力室和发动机的主要参数20260911.pptx
+│  ├─ architecture/           三视图SVG/Mermaid/离线HTML
+│  ├─ governance.md           任务/文档/Git/目录操作规范
+│  ├─ engineering.md          计算核心设计契约
+│  ├─ tasks.md                生成的完整任务板
+│  └─ 其他专题                研究计划、要求、基准、协议、决策
+├─ src/ + include/            C核心、适配器、CLI与公共API
+├─ tools/                     治理、构建测试、运行记录的唯一行为实现
+├─ scripts/                   PowerShell兼容入口和语法检查
+├─ tests/ + cases/            独立基准、负向测试、教学/研究算例
+├─ data/                     真实参数契约；待研究落地
+├─ third_party/              外部移植与许可约定
+├─ taskshot/                 不可静默改写的工作历史
+├─ 作业要求/ + 调研/          课程要求、原图、论文、证据与研究专题
+├─ build/                    可再生构建、测试、临时工具（忽略）
+└─ results/local/            本地成功/失败运行快照（忽略）
 ```
 
-原始资料未搬迁。保留路径可避免历史文档、脚本和用户书签失效。新目录通过有内容的README或模板建立，不添加没有意义的占位代码。
+## 单一来源
 
-## 每类信息只设一个主要维护位置
-
-| 信息 | 主位置 | 其他文档的做法 |
+| 信息 | 主维护位置 | 约束 |
 |---|---|---|
-| 老师要求 | 作业要求/大作业1_要求存档.md | 引用，不另编“老师要求” |
-| 当前工作状态 | worknow.md | README只介绍阶段，handoff链接当前状态 |
-| 所有任务及依赖 | docs/tasks.md | worknow只突出当前/下一项 |
-| 用户约束与执行规则 | rules.md | AGENTS保留关键约束和入口 |
-| 已作决定及理由 | docs/decisions.md | 研究建议不直接改写为已批准决定 |
-| 历史执行记录 | taskshot/ | 不把worknow写成流水账 |
-| 来源与参数判断 | 调研/证据与参数台账.md及专题证据表 | 报告用来源ID，避免另造相同ID |
-| 原始证据 | 调研/原始来源、文献、检索记录 | 摘要引用原文；快照保持可追溯 |
+| 任务事实 | project/tasks.json | 命令操作；事件、状态和负责人一致 |
+| 当前状态 / 任务板 | worknow.md / docs/tasks.md | 从登记生成，不手改 |
+| 模块和生产C源码 | project/modules.json | 两条构建、依赖检查和架构共用 |
+| 规范文档与根目录职责 | project/policy.json | 新根目录要登记，不随意散落文件 |
+| 研究结论 | 调研/专题及证据台账 | 证据截止、版本和假设明确 |
+| 原始证据 | 原始来源/文献/检索记录/作业要求 | 保留字节；修订新增日期版本 |
+| 运行与构建 | manifest指向的不可变构建、results/local | 不覆盖RunId；失败也记录 |
+| 历史与决策 | taskshot / docs/decisions | 工作历史与方案决定分别维护 |
 
-## 实现目录职责与落地状态
+## 文档生命周期
 
-| 未来目录 | 创建时机 | 内容边界 |
-|---|---|---|
-| `src/`、`include/` | 已创建，ENG-001 | 自己维护的C核心与接口，热化学/循环扩展未完成 |
-| `data/parameters/` | 参数集结构落地 | 事实/假设/未知分离；含来源与版本 |
-| `cases/` | 已创建 | 教学基准；真实型号数据仍需DATA-001 |
-| `tests/` | 已创建 | 独立解析参考、守恒、数值和CLI边界 |
-| `third_party/` | 已创建边界说明 | 尚无移植代码/依赖，不等于已完成许可选型 |
-| `build/` | 已有Debug/Release | 可再生成的编译产物、构建和测试报告，不等于最终提交包 |
-| `results/` | 已创建并有本地算例运行 | 输入、二进制、构建指纹及成功/失败记录，不放手填“仿真结果” |
-| `deliverables/` | 报告和发布阶段 | 待提交的四项成果与复现说明 |
+入口负责导航；规范负责约束；操作说明负责命令；研究文档负责论证；历史快照负责“当时做了什么”；生成文件负责展示登记状态。不在多个文件重复维护任务表、Git实况和当前测试计数。
 
-## 命名与归档
+新研究专题使用任务ID命名，结项后链接回调研索引。新模块先定义契约和源码归属，补测试，再更新架构与构建登记。尚未实现的thermo/cycle在图中保持planned，不能通过创建空目录暗示已完成。
 
-- 任务ID：`ORG-001`、`RES-001`、`DES-001`、`IMP-001`等，固定后不换义。
-- 专题：`RES-001_型号版本与参数缺口.md`等，文件头写日期、任务ID、证据截止和状态。
-- 检索Topic：`20261001_res001_cz10b_stage2`，避免重复已有输出；日期按实际执行日。
-- taskshot：`YYYY-MM-DD_NNN_短标题.md`，同日序号递增。
-- 来源ID：旧V/O/L编号含义不变；新来源先查索引，使用唯一ID，重新抓取加日期/修订标识，不覆盖旧快照。
-- 大HTML（当前Pyskyfire验证页约44MB）按需定点读取，不整份塞入上下文。
+## 产物与存储
+
+生产源码、规范、参数来源和选定验收证据进Git。build/results-local/锁/缓存忽略。正式研究结果未来放deliverables或有版本的结果目录，并明确引用输入与验证。
+
+`python tools/project.py inventory`只读展示体积、大文件及旧构建候选；不会自动清理。原课件/论文/网页不属于可随意删除的缓存，已有44MB交互网页属于历史档案。未来新增超25MB内容需要先说明存储方案。
+
+实际规则和Git检查见[治理规范](governance.md)；[架构三视图](architecture/README.md)表达业务与功能，不以这份目录树代替架构。

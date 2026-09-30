@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "modules": [
+    {"id":"core","name":"数值与错误契约","state":"implemented","owner_role":"数值核心维护","paths":["src/core/**","include/rocketperf/status.h","include/rocketperf/root.h","include/rocketperf/numeric.h","include/rocketperf/version.h"],"sources":["src/core/status.c","src/core/root.c"],"allowed_dependencies":[],"contract":"显式状态、有限数、夹逼求根；无I/O、堆分配和全局可变状态","checks":["tests/test_core.c"]},
+    {"id":"nozzle","name":"理想喷管模型","state":"implemented","owner_role":"热力与喷管维护","paths":["src/nozzle/**","include/rocketperf/nozzle.h"],"sources":["src/nozzle/ideal.c"],"allowed_dependencies":["core"],"contract":"SI值类型；定比热、匹配/欠膨胀；失败不修改输出","checks":["tests/test_core.c","tests/reference/air_mach2.json"]},
+    {"id":"adapters","name":"输入 / 输出 / 平台","state":"implemented","owner_role":"接口与平台维护","paths":["src/adapters/**"],"sources":["src/adapters/case_file.c","src/adapters/json_report.c","src/adapters/platform.c"],"allowed_dependencies":["core","nozzle"],"contract":"严格算例schema、JSON和UTF-8路径；不替代物理求解","checks":["tests/test_cli.py"]},
+    {"id":"cli","name":"命令行用例编排","state":"implemented","owner_role":"应用入口维护","paths":["src/cli/**"],"sources":["src/cli/main.c"],"allowed_dependencies":["core","nozzle","adapters"],"contract":"装载→求解→报告；stdout数据/stderr诊断；非零失败","checks":["tests/test_cli.py"]},
+    {"id":"tooling","name":"任务 / 质量 / 运行追溯","state":"implemented","owner_role":"工程治理维护","paths":["tools/**","scripts/**","project/**",".githooks/**"],"sources":[],"allowed_dependencies":[],"contract":"任务状态单一来源；可验证验收；原子记录与Git检查","checks":["tests/test_governance.py","tests/test_runner.py"]},
+    {"id":"thermo","name":"热化学与物性","state":"planned","owner_role":"热力建模研究","paths":[],"sources":[],"allowed_dependencies":["core"],"contract":"选定算法/数据库/许可并独立验证后实现","checks":[]},
+    {"id":"cycle","name":"整机循环与损失","state":"planned","owner_role":"循环与系统研究","paths":[],"sources":[],"allowed_dependencies":["core","nozzle","thermo"],"contract":"先定义控制体、支路和功率残差；不使用未核验型号数据","checks":[]}
+  ]
+}

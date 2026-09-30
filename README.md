@@ -1,49 +1,36 @@
-# 火箭发动机原理大作业
+# 火箭发动机原理 · Rocketperf
 
-研究对象：朱雀三号与长征十号乙动力系统。作业包含文献调查、发动机性能计算、优缺点与改进方案研究，核心计算使用C语言。
+研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前计算能力是**经过验证的理想气体教学基线**；真实参数、热化学与循环模型仍需研究。
 
-**开始工作：读 [worknow](worknow.md) → [rules](rules.md) → [handoff](handoff.md)。** Agent入口为 [AGENTS.md](AGENTS.md)。
+[打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
-## 当前阶段
+![业务流程](docs/architecture/business.svg)
 
-已有v0.1.0工程基底：纯C17理想喷管核心、严格算例输入、JSON输出、解析基准和构建/测试/运行追溯。它使用教学理想气体数据，尚不能预测两型真实发动机性能。型号证据、热化学和循环模块继续按任务推进。
+## 开始工作
 
-## 构建、验证和运行
-
-需要PowerShell 7、GCC及用于测试的Python 3（标准库即可）。从根目录执行：
+需要Python 3.10+和GCC；PowerShell是可选兼容入口。根目录执行：
 
 ```powershell
-pwsh -NoProfile -File ./scripts/test.ps1 -Configuration Debug
-pwsh -NoProfile -File ./scripts/test.ps1 -Configuration Release
-pwsh -NoProfile -File ./scripts/run-case.ps1
+python tools/project.py doctor
+python tools/quality.py
+python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 ```
 
-构建产物在`build/`；运行会打印`results/local/<RunId>/result.json`路径，并保存输入/二进制快照及哈希。已有RunId拒绝覆盖。Windows中文路径已纳入测试。
+运行工具核对新鲜的构建/测试证据，保存输入、实际二进制、报告和哈希到 `results/local/<RunId>/`。失败也保留记录。同名RunId不能覆盖。
 
-若只想查看JSON：`./build/release/rocketperf.exe run ./cases/benchmarks/air_mach2_vacuum.ini`。
+## 按职责找入口
 
-## 常用入口
-
-| 需要做什么 | 入口 |
+| 工作 | 入口 |
 |---|---|
-| 确认老师到底要求什么 | [作业要求存档](作业要求/大作业1_要求存档.md)、[要求与交付映射](docs/requirements-map.md) |
-| 看完整思路、模块、排期与分工 | [项目完整规划](docs/project-plan.md) |
-| 开发核心、理解模型范围和输入 | [工程设计](docs/engineering.md)、[算例契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
-| 领取下一项工作 | [任务板](docs/tasks.md)、[全面调研议题](docs/research-agenda.md) |
-| 找文件和判断放在哪里 | [目录与文档职责](docs/project-map.md) |
-| 理解哪些路线已决定 | [决策记录](docs/decisions.md) |
-| 阅读已有调研结论 | [调研索引](调研/README.md)、[综合调研报告](调研/综合调研报告_2026-09-29.md) |
-| 查参数来源/冲突 | [证据与参数台账](调研/证据与参数台账.md) |
-| 查开源工具和技术文献 | [开源工具与文献评估](调研/开源工具与文献评估.md) |
-| 运行检索与本地检查 | [环境与运行说明](docs/environment.md)、[验证要求](docs/verification.md) |
-| 了解上次做了什么 | [handoff](handoff.md)、[历史快照](taskshot/README.md) |
+| 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md) |
+| 领取、交接、验收任务 | [worknow](worknow.md)、[handoff](handoff.md)、[治理命令](docs/governance.md) |
+| 理解业务与模块边界 | [架构三视图及模块契约](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
+| 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
+| 查文献与参数证据 | [调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
+| 管目录、构建和Git | [目录地图](docs/project-map.md)、[环境说明](docs/environment.md)、[治理规范](docs/governance.md) |
 
-展示时间：**2026-10-16，周五第3—5节**。交付源代码、程序发布版、展示PPT和研究报告；展示≤10分钟、提问≤5分钟。分组人数在照片与本地课件中有冲突，实际安排待老师/助教确认。
+任务事实只维护在 `project/tasks.json`，worknow和任务板自动生成。模块与源码清单只维护在 `project/modules.json`，架构和两条构建路径共同使用。原始资料保留原路径和字节。
 
-从项目根目录执行一次只读检查：
+课程节点：2026-10-16，周五第3—5节；展示≤10分钟、提问≤5分钟。最终交源码、发布版、报告和PPT。当前工程通过不等于课程研究已经完成。
 
-```powershell
-pwsh -NoProfile -File ./scripts/check-project.ps1
-```
-
-现有原始材料保留原路径。本地Git已初始化为main分支，尚无提交或远端；CI配置已提供，但本轮未运行远端CI或CMake。实际验证路径为本机GCC的Debug/Release。
+Git分支、HEAD和脏状态以doctor输出为准。所有提交仍在本地，未添加远端或推送。CMake本机路径已补测，远端CI/Linux结果以实际运行记录为准。

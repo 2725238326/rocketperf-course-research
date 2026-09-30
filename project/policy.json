@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "wip_limit": 1,
+  "max_new_blob_bytes": 25000000,
+  "archive_prefixes": ["调研/原始来源/","调研/文献/","调研/检索记录/","作业要求/"],
+  "protected_file": "第2章推力室和发动机的主要参数20260911.pptx",
+  "allowed_roots": [".editorconfig",".gitattributes",".github",".githooks",".gitignore","AGENTS.md","CMakeLists.txt","CONTRIBUTING.md","README.md","cases","data","docs","handoff.md","include","project","results","rules.md","scripts","src","taskshot","tests","third_party","tools","worknow.md","作业要求","调研","第2章推力室和发动机的主要参数20260911.pptx"],
+  "generated_documents": ["worknow.md","docs/tasks.md"],
+  "canonical_documents": [
+    {"path":"README.md","role":"入口与最短使用路径","owner":"tooling"},
+    {"path":"rules.md","role":"用户约束和执行规则","owner":"tooling"},
+    {"path":"handoff.md","role":"接手方式、风险与最近快照入口；不重复任务状态","owner":"tooling"},
+    {"path":"docs/governance.md","role":"任务、文档、Git和目录治理规范","owner":"tooling"},
+    {"path":"docs/architecture/README.md","role":"业务/计算/治理三视图和模块契约入口","owner":"tooling"},
+    {"path":"docs/engineering.md","role":"物理核心和接口设计契约","owner":"nozzle"},
+    {"path":"docs/case-format.md","role":"外部输入输出协议","owner":"adapters"},
+    {"path":"docs/benchmarks.md","role":"教学参考推导与适用域","owner":"nozzle"},
+    {"path":"docs/project-plan.md","role":"研究目标、里程碑与分工建议","owner":"tooling"},
+    {"path":"docs/requirements-map.md","role":"老师要求到产物的映射","owner":"tooling"},
+    {"path":"docs/decisions.md","role":"决定及依据，不维护实时任务状态","owner":"tooling"}
+  ]
+}

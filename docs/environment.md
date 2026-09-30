@@ -1,71 +1,68 @@
-# 环境与运行说明
+# 环境与运行
 
-盘点日期：2026-10-01。项目根目录：`E:/Work/火发原理`。默认使用PowerShell 7，命令示例从根目录执行。
+本机验证：Windows、Python 3.13、MinGW GCC 14.2.0、PowerShell 7.6.5、Git 2.46.2。另已在项目临时目录安装CMake 3.31.10和Ninja 1.13.2，完成Release构建与CTest。Linux/远端CI仍需真实运行。
 
-## 已实际检查
+## 常用命令
 
-| 项目 | 结果 | 限制 |
-|---|---|---|
-| PowerShell | `pwsh --version`：7.6.5 | 不加载用户profile，避免提示增强/代理配置副作用 |
-| GCC | MinGW 14.2.0，路径`D:/program/mingw/mingw64/bin/gcc.exe` | 已通过C17严格警告Debug/Release构建、核心测试和CLI测试 |
-| Git | 2.46.2.windows.1 | 已初始化本地main，无提交和远端 |
-| Python | `C:/Python313/python.exe` | 已运行标准库黑盒测试；pypdf等文档依赖另行按需定位 |
-| CMake/Ninja/Clang/MSVC cl | 本轮PATH查询未发现 | 不表示整机未安装；只有实际需要时再检查/配置 |
-| 网络接口 | 有9月29日使用记录 | 本轮未发送新的Grok请求，不能声称10月1日接口可用性已验证 |
-
-## 工程构建与验证
+从项目根目录执行：
 
 ```powershell
-pwsh -NoProfile -File ./scripts/build.ps1 -Configuration Debug
-pwsh -NoProfile -File ./scripts/test.ps1 -Configuration Debug
-pwsh -NoProfile -File ./scripts/test.ps1 -Configuration Release
-pwsh -NoProfile -File ./scripts/run-case.ps1
+python tools/project.py doctor
+python tools/project.py check
+python tools/quality.py
+python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 ```
 
-GCC入口不要求CMake安装。`build.ps1 -Compiler ...`可指定GCC路径；`test.ps1 -Python ...`可指定Python。Windows命令行和文件适配层显式处理UTF-8/UTF-16，因此中文绝对路径和空格已测试。
-
-另提供CMakeLists：具备CMake环境后可用`cmake -S . -B build/cmake`、`cmake --build build/cmake`、`ctest --test-dir build/cmake --output-on-failure`。本轮PATH未提供CMake命令，未执行该构建；这些命令和远端CI不计入本轮已通过结果。
-
-## 离线项目检查命令
+只构建或单配置测试：
 
 ```powershell
-pwsh -NoProfile -File ./scripts/check-project.ps1
+python tools/pipeline.py build --configuration Debug
+python tools/pipeline.py test --configuration Release
 ```
 
-检查根入口/必要文件、治理文档与专题的相对链接、PowerShell语法，以及来源索引中available=true的文件哈希。available=false的历史来源列为known gaps，不直接使检查失败。
+GCC命令可用--compiler指定。C运行时无Python物理求解依赖；Python标准库组织构建、测试、任务和运行证据。PowerShell脚本保留兼容参数，统一调用Python工具。
 
-## 新检索：先预览，再请求
+## 构建与报告位置
 
-已准备好RES-001的一条起始问题：[问题文件](../调研/prompts/20261001_res001_versions.txt)。
+- 每次尝试：build/artifacts/配置/build-id/，包含状态manifest和日志。
+- 当前指针：build/配置/latest.json。失败尝试不会自动回退旧PASS。
+- 当前方便查看的build-manifest/test-report会同步，但正式运行按指针核验实际构建、二进制和测试输入。
+- 运行：results/local/RunId/。--no-build要求当前已有新鲜的已测试构建，否则失败；默认缺证据时先构建测试。
 
-离线预览（不读密钥、不联网、不写结果）：
+旧工程的v1运行记录保留，现行运行/构建manifest为v2。不要把旧报告文件存在等同当前通过。
+
+## CMake本机复现（Windows）
+
+临时工具都在build中，不修改系统PATH，也不进入Git：
+
+```powershell
+python -m pip install --target build/tooling cmake==3.31.10 ninja==1.13.2
+$ninja = (Resolve-Path build/tooling/bin/ninja.exe).Path
+& ./build/tooling/cmake/data/bin/cmake.exe -S . -B build/cmake-verified -G Ninja "-DCMAKE_MAKE_PROGRAM=$ninja" -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
+& ./build/tooling/cmake/data/bin/cmake.exe --build build/cmake-verified
+& ./build/tooling/cmake/data/bin/ctest.exe --test-dir build/cmake-verified --output-on-failure
+```
+
+已有工具时无需重装。Linux或已配置CMake的环境可直接使用cmake/ctest命令。构建源码列表来自project/modules.json，不在两份入口重复维护。
+
+## 任务和Git
+
+```powershell
+python tools/project.py show RES-001
+git config --local core.hooksPath .githooks
+python tools/project.py check --staged
+```
+
+完整状态流转见[治理规范](governance.md)。实时分支/HEAD/脏状态看doctor；本地有提交不等于已经推送。
+
+## Grok检索
+
+配置仍在 `E:/Demo/IDEA_collector/apikey/grok.txt`，不输出或复制凭据。已有起始问题可预览：
 
 ```powershell
 pwsh -NoProfile -File ./调研/scripts/research.ps1 -Topic 20261001_res001_versions -CutoffDate 2026-10-01 -Brief -DryRun
 ```
 
-实际联网，移除DryRun：
+实际检索时去掉DryRun；新执行日期/问题使用新的Topic和明确截止。MaxCalls只是提示目标。构建、治理和架构工具不调用该接口。
 
-```powershell
-pwsh -NoProfile -File ./调研/scripts/research.ps1 -Topic 20261001_res001_versions -CutoffDate 2026-10-01 -Brief
-```
-
-执行日期变化时，使用新的Topic/问题文件和明确的CutoffDate。Topic已有输出时会拒绝覆盖。`-PromptFile`允许指定另一份已准备的问题文件，`-ConfigPath`可显式指定配置位置；不要在命令里写密钥。
-
-默认配置仍为 `E:/Demo/IDEA_collector/apikey/grok.txt`。模型默认沿用既有可用配置`grok-4.6`；若服务端变更，应据真实报错检查接口，不臆造成功。
-
-`-MaxCalls`只控制提示中的目标调用次数，实际服务端可能超出，**不是硬限额**。超时/网关错误先记录并缩小问题；不能凭空把失败请求当作完成的搜索。
-
-## 其他现有辅助脚本
-
-| 脚本 | 作用 | 注意 |
-|---|---|---|
-| `调研/scripts/fetch_sources.ps1 -Manifest ...` | 按清单HTTP读取公开原文 | 已有同名文件会跳过；新日期用新ID；200也要判断是否真为正文 |
-| `调研/scripts/index_sources.ps1` | 根据清单重建来源索引/哈希 | **不是只读核验工具**；先查旧索引，不能用重建掩盖不明文件变化 |
-| `调研/scripts/fetch_papers.ps1` | 下载已列的5份PDF | 现有文件跳过；目前均已有，无需重下 |
-| `调研/scripts/extract_papers.py` | PDF转文本 | 需要pypdf；只提取文字，不能替代公式/图表视觉核对 |
-| `调研/工具/Invoke-GrokResearch.ps1` | 历史研究入口 | 会按OutputStem写文件，保护措施较少；保留供追溯，不推荐新任务使用 |
-
-## 后续环境工作
-
-OPS-001的本地GCC路径已完成。后续按实际需要验证CMake、Linux/CI或新增依赖，不把配置文件存在当成测试已通过。当前没有后台计算服务、任务调度或自动监控安排。重复运行同一RunId会拒绝，必须使用新ID保留历史结果。
+原始来源索引重建脚本会写哈希记录，不能把它当只读验证或用于掩盖不明变化。现有资料无需重复下载。没有后台服务、自动监控或对外发布安排。

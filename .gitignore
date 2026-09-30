@@ -10,3 +10,4 @@ __pycache__/
 # Reproducible build artifacts; final releases belong in deliverables/.
 /build/
 /results/local/
+/project/.locks/

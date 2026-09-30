@@ -1,0 +1,8 @@
+flowchart LR
+  R[READY] -->|领取与依赖检查| A[ACTIVE]
+  A -->|产物和质量证据| V[REVIEW]
+  V -->|新鲜指纹验收| D[DONE]
+  V -. 继续实现 .-> A
+  A -->|记录原因| B[BLOCKED]
+  B -->|依赖重检| R
+  D --> G[Git审查与本地提交]

@@ -1,9 +1,16 @@
-# 验证入口
+# 验证入口与覆盖
 
-- `test_core.c`：解析Mach/性能参考、根求解错误与预算、输出事务性、42组连续/能量守恒、面积/背压缩放和参数边界。
-- `test_cli.py`：Python标准库黑盒测试。检查参考JSON、UTF-8中文路径、BOM/CRLF、确定性、缺字段/重复/未知字段、非有限数、过膨胀拒绝、超长/NUL/文件限制、JSON转义和退出码。
-- `reference/air_mach2.json`：独立从已知Me=2的闭式关系生成的数值，不由被测求根器生成。
+统一验收：`python tools/quality.py`。
 
-入口为`pwsh -NoProfile -File ./scripts/test.ps1 -Configuration Debug`或Release。脚本会先重新构建再测试，全部通过后才写`build/<配置>/test-report.json`。报告关联被测二进制/构建清单哈希；重建后旧报告不能自动代表新二进制。
+| 层次 | 测试 | 覆盖 |
+|---|---|---|
+| 数学/核心 | test_core.c | 解析Mach与性能、连续/能量、缩放、求根失败、越域和有限数 |
+| 外部协议 | test_cli.py | 输入严格性、中文路径、BOM/CRLF、JSON/退出码、确定性 |
+| 工程治理 | test_governance.py | 状态/依赖/WIP/负责人/事件/锁、契约修订、证据过期和架构边界 |
+| 运行管理 | test_runner.py | schema与实际输入对应、不可变快照、超时/启动/复制/域失败、旧PASS拒绝 |
 
-Linux可加`-Sanitize`检查地址/未定义行为；Windows路径明确不声称已支持该模式。CI已配置但本地测试不能代替真实CI运行。
+核心解析参考来自已知Mach的闭式关系，不由待测求根程序产生。测试使用教学/研究输入，不充当真实发动机验证。
+
+治理测试使用build下的独立临时项目，运行管理测试留下results/local中的独立测试运行，不改原始资料。runner测试需要Release的新鲜已测构建，统一质量入口按正确顺序准备。
+
+构建/测试报告记录RUNNING/PASS/FAIL与关联输入；只有新鲜完整证据可用于任务验收。Linux sanitizer与远端CI需真实执行后才可宣称通过。

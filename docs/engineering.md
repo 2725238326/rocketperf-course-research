@@ -1,21 +1,14 @@
 # C17工程基底与设计约定
 
-版本：0.1.0，2026-10-01。当前实现是理想气体喷管教学基线，不是两型真实发动机求解器。模型契约及参考值见[基准说明](benchmarks.md)，输入契约见[算例格式](case-format.md)。
+物理核心版本：0.1.0。当前实现是理想气体喷管教学基线，不是两型真实发动机求解器。模型契约见[基准说明](benchmarks.md)、[算例格式](case-format.md)；业务/模块/治理的可视化入口见[架构三视图](architecture/README.md)。
 
 ## 为什么采用这些设计
 
 采用“纯计算核心＋外部适配器”的分层方式。核心不读文件、不打印、不分配堆内存、不读取环境和全局可变状态；相同输入和数值策略产生确定结果。CLI处理流程、文件、编码和输出格式。
 
-```mermaid
-flowchart TD
-    CLI[命令行编排] --> INPUT[严格算例文件适配器]
-    CLI --> MODEL[理想喷管核心]
-    MODEL --> ROOT[通用区间求根与数值策略]
-    CLI --> OUTPUT[JSON报告适配器]
-    INPUT --> DTO[带SI单位字段的值类型]
-    MODEL --> DTO
-    OUTPUT --> DTO
-```
+![计算模块职责与边界](architecture/components.svg)
+
+模块登记由`project/modules.json`维护，GCC与CMake共用生产源码清单；工具自动核对源码归属、直接依赖和纯核心边界，图源漂移会阻止验收。
 
 | 设计原则/模式 | 当前具体实现 | 解决的问题 |
 |---|---|---|
@@ -54,7 +47,9 @@ MinGW的类型泛化`isfinite`宏在严格转换警告下产生不必要的float
 
 ## 构建和维护
 
-本机已验证路径：PowerShell 7＋MinGW GCC 14.2.0，Debug/Release均启用严格警告。CMakeLists与Windows/Linux CI已配置；在本次本机环境中没有执行CMake、远端CI或Linux sanitizer，不据此宣称跨平台验证完成。
+本机已验证GCC 14.2.0的Debug/Release，以及CMake 3.31.10＋Ninja 1.13.2的Release/CTest。远端CI和Linux sanitizer尚未实际执行，不据配置存在宣称跨平台验证完成。Python标准库统一工程行为，PowerShell保留兼容入口。
+
+构建/测试/运行使用不可变产物与显式状态，完整规则见[治理规范](governance.md)。当前PASS关联源码、验证输入和具体二进制；过期结果不能用于本次验收。
 
 新模块必须具备：模型/数据适用域、明确单位、失败语义、一个独立参考和合适的守恒/性质检查。只在有真实需要时增加抽象层。变量、输入、数值策略和算法版本发生实质变化时，补充测试与决策记录。
 

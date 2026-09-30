@@ -8,7 +8,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        configuration: [Debug, Release]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -18,26 +17,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Build and test
-        run: ./scripts/test.ps1 -Configuration ${{ matrix.configuration }}
-      - name: Offline project integrity
-        run: ./scripts/check-project.ps1
-      - name: CMake alternate build (Linux)
-        if: runner.os == 'Linux'
+      - name: Full governance and engineering quality
+        run: python tools/quality.py
+      - name: CMake alternate build
         run: |
-          cmake -S . -B build/cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+          python -m pip install cmake==3.31.10 ninja==1.13.2
+          if ($LASTEXITCODE -ne 0) { throw 'CMake tools install failed' }
+          cmake -S . -B build/cmake -G Ninja -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
           if ($LASTEXITCODE -ne 0) { throw 'CMake configure failed' }
           cmake --build build/cmake
           if ($LASTEXITCODE -ne 0) { throw 'CMake build failed' }
           ctest --test-dir build/cmake --output-on-failure
           if ($LASTEXITCODE -ne 0) { throw 'CTest failed' }
       - name: Linux memory and undefined-behavior checks
-        if: runner.os == 'Linux' && matrix.configuration == 'Debug'
-        run: ./scripts/test.ps1 -Configuration Debug -Sanitize
+        if: runner.os == 'Linux'
+        run: python tools/pipeline.py test --configuration Debug --sanitize
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: validation-${{ matrix.os }}-${{ matrix.configuration }}
+          name: validation-${{ matrix.os }}
           path: |
             build/**/build-manifest.json
             build/**/test-report.json
+            build/quality/**
+            build/cmake/Testing/Temporary/LastTest.log
