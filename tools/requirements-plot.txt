@@ -1,0 +1,3 @@
+# Optional offline reporting dependency; not required by the C solver or governance gate.
+# Confirmed importable in the local Python 3.13 environment on 2026-10-01.
+matplotlib==3.10.8

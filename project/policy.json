@@ -7,6 +7,7 @@
   "allowed_roots": [".editorconfig",".gitattributes",".github",".githooks",".gitignore","AGENTS.md","CMakeLists.txt","CONTRIBUTING.md","README.md","cases","data","docs","handoff.md","include","project","results","rules.md","scripts","src","taskshot","tests","third_party","tools","worknow.md","作业要求","调研","第2章推力室和发动机的主要参数20260911.pptx"],
   "generated_documents": ["worknow.md","docs/tasks.md"],
   "canonical_documents": [
+    {"path":"docs/technology-stack.md","role":"本次交付技术选型、工具职责和延期边界","owner":"tooling"},
     {"path":"README.md","role":"入口与最短使用路径","owner":"tooling"},
     {"path":"rules.md","role":"用户约束和执行规则","owner":"tooling"},
     {"path":"handoff.md","role":"接手方式、风险与最近快照入口；不重复任务状态","owner":"tooling"},

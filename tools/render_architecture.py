@@ -76,7 +76,7 @@ def components(modules):
     body+=arrow([(460,535),(540,535),(540,614),(1400,614),(1400,562)],"虚线：公共值类型 / 状态契约依赖",958,603,True)
     body+=text(100,665,"接口边界",20,GREEN,650)+text(250,665,"include/rocketperf：SI字段、只读输入、成功才写输出；核心不依赖文件、网络或界面。",19,MUTED)
     body+=node(100,714,490,"工程工具与验证",["任务登记 / 构建测试 / 运行快照"],"tools · scripts · tests · project",h=122)
-    body+=node(660,714,430,m['thermo']['name'],["算法、数据库与验证尚待落实"],"扩展计划，不冒充已实现",state="planned",h=122)
+    body+=node(660,714,430,m['thermo']['name'],["NASA9 / HP平衡，实现与验证待完成"],"技术路线已定 · 尚未实现",state="planned",h=122)
     body+=node(1150,714,430,m['cycle']['name'],["控制体、支路、功率与损失"],"扩展计划，不冒充已实现",state="planned",h=122)
     return frame("02","功能核心：边界清楚，模块可以独立维护","实线表示主要编排 / 调用；虚线表示接口依赖。灰色虚线框明确标出未实现扩展。",950,body)
 

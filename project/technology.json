@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "decision_status": "accepted",
+  "decided_on": "2026-10-01",
+  "task": "TECH-001",
+  "scope": "2026-10-16 course delivery baseline; selection is not implementation verification",
+  "engineering": {
+    "core_language": "C17",
+    "numeric_type": "double",
+    "units": "explicit SI fields",
+    "primary_pipeline": "Python standard-library orchestration + GCC",
+    "reference_windows_compiler": "GCC 14.2.0",
+    "alternate_build": {"cmake": "3.31.10", "ninja": "1.13.2", "role": "IDE and independent build verification"},
+    "source_registry": "project/modules.json",
+    "tooling_python": "3.13",
+    "plotting": {"library": "Matplotlib", "version": "3.10.8", "backend": "Agg", "status": "import_verified; project plotting pipeline planned"},
+    "ui": "CLI plus offline HTML reports",
+    "storage": "versioned files and Git; no database",
+    "runtime_solver_dependencies": "C runtime/math library and versioned input data only"
+  },
+  "physics": {
+    "current_baseline": {"model": "ideal_constant_gamma_v1", "status": "implemented_and_tested_on_synthetic_cases"},
+    "properties": {"method": "NASA9 temperature polynomials", "status": "selected_not_implemented", "data_pin": "required before ingestion"},
+    "combustion": {"method": "element-constrained Gibbs minimization with TP inner and HP outer solve", "scope": "validated subset of neutral C/H/O gas species; no condensed phases or ionization", "status": "selected_not_implemented"},
+    "nozzle_extension": {"method": "quasi-1D adiabatic variable-property frozen-composition expansion", "freeze_plane": "chamber exit", "status": "selected_not_implemented"},
+    "cycle": {"method": "0D steady component mass/energy/shaft-power balance", "status": "selected_not_implemented"},
+    "scalar_solver": "bracketed bisection",
+    "coupled_solver": "damped Newton with residual scaling and line search; C partial-pivot LU",
+    "study": "C-generated parameter scans, local sensitivities and bounded scenarios"
+  },
+  "references": [
+    {"name": "NASA CEA", "role": "primary thermochemical theory/examples and independent reference", "reference_release": "3.3.4", "runtime_link": false, "reference_execution_verified": false},
+    {"name": "Pyskyfire", "role": "preferred selective component/validation reference", "license_observed": "MIT", "source_commit": null, "pin_and_review_before_reuse": true},
+    {"name": "RocketCycles", "role": "cycle methodology/result comparison; not default source translation", "runtime_link": false},
+    {"name": "Cantera/CoolProp/RocketCEA/RocketIsp", "role": "optional independent comparison only", "runtime_link": false}
+  ],
+  "deferred": ["3D reactive CFD", "structural/thermal FEA", "full regenerative cooling geometry", "startup transient control", "quantitative reusable life prediction", "full vehicle trajectory optimization", "general real-fluid EOS", "web server or desktop GUI framework"],
+  "policy": "Core physical calculations remain C. Raw coefficients are sourced data, not a hidden external solver. Unknown engine facts remain unknown. No project-wide publication license chosen."
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 3,
+  "revision": 7,
   "context": {
     "phase": "C17教学基线可用；真实型号研究待深化",
     "evidence_cutoff": "2026-09-29",
@@ -373,6 +373,30 @@
         "path": "project/evidence/GOV-001_1ee64e2e9807.json",
         "sha256": "b6f8154d871cab72b76c181af96a80b7bac23038fcfd56956ef44777c08ad635"
       }
+    },
+    {
+      "id": "TECH-001",
+      "title": "确定课程项目技术栈与物理算法路线",
+      "status": "DONE",
+      "priority": 0,
+      "depends_on": [
+        "GOV-001"
+      ],
+      "required_artifacts": [
+        "docs/technology-stack.md",
+        "project/technology.json"
+      ],
+      "acceptance": [
+        "冻结工程、界面、数据、算法和开源参考职责；区分决定与实际实现状态",
+        "与核心全C要求、现有基底和交付周期一致，说明延期范围及变更条件"
+      ],
+      "owner": "root",
+      "note": "技术选型确定，功能实现状态与资料证据仍按任务推进；不把决定当成热化学/循环已验证。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/TECH-001_b104cbd6eeec.json",
+        "sha256": "6fc33bf67f7dfd06151f96e952512b4c6ce3072117e763eb3ad9cc3df3904fbf"
+      }
     }
   ],
   "events": [
@@ -615,6 +639,54 @@
       "note": "机械验收与产物契约完成；真实参数/热化学/循环研究仍未完成，远端CI/Linux未运行。",
       "previous_hash": "bbafe7b47654e8702fd587c284cdbdb84bdaceda6efcffd9b8d2e9a6a2371933",
       "hash": "8f968c60648d3c261e5174da8ecc3d770586627ef9a2b53202363330a0cb3d80"
+    },
+    {
+      "seq": 21,
+      "at": "2026-09-30T20:52:02+00:00",
+      "task": "TECH-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "8f968c60648d3c261e5174da8ecc3d770586627ef9a2b53202363330a0cb3d80",
+      "hash": "e0bee6d8280b5ec53922edbd6390b2e69faf363901ef0b375959dae3e1e1247c"
+    },
+    {
+      "seq": 22,
+      "at": "2026-09-30T20:52:02+00:00",
+      "task": "TECH-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户授权直接确定选型；沿用已验证工程，明确高级物理模块的实现与验收边界。",
+      "previous_hash": "e0bee6d8280b5ec53922edbd6390b2e69faf363901ef0b375959dae3e1e1247c",
+      "hash": "db15028f8281b8255e366f01543c7ce51680ee5a232c04eee8f746d08241df28"
+    },
+    {
+      "seq": 23,
+      "at": "2026-09-30T20:58:51+00:00",
+      "task": "TECH-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "工程栈、模型/数值方法、开源参考职责、输入输出、部署与延期边界已明确；架构planned状态和文档同步，Matplotlib导入已核查。",
+      "previous_hash": "db15028f8281b8255e366f01543c7ce51680ee5a232c04eee8f746d08241df28",
+      "hash": "8d07bd323dc2852002a6dcd27548aa10ba6b389a79f78d4623a78ed1c8daa458"
+    },
+    {
+      "seq": 24,
+      "at": "2026-09-30T20:58:52+00:00",
+      "task": "TECH-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "技术选型确定，功能实现状态与资料证据仍按任务推进；不把决定当成热化学/循环已验证。",
+      "previous_hash": "8d07bd323dc2852002a6dcd27548aa10ba6b389a79f78d4623a78ed1c8daa458",
+      "hash": "b23c44252174644c6a4fc15b28f88093392e13c2709440328e3b029cdcec476c"
     }
   ]
 }

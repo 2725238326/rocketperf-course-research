@@ -4,6 +4,8 @@
 
 [打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
+技术路线已确定：[C17核心、零维/准一维/稳态模型、CLI与离线报告](docs/technology-stack.md)。该决定明确工具职责，不代表高级模型已实现。
+
 ![业务流程](docs/architecture/business.svg)
 
 ## 开始工作
