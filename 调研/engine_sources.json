@@ -1,0 +1,8 @@
+[
+  {"id":"V06_casc_engines","url":"https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"},
+  {"id":"V07_cctv_interview","url":"https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"},
+  {"id":"O05_coolprop_library","url":"https://coolprop.org/coolprop/wrappers/SharedLibrary/index.html"},
+  {"id":"O05_coolprop_license","url":"https://raw.githubusercontent.com/CoolProp/CoolProp/master/LICENSE"},
+  {"id":"O02_rocketcea_license","url":"https://raw.githubusercontent.com/sonofeft/RocketCEA/master/LICENSE.txt"},
+  {"id":"O03_rocketisp_license","url":"https://raw.githubusercontent.com/sonofeft/RocketIsp/master/LICENSE.txt"}
+]

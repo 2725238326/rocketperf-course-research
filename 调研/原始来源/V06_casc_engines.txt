@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="../../../template/2358127/2358142.css" type="text/css" rel="stylesheet">
+
+    
+<!--start component HTML组件(sytitle)-->
+<title>中国航天科技集团有限公司</title>
+
+<script type="text/javascript" src="../../../template/2466036/3546477.js"></script>
+
+<style>
+.newsitem .ywly{ padding: 0.2rem 0.15rem; }
+.newsitem .ywly .picgroup img{ float: left; width: 2.95rem; height: 1.7rem; margin: 0.05rem; }
+.newsitem .ywly p{font-size:0.28rem;line-height:0.48rem;text-indent:2em;padding:0.1rem 0;}
+.newsitem .tab-title{background-color:#eaeaea;font-size:0.24rem;height:0.64rem;line-height:0.64rem;}
+.newsitem .tab-title a{width:33.3%;display:block;float:left;text-align:center;font-weight:bold;background-color:#eaeaea;box-sizing:border-box;border-left:1px solid #f8f8f8;border-right:1px solid #cdcdcd;}
+.newsitem .tab-title a.on{background-color:#11417e;color:#fff;border:none;position:relative;}
+.newsitem .tab-title a.on i{position:absolute;width:0;height:0;border-left:0.1rem solid transparent;border-right:0.1rem solid transparent;border-top:0.1rem solid #11417e;top:0.64rem;left:45%;display:block;}
+.ywly .tab-title a{width:100%;}
+.ywly .tab-title a.on i{left:48%;}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block;overflow:hidden;clear:both;height:0;visibility:hidden;content:".";}
+#goto-top{display:none;position:fixed;width:38px;height:36px;background:url(../../../dbsource/2434438/2434439.png) no-repeat 0 0;bottom:40px;right:40px;-webkit-transition:all 0.2s;-moz-transition:all 0.2s;-o-transition:all 0.2s;transition:all 0.2s;z-index:9999;}
+
+<!--图片列表-->
+.tabLis a{display:block;}
+.tabLis .tabLx{float:left;width:3rem;margin-top:30px;margin-left:0.3rem;}
+.tabLis .tabLx  .tabLxx{margin-left:0;}
+.tabLis .pinimg{height:2rem;margin-right:0.46rem;float:left;}
+.tabLis .pinimg img{height:1.8rem;width:2.9rem;}
+.tabLis .pinimg p{font-size:14px;padding-top: 0.15rem;padding-bottom:0.6rem;}
+.more{margin-bottom:0.2rem;}
+</style>
+<!--end component HTML组件(sytitle)-->
+
+    
+    <script type="text/javascript">
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        if(clientWidth>=640){
+                            docEl.style.fontSize = '100px';
+                        }else{
+                            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                        }
+                    };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+</head>
+<body>
+
+<!--start component HTML组件(sytopbanne)-->
+<header class="top-bar">
+<a href="../../../index.html" class="fl logo">
+<img src="../../../template/2358127/2358145.png">
+</a>
+<a href=http://mail.spacechina.com/ target="_blank" class="fr all"><img src="../../../template/2358127/2358143.png"></a>
+
+<!--<a href="javascript:;" class="fr email"><img src="#"></a>-->
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?dc30a93fcf73ec38e6d98ac6ae039cd6";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+<!--end component HTML组件(sytopbanne)-->
+
+
+<!--start component HTML组件(new)-->
+<!--<div class="searchbox">
+    <input type="text" class="fl ipt" placeholder="请输入您要搜索的内容...">
+    <input type="button" class="fr ibt" value="搜索">
+</div>-->
+<!--end component HTML组件(new)-->
+
+
+<!--start component HTML组件(nav)-->
+<nav class="index_nav">
+<ul class="clearfix">
+
+
+<!--<li style="width:33.3%;"><a href="#" style="width:2rem;"></a></li>-->
+
+<li><a href="../../../n142/index.html" class="">关于我们</a></li> 
+<li><a href="../../../n2014789/n2014804/index.html">集团要闻</a></li>
+<li><a href="../../../n2014789/n2014799/index.html">党组声音</a></li>
+<li><a href="../../../n962369/n962398/index.html">党建动态</a></li>
+
+
+<li><a href="../../../n2014789/n2014814/index.html">国际合作</a></li>
+<li><a href="../../../n1995122/index.html">信息公开</a></li>
+<li><a href="../../../n2014789/n2014809/index.html">一线新闻</a></li>
+<li><a href="../../../n146/index.html">业务领域</a></li>
+
+
+<li><a href="../../../n142/n162/index.html">上市公司</a></li>
+<li><a href="../../../n2018089/n2018151/index.html">商业航天</a></li>
+<li><a href="../../../n2018089/n2018146/index.html">卫星应用</a></li>
+<li><a href="http://www.spacetalent.com.cn/">人才招聘</a></li>
+
+</ul>
+</nav>
+<!--end component HTML组件(nav)-->
+
+<div class="contain">
+    
+<!--start component 文档组件(new)-->
+<script type="text/javascript" src="../../../dbsource/361/363.js"></script>
+<style>
+.topNew .wz-text img{width:5.7rem !important;height:auto !important;}
+
+</style>
+ <div class="contain">
+    <div class="topNew wzbox">
+        <h2>雄关漫道真如铁 而今迈步从头越——航天科技集团长十乙火箭团队以实干担当打赢我国重复使用火箭关键一役</h2>
+        <div class="info">
+           <span class="from">  文章来源:中国航天报 </span>
+            <span class="sendTime">发布时间：2026-07-15 </span>
+        </div>
+        <div class="wz-text" id="sty">
+                       <p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">7月10日，南海之上，捷报传来。由中国航天科技集团有限公司研制的长征十号乙运载火箭首飞任务取得圆满成功。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">此次任务是我国首次成功实施运载火箭可控回收，也是全球首次运载火箭网系回收，标志着我国在重复使用火箭技术领域取得历史性突破，将为加快提升我国进出空间能力奠定坚实基础。航天科技集团打赢了宇航领域“十五五”高质量发展的关键一役。在任务开展全过程中，航天科技集团牢记“国之大者”，始终以党和国家利益为重，自觉服从服务于党和国家工作大局，各参研单位坚定“功成不必在我、功成必定有我”境界担当，全方位优化资源、跨专业协同攻坚、多领域精诚合作，以高质量完成重大工程任务的实干实绩检验树立和践行正确政绩观学习教育成效。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">长十乙火箭研制团队锚定“党和国家利益高于一切”，从技术验证到工程实践、从单一突破到体系推进，争分夺秒、实干担当，同时实现一子级回收与二子级入轨，成功将梦想变为现实，为我国构建大规模、低成本、高频次的空间运输体系注入了强大“绿色动能”。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;"><span style="font-weight: bold;">把“三实”写进火箭首飞回收任务全过程</span></p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">“行之力则知愈进，知之深则行愈达。”习近平总书记强调，共产党人必须实事求是、求真务实、真抓实干。谋划在实、推进在实、作风在实——这“三实”，写进了长十乙火箭首次发射回收任务的全过程。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">一院党委高度重视，成立了试验队临时党委，坚持思想引领、凝心聚力，院主要领导任临时党委书记，全程参与策划决策，靠前指挥、一线督导，把关技术路线与任务计划，协调解决重大问题，统筹全院资源形成协同攻坚格局；全体试验队员，尤其是冲锋在一线的党员干部，用正确政绩观把住现场的安全关、质量关、进度关；面对海上回收等核心难题，成立多个联合技术攻关组，多次赴现场解决首飞中存在的风险和问题。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">为了打赢这场攻坚战，临时党委以“一切围绕成功、一切服务一线”为准则，深入开展形势任务教育和专题思想动员，以专题党课、临时党委学习扩大会、各党支部“三会一课”为载体，引导全员奋发进取，在重大工程任务中淬炼党性、检验党性，锤炼真本领、铁肩膀。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">任务期间，团队对标型号首飞、重大工程标准，围绕全箭技术状态更改确认、发射场合练及挂网试验、首飞关键产品质量等，铺开“5+1”重点工作。历经多轮复查、持续攻坚，团队以高昂斗志加严谨作风，让关键技术风险和产品质量管控被牢牢咬住。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">工程推进到哪里，党组织就覆盖到哪里。发射场、总装厂、回收港、总装码头等关键阵地，20余个临时党支部依次建立起来，关键技术攻关党员突击队覆盖全部核心环节。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">回收船上，网系回收系统召集党员骨干组建供配电及驱动攻坚突击队，两班倒抢通供配电路；箭体总装现场，15名党员组成总装突击队，零失误完成箭体总装；在“三平”测发现场，控制系统党员技术攻关组排查处置各环节隐患，支撑合练顺利开展……</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">前方激战正酣，后方牢牢托底。针对出海作业，试验队临时党委组建“海上任务党员先锋队”，在出海前开展海上应急培训和演练、编印出海作业安全手册等，配备应急药品与救生装备，确保每名队员熟练掌握海上自救互救技能，切实筑牢海上作业安全防线。后方无忧则前方无虑。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">当一切准备就绪，全体试验队员静待长十乙首飞成功、一子级踏云归来。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;"><span style="font-weight: bold;">把“能上能下”这块“硬骨头”啃下来</span></p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">“沉下心抓技术迭代与风险闭环，以过硬液体动力成果保障任务一次成功。”六院党委将长十乙火箭首次发射回收任务视为检验液体动力高质量发展成效、践行强军报国使命的重要考场，把正确政绩观视为攻坚克难的指南针，贯穿任务研制全生命周期。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">面对重复使用火箭发动机要“能上能下”的世界级难题，六院党委第一时间组建党员攻坚突击队，将支部建在科研一线。对于本次任务关键的长十乙火箭一子级130吨级泵后摆液氧煤油发动机，团队不仅要确保其在单次任务中“能回收”，更要让返回后的后处理“好用”、让发动机寿命“耐用”。围绕本次任务，六院党委坚持树立和践行正确政绩观，将党旗插在最难啃的“硬骨头”——高空点火攻关的最前沿。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">火箭发动机地面点火数据虽历经“千锤百炼”，但火箭回收要求发动机在再入返回段、高速来流条件下毫秒级响应。一旦点火失败，整发任务归零。六院发动机研制团队面临着无法在地面模拟真实环境，没法做地面试验考核的难题。今年年初，一通关于高空点火风险的电话让产品暂缓出厂。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">面对紧迫的节点要求，六院党委靠前指挥，充分发挥政治优势，相关团队统筹精锐力量开展集智攻关，依托数字化平台，对各类弹道、不同条件的点火环境进行“地毯式”排查，运用既有数据校准仿真，结合历史数据进行包络分析，辅以旁证和控制措施，最终形成完整翔实的说明，顺利通过各级专家评审，为产品如期出厂、保障首飞顺利实施扫清了关键障碍。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">与此同时，二子级140吨级液氧甲烷发动机的研制也在同步加速。六院党委坚持“快”而不“浮”，&nbsp;打破常规，创新采用快速研制模式。团队提前布局零件加工，同步推进方案细化与进度跟踪，将工艺、设计、生产、产保4方拧成一股绳。从方案论证到整机试车仅用时7个月，创下了集团公司发动机研制新纪录。其间，团队还突破重复使用发动机总装狭小空间力矩量化拧紧等关键技术，优化涡轮壳体自动焊接、导管自动焊接等20余项工艺，以严慎细实的作风把住了产品交付的质量关。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">“用户至上、动力先行”“以奋斗者为本”，这套理念被写进型号党员突击队的行动里，他们始终把“能上能下”的技术高地作为树立和践行正确政绩观的最佳练兵场，用可靠的动力心脏，为长十乙火箭一子级回收与二子级入轨提供了重要支撑。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">技术扎实可靠、任务一次成功，这场南海之上的攻坚战，长十乙火箭团队用可靠和成功，续写着中国航天无限可能的传奇。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">加快建设航天强国，是航天人矢志不渝的政治担当。新征程上，航天科技集团将继续以正确政绩观为引领，加快“一重一重”等重大任务研制，奋力以经得起实践、人民、历史检验的硬核实绩，向党和国家交上新的优异答卷。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 0px; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;">（<span style="color: rgb(0, 0, 0); font-family: 宋体; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: justify; text-indent: 32px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">任长胜</span>）</p>
+              </div>
+    </div>
+</div>
+
+<!--end component 文档组件(new)-->
+
+    
+    
+    
+    
+    
+</div>
+
+
+<!--start component HTML组件(new)-->
+<a href="#" title="返回顶部" id="goto-top"></a>
+<footer>
+    <p>京ICP备13027524号</p>
+    <p>京公网安备：11040102700098号</p>
+    <p>中国航天科技集团有限公司版权所有</p>
+</footer>
+
+<!--导航条效果-->
+<script>
+    $(function(){
+  (function(){
+   for(var h=0;h<$(".index_nav ul li a").length;h++){
+    $(".index_nav a").eq(h).mouseover(function(){
+     $(".index_nav a").removeClass("on");
+     $(this).addClass("on");
+     
+    })
+   }
+  })();
+ })
+
+
+
+
+
+
+$(function(){
+        //置顶按钮显示/隐藏实现
+        $(window).scroll(function(){
+            var w_height = $(window).height();//浏览器高度
+            var scroll_top = $(document).scrollTop();//滚动条到顶部的垂直高度
+            if(scroll_top > w_height){
+                    $("#goto-top").fadeIn(500);
+                }else{
+                    $("#goto-top").fadeOut(500);
+            }
+        });
+    //置顶
+    $("#goto-top").click(function(e){
+            e.preventDefault();
+            $(document.documentElement).animate({
+                scrollTop: 0
+                },200);
+            //支持chrome
+            $(document.body).animate({
+                scrollTop: 0
+                },200);
+        });
+    })
+
+
+  $(function(){
+            $("#sty").find("img").css({
+                "width" : "",
+                "height" : ""
+            })
+
+
+  </script>
+<!--end component HTML组件(new)-->
+
+</body>
+</html>

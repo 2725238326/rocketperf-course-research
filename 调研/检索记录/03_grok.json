@@ -1,0 +1,711 @@
+{
+  "retrievedAt": "2026-09-29T15:29:20.2661508+08:00",
+  "model": "grok-4.6-build",
+  "responseId": "65ea2353-1933-9a26-8015-b902c9502c4e",
+  "searchRecords": [
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA RP-1311 CEA \"Computer Program for Calculation of Complex Chemical Equilibrium Compositions\" PDF Gordon McBride site:nasa.gov",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/citations/19780009781"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/cea-history/"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19780009781/downloads/19780009781.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://cearun.grc.nasa.gov/intro.html"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19960044559/downloads/19960044559.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19660000669/downloads/19660000669.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19940028442/downloads/19940028442.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20020036214/downloads/20020036214.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20240016039/downloads/CEA_SciTech_2025_Leader.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA SP-125 OR \"SP-125\" OR SP-8087 OR \"liquid rocket engine\" performance OR system NASA technical report PDF official",
+        "sources": [
+          {
+            "type": "url",
+            "url": "http://web.archive.org/web/20141010035812/http:/ntrs.nasa.gov/search.jsp?Ntt=sp-125&Ntk=all&Ntx=mode"
+          },
+          {
+            "type": "url",
+            "url": "https://archive.org/details/NASA_NTRS_Archive_19710019929"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/propulsion-systems-laboratory-missiles-and-turbojets/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Design-of-Liquid-Propellant-Rocket-Engines.-NASA-Huzel-Huang/dba9648b196a640512a5dac8f7f9f383e54a0c75"
+          },
+          {
+            "type": "url",
+            "url": "https://cdp.pageplace.de/cdp/public/publications/DT0400/9781394187225_A64502498/PREVIEW/9781394187225_A64502498_preview.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.academia.edu/42124584/MODERN_ENGINEERING_FOR_DESIGN_OF_LIQUID_PROPELLANT_ROCKET_ENGINES_REVISED_UPDATED_AND_ENLARGED_BY_Rocketdyne_Division_of_Rockwell_International_Volume_147_PROGRESS_IN_ASTRONAUTICS_AND_AERONAUTICS"
+          },
+          {
+            "type": "url",
+            "url": "https://web.stanford.edu/~cantwell/AA284A_Course_Material/AA284A_Resources/Huzel%20and%20Huang,%20Design_Of_Liquid_Propellant_Rocket_Engines%20NASA%201967.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://archive.org/details/7244552-turbopump-systems-for-liquid-rocket-engines"
+          },
+          {
+            "type": "url",
+            "url": "http://id.ndl.go.jp/bib/033341978"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19810007661/downloads/19810007661.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA CEA github open source OR \"nasa/CEA\" OR cea2 chemical equilibrium applications",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/quick_start.html"
+          },
+          {
+            "type": "url",
+            "url": "https://software.nasa.gov/software/LEW-20586-1"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea/tree/main/source"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20240010609/downloads/CEA_TFAWS_2024_Leader.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "sonofeft/RocketCEA sonofeft/RocketIsp github license language",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketIsp"
+          },
+          {
+            "type": "url",
+            "url": "https://pypi.org/project/rocketcea/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Cantera/cantera OpenMDAO/pyCycle github rocket OR \"chemical equilibrium\" OR cycle analysis license",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/kyleniemeyer/RoCt"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/OpenMDAO-Plugins/pyCycle"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/335076758_pyCycle_A_Tool_for_Efficient_Optimization_of_Gas_Turbine_Engine_Cycles"
+          },
+          {
+            "type": "url",
+            "url": "https://cantera.org/"
+          },
+          {
+            "type": "url",
+            "url": "https://openmdao.org/pubs/Gray-_2016_-PyCycle_Thermodynamics.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/303902778_Optimization_of_Turbine_Engine_Cycle_Analysis_with_Analytic_Derivatives"
+          },
+          {
+            "type": "url",
+            "url": "http://hdl.handle.net/2060/20170002541"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "C language OR \"written in C\" chemical equilibrium OR CEA rocket performance OR \"rocket engine\" open source github -python -fortran",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0010465525005053"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/janstruzinski/RocketCycles"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/phiper5/cea_rocket_run"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/abs/2409.15086"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20180507012214/http:/rocketworkbench.sourceforge.net/equil.phtml"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20240016039/downloads/CEA_SciTech_2025_Leader.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 OR \"Zhuque-3\" OR ZQ-3 LandSpace 发动机 OR \"长征十号乙\" OR \"CZ-10B\" 动力系统 甲烷 重复使用 官方 参数",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.techtimes.com/articles/324180/20260812/landspace-zhuque-3-attempts-land-based-booster-recovery-1b-ipo-stake.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20251204A020DP00"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212847/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/5238407426740580.html"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    "**NASA CEA及相关液体火箭系统/性能资料（优先官方原始，支持化学平衡、理论火箭性能、循环分析基础）。** NASA RP-1311 Part I（1994，Gordon, S. & McBride, B.J.，NASA Glenn/Lewis）：*Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications. Part 1: Analysis*。自由能最小化求解化学平衡（指定T-P、H-P、S-P等状态），混合物热力/输运性质及导数，冷凝相/电离处理，火箭性能（有限/无限燃烧室面积模型、平衡与冻结膨胀）、激波与C-J爆轰。官方入口https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/ ，NTRS可查。Part II（1996，同作者）：*... II. Users Manual and Program Description*，程序结构、输入格式、thermo.inp数据库、示例（含火箭问题）。PDF：https://ntrs.nasa.gov/api/citations/19960044559/downloads/19960044559.pdf 。早期对应NASA SP-273（1976，Gordon & McBride）：*Computer Program for Calculation of Complex Chemical Equilibrium Compositions, Rocket Performance...*（CEC76，自由能最小化，平衡/冻结火箭性能）。PDF链接见NTRS 19780009781。这些支持0D/准1D理论Isp、c*、γ变化、冻结 vs 平衡膨胀计算，是后续系统平衡的输入。NASA SP-125（1971第2版，Huzel, D.K. & Huang, D.H.）：*Design of Liquid Propellant Rocket Engines*。覆盖推力产生、燃烧室/喷管流动、性能参数（Isp、c*、推力系数）、推进剂、泵压/气瓶供应系统、涡轮泵集成、冷却与传热、循环类型。NTRS 19710019929，PDF可经archive或斯坦福镜像获取（https://web.stanford.edu/~cantwell/AA284A_Course_Material/AA284A_Resources/Huzel%20and%20Huang,%20Design_Of_Liquid_Propellant_Rocket_Engines%20NASA%201967.pdf ）。 complementary NASA专论如SP-8107（涡轮泵系统）、SP-8087/8109等提供部件图谱与功率平衡基础。液体发动机重复使用相关可核查资料较少直接综述（多为新闻/二次），甲烷优势（无积碳、易检查再飞）见LandSpace公开及一般推进文献；NASA历史如RL-10/SSME测试提供节流、多次启动、冷却稳定经验，但无针对ZQ-3/CZ-10B的全文专论。部分NTRS PDF仅摘要/片段可见，全文需自行下载。"
+  ],
+  "annotations": [
+    {
+      "type": "url_citation",
+      "url": "https://archive.org/details/NASA_NTRS_Archive_19710019929",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://archive.org/details/NASA_NTRS_Archive_19710019929"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://cdp.pageplace.de/cdp/public/publications/DT0400/9781394187225_A64502498/PREVIEW/9781394187225_A64502498_preview.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://cdp.pageplace.de/cdp/public/publications/DT0400/9781394187225_A64502498/PREVIEW/9781394187225_A64502498_preview.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://news.qq.com/rain/a/20251204A020DP00",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://news.qq.com/rain/a/20251204A020DP00"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.academia.edu/42124584/MODERN_ENGINEERING_FOR_DESIGN_OF_LIQUID_PROPELLANT_ROCKET_ENGINES_REVISED_UPDATED_AND_ENLARGED_BY_Rocketdyne_Division_of_Rockwell_International_Volume_147_PROGRESS_IN_ASTRONAUTICS_AND_AERONAUTICS",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.academia.edu/42124584/MODERN_ENGINEERING_FOR_DESIGN_OF_LIQUID_PROPELLANT_ROCKET_ENGINES_REVISED_UPDATED_AND_ENLARGED_BY_Rocketdyne_Division_of_Rockwell_International_Volume_147_PROGRESS_IN_ASTRONAUTICS_AND_AERONAUTICS"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/phiper5/cea_rocket_run",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/phiper5/cea_rocket_run"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0010465525005053",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.sciencedirect.com/science/article/pii/S0010465525005053"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/20020036214/downloads/20020036214.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/20020036214/downloads/20020036214.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://web.archive.org/web/20180507012214/http:/rocketworkbench.sourceforge.net/equil.phtml",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://web.archive.org/web/20180507012214/http:/rocketworkbench.sourceforge.net/equil.phtml"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.sina.cn/news/detail/5238407426740580.html",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.sina.cn/news/detail/5238407426740580.html"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/cea-history/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/cea-history/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://web.stanford.edu/~cantwell/AA284A_Course_Material/AA284A_Resources/Huzel%20and%20Huang,%20Design_Of_Liquid_Propellant_Rocket_Engines%20NASA%201967.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://web.stanford.edu/~cantwell/AA284A_Course_Material/AA284A_Resources/Huzel%20and%20Huang,%20Design_Of_Liquid_Propellant_Rocket_Engines%20NASA%201967.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://software.nasa.gov/software/LEW-20586-1",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://software.nasa.gov/software/LEW-20586-1"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/OpenMDAO-Plugins/pyCycle",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/OpenMDAO-Plugins/pyCycle"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://cantera.org/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://cantera.org/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.researchgate.net/publication/303902778_Optimization_of_Turbine_Engine_Cycle_Analysis_with_Analytic_Derivatives",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.researchgate.net/publication/303902778_Optimization_of_Turbine_Engine_Cycle_Analysis_with_Analytic_Derivatives"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://archive.org/details/7244552-turbopump-systems-for-liquid-rocket-engines",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://archive.org/details/7244552-turbopump-systems-for-liquid-rocket-engines"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/19810007661/downloads/19810007661.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/19810007661/downloads/19810007661.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst"
+    },
+    {
+      "type": "url_citation",
+      "url": "http://id.ndl.go.jp/bib/033341978",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "http://id.ndl.go.jp/bib/033341978"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/20240016039/downloads/CEA_SciTech_2025_Leader.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/20240016039/downloads/CEA_SciTech_2025_Leader.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://en.wikipedia.org/wiki/Zhuque-3",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://en.wikipedia.org/wiki/Zhuque-3"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/19960044559/downloads/19960044559.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/19960044559/downloads/19960044559.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://arxiv.org/abs/2409.15086",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://arxiv.org/abs/2409.15086"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.techtimes.com/articles/324180/20260812/landspace-zhuque-3-attempts-land-based-booster-recovery-1b-ipo-stake.htm",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.techtimes.com/articles/324180/20260812/landspace-zhuque-3-attempts-land-based-booster-recovery-1b-ipo-stake.htm"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://nasa.github.io/cea/quick_start.html",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://nasa.github.io/cea/quick_start.html"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/nasa/cea/tree/main/source",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/nasa/cea/tree/main/source"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/20240010609/downloads/CEA_TFAWS_2024_Leader.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/20240010609/downloads/CEA_TFAWS_2024_Leader.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://cearun.grc.nasa.gov/intro.html",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://cearun.grc.nasa.gov/intro.html"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/19780009781/downloads/19780009781.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/19780009781/downloads/19780009781.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "http://web.archive.org/web/20141010035812/http:/ntrs.nasa.gov/search.jsp?Ntt=sp-125&Ntk=all&Ntx=mode",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "http://web.archive.org/web/20141010035812/http:/ntrs.nasa.gov/search.jsp?Ntt=sp-125&Ntk=all&Ntx=mode"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://pypi.org/project/rocketcea/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://pypi.org/project/rocketcea/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/sonofeft/RocketIsp",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/sonofeft/RocketIsp"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/sonofeft",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/sonofeft"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.researchgate.net/publication/335076758_pyCycle_A_Tool_for_Efficient_Optimization_of_Gas_Turbine_Engine_Cycles",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.researchgate.net/publication/335076758_pyCycle_A_Tool_for_Efficient_Optimization_of_Gas_Turbine_Engine_Cycles"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://openmdao.org/pubs/Gray-_2016_-PyCycle_Thermodynamics.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://openmdao.org/pubs/Gray-_2016_-PyCycle_Thermodynamics.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/19660000669/downloads/19660000669.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/19660000669/downloads/19660000669.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "http://hdl.handle.net/2060/20170002541",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "http://hdl.handle.net/2060/20170002541"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://zh.wikipedia.org/zh-hans/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://zh.wikipedia.org/zh-hans/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.nasa.gov/propulsion-systems-laboratory-missiles-and-turbojets/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.nasa.gov/propulsion-systems-laboratory-missiles-and-turbojets/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.semanticscholar.org/paper/Design-of-Liquid-Propellant-Rocket-Engines.-NASA-Huzel-Huang/dba9648b196a640512a5dac8f7f9f383e54a0c75",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.semanticscholar.org/paper/Design-of-Liquid-Propellant-Rocket-Engines.-NASA-Huzel-Huang/dba9648b196a640512a5dac8f7f9f383e54a0c75"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/citations/19780009781",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/citations/19780009781"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://ntrs.nasa.gov/api/citations/19940028442/downloads/19940028442.pdf",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://ntrs.nasa.gov/api/citations/19940028442/downloads/19940028442.pdf"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://nasa.github.io/cea",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://nasa.github.io/cea"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/sonofeft/RocketCEA",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/sonofeft/RocketCEA"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/janstruzinski/RocketCycles",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/janstruzinski/RocketCycles"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/nasa/cea",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/nasa/cea"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://github.com/kyleniemeyer/RoCt",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://github.com/kyleniemeyer/RoCt"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://novosti-kosmonavtiki.ru/articles/212847/",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://novosti-kosmonavtiki.ru/articles/212847/"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.landspace.com/product.html",
+      "start_index": 0,
+      "end_index": 0,
+      "title": "https://www.landspace.com/product.html"
+    }
+  ]
+}

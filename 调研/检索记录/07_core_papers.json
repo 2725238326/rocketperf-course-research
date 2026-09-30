@@ -1,0 +1,563 @@
+{
+  "topic": "07_core_papers",
+  "retrieved_at": "2026-09-29T16:24:09.5671386+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "只查4-5份真实技术文献：Gordon/McBride NASA RP-1311 第一部1994第二部1996（分别给NASA NTRS入口）；DLR LUMEN液体火箭发动机循环/系统建模公开论文；一个液体火箭发动机节流或控制/瞬态建模综述。返回准确题名、作者、年、报告号或DOI、原始URL、每份一句实际用途。约1000中文字，不扩展项目介绍。\n",
+  "search_calls": [
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA RP-1311 Gordon McBride 1994 NTRS",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/wp-content/uploads/2025/06/rocket-lab-facilities-manual-1991.pdf?emrc=1f3780"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/propulsion-systems-laboratory-missiles-and-turbojets/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/armstrong/history/publications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/wp-content/uploads/2023/09/sp-2014-617-1.pdf?emrc=c5763d"
+          },
+          {
+            "type": "url",
+            "url": "https://archive.org/details/sim_acta-astronautica_1994-01_32_1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.witpress.com/elibrary/wit-transactions-on-the-built-environment/5/11257"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/centers-and-facilities/armstrong/space-and-hypersonics-technologies/"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19940030197/downloads/19940030197.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/former-astronaut-richard-f-gordon-jr/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA RP-1311 Part 2 1996 McBride Gordon NTRS",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://scholar.google.com/scholar_lookup?author=McBride+B.+J.+&+Gordon+S.&journal=Tech.+rep.%2C+NASA+Lewis+Research+Center&publication_year=1996"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/people/david-d-mcbride/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/armstrong/history/publications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/wp-content/uploads/2025/06/rocket-lab-facilities-manual-1991.pdf?emrc=1f3780"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/citations/20609850249062"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/news-release/nasa-announces-armstrong-flight-research-center-director-to-retire/"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19810017992/downloads/19810017992.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://publications.hse.ru/en/view/144506588"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/aeronautics/nasas-contributions-to-aeronautics-volume-2/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "DLR LUMEN liquid rocket engine cycle modeling paper",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/350277855_Machine_Learning_Methods_for_the_Design_and_Operation_of_Liquid_Rocket_Engines_-_Research_Activities_at_the_DLR_Institute_of_Space_Propulsion"
+          },
+          {
+            "type": "url",
+            "url": "https://dl.iafastro.directory/event/IAC-2019/paper/54963/"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/219040/1/DLR-FB-2025-16.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.eucass.eu/doi/EUCASS2025-105.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/200226/"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/213229/1/IAC-24,C4,1,5,x86850%20manuscript.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/191316/1/Traudt%20IAC-22%2CC4%2C1%2C3%2Cx73654.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/142128/1/Paper.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/130877/1/ISTS%202019%20Deeken.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "liquid rocket engine throttling control transient modeling review paper",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0376042118301830"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20090037061/downloads/20090037061.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3969/j.issn.1671-0940.2021.02.002"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/2076-0825/14/8/385"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S1270963826007807"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20100033271/downloads/20100033271.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://hdl.handle.net/2060%2F20090037061"
+          },
+          {
+            "type": "url",
+            "url": "https://doi.org/10.2514/1.49791"
+          },
+          {
+            "type": "url",
+            "url": "http://hdl.handle.net/2060/20050217133"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2022/0117/11361009.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "ntrs.nasa.gov RP-1311 Gordon McBride 1994",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/people/david-d-mcbride/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/wp-content/uploads/2023/09/sp-2014-617-1.pdf?emrc=c5763d"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/pdf/55691main_Diaz_020204.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/former-astronaut-richard-f-gordon-jr/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "ntrs.nasa.gov RP-1311-P2 McBride Gordon 1996",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/people/david-d-mcbride/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/armstrong/history/publications/"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/citations/20609850249062"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/news-release/nasa-announces-armstrong-flight-research-center-director-to-retire/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/pdf/55691main_Diaz_020204.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:ntrs.nasa.gov Computer program for calculation of complex chemical equilibrium compositions and applications",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19720000717/downloads/19720000717.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19780009781/downloads/19780009781.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/citations/19780009781"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19940028442/downloads/19940028442.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/20240010609/downloads/CEA_TFAWS_2024_Leader.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"NASA-RP-1311\" OR \"RP-1311\" ntrs.nasa.gov Gordon",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/armstrong/history/publications/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/history/report-to-the-president-elect-of-the-ad-hoc-committee-on-space-january-10-1961/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/ocfo/ppc-corner/ppc-guidance-documents/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/propulsion-systems-laboratory-missiles-and-turbojets/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/wp-content/uploads/2025/06/rocket-lab-facilities-manual-1991.pdf?emrc=1f3780"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "ntrs.nasa.gov \"Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications\" 1994",
+        "sources": [
+          {
+            "type": "url",
+            "url": "http://hdl.handle.net/2060/19950013764"
+          },
+          {
+            "type": "url",
+            "url": "https://archive.org/details/NASA_NTRS_Archive_19950013764"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://ntrs.nasa.gov/api/citations/19940028442/downloads/19940028442.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://cir.nii.ac.jp/crid/1571698600713840896?lang=ja"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "ntrs.nasa.gov \"Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications\" Part 2 OR \"Users Manual\" 1996 McBride",
+        "sources": [
+          {
+            "type": "url",
+            "url": "http://hdl.handle.net/2060/19960044559"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/computer-program-for-calculation-of-complex-chemical-2ipjx4zcn6"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://archive.org/details/NASA_NTRS_Archive_19950013764"
+          },
+          {
+            "type": "url",
+            "url": "https://ndlsearch.ndl.go.jp/books/R100000002-I000006599362"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://ntrs.nasa.gov/citations/19950013764"
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://ntrs.nasa.gov/citations/19960044559"
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.eucass.eu/doi/EUCASS2025-105.pdf"
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-13",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:elib.dlr.de LUMEN EcosimPro OR ESPSS modeling OR cycle analysis",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/219040/1/DLR-FB-2025-16.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/220435/"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/219040/1/DLR-FB-2025-16.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/198556/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_64d45e32-d3d1-94b7-8408-898d00690114_call-374c71ce-98f0-4a84-a2b3-523dcb486b19-14",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Parametric Optimization of Turbopump for Reusable Rocket Engine LUMEN year author conference",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/207123/2/aerospace-11-00808.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://elib.dlr.de/195494/"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**检索范围严格限于用户指定：Gordon/McBride NASA RP-1311两部（NTRS入口）、DLR LUMEN循环/系统建模公开论文、液体火箭发动机节流或控制/瞬态建模综述。优先官方原始来源（NASA NTRS、DLR elib、EUCASS DOI、期刊DOI），截止2026-09-29已核实可访问。共5份，每份含准确题名/作者/年/报告号或DOI/原始URL及一句实际用途。**\n\n**1. NASA RP-1311第一部（1994）**  \n题名：Computer program for calculation of complex chemical equilibrium compositions and applications. Part 1: Analysis  \n作者：Sanford Gordon, Bonnie J. McBride  \n年：1994  \n报告号：NASA-RP-1311（NTRS Document ID 19950013764）  \n原始URL：https://ntrs.nasa.gov/citations/19950013764（PDF：https://ntrs.nasa.gov/api/citations/19950013764/downloads/19950013764.pdf）  \n实际用途：提供化学平衡计算的数学分析、混合物热力学/输运性质公式及火箭性能（有限/无限燃烧室面积模型）等应用基础。  \n支持片段：“This report presents the latest... topics include mathematical analyses and techniques for obtaining chemical equilibrium; formulas for obtaining thermodynamic and transport mixture properties... rocket performance based on either a finite- or infinite-chamber-area model”。[[1]](https://ntrs.nasa.gov/citations/19950013764)\n\n**2. NASA RP-1311第二部（1996）**  \n题名：Computer Program for Calculation of Complex Chemical Equilibrium Compositions and Applications II. Users Manual and Program Description  \n作者：Bonnie J. McBride, Sanford Gordon  \n年：1996  \n报告号：NASA-RP-1311（NTRS Document ID 19960044559）  \n原始URL：https://ntrs.nasa.gov/citations/19960044559（PDF：https://ntrs.nasa.gov/api/citations/19960044559/downloads/19960044559.pdf）  \n实际用途：CEA程序用户手册，详述输入数据集准备、输出表格、程序模块组织及示例，便于热力与燃烧问题求解。  \n支持片段：“This users manual is the second part of a two-part report describing the NASA Lewis CEA program... details for preparing input data sets; a description of output tables... a number of examples that illustrate various types of problems”。[[2]](https://ntrs.nasa.gov/citations/19960044559)\n\n**3. DLR LUMEN循环/系统建模论文**  \n题名：Validation of the LUMEN EcosimPro Model with Hot-Fire Test Data  \n作者：Eldin Kurudzija, Kai Dresia, Vincent Bareiß, Christopher Groll, Max Axel Müller, Tobias Traudt, Michael Börner, Wolfgang Armbruster, Dmitry Suslov, Justin Hardi, Günther Waxenegger-Wilfing, Jan Deeken（DLR Institute of Space Propulsion等）  \n年：2025  \nDOI：10.13009/EUCASS2025-105  \n原始URL：https://www.eucass.eu/doi/EUCASS2025-105.pdf  \n实际用途：用EcosimPro/ESPSS建立LUMEN LOX/LNG膨胀循环发动机瞬态系统模型，经部件与整机热试数据验证，用于循环仿真、控制与健康监测开发。  \n支持片段：“The LUMEN simulation model is built in EcosimPro with the European Space Propulsion System Simulations (ESPSS) toolkit... the entire LUMEN model is validated using hot-fire test data. The results show that critical parameters... are modelled with high accuracy”。[[3]](https://www.eucass.eu/doi/EUCASS2025-105.pdf)\n\n**4. DLR LUMEN循环/系统建模论文（补充）**  \n题名：Parametric Optimization of Turbopump for Reusable Rocket Engine (RRE) Applications  \n作者：Mateusz T. Gulczyński, Robson H. S. Hahn, Günther Waxenegger-Wilfing, Jan C. Deeken, Michael Oschwald（DLR）  \n年：2023（ISTS会议，Received May 29, 2023）  \n原始URL：https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf  \n实际用途：基于LUMEN演示发动机，用EcosimPro ESPSS进行液体火箭发动机循环瞬态建模与涡轮泵参数优化及寿命评估。  \n支持片段：“The modelling and performance analysis under transient conditions are conducted with EcosimPro ESPSS software... based on the LUMEN demonstrator engine... Engine Cycle Modelling”。[[4]](https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf)\n\n**5. 液体火箭发动机节流综述**  \n题名：Liquid-Propellant Rocket Engine Throttling: A Comprehensive Review  \n作者：Matthew J. Casiano, James R. Hulka, Vigor Yang  \n年：2010（Journal of Propulsion and Power；NTRS预印本2009）  \nDOI：10.2514/1.49791（NTRS Document ID 20090037061）  \n原始URL：https://ntrs.nasa.gov/citations/20090037061（期刊：https://doi.org/10.2514/1.49791）  \n实际用途：全面综述液体火箭发动机节流方法（高压降、双歧管、气体喷射等）、动力学影响及燃烧不稳定、传热等关键问题。  \n支持片段：“This review provides a detailed survey of LRE throttling centered around engines from the United States. Several LRE throttling methods are discussed... The effects of variable thrust on the mechanics and dynamics of an LRE”。[[5]](https://ntrs.nasa.gov/api/citations/20090037061/downloads/20090037061.pdf)\n\n以上均经官方入口直接核实，无扩展介绍。无法独立核实的文献未列入。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://ntrs.nasa.gov/citations/19950013764",
+              "start_index": 917,
+              "end_index": 967,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://ntrs.nasa.gov/citations/19960044559",
+              "start_index": 1666,
+              "end_index": 1716,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.eucass.eu/doi/EUCASS2025-105.pdf",
+              "start_index": 2500,
+              "end_index": 2551,
+              "title": "3"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://elib.dlr.de/195494/1/OS1-2-02_%20Parametric%20Optimization%20of%20Turbopump%20for%20Reusable%20Rocket%20Engine%20(RRE)%20Applications%20Mateusz%20Gulczynski.pdf",
+              "start_index": 3252,
+              "end_index": 3427,
+              "title": "4"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://ntrs.nasa.gov/api/citations/20090037061/downloads/20090037061.pdf",
+              "start_index": 4058,
+              "end_index": 4138,
+              "title": "5"
+            }
+          ]
+        }
+      ],
+      "id": "msg_64d45e32-d3d1-94b7-8408-898d00690114",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 230294,
+    "input_tokens_details": {
+      "cached_tokens": 177024
+    },
+    "output_tokens": 6360,
+    "output_tokens_details": {
+      "reasoning_tokens": 4585
+    },
+    "total_tokens": 236654,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 15,
+    "cost_in_usd_ticks": 2335841600,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 15,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 52990,
+      "output_tokens": 1509
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

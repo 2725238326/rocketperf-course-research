@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "provenance": "Analytic M=2, gamma=7/5, Ae/At=27/16; Python Decimal 50-digit evaluation, no inversion/root solver. See docs/benchmarks.md.",
+  "relative_tolerance": 1e-9,
+  "expected": {
+    "exit_mach": 2.0,
+    "exit_temperature_k": 166.66666666666667,
+    "exit_pressure_pa": 127804.52546295094,
+    "exit_velocity_m_s": 517.5583702991061,
+    "characteristic_velocity_m_s": 428.53006428954317,
+    "mass_flow_kg_s": 2.3335585606062264,
+    "thrust_n": 1423.4229023436161,
+    "thrust_coefficient": 1.4234229023436161,
+    "specific_impulse_s": 62.200599374151
+  }
+}

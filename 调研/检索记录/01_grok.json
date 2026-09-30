@@ -1,0 +1,322 @@
+{
+  "retrievedAt": "2026-09-29T15:29:00.8155076+08:00",
+  "model": "grok-4.6-build",
+  "responseId": "ee233d35-3bc5-91e3-b58a-c3e52d796ce3",
+  "searchRecords": [
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 官网 朱雀三号",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huishan.gov.cn/doc/2026/05/29/4783265.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://m.bjnews.com.cn/detail/1787123859129207.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kw.beijing.gov.cn/xwdt/bmdt/202512/t20251203_4319494.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.mynavi.jp/techplus/article/20251219-3833817/"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 天鹊12 天鹊15 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.kepuchina.cn/article/articleinfo?business_type=100&classify=0&ar_id=670713"
+          },
+          {
+            "type": "url",
+            "url": "https://www.thepaper.cn/newsDetail_forward_32104362"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:landspace.com 朱雀三号",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=74"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 朱雀三号 验证箭 轨道箭",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.guancha.cn/industry-science/2025_12_06_799591.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20251203A05BJF00"
+          },
+          {
+            "type": "url",
+            "url": "https://kw.beijing.gov.cn/xwdt/bmdt/202512/t20251203_4319494.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://www.beijing.gov.cn/ywdt/gzdt/202608/t20260821_4832099.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.bjnews.com.cn/detail/1787123859129207.html"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=66"
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "天鹊12 天鹊12A 天鹊12B 发动机 循环 室压 比冲 推力 site:landspace.com OR 蓝箭航天",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=54"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=61"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=69"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "天鹊15A 天鹊15B 液氧甲烷发动机 参数",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202210/19/WS634fe737a310817f312f290c.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/16435"
+          }
+        ]
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=49"
+      }
+    },
+    {
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+      }
+    }
+  ],
+  "messages": [
+    "**朱雀三号（ZQ-3）及天鹊系列发动机公开证据汇总（截至2026-09-29）**\n\n蓝箭航天官网当前产品页将朱雀三号定位为可重复使用液氧甲烷运载火箭，一子级9台TQ-12B、二子级1台TQ-15B真空发动机，全箭长76.6m、起飞推力900t、LEO一次性21.3t/航区回收18.3t/返场12.5t，一子级设计复用达20次，并称2025年12月已完成中国商业航天首次可重复使用火箭轨道级发射验证。[[1]](https://www.landspace.com/product.html)\n\n实际飞行的遥一（2025-12-03）与遥二（2026-08-19）为较短构型：全箭长66.1m、起飞质量约560-570t、起飞推力7542kN，一级9台天鹊12A并联、二级1台天鹊15A真空型。遥一二级成功入轨并完成二次起动，但一子级着陆段点火异常、回收失败；遥二成功入轨并实现一子级陆地支腿软着陆（中国首次入轨级陆地回收）。这反映方案演变：2023年8月立项、12月发布目标构型（12B/15B、76.6m、900t级）后，因发动机进度先飞“基础型”（12A/15A、66.1m）。VTVL-1验证箭（2024年1月/9月）用单台改进型天鹊12完成百米/10km级垂直起降，验证着陆技术。天鹊12/12A/12B与15/15A/15B对应关系：12系列为一级海平面型（原12→改进12A用于基础型飞行→12B用于目标构型），15系列为二级真空型（15A用于基础型及朱雀二号改进型，15B用于目标构型）。公开证据对“基础型/改进型”官方命名不完全统一，部分来源称遥一/遥二为基础型。[[2]](https://www.landspace.com/news-detail.html?itemid=66)\n\n**推进剂与循环**：全箭液氧/甲烷。天鹊12为全球首台飞行验证的大推力泵后摆液氧甲烷发动机；15A为全国首台燃气冷却大推力泵前摆真空型。循环类型官方未在产品页直接标注“燃气发生器”，但泵后/泵前摆描述及系列特征与开式燃气发生器循环一致（新研“蓝焱”才明确全流量补燃）。无闭式/分级燃烧证据。[[3]](https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html)\n\n**发动机数量、推力、比冲等可追溯参数**（仅列官方/权威来源，区分设计/台架/飞行；无室压官方值）：\n\n| 参数 | TQ-12（原） | TQ-12A（基础型飞行） | TQ-12B（目标构型） | TQ-15A（基础型飞行） | TQ-15B（目标） |\n|------|-------------|----------------------|--------------------|----------------------|---------------|\n| 推力 | 真空80t | 海平面84.6t | 海平面1000kN | 真空836kN | 真空1183kN |\n| 比冲 | 真空350s | 海平面293s | — | 真空334.5s | — |\n| 混合比 | 3.5 | 2.9 | — | 2.9 | — |\n| 节流 | — | 50-110%（试车） | 深度节流（台架） | 55-110%（设计/试车，测试达40-120%） | — |\n| 再点火 | — | 二次起动试车+飞行二级验证 | 多次起动台架 | 三次起动能力+飞行二次起动 | — |\n| 复用 | — | 二次起动试车验证可复用 | 550s+多次起动台架 | 长时多次试车 | — |\n\n一级9台并联（九机45s台架试车验证，飞行验证），二级1台。起飞推力：基础型7542kN（台架/飞行），目标900t（设计）。一子级设计复用≥20次（目标，回收后发动机可不下箭检查即可再飞）；截至2026-09-29，遥二已着陆但无公开复飞。飞行验证包括二级多次起动、深度变推需求及九机并联。[[1]](https://www.landspace.com/product.html)\n\n**最有价值原始/权威资料（8条，优先官网/新华社级）**：\n1. https://www.landspace.com/product.html 《产品与服务》 蓝箭航天（持续更新） 支撑当前目标构型12B/15B、76.6m/900t/运力及12A海平面参数。摘录：“一子级采用9台TQ-12B”。缺口：无室压。\n2. https://www.landspace.com/news-detail.html?itemid=66 《朱雀三号重复使用遥一运载火箭入轨圆满成功》 2025-12-03 蓝箭航天 支撑基础型12A/15A、66.1m/7542kN、九机并联、二级二次起动、回收失败。摘录：“一级采用九台天鹊12A”。冲突：与产品页长度/发动机型号。\n3. https://www.landspace.com/news-detail.html?itemid=49 《朱雀三号火箭一子级设计复用可达20次》 2023-12-11 蓝箭航天/科技日报 支撑原设计12B 1000kN/15B 1183kN、76.6m/900t/21.3t。摘录：“9台海平面推力1000千牛的天鹊12B”。\n4. https://www.landspace.com/news-detail.html?itemid=64 《朱雀三号一级动力系统九机并联地面点火试验成功》 2025-06-20 蓝箭航天 支撑12A九机7542kN/45s台架。摘录：“9机并联总推力达7542kN”。\n5. https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html 《天鹊系列发动机》 2023-05-14 全国科技活动周/北京市 支撑TQ-12真空80t/350s/混合比3.5及15A 836kN/334.5s/2.9。摘录：“真空推力：80 t”。\n6. https://www.landspace.com/news-detail.html?itemid=54 《蓝箭航天首台天鹊A发动机成功交付》 2024-03-07 蓝箭航天 支撑12A推力+9%/比冲+40m/s及15A多次起动/变推。摘录：“推力提高9%”。\n7. https://kw.beijing.gov.cn/xwdt/bmdt/202512/t20251203_4319494.html 《朱雀三号重复使用运载火箭发射入轨》 2025-12-03 北京市科委（新华社、蓝箭航天） 支撑遥一入轨及突破（与官网一致）。摘录：“九台天鹊12A发动机并联”。\n8. https://www.landspace.com/news-detail.html?itemid=76 《朱雀三号重复使用遥二运载火箭实现入轨及回收圆满成功》 2026-08-19 蓝箭航天 支撑遥二成功陆地回收。摘录：“一子级按预定程序成功软着陆”。冲突/缺口：产品页已切换B型，无12B/15B飞行参数、无室压、循环未直标。\n\n**课程分析边界**：可做公开参数基础上的燃气发生器开式循环原理分析（比冲损失、变推/多次起动对效率与复用的影响）、推力/比冲/混合比热力学对比及复用对发动机清洁/节流要求；不能做未公开室压推算、具体喷注/冷却结构、材料工艺、控制系统详细设计或制造工程。严禁将台架/设计目标当作飞行实值。"
+  ],
+  "annotations": [
+    {
+      "type": "url_citation",
+      "url": "https://www.landspace.com/product.html",
+      "start_index": 202,
+      "end_index": 247,
+      "title": "1"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.landspace.com/news-detail.html?itemid=66",
+      "start_index": 692,
+      "end_index": 751,
+      "title": "2"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html",
+      "start_index": 899,
+      "end_index": 994,
+      "title": "3"
+    },
+    {
+      "type": "url_citation",
+      "url": "https://www.landspace.com/product.html",
+      "start_index": 1695,
+      "end_index": 1740,
+      "title": "1"
+    }
+  ]
+}

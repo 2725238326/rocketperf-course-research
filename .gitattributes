@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.png -text
+*.jpg -text
+*.pdf -text
+*.pptx -text
+# Archived byte hashes must survive checkout without newline conversion.
+调研/原始来源/** -text
+调研/文献/** -text
+调研/检索记录/** -text

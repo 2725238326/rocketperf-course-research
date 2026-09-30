@@ -1,0 +1,684 @@
+[PDF PAGE 1]
+Validation of the LUMEN EcosimPro Model with Hot-Fire
+Test Data
+Eldin Kurudzija⋆†, Kai Dresia⋆†, Vincent Bareiß⋆, Christopher Groll⋆, Max Axel Müller⋆, Tobias Traudt⋆,
+Michael Börner⋆, Wolfgang Armbruster⋆, Dmitry Suslov⋆, Justin Hardi⋆, Günther Waxenegger-Wilfing⋆‡,
+Jan Deeken⋆§
+⋆German Aerospace Center (DLR), Institute of Space Propulsion, 74239 Lampoldshausen, Germany
+‡University of Würzburg, Institute of Computer Science, 97074 Würzburg, Germany
+§ RWTH Aachen University, Institute of Jet Propulsion and Turbomachinery, 52062 Aachen, Germany
+Eldin.Kurudzija@dlr.de, Kai.Dresia@dlr.de
+†These authors contributed equally
+Abstract
+LUMEN (Liquid Upper stage deMonstrator ENgine) is a LOX/LNG expander-bleed type engine with two
+turbopumps in the 25 kN thrust range. The project was started in 2017 at the Institute of Space Propulsion
+of the German Aerospace Center (DLR). Since then, several test campaigns have been carried out for the
+thrust chamber assembly and each turbopump while the first hot-fire test of the whole engine was suc-
+cessfully conducted in 2024. The experimental data collected during each test campaign provides an ideal
+basis for validating transient simulation models at component and system level. The LUMEN simulation
+model is built in EcosimPro with the European Space Propulsion System Simulations (ESPSS) toolkit. In
+this work, the models for the combustion chamber, injector, cooling channels, turbines and pumps are first
+validated individually. Subsequently, the entire LUMEN model is validated using hot-fire test data. The
+results show that critical parameters, such as the combustion chamber pressure, the fuel injection temper-
+ature and the rotational speed of each turbopump, are modelled with high accuracy. Overall, the mean
+average percentage error is below 5 % for each quantity. The results of this work allow fast, simple and
+risk-free predictions of the system behaviour of LUMEN. This is particularly important in the preparation
+of future test campaigns and for developing intelligent controllers and health monitoring systems.
+1. Introduction
+The Institute of Space Propulsion at the German Aerospace Center (DLR) initiated the LUMEN (L
+iquid Upper stage
+deMonstrator ENgine) project in 2017, aiming to develop system-level expertise for the operation of liquid rocket
+engines. LUMEN, as shown in Figure 1, is an expander-bleed rocket engine which operates with liquid oxygen (LOX)
+and liquefied methane (LNG). Each propellant is pressurised by its own turbopump. LNG is partially used for the
+regenerative cooling of the main combustion chamber (MCC) in a counterflow-arrangement. The heated LNG mass
+flow is then split between a mixer, where it is used to elevate the temperature of the fuel before injection into the
+MCC, and the cooling channels of the nozzle extension (NE). The NE coolant is then used to drive the turbines before
+being discarded. LUMEN generates 25 kN thrust in its nominal operating point at a combustion chamber pressure pcc
+of 60 bar and a mixture ratio ROF of 3.4. In its latest configuration, LUMEN uses three electrically actuated control
+valves for setting the operating point: the turbine fuel valve (TFV), the turbine oxidiser valve (TOV) and the fuel
+control valve (FCV).
+Within the LUMEN project the thrust chamber assembly (TCA) and each turbopump were first developed and
+tested individually before hot-fire test campaigns of the whole engine were successfully conducted at the European
+research and technology test bench P8.3 in Lampoldshausen in 2024 and 2025 [8, 18]. Two combustors with similar
+pressure loss and heat transfer characteristics were developed and tested in the project. The first combustor is con-
+ventionally manufactured and uses a CuCrZr inner liner with axially milled and galvanically closed cooling channels.
+Laser powder bed fusion (LPBF) was used to manufacture the second single piece combustor liner. Details of the the
+development and manufacturing process of the conventional combustor and the additive manufactured combustor are
+provided in Haemisch et al. [11] and Suslov et al. [16, 17]. The injector head features 42 shear-coaxial elements. Char-
+acterisation of the combustion process and verification of flame anchoring are achieved by means of a measurement
+ring equipped with temperature and pressure sensors as well as optical probes.
+Copyright © 2025 by Eldin Kurudzija et al.. Published by the EUCASS association with permission.
+DOI: 10.13009/EUCASS2025-105
+11ᵀᴴ EUROPEAN CONFERENCE FOR AERONAUTICS AND SPACE SCIENCES (EUCASS)
+
+[PDF PAGE 2]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+NE
+INJ
+MCC
+IGN
+FCV
+RAV
+BPV
+XCV
+MIXERMFVMOVOCV
+Interface
+LOX
+Interface
+LNG
+LOX
+Pump
+LNG
+Pump
+LNG
+Turbine
+LOX
+Turbine
+TFVTOV
+TBV
+Figure 1: Flow scheme of LUMEN.
+The fuel and oxidiser turbopump (FTP and OTP), as shown in Figure 2, use a single-stage centrifugal pump
+and supersonic impulse turbine. The design has been carried out using in-house tools [18]. Details of the pump and
+turbine design are given in Hahn et al. [4, 5]. To increase the life expectancy of the bearing system, oil lubrication with
+commercial of the shelf bearings is used. With a minimum expected life of 1000 h, the bearing system exceeds the life
+time of typical turbopump designs significantly. The maximum rotational speed of the OTP and FTP is 28 000 rpm and
+50 000 rpm, respectively.
+Figure 2: OTP after sub-component test (left) and FTP during hot-fire test (right).
+In the current shift of the space industry towards re-usability and cost reduction, advanced technologies such
+as intelligent control and health monitoring play a vital role. Given its modular design, extensive instrumentation
+and wide throttling range, LUMEN is ideally suited for testing and developing control and health monitoring systems
+under realistic conditions. The development of those technologies requires a transient simulation model and a detailed
+understanding of the engine. The sub-component and hot-fire tests, which were carried out within the LUMEN project
+provide a large database for building and validating the required simulation model. This paper presents the detailed
+modeling of the LUMEN simulation model using the European Space Propulsion System Simulation (ESPSS) toolkit
+of EcosimPro and its validation using experimental data. For this, an overview of the test activities which were carried
+out within the LUMEN project is given first. After, the sub-component modelling and validation are described. Finally,
+the complete simulation model is validated using experimental data from the latest hot-fire test campaign.
+2
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 3]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+40 50 60 70 80
+Combustion chamber pressure pcc [bar]
+2.6
+3.0
+3.4
+3.8
+4.2Mixture Ratio ROF [-]
+LUMEN envelope
+BKL-V1 BKL-V3 (LPBF)
+Figure 3: Steady-state load points achieved during TCA
+test campaigns for both combustors [11, 16, 17].
+ Figure 4: Thrust chamber during hot fire testing.
+2. Test activity overview
+Design qualification and characterisation of each subsystem were achieved over multiple test campaigns. This includes
+two test campaigns for the TCA, two test campaigns for each turbopump and two hot-fire test campaigns of the whole
+engine. In the following section an overview of these test campaigns is provided.
+2.1 Thrust chamber assembly
+The TCA test campaigns were conducted at the P8 test facility in Lampoldshausen, focusing on the characterisation of
+the injector head, combustion chamber, nozzle extension, regenerative cooling system and control valves [11, 16]. In
+addition to qualifying the design of both combustors, several goals were successfully achieved:
+• Characterisation of the injector head pressure loss
+• Determination of the combustion efficiency and minimum required cooling channel mass flow
+• Performance characterisation with fuel injection temperatures between 210 K and 290 K
+In total, 27 tests have been conducted with an accumulated test duration of 24 minutes. As shown in Figure 3, represen-
+tative steady-state load points have been achieved for both combustors within the LUMEN operational envelope. More
+details on the experimental setup and results can be found in Börner et al. [3], Hardi et al. [13], Haemisch et al. [11]
+and Suslov et al. [16, 17].
+2.2 Turbopumps
+Multiple test campaigns have been conducted for the characterisation of the performance of both turbopumps, the
+qualification of the mechanical and thermal design and the development of a reliable chill-down procedure [18]. For
+each turbopump unit individual test campaigns have been conducted. Following the initial water test of the OTP,
+cryogenic test campaigns were conducted at the P8.3 test facility in Lampoldshausen. In those test campaigns, the
+turbine was driven with gaseous nitrogen and the pump discharge pressure and mass flow were set by a downstream
+control valve and orifice.
+During the OTP test campaign at the P8.3 test facility, the employment of a neural network based controller for
+tracking reference trajectories of the pump discharge pressure and pump mass flow rate was successfully demonstrated
+for the first time by Dresia et al. [7]. The intelligent controller achieved high tracking accuracy over an accumulated
+runtime of 500 s with errors below 1 %. In addition, fault diagnostic methods were successfully tested in the FTP test
+campaign by Kurudzija et al. [14]. Within this work, semi-empirical models were derived which accurately describe
+the relationship between the pump discharge pressure, mass flow rate, rotational speed and the actuator position of
+the FCV . The mathematical models were successfully employed at the test bench P8.3 and achieved errors below 3 %.
+In post-processing, a fault in the rotational speed sensor with a detection delay below 1 s could be detected. This
+demonstrated the capability of using those models for fault diagnostic in future health monitoring systems. Over five
+test campaigns, the OTP and FTP accumulated a runtime of 88 minutes and 44 minutes, respectively.
+3
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 4]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+40 50 60 70 80
+Combustion chamber pressure pcc [bar]
+2.6
+3.0
+3.4
+3.8
+4.2Mixture Ratio ROF [-]
+LUMEN envelope
+Demo 24 Demo 25
+Figure 5: Steady-state load points achieved during the hot-
+fire test campaigns [8].
+ Figure 6: LUMEN hot fire testing at test bench P8.3.
+2.3 Engine
+Following the sub-component tests, the entire LUMEN demonstrator engine has been successfully tested and put into
+service at the test bench P8.3 in 2024 as shown in Figure 6. Within this test campaign, the ignition sequence was
+initially established, with the subsequent characterisation of the operational envelope. With the objective of further
+expanding the operational envelope, testing the throttling capabilities and optimising sub-components of LUMEN, a
+second test campaign was conducted in 2025. In comparison to the preceding test campaign, the LOX impeller has
+been improved, an injector head which features swirl elements on the inner row and shear-coaxial elements on the outer
+row has been utilised, the chill-down process has been improved and the system pressure losses have been reduced [8].
+Over the course of both test campaigns, numerous significant milestones have been achieved:
+• Characterisation of the engine for combustion chamber pressures between 38 bar and 78 bar.
+• Demonstration of the repeatability of the engine conditioning and ignition sequences.
+• Demonstration of high durability of the TCA over 27 ignitions and test operation exceeding 24 minutes.
+• Validation of the thermal design of the turbopumps during long-duration tests.
+• Establishment of a large database on LOX/LNG injection over a wide fuel injection temperature and combustion
+chamber pressure range.
+• Demonstration of the self-start capability without relying on a GN2 turbine starter.
+• Demonstration of a neural network controller for thrust and mixture ratio control.
+• Demonstration of operation along a sequence analogous to a moon landing.
+In total, 17 ignitions of LUMEN have been successfully performed in both test campaigns with an accumulated hot-
+fire test duration of over 20 minutes [8]. As shown in Figure 5, the whole operational envelope of LUMEN has been
+successfully characterised in both test campaigns. More details are provided in Dresia et al. [8].
+3. Fundamentals
+Following the establishment of a large database for each sub-component and the entire engine, accurate transient sim-
+ulation models can be developed and validated across the whole operational envelope of LUMEN. The simulation
+models are built in EcosimPro 7.0.10. In the following section an overview of the measurement uncertainties is pro-
+vided, followed by a description of the mathematical fundamentals of EcosimPro.
+4
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 5]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+Table 1: Measurement accuracy and uncertainties.
+Measurement Measurement range Max. uncertainty
+Temperature 106 − 313 K ±2.5 K
+233 − 648 K ±1.5 K
+Mass flow rate 0 − 10 kg/s ±0.03 kg/s
+V olumetric flow rate 0 − 12 l/s ±3 %
+Pressure 0 − 250 bar ±1 %
+Rotational speed 0 − 200 000 rpm ±0.2 %
+3.1 Measurement uncertainties
+For characterising the operational condition of the components, extensive instrumentation is used within each test
+campaign of the LUMEN project. This includes measurements of pressures, temperatures, mass flow rates, rotational
+speeds and vibrations. As the fluid properties are varying within the engine, different types of sensors and mea-
+surement ranges are used depending on the expected conditions. Thermocouples used for measuring cryogenic and
+non-cryogenic temperatures are mostly of type K and introduce an uncertainty of ±2.5 K between 106 K and 313 K
+and ±1.5 K between 233 K and 648 K, respectively. A broad range of different static pressure sensors is used within
+LUMEN with the maximum uncertainty of the static pressure sensors being ±1 % from the full span measurement
+range. For measuring the injection mass flow rate on the LOX and LNG side, Coriolis flow meter are used. The maxi-
+mum uncertainty is ±0.03 kg/s. Turbine flow meter are used for the other flow rate measurements. Using temperature
+and pressure measurements to estimate the fluid density with lookup tables, the volumetric flow rate is converted to
+a mass flow rate measurement in the MCC. The uncertainty of the whole measurement chain is ±3 % [1, 12]. The
+rotational speed of the turbopumps is measured with an inductive sensor which has a published linearity of ±0.2 %.
+The considered uncertainties are summarized in Table 1.
+3.2 Mathematical modeling
+EcosimPro solves systems of differential algebraic (DAE) and ordinary differential equations (ODE) and is able to
+handle discontinuities introduced by discrete events such as valve switching or phase transition [9]. It uses an object-
+oriented modelling approach in which complex physical systems, e.g. the LUMEN engine, are built with more elemen-
+tary components, e.g. pipes or valves. Each component is defined by its own system of equations and ports through
+which mass, momentum and energy are exchanged. By defining boundary conditions, EcosimPro automatically as-
+sembles a global system of equations. Denoting x(t) ∈ Rn as the vector of explicit algebraic variables and y(t) ∈ Rm as
+the vector of semi-state and implicit algebraic variables, the mathematical problem can be stated as
+x = G(t, y, x, p) and F(t, y, ˙y, x, p) = 0, (1)
+where p collects the non-explicit variables. For solving the system of equations, several transient solvers with variable-
+step integration can be used. In this work, the sparse CVODE solver with backward differentiation formula is used.
+4. Component modeling and validation
+The LUMEN simulation model is built using the European Space Propulsion System Simulation (ESPSS) toolkit
+version 3.8.1 of EcosimPro. ESPSS provides a comprehensive collection of components for the simulation of rocket
+engines and satellites [10]. It includes libraries for calculating the thermodynamic and transport properties for perfect
+and real fluids as well as mixtures of fluids and chemicals. Propulsion-specific components such as turbines, pumps,
+combustion chambers, pipes and valves are implemented in ESPSS libraries. Governing equations for mass continuity,
+momentum and energy conservation are enforced within those components. Each component is characterised by a
+unique set of parameters and equations. The details of the most relevant components used in the LUMEN model are
+described and validated in the following. As LUMEN’s components have been updated progressively, only stationary
+load points from the latest hot-fire test campaign (see Figure 5) are used for validation. The initial modeling of each
+component and the complete LUMEN model has been conducted by Dresia [6].
+5
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 6]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+4.1 Injector
+For modelling the injector, the standard ESPSS component is used [10]. The mass flow ˙m is calculated dynamically by
+balancing the momentum using
+0.5 I d ˙m
+dt =
+
+p + 0.5ρv2
+in −
+
+p + 0.5ρv2
+out − 0.5 ζ G2
+ρin
+. (2)
+Here I is the inertia of the injector,p the pressure, ρ is the density,v the velocity of the fluid,ζ the effective pressure loss
+coefficient andG the mass flow per unit area. The validation of the modeling of the injector is conducted by comparing
+the pressure drop across each injector. The pressure drop is a function of the mass flow through the injector, the fluid
+density and the area discharge coefficient(CdA)inj, defined as
+∆p =
+˙m2
+inj
+2ρ (CdA)2
+inj
+. (3)
+To validate the mathematical models for each injector, the mass flow, inlet temperature and pressure are imposed
+as boundary conditions and the outlet pressure is compared against experimental data. As shown in Figure 7, the
+model aligns well with experimental data for both injectors. At the given temperatures, LOX can be assumed to be
+incompressible, the pressure drop changes therefore approximately quadratically with an increasing mass flow. The
+compressibility effects on the LNG side are also accurately modelled. In total, the pressure loss across the LOX and
+LNG injector is modeled with errors below 4 % and 5 %, respectively.
+0.6 0.8 1.0 1.2 1.4
+Normalized injector mass flow ˙m [−]
+0
+5
+10
+15
+20
+25
+30Injector pressure drop ∆p [bar]
+Experiment
+Ecosim
+(a) LOX injector
+0.00 0.25 0.50 0.75 1.00 1.25 1.50
+Normalized injector mass flow ˙m [−]
+0
+5
+10
+15
+20
+25
+30Injector pressure drop ∆p [bar]
+Experiment
+Ecosim
+40 50 60 70
+CH4 density ρ [kg/m3]
+ (b) LNG injector
+Figure 7: Comparison of the predictions of the injector components with experimental data.
+4.2 Cooling channels
+The regenerative cooling of LUMEN is modeled using two separate cooling channels for the combustion chamber and
+nozzle extension, respectively. ESPSS models the cooling channels using a central fluid channel with surrounded wall
+components. Fluid dynamic e ffects, such as pressure loss due to internal friction and variations in the velocity of the
+cooling medium, as well as thermodynamic effects resulting from heat transfer with the cooling channel walls, are
+modeled within the central fluid channel. This represents a resistive flow element, thermally interacting with the metal
+structures through a one-dimensional thermal port. The heat transfer inside the metal structure of the cooling channel
+due to conductivity is modeled using the wall components. The detailed description of the mathematical model of the
+cooling channels is given in [10].
+To validate the modeling, the cooling channels are simulated alongside the combustion chamber. The heat
+transfer is modeled by a modified Bartz correlation, taking into account the stronger influence of the fuel injection
+temperature and combustion chamber pressure for LUMEN [6]. The mass flow, inlet temperature and pressure for
+both components are imposed as boundary conditions. Similarly to the injector component, the cooling channel is
+validated by comparing the pressure drop as well as the integral heat flux to experimental steady-state points. As
+6
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 7]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+shown in Figure 8 the model aligns well with experimental data for both the pressure drop and integrated heat flux.
+The maximum error in the pressure drop of the combustion chamber and nozzle extension cooling channels is 1.4 bar
+and 1.7 bar, respectively. For the integrated heat flux, the maximum error in both cooling channels is below 6 %.
+0.0 0.5 1.0 1.5 2.0
+Normalized mass flow ˙m [−]
+0
+5
+10
+15
+20
+25
+30Pressure drop ∆p [bar]
+Experiment CC
+Experiment NE
+Ecosim
+0 20 40 60 80
+Chamber pressure pcc [bar]
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5Norm. integrated heat flux Q [−]
+Experiment CC
+Experiment NE
+Ecosim
+Figure 8: Comparison of the model predictions for the pressure drop and integral heat flux with experimental data.
+4.3 Pumps
+For modelling the behavior of the pump, ESPSS provides different components [10]. In the early design stage, a generic
+pump component can be used in which the performance curves are calculated based on the design point and specific
+speed of the pump using Suter curves. To enable accurate modelling of the off-design behavior, performance curves for
+head rise and torque can be provided in the standard pump component. In this work, the standard component is used
+and the initial performance curves, provided by Hahn et al. [15], are modified to match experimental data.
+The rotational speed ω of the pump is calculated dynamically by balancing the torque T at the shaft with the
+torque consumed of the pump under consideration of the inertia of the pump Ip
+Ip
+dω
+dt = Tshaft − T. (4)
+For energy conservation, the product of enthalpy h and mass flow is balanced under consideration of the added me-
+chanical work to the fluid at the inlet
+˙mphout = ˙mphin + T ω. (5)
+Neglecting cavitation, the mass flow is calculated dynamically with
+Ifluid
+d ˙mp
+dt = (p + 0.5ρv2)in − (p + 0.5ρv2)out + g ρin HT, (6)
+where Ifluid is the inertia of the fluid andHT is the total dynamic head. Both characteristic curves are based on the outlet
+flow coefficientϕ+ which is defined as
+ϕ+ = ˙mp
+ρin ω. (7)
+The head coefficientψ+ describes the pump head rise normalized by the rotational speed and is modeled as a function
+of the outlet flow coefficient
+ψ+ = pout − pin
+ρin ω2 = f (ϕ+). (8)
+In Belyaev [2] the relationship between the flow and head coefficient is expressed as an polynomial relationship
+ψ+ = a + b ϕ+ − c ϕ+ϕ+, (9)
+where the polynomial coefficient can be derived from the pump design point. In this work, the coefficients are estimated
+with experimental data for both pumps. As demonstrated in Figure 9 (a), the polynomial relationship aligns well with
+experimental data of the FTP. However, the experimental data of the OTP indicates that the rotational speed has a
+stronger influence on the head rise. To account for this behavior, a linear correction term based on the rotational speed
+is introduced for the head coefficient
+ψ+
+corr = ψ+ + f (ω) = f (ϕ+, ω). (10)
+7
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 8]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+With this correction, the experimental data of the OTP can be accurately reproduced over a wide flow coefficient
+range, as shown in Figure 9 (b). For further validation, an isolated simulation environment is built for each pump.
+Each component is simulated individually with imposed boundary conditions from experimental data. In this setup the
+inlet temperature and pressure, rotational speed and mass flow are imposed as boundary conditions while the outlet
+pressure is used for validation. The maximum errors of the FTP and OTP lies below 1 % and 3 %, respectively. This
+demonstrates that the provided relationship for the head and flow coefficient is modeled accurately for both pumps.
+0.8 0.9 1.0 1.1 1.2 1.3
+Outlet flow coefficient φ+ [−]
+0.90
+0.95
+1.00
+1.05
+Head coefficient ψ+ [−]
+Experiment
+Ecosim
+30 35 40 45 50
+Rotational speed N [1000/min]
+(a) FTP
+1.0 1.2 1.4 1.6 1.8 2.0
+Outlet flow coefficient φ+ [−]
+0.95
+1.00
+1.05
+1.10
+1.15
+Corrected head coefficient ψ+
+corr [−] Experiment
+Ecosim
+15 20 25 30
+Rotational speed N [1000/min]
+ (b) OTP
+Figure 9: Relationship between the flow coefficient and the head coefficient for the FTP and the corrected head coeffi-
+cient for the OTP. All coefficients are normalized against the nominal operational point.
+The second pump curve describes the torque coefficientλ+ as a function of the flow coefficient
+λ+ = T
+ρin ω2 = f (ϕ+), (11)
+where T is the consumed torque of the pump. During the LUMEN test campaigns, no torque measurement has been
+conducted. For estimating the torque coefficient, the fluid enthalpyh at the inlet and outlet is estimated using tempera-
+ture and pressure measurements. Using the definition of the isentropic efficiency
+ηp = hout,s − hin
+hout − hin
+(12)
+and rearranging the torque, head and flow coefficient as
+ηp = ϕ+ ψ+
+λ+ . (13)
+the torque coefficient can be estimated using the available measurements. As shown in Figure 10, the torque coefficients
+for both pumps can be estimated such that the isentropic efficiencies aligns with experimental data. For validating the
+torque curve, the same simulation setup as for the head curve is used and the outlet temperature is compared against
+experimental data. The maximum error for the FTP and OTP is 1.6 K and 1.8 K, respectively. This indicates that the
+torque for both pumps is modeled accurately. However, it should be mentioned that the fluid temperature increase
+between inlet and outlet of the pumps is in the order of 10 K and subject to both measurement uncertainties of the
+cryogenic thermocouples as well as heat ingress through the pump structure.
+4.4 Turbine
+Analogous to the pump, ESPSS provides multiple components for the turbine [10]. The generic turbine calculates the
+performance map based on the rated conditions. In the standard turbine component, this map is an input parameter
+which allows an accurate modeling of the off-design behavior. In this work, the standard component is used and the
+initial performance curves, provided by Hahn et al. [15], are modified to match experimental data.
+The mechanical balance and energy conservation of the turbine is similar to the pump (see Equation 4 and 5)
+with the difference that the mechanical work is added to the fluid at the outlet. As LUMEN uses supersonic impulse
+8
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 9]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+0.8 0.9 1.0 1.1 1.2 1.3
+Outlet flow coefficient φ+ [−]
+0.0
+0.5
+1.0
+1.5
+Isentropic efficiency ηp [−]
+Experiment
+Ecosim
+30 35 40 45 50
+Rotational speed N [1000/min]
+(a) FTP
+0.85 0.90 0.95 1.00 1.05 1.10
+Outlet flow coefficient φ+ [−]
+0.0
+0.5
+1.0
+1.5
+2.0
+Isentropic efficiency ηp [−]
+Experiment
+Ecosim
+15 20 25 30
+Rotational speed N [1000/min]
+ (b) OTP
+Figure 10: Relationship of the isentropic pump efficiency and flow coefficient for both turbopumps. As the efficiency
+of the OTP is modeled as a function of the corrected head coe fficient, which is dependent on rotational speed, the
+colored region shows the efficiency for the boundaries of the rotational speed in the operational envelope of LUMEN.
+All quantities are normalized against the nominal operational point.
+turbines, the inlet mass flow is computed assuming choked flow at the throat of the inlet nozzles
+Ifluid
+d ˙mt
+dt = (p + 0.5ρv2)t,in − (p + 0.5ρv2)t,out − 0.5(ζ + ζcrit) G2
+ρin
+. (14)
+Here ζ is the pressure loss coefficient andζcrit is the sonic flow correction factor. For the construction of the turbine
+performance map, coefficients describing the blade speed, pressure ratio and torque are used. The speed coe fficient
+Nred relates the blade speed to the velocity of the working fluid as
+Nred = rt ω
+aout
+, (15)
+where rt is the characteristic blade tip radius and aout is the speed of sound at the outlet. The total pressure ratio πt is
+defined as the ratio of the total pressure at the inlet and outlet
+πt = pt,in
+pt,out
+. (16)
+The specific torque τ is a function of the speed coefficient and total pressure ratio and can be expressed as
+τ = T
+rt ˙mt aout
+= f (Nred, πt). (17)
+As mechanical losses are considered, the turbine performance maps are estimated by simulating the balancing of turbine
+generated and pump consumed power. For this, the turbines and pumps are simulated in an isolated simulation environ-
+ment using boundary conditions for the mass flow, rotational speed, inlet temperature and pressure from experimental
+steady-state points. Finally, the pump performance curves described in Section 4.3 are fixed and the performance map
+of the turbine is updated iteratively until a power balance is approximately reached. The results of both turbopumps
+are shown in Figure 11. The maximum power imbalance for the FTP and OTP is 6 % and 5 %, respectively. This
+demonstrates that an approximate power balance over the entire range of experimental data could be reached using the
+estimated turbine performance map.
+5. System analysis
+As demonstrated in the previous section, the modeling of the individual components is accurate. However, coupling
+effects and propagation of unavoidable modeling errors can result in an inaccurate complete model. For validation,
+all components are integrated into a complete model of LUMEN. The predictions of this model are compared against
+experimental data from a single test run after the ignition and start-up of the engine. This test run has been specifically
+9
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 10]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+0 50 100 150
+Pump power Pp [kW]
+0
+50
+100
+150Turbine power Pt [kW]
+FTP
+OTP
+Power balance
+Figure 11: Power balance for both turbopumps.
+designed for validation purposes, as it covers the entire operational range of LUMEN, including steps and ramps as
+transients. The temperature and pressure conditions at the interface of the test bench for LOX and LNG are imposed
+as inlet boundary conditions. Outlet boundary conditions are set to standard temperature and pressure. The control
+signals of TFV , TOV and FCV are also imposed as boundary condition. The comparison of the model predictions and
+the experimental data for various pressures and temperatures, the rotational speed of both turbopumps and the mixture
+ratio is shown in Figure 12. The mean average percentage error (MAPE) over the entire test duration and the maximum
+absolute error of steady-state points are reported in Table 2.
+Overall, the model is able to accurately reproduce the combustion chamber pressure and mixture ratio with
+a MAPE of 2.4 % and 3.5 %, respectively. With a maximum error of 2 .4 bar or 3.3 %, the steady-state combustion
+chamber pressure is modeled with high accuracy. Generally, the model captures pressures with high accuracy both in
+steady-state and during transients. The oxidiser pump outlet pressure is modeled the poorest with a maximum absolute
+error and MAPE of 7.4 % and 4.1 %, respectively. Despite the considerable variation, this is solely 3.2 bar. This
+indicates that the model is able to replicate the pressure drop across the cooling channels, valves, pipes and injectors.
+The same trend is evident for the temperatures. The maximum steady-state error is reached for the cooling channel
+outlet temperature with 6.0 %, respectively 25.4 K. As the rate of change of the temperatures has a high time scale, the
+transient dynamics can be effectively evaluated using the MAPE. The maximum MAPE is 2.1 % for the cooling channel
+outlet temperature which indicates that the model is able to accurately capture the temperature increase in the feedlines
+and cooling channels. Further, the model is able to replicate the rotational speed of both turbopumps with steady-
+state errors of approximately 3.0 % and a MAPE of 1.8 %. Given the high modeling accuracy in the temperatures,
+pressures and rotational speeds, it can be concluded that the torque relationships for the pumps and turbines, which
+were determined with high uncertainty, reflect the correct trend. The model is also able to replicate the mass flows
+accurately over the whole test duration. This is indicated by the maximum steady-state error and MAPE of the mixture
+ratio of 5.2 % and 3.5 %, respectively.
+Table 2: Prediction error of the LUMEN simulation model for different pressures, temperatures, the rota-
+tional speed of both turbopumps and the mixture ratio.
+Parameter MAPE 1 Max. percentage error2 Max. absolute error2
+Combustion chamber pressure pcc 2.4 % 3.3 % 2.4 bar
+Fuel pump outlet pressure pf,out 2.8 % 4.8 % 5.2 bar
+Oxidiser pump outlet pressure po,out 4.1 % 7.4 % 3.2 bar
+Fuel injection temperature Tinf,f 1.9 % 4.8 % 15.1 K
+Cooling channel outlet temperature Trc,out 2.1 % 6.0 % 25.4 K
+Turbine inlet temperature Tt,in 2.0 % 4.0 % 23.2 K
+Rotational speed FTP NFTP 1.5 % 3.1 % 1292 rpm
+Rotational speed OTP NOTP 1.8 % 2.6 % 684 rpm
+Mixture ratio ROF 3.5 % 5.2 % 0.2
+1
+Calculation over the test duration after ignition and start-up.
+2
+Only steady-state points are considered.
+Overall, the high accuracy of the simulation model over the entire operational envelope of LUMEN makes it
+10
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 11]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+30 40 50 60 70 80 90
+Time t [s]
+25
+50
+75
+100
+125
+150Pressure p [bar]
+pcc pf, out po, out
+Ecosim Experiment
+30 40 50 60 70 80 90
+Time t [s]
+200
+300
+400
+500
+600Temperature T [K]
+Tinj, f Tt, in Trc, out
+Ecosim Experiment
+30 40 50 60 70 80 90
+Time t [s]
+10
+20
+30
+40
+50Rotational speed N [1000/min]
+NFTP NOTP
+30 40 50 60 70 80 90
+Time t [s]
+2.0
+2.5
+3.0
+3.5
+4.0Mixture Ratio ROF [−]Ecosim Experiment
+Figure
+12: Comparison of the predictions of the LUMEN simulation model with experimental data. The compared
+values are the combustion chamber pressure pcc, the fuel and oxidiser pump outlet pressure pf,out and po,out, the fuel
+injection temperature Tinf,f, the cooling channel outlet temperature Trc,out and turbine inlet temperature Tinf,f and Tt,in,
+the rotational speed of the FTP and OTP NFTP and NOTP and the mixture ratio ROF.
+well-suited for a wide range of applications. During the 2025 hot-fire test campaign, the model has been successfully
+used to generate a sequence replicating the thrust profile of the Apollo 15 Lunar Module during landing [8]. With
+this bi-directional validation, it can also be concluded that the model is well-suited for the development of intelligent
+controllers and health monitoring systems which are key of next generation rocket engines.
+6. Summary and outlook
+In this work the LUMEN simulation model which was initially developed by Dresia [6] using EcosimPro with the
+European Space Propulsion System Simulation (ESPSS) toolkit is updated and validated using experimental data from
+the latest test campaign conducted in 2025. For this, the components of the thrust chamber, cooling channels, injectors,
+turbines and pumps are built and validated individually using experimental data from the latest hot-fire test campaign
+of LUMEN. All components were modeled with high accuracy. After, all components are integrated into a complete
+LUMEN model. The complete model is compared against experimental data from a test run which covers the complete
+operational envelope of LUMEN with steps and ramps as transients. Over the entire test duration, the model demon-
+strated a high degree of accuracy with a mean average percentage error of 2.4 % and 3.5 % for the combustion chamber
+pressure and mixture ratio, respectively.
+Despite its high accuracy, the simulation model is developed with remaining uncertainty in the torque character-
+istics for the FTP and OTP. In accordance with LUMEN’s roadmap, test campaigns are scheduled with the purpose of
+acquiring data for the complete characterisation of the turbines and pumps of the FTP and OTP. Within future activities
+it is planned to compare the simulation model against experimental data of more test runs. In the subsequent phase
+of the project, it is planned to develop intelligent controllers and fault diagnosis systems using the simulation model.
+Those advanced technologies will be experimentally tested at the European research and technology test bench P8.3 in
+Lampoldshausen in the future, paving the way for next generation rocket engines.
+11
+DOI: 10.13009/EUCASS2025-105
+
+[PDF PAGE 12]
+V ALIDATION OF THE LUMEN ECOSIMPRO MODEL
+References
+[1] W. Armbruster. Untersuchung injektorgekoppelter Verbrennungsinstabilitäten in einer kryogenen Raketen-
+brennkammer. Ph.d. thesis, RWTH Aachen, 2022.
+[2] E. Belyaev, V . Chevanov, and V . Chervakov.Mathematical Modeling of the Work Process in Liquid-Propellant
+Rocket Engines (in Russian). MAI Moscow, 1999.
+[3] M. Börner, J. Martin, J. S. Hardi, D. Suslov, J. C. Deeken, and M. Oschwald. Lumen Thrust Chamber - Flame
+Anchoring for Shear Coaxial Injectors. In 7th Edition of the Space Propulsion Conference, Virtual, 2021.
+[4] R. H. Dos Santos Hahn, J. C. Deeken, M. Oschwald, and S. Schlechtriem. Turbine Design and Optimization Tool
+for LUMEN Expander Cycle Demonstrator. Journal of Physics: Conference Series, 1909(1), doi: 10.1088/1742-
+6596/1909/1/012053, 2021.
+[5] R. H. Dos Santos Hahn, J. C. Deeken, T. Traudt, M. Oschwald, S. Schlechtriem, and H. Negishi. LUMEN
+Turbopump - Preliminary Design of Supersonic Turbine. In 32nd International Symposium on Space Technology
+and Science, Fukui, Japan, 2019.
+[6] K. Dresia. Rocket Engine Control with Deep Reinforcement Learning. Ph.d. thesis, RWTH Aachen, 2025.
+[7] K. Dresia, A. Adler, A. M. Saraf, R. H. Dos Santos Hahn, E. Kurudzija, T. Traudt, J. C. Deeken, and
+G. Waxenegger-Wilfing. Rocket Engine Control with Neural Networks: Experimental Results of the LUMEN
+Turbopump Test Campaign. In AIAA SCITECH 2023 Forum, National Harbor, United States of America, 2023.
+[8] K. Dresia, T. Traudt, M. Börner, D. Suslov, W. Armbruster, R. dos Santos Hahn, E. Kurudzija, C. Groll, M. A.
+Müller, S. Klein, J. Hämisch, J. Deeken, J. Hardi, and S. Schlechtriem. Hot-Fire Testing and System Analysis of
+the LUMEN Liquid Upper Stage Demonstrator Engine. In3rd Int. Conf. on Flight Vehicles, Aerothermodynamics
+and Re-entry (FAR), Arcachon, France, 2025.
+[9] Empresarios Agrupados. EcosimPro 2024 Version 7.0 Complete Reference Manual, 2024.
+[10] Empresarios Agrupados and ESA. ESPSS 3.8.1 User Manual, 2024.
+[11] J. Haemisch, D. Suslov, G. Waxenegger-Wilfing, K. Dresia, and M. Oschwald. LUMEN - Design of the Re-
+generative Cooling System for an Expander Bleed Cycle Engine Using Methane. In 7th Edition of the Space
+Propulsion Conference, Virtual, 2021.
+[12] J. S. Hardi. Experimental Investigation of High Frequency Combustion Instabilities in Cryogenic Oxygen-
+Hydrogen Rocket Engines. Ph.d. thesis, The University of Adelaide, 2012.
+[13] J. S. Hardi, J. Martin, M. Son, W. Armbruster, J. C. Deeken, D. Suslov, and M. Oschwald. Lumen Thrust Chamber
+- Injector performance and Stability. In 7th Edition of the Space Propulsion Conference, Virtual, 2021.
+[14] E. Kurudzija, K. Dresia, J. Martin, T. Traudt, J. C. Deeken, and G. Waxenegger-Wilfing. Virtual Sensing for
+Fault Detection within the LUMEN Fuel Turbopump Test Campaign. In 9th Edition of the Space Propulsion
+Conference, Glasgow, Scotland, 2024.
+[15] R. H. Dos Santos Hahn, K. Dresia. LUMEN Generic Turbopump Models. Technical report, DLR-LA-LM-TP-
+TB-005-01, Lampoldshausen, Germany, 2024.
+[16] D. Suslov, J. Haemisch, E. Zametaev, W. Armbruster, M. Börner, R. H. Dos Santos Hahn, S. Klein, K. Dresia,
+J. Hardi, T. Traudt, J. C. Deeken, and S. Schlechtriem. Development of a 25 kN Regeneratively Cooled LOX/LNG
+Thrust Chamber for LUMEN. In 9th Edition of the Space Propulsion Conference, Glasgow, Scotland, 2024.
+[17] D. Suslov, J. Haubrich, J. Haemisch, K. J. Artzt, J. Munk, W. Armbruster, J. S. Hardi, and J. C. Deeken. Develop-
+ment and Qualification Testing of a Laser Poweder Bed Fusion Manufactured 25 kN LOX/LNG Regeneratively
+Cooled Thrust Chamber Produced from CuCrZr-Alloy. In 9th Edition of the Space Propulsion Conference, Glas-
+gow, Scotland, 2024.
+[18] T. Traudt, W. Armbruster, C.r Groll, R. H. Dos Santos Hahn, K. Dresia, M. Börner, S. Klein, D. Suslov, E. Ku-
+rudzija, J. Haemisch, M. A. Müller, J. C. Deeken, J. Hardi, and S. Schlechtriem. LUMEN, the Test Bed for
+Rocket Engine Components: Results of the Acceptance Tests and Overview on the Engine Test Preparation. In
+9th Edition of the Space Propulsion Conference, Glasgow, Scotland, 2024.
+12
+DOI: 10.13009/EUCASS2025-105

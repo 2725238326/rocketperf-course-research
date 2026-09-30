@@ -1,0 +1,296 @@
+[PDF PAGE 1]
+ 
+ 
+ 
+1 
+Parametric Optimization of Turbopump  for Reusable Rocket Engine (RRE) Applications   By Mateusz T. GULCZYŃSKI, 1),2) Robson H. S. HAHN, 1)  Günther WAXENEGGER-WILFING, 1) Jan C. DEEKEN, 1),2) and Michael OSCHWALD 1),2)  1)Institute of Space Propulsion, German Aerospace Center (DLR), Hardthausen am Kocher, Germany 2)Faculty of Mechanical Engineering, RWTH Aachen University, Aachen, Germany  (Received May 29th, 2023)      With the development of contemporaneous reusable launchers, including projects such as Themis with a liquid LOX/LCH4 Prometheus engine, CALLISTO - Reusable VTVL launcher first stage demonstrator with a LOX/LH2 RSR2 engine, or Space-X’s Falcon 9 with a Merlin 1 engine, it is essential to further advance control algorithms to secure a failure-free engine operation. The engine's multi-restart capability not only implies additional requirements regarding throttling, where an extended controller-validity domain must be attained to safely reach low thrust levels for various engine operating regimes, but primarily increases the likelihood of component failure, including evolving parameters related to the mission profile. Therefore, to efficiently evaluate the fully continuous engine phases from start-up to shutdown transient, the dynamic reliability of the reusable rocket engine (RRE) is assessed along with its subcomponents under assorted failure modes, and a study based on multi-physics system-level modelling and simulation is proposed with a focus on the turbopump components. The modelling and performance analysis under transient conditions are conducted with EcosimPro ESPSS software, an object-oriented programming language. Within the presented deterministic thermically dependent structural simulation, the main control objectives pertain to end-state tracking of combustion chamber pressure and mixture ratios, along with operational constraints verification based on the LUMEN demonstrator engine and LE-5B-2 engine class. To predict the turbopump components remaining useful life, a model-based method for turbopump optimization incorporating analytical (0D) calculation is utilized.  Key Words:  EcosimPro European Space Propulsion System Simulation (ESPSS), Engine Cycle Modelling,    Reusable Rocket Engine (RRE), Fatigue Life Analysis, Turbine Blade, Turbopump   Nomenclature  c :  chord length, m !!" :  axial velocity – stator exhaust, m/s !#" :  axial velocity – rotor exhaust, m/s !!$ :  tangential velocity – stator exhaust, m/s !#$ :  tangential velocity – rotor exhaust, m/s h :  blade height, m "̇ :  mass flow rate, kg/s nstat :  number of blades rfillet :  fillet radius, disk-blade transition, m t :  maximum blade thickness, m  Θ :  admission degree !!"#	%&' :  density, g/cm3  Subscripts FTP :  Fuel Turbopump OTP :  Oxygen Turbopump  1.  Introduction  Reusable rocket engines (RREs) are gaining extensive interest in the aerospace community due to their compelling military and civil benefits along with their cost-saving potential. A RRE configuration, which satisfies various mission and operational needs, allows for a greatly minimized development effort in contrast with the traditional 
+approach with crafts designed for dedicated missions,1,2,3,4). Notwithstanding the benefits of RREs, the propulsion system's dependability over a range of services, is an important limiting factor that must be addressed to take full advantage of the reusable Liquid Rocket Engine (LRE). This implies additional requirements on the most critical LRE’s components. The turbopumps of a LRE, play a key role in achieving a high specific impulse and a high thrust-to-weight ratio,5). As it is one of the most critical components in LREs, to determine the reusability capacity of an engine, it is essential to evaluate loading conditions and the resulting main stresses in the blades to estimate the permissible margins, principally with respect to High Cycle Fatigue (HCF) and Low Cycle Fatigue (LCF).   In the LE-5B-2 engine, due to a change in requirements with an extended firing duration (from 2336 sec. to 3160 sec. for LE-5B-3), as well as 4 mission duty cycles, cracks were reported on the turbine blades and disk-shaft of the fuel turbopump, mainly due to HCF, 6. The engine was developed for the second stage of the H-II rocket, with hydrogen used for the cooling of the thrust chamber and subsequently employed to drive the turbine. A partial admission turbine was utilized, and the nozzle inlet had blockages in the circumferential direction to allow for a turbine blade height to be enough for improved manufacturability and decrease leakage loss – affected mainly by the relative scale of tip clearance to turbine blade height,6). The drawback of such a solution was that it destabilized flow and increased pressure fluctuation, enhancing the risk of HCF. 
+ 
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 2]
+ 
+ 
+ 
+2 
+As described in the NASDA report in 2001, 7), cracks with fatigue fractures were observed in the interblade part and the front protrusion of the 1-stage turbine disc of the liquid hydrogen turbo pump (FTP), 6,7). Despite a design modification introduced in the next generation engine LE-5B-3, with employment of a full admission turbine blade and no blockage at the nozzle inlet to reduce the risk of HCF, the evaluation of the turbopump’s main stresses in the blades in the context of fully continuous engine phases from start-up to shutdown transient and with the enhanced control performance simulation models, remains a decisive factor to efficiently predict the critical life of the turbopump component. The combustion performance, dependent on the flight operating parameters, along with turbopumps operating outside design conditions under large thermo-mechanical cyclic strains emerging from an increased temperature driving gas combined with a fast start-up sequence as well as a large rotational speed, must therefore be embedded in the parametric analysis, 5,8,9,10,11).   The research on the critical LRE components combined with model-based design (MBD) for parametric optimization is underrepresented in the literature. Notably, most studies are focused exclusively on engine cycle modelling or research on critical engine components life. Only a few publications combine engine cycle modelling with component life assessment. In manuscript, 12, authors presented a methodology for liquid rocket engine cycle modelling with fatigue life studies of a combustion chamber. The results were centered around loads acting on the combustion chamber component in the context of the engine’s operating regime. In publication, 13), Vulcain engine was assessed using the EcosimPro library, which includes various rocket components, as well as auxiliary functions to calculate the physical properties of the substances that take part in the propulsion process (e.g. combustion). The authors focused on the mathematical model– reality result correspondence, achieving an error of less than 5%. In a more recent publication, 14, the System-Level Simulation (SLS) model was developed with the global behavior of a reusable liquid rocket engine employing the expander-bleed cycle. The results obtained for different static-firing tests were compared with the effect of the overhaul inspection on the turbopump, capturing differences in the model parameters. Furthermore, results for the startup and cutoff phases were found to be in good agreement with the test data.   This paper is structured as follows: Section 2 – Engine Architecture and Operations – introduces LUMEN demonstrator and the LE-5B-2 engines’ architecture in the context of parametric studies and a generalized turbopump model developed in the EcosimPro environment. Section 3 – Turbine Blade Fatigue Life Model – features the “Turbine_Blade_Fatigue” tool developed to work in the EcosimPro environment. The methodology to calculate the main stresses and number of cycles to failure, as well as the modified Goodman–Haigh material failure theory, are shown;  Section 4 – Results and Outlook– encompasses critical design point analysis and parametric study results, including influence on the turbine blades life in dependence on the main engine-turbopump parameters (e.g., rotational speed, mass flow). Finally, the outlook for future studies is presented. 
+2.  Engine Architecture and Operations    For the validation of the presented model, an LE-5B class engine – a reference model – based on the literature data with hypothetical values, and a Liquid Upper stage deMonstrator ENgine (LUMEN)’s – a breadboard engine in the 25kN thrust class, working on a mixture of liquid oxygen (LOX) and methane, are used. For both, a reference engine and LUMEN turbopump (OTP and FTP) partial admission turbine blade design is used. Contrary to the LE-5B-2, the LE-5B-3 uses a full admission turbine blade to avoid HCF when engine operation exceeds 2336 sec, 6). Both the LUMEN demonstrator and LE-5B-2 engine work in an expander-bleed (EB) cycle. The nominal thrust of LUMEN is 25 kN and 137.2 kN for the LE-5B-2; the mixture ratio is 3.4 (LUMEN), 5.0 (LE-5B-2); the combustion chamber pressure is 6 MPa (LUMEN), 3.58 MPa (LE-5B-2); and the specific impulse is 447 seconds (LE-5B-2), 6, 15). The turbine pressure ratio can be high because the gas that drives the turbine is dumped. In both LUMEN and LE-5B engines, there are fuel- and oxidizer-turbopumps with partial admission turbine blades. In the expander bleed cycle, the energy for driving the turbine gas is obtained through heat exchange occurring around a combustion chamber. To attain high engine performance, the flow rate of a turbine driven gas must be small, as this type of cycle belongs to the category of open cycle liquid rocket engines. Consequently, to produce a substantial amount of work output, the turbine in an expander bleed cycle needs to possess a high expansion ratio, surpassing that of closed cycle liquid rocket engines such as staged combustion. Furthermore, with the requirement of a reduced turbine weight and the need to deliver a significant amount of shaft power output, it is common practice to employ a high-pressure ratio impulse turbine, 16).   Thanks to a large operational domain between 35 bar up to 80 bar and a nominal operation of 60 bar chamber pressure, the LUMEN demonstrator offers a throttling range of 58% to 133% of nominal thrust, 17). In case of the LE-5B engine, throttling tests at 60%, 30%, and extremely low levels (3%) for idle-mode operation, only using the tank-head pressure without operating the turbine, ensure stable operating capability over a wide range of conditions, 18). Contrary to LE-5A, where the fuel that drives a turbine was exhausted through the combustion chamber and nozzle, in the LE-5B engine, a regeneratively cooper-based cooling system is used in the nozzle to increase a heat exchange. In the LUMEN demonstrator, to mitigate the risk, instead of using a weight- optimized single- shaft LOX/LNG turbopump, two turbopumps are employed for enhanced individual operation. In comparison to a flight model, this engine exhibits enhanced controllability by using six electric valves instead of orifices and conventional pneumatic valves that tend to respond slowly. This enables the engine to achieve the desired operating point even in the presence of changing operating conditions or components. However, the presence of the mixer and the turbopumps, driven by heated fuel from regenerative cooling, introduces a high level of coupling that implies additional challenges for engine control. A schematic diagram of both engines is presented in Fig. 1. 
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 3]
+ 
+ 
+ 
+3 
+ (a) 
+ (b) Fig. 1.  Engine schematics of (a) LE-5B-2 with a mixer design and partial admission TB cross-section; (b) LUMEN demonstrator combining LOx and LNG turbopump cross-sections, 5, 6, (M. T. Gulczyński et al.)   The LUMEN FTP pressurizes the liquid methane received from the test bench interface. A portion of this pressurized methane is then directed to the Main Combustion Chamber (MCC), which is regulated by the Fuel Control Valve (FCV). The remaining cryogenic fuel is utilized as a coolant for the combustion chamber walls, following a counter-flow configuration. To sustain the necessary injection temperature for the supercritical gaseous fuel during injection, the heated fuel is partly mixed with a cold fuel under the control of the Mixer Control Valve (XCV), similarly to the approach employed by the LE-5B engine. The XCV is additionally utilized to regulate the pressure of the cooling channels, ensuring that methane remains in a supercritical state. The excess heated fuel is employed to cool the nozzle extension, 
+acquiring extra heat energy that is subsequently utilized to drive both turbopumps. Consequently, the power of the turbine is managed through the Turbine Fuel Valve (TFV) for the FTP, and the Turbine Oxidizer Valve (TOV) for the OTP. The LOX received from the test bench is pumped directly into the injector by the Oxidizer Turbo pump (OTP), which is regulated by the Oxidizer Combustion Valve (OCV). The LOX supplied by the test bench is pumped directly into the injector by the OTP, which is regulated by the Oxidizer Combustion Valve (OCV). To ensure safe operation, an extra Turbine Bypass Valve (TBV) can be optionally employed to quickly release the heated fuel, resulting in the deceleration of both turbopumps. Furthermore, the Bypass Valve (BPV) enables the regulation of the mass flow in the Main Combustion Chamber (MCC) cooling channels, even in cases where the additional fuel mass flow is not utilized for injection or powering the turbines. The Main Fuel Valve (MFV) and Main Oxidizer Valve (MOV) are employed to initiate and terminate combustion as needed, while a torch igniter positioned at the injector head is utilized for ignition, 5, 15, 17, 19, 20).  2.1.  Turbopump Generalized Model in EcosimPro ESPSS for a Parametric Study with Input Parameters    Most of a liquid rocket engine's components operate under extremely harsh conditions, where a transient phase operation is difficult to model. The start-up and shut-down operations involve complex phenomena crucial for design studies for engines or evaluating their performance, including combustion instabilities, reverse flow in the pumps, turbopumps operating outside of their design parameters, and two-phase flows. To decrease the number of experimental tests and improve engine safety and dependability, simulations of the ignition transient period and the shut-down phase become necessary,21). The generalized turbopump model schematic, developed in the EcosimPro ESPSS environment for reusable engine-turbopump parametric optimization, is presented in Fig. 2. To support the multi-physics system-level simulation, a “Turbine Blade Fatigue” tool was developed, which allows one to quickly estimate the turbine blade’s critical life and number of cycles to failure, under given operating conditions, including transient mode. 
+ Fig. 2.  Turbopump generalized model schematic, developed in the EcosimPro ESPSS environment with a "Turbine Blade Fatigue" tool for critical life analysis (M. T. Gulczyński et al.) 
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 4]
+ 
+ 
+ 
+4 
+To achieve the desired output, the expander bleed cycle necessitates a high level of turbine efficiency since the temperature of the turbine driving gas is lower in comparison to the combustion gas, 22).   A developed setup of the generalized turbopump includes similar pipelines, valves, and orifices, where the turbine and pump components are selected from the ESPSS turbo-machinery library and linked together, along with an additional Turbine Blade Fatigue module, developed by the authors. The pipe components are used to simulate the network that delivers gaseous nitrogen and liquid methane in case of LUMEN and liquid hydrogen for a reference engine. The valve delay is adjusted by incorporating supplementary components tailored to specific requirements. The turbopump operation is determined with custom parameters, performance maps, and dimensionless characteristic curves in accordance with the validated engine’s requirements and EcosimPro ESPSS models. A developed generalized turbopump model considers various valve attributes, including a valve that controls the turbopump power by adjustment of the turbine mass flow and pressure ratio, along with a valve for the pump mass flow control to adjust the turbopump load. Control over pump pressure and mass flow rate, is necessary for a transient condition simulation. The flow characteristic refers to how the flow coefficient changes depending on the position of the valve.   The key geometric parameters of the LUMEN’s turbopumps, along with hypothetical values for the LE-5B-2 FTP turbopump, are presented in Table 1.  Table 1.  Input Parameters of LUMEN OTP, FTP and hypothetical parameters from the literature of the LE-5B-2 Class Engine Parameter LUMEN LE-5B-2* Unit m 0.0017 0.0013 kg Rmean  0.0635 0.07875 m nstat (OTP) nstat (FTP) 3 5 - 44 - - rfillet 0.005 0.005 m h(OTP) h(FTP) 0.0093 0.0097 - 0.0091 m m nblades 65 97 - β&( β)(  69 18 61.5 17 o o tOTP tFTP 0.00370 0.00406 - 0.00499 m m c 0.009 0.0075 m C&*	(,-.|0-.)  246.9 | 257.7 617.6 m/s C)*	(,-.|0-.)  201.9 | 174.1 598.9 m/s C&2	(,-.|0-.)  875.6 | 901.2 1886.8 m/s C)2	(,-.|0-.)  406.9 | 159 843.1 m/s ṁ  1.046 0.491 kg/s ΘOTP ΘFTP 0.229 0.356 - 0.441 - - γ3456478	%&'  8190 8190 kg/m3   
+3.  Turbine Blade Fatigue Model    Within this section, a “Turbine Blade Fatigue” model developed to work in the EcosimPro environment is described. The blades and vanes of the turbopump experience gas-dynamic loads arising from pressure distribution across the blade airfoils. Moreover, as the rotating speed increases, the blade masses may generate considerable transverse loads along the curvilinear paths, which result from gyroscopic moments and centrifugal transverse forces, 23). The primary loads acting on turbine blades can be categorized as: static and dynamic loads – resulting from the fluid flow acting on the blade profile; mass loads induced by centrifugal force, and loads arising from elastic vibrations of the blades and the entire rotor. During operations, these loads translate into the following main stresses, 24): - Tensile stresses – from rotating blade mass; - Bending stresses – induced by the flowing medium acting on the blade profile, along with stresses from centrifugal forces of the rotating blade mass and stresses caused by transverse vibrations of the blade; - Tangential stresses – from torsional moments induced by the flowing medium acting on the blade profile, in addition to torsional moments of the mass forces acting on the blade and torsional vibration of the blade’s active part.  Fig. 3 shows the primary geometrical parameters of the LUMEN turbine blade (as well as LE-5B type turbine blade). The following subsections present the analytical approach for calculating the main loads on the turbine blade, including rotational, gas pressure, and mechanical loads, 4, 5, 10, 19, 24, 25, 26, 27, 28). Presented equations are applicable to any load’s calculation of a partial admission turbine blade type. The basis of proposed calculation methodology for turbine bending and centrifugal stresses was previously published in, 5) – several updates were applied within this publication.  
+  Fig. 3. Schematic of a generic TB with a blade geometry (“R0” – root radius, “R1” – tip radius, “Rmean” – blade centroid radius) (M. T. Gulczyński et al.),5. 
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D D
+02Drawing+LUMEN_BLISK_MateuszGulczynski
+gulc_ma 6/9/2022Designed byChecked byApproved by Date
+1 / 1 EditionSheet
+Date
+x
+y
+Py
+Px
+ω
+RR1R0
+z
+0
+Y
+CGXAxial direction
+R
+Fσ+dσ
+σ
+R1
+R0
+dF
+Ri
+My
+chord c
+y
+xchord
+δ
+xxi
+dR
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D D
+02Drawing+LUMEN_BLISK_MateuszGulczynski
+gulc_ma 6/9/2022
+Designed by Checked by Approved by Date
+1 / 1 Edition Sheet
+Date
+x
+y
+Py
+Px
+ω
+RR1R0
+z
+0
+Y
+CG XAxial direction
+R
+F
+σ+dσ
+σ
+R1
+R0
+dF
+Ri
+My
+chord c
+y
+xchord
+δ
+x
+xi
+dR
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 5]
+ 
+ 
+ 
+5 
+3.1.  Tensile Loads Acting on the Blade Induced by Centrifugal Forces of the Rotating Blade Mass   For a rotor that spins with an angular velocity “ω”, a differential centrifugal force acting on the blade element of length dR is calculated in accordance with equation (1): 
+$%%=&9'∫ ():)*(,*+.)0.%%+	(./(/01/2	./01%3+)=5&96'.            (1) The highest centrifugal force is calculated for the cross-section at the root of the blade, at “R0”, with the following equation: 
+$%*=&9'∫ (*)*(,*+.)0.																																																					%*+	(./(/01/2	./01%3+)=5&96'	∑(%%+%%7!)(,%7!#−,%#)%8+%8* .(2) Consequently, the centrifugal stresses at the given radius of the blade are estimated as highlighted in equation (3):  
+459=&9'::∫ ():)*(,*+.)0.=5&9#';<9;979:9=;59+	(./(/01/2	./01%3+)=><=(>?@	ABCBDEBF	ABDE:?=)>:=(>?@	ABCBDEBF	ABDE:?=),     (3) where “6(,!#−,%#)=Φ” represents a cross-section of the blade airfoil through which the flowing medium passes. Based on equation (3), the admissible stresses “kr” acting on the blade material are estimated. In dependence on the blade material, operating conditions (e.g., temperature, flowing medium), as well as admissible stress factor, the elastic growth of the blade is calculated: Δ9=5&9#'?∫ 9;9<(,!#−:%#)d:%=5&9@'?,!A<2−39?9;+9?G9;G?.  (4) Finally, the blade tensile loads induced by the centrifugal forces of the rotating blade mass are calculated using a tabular method, 24), where a blade is divided into smaller sections.  3.2.  Bending Moments Induced by Fluid Medium’s Pressure and The Centrifugal Loads   The fluid medium passing through the blades generates dynamic force and force induced by the pressure difference between the front and rear parts of the blade. The force components, denoted by “Px” and “Py”, as highlighted in Fig. 3, are determined from the equations (5) and (5’) with a second flow rate parameter of the working medium “"̇” and admission degree “∈”. $A)=#;B%B(C!−C#)+!'()!D!"#−)#D#"#)E						AC=#;B%'[)!D!"(D!D−G)+)#D#"(D#$+G)] ,  (5) 
+$A)=Ė(0;HDI709HDI)%∈(9;79<)AC=Ė(0;JDI709JDI)%∈(9;79<)  .              (5’) The axial “c1a, c2a” and tangential “c1u, c2u” velocities at the stator- and rotor-exhaust in the stator frame of rotation are calculated in accordance with a set of equations presented in, 29). These are critical in transient calculations. A change 
+in axial and tangential velocities, mass flow, rotational speed, etc., influences the fatigue life of the turbine blade. The bending moments are subsequently calculated with equations (6): $IHI=∫ (J< AC(J−J*)0J=AC((7J<)9#IKI=∫ (J<A)(J−J*)0J=A)((7J<)9# .        (6) As in the case of tensile load calculations, the bending moments are calculated using a tabular method, where the blade is sectioned along the height, similarly to what was presented in Fig. 3. To calculate the total bending moment about the x-axis in section “i” induced by centrifugal loads, the following equation (7) is applied: $I)KB=F:=L=5'K#∫ 9;9:*(L,%−L%,)0,ICKB=F:=L=5'K#∫ 9;9:*(.−.%)RdR					 .     (7)  3.3.  Bending Stresses in the Blade’s Outermost Layers   To determine the bending stresses in the outermost layers of the blade, a center of gravity and a moment of inertia for the given blade profile are calculated. The geometrical parameters, as highlighted in Fig. 3, together with velocity triangles, as shown in Fig. 4, are applied for turbine stress calculation. The blade profile is approximated with geometrical figures applied to a blade cross-section, which allows for a quick estimation of the stress components. As shown in Fig. 4 the moments of inertia of the LUMEN’s impulse turbine blade are calculated in accordance with Steiner’s parallel axis theorem: 
+$N)=N)<−*O#				NC=NC<−*P#				N)C=N)<C<−*OP  ,            (8) where “A” represents the cross-sectional area of the blade, and “a” and “b” are the distances between the given axes.  
+  (a)                            (b) Fig. 4.  Schematic cross-sections of the LUMEN impulse turbine blade profile, highlighting: (a) blade geometry with a central axis system with bending moments acting on the blade profile; (b) velocity triangles in front of and behind the blade (M. T. Gulczyński et al.) The centre of gravity for the LUMEN impulse turbine profile is calculated as follows (9): 
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D D
+BladeCrossSections_Drawing+LUMEN_BLISK_Mat
+gulc_ma 6/9/2022
+Designed by Checked by Approved by Date
+1 / 1 Edition Sheet
+Date
+x
+y
+Py
+Px
+ω
+RR1R0
+z
+0
+Y
+CG X
+btrapezoid
+d2d1
+atrapezoid
+htrapezoid
+yCGRsemicricle
+ytrapezoid
+ysemicircle
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D D
+06Drawing+LUMEN_BLISK_MateuszGulczynski
+gulc_ma 6/9/2022
+Designed by Checked by Approved by Date
+1 / 1 EditionSheet
+Date
+x
+y
+Py
+Px
+ω
+RRBRK
+R
+0
+α1
+β1
+Vr1
+V1
+Vf1
+Inlet VelocityDiagram Outlet VelocityDiagram
+Vb
+Vr2
+β2
+α2
+V2
+Vf2
+cw1
+Vb
+Vb
+cw2
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 6]
+ 
+ 
+ 
+6 
+⎩⎪⎪⎨⎪⎪⎧0!=LLM−L1B"N/J3%2																																										0#=LLM−L./E%0%B0(/																																										U)MNO=B<("OP)Q#?(−0!)E−B<;99#?(−0#)E				*"B/"=("OP)Q#−;99#																																												L=RP:H@BH																																																															,  (9) 
+which leads to equation (10) for centre of gravity. !V=LLS+L .                   (10) The turbine moments of inertia about the central principal axes are calculated by equations (11) for an impulse turbine type.  TU!=U!!−XY"=Z($%&'))"*"−+,#-[−XY"																																																																																				U.=U.!−X\"=Z($%')($$%'$))/-+(($%'))"	(^*+_`)"[−[+,#-++,$"(^"+_`)"]−X\"   (11) As impulse turbine blades are symmetric, the “x=0” and “I)<=I)” and “IC<=−IC” therefore, the bending stress at any arbitrary point of the section is determined by: 5'".	P/+2%+'=cP<dP<L  .             (12) A change in the angular momentum of the gas in the tangential direction results in a force that generates a useful torque and a gas bending moment in the axial direction. Consequently, a gas bending stress amounts to the tensile stress – on the leading and trailing edges, and the compressive stress – on the suction side of the blade. The leading or trailing edge of the root section is often where the highest stress is located,5,10,11,25,30). For the calculations of gas bending and centrifugal stresses, the velocity triangle schematic is used, as highlighted in Fig. 4 (b). For the considered partial admission turbine – the gas bending stress is reduced to zero in the non-admission parts of the turbine, where the stress amplitude 5",*f obtained by this 0D method is half of the maximum gas bending stress:  5",*f=	gLK,RHP,<S# .                (13) The mean stress 5E,*f obtained by this 0D method is the sum of the centrifugal stress and the stress amplitude: 5E,*f=	50,*f+5",*f .             (14) The main geometric parameters along with operating the conditions applied to the calculations are presented in the following sections,31,32).  3.4.  Fatigue Life Calculations   To evaluate the fatigue life at a given stress ratio (alternating and mean stresses) and with respect to material properties (ultimate strength and endurance strength), the modified Goodman- Haigh diagram is primarily utilized, 33,34), described with the following equation: gHgT>+gRgUNV=!>R  ,                (15) where 5" – alternating stress; 5E – mean stress; %U – safety factor; 5h> – endurance limit ; 5ijR – ultimate tensile strength 
+Furthermore, the following assumptions are made (in accordance with, 35), where the Inconel 718 was studied): - in the Goodman equation, the stress amplitude (5") is normalized by the stress amplitude at the endurance limit (5h>) and for fully reversed conditions, R=-1 to increase accuracy, 5E=0; - at a constant load, the mean stress is normalized by the failure stress (R=1, 5"=0); - the combination of the Basquin type and the Goodman equation is applied, where: 5k=*lXkSW ,                  (15) where “A’=7160MPa”, “B’=-0.1872” and “C’=1154MPa” are the fitting parameters as compiled to be fitted in accordance with HCF tests carried out in a given gas. Subsequently, a modified Goodman equation is utilized to determine the number of cycles until failure “Xk” (as proposed in reference, 35)): Xk=YgH:Wm!7XRYWnOW  .               (16) The endurance limit is assessed with a Goodman- Haigh diagram. 3.5.  Material Properties    The turbine blades of the LUMEN are made from Inconel 718, while it is assumed that the turbine blades of the reference engine are also manufactured using Inconel 718. As highlighted in the literature (e.g., 35, 36, 37)), the Inconel 718 alloy’s mechanical properties vary depending on the applied treatment, where, e.g., solution treatment and ageing (ST + A) result in cyclic softening, whereas a direct ageing (DA) results in cyclic hardening at high temperatures.  The ST + A state of the Inconel 718 alloy hardens at the initial stage of circulation, followed by fatigue softening under room temperature, which is also noted in Inconel 718 alloys with different heat treatment processes and long-term aging, 37). Moreover, the mechanical properties of nickel-based alloys depend considerably on the chemistry and the microstructural characteristics of the superalloy, including, e.g., grain size, γ'/γ” size and distribution, carbide and boride size and content, along with grain boundary morphology. Inconel 718 has a face-centred cubic (FCC) structure γ matrix, where the remaining phases reside. The primary strengthening phase of this superalloy is the thermodynamically metastable γ'' phase. Following prolonged exposure to thermal conditions, the metastable γ'' phase in Inconel 718 can undergo a transformation into the stable δ phase (Ni3Nb) when temperatures exceed 650 °C. This transformation results in the degradation of Inconel 718 properties, 38).   Within the presented research, the material properties of the reference engine’s turbine blades were approximated based on the literature data. The material properties of Inconel 718 for GH2 gas and Argon gas up to the endurance limit of around 250 MPa at 2e6 cycles (at a mean stress of 500 MPa), were retrieved from, 35), including fatigue strength, true stress at the fracture point, and tensile strength. 
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 7]
+ 
+ 
+ 
+7 
+Moreover, the remaining parameters, such as yield strength, YS=1150MPa were estimated from 39, 40. Based on the acquired data, the Goodman-Haigh diagram (Fig. 5) was developed.  
+ (a)                            (b) Fig. 5.  Mechanical properties of the Inconel 718 with (a) Goodman- Haigh diagram for Inconel 718 for 2e6 number of cycles until failure (M. T. Gulczyński et al.) (b) top – mean stress vs. cycles until failure at a fixed stress amplitude of 218 MPa; bottom – stress amplitude vs. cycles until failure at a fixed mean stress of 500 MPa (source: 35))    The stress concentration factor in dependence on the fraction of the fillet radius and the blade thickness was employed in accordance with Fig. 6, to accommodate a transition area between the blade and the disk.  
+ Fig. 6.  Stress-concentration factor as a function of the fillet radius and the blade thickness (adapted from, 10, 26, 41), (M. T. Gulczyński et al.)   To compare both engines, the LE-5B-2 firing duration requirement of 2336 sec. was assumed to be a boundary condition in the analyses. Within the given firing duration time and rotational speed of the specified turbopump, a turbine blade’s expected life was estimated to be 2 million cycles before failure for a reference engine and LUMEN FTP and 1 million cycles for LUMEN OTP. Finally, to account for a change in operating conditions with the start-up and shut-down transient, the model in EcosimPro was developed (presented in the following section). 
+4.  Results and Outlook    In the following section, the results of the transient- and critical- design point analyses are presented.   4.1 Transient Analysis Results Based on the LUMEN turbopump operating conditions, within Figs. 8-10, the main operating parameters of the developed generalized turbopump model with a “Turbine_Blade_Fatigue” tool were validated. The envelope includes the representative conditions tested at the LUMEN test bench. The mean stress and stress amplitude values are approximated and depend on the input parameters and applied operating parameters. The model allows for a quick estimation of expected stresses and the fatigue life of the turbopump blades. During LUMEN operation, different load points are tested at various operational conditions until around 100 seconds, and the highest load conditions are from 100 up to 200 seconds (similarly to the plotted design point at the Goodman-Haigh diagram). An example of the transient analysis results based on the LUMEN FTP turbopump operational envelope with a temperature and a rotational speed are presented in Fig. 7.  
+ (a) 
+ (b) Fig. 7.  Example of the transient analysis results based on the LUMEN FTP turbopump operational envelope with (a) temperature and (b) rotational speed in rad/s 
+⸺ Rotational speed 
+⸺ Temperature 
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 8]
+ 
+ 
+ 
+8 
+  In the case of LUMEN, although friction losses in the system typically result in a decrease in total temperature after expansion, the reduction in total outlet temperature is negligible across all operational conditions. Consequently, the structural temperatures of both the stator and rotor remain consistently comparable. The operational sequence of the LUMEN turbopump begins with a cooling process for the pump, followed by the chilling of the downstream pipeline. Subsequently, the turbopump initiates its startup procedure until it reaches the desired operational speed. Once the nominal speed is reached, it operates consistently until shutdown and comes to a full stop at the end of the operational period. The primary change in the blade film coefficient and temperature occurs during the nominal operational phase. During the chill-down phase, which lasts approximately 300 seconds, the decrease in enthalpy in the turbine blade is also insignificant. After the chill-down phase, the shaft region experiences a minimum temperature of 280K, ensuring that the BLISK (blade integrated disk) is not subjected to cryogenic temperatures.  The main stresses on the blades, including bending and centrifugal stresses, are calculated using the methodology presented in a previous section. In Fig. 8, an example result of the transient analysis of the LUMEN FTP with the use of the Turbine_Blade_Fatigue tool was presented, where the highest loading condition was recorded between 100 and 200 sec.  
+ Fig. 8.  LUMEN FTP transient results with bending and centrifugal stresses at blades leading and trailing edges in a given operational envelope 
+ Fig. 9.  LUMEN FTP transient fatigue results: mean and amplitude stresses at the dedicated engine operational envelope 
+  Based on the calculated bending and centrifugal stresses, as well as parameters such as rotational speed and mass flow, the amplitude- and mean stress is estimated, as shown in Fig. 9. For both LUMEN FTP and reference engine, the highest mean stress and stress amplitude can be observed at the nominal operating condition. The proposed fatigue model helps to evaluate the critical design point and combined fatigue loading.  4.2.  Critical Design Point Analysis Results   In Fig. 10., the Goodman-Haigh diagram was presented with the fatigue life results of the LUMEN OTP&FTP and the reference engine FTP at the design point stress ratio (alternating and mean stresses). As specified before, the S-N plot employed to derive the evaluated loading conditions plotted at the Goodman-Haigh diagram (including the effect of the mean stress on the fatigue life) was obtained from the literature, 35.  
+ Fig. 10. Goodman-Haigh diagram of Inconel 718 for 2e6 number of cycles for the LUMEN FTP and OTP, as well as the LE-5B-2 Class Reference Engine FTP, at a specified design condition point, (M. T. Gulczyński et al.) As highlighted on the Goodman-Haigh diagram, the LUMEN- and the reference engine- FTP, exhibit similar stress levels at nominal operating conditions. Despite a higher mean stress, the stress amplitude is relatively low – in the range of 23MPa. Moreover, fatigue life is found to be greatly higher than 2 million cycles estimated for the reference engine’s minimum life for a firing duration of 2336 sec. Table 2. Worst-case design point of the LUMEN and reference engine TP Nomenclature Parameter LUMEN OTP | FTP LE-5B-2 Class Reference Engine FTP Unit Cyclic stress !0C0(%0    44 | 46   22 MPa Stress amplitude  !"    22 | 23    11  MPa Mean stress !E    52 | 132   121 MPa 
+⸺ Bending stress per blade ⸺ Centrifugal stress per blade  
+⸺ Mean stress ⸺ Stress amplitude  
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 9]
+ 
+ 
+ 
+9 
+  The calculated stresses for a given design point are presented in Table 2. The estimated factor of safety (SF) for LUMEN OTP and FTP is: SFLUMEN OTP =7.9, SFLUMEN FTP =5.2. The safety factor of a reference engine is SFREF Engine FTP =8.5. Due to the low stress amplitude, the HCF life of the LUMEN and the reference engine TP blades, as predicted by equation (16), is as high as Xk=	17 trillion cycles before failure for OTP and 17 trillion cycles for FTP. The allowable stress amplitude and mean stress will be lower if the number of operating cycles increases, as, e.g., in a reusable unit application. In accordance with, 35), and as shown in Fig. 5, for Inconel 718 at 1e7 number of cycles, the allowable mean stress and stress amplitude are as high as 200 MPa, and 170 MPa respectively.    For the evaluated case of the LE-5B-2 class engine, the allowable stresses should be considered as a less-conservative estimation due to the potential influence of additional operational parameters such as thermal shock during transient start-up and shutdown phases, 42), or possible hydrogen embrittlement (HE) when the alloy is exposed to hydrogen gas or hydrogen-containing gas species such as hydrogen sulfide (H2S), hydrogen chloride (HCl), and hydrogen bromide (HBr) environments, which could result in a decrease in the fracture toughness or ductility of a metal due to the presence of atomic hydrogen, 43). The degree of embrittlement of the alloy can be more pronounced in the aged condition due to the formation of γ" and γ' precipitates, as compared with the solution- annealed condition, 38).  
+ Fig. 11.  Effects on HCF of Inconel 718 in 34.5 MPa hydrogen pressure at room temperature (source: NASA/TM-2016–218602)    Fig. 11 illustrates the typical effects of hydrogen embrittlement (HEE) on the low cycle fatigue (LCF) and high cycle fatigue (HCF) characteristics of Inconel 718 superalloy. The testing was conducted at room temperature under a hydrogen pressure of 5 ksi (34.5 MPa). It is important to observe in this figure that the HCF range is defined when the cumulative fatigue life (CTF) exceeds 1e6 cycles.   
+4.3.  Results Summary and Outlook   In this paper, a transient model developed in the EcosimPro parametric tool was presented using the example of the LUMEN demonstrator and LE-5B-2 class engine (with hypothetical parameters obtained from the literature). The estimated high cycle fatigue (HCF) lifespan of both LUMEN and reference engine TP blades was found to be exceptionally large due to the low stress amplitude. Considering certain constraints, the proposed model can effectively be utilized to estimate the fatigue life of turbine blades under user-defined operating conditions.      Future work: - To further validate the model, it is necessary to conduct experiments that investigate the material properties under LCF/HCF conditions, considering temperature influence, manufacturing process, and exposure to various fuels (in the case of the LUMEN demonstrator, most tests are conducted with nitrogen, which is nonreactive); - Further enhancement of the developed transient analysis and a damped vibration of the turbine blade in the non-admission sections of the turbine are foreseen; - An extended fatigue life analysis with the implementation of a damage accumulation method presented in, 44, 45), for improved accuracy of the LCF models; - The lessening blade’s life, influenced by effects such as multiaxial fatigue – combined HCF and LCF, creep, or corrosion, will be further evaluated with developed models for different engine applications.                    Acknowledgments  The project leading to this paper has received funding from the European Union’s Horizon 2020 research & innovation programme under the Marie Skłodowska-Curie grant agreement No 860956.  
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -
+
+[PDF PAGE 10]
+ 
+ 
+ 
+10 
+References  1. Callsen, S., Stappert, S. & Sippel, M. Study on future European winged reusable launchers. 1–14 (2022). 2. Lariviere, M. & Kezirian, M. T. Preliminary safety assessment of the DLR SpaceLiner vehicle. J. Sp. Saf. Eng. 6, 15–23 (2019). 3. Stappert, S., Sippel, M., Bussler, L., Wilken, J. & Krummen, S. Spaceliner cabin escape system design and simulation of emergency separation from its winged stage. 22nd AIAA Int. Sp. Planes Hypersonics Syst. Technol. Conf. 17–19 (2018) doi:10.2514/6.2018-5255. 4. Gulczynski, M. T. et al. RLV applications: challenges and benefits of novel technologies for sustainable main stages. in (2021). 5. Gulczyński, M. T., Riccius, J. R., Waxenegger-Wilfing, G., Deeken, J. C. & Oschwald, M. Turbine Blades for Reusable Liquid Rocket Engines ( LRE ) – Numerical Fatigue Life Investigation. in IEEE Aerospace Conference (IEEE, 2023). doi:10.1109/AERO55745.2023.10115912. 6. Terakado, D., Higashi, K. & Sakaki, K. 2nd qualification test series results of the upper stage engine LE-5B-3 for H3 rocket. 1–8 (2019) doi:10.13009/EUCASS2019-626. 7. LE-5Bエンジンの信頼性向上燃焼試験の結果について. Space Development Agency (NASDA) vol. 17 (2001). 8. Yoshida, M., Kimura, T., Hashimoto, T., Moriya, S. & Takada, S. Overview of Research and Development Status of Reusable Rocket Engine. Springer Aerosp. Technol. 905–931 (2017) doi:10.1007/978-3-319-27748-6_38. 9. Pérez-Roca, S. et al. A survey of automatic control methods for liquid-propellant rocket engines. Prog. Aerosp. Sci. 107, 63–84 (2019). 10. Gulczyński, M. T. et al. Numerical Turbine Blade Fatigue Life Analysis for Reusable Liquid Rocket Engines (LREs) Applications. in 1–14 (2022). doi:10.13009/EUCASS2022-6150. 11. Zhang, W. Failure characteristics analysis and fault diagnosis for liquid rocket engines. Failure Characteristics Analysis and Fault Diagnosis for Liquid Rocket Engines (2016). doi:10.1007/978-3-662-49254-3. 12. Waxenegger, G., Riccius, J., Zametaev, E., Deeken, J. & Sand, J. Implications of Cycle Variants, Propellant Combinations and Operating Regimes on Fatigue Life Expectancies of Liquid Rocket Engines. (2017). 13. Margarit i Bel, N. & Sánchez, M. M. Simulation of a Liquid Rocket Engine. (2001). 14. Satoh, D., Tsutsumi, S., Hirabayashi, M., Kawatsu, K. & Kimura, T. Estimating model parameters of liquid rocket engine simulator using data assimilation. Acta Astronaut. 177, 373–385 (2020). 15. Deeken, J., Oschwald, M. & Schlechtriem, S. LUMEN DEMONSTRATOR – PROJECT OVERVIEW. (2021). 16. Kawatsu, K. et al. Multi objective optimization of a supersonic axial turbine blade row shape for a rocket engine turbopump. 47th AIAA/ASME/SAE/ASEE Jt. Propuls. Conf. Exhib. 2011 (2011) doi:10.2514/6.2011-5784. 17. Traudt, T. et al. LIQUID UPPER STAGE DEMONSTRATOR ENGINE (LUMEN): COMPONENT TEST RESULTS AND PROJECT PROGRESS. in Space Propulsion Conference 2022 (2022). 18. Atsumi, M., Yoshikawa, K., Ogawara, A. & Onga, T. Development of the LE-X Engine. Mitsubishi Heavy Industries Technical Review vol. 48 http://www.mhi.co.jp/technology/review/pdf/e484/e484036.pdf (2011). 19. Robson H. S. Hahn et al. LUMEN Turbopump - Preliminary Design of Supersonic Turbine. 9–10 (2019). 20. Adler, A. Design and Robustness Analysis of Neural Network Based Control of Rocket Engine Turbopumps. (2022). 21. Matteo, F. Di & Steelant, J. Multi-Disciplinary Propulsion Simulations at Engineering Level by means of the European Space Propulsion System Simulation ESPSS. 1–31. 22. Mizuno, T., Oguchi, H., Niiyama, K. & Shimiya, N. Development of Turbopump for LE-9 Engine. IHI Eng. Rev. 51, 42–48 (2018). 23. Dżygadło, Z., Łyżwiński, M., Otyś, J., Szceciński, S. & Wiatrek, 
+R. Napędy Lotnicze - Zespoły Wirnikowe Silników Turbinowych. (Wydawnictwo Komunikacji i Łączności, 1982). 24. Lipka, J. Wytrzymalosc Maszyn Wirnikowych. (Wydawnictwo Naukowo-Techniczne Warszawa, 1967). 25. Гахун, Г. Г. & и др (сост.), . КОНСТРУКЦИЯ И ПРОЕКТИРОВАНИЕ ЖИДКОСТНЫХ РАКЕТНЫХ ДВИГАТЕЛЕЙ. (Москва Машиностроение, 1989). 26. Administration, N. A. and S. NASA SP-8110 Liquid Rocket Engine Turbines. (1974). 27. Saravanamuttoo, H. I. H., Cohen, H., Rogers, G. F. C., Straznicky, P. V. & Nix, A. C. Gas Turbine Theory SEVENTH EDITION Gas Turbine Theory. (2017). 28. Jack L. Kerrebrock. Aircraft Engines and Gas Turbines, Second Edition. (The MIT Press, 1992). 29. Б.В.Овсянников & Б.И.Боровский. ТЕОРИЯ И РАСЧЕТ АГРЕГАТОВ ПИТАНИЯ ЖИДКОСТНЫХ РАКЕТНЫХ ДВИГАТЕЛЕЙ. (1986). 30. Riccius, J. R., Zametaev, E. B., Gulczyński, M. T. & Hahn, R. H. S. NUMERICAL LRE TURBINE BLADE FATIGUE LIFE ANALYSIS TAKING INTO ACCOUNT PARTIAL ADMISSION EFFECTS. in LUMEN Project (FAR Conference - European Space Agency (ESA), 2022). 31. Kumar, R. et al. Thermo-mechanical analysis and estimation of turbine blade tip clearance of a small gas turbine engine under transient operating conditions. Appl. Therm. Eng. 179, 115700 (2020). 32. Thamizh, R. I., Velmurugan, R. & Jayagandhan, R. Finite element analysis of metal matrix composite blade. IOP Conf. Ser. Mater. Sci. Eng. 152, (2016). 33. Farhat, H. Chapter 5 - Typical service-induced damages. in Operation, Maintenance, and Repair of Land-Based Gas Turbines (ed. Farhat, H.) 107–130 (Elsevier, 2021). doi:https://doi.org/10.1016/B978-0-12-821834-1.00006-X. 34. Farhat, H. Chapter 8 - Lifetime extension: Assessment and considerations. in Operation, Maintenance, and Repair of Land-Based Gas Turbines (ed. Farhat, H.) 175–196 (Elsevier, 2021). doi:https://doi.org/10.1016/B978-0-12-821834-1.00003-4. 35. Bruchhausen, M. et al. Impact of hydrogen on the high cycle fatigue behaviour of Inconel 718 in asymmetric push-pull mode at room temperature. Int. J. Fatigue 70, 137–145 (2015). 36. Belan, J. High frequency fatigue test of in 718 alloy – microstructure and fractography evaluation. Metalurgija 54, 59–62 (2015). 37. Zhong, L., Hu, H., Liang, Y. & Huang, C. High Cycle Fatigue Performance of Inconel 718 Alloys with Different Strengths at Room Temperature. 1–14 (2019) doi:10.3390/met9010013. 38. Iturbe, A. et al. Mechanical characterization and modelling of Inconel 718 material behavior for machining process assessment. Mater. Sci. Eng. A 682, 441–453 (2017). 39. Kawagoishi, N., Chen, Q. & Nisitani, H. Fatigue strength of Inconel 718 at elevated temperatures. Fatigue Fract. Eng. Mater. Struct. 23, 209–216 (2000). 40. Shao-Hsien, C. & Tsai, K. T. Predictive Analysis for the Thermal Diffusion of the Plasma-Assisted Machining of Superalloy Inconel-718 Based on Exponential Smoothing. Adv. Mater. Sci. Eng. 2018, (2018). 41. Collins, J. A. (Jack A. . Failure of materials in mechanical design : analysis, prediction, prevention. (Wiley, 1981). 42. 宇宙開発委員会技術評価部会. Ｈ－ⅡＡロケットの打上げ前段階における 技術評価について（報告）. (2000). 43. Cottis, R. A. Hydrogen embrittlement - NASA/TM-2016–218602. Shreir’s Corrosion (2010) doi:10.1016/B978-044452787-5.00200-6. 44. Gulczynski, M. T., Riccius, J. R., Waxenegger-Wilfing, G., Deeken, J. & Oschwald, M. Combustion Chamber Fatigue Life Analysis for Reusable Liquid Rocket Engines (LREs). in AIAA SCITECH 2023 Forum (American Institute of Aeronautics and Astronautics, 2023). doi:10.2514/6.2023-1263. 45. Gulczyński, M. T., Riccius, J. R., Waxenegger-wilfing, G., Deeken, J. C. & Oschwald, M. Numerical Fatigue Life Analysis of Combustion Chamber Walls for Future Reusable Liquid Rocket Engines (LREs) Applications. in 1–14 (2022).   
+2023-o-1-07 ISTS2023
+34th ISTS Organizing Committee. - 2023-o-1-07 -

@@ -1,0 +1,504 @@
+{
+  "topic": "08_engine_cycles",
+  "retrieved_at": "2026-09-29T16:32:53.7971420+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "只核查两个窄问题，每项最多2个一手来源：1. 天鹊12A/15A是否明确采用燃气发生器开式循环？找蓝箭或作者技术论文原文。2. YF-100系列采用富氧补燃循环的官方来源；是否能明确适用于长十乙所用130吨级泵后摆发动机。不要把家族事实说成具体首飞子型验证。返回URL、日期、准确短引文及证据范围。约700中文字。\n",
+  "search_calls": [
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "天鹊12A 15A 燃气发生器 开式循环",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://m.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/-2yBbssuM7f97HGP7NI0OQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.zhulouren.com/118328.html"
+          },
+          {
+            "type": "url",
+            "url": "https://h-bid.jp/noritz-stove-error-12/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinamacro.cn/Uploads/Products/202306/649c05b4836ec.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://patentimages.storage.googleapis.com/54/5a/de/a8e59c30fc0f12/CN112198919A.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://storage.kz.prom.st/301967_hintek12.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mingyou360.com/detail/10128033.html"
+          },
+          {
+            "type": "url",
+            "url": "https://vdomteplo.com/zh/diy-gas-generator-furnace-with-your-own-hands/"
+          },
+          {
+            "type": "url",
+            "url": "http://www.greatchinaca.com/web/upload/at/file/20190325/1553503405118109CCB3.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bzxz.net/bzxz/181281.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.arcmep.com/e/action/ShowInfo.php?classid=426&id=23062"
+          },
+          {
+            "type": "url",
+            "url": "https://zh-tw.manuals.plus/aceup-energy/ag1200-gas-powered-generator-manual"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 天鹊 TQ-12A TQ-15A 循环 技术论文",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://m.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "http://www.3dsciencevalley.com/?p=31138"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://m.bjnews.com.cn/detail/1713175344129127.html"
+          },
+          {
+            "type": "url",
+            "url": "http://pdf.dfcfw.com/pdf/H2_AN202512311812118866_1.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-100 富氧补燃循环 官方 长十乙 130吨 泵后摆",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2022/0826/10745710.html"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/a/20160606/48923971_0.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv15113396/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20201227061814/http://www.spaceflightfans.cn/42936.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/YF-100%E7%81%AB%E7%AE%AD%E5%8F%91%E5%8A%A8%E6%9C%BA/7973337"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-100M"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/YF-100"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-100系列 氧富 补燃 长征十号乙 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://futurephecda.com/news/19060"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "http://www.astronautix.com/y/yf-100.html"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20201227061814/http://www.spaceflightfans.cn/42936.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20160304055915/http:/www.shenkong.net/Explore/1410/ZGXYDYYMYFDJ3-YF100-115ZYTX26045110.htm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 YF-100K 或 130吨 泵后摆 发动机 循环 官方",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/en/item/YF-100K%20engine/5876985"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2022/0826/10745710.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sasac.gov.cn/n2588025/n2588124/c26721243/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.fx361.com/page/2022/0826/10745710.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"天鹊-12A\" OR \"TQ-12A\" \"燃气发生器\" 蓝箭 官方 OR 论文 site:landspace.com OR 蓝箭航天",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=63"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=54"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 一级发动机 YF-100 或 130吨 泵后摆 官方 site:gov.cn OR site:cmse.gov.cn OR site:casc.com.cn OR 航天科技",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/xwzx/202508/t20250815_56827.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/art/2008/9/18/art_201_3736.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/kpjy/htzs/ttsj/202005/t20200515_46594.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/xwzx/202406/t20240614_55566.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/xwzx/202509/t20250912_56855.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/kpjy/htzs/ttsj/202005/t20200503_46358.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/art/2015/9/11/art_948_20851.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/xwzx/202303/t20230321_53144.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2018n/2018ndlq/201812/t20181221_40844.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html"
+      }
+    },
+    {
+      "id": "ws_914606db-4746-9624-bb17-ebd90528d1b6_call-e7c23245-9376-46f0-a309-804dc243bb1d-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**1. 天鹊12A/15A循环类型**  \n蓝箭航天作者技术论文明确：TQ-12A及其真空变体TQ-15A为80吨级液氧/甲烷发动机家族最新演进，基线TQ-12为燃气发生器循环（gas-generator cycle，即开式循环），12A/15A保持核心架构。[[1]](https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462)\n\n一手来源：Hua Wei等（LandSpace），*Acta Astronautica* Vol.247（2026年10月，DOI 10.1016/j.actaastro.2026.05.033），标题“Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine”。URL：https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462  \n短引文：“The TianQue-12A (TQ-12A) and its vacuum variant, TQ-15A, represent the latest evolution of the 80-ton class LOX/methane engine family... The baseline version TQ-12 is a gas-generator cycle engine... These improvements were made while maintaining the core architecture”。关键词含“Gas-generator cycle”。证据范围：作者论文直接描述家族及12A/15A演进，飞行验证至ZQ-3（2025年12月）。中文摘要转载（2026-05-19）一致。蓝箭官网未单独明示循环，此为最直接一手。\n\n**2. YF-100系列富氧补燃及长十乙适用性**  \n官方来源确认YF-100（120吨级）采用高压富氧补燃循环（oxidizer-rich staged combustion），130吨级泵后摆发动机充分继承该技术基础。[[2]](https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ)\n\n一手来源1：李斌、刘站国等（航天推进技术研究院/西安航天动力研究所），《载人航天》2022年第4期，中国载人航天官网转载（2023-02-21）。URL：https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html  \n短引文：“130吨级泵后摆高压补燃液氧煤油发动机...以现役的120吨级高压补燃液氧煤油发动机为基础研制...120吨级发动机采用富氧高压补燃循环方式”。证据范围：130吨泵后摆（YF-100K类，海平面约1250kN）为新一代载人运载火箭（CZ-10系列）一级主动力，已逾万秒试车。\n\n一手来源2：西安航天动力研究所张晓军等，《我国液氧煤油发动机技术发展概述》（中国航天公众号）。URL：https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ  \n短引文：“YF-100...发动机采用高压富氧补燃循环方案...130吨级发动机海平面推力1250kN...为新一代载人运载火箭一级主动力装置”。\n\n长十乙（CZ-10B）公开资料将其一级关联YF-100K家族7机并联（高压补燃），但官方（cmse.gov.cn）仅确认CZ-10/甲系列使用该130吨泵后摆，无独立“长十乙首飞子型”循环验证文件。证据限于家族继承与总体设计，不可将系列事实等同具体子型飞行验证。无法核实更细官方链接。  \n\n（全文约680字，限于截止2026-09-29可核一手资料。）",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
+              "start_index": 131,
+              "end_index": 209,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ",
+              "start_index": 984,
+              "end_index": 1040,
+              "title": "2"
+            }
+          ]
+        }
+      ],
+      "id": "msg_914606db-4746-9624-bb17-ebd90528d1b6",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 150601,
+    "input_tokens_details": {
+      "cached_tokens": 89088
+    },
+    "output_tokens": 4848,
+    "output_tokens_details": {
+      "reasoning_tokens": 3628
+    },
+    "total_tokens": 155449,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 11,
+    "cost_in_usd_ticks": 1218637200,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 11,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 62460,
+      "output_tokens": 1538
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

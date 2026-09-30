@@ -1,0 +1,13 @@
+[
+  {"id":"O01_cea_repo","url":"https://api.github.com/repos/nasa/cea"},
+  {"id":"O02_rocketcea_repo","url":"https://api.github.com/repos/sonofeft/RocketCEA"},
+  {"id":"O03_rocketisp_repo","url":"https://api.github.com/repos/sonofeft/RocketIsp"},
+  {"id":"O04_cantera_repo","url":"https://api.github.com/repos/Cantera/cantera"},
+  {"id":"O05_coolprop_repo","url":"https://api.github.com/repos/CoolProp/CoolProp"},
+  {"id":"O05_coolprop_readme_api","url":"https://api.github.com/repos/CoolProp/CoolProp/readme"},
+  {"id":"O05_coolprop_c_api","url":"https://coolprop.org/coolprop/wrappers/C/index.html"},
+  {"id":"O06_pycycle_repo","url":"https://api.github.com/repos/OpenMDAO/pyCycle"},
+  {"id":"O07_pyskyfire_repo","url":"https://api.github.com/repos/ask-hovik/pyskyfire"},
+  {"id":"O07_pyskyfire_validation","url":"https://ask-hovik.github.io/pyskyfire/validation/rl10a-3-3a.html"},
+  {"id":"O08_rocketcycles_repo","url":"https://api.github.com/repos/janstruzinski/RocketCycles"}
+]

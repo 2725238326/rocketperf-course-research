@@ -1,0 +1,3640 @@
+[PDF PAGE 1]
+NASA
+Reference
+Publication
+1311
+1994
+National Aeronautics and
+Space Administration
+Office of Management
+Scientific and Technical
+Information Program
+Computer Program for Calculation
+Complex Chemical Equilibrium
+Compositions and Applications
+I. Analysis
+Sanford Gordon
+Sanford Gordon and Associates
+Cleveland, Ohio
+Bonnie J. McBride
+Lewis Research Center
+Cleveland, Ohio
+of
+
+
+[PDF PAGE 2]
+
+
+[PDF PAGE 3]
+Preface
+This report presents the latest in a number of versions of chemical
+equilibrium and applications programs developed at the NASA Lewis Research
+Center over more than 40 years. These programs have changed over the years to
+include additional features and improved calculation techniques and to take
+advantage of constantly improving computer capabilities. The minimization-of-
+free-energy approach to chemical equilibrium calculations has been used in all
+versions of the program since 1967.
+The two principal purposes of this report are presented in two parts. The
+first purpose, which is accomplished here in part I, is to present in detail a
+number of topics of general interest in complex equilibrium calculations. These
+topics include mathematical analyses and techniques for obtaining chemical
+equilibrium; formulas for obtaining thermodynamic and transport mixture
+properties and thermodynamic derivatives; criteria for inclusion of condensed
+phases; calculations at a triple point; inclusion of ionized species; and various
+applications, such as constant-pressure or constant-volume combustion, rocket
+performance based on either a finite- or infinite-chamber-area model, shock wave
+calculations, and Chapman-Jouguet detonations.
+The second purpose of this report, to facilitate the use of the computer
+code, is accomplished in part II, entitled "Users Manual and Program
+Description." Various aspects of the computer code are discussed, and a number
+of examples are given to illustrate its versatility.
+P_ PAGE III_I_NK NOT FILMED
+/
+iii PAGE, T_"I INTENTIONAI.LY_ i._ _'_
+
+
+[PDF PAGE 4]
+
+
+[PDF PAGE 5]
+Contents
+Page
+1. Introduction .......................................... 1
+2. Equations Describing Chemical Equilibrium .................. 3
+2.1 Units .......................................... 3
+2.2 Equation of State ................................. 3
+2.3 Minimization of Gibbs Energy ........................ 4
+2.3.1 Gibbs Iteration Equations ........................ 6
+2.3.2 Reduced Gibbs Iteration Equations ................. 7
+2.4 Minimization of Helmholtz Energy ..................... 8
+2.4.1 Helmholtz Iteration Equations ..................... 9
+2.4.2 Reduced Helmholtz Iteration Equations .............. 9
+2.5 Thermodynamic Derivatives From Matrix Solutions ........ 10
+2.5.1 Derivatives With Respect to Temperature ........... 10
+2.5.2 Derivatives With Respect to Pressure .............. 11
+2.6 Other Thermodynamic Derivatives .................... 12
+3. Procedure for Obtaining Equilibrium Compositions ............ 13
+3.1 Initial Estimates ................................. 13
+3.2 Magnitude of Species Used During Iteration ............. 13
+3.3 Convergence ................................... 14
+3.4 Tests for Condensed Phases ......................... 15
+3.5 Phase Transitions and Special Derivatives ............... 16
+3.6 Singularities .................................... 17
+3.7 Iteration Procedure and Tests for Ions .................. 17
+4. Thermodynamic Data .................................. 19
+4.1 Assigned Enthalpies .............................. 19
+4.2 Least-Squares Coefficients .......................... 19
+5. Thermal Transport Property Data ......................... 21
+5.1 Data for Individual Species ......................... 21
+5.2 Mixture Property Data ............................. 21
+5.2.1 Viscosity and Frozen Thermal Conductivity .......... 21
+5.2.2 Reaction Thermal Conductivity ................... 22
+5.2.3 Specific Heat for Gases Only .................... 23
+5.2.4 Prandtl Number ............................. 23
+6. Theoretical Rocket Performance .......................... 25
+6.1 Assumptions .................................... 25
+P&G.T_ I_L.AI_ f'K)T lrlLMEJ_ v PAGE. _J INTENTIONALLYBLA_',;K
+
+
+[PDF PAGE 6]
+6.2 Parameters ..................................... 26
+6.2.1 Conservation Equations ........................ 26
+6.2.2 Velocity of Flow ............................. 26
+6.2.3 Force ..................................... 26
+6.2.4 Specific Impulse ............................. 26
+6.2.5 Mach Number ............................... 27
+6.2.6 Characteristic Velocity ......................... 27
+6.2.7 Area per Unit Mass Flow Rate ................... 27
+6.2.8 Coefficient of Thrust .......................... 27
+6.2.9 Area Ratio ................................. 27
+6.3 Procedure for Obtaining Equilibrium Rocket Performance
+for IAC Model .................................. 27
+6.3.1 Combustion Conditions ........................ 28
+6.3.2 Exit Conditions .............................. 28
+6.3.3 Throat Conditions ............................ 28
+6.3.4 Discontinuities at Throat ....................... 28
+6.3.5 Assigned Subsonic or Supersonic Area Ratios ........ 29
+6.3.6 Empirical Formulas for Initial Estimates of PinflPe ..... 29
+6.3.7 Analytic Expression for Improved Estimates
+of PinflPe .................................. 29
+6.4 Procedure for Obtaining Equilibrium Rocket Performance
+for FAC Model ................................. 30
+6.4.1 Initial Estimates for Pinf and AclA t ................ 30
+6.4.2 Improved Estimates for Pinf and Ac[A t .............. 31
+6.5 Procedure for Obtaining Frozen Rocket Performance ....... 31
+6.5.1 Exit Conditions .............................. 31
+6.5.2 Throat Conditions ............................ 32
+6.5.3 Thermodynamic Derivatives for Frozen Composition ... 32
+7. Incident and Reflected Shocks ............................ 33
+7.1 Incident Shocks ................................. 33
+7.1.1 Iteration Equations ........................... 34
+7.1.2 Corrections and Convergence .................... 35
+7.1.3 Initial Estimates of T2/T 1 and P2/P 1 ............... 35
+7.2 Reflected Shocks ................................ 36
+7.2.1 Iteration Equations ........................... 36
+7.2.2 Corrections and Convergence .................... 37
+7.2.3 Initial Estimates of Ts/T 2 and Ps/P2 ............... 37
+8. Chapman-Jouguet Detonations ............................ 39
+8.1 Iteration Equations ............................... 39
+8.2 Corrections and Convergence ........................ 40
+8.3 Initial Estimates of T21Tl and P21PI ................... 40
+9. Input Calculations ..................................... 41
+Appendix---Symbols ..................................... 45
+References ............................................. 49
+vi
+
+
+[PDF PAGE 7]
+Chapter 1
+Introduction
+Knowing the chemical equilibrium compositions of
+a chemical system permits one to calculate theoretical
+thermodynamic properties for the system. These proper-
+ties can be applied to a wide variety of problems in
+chemistry and chemical engineering. Some applications
+are the design and analysis of equipment such as
+compressors, turbines, nozzles, engines, shock tubes, heat
+exchangers, and chemical processing equipment.
+For more than 40 years the NASA Lewis Research
+Center has been involved in developing methods and
+computer programs for calculating complex chemical
+equilibrium compositions and thermodynamic properties
+of the equilibrium mixtures and in applying these
+properties to a number of problems (Gordon et al., 1959,
+1962, 1963, 1970, 1976, 1984, 1988; Huff et al., 1951;
+Svehla and McBride, 1973; and Zeleznik and Gordon,
+1960, 1962a,b, 1968). Earlier versions of the chemical
+equilibrium computer program (Zeleznik and Gordon,
+1962a; and Gordon and McBride, 1976) have had wide
+acceptance. Since the last publication this program has
+been under continuous revision and updating, including
+several substantial additions. One addition is an option
+for obtaining the transport properties of complex
+mixtures (Gordon et al., 1984) by methods simpler than
+those of Svehla and McBride (1973). A second addition
+is an option to calculate rocket performance for a rocket
+motor with a finite-area combustor (Gordon and
+McBride, 1988). The present report documents these and
+other additions and revisions to the program since 1976.
+The revised program is called CEA (Chemical
+Equilibrium and Applications).
+The program can now do the following kinds of
+problems:
+(1) Obtaining chemical equilibrium compositions
+for assigned thermodynamic states. These states may be
+specified by assigning two thermodynamic state func-
+tions as follows:
+(a) Temperature and pressure, tp
+(b) Enthalpy and pressure, hp
+(c) Entropy and pressure, sp
+(d) Temperature and volume (or density), tv
+(e) Internal energy and volume (or density), uv
+(f) Entropy and volume (or density), sv
+(2) Calculating theoretical rocket performance for
+a finite- or infinite-area combustion chamber
+(3) Calculating Chapman-Jouguet detonations
+(4) Calculating shock tube parameters for both inci-
+dent and reflected shocks
+Some problems handled by the program use just one
+combination of assigned states--namely, the tp, hp, sp,
+tv, uv, and sv problems. For example, the tp problem,
+which consists of a schedule of one or more assigned
+temperatures and pressures, might be used to construct
+Mollier diagrams. The hp problem gives constant-
+pressure combustion properties and the uv problem gives
+constant-volume combustion properties. Other problems
+make use of more than one combination of assigned
+thermodynamic states. For example, the shock and
+detonation problems use hp and tp; the rocket problem
+uses hp or tp and also sp.
+This report consists of two parts. Part I, containing
+the analysis, includes
+(1) The equations describing chemical equilibrium
+and the applications previously mentioned (i.e., rocket
+performance, shocks, and Chapman-Jouguet detonations)
+(2) The reduction of these equations to forms
+suitable for mathematical solution by means of iterative
+procedures
+(3) Equations for obtaining thermodynamic and
+transport properties of mixtures
+Part II, a program description and users manual,
+discusses the modular form of the program and briefly
+
+
+[PDF PAGE 8]
+describeseachsubroutine.It also discusses the prepara-
+tion of input, various permitted options, output tables,
+and error messages. A number of examples are also
+given to illustrate the versatility of the program.
+In addition to the work in chemical equilibrium
+calculations and applications over the past 40 years,
+progress in computer programs, data generation, and data
+fitting has also been made at NASA Lewis for the ther-
+modynamic and thermal transport properties of indi-
+vidual species required for the equilibrium calculations.
+Some examples of this effort are Burcat et al. (1985),
+McBride et al. (1961, 1963, 1967, 1992, 1993a,b),
+Svehla (1962), and Zeleznik and Gordon (1961). In
+addition to data calculated by us, other thermodynamic
+data included in our files are taken from sources such as
+Chase et al. (1985), Garvin et al. (1987), Gurvich et al.
+(1989), and Marsh et al. (1988). Files distributed with
+the computer program are described in part II.
+Various versions of the equilibrium program or
+modifications of the program have been incorporated
+into a number of other computer codes. An example
+is Radhakrishnan and Bittker (1994) for kinetics cal-
+culations.
+
+
+[PDF PAGE 9]
+Chapter 2
+Equations Describing Chemical Equilibrium
+Chemical equilibrium is usually described by either
+of two equivalent formulations--equilibrium constants or
+minimization of free energy. Reports by Zeleznik and
+Gordon (1960, 1968) compare the two formulations.
+Zeleznik and Gordon (1960) shows that, if a generalized
+method of solution is used, the two formulations reduce
+to the same number of iteration equations. However,
+with the minimization-of-free-energy method each
+species can be treated independently without specifying
+a set of reactions a priori, as is required with equilibrium
+constants. Therefore, the minimization-of-free-energy
+formulation is used in the CEA program.
+The condition for equilibrium can be stated in terms
+of any of several thermodynamic functions, such as the
+minimization of Gibbs or Helmholtz energy or the
+maximization of entropy. If one wishes to use tempera-
+ture and pressure to characterize a thermodynamic state,
+Gibbs energy is most easily minimized inasmuch as
+temperature and pressure are its natural variables.
+Similarly, Helmholtz energy is most easily minimized if
+the thermodynamic state is characterized by temperature
+and volume (or density).
+Zeleznik and Gordon (1960) presents equations
+based on minimization of Gibbs energy. Some of these
+equations are repeated and expanded herein for
+convenience. In addition, a set of equations based on
+minimization of Helmholtz energy is also presented.
+However, because only ideal gases and pure condensed
+phases are being considered, the general notation of
+Zeleznik and Gordon (1960) is not used.
+Physical Unit Symbol
+quantity
+Length meter m
+Mass kilogram kg
+Time second s
+Temperature kelvin K
+Force newton N
+Pressure newton per N/m 2
+square meter
+Work, energy joule J
+The numerical values of a number of fundamental
+contants are taken from Cohen and Taylor (1987). For
+example, the value of the gas constant R taken from this
+reference is 8314.51 J/(kg-mole)(K). In those sections
+dealing with the computer program, other units are used
+in addition to or instead of SI units.
+2.2 Equation of State
+In this report we assume that all gases are ideal and
+that interactions among phases may be neglected. The
+equation of state for the mixture is
+PV = nRT (2.1a)
+2.1 Units
+The International System of Units (SI) used in this
+report is
+or
+---P = nRT (2.1b)
+P
+
+
+[PDF PAGE 10]
+whereP is pressure (in newtons per square meter), V
+specific volume (in cubic meters per kilogram), n moles
+per unit mass of mixture (in kilograms-mole per
+kilogram), T temperature (in kelvin), and p density (in
+kilograms per cubic meter). Symbols used in this report
+are defined in the appendix. For a reacting chemical
+system the number of moles n is generally not constant.
+Equation (2.1) is assumed to be correct even when
+small amounts of condensed species (up to several
+percent by weight) are present. In this event the
+condensed species are assumed to occupy a negligible
+volume relative to the gaseous species. An example
+given in part II of this report illustrates the validity of
+this assumption. In the variables V, n, and p the volume
+and mole number refer to gases only, but the mass is for
+the entire mixture including condensed species. The
+word "mixture" is used in this report to refer to mixtures
+of reaction products as distinguished from mixtures of
+reactants, which are referred to as "total reactants."
+On the basis of this definition, n can be written as
+big
+n = _ nj (2.2)
+1=1
+where nj is the number of kilogram-moles of species j
+per kilogram of mixture and the index NG refers to the
+number of gases in the mixture. The molecular weight of
+the mixture M is defined as
+1M = - (2.3a)
+ill
+or equivalently as
+NS
+E n,UjM- i=I
+big
+1=i
+(2.3b)
+where M: is the molecular weight of species j and the
+index NS_ refers to the number of species in the mixture.
+In the CEA computer program, among the NS species,
+gases are indexed from 1 to NG and condensed species
+from NG + 1 to NS.
+More conventionally, molecular weight is defined
+as
+biS
+E n,Mj
+MW- i=i (2.4a)big
+J=i
+Molecular weight is given the symbol MW in equa-
+tion (2.4a) to differentiate it from M. The two different
+definitions of molecular weight, M and MW, give differ-
+ent results only in mixtures of products containing con-
+densed as well as gaseous species. Only M is given in
+the output, but MW may be obtained from M by means
+of
+(2.4b)
+where x/is the mole fraction of species j relative to all
+species m the mixture. Some additional discussion of the
+differences in these molecular weights is given in part II
+of this report.
+2.3 Minimization of Gibbs Energy
+For a mixture of NS species the Gibbs energy per
+kilogram of mixture g is given by
+g
+N$
+= _jnj
+i=i
+(2.5)
+where the chemical potential per kilogram-mole of
+species j is defined to be
+(2.6)
+The condition for chemical equilibrium is the minimiza-
+tion of free energy. This minimization is usually subject
+to certain constraints, such as the following mass-balance
+constraints:
+NS
+__,aon j - b_ = 0 (i = 1.... ,Q) (2.7a)
+j=l
+
+
+[PDF PAGE 11]
+or
+O
+b t - bi = 0 (i = 1,...,0 (2.7b)
+where the stoichiometric coefficients aij are the number
+of kilogram-atoms of element i per kilogram-mole of
+species j, the index _ is the number of chemical ele-
+ments (if ions are considered, the number of chemical
+elements plus one), b_ is the assigned number of
+kilogram-atoms of element i per kilogram of total
+reactants (see eq. (9.5)), and
+NS
+bj = 2_aonj (i = 1,...,0 (2.7c)
+j-t
+is the number of kilogram-atoms of element i per kilo-
+gram of mixture.
+Defining a term G to be
+!
+ -- s + X,(b - bDi-1
+(2.8)
+where _'i are Lagrangian multipliers, the condition for
+equilibrium becomes
+ -- .j + x,.,o 8nj + ° (b, - bT)SX, =0
+(2.9)
+Treating the variations 5nj and _Xi as independent gives
+!
+pj + _ _.,aO = 0 (j = 1,...,NS) (2.10)
+i=l
+and also gives the mass-balance equation (2.7b).
+From the assumptions in section 2.2 the chemical
+potential can be written as
+ lXjo+ RT In nY + RT In P (j = 1,...,NG)= rt
+ [ixI (] = NG + 1,...,NS) (2.11)
+state. For a gas the standard state is the hypothetical
+ideal gas at the standard-state pressure. For a pure solid
+or liquid the standard state is the substance in the
+condensed phase at the standard-state pressure.
+Historically, the defined standard-state pressure has been
+1 atmosphere (101 325 Pa). Most early tabulations of
+thermodynamic data were based on this pressure.
+However, in 1982 the International Union of Pure and
+and Applied Chemistry (Cox, 1982) recommended that
+the standard-state pressure should be defined as 1 bar
+(105 Pa). Most recent compilations have used 1 bar as
+the standard pressure (e.g., Chase et al. (1985), Garvin
+et al. (1987), Gurvich et al. (1989), Marsh et al. (1988),
+and McBride et al. (1993a,b)). The unit of pressure in
+equation (2.11) should be consistent with the unit of
+pressure in the thermodynamic data being used.
+The term la_ and other thermodynamic terms that
+appear later in the text, such as C_j, H_, S_, C_:, and
+Uj°, are all functions of temperature. However, inc'tuding
+T as part of the symbol notation, such as H_.(T) or H°(T),
+is done only when needed for clarity. Vor example,
+sensible heat for species j between a temperature T and
+a temperature of 298.15 K can be written as H_(T) -
+H}(298.15).
+Equations (2.7a) and (2.10) permit the determin-
+ation of equilibrium compositions for thermodynamic
+states specified by an assigned temperature To and
+pressure P0" That is, in addition to equations (2.7a) and
+(2.10), we have the pair of trivial equations
+T = TO (2.12a)
+P = Po (2.12b)
+However, the thermodynamic state can be specified by
+assigning any two state functions. For example, the
+thermodynamic state corresponding to a constant-
+pressure combustion is specified, instead of by
+equations (2.12), by
+h = ho (2.13a)
+P = Po (2.13b)
+where Iff for gases (j = 1 to NG) and for condensed
+phases (j > NG) is the chemical potential in the standard
+where h is the specific enthalpy of the mixture and h0 a
+constant equal to the specific enthalpy of the reactants
+(see eq. (9.7)). The expression for h is
+5
+
+
+[PDF PAGE 12]
+N$
+h = _ njH 7 (2.14)
+iffil
+where H. ° is the standard-state molar enthalpy for.J
+species j at temperature T.
+For assigned entropy and pressure (such as for an
+isentropic compression or expansion to a specified
+pressure), the thermodynamic state is specified by
+s=s o (2.15a)
+P = Po (2.15b)
+where s is the specific entropy of the mixture and so the
+assigned specific entropy, or the specific entropy of the
+total reactant (see eq. (9.22)). The expression for s is
+N$
+s--E l=t
+(2.16)
+where
+pansion of the appropriate equations with all terms
+truncated that contain derivatives higher than the first.
+The correction variables used areAln nj (j = 1,...,NG),
+Anj (j = NG + 1,...,NS), Aln n, n_ = -_,JRT, a n d
+AInT. As Zeleznik and Gordon (1968) points out, it is
+no restriction to start each iteration with the estimate for
+the Lagrangian multipliers equal to zero inasmuch as
+they appear linearly in equation (2.10). After making
+dimensionless those equations containing thermodynamic
+functions, the Newton-Raphson equations obtained from
+equations (2.10), (2.7), (2.13a), and (2.15a) are
+ahnj - _a¢r_ i - Alnn - -- AlnTi=1 RT
+= _l.tj (j = 1,...,NG)
+RT (2.18)
+, He _ "j
+-_acn, - -_TAIn T =iol RT
+(j = NG + 1..... NS) (2.19)
+ s7 - R In nj _ R haP (j = 1,...,NG)Sj= n
+ IS7 (j = NG + 1,...,NS) (2.17)
+and S ° is the standard-state molar entropy for species j.
+Equation (2.17) is similar to equation (2.11), and the
+same discussion concerning standard-state pressure that
+applied to equation (2. I 1) also applies to equation (2.17).
+2.3.1 Gibbs Iteration Equations
+The equations required to obtain composition are
+not all linear in the composition variables and therefore
+an iteration procedure is generally required. In the itera-
+tion procedure to be described it will be convenient to
+treat n as an independent variable. A descent Newton-
+Raphson method is used to solve for corrections to initial
+estimates of compositions nj, Lagrangian multipliers Xj,
+moles of gaseous species n, and (when required)
+temperature T. This method involves a Taylor series ex-
+NO NS
+_ aqnj Aln nj + _.
+j=l j=NG+i
+% a nj = b_ - bk
+(k = 1..... 0
+NO NG
+__,n/alnnj - nAlnn = n - _n/
+jft jfi
+NG o NS H?
+ at. Rr-'an'
++ nj'----2AInT= R_rU-I
+(2.20)
+(2.21)
+(2.22)
+
+
+[PDF PAGE 13]
+At" T
+j-i R j=No+l U=l
+"gO - S
+R
+NG
++ n - _ nj (2.23)
+j-I
+where C_i is the standard-state specific heat at constant
+pressure for species j at temperature T.
+2.3.2 Reduced Gibbs Iteration Equations
+For problems with assigned thermodynamic states
+tp, hp, or sp, various combinations of equations (2.18) to
+(2.23) could be used to obtain corrections to estimates.
+However, for chemical systems containing many species,
+it would be necessary to solve a large number of
+simultaneous equations. This large number of equations
+can be reduced quite simply to a much smaller number
+by algebraic substitution. The expression for Aln nj
+obtained from equation (2.18) is substituted into equa-
+tions (2.20) to (2.23). When equation (2.19) written with
+signs reversed is included, the resulting reduced
+equations are
+_, _, a_aonjn i + a_Anj + aqnj At" n
+i=1 1=1 /=NG÷I l,,j= 1
+tj=l
+e,_o] Noa At" T = b_-b k + y]_ aqnj_tj
+ ) j:, RT
+(k = 1.....0 (2.24)
+| o
+E ao., + H7 At" T- "JRT RTi=1
+q = NG + 1,...,NS)
+(2.25)
+ _ ,,,/,j_,+ ,_-,, At.. + A_ ri:l j:l t.#=l tj:i RT )
+NO NG
+= n - _ nj + _ n/ix# (2.26)
+j:_ j:_ RT
+' (_aqnlHTI + NS H°" + __,Ol° nn_R_)E ,< E _"., A_..i-l 1+1 _ J _ J-NG+I -I
++ ,,.T: - R2T 2 J 1-1 R2T 2/=l /=l
+(2.27)
++ E hA.+ At"j=NO+I R _# I,j-I
+ o "°",".',1+ njC;"s+_ At" r- _°-_
+_,1=1 R /=l R1T ) R
++ n
+NG big
+- E nj + E _ (2.28)
+j=l S-i R2T
+Equations (2.24) to (2.28) are given in table 2.1 in
+a form that permits a direct comparison with other sets
+of simultaneous equations presented in later sections
+(tables 2.2 to 2.4). (Note that tables 2.1 to 2.4 appear at
+the end of this document.) In a previous report (Gordon
+and McBride, 1976), some special script symbols were
+used for the sake of compactness in preparing tables 2.1
+to 2.4, as for example,
+9(- h (2.29)
+RT
+These script symbols are no longer used in this report.
+The correction equations required for several types
+of constant-pressure problems are summarized as
+follows, where i = 1..... | and j = NG + 1..... NS:
+Type of Equations Correction
+problem required variables
+_i, _lj, AIn nAssigned temperature
+and pressure, tp
+Assigned enthalpy
+and pressure, hp
+Assigned entropy and
+pressure, sp
+(2.24), (2.25),
+(2.26)
+(2.24), (2.25),
+(2.26), (2.27)
+(2.24), (2.25),
+(2.26), (2.28)
+gi, An), AIn n,
+Aln T
+_i, An),AIn n,
+Ain T
+7
+
+
+[PDF PAGE 14]
+After obtainingthe correctionvariablesshown
+above,the correctionsfor gaseousspeciesAln nj
+(/" = 1.... ,NG) are then obtained from equation (2.18).
+Section 3.3 discusses controlling the size of corrections
+before they are applied to obtain improved estimates.
+2.4 Minimization of Heimholtz Energy
+The equations presented in this section are similar
+to those in section 2.3. Whatever differences appear are
+due to the different forms of the chemical potential
+laj (j = 1,...,NG). In section 2.3 pressure was one of the
+assigned thermodynamic states, and consequently Gibbs
+energy was minimized. In this section volume (or
+density) is one of the assigned thermodynamic states,
+and consequently Helmholtz energy is minimized.
+The two energies (Gibbs and Helmholtz) have the
+following thermodynamic relationship:
+f = g - PV (2.30)
+where f is the Helmholtz energy per kilogram of mix-
+ture. After substituting Gibbs energy g as given by
+equation (2.5), equation (2.30) becomes
+NS
+f-. _ _,,,,j - ev
+j=l
+(2.31)
+The chemical potential iaj can be expressed as a thermo-
+dynamic derivative in several ways (Kirkwood and
+Oppenheim, 1961). One way is given by equation (2.6).
+Another expression is
+(2.32)
+If
+!
+e--z.Ex,(b,-b:) i=!
+(2.33)
+the condition for equilibrium based on the minimization
+of Helmholtz energy subject to mass-balance constraints
+is
+Ns(, /j=l i=l
+!
+• E(b,- b,°)8x,i=l
+=0
+(2.34)
+Treating _nj and 8_ i as independent again gives, as in
+section 2.3, equations (2.7) and (2.10). Now, however,
+instead of equation (2.11),
+laI
+ + RTInnIR'T
+= V q =1,...,NG)
+(j = NG + 1,...,NS) (2.35)
+where R' = Rxl0 -5.
+Equations (2.7) and (2.10), with laj given by
+equation (2.35), permit the determination of equilibrium
+compositions for thermodynamic states specified by an
+assigned temperature TO and volume V0; that is, in
+addition to equations (2.7) and (2.10), we have the pair
+of trivial equations
+T = To (2.36a)
+V = Vo (2.36b)
+Analogous to equation (2.13) for a constant-
+pressure combustion process, we can set down the
+following conditions for constant-volume combustion:
+u" " (2.37a)= U0
+V = Vo (2.37b)
+where u' is the specific internal energy of the mixture
+and u 0 a constant equal to the specific internal energy of
+the reactants. The expression for u' is
+NS
+u' --E niO; (238)j=i
+where U7 is the standard-state molar internal energy for
+species j.
+
+
+[PDF PAGE 15]
+Analogousto equation(2.15),for assignedentropy
+andvolume(suchasfor anisentropiccompressionor
+expansionto a specifiedvolume),thethermodynamic
+stateis specifiedby
+s = so (2.39a)
+V = V0 (2.39b)
+Iteration equations are derived in section 2.4.1 that
+permit solution of the composition variables for constant-
+volume problems.
+2.4.1 Helmholtz Iteration Equations
+Correction equations are obtained in a manner
+similar to that described in section 2.3.1. In this case,
+however, the expression for layis equation (2.35) rather
+than equation (2.11). Because n does not appear
+explicitly as a variable in equation (2.35), Aln n no
+longer appears as a correction variable. The Newton-
+Raphson equations obtained from equations (2.10), (2.7),
+(2.37a), and (2.39a) are
+- a¢x i - -_TAln T = _-_Alnnj t=i q = 1,...,NG)
+(2.40)
+NO (S 1 _s SjEn,/R -1 Alnnj + E -_An,j=l \ j=I",IG* 1
++ AInT= -so -s
+V=l R
+(2.44)
+where C_°,j is the standard-state specific heat at constant
+volume for species j at temperature T.
+2.4.2 Reduced Helmhoitz Iteration Equations
+Equations (2.40) to (2.44) may be reduced to a
+much smaller set of working correction equations by
+eliminating Aln nj, obtained from equation (2.40), from
+equations (2.42) to (2.44). When equation (2.41) written
+with the signs reversed is included, the resulting reduced
+set of equations is
+! NG
+E E +i=1 j=l a_ Anj + RT )Aln Tl=SOq \1=1
+NG
+= b_' - bk ÷j_ a_PtJRr (k-- 1,...,0 (2.45)
+ U? pj
+ A r-- q=NG+I .... ,_I )
+(2.41)
+_aox i + --AInT =i=x RT RT
+q = NG+I,...,NS)
+(2.46)
+NO NS
+ a_nj Aln nj + _ akjAn _ = b_' - b, (k = 1,...,0
+j=t /=NG*I
+(2.42)
+j=l RT
+Ns U?
+/=NG*I
++ AInT -
+L/=I
+: -- U:Uo
+RT
+(2.43)
+,=, ) '
+NS o
++ E V) Anj
+j=_÷1 RT
++ njC_-_--LJ+ _ &In T
+[j._ R j._ R2T 2 ]
+, _ ouo - u ny_ _j+
+RT j=l RUT2
+(2.47)
+
+
+[PDF PAGE 16]
+,=1 '= j=NG*I R
+t_=zR +_ R21;
+so-, + n,%__-R 1=i R2T
+(2.48)
+Equations (2.45) to (2.48) are given in table 2.2 in a
+form that permits direct comparison with the iteration
+equations in table 2.1 and the derivative equations in where
+tables 2.3 and 2.4.
+The correction equations required for several types
+of constant-volume problems are summarized as follows,
+wherei=l ..... landj=NG+ 1.... ,NS: and
+Type of Equations Correction
+problem required variables
+(2.45),(2.46)Assigned temperature
+and volume, tv
+Assigned internal
+energy and volume,
+uv
+Assigned entropy and
+volume, sv
+(2.45),(2.46),
+(2.47)
+(2.45), (2.46),
+(2.48)
+_i, An/, _dn T
+After obtaining the correction variables the
+corrections for gaseous species Aln nj q=l .... ,NG) are
+then obtained from equation (2.40). (See section 3.3 for
+discussion on controlling size of corrections before
+applying them to obtain improved estimates.)
+2.5 Thermodynamic Derivatives From
+Matrix Solutions
+All thermodynamic first derivatives can be ex-
+pressed in terms of any three independent first deriva-
+tives. The Bridgman tables, as tabulated, for example, in
+Lewis and Randall (1961), express first derivatives in
+terms of (aVlOl),. (ov/ol') r, and (OhiO1]e =-% We use
+the logarithmic form of the volume derivatives because
+it gives an indication of the extent of chemical reaction
+occurring among the reaction species. These derivatives
+may have more than one value depending on what is
+assumed occurs to composition in a thermodynamic
+process from one condition to another. If, for example,
+composition is assumed to reach its equilibrium value
+instantaneously, the derivatives are referred to as
+"equilibrium" derivatives. If, on the other hand, reaction
+times are assumed to be infinitely slow, composition
+remains fixed (frozen) and the derivatives are referred to
+as "frozen." Special subscripts are used to differentiate
+these different conditions only for cp, thermal
+conductivity, and Prandtl number. The equilibrium value
+of Cp may be expressed as the the sum of a "frozen"
+contribution and a "reaction" contribution as follows:
+cp,e = cv.f + cv,_ (2.49a)
+NS
+cv.! = _ n.iC_°,j (2.49b)
+j=l
+/=l JT_-_--T)e + i=NO.l -T-__-T)e (2.49c)
+The expressions in equations (2.49b) and (2.49c) were
+obtained by differentiating equation (2.14). (Subscripts
+different from those used in equation (2.49a) are used in
+transport property calculations. See section 5.2.3).
+From equation (2.1)
+ 01nV] = 1 + (01nn] (2.50)
+ Oln T),,, t_Oln T)v
+ Oln P ) r I,Oln P Jr
+2.5.1 Derivatives With Respect to Temperature
+The derivatives of nj and n with respect to temper-
+ature are needed to evaluate equations (2.49c) and (2.50).
+These may be obtained by differentiating equations
+(2.10), (2.7), and (2.3), which gives the following:
+ __' : _fo .) .; aln r)p - Z,., aq[0_]_ /, _,aba TIp " -_
+q = 1,...,NG) (2.52)
+' 2 .:-E,=, ,o1,1r),, Rr (j = NG + 1,...,NS) (2.53)
+10
+
+
+[PDF PAGE 17]
+(k = 1,...,0 (2.54)
+_,o(at..D .( a_"l =oE.,/_/- tomr),1=I \ Ip
+(2.55)
+As in the case of the iteration correction equations
+previously discussed, the derivative equations can be
+reduced to a much smaller number of simultaneous
+equations by eliminating (ain nj/aln T_p, obtained from
+equation (2.52), from equations (2.54) and (2.55). When
+equation (2.53) written with the sign reversed is
+included, the resulting reduced number of temperature
+derivative equations is
+L£ ( a=,_ aJ anJ ]%a_,_.,--, + _
+'tainr)_ _ainr/,l=l 1=1 /=NG+I
+ (ain._ = .o o
++_ ,,,¢,,t_), -,-,E_,v,,,,;=,
+(t = L..,0 (2.56)
+D (o.,_ n7
+ <'"t_J, : -_ (j = NG + 1,...,NS) (2.57)
+a.n. = -E np_
+E_,:I_ "taint), s:, er (2.58)
+Equations (2.56) to (2.58) are given in table 2.3 in
+a form that simplifies the comparison of derivative equa-
+tions with the iteration equations in tables 2.1 and 2.2.
+The values of the derivatives obtained from equa-
+tions (2.56) to (2.58) could be used in equation (2.52) to
+obtain derivatives for the gaseous species (0in n/IOln T)p
+q = 1..... NG) and all of the temperature derivatives
+could then be used to evaluate ce from equations (2.49).
+However, there is an alternative and much simpler
+procedure for obtaining Cp. SubstitutingOlnnilain T)P
+obtained from equation (2.52) into equations (2.49) and
+dividing by R yield
+fii'p;Ir i! "°+ a_""l + _+ES(x'_'t.#:l RT )tOinTJp 1:1 R j=l R2T 2
+(2.59)
+In equation (2.59) only the temperature derivatives
+obtained directly from solution of equations (2.56) to
+(2.58) are required. Furthermore, all the coefficients in
+equation (2.59) are exactly the coefficients appearing in
+the reduced-enthalpy equation (2.27). The second-last
+term in equation (2.59) is the frozen contribution to
+specific heat (eq. (2.49b)); the remainder of the terms are
+the reaction contribution (eq. (2.49c)).
+2.5.2 Derivatives With Respect to Pressure
+The derivative (ain n/Oin P)r can be obtained in a
+manner similar to that described for obtaining derivatives
+with respect to the temperature. Differentiating equa-
+tions (2.10), (2.7), and (2.3) gives
+ a.,.,] , ( o:,'l _(0k,./ : aine;,-_a"t_J, t_),. -I
+q = 1,...,NG) (2.60)
+, (a:,_-Ea.. -- =
+,:, "toineJ,. 0 q = NG+I .... ,NS) (2.61)
+ (oin,0 ( % ]
+ + --o
+(k = 1,...,0 (2.62)
+ :it 0---_) r t-_--_) r : 0 (2.63)j=l
+Equations (2.60) to (2.63) can be reduced to a
+smaller set by eliminating (0in nj/ain _r, obtained from
+equation (2.60), from equations (2.62) and (2.63). When
+equation (2.61) written with the sign reversed is
+included, the results are
+11
+
+
+[PDF PAGE 18]
+l=l j=l j=NO÷I
+NG NO
+ ( ainn_
++ av,,t J--av', :,...,or y=t
+(2.64)
+q --NG + I,...,NS) (2.65)
+.o ( a=. _ No
+(2.66)
+Equations (2.64) to (2.66) are given in table 2.4 for
+comparison with tables 2.1, 2.2, and 2.3. The only
+derivative obtained from solution of equations (2.64)
+to (2.66) that is used is (OinnlainP) r (see eq. (2.51).
+2.6 Other Thermodynamic Derivatives
+As stated previously, all thermodynamic first
+derivatives can be expressed in terms of the three
+thermodynamic first derivatives discussed in the previous
+sections--namely, Cp, ain v[aln 7) e, and(aln V/aln P)r
+(see Bridgman tables in Lewis and Randall (1961)).
+Velocity of sound a, a frequently used parameter, is
+defined by
+a2=(aP) =PfahlPl = l e ( a _ P _ 
+ s Pk,ainPJs P_ainV)s
+(2.67)
+From Bridgman tables
+ ainP = %
+ v;,c(a.,vI-+ oh, (2.68)
+This may be written as
+ atnP] _ c,
+ ain V]s cv( aln V_) (2.69)
+t0_Yr
+where
+ PV( ain V]2
+r k ain T)e
+= Cp + ( ain V] (2.70)
+k-g-_ ),
+Using the symbols
+and
+=- ( ainPI (2.71)
+"is _ain p Js
+Y _=cp (2.72)
+Cv
+equation (2.69) may be written as
+¥ (2.73)
+Vs = ( din v]
+k-O---_-_) r
+Using the equation of state given in equation (2.1),
+we obtain from equation (2.67) the familiar expression
+for velocity of sound
+a = _ (2.74)
+Note that the Ys defined by equation (2.71) is required
+in equation (2.74) and not the specific heat ratio T
+defined in equation (2.72).
+In section 3.5 an alternative expression is derived
+for Ysfor the special situation of triple phases, where the
+expressions in equations (2.68), (2.69), and (2.73) are no
+longer valid.
+Gordon and Zeleznik (1962) gives numerous first
+derivative relations that are of interest in rocket
+performance calculations. One of these derivatives,
+which is used in section 6.3.4, is
+ alnP] _ %
+ aM TJs nR( Sln V] (2.75)
+ksin Th,
+A numerical example involving this derivative is given
+in Zeleznik and Gordon (1968).
+12
+
+
+[PDF PAGE 19]
+Chapter 3
+Procedure for Obtaining Equilibrium
+Compositions
+In principle, obtaining equilibrium compositions by
+means of the Newton-Raphson iteration procedure dis-
+cussed in sections 2.3.1, 2.3.2, 2.4.1, and 2.4.2 should
+offer no difficulties. However, a number of practical
+items require detailed attention in order to avoid numeri-
+cal difficulties: initial estimates, tests for condensed
+phases, phase transitions and triple points, convergence,
+accidental singularities, special handling of ions, and
+consideration of trace species.
+3.1 Initial Estimates
+An extremely simple procedure is used in this
+report to assign estimates for composition. For the first
+iteration of the first point in a schedule of points, we
+assign n = 0.1, which is equivalent to an estimate of 10
+for molecular weight. Then the number of kilogram-
+moles of each gaseous species per kilogram of mixture
+is set equal to 0.1/NG, where NG is the number of gase-
+ous species being considered. The number of moles of
+each condensed species is set equal to zero. For hp, sp,
+uv, and sv problems an arbitrary initial estimate of
+T = 3800 K is used by the program unless a different
+estimate is included in the input.
+Admittedly, this simple procedure will often give
+poor initial estimates. However, for a general chemistry
+program, we find this technique preferable to the alterna-
+tive of devising numerous special routines for obtaining
+good estimates for numerous possible chemical systems.
+Furthermore, the estimating technique is used only for
+the first point in any schedule of points. For all points
+after the first the results of a preceding point serve as
+initial estimates.
+Because no attempt is made to obtain good initial
+estimates, the question arises whether convergence can
+be "guaranteed." This question is discussed in
+section 3.3.
+3.2 Magnitude of Species Used During
+Iteration
+Both the linear and logarithmic composition varia-
+bles are used for gaseous species during the composition
+iteration process. Only the linear variable is used for
+condensed species. Corrections to compositions for
+gases are in the form of logarithmic variables Aln nl, and
+therefore the logarithmic values of gaseous compositions
+In nj are continuously updated from iteration to iteration.
+The linear values of the compositions nj are obtained by
+taking the antilogarithm of In nj. However, to save com-
+puter time during iteration, n7 are calculated only for
+those species whose mole fractions are greater than a
+certain specified size. In a previous version of the
+program (Gordon and McBride, 1976) this specified size
+had only one value, namely nj/n = 10-8 (or lnnj/n
+= -18.420681). A program variable SIZE was defined as
+SIZE = 18.420681. Thus, antilogarithms of In nj were
+obtained only for gases meeting the following condition:
+In nj./n > -SIZE (nj/n > 10-8.) For gaseous species not
+passing this test nj were set equal to zero. In addition,
+the maximum number of iterations permitted was 35.
+In the present CEA program several additional
+variables relating to SIZE have been added to handle
+more demanding situations. Two of the present variables
+relating to the mole fraction size for which antilogari-
+thms are obtained are TSIZE for non-ionized species and
+ESIZE for ionized species. TSIZE may be modified for
+any of the following reasons: inclusion of species in the
+calculations with mole fractions smaller than l0 -8 (by
+means of an input parameter TRACE); a change of
+13
+
+
+[PDF PAGE 20]
+components;a singular matrix; or the chemical system
+under consideration containing a chemical element that
+differs in magnitude from the largest of the other
+elements by more than 105 . The purpose of changing
+TSIZE in the last case is to ensure that not all species
+containing the trace element will be eliminated during
+iteration. To aid in testing for trace elements, a param-
+eter BRATIO is defined to be the ratio of the elements
+with the lowest to highest kilogram-atoms per kilogram
+of mixture. The following, then, are the conditions under
+which several parameters relating to species size are set
+to various values. These conditions are based on exten-
+sive practical experience with obtaining solutions for
+many types of problems:
+(1) TSIZE = SIZE until convergence or a singular
+matrix occurs.
+(2) TSIZE = XSIZE if TRACE # 0 after first con-
+vergence, or if a singular matrix or new components
+occur.
+(3) ITN - maximum number of iterations.
+Default:
+(1) SIZE = -In 10-8 = 18.420681
+(2) XSIZE = -In 10-11 = 25.328436
+(3) ESIZE = -In 10-14 = 32.236191
+(4) ITN = 50
+(5) TRACE = 0
+Nondefault:
+(1) If TRACE # 0, ITN = 50 + NS/2
+(2) If TRACE < 10-8, XSIZE - -In TRACE and
+ESIZE = -In (TRACExI0 -3) = XSIZE + 6.9077553
+(3) If BRATIO < 10-5, SIZE = In 1000/BRATIO
+and XSIZE = SIZE + In 1000 (6.9077553)
+(4) If singular matrix, XSIZE = TSIZE = 80.
+The use of ESIZE to control the size of ionized
+species permitted to be present during iteration is
+discussed in the section 3.7.
+3.3 Convergence
+The problem of convergence is discussed in
+Zeleznik and Gordon (1962a) and Gordon and McBride
+(1976). Zeleznik and Gordon (1962a) points out that the
+iteration equations sometimes give large corrections that,
+if used directly, could lead to divergence. Two situations
+can cause large corrections. The first situation occurs in
+the early stages of the calculation and is due to poor esti-
+mates. The second may occur at later stages of the calcu-
+lation when the iteration process sometimes attempts to
+make extremely large increases in moles of species that
+are present in small amounts. An example of this second
+situation is given in Zeleznik and Gordon (1962a). In
+both of these cases a control factor _, is used to restrict
+the size of the corrections to In nj (j = 1..... NG) and nj
+(j = NG + 1..... NS) as well as to In n and In T obtained
+by solving the equations in tables 2.1 and 2.2.
+The numerical value of _, is determined by empiri-
+cal rules that experience has shown to be satisfactory.
+For T and n, corrections are limited to a factor of e 0"4
+= 1.4918. For gas-phase species two different correction
+controls are calculated that depend on the magnitude of
+the mole fractions. The logarithm of each mole fraction
+is compared with a parameter called SIZE whose default
+value is -In 10-8 = 18.420681. If ln(njln) > -SIZE,
+corrections to nj are limited to a factor of e 2 = 7.3891.
+For these limitations on corrections to T, n, and nj/n the
+value of a control factor _'! may be calculated as
+2
+),_ -- (3.1)
+max(Slain T I, 51Aln nl, lain nil)
+For those gaseous species for which In(n/n)
+_<-SIZE and Aln nj >_0, a control factor L2 is defined as
+_2 =mill
+-In5 - 9.2103404
+n
+Alnnj- Alnn
+(3.2)
+This prevents a gaseous species with a small mole
+fraction from increasing to a mole fraction greater than
+10-4. The control factor _, to be used in equations (3.4)
+is defined in terms of kl and L2 as
+Jt = rain(l, ;t,, _'2) (3.3)
+A value for _, is determined for each iteration.
+Whenever current estimates of composition and/or tem-
+perature are far from their equilibrium values, _, will be
+less than 1. Whenever they are close to their equilibrium
+values, _, will equal 1. New estimates for composition
+14
+
+
+[PDF PAGE 21]
+andtemperaturearethenobtainedfrom thecorrection
+equations
+In ny ÷'' = In n;0 + )_(O(AIn nj)(O q = 1,...,NG)
+nT,, = + x(o(a.j)(o q = NG ÷ 1,...,NS)
+In n c_÷_)= In n (° + X(°(Aln n) (°
+In T (s÷_) = In T (° + 2.(0(AIn 20(0 (3.4)
+where the superscript i represents the ith estimate.
+The iteration procedure is continued until correc-
+tions to composition satisfy the following criteria:
+njlAIn nil < 0.5x10 -s
+NS
+(] = 1..... NG)
+. ]AnjJ < 0.5xl0_S
+NS
+j=i
+(j = NG + 1,...,NS)
+nlAIn n I < 0.5xl0_S
+NS
+(3.5)
+For those chemical elements for which b_ >
+1.0xl0 -6, the convergence test for mass balance is
+- aenj a (0)m x x 1.0xl0-'
+j=l (3.6a)
+(i ffi 1,...,0
+where the subscript "max" refers to the chemical element
+i with the largest value of b_. When temperature is a
+variable, the convergence test for temperature is
+lAIn TI _; 1.0xl0 -4 (3.6b)
+For a constant-entropy problem (sp, sv, or rocket), the
+following convergence test on entropy is also required:
+(3.6c)
+When TRACE g 0, an additional test is used:
+ _(k) (_l)
+ _J --- xi < 0.001
+ ,_.-t) (i" 1,...,0 (3.6d)
+where the superscript refers to the kth iteration. The
+convergence tests in equations (3.5) and (3.6) ensure
+accuracy to five places in composition when expressed
+as mole fractions.
+As pointed out in section 3.2 the maximum number
+of iterations permitted by the CEA program is
+50 + NS/2. For most of the hundreds of different kinds
+of problems that have been solved by the program,
+convergence has been obtained in fewer than this
+number. For the first point, which starts with arbitrary
+initial estimates, a typical number of iterations is 8 to 20.
+For succeeding points, which use compositions of a
+previously calculated point for initial estimates, a typical
+number of iterations is 3 to 10. In the sample problems
+given in part II, for example, the number of iterations for
+the first point was 9 to 15. In some special cases a
+problem may be singular, and solutions to the correction
+matrix are then unobtainable. Techniques for handling
+this situation are discussed in section 3.6.
+3.4 Tests for Condensed Phases
+For the first point in a schedule of points, unless
+INSERT records are used (see part II of this report), the
+program considers only gaseous species during the itera-
+tion to convergence. For each point after the first, the
+program uses the results of a previous point for its initial
+estimate. After every convergence the program automati-
+cally checks for the inclusion or elimination of con-
+densed species.
+The test is based on the minimization of Gibbs
+energy. At equilibrium, equation (2.9) is satisfied (i.e.,
+8G = 0). The requirement for a condensed species j,
+which was not previously included as a possible species,
+to now be included is that its inclusion will decrease
+Gibbs energy; that is, from equation (2.9)
+ kRTJ_ i-1
+(3.7)
+where the subscript c refers to a condensed species.
+Equation (3.7) is identical to the vapor pressure test used
+in Zeleznik and Gordon (1962a) when data for the gas
+15
+
+
+[PDF PAGE 22]
+phaseaswellforthecondensedphaseareavailable.The
+vaporpressuretestis
+ RTJc RT n /s
+(3.8)
+where the subscript g refers to the gas phase of the same
+species as the solid phase referred to by the subscript c.
+Equations (3.7) and (3.8) are equivalent. The last term in
+equation (3.7) is identical for the gas and condensed
+phases of the same species. From equation (2.10) this
+term for the gas phase equals (laj/RT)g, which, using the
+definition of laj in equation (2.11), leads directly to
+equation (3.8). However, the advantage of equation (3.7)
+over (3.8) is that equation (3.8) can be used only when
+the gas phase of the species corresponding to the con-
+densed phase to be tested is present, whereas equation
+(3.7) can always be used. Using equation (3.7) eliminates
+the need for the extensive programming required in
+Zeleznik and Gordon (1962a) to accommodate
+A1203(s,1), for which gas-phase data are not available.
+At most, only one new condensed species is in-
+cluded after each convergence. In the event that several
+condensed species pass the test required by equa-
+tion (3.7), only that species giving the largest negative
+change to Gibbs energy is included as a possible species
+and convergence to a new equilibrium composition is
+obtained. This process is repeated until all condensed
+species required by equation (3.7) are included.
+If, after convergence, the concentration of a
+condensed species is negative, the species is removed
+from the list of currently considered species, and conver-
+gence to a new equilibrium composition is obtained.
+3.5 Phase Transitions and Special
+Derivatives
+The calculation method is based on the assumption
+that condensed phases are pure. Therefore, the possibility
+exists of encountering phase transition between solid and
+liquid (melting points) or between two stable solid
+phases. Such transitions constitute triple points because
+three phases of the same species coexist, one gaseous
+and two condensed. Such triple points are characterized
+by a definite vapor pressure and temperature, independ-
+ent of the relative proportions of each phase. This
+characterization is shown by the fact that the iteration
+equations of table 2.1 become singular for an assigned
+temperature and pressure and the inclusion of two
+condensed phases of the same species. At a triple point,
+for a specified system pressure, the relative amounts of
+the phases can be determined only if either the enthalpy
+or the entropy is assigned.
+The program can obtain equilibrium compositions
+containing either one or two condensed phases of a
+species with or without the corresponding gas phase.
+When temperature is assigned, no problems arise as to
+which one of the two or more condensed phases of a
+species is to be considered. However, when temperature
+is a variable, such as in combustion or rocket problems,
+several possibilities need to be considered. For example,
+if a liquid phase is being considered by the program and
+the temperature at convergence is below the melting
+point, two possibilities exist. First, the solid phase might
+be substituted for the liquid phase and a new conver-
+gence obtained, or second, both liquid and solid might
+be considered simultaneously and a new convergence
+obtained. Similar possibilites exist when convergence is
+obtained with a solid phase above the melting point.
+These possibilities and methods of treating them are
+discussed in detail in Zeleznik and Gordon (1962a); the
+discussion is not repeated herein. In brief, the following
+criteria are used by the program to determine whether to
+switch one condensed phase of a species to another or
+whether to consider both simultaneously:
+(1) Liquid present at temperature T < Tm:
+(a) If T,n - T > 50 K, switch solid for liquid.
+(b) If Tm - T < 50 K, include solid and liquid.
+(2) Solid present at temperature T > Tin:
+(a) If T- Tm > 50 K, switch liquid for solid.
+(b) If T - Tm < 50 K, include solid and liquid.
+Similar tests apply for two solid phases of a species.
+The unusual situation of constant temperature
+during an isentropic compression or expansion process
+can occur when two phases of the same species coexist.
+The transition temperature remains constant while one
+phase is being converted to the other. Under this
+circumstance derivatives with respect to temperature are
+not defined. Thus, several of the derivatives previously
+discussed, Cp, cv, and (Din V/Dln T)p, cannot be obtained
+in this case. As a consequence equation (2.73) cannot be
+used to obtain Ts.
+In Gordon (1970) the following expression was
+derived for the situation of constant temperature and
+16
+
+
+[PDF PAGE 23]
+entropy:
+_(a., --Ys,r _ 81n p )s,r Oln VI
+ OIn P)r
+(3.9)
+The velocity of sound for this situation is no longer
+given by equation (2.74) but rather by
+as,r = _ (3.10)
+These derivatives will be used in connection with
+discontinuities in a rocket throat (see section 6.3.4).
+3.6 Singularities
+The iteration method used in this report has
+successfully handled numerous chemical systems under
+a wide variety of thermodynamic conditions. Neverthe-
+less, special procedures are required to take care of
+several situations involving singularities that would
+otherwise cause the iteration method to fail. One such
+situation is a singularity in the coefficient matrix that is
+caused when all species that contain one of the elements
+are temporarily eliminated during the iteration process.
+Another situation resulting in a singularity occurs when
+two rows of the coefficient matrix are identical. This
+happens when the ratio of the assigned elements in these
+two rows is equal to the ratio of the stoichiometric
+coefficients of these two elements in every gaseous
+species being considered during the current iteration that
+contains both elements. That is,
+aq _ b_ q = 1,...,NG) (3.11)
+a_ b_
+One example for which equation (3.11) applies is
+stoichiometric hydrogen and oxygen at low temperatures
+and pressures, where the only species with n: > 10-8 is4
+H20(g ). Another example is stoichiometric hthium and
+fluorine at low temperatures, where the only species are
+LiF, Li2F 2, and Li3F 3. When either of these two
+situations occurs, the program will automatically reset all
+species currently set to zero to nj = 10-6. This reset
+feature can be tried twice and will usually take care of
+these causes of singularity.
+If the restart procedure just described is not suc-
+cessful and the situation represented by equation (3.11)
+is the cause of the singularity, the program will attempt
+an additional procedure: (1) selecting one of the larger
+species containing both elements to be one of the new
+components; (2) reducing the number of components and
+the size of the coefficient matrix by 1; and (3) switching
+components for the rest of the chemical system.
+Another singularity is caused when several
+condensed species are currently being considered and
+one of these species can be formed by some linear
+combination of the others. An example of this is a
+chemical system containing iron and oxygen where the
+current iteration is simultaneously considering FeO(s),
+Fe203(s), and Fe304(s). When this occurs, the program
+automatically removes one of the species involved with
+the singularity, prints an error message with this
+information, and restarts.
+3.7 Iteration Procedure and Tests
+for Ions
+The program is capable of calculating equilibrium
+properties of plasmas (mixtures containing ionized
+species) if the plasma is considered ideal. Ideal is here
+meant to imply that no coulombic interactions are
+considered. Plasma textbooks, such as Griem (1964),
+point out that effects of coulombic interactions do need
+to be considered in plasmas (by means of the Debye-
+Huckel approximation, e.g.). However, special pro-
+gramming is needed to take care of these effects.
+Therefore, because the program does not consider these
+effects, the results of calculations when ions are
+considered will be valid only for those conditions where
+the ionic density is so small that the coulombic effects
+are unimportant.
+For ions to be considered, the charge-balance
+equation
+NO
+ a,jnj = O (3.12)
+j=!
+is required, where a# indicates the excess or deficiency
+of electrons in the ion relative to the neutral species. For
+example, in a mole of an ionized species, aej = -3 for
+Ar +H- and +1 for 02. To prevent difficulties in matrix
+17
+
+
+[PDF PAGE 24]
+solutions,theprogramautomaticallyremovesthecharge-
+balanceequationwhen,for eachionizedspeciesbeing
+considered,In njln < -ESIZE (defined in section 3.2).
+There are situations when all the previous
+convergence tests have been passed but the ion balance
+is still incorrect. A special iteration procedure was
+developed to obtain the correct ion balance for these
+situations. It consists of obtaining a value of the
+Lagrangian multiplier for ions divided by RT, based on
+the assumption that the magnitude of the ionized species
+is small relative to the un-ionized species. The initial
+estimate for ne is taken to be the value in storage for the
+current point or from a previous point. The iteration
+procedure consists of the following steps:
+(1) Corrections to it e are obtained from
+NO
+j=i (3.13)A_e- NO
+ (a ,j)2nj
+i=1
+(2) The test for convergence is
+lane[ _; 0.0001 (3.14)
+(3) If this convergence test is not met, new
+estimates for the composition of ionized species are
+obtained from
+(In nj)i+1 = On nj)t + aej Ax, (3.15)
+where the superscript i refers to the ith iteration. The
+previous sequence of steps is repeated until equa-
+tion (3.14) is satisfied. The CEA program allows for a
+maximum of 80 ion-balance iterations, but generally
+convergence is reached in about 2 to 10 iterations.
+18
+
+
+[PDF PAGE 25]
+Chapter 4
+Thermodynamic Data
+Thermodynamic data are included with the current
+program for reaction products and reactants. The number
+of these products and reactants changes over time as new
+ones are added to the data base. The data are selected
+from a number of sources, but the principal current
+sources are Chase et al. (1985), Cox et al. (1989),
+Gurvich et al. (1989), and Marsh et al. (1988). McBride
+et al. (1993a) documents the sources and the data for 50
+reference elements plus electron gas and deuterium,
+which are presently included in the thermodynamic data
+set. These elements are discussed in section 4.1. The data
+for the atomic gases as well as for a number of diatomic
+and polyatomic gases were calculated at NASA Lewis by
+using the PAC91 computer program described in
+McBride and Gordon (1992).
+The thermodynamic data provided with the CEA
+program are in the form of least-squares coefficients (to
+be described). These data, in formatted form, are
+processed by subroutine UTHERM and stored for further
+use in unformatted form. Subroutine UTHERM and the
+format for the coefficient data are both described in
+part II of this report.
+4.1 Assigned Enthalpies
+For each species heats of formation (and, when
+applicable, heats of transition) were combined with
+sensible heats to give assigned enthalpies /-P(T). By
+definition
+H*(7) - /-/*(298.15)+ [(/-/*(7)- H*(298.15)] (4.1)
+We havearbitrarilyassumedH°(298.15)=AfH°(298.15).
+Equation (4.1) then becomes
+/-£'(7) = A//-F (298.15) + [/-/°(7) -/-r'(298.15)] (4.2)
+In general, H°(T) _ AfH°(T) for T _ 298.15 K.
+A set of reference elements must be specified in
+order for heats of formation to be unambiguously related
+to specific reactions. Included among the species for
+which thermodynamic data are on a data file are the
+following 50 reference elements plus deuterium and
+electron gas: Ag, AI, Ar, B, Ba, Be, Bi, Br 2, C, Ca, Cd,
+CI 2, Co, Cr, Cu, D 2, e-, F 2, Fe, Ge, H 2, He, Hg, 12, K,
+Kr, Li, Mg, Mn, Mo, N 2, Na, Nb, Ne, Ni, 0 2, P, Pb, Rb,
+S, Si, Sn, Sr, Ta, Th, Ti, U, V, W, Xe, Zn, and Zr. The
+thermodynamic data for these elements are documented
+in McBride et al. (1993a). For all reference elements
+A/H°(298.15) =/-/°(298.15) = 0.
+Assigned enthalpies for a number of reactants are
+in a reactant data file. For noncryogenic reactants
+assigned enthalpies (heats of formation) are given at
+298.15 K. For cryogenic liquids assigned enthalpies are
+given at their boiling points. These enthalpies are usually
+obtained by subtracting the following quantities from the
+heat of formation of the gas phase at 298.15 K: the
+sensible heat between 298.15 K and the boiling point,
+the difference in enthalpy between the ideal gas and the
+real gas at the boiling point, and the heat of vaporization
+at the boiling point.
+4.2 Least-Squares Coefficients
+For each reaction species the thermodynamic
+functions specific heat, enthalpy, and entropy as
+functions of temperature are given in the form of least-
+squares coefficients. The general form of these equations
+is as follows:
+C_ _ _a,T¢, (4.3)
+R
+19
+
+
+[PDF PAGE 26]
+RT RT RT
+---alT -2 + o.2T-l In T + a3
+7 3 7 4 d s
+s°R-f-C rdT (4.5) +,,,T+a v+ ¥
+(4.10)
+Two sets of least-squares coefficients have been
+used in the chemical equilibrium program to represent
+thermodynamic data. The "old" form has been used for
+the last 25 years (Gordon and McBride, 1976; and
+McBride et al., 1993b). It consists of a fourth-order
+polynomial for the t_JR function plus integration
+constants for enthalpy and entropy as follows:
+C_ -_al + asT + asT2 + a4T3 + as74 (4.6)
+R
+I-I*_ al + asT + a--2T2+ a---_dT3+ as74 + a._.._ (4.7)
+RT 2 3 4 5 T
+a3T2 a4T3 as74 +o.7S° =aIInT +asT + +-- +
+R 2 3 4 (4.8)
+The "new" form for these functions will be used to
+represent the thermodynamic data with the program
+described in part II. This form consists of seven terms
+for _R and corresponding terms for enthalpy and
+entropy as well as the integration constants a 8 and a 9 as
+follows:
+ = alT -2 + as T-I + as + a4T
+R
++ as T2 + a6T 3 + as74 (4.9)
+ _ T -2
+R -at--2---asT-l + a31nT+a4T
+T 2 T 3 74
++ant +a(_- +ovT +a_ (4.11)
+For gases the temperature intervals for both the old
+and new functional forms are fixed. These intervals are
+200 to 1000 K and 1000 to 6000 K for the old form
+(i.e., the fourth-order polynomial form for Cp). The new
+form uses these same intervals plus an additional interval
+from 6000 to 20 000 K for some gases. For the con-
+densed species each phase has its own set of coefficients.
+If possible, the old form uses the same two temperature
+intervals for condensed species as for the gases, but the
+intervals are usually limited by transition points. Further-
+more, there are two intervals only if the 1000 K common
+point is within the species temperature range. Otherwise,
+there is just one. By contrast, the new functional form
+has a flexible number of intervals in order to fit the
+selected data more accurately.
+Generally, the three functions C_/R, H°/RT, and
+S°/R are fit simultaneously. The fit is constrained to
+match the functions exactly at T = 298.15 K. Thus, the
+least-squares coefficients reproduce heats of formation at
+T = 298.15 K exactly. For temperature intervals that do
+not contain T = 298.15 K, the fit is constrained to give
+the same functional values at the common temperature
+point for any contiguous intervals. When phase transi-
+tions occur, the fit is constrained so that the difference
+in Gibbs energy is zero between the phases at the
+transition point.
+20
+
+
+[PDF PAGE 27]
+Chapter 5
+Thermal Transport Property Data
+The CEA program provides an option for calculat-
+ing mixture viscosities and thermal conductivities. The
+formulas for these mixture properties are given in sec-
+tion 5.2. Viscosity and thermal conductivity data for
+individual gaseous species, which are required for the
+mixture calculations, are included with the current pro-
+gram. Thermal transport properties for condensed species
+are not included inasmuch as there is no feasible method
+for calculating thermal transport properties for a multi-
+phase mixture. The thermal transport data were taken
+from Svehla (1995).
+5.2 Mixture Property Data
+Thermal conductivity and specific heat of a mixture
+each consists of two parts, the so-called "frozen" and
+"reaction" contributions. This was discussed for specific
+heat in section 2.5. Equation (2.49a) shows specific heat
+as the sum of these two parts. Analogously, thermal
+conductivity can be written as
+_'eq = _'fr + Xm (5.2)
+5.1 Data for Individual Species
+The thermal transport property data provided with
+the CEA program are in the form of least-squares coeffi-
+cients. The data for each species were fitted to the
+following form, which is also used in Gordon et al.
+(1984):
+In = A ln T + --B + __C + DT 7 2
+(5.1)
+where rl is viscosity and _, is thermal conductivity. A
+binary interaction parameter rlij is also included for some
+pairs of species in the same form as equation (5.1).
+The coefficients in equation (5.1) were generated to
+give viscosity in units of micropoise (laP) and thermal
+conductivity in units of microwatts per centimeter-kelvin
+(laW/cm-K). The order and format of the transport data
+coefficients are given in part II of this report.
+where keq, _'fr' and _'re are the equilibrium, frozen, and
+reaction thermal conductivities of the mixture,
+respectively. The mixture viscosity, on the other hand,
+has only one term.
+5.2.1 Viscosity and Frozen Thermal Conductivity
+As pointed out in Gordon et al. (1984), most
+aI_proximate mixture methods have the following form
+for mixture viscosities and frozen thermal conductivities
+(also the form used in the CEA program):
+rlm_x= _ xdrl_, m,_ (5.3)J=l
+ai + E Xj*i]
+j-!
+and
+r_ x_. i
+_'f_ = _ m_ (5.4)
+i=l
+x i + jZxjO o
+21
+
+
+[PDF PAGE 28]
+where NM is the number of gaseous species for thermal
+transport property calculations (NM < 50), x i is the mole
+fraction of species i relative to the NM gaseous species
+used for thermal transport property calculations, rli is the
+viscosity of species i, lqmix is the viscosity of the mix-
+ture, _'i is the thermal conductivity of species i, ¢ij is the
+viscosity interaction coefficient between species i and j
+in equation (5.3) (d_ij _ t_ji), and _ij is the interaction
+coefficient between species i and j in equation (5.4) (_ij
+_I/JiZseveral_forms for the interaction coefficients _ij and
+Vii available in the literature are compared in Gordon
+et al. (1984), and the following were used:
+and
+[ 2.41(M_ - Mj)(Mj - O.142Mj)]_0 = 4)0 I+ (M--i+ Mj)-_
+(5.6)
+For some pairs of species an interaction parameter rlij is
+available from the literature. As discussed in section 5.1,
+these values have been least squared and are included in
+the transport property data file. When this parameter is
+available, _q is obtained from the following equation
+rather than from equation (5.5):
+ ,1, (5.7)
+The interaction parameter rli) also appears in the expres-
+sion for the reaction contribution to thermal conductivity.
+The same values of t_ij that are obtained from equa-
+tions (5.5) or (5.7) are also used in equation (5.6).
+5.2.2 Reaction Thermal Conductivity
+The reaction contribution to thermal conductivity is
+obtained in the same manner as discussed by Butler and
+Brokaw (1957) and Brokaw (1960) and as used by
+Svehla and McBride (1973). The following equation is
+used, which is applicable when local equilibrium exists
+in a mixture of reacting or ionizing gases:
+NR Arn? /_r,/
+x.--RE R----Vi=1
+(5.8)
+where NR is the total number of chemical reactions of
+gaseous species and Aft-/_ is the heat of reaction for
+reaction i at temperature T expressed as
+ArHi°(T) = _ cx.afl_ (i = 1,2,...,NR) (5.9)
+k=l
+where OLikare the stoichiometric coefficients written for
+the chemical reactions involving species A k as follows:
+NM
+ _tt_Ak -- 0 (i = 1,2,...,NR) (5.10)
+k=l
+Equations (5.8) to (5.10) are also applicable to ionizing
+gases. In this case the heat of reaction is replaced by the
+ionization potential, and ions and electrons are species.
+Note that the stoichiometric coefficients O_ik dis-
+cussed here are defined differently from the stoichio-
+metric coefficients a/j discussed in chapter 2. In the
+coefficients t_ik the subscripts refer to species k in
+reaction i, and the coefficient may be positive or
+negative. In the coefficients aij the subscripts refer to
+chemical element i in species j, and the coefficient is
+always positive.
+The _'r,i required in equation (5.8) are found by
+solving the following set of linear equations:
+_"_gq_.j - (i = 1,2,...,NR) (5.11)
+j:_ RT
+where the gij are given by
+NM-, r_ {RT ffa'k cxi_ecxJk_czi__._1 (5.12)
+and where
+RT 5MeM_ (5.13)
+The A_ factor in the previous equation is a collision
+cross-section ratio that is used in Svehla and McBride
+(1973) but is not used in this report. In its place we have
+substituted the value of 1.1, which, as may be seen in
+Hirschfelder et al. (1954) (table I-N for the Lennard-
+Jones potential and table VII-E for the modified
+22
+
+
+[PDF PAGE 29]
+Buckingham6-exppotential),is atypicalvalue(to two
+figures) for this parameter.The parameterrlk0 in
+equation(5.13)wasbrieflydiscussedinsection5.2.1and
+is availablefor somepairsof specieswiththetransport
+propertiesof individual species.For most pairs of
+species,however,it is calculatedfrom equation(5.7)
+where_k_is defined,with appropriatesubscripts,by
+equation(5.5). The thermalconductivityof the gas
+mixtureasgivenby equation(5.2)is thenobtainedby
+addingtheresultsof equations(5.4)and(5.8).
+5.2.3 Specific Heat for Gases Only
+Some functions, such as Prandtl number, involve a
+number of other parameters (e.g., specific heat, viscosity,
+and thermal conductivity). In this event, for consistency,
+the parameters involved should be based on similar
+assumptions. Inasmuch as viscosity and thermal conduc-
+tivity are calculated for a maximum of 50 gases (with no
+condensed species permitted), specific heat, when used
+with these properties, should also be based on the same
+gases. The following equation, which is similar to
+equation (2.49a) but with different subscripts, is used to
+express specific heat for transport property calculations:
+cp,_ = cp_ + cp,_ (5.14)
+When no condensed species are present and the
+same gaseous species are included in the transport
+property calculations as in the thermodynamic property
+calculations, equations (2.49a) and (5.14) will produce
+the same numerical results. Otherwise, they may yield
+different results.
+The equation for Cp fr is similar to equation (2.49b)
+except for being restricted to gases and having a
+different limit for the number of gases involved; that is,
+cp,fi. -
+NM
+ ,,,%i=l
+NM
+i=1
+(5.15)
+An alternative method of calculating the reaction
+contribution to specific heat is given in Svehla and
+Brokaw (1966) that differs from but is equivalent to
+equation (2.49c) or the reaction part of equation (2.59).
+It is analogous to the method for obtaining the reaction
+contribution to thermal conductivity (eq. (5.8)), namely
+ ,re =
+ X,I=1
+NM
+Ei=1
+(5.16)
+Note that the upper case X i in equation (5.16) are not the
+same variables as the lower case xi. The X i are found by
+solving the following set of linear equations:
+i = 1,2,...,NR (5.17) A,nT,
+jr1 RT
+where the dij are given by
+de= E Extx, --- x, 3, xk x, )
+(5.18)
+Note that the terms in equation (5.18) are the same as
+those in equation (5.12) except that the RT/PD u group
+is not present.
+5.2.4 Prandtl Number
+Prandtl numbers have application in heat transfer
+calculations. Frozen and equilibrium Prandtl numbers
+may be calculated from previously calculated properties
+by means of
+and
+prfr_ ep_rn.ax (5.19a)
+Pr_ cp,mrl_ (5.19b)
+=" _'_1
+23
+
+
+[PDF PAGE 30]
+
+
+[PDF PAGE 31]
+Chapter 6
+Theoretical Rocket Performance
+Before the publication of Gordon and McBride
+(1988), the Chemical Equilibrium Calculations (CEC)
+computer program described in Gordon and McBride
+(1976) could calculate theoretical rocket performance
+only for an infinite-area combustion chamber (IAC).
+Calculation of rocket performance for a finite-area com-
+bustor (FAC), presented in Gordon and McBride (1988),
+was added as an option to the Chemical Equilibrium
+with Transport Properties (CET) program in 1988.
+Figure 6.1 presents schematic cross sections of FAC
+and IAC rocket engines. Various points at which calcula-
+Infinite-area chamber, inf
+l Exit, e
+I
+\
+"_Combustor end, C
+products
+- 1_ .... CE
+,, ,,I I
+Injector, inj Throat, t
+(a)
+ finite-area chamber, inf
+ it, e
+Co)
+Figure 6.1 .--Schematics of rocket combustion chamber cross
+sections. (a) Finite-area combustion chamber. (b) Infinite-area
+combustion chamber.
+tions are made in the CEA program to obtain rocket
+performance are indicated in these figures. Combustion
+and throat parameters are always calculated first auto-
+matically. For the IAC model, only one combustion
+point is calculated, namely, at infinite area (inf'). How-
+ever, for the FAC model, two combustion points are
+calculated, namely, at the combustion chamber inlet (or
+equivalently at the injector face, inj) and at the combus-
+tor end, c. In addition to these two combustion points for
+the FAC, a combustion calculation for an infinite-area
+combustor, indicated in figure 6.1 (a) by the dashed line,
+is also made. The results at this fictitious point are used
+as an aid in an iteration procedure to obtain combustor
+end conditions, as discussed in section 6.4. In addition,
+the pressure at this point is used in calculating c* (see
+section 6.2.6). Throat conditions are indicated by the
+subscript t; other nozzle exit conditions, either subsonic
+or supersonic, are indicated by the subscript e. Nozzle
+conditions are assigned as an option and may be in the
+form of assigned area ratios, pressure ratios, or both.
+6.1 Assumptions
+The calculation of theoretical rocket performance
+involves a number of assumptions. For the same propel-
+lant and operating conditions theoretical performance can
+vary depending on which assumptions are used. For this
+report most of the assumptions are the same for both the
+IAC and FAC models. These assumptions are one-
+dimensional form of the continuity, energy, and
+momentum equations; zero velocity at the combustion
+chamber inlet; complete combustion; adiabatic combus-
+tion; isentropic expansion in the nozzle; homogeneous
+mixing; ideal-gas law; and zero temperature lags and
+zero velocity lags between condensed and gaseous
+species. The chamber in the FAC model is assumed to
+have a constant cross-sectional area. In this chamber
+P_ PA_E _H.._r_ NOT rlLME_
+P._CE.L_"..t ___iNTEr_TiO,%_.LLYi3tL,=_.
+25
+
+
+[PDF PAGE 32]
+combustionis a nonisentropic,irreversibleprocess.
+Duringtheburningprocesspartof theenergyreleasedis
+usedto raise the entropy,and the pressuredrops.
+Expansionin thenozzleis assumedto beisentropic.
+Combustionconditionsare obtainedwith the
+assumptionof chemicalequilibriumof thecombustion
+products.FortheIAC modeltheCEAprogramprovides
+theoptionof calculatingeitherequilibriumor frozen
+theoreticalrocketperformance.Equilibriumperformance
+is basedon theassumptionof instantaneouschemical
+equilibriumduringexpansionin thenozzle.Frozenper-
+formanceis basedontheassumptionthatcomposition
+remainsfrozenat the combustioncompositionduring
+expansion.For the FAC modelonly equilibriumper-
+formanceispermitted.
+Assumingthesamevelocity(eitherzeroor other-
+wise)atthecombustionchamberinlet,identicalthermo-
+dynamicresultsareobtainedfor thecombustioninlet
+conditionfor boththeIAC andFACmodels.
+6.2 Parameters
+6.2.1 Conservation Equations
+Rocket performance, as well as other fluid dynamic
+problems in the program, is based on the following
+conservation equations, which are consistent with the
+assumptions previously discussed:
+(1) Continuity:
+pzAzU2 = plAlul (6.1)
+(2) Momentum:
+2
+P2 + P2U_ = P! + PlUl (6.2)
+(3) Energy:
+2 2
+u7 ul
+h2+--=hl+-- 2 2
+(6.3)
+Equation (6.1) describes the condition of constant mass
+flow rate, which will be given the symbol rh; that is,
+rh = pAu (6.4)
+Equation (6.2) applies only for constant-area, one-
+dimensional flow.
+6.2.2 Velocity of Flow
+The combustion chamber inlet is indicated by the
+subscripts inf for the IAC model and inj for the FAC
+model. Then using these subscripts instead of 1 and
+using e instead of 2 in equation (6.3) and assuming the
+velocity at the combustion chamber inlet to be negligible
+relative to the exit velocity result in equation (6.3)
+becoming
+= l _/2(h_ - h,)U e
+[ j2(hmj h,)
+for IAC model
+for FAC model
+(6.5)
+where h is in units of joules per kilogram and u is in
+units of meters per second.
+6.2.3 Force
+From the momentum principle of fluid mechanics
+the external force on a body in a steadily flowing fluid
+is due to the change of momentum of the fluid and to
+the increase in pressure forces acting on the body. For
+rocket applications this is expressed as
+F- rhue + (e, - P,,)A, (6.6)
+gc
+The conversion factor gc has been introduced to allow
+for various units. For some commonly used systems of
+units, such as the cgs system or the International System
+(Goldman and Bell, 1986), gc = 1. However, in the
+English Technical System, commonly used by engineers,
+gc = 32.1740 (lbm/lbf)(ft/s 2)
+6.2.4 Specific Impulse
+Specific impulse is defined as force per unit mass
+flow rate. From equation (6.6)
+I- F _ u, + (P,- Pa)Ae (6.7)
+rh gc rh
+26
+
+
+[PDF PAGE 33]
+In rocket literature specific impulse is often expressed in
+English Technical System units of pounds force per
+pound mass per second. However, for those systems of
+units previously mentioned for which gc = 1, I is both
+dimensionally and numerically equal to velocity.
+In this report when the exit pressure is equal to the
+ambient pressure, specific impulse will be given the
+symbol Isp" From equation (6.7)
+U_
+I_ - (6.8)
+gc
+When the ambient pressure is assumed to be zero
+(vacuum conditions), specific impulse will be given the
+symbol Ivac. From equations (6.7) and (6.8)
+P_Ae
+/_,_ = I_ + -- (6.9)p/l
+6.2.5 Mach Number
+Mach number is defined as the ratio of velocity of
+flow to velocity of sound:
+_/[q, _ u (6.1 O)
+a
+Velocity of flow is given by equation (6.5). Velocity of
+sound is given by equation (2.74) (or eq. (3.10)).
+6.2.6 Characteristic Velocity
+Characteristic velocity is given the symbol c* and
+is defined as
+c*- Pi"e4*gc (6.11)
+v/l
+6.2.7 Area per Unit Mass Flow Rate
+From equation (6.4)
+A
+rh
+1
+PU e
+(6.12)
+The terms p and u e are obtained from equations (2.1b)
+and (6.5), respectively.
+6.2.8 Coefficient of Thrust
+The coefficient of thrust is defined in terms of
+previously defined parameters
+u (6.13)Cr- c*
+6.2.9 Area Ratio
+The ratio of area at any exit nozzle station to area
+at the throat is obtained from the values of equa-
+tion (6.12) at these two points
+A, (A/m),D
+A,
+(6.14)
+6.3 Procedure for Obtaining
+Equilibrium Rocket Performance
+for IAC Model
+The procedure for obtaining equilibrium perform-
+ance differs somewhat for the IAC and FAC models.
+The principal difference is due to only one combustion
+point being required for the IAC model (point inf in
+fig. 6. l(b)) but two combustion points being required for
+the FAC model, namely, at the inlet and exit of the finite
+chamber (points inj and c in fig. 6.1 (a)). The procedure
+for the IAC model is discussed first, inasmuch as it is
+somewhat simpler.
+For the IAC model the procedure consists of first
+determining combustion properties and then determining
+exhaust properties at the throat and at other assigned
+stations, if any, in the nozzle exit. Combustion and throat
+conditions are always obtained first automatically by the
+CEA program. To obtain other nozzle conditions (either
+subsonic or supersonic), the desired points must be
+specified as part of the input in the form of assigned area
+ratios or pressure ratios.
+For the FAC model the procedure involves first
+determining combustion properties at the combustor
+inlet. This station is also referred to as the "injector (inj)
+station." Conditions at the end of the combustor c and at
+the throat are then both determined by means of an
+iteration loop that also includes the fictitious point inf
+27
+
+
+[PDF PAGE 34]
+(fig. (6.1(a)),as discussedin section6.4. The two
+combustionstationsinj andc andthethroatarealways
+calculatedfirstautomaticallybytheCEAprogram.Asis
+thecasefor theIAC modelothernozzleexit points,if
+desired,mustbespecified.
+6.3.1 Combustion Conditions
+For both the FAC model at station inj and the IAC
+model at station inf, the same combustion temperature
+and equilibrium compositions are obtained by the pro-
+gram for an assigned chamber pressure and the reactant
+enthalpy (in the program HP = .TRUE.). From the
+combustion compositions and temperature the combus-
+tion entropy and other combustion properties are deter-
+mined. For the IAC model the combustion entropy Sin f
+is assumed to be constant during isentropic expansion in
+the nozzle. However, combustion in a finite-area rocket
+chamber (the FAC model) is a nonisentropic process.
+The entropy increases during the combustion process
+from Sin. to S while pressure drops from P- to P Forc m l c"
+the FA_ model the entropy at the end of the combustion
+chamber s c is held constant during isentropic expansion
+in the nozzle•
+6.3.2 Exit Conditions
+Exit conditions include the throat conditions and
+assigned area ratios AJA r or pressure ratios PinflPe or
+Pin:/P: Throat conditions are always determinedJ
+automatically by the program. Other exit conditions, on
+the other hand, are optional and, if included, will be
+calculated after throat calculations are completed.
+For an assigned pressure ratio equilibrium compo-
+sitions and exit temperature are determined for the
+pressure P corresponding to the assigned pressure ratio
+and for the combustion entropy (Sin f for IAC and s . for• . IllJ .
+FAC). For throat and assigned area ratios iteration
+procedures are used to determine the correct pressure
+ratios. These procedures are described in sections 6.3.3
+to 6•3.7.
+After equilibrium compositions and temperature are
+obtained for an assigned pressure ratio or area ratio, all
+the rocket parameters for that point can be determined.
+6.3.3 Throat Conditions
+Throat conditions can be determined by locating the
+pressure or pressure ratio for which the area ratio is a
+minimum or, equivalently, for which the velocity of flow
+is equal to the velocity of sound. The second procedure
+is used in this report. Throat pressure is determined by
+iteration.
+The initial estimate for the pressure ratio at the
+throat is obtained from the approximate formula
+P_-fi_t --)-(Ys; 1 vd(_s-_)
+(6.15)
+Equation (6.15) is found in many references on rocket
+propulsion, such as Sutton and Ross (1976), but is exact
+only when Ys is constant from combustion point to
+throat. Because the value of Ys is not yet known at the
+throat, the value of Ys from the combustion point is used
+by the CEA program in equation (6•15). It generally
+gives an excellent initial estimate.
+Equilibrium properties for Sinf and for the value of
+Pt calculated from equation (6.15) are obtained as for
+any exit point. From these properties Ue2 (using
+eq. (6•5)) and ae2 (using eq. (2.74)) are calculated and
+the following test for convergence is made:
+2 _ 2
+ _ 0.4x10-4 (6•16)
+I ", I
+This criterion is equivalent to ensuring that at the throat
+the Mach number is within l_0.2xlO -'4.
+If the convergence test is not met, an improved
+estimate of the throat pressure ratio is obtained from the
+iteration formula
+Pt,k.t = P 1 7 y_ ),_
+(6.17)
+where the subscript k indicates the kth iteration• A
+maximum of four iterations on throat pressure is
+permitted. Usually, no more than two are required.
+6.3.4 Discontinuities at Throat
+Gordon (1970) gives a special procedure for
+obtaining throat conditions when the velocity of sound
+is discontinuous at the throat• This type of discontinuity
+may occur when a transition point, such as a melting
+point, is being calculated at the throat. The solution of
+this problem requires the following equation, which
+28
+
+
+[PDF PAGE 35]
+permitsestimatingthe throatpressureat the melting
+point, where the solid phase just begins to appear:
+ Oln P )s(inInPt = InP + _ T,, - In T) (6.18)
+where the derivative is given by equation (2.75).
+6.3.5 Assigned Subsonic or Supersonic Area Ratios
+An iteration process is used in the CEA program to
+obtain the pressure ratios corresponding to the assigned
+area ratios. In general, initial estimates for pressure ratios
+in the iteration scheme are obtained from empirical
+equations derived from plots of previously calculated
+data. However, if the current as well as the previous
+assigned supersonic area ratios are greater than 2, an
+analytic expression is used to obtain the initial estimate.
+The same analytic expression is also used in all cases to
+obtain improved estimates for the pressure ratios.
+6.3.6 Empirical Formulas for Initial Estimates of
+Pinfie e
+Initial estimates of pressure ratios corresponding to
+subsonic area ratios are obtained from the following
+empirical formulas:
+inP 
+In Pinf - Pt
+P,
+and
+ + 10.58 + 9.454 At
+ /
+,.A. A._+ 10.58 In +9.454in_- t
+(6.19)
+( A. )1.0001 < -- < 1.09
+A, (6.20)
+When an assigned supersonic area ratio requires an
+initial estimate of pressure ratio to be obtained from an
+empirical formula, the following formulas are used:
+In_=InPPt +I3"29_InA*12+l'535inAeA,)A,
+and
+In_-__ = Ys + 1.4 At z 2¢
+(6.21)
+(6.22)
+In equation (6.22) the value of Ys is that determined for
+throat conditions.
+6.3.7 Analytic Expression for Improved Estimates of
+PinflP e
+The equilibrium properties obtained for the initial
+and each subsequently improved estimate of PinflPe are
+used in equations (6.23) and (6.24) to obtain the next
+improved estimates. From table I of Gordon and
+Zeleznik (1962) the following derivative can be obtained:
+Oin_ (_nRTI 'u2-a2)"a U2 )¢
+This derivative is used in the following correction
+formula to obtain an improved estimate for PinflPe:
+ Pe )kq _ P" )k Oln
+L_, t/sjt
+["in__ I, A,hJ (6.24)
+where the subscript k refers to the kth estimate and
+where the area ratio with no iteration subscript is the
+assigned value. The iteration procedure is continued until
+I P')k., _ P'}t
+(6.25)
+29
+
+
+[PDF PAGE 36]
+with a maximumof 10iterationspermitted.Generally,
+convergenceis reachedwithintwoto fouriterations.
+6.4 Procedure for Obtaining
+Equilibrium Rocket Performance
+for FAC Model
+In this report the finite-area combustor is assumed
+to have a constant cross section. For this constant-area
+combustion chamber the momentum equation (6.2) can
+be written as
+(P + 9u2)i,_ = (e + pU2)c (6.26)
+Substituting rh/A = pu (from the continuity eq. (6.4)) into
+equation (6.26) gives
+When velocity at the injector face is negligible, equa-
+tions (6.26) and (6.27) reduce to
+ rhu / (6.28)emj : (e +p.2)c : e ÷ T c
+An iteration procedure is required to satisfy
+equation (6.28). This procedure is somewhat different for
+each of the two possible input options available for FAC.
+In option 1 the contraction ratio Ac/A t is assigned. In
+option 2 the mass flow rate per unit combustor area rh/A c
+is assigned. The iteration procedure for option 1 is
+simpler and therefore will be described first. Four points
+shown in figure 6.1 (inj, inf, c, and t) are involved in the
+iteration procedure. Thermodynamic parameters at the
+injector face are obtained by a combustion calculation.
+This point needs to be calculated only once. Starting
+with an estimated value for Pinf' calculations are then
+made for points inf, t, and c (the assigned contraction
+ratio) exactly as is done for the IAC model (for the
+infinite-area combustion point, the throat, and an
+assigned subsonic area ratio). A check is then made to
+see if equation (6.28) is satisfied to within the tolerance
+[Pi,j - (P + PU2)cl < 2xl0-S (6.29)
+If equation (6.29) is satisfied, the calculations for
+the finite-area combustor are complete for points c and t.
+Calculations are then continued if other values of
+pressure ratio and/or area ratio have been specified in the
+input. If equation (6.29) is not satisfied, an improved
+estimate for Pinf is obtained as described in section 6.4.2,
+and the procedure for the points inf, t, and c is repeated
+until equation (6.29) is satisfied.
+An iteration procedure similar to that described for
+option 1 is also used for option 2. However, the
+contraction ratio is not known for option 2. Therefore,
+the iteration procedure involves starting with an
+estimated value for AclA t as well as for Pinj and then
+obtaining improved estimates for both Pinj and AJA r
+Not surprisingly, more iterations are required for
+option 2 than for option I, which requires improved
+estimates for Pinj only. As for option 1 iteration is
+complete when equation (6.29) is satisfied.
+6.4.1 Initial Estimates for Pinf and AclA t
+A curve given in figure 3-14 of Sutton and Ross
+(1976) relates PinftPinj with AclA t for an assumed value
+of y = 1.2. The following empirical equation was derived
+by fitting three selected points read from the curve:
+(6.30)
+Equation (6.30) is used only to obtain an initial estimate
+for Pinf'
+For option 1 the assigned value of the contraction
+ratio Ac/A t is used in equation (6.30). For option 2 an
+initial estimate of Ac/A t is required. This initial estimate
+is obtained from
+ac
+At 2350---_ (6.31)
+A_
+30
+
+
+[PDF PAGE 37]
+Equation(6.31) was derivedby startingwith the
+relationshipfor characteristicvelocity c* = PinfAt#n
+(eq. (6.11) with gc = 1), multiplying both sides by A c,
+and using a representative but approximate value of
+c* = 2350 m/s. When equation (6.31) is substituted into
+equation (6.30), a quadratic in Pinf is obtained. The
+solution of this quadratic gives the initial estimate for
+Pinf" This estimate for Pinf, when used in equation (6.31),
+gives the initial estimate for Ac[A r If the input value of
+rh/A c is so large that equation (6.31) calculates a value
+less than 1, the program will stop the calculations and
+print out the error message INPUT VALUE OF
+MDOT/A = (value) IS TOO LARGE. GIVES CR
+ESTIMATE LESS THAN 1.
+6.4.2 Improved Estimates for Pinf and Ac]A t
+For option 1 an improved estimate for Pinf
+(Pinf, new) is obtained by assuming that the ratio of this
+desired Pinf,new value to the current value of Pinf is equal
+to the ratio of the assigned value of Pinj (Pinj,a) to the
+current value of Pinj (obtained by means of eq. (6.28)).
+This assumption leads to
+(6.32)
+Equation (6.32) often gives such an excellent improved
+estimate for Pinf that it need be used only once to obtain
+convergence (eq. (6.29)). For option 2 an improved
+estimate for Ac/A t is required in addition to the one for
+Pinf and is obtained from
+rh
+A c At
+At
+(6.33)
+For some test cases involving hydrogen and oxygen as
+propellant, approximately four iterations involving equa-
+tion (6.33) were required for convergence (eq. (6.29)).
+6.5 Procedure for Obtaining Frozen
+Rocket Performance
+The procedure for obtaining rocket performance
+assuming that composition is frozen (infinitely slow reac-
+tion rates) during expansion is simpler than that
+assuming equilibrium composition. The reason is that
+equilibrium compositions need be determined only for
+combustion conditions. After obtaining combustion con-
+ditions in the identical way described for equilibrium
+rocket performance, the remainder of the procedure is as
+follows.
+6.5.1 Exit Conditions
+Improved estimates of the exit temperature
+corresponding to some assigned PinflPe are obtained by
+means of the following iteration formulas:
+(In Te)k. ' = (In Te)k + (Aln Te)k (6.34)
+where
+(Aln Te)k - si'r - se)' (6.35)
+Cp,e_
+and where k refers to the kth estimate. The initial esti-
+mate of an exit temperature is the value of temperature
+for the preceding point. The iteration procedure is
+continued until
+IAln TeI < 0.5×10 -4 (6.36)
+The maximum number of iterations permitted by the pro-
+gram is eight, although the convergence criterion of
+equation (6.36) is generally reached in two to four
+iterations.
+Phases are also considered to be frozen. Therefore,
+the program will calculate frozen rocket performance for
+assigned schedules of pressure and/or area ratios only
+until an exit temperature is reached that is 50 K below
+the transition temperature of any condensed species
+present at the combustion point. If a calculated exit tem-
+perature is more than 50 K below the transition tempera-
+ture, this point and all subsequent points in the schedule
+are ignored by the program and do not appear in the
+output. In addition, the following message is printed:
+CALCULATIONS WERE STOPPED BECAUSE NEXT
+POINT IS MORE THAN 50 DEG BELOW TEMP
+RANGE OF A CONDENSED SPECIES.
+After an exit temperature has been determined, all
+the rocket performance parameters (section 6.2) can be
+determined.
+31
+
+
+[PDF PAGE 38]
+6.5.2 Throat Conditions
+Calculations for frozen throat conditions are similar
+to those for equilibrium conditions. That is, equa-
+tion (6.15) is used to get initial estimates for PinflPt,
+equation (6.17) is used to get improved estimates for
+PinflPt, and equation (6.16) is used as the convergence
+criterion. With composition and phases frozen, there is
+no possibility of discontinuities at the throat, in contrast
+to equilibrium compositions.
+6.5.3 Thermodynamic Derivatives for Frozen
+Composition
+The thermodynamic derivatives discussed in pre-
+vious sections were based on the assumption that in any
+thermodynamic process, from one condition to another,
+composition reaches its equilibrium values instantan-
+eously. If, on the other hand, reaction times are assumed
+to be infinitely slow, composition remains fixed (frozen).
+In this event expressions for derivatives become simpler
+(see Zeleznik and Gordon (1968) for further discussion).
+An expression for specific heat, based on frozen compo-
+sition, has already been given in equation (2.49b). Some
+other derivatives based on frozen composition are as
+follows: From equations (2.50) and (2.51), respectively.
+(a _v/ _)p = 1 (6.37)
+ din V] = -1 (6.38)
+ Oln P ) r
+From equation (2.70)
+cv = Cp,i- nR (6.39)
+From equations (2.73) and (6.38), it is clear that for
+frozen composition
+¥s=¥ (6.40)
+32
+
+
+[PDF PAGE 39]
+Chapter 7
+Incident and Reflected Shocks
+The solution to the conservation equations that
+describe conditions for incident and reflected shocks is
+most conveniently-obtained in terms of assigned
+temperature before and after shock. Therefore, theoretical
+values for shock parameters, such as velocities and gas
+compositions, are generally found tabulated as functions
+of assigned temperatures (or temperature ratios). How-
+ever, in shock tube experiments shock velocities are
+generally known, rather than temperature ratios, thus
+requiring interpolation for purposes of comparison. It is
+therefore useful to have a calculating scheme that calcu-
+lates shock properties in terms of assigned velocities, and
+that is the scheme used in this report.
+No consistent nomenclature has been found in the
+literature for shock parameters. For example, in Gaydon
+and Hurle (1963) u is the velocity of the gases relative
+to the velocity of the shock front w, and v is the actual
+velocity of the gases in the shock tube. In Glass and Hall
+(1959), however,.the converse is given. We will use es-
+sentially the nomenclature of Gaydon and Hurle (1963).
+Figure II.6 in Gaydon and Hurle (1963) shows the
+usual incident and reflected conditions in both
+laboratory-fixed and shock-fixed coordinates. Velocities
+can be expressed as
+ = _-_ = V +_ or ti = _-_ (7.1)
+For incident shock waves equation (7.1) gives
+til = Ws - 17t = Ws (7.2)
+and
+1i2 = _s - ¢2 (7.3)
+In equation (7.2) it is assumed that the test gas is at rest
+(-¢! = 0). For reflected waves equation (7.1) gives
+_" = v2 + _'R (7.4)
+and
+u5 = V5 + _'R = g'K (7.5)
+In equation (7.5) it is assumed that the shocked gases at
+the end of the shock tube are brought to rest ('_5 = 0).
+The asterisk is used with -//2 in equation (7.4) to differ-
+entiate it from _T2 in equation (7.3). The gas properties
+are the same for condition 2, but the relative velocities
+are different. All quantities that appear in equations (7.2)
+to (7.5) are positive, and henceforth the arrows will be
+dropped.
+7.1 Incident Shocks
+For a constant-area shock the conservation equa-
+tions describing incident conditions are those given by
+equations (6.1) to (6.3) with A I = A 2. For iterative
+purposes it is convenient to reduce these equations to a
+form similar to that given in Zeleznik and Gordon
+(1962b) as follows:
+(7.6)
+h, = hi + -_- 1-['-_2)]
+(7.7)
+It is also convenient to use the symbols P* and h* for
+the right sides of equations (7.6) and (7.7), respectively.
+These equations then become
+33
+
+
+[PDF PAGE 40]
+h" -_ =0
+(7.8)
+(7.9) P1
+02 RT1 I,alnP)ra PI
+(7.13)
+In equation (7.9), h 2 is defined by means
+equation (2.14).
+7.1.1 Iteration Equations
+of
+Applying the Newton-Raphson method to equa-
+tions (7.8) and (7.9) divided by R and using for the
+independent variables the logarithm of temperature ratio
+and pressure ratio across the shock give
+(7.10)
+O_nP, P, oh,r,
+Pt Tx
+_ P2 p,
+PI
+at.5 P' a._5
+PI 7'1
+_ h 2 - h" (7.11)
+R
+where
+a_r2
+T,
+_ M,",_(p, )e_e* e2 1+-- 1
+ ,,,:r ,,./o _ : --_t_)t_--_--p:_
+Pl
++ T2[IOlnVI -1]
+alnr2
+rl
+uf(pl)2(OlnV] Y2Cp, 2
+: - _t_) t_),,_ R
+(7.14)
+(7.15)
+(7.16)
+(7.17)
+ Pi) k t l]k+i \ l/k
+(7.12a)
+_ ,j_+, tr,)_
+(7.12b)
+and the subscript k stands for the kth iteration.
+The partial derivatives and right sides in equa-
+tions (7.10) and (7.11) are given as follows:
+,h. ,h.. u2['1
+where from equations (2.1b) and (2.3a)
+Pi Pl Mi T2
+P2 P2 M2 TI
+(7.18)
+(7.19)
+34
+
+
+[PDF PAGE 41]
+7.1.2 Corrections and Convergence
+An arbitrary control factor X is applied to the
+corrections obtained from solution of equations (7.10)
+and (7.11) before using the corrections in equa-
+tions (7.12) to obtain improved estimates. The purpose
+of the control factor is to limit the size of the corrections
+in order to prevent divergence. Different maximum
+corrections are permitted during the course of the
+iteration process. Depending on the iteration number this
+control factor permits a maximum correction of 1.5 to
+0.05 times the previous estimates of PzJPi and T2IT 1.
+This is the same as permitting a maximum absolute
+correction of 0.40546511 to 0.04879016 on In PzlP1 and
+In T2/T I. As an illustration, the control factor X,
+corresponding to the maximum correction of 0.40546511
+is obtained by means of the following equations:
+0.40546511
+J'3 - (7.20)
+0.40546511
+J'4 - (7.21)
+_. = min(_.3,_.4,1) (7.22)
+A schedule of numerical values used in equations (7.20)
+and (7.21) (in addition to the value of 0.40546511) and
+the criteria for when they are used are discussed in
+part II of this report.
+Improved estimates are obtained by using equa-
+tion (7.22) with equation (7.12) to give
+ln(P21 = In(P21+ jt/AlnpP_2 / (7.23a)
+te,),+, te, L , ,,,
+In( T2] ln(Tz] +
+iT,)., tT,L , T,:,
+The iteration process is continued until corrections
+obtained from equations (7.10) and (7.11) meet the
+following criteria:
+(7.24a)
+(7.24b)
+7.1.3 Initial Estimates of T2/T 1 and P21PI
+Formulas for temperature ratio and pressure ratio
+across the incident shock, assuming constant "l',can be
+found in texts such as Gaydon and Hurle (1963). These
+formulas, slightly rearranged, are
+P2 _ 2¥1'//4_1z - Yl + 1 (7.25)
+Pt "fi +1
+2
+_ (7.26)
+Tl Pi Yi +1
+If ], is constant over the temperature range T ! to T2,
+equations (7.25) and (7.26) give exact theoretical values
+for P21PI and T21T 1. When composition is assumed to be
+frozen across the shock, _/2does not vary greatly from ]'1,
+and equations (7.25) and (7.26) generally give excellent
+first estimates. Improved estimates are then obtained as
+described in sections 7.1.1 and 7.1.2. However, if
+equilibrium composition is assumed across the shock,
+equation (7.26) generally gives estimates of temperature
+ratio that are too high. In Gordon and McBride (1976)
+an empirical equation is used to lower the T2 estimates
+obtained from equation (7.26). This procedure has now
+been replaced by a new estimating scheme that gives
+considerably better estimates, especially at high Mach
+numbers. The initial estimate for P2 is still obtained from
+equation (7.25). However, the initial estimate for T2 is
+obtained by ca.rrying out a combustion calculation using
+the estimate for P2 for the assigned pressure and the
+value obtained from the following equation for the
+assigned enthalpy:
+2
+U 1
+h 0 = h2 = h l+- (7.27)2
+The properties for condition 1 are for the unshocked
+gases.
+35
+
+
+[PDF PAGE 42]
+7.2 Reflected Shocks
+The reflected shock conservation equations could be
+written like equations (6.1) to (6.3), but it is more con-
+venient to use the relations in equations (7.4) and (7.5),
+which give
+p_wR -- p:(v: + w=) (7.28)
+P5 + p,w_ = /)2 + P2(V2 + we) 2 (7.29)
+1 2 1 vh5 + _wR = /12 + _(2 + w,) 2 (7.30)
+For iterative purposes it is convenient to reduce equa-
+tions (7.28) to (7.30) to a form similar to equations (7.6)
+and (7.7) as follows:
+P,
+P_
+-1+
+P5
+2 --
+P2V2 P2 (7.31)
+2
+ P__2_ (7.32)
+P2
+For convenience, the fight sides of equations (7.31)
+and (7.32) will be given the symbols P" and h'. The
+reflected shock parameters may now be solved by the
+simultaneous solutions of
+P5
+P'--- =0
+/'2
+(7.33)
+h' - h5 -- 0 (7.34)
+7.2.1 Iteration Equations
+Applying the Newton-Raphson method to equa-
+tions (7.33) and (7.34) divided by R and using for
+independent variables the logarithm of temperature ratio
+and pressure ratio across the shock give
+ol.5 P_ o.,5 r_
+_ 7"2
+ l
+(7.35)
+ain5 p2 a.,5
+Aln T5 _ hs-h'
+T2 R
+(7.36)
+where
+ ., ke2)k., _ 2j,
+(7.37)
+Aln-:- = In - In
+t, k 2/k,! k 2h,
+(7.38)
+The partial derivatives and fight sides for equa-
+tions (7.35) and (7.36) are as follows:
+o -- u2q .-_ (oInv] e,
+= _ (p, 112_,0_).- _ (7.39)
+ P5
+aln TsT2 RT2 (Ps-)2_OInTje__1
+(7.40)
+r ]I, P2
+(7.41)
+36
+
+
+[PDF PAGE 43]
+_(h' - hs) P_2 _v_ p__ (a_.vI
+M,[t,akr),._ J (7.42)
+ °'O__ _ v_ P--22 ( din VI Tscp's (7.43)
+P5 +]1
+hs - h' hs - h2 v_ P2
+R R
+(7.44)
+7.2.2 Corrections and Convergence
+The same control factors, correction equations, and
+tests for convergence discussed in the previous section
+for In P21P! and In TffT 1 (eqs. (7.20) to (7.24)) are
+applicable for In P51P2 and In Ts/T 2.
+7.2.3 Initial Estimates of TsIT 2 and PsIP2
+A value of Ts/T 2 = 2 is generally a satisfactory
+initial estimate. An estimate for PsIP2 in terms of TsIT 2
+can be obtained by inverting equation (2.36) in Gaydon
+and Hurle (1963). For Ts/T 2 = 2 this gives
+ ",)' (7.45)
+Only one solution of equation (7.45) is positive.
+37
+
+
+[PDF PAGE 44]
+
+
+[PDF PAGE 45]
+Chapter 8
+Chapman-Jouguet Detonations
+The method used for obtaining Chapman-Jouguet
+detonation parameters is described in Zeleznik and
+Gordon (1962b). There are three steps in the calculation
+procedure. First, an initial estimate of the detonation
+pressure and temperature is made. Second, the estimate
+of these parameters is improved by using a recursion
+formula. Third, the correct values are obtained by means
+of a Newton-Raphson iteration procedure. The required
+equations are derived in Zeleznik and Gordon (1962b)
+and are summarized herein for convenience in slightly
+modified form.
+The same conservation equations (6.1) to (6.3) for
+continuity, momentum, and energy that apply for shock
+also apply here with the additional constraint that
+u 2 = a 2. For iterative purposes, as was true for the shock
+equations, it is convenient to reduce the three conserva-
+tion equations to two:
+ 1 - Ysa - 1 (8.1)
+h2:h, ]÷ 2M2 L_) - 1 (8.2)
+The pressure ratio in equation (8.1) is the reciprocal
+of the pressure ratio in equation (7.6) because, as pointed
+out in Zeleznik and Gordon (1962b), the Newton-
+Raphson iteration encounters fewer problems in the form
+of equation (8.1).
+For convenience in writing the iteration equations
+the symbols P" and h" are used to represent the right
+sides of equations (8.1) and (8.2), respectively. These
+equations then become
+P" P_ - 0 (8.3)
+P2
+h" - h e = 0 (8.4)
+8.1 Iteration Equations
+Applying the Newton-Raphson method to equa-
+tions (8.3) and (8.4), dividing by R, and using for
+independent variables the logarithm of temperature ratio
+and pressure ratio across the detonation give
+a_5 P' a_5 r,
+P1 Tl
+(8.5)
++ Amr=_h_-h"
+a p_ P, otnr2 T, e
+P_ 7"1
+(8.6)
+where Aln P2/Pl and Aln T2/T 1 are defined by equa-
+tion (7.12).
+The partial derivatives appearing in equations (8.5)
+and (8.6) can be evaluated if Ts is taken to be independ-
+ent of temperature and pressure. This assumption is
+reasonable for moderate ranges of temperatures and
+pressures. To within the accuracy of this assumption the
+partial derivatives and right sides of equations (8.5)
+and (8.6) are
+Pl_Xi_i_ Pa,3_ _LANK !_OT I_XD 39
+
+
+[PDF PAGE 46]
+Pl
+P1 P2 (aln V / (8.7)
+a_r_
+7",
+(8.8)
+- 1 + Ys,2 - 1 (8.9)
+P2 /'2
+el
++ 1] (8.10)
+_[$,2T2[(.2)2 + l](a]n VI Y2Cp,2
+(8.11)
+R - R _-_2 [-_l-1 (8.12)
+8.3 Initial Estimates of T21T 1 and
+P21P 1
+A good initial estimate for pressure ratio is not as
+important as a good estimate for temperature ratio. For
+a number of chemical systems that were investigated, an
+initial estimate of (P2/PI) 0 = 15 has been found to be
+satisfactory. An initial estimate for temperature ratio is
+found by calculating the flame temperature T2
+corresponding to the enthalpy
+h2 : hi 4 M t [ PI)o
+(8.13)
+Improved initial estimates for the assumed value of
+(P2/P1)o and the estimated value of (T2/TI) 0 correspond-
+ing to h2 in equation (8.13) can be obtained by using the
+recursion formulas
+k*l 2Ys_ ak
+(8.14)
+RY s:2 rk21- 1+
+2M l cp,_ rk ÷l
+where
+(8.15)
+(8.16)
+8.2 Corrections and Convergence
+The discussion of convergence controls and correc-
+tions for shock calculations applies equally well for
+Chapman-Jouguet detonations. Equations (7.20) to (7.22)
+give the control factor _; equation (7.23) gives the new
+estimates for P2/PI and T2/T]; and equation (7.24) is the
+test for convergence.
+(8.17)
+The quantities M 2, _ts,2, and Cp, 2 in equations (8.14)
+to (8.16) are the equilibrium values for (Pz/PI)o and
+(T2ITI) o. Repeating the use of equations (8.14) to (8.17)
+three times in the program generally provides excellent
+initial estimates for the Newton-Raphson iteration.
+40
+
+
+[PDF PAGE 47]
+Chapter 9
+Input Calculations
+A number of options are provided in the program
+for specifying input, and these options are discussed in
+detail in part II. Part of the input concerns reactants. The
+total reactant may be composed of a number of reactants,
+each of which may be specified as an oxidant or a fuel.
+If the total reactant contains more than one oxidant,
+these oxidants may be combined into a total oxidant by
+specifying the relative proportion of each oxidant.
+Similarly, if the total reactant contains more than one
+fuel, the fuels may be combined into a total fuel by
+specifying the relative proportion of each fuel. The
+overall properties of the total reactant (such as elemental
+o p
+compositions bi, enthalpy h0, internal energy u0,
+molecular weight M 0, density PO, positive and negative
+oxidation states V+ and V-, specific heat c0, and entropy
+So) can then be calculated by specifying the relative
+amounts of total oxidant and total fuel. This method is
+particularly convenient if calculations are to be obtained
+for a number of oxidant-fuel ratios.
+To obtain assigned properties for the total reactant,
+each reactant j may be specified as either a fuel or an
+oxidant even though a reactant may ordinarily be thought
+of as inert (e.g., N2). If reactants are not divided into
+fuels and oxidants, they are treated like fuels with
+o/f= O. Letting the superscript k equal 1 for oxidant
+(provided that there is an oxidant) and 2 for fuel, the
+kilogram-atoms of the ith element per kilogram of total
+oxidant or total fuel is
+_c
+b? E "= aq nj
+i=1
+(i = 1,...,_; k = 1,2) (9.1)
+where NREAC is the total number of reactants and# k)
+is the number of kilogram-moles of the jth reactant per
+kilogram of total oxidant (k = 1) or total fuel (k = 2). If
+the amounts of oxidants and fuels are specified in terms
+of weights, n: _) is obtained by
+ k) NREAC
+1=1
+(/"= I,...,NREAC; k = 1,2)
+(9.2)
+where 1_/k) is the weight of the jth reactant and M[ _) is
+the molecular weight of the jth reactant. If, however,
+amounts of oxidants and fuels are specified in terms of
+kilogram-moles N: k),
+nfk) = NREAC
+Ej=l
+(j : 1,...,NREAC; k = 1,2)
+(9.3)
+The M: k) can be calculated from the atomic weights of
+the chemical elements M i as
+M:t)= __,a_.k)Mi
+i=1
+q = 1,...,NREAC; k -- 1,2) (9.4)
+The b: t) can be combined by means of the
+following equation to give the kilogram-atoms per
+kilogram of total reactant:
+b i -
+0
+l+-
+f
+(i = 1..... _) (9.5)
+where olf is the oxidant-to-fuel weight ratio.
+Formulas analogous to equations (9. I) and (9.5) can
+be used to obtain other properties of the total oxidant,
+total fuel, and total reactant (such as enthalpies, internal
+41
+
+
+[PDF PAGE 48]
+energies,molecularweights,anddensities).Theenergies
+giveninthenextfourequationsarein theformin which
+theyappearin thematrixarrays(tables2.1to 2.3).
+(1) Specificenthalpyof totaloxidant(k = 1) or
+totalfuel(k = 2)h (k) divided by RT, (kg-mole/kg)(_):
+h(k) _J,c (HT)C*)n)k) (k= 1,2) (9.6)
+RT - j=_l RT
+where (H?)(k) is the molar enthalpy of the jth reactant,
+(J/kg-mole)_/)
+(2) Specific enthalpy of total reactant h0 divided by
+RT, kg-mole/kg:
+I,
+-0 _ (k = 1,2) (9.7)
+RT o1 + --
+f
+(3) Specific internal energy of total
+(k = 1) or total fuel (k = 2) (u)(k) divided
+(kg-mole/kg)(k):
+oxidant
+by RT,
+RT j=l RT
+(k = 1,2) (9.8)
+where (U°I (k) is the molar internal energy of the jth
+-(k)reactant, (J/kg-mole)) .
+(4) Specific internal energy of total reactant u_
+divided by RT, kg-mole/kg:
+ ÷(ol(,')'"Uo' _ RT _f} RT
+RT o1 + --
+f
+(9.9)
+(5) Molecular weight of total oxidant (k = 1) or
+total fuel (k = 2):
+M(k) _ 1 (k = 1,2) (9.10)NREAC
+jffil
+(6) Molecular weight of total reactant, kg/kg-mole:
+[f+ 11M(')M(2)
+Mo = (9.11)
+(If M (I) = O, M0 = M(2); and if M (2) = O, M0 = M(1).)
+(7) Density of total oxidant or fuel:
+p(_) = 1 (k = 1,2) (9.12)
+ n)k,M k)
+E (2)
+jffil pj
+(8) Density of total reactant:
+(9.13)
+In the main program of CEA several alternative
+expressions are given for specifying the relative amounts
+of total oxidant to total fuel and for relating them to olf.
+Two expressions are given for equivalence ratio---a
+chemical equivalence ratio r and a fuel-to-air (or fuel-to-
+oxidant) equivalence ratio _. If the chemical equivalence
+ratio is specified, it will be necessary to make use of
+÷ and V/" be positive andoxidation states. Let V i
+negative oxidation states of the ith element in its
+commonly occurring compounds. At least one of these
+will be zero. Thus, for example, the negative oxidation
+state for chlorine is -1 and its positive oxidation state is
+zero. The oxidation states per kilogram of total oxidant
+or total fuel are
+!
+V"(k)= _ Vi"b:k) (k = 1,2)
+i=l
+(9.14)
+!
+V -(*) = _ Vt- b: k) (k = 1,2)
+i=1
+(9.15)
+The positive and negative oxidation states for the total
+reactant are then
+42
+
+
+[PDF PAGE 49]
+:,V" = (9.16)
+ol+--
+f
+V- - (9.17)
+0l+--
+f
+The chemical equivalence ratio is now defined as
+ +
+r - --- (9.18)
+V-
+The equivalence ratio ¢, commonly used in
+engineering practice, is defined as
+f
+ _ a (9.19)
+(Lo
+where fla is the fuel-to-air weight ratio. As Gordon
+(1982) points out, the two equivalence ratios r and _ are
+always identical for the stoichiometric condition. In
+addition, they are always identical when all the positive
+valence atoms are in the fuel and all the negative valence
+atoms are in the oxidizer (eg., CH 4 + 02). However, if
+some negative valence atoms are in the fuel (e.g.,
+CH3OH) or if some positive valence atoms are in the
+oxidizer (e.g., H202), then for off-stoichiometric
+conditions r and ¢ differ for the same reaction. For
+example, for CHaOH + 1/2 02, r = 2 and ¢ = 3.
+One of the options in the SHOCK problem requires
+reactant compositions relative to the total reactant. These
+may be obtained as follows:
+f
+for k=l
+= n:k) for k=2
+O
+l+--
+f
+(j = I,...,NRF.AC) (9.20)
+where mj is kilogram-moles ofjth reactant per kilogram
+of total reactant.
+Specific heat and entropy for the total reactant in
+kilogram-moles per kilogram can be calculated by using
+the mj, CTj, and Sj of the j reactants:
+(9.21)
+R .o mj (9.22)
+43
+
+
+[PDF PAGE 50]
+
+
+[PDF PAGE 51]
+Appendix--Symbols
+A,B,C,D
+A
+A e/A t
+Ak_
+Ak
+d
+ai(i = 1...9)
+a U
+(k)
+aij
+aS, T
+b i
+b_t)
+b7
+C F
+transport property coefficients, eq. (5.1)
+area, m2
+ratio of nozzle exit area to throat area,
+eq. (6.14)
+collision cross-section ratio, eq. (5.13)
+chemical formula of species k,
+dimensionless, eq. (5.10)
+velocity of sound, m/s, eqs. (2.67)
+and (2.74)
+least-squares coefficients, eqs. (4.6)
+to (4.11)
+stoichiometric coefficients, kilogram-
+atoms of element i per kilogram-mole of
+species j, (kg-atom)/(kg-mole)), eq. (2.7a)
+stoichiometric coefficients, kilogram-
+atoms of element i per kilogram-mole of
+reactant j (oxidant if k = 1, fuel if k = 2),
+(kg-atom)!k)/(kg-mole)J k), eq. (9.1)
+velocity of sound, m/s, defined by
+eq. (3.1 O)
+kilogram-atoms of element i per kilogram
+of mixture, (kg-atom)i/kg, eq. (2.7c)
+assigned kilogram-atoms of element i per
+kilogram of total oxidant (k = 1) or total
+fuel (k = 2), (kg-atom)!k)/kg(k), eq. (9.1)
+assigned kilogram-atoms of element i per
+kilogram of total reactant, (kg-atom)/kg,
+eq. (9.5)
+coefficient of thrust, eq. (6.13)
+C_j
+ O
+vj
+C o
+¢p
+ ,e
+Cp,eq
+Cp,f
+Cp,fr
+ ,r
+ ,re
+c V
+c
+Dk_
+d6
+molar heat capacity at constant pressure
+for standard state for species or reactant j,
+J/(kg-mole)j(K)
+molar heat capacity at constant volume
+for standard state for species j,
+J/(kg-mole)j(K)
+specific heat at constant pressure of total
+reactant, J/kg-K, eq. (9.21)
+specific heat at constant pressure of
+mixture, equilibrium or frozen, J/kg-K
+equilibrium specific heat at constant
+pressure, J/kg-K, eq. (2.49a)
+equilibrium specific heat at constant
+pressure for transport properties,
+J/kg-K, eq. (5.14)
+frozen specific heat at constant pressure,
+J/kg-K, eq. (2.49b)
+frozen specific heat at constant pressure
+for transport properties, J/kg-K, eq. (5.15)
+reaction specific heat at constant pressure,
+J/kg-K, eq. (2.49c)
+reaction specific heat at constant pressure
+for transport properties, J/kg-K, eq. (5.16)
+specific heat at constant volume of
+mixture, equilibrium or frozen, J/kg-K,
+eq. (2.70) or (6.39)
+characteristic velocity, m/s, eq. (6.11)
+binary diffusion coefficient, m2/s,
+eq. (5.13)
+matrix coefficient in eq. (5.17)
+P.gGe,IJ_._ i Jt_iNTENr!ONALLY _}LA,'.)_
+45
+
+
+[PDF PAGE 52]
+F
+%F
+f
+G
+g
+gc
+AS/r(/)
+h
+h(k)
+h o
+ r
+h"
+h*
+I
+/sp
+M
+Helmholtz energy of mixture with
+constraints, defined by eq. (2.33), J/kg; or
+force, N, eq. (6.6)
+percent of total fuel in total reactant by
+weight or mass
+Helmholtz energy of mixture, J/kg,
+eqs. (2.30) and (2.31)
+Gibbs energy of mixture with constraints,
+J/kg, defined by eq. (2.8)
+Gibbs energy of mixture, J/kg, eq. (2.5)
+conversion factor, eqs. (6.6) to (6.8)
+molar standard-state enthalpy for
+species j, J/(kg-mole)j
+molar enthalpy of reactant j (k = 1 for
+oxidant, k = 2 for fuel), J/(kg-mole)} k),
+eq. (9.6)
+heat of formation at temperature T,
+J/kg-mole, eq. (4.2)
+heat of reaction at temperature T,
+J/(kg-mole), eq. (5.9)
+specific enthalpy of mixture, J/kg,
+eq. (2.14)
+specific enthalpy of total oxidant (k = 1)
+or total fuel (k = 2), (J/kg) (k), eq. (9.6)
+specific enthalpy of total reactants, J/kg,
+eq. (9.7)
+term defined by
+term defined by
+term defined by
+right side of eq. (7.32)
+fight side of eq. (8.2)
+fight side of eq. (7.7)
+specific impulse, N/(kg/s) or m/s,
+eq. (6.7)
+specific impulse with exit and ambient
+pressures equal, N/(kg/s) or m/s, eq. (6.8)
+vacuum specific impulse, N/(kg/s) or m/s,
+eq. (6.9)
+molecular weight of mixture, kg/kg-mole,
+eqs. (2.3)
+atomic weight of chemical element i,
+(kg/kg-atom)i, eq. (9.4)
+M0
+M}jk)
+MW
+o/f
+P
+PinelPe
+eo
+t"
+p,,
+p*
+Pr
+R
+r
+molecular weight of species j, eqs. (2.3b)
+and (2.4)
+molecular weight of total reactant,
+kg/kg-mole, eq. (9.11)
+molecular weight of total oxidant (k = 1)
+or total fuel (k = 2), (kg/kg-mole) (k), eq.
+(9.10)
+molecular weight of reactant j (oxidant if
+k = 1; fuel if k = 2, (kg/kg-mole)! k),
+eqs. (9.4)
+molecular weight of mixture, kg/kg-mole,
+eqs. (2.4)
+Mach number, eq. (6.10)
+kilogram-moles of reactant j per kilogram
+of total reactant, (kg-mole)j/kg, eq. (9.20)
+mass flow rate, kg/s, eq. (6.4)
+kilogram-moles of reactant j (oxidant if
+k = 1; fuel if k = 2), (kg-mole)} i)
+kilogram-moles of mixture per unit mass,
+kg-mole/kg, eq. (2.2)
+kilogram-moles of species j per kilogram
+of mixture, (kg-mole)j/kg, eq. (2.2)
+kilogram-mole per kilogram of reactant j
+(oxidant if k = 1; fuel if k = 2),
+(kg-mole)}k)/kg (k), eq. (9.2) or (9.3)
+oxidant-to-fuel weight (or mass) ratio
+pressure, N/m 2
+ratio of combustion pressure to exit
+pressure for IAC model
+assigned or initial pressure, N/m 2
+term defined by right side of eq. (7.31)
+term defined by fight side of eq. (8.1)
+term defined by right side of eq. (7.6)
+Prandtl number, eqs. (5.19)
+universal gas constant, 8314.51 J/
+(kg-mole)(K)
+equivalence ratio based on oxidation
+states, eq. (9.18)
+46
+
+
+[PDF PAGE 53]
+s
+s o
+T
+v;
+p
+u
+u'(k)
+I
+u 0
+V
+v+
+V-
+w(k)
+v-(k)
+w
+w R
+molar entropy of species j,
+J/(kg-mole)j(K), eq. (2.17)
+molar standard-state entropy for species j,
+J/(kg-mole)j(K)
+specific entropy of mixture, J/kg-K,
+eq. (2.16)
+specific entropy of total reactants, J/kg-K,
+eq. (9.22)
+temperature, K
+molar standard-state internal energy for
+species j, J/kg-mole, eq. (2.38)
+molar internal energy of reactant j
+(oxidant if k = l; fuel if k = 2),
+(J/kg-mole)} k), eq. (9.8)
+velocity (in shock problems, velocity
+relative to incident or reflected shock
+front), m/s, eqs. (6.5) and (7.1)
+specific internal energy of mixture, J/kg,
+eq. (2.38)
+specific internal energy of total oxidant
+(k = 1) or total fuel (k = 2), (l/kg) (k),
+eq. (9.8)
+specific internal energy of total reactant,
+J/kg, eq. (9.9)
+specific volume, m3/kg, eq. (2.1a)
+positive oxidation state of total reactant,
+eq. (9.16)
+negative oxidation state of total reactant,
+eq. (9.17)
+positive oxidation state of total oxidant
+(k = 1) or total fuel (k = 2), eq. (9.14)
+negative oxidation state of total oxidant
+(k = 1) or total fuel (k = 2), eq. (9.15)
+actual velocity of gases in shock tube,
+m/s, eq. (7.1)
+weight offlh reactant (oxidant if k = 1;
+fuel if k -- 2), kg}_), eq. (9.2)
+shock front velocity, m/s, eq. (7.1)
+reflected shock front velocity, m/s,
+eq. (7.4)
+w S
+xi
+x i
+(tik
+_k
+Y
+"fli
+rlij
+_' 1,_'2,
+_,3,_,4
+_,eq
+_'fr
+incident shock front velocity, m/s,
+eq. (7.2)
+unknowns in eq. (5.16)
+mole fraction of species i relative to all
+species (gaseous and condensed) in eq.
+(2.4a) and relative to NM gaseous species
+used for thermal transport property
+calculations in eqs. (5.3), (5.4), (5.12),
+(5.15), (5.16), and (5.18)
+stoichiometric coefficients of species k in
+reaction i for transport property
+calculations, eq. (5.10)
+parameter defined by equation (8.16)
+specific heat ratio, eq. (2.72)
+isentropic exponent, eqs. (2.71) and (2.73)
+viscosity of species i, laP, eq. (5.3)
+viscosity interaction parameter, laP,
+eq. (5.7)
+viscosity of mixture, paP, eq. (5.3)
+control factor, eqs. (3.3) and (7.22);
+thermal conductivity, eq. (5.1)
+Lagrangian multipliers, eqs. (2.8) and
+(2.33); thermal conductivity of species i,
+laW/cm-K, eq. (5.4)
+control factors, eqs. (3.1), (3.2), (7.20),
+and (7.21)
+equilibrium thermal conductivity of
+mixture, laW/cm-K, eq. (5.2)
+frozen thermal conductivity of mixture,
+laW/cm-K, eq. (5.4)
+variables in eqs. (5.8) and (5.11)
+reaction thermal conductivity of mixture,
+laW/cm-K, eq. (5.8)
+chemical potential of species j,
+J/(kg-mole)j, eqs. (2.11) and (2.35)
+standard-state chemical potential of
+species j, J/(kg-mole)j, eq. (2.11)
+Lagrangian multiplier for ions divided by
+RT
+47
+
+
+[PDF PAGE 54]
+/t i
+P
+Po
+p(k)
+qx0
+%
+Subscripts:
+a
+¢
+e
+g
+inf
+inj
+k
+m
+Lagrangian multiplier for element i P
+divided by RT, eqs. (2.18), (2.19), (2.40),
+and (2.41) s
+stoich
+density of mixture, kg/m 3, eq. (2.1b)
+T
+density of total reactant, kg/m 3, eq. (9.13)
+t
+density of total oxidant (k = 1) or total
+fuel (k = 2), (kg/m3) (k), eq. (9.12) 0
+density of reactant j (oxidant if k = 1; fuel 1,2,5
+if k = 2), (kg/m3)J k), eq. (9.12)
+frozen thermal conductivity interaction
+coefficient between species i and j,
+eqs. (5.4) and (5.6)
+k
+equivalence ratio based on fla ratios,
+eq. (9.19) Indices:
+viscosity interaction coefficient between Q
+species i and j, eqs. (5.5) and (5.7)
+pressure
+entropy
+stoichiometric
+temperature
+throat
+total reactant; zeroth iteration
+stations
+Superscripts:
+o symbol for standard state; an assigned or
+initial condition
+1 if oxidant, 2 if fuel
+NG
+ambient; assigned
+end of combustion chamber; condensed NM
+exit; electrons
+gas NR
+combustor station assuming infinite
+chamber area NREAC
+combustor inlet or injector station for NS
+finite-area combustor
+iteration k
+melting
+number of chemical elements (if ions are
+considered, number of chemical elements
+plus one)
+number of gaseous species in thermo-
+dynamic data for current chemical system
+number of gaseous species for transport
+property calculations
+number of reactions for transport property
+calculations
+number of reactants
+number of species, gaseous and con-
+densed, in thermodynamic data for current
+chemical system
+48
+
+
+[PDF PAGE 55]
+References
+Brokaw, R.S., 1960, "Thermal Conductivity of Gas
+Mixtures in Chemical Equilibrium," Journal of
+Chemical Physics, Vol. 32, No. 4, pp. 1005-1006.
+Burcat, A., Zeleznik, F.J., and McBride, B.J., 1985,
+"Ideal Gas Thermodynamic Properties for the
+Phenyl, Phenoxy and o-Biphenyl Radicals," NASA
+TM-83800.
+Butler, J.N. and Brokaw, R.S., 1957, "Thermal Conduc-
+tivity of Gas Mixtures in Chemical Equilibrium,"
+Journal of Chemical Physics, Vol. 26, No. 6,
+pp. 1636-1643.
+Chase, M,W., Jr., Davies, C.A., Downey, J.R., Jr.,
+Frurip, D.J., McDonald, R.A., and Syverud, A.N.,
+1985, "JANAF Thermochemical Tables," Third ed.,
+Pts. I-H, Journal of Physical and Chemical
+Reference Data, Vol. 14, Suppl. 1, American
+Chemical Society, Washington, DC.
+Cohen, E.R. and Taylor, B.N., 1987, "The 1986
+CODATA Recommended Values of the Fundamental
+Physical Constants," National Bureau of Standards,
+Journal of Research, Vol. 92, Mar.-Apr., pp. 85-95.
+Cox, J.D., ed., 1982, "Notation of States and Processes,
+Significance of the Word 'Standard' in Chemical
+Thermodynamics, and Remarks on Commonly Tabu-
+lated Forms of Thermodynamic Functions," Pure
+and Applied Chemistry, Vol. 54, pp. 1239-1250.
+Cox, J.D., Wagman, D.D., and Medvedev, V.A., 1989,
+CODATA Key Values for Thermodynamics, Hemi-
+sphere Publishing Corp., New York.
+Garvin, D., Parker, V.B., and White, H.J., Jr., 1987,
+CODATA Thermodynamic Tables, Hemisphere
+Publishing Corp., New York.
+Gaydon, A.G. and Hurle, I.R., 1963, The Shock Tube in
+High-Temperature Chemical Physics, Reinhold
+Publishing Corp.
+Glass, I.I. and Hall, J.G., 1959, "Handbook of Super-
+sonic Aerodynamics, Section 18. Shock Tubes,"
+NAVORD Rep. 1488, Vol. 6, Bureau of Naval
+Weapons.
+Goldman, D.T. and Bell, R.J., 1986, "The International
+System of Units (SI)," NBS Special Publication 330,
+1986 Ed.
+Gordon, S., Zeleznik, F.J., and Huff, V.N., 1959, "A
+General Method for Automatic Computation of
+Equilibrium Compositions and Theoretical Rocket
+Performance of Propellants," NASA TN D-132.
+Gordon, S. and Zeleznik, F.J., 1962, "Thermodynamic
+Extrapolation of Rocket Performance Parameters,"
+American Rocket Society Journal, Vol. 32, No. 8,
+pp. 1195-1202.
+Gordon, S. and Zeleznik F.J., 1963, "A General IBM
+704 or 7090 Computer Program for Computation of
+Chemical Equilibrium Compositions, Rocket Per-
+formance, and Chapman-Jouguet Detonations,
+Suppl. 1: Assigned Area-Ratio Performance," NASA
+TN D-1737.
+Gordon, S., 1970, "Calculation of Theoretical Equilib-
+rium Nozzle Throat Conditions When Velocity of
+Sound Is Discontinuous," American Institute of
+Aeronautics and Astronautics Journal, Vol. 9, No. 1,
+pp. 179-182.
+Gordon, S. and McBride, B.J., 1976, Computer Program
+for Calculating Complex Chemical Equilibria,
+Rocket Performance, Incident and Reflected Shocks,
+49
+
+
+[PDF PAGE 56]
+and Chapman-Jouguet Detonations, NASA SP-273,
+(Revision of 1971 publication).
+Gordon, S., 1982, "Thermodynamic and Transport
+Combustion Properties of Hydrocarbons With Air,
+I-Properties in SI Units," NASA TP-1906.
+Gordon, S., McBride, B.J., and Zeleznik, F.J., 1984,
+"Computer Program for Calculation of Complex
+Chemical Equilibrium Compositions and Applica-
+tions, Supplement I-Transport Properties," NASA
+TM-86885.
+Gordon, S. and McBride, B.J., 1988, "Finite Area
+Combustor Theoretical Rocket Performance," NASA
+TM-100785.
+Griem, H.R., 1964, Plasma Spectroscopy, McGraw-Hill
+Book Co., Inc.
+Gurvich, L.V., Veyts, I.V., _Alcock, C.B., 1989,
+Thermodynamic Properties of Individual Substances,
+Vol. 1, Pts. 1-2, Fourth ed., Hemisphere Publishing
+Corp., New York.
+Hirschfelder, J.O., Curtiss, C.F., and Bird, R.B., 1954,
+Molecular Theory of Gases and Liquids, John Wiley
+& Sons, Inc.
+Huff, V.N., Gordon, S., and Morrell, V.E., 1951, "Gen-
+eral Method and Thermodynamic Tables for Compu-
+tation of Equilibrium Composition and Temperature
+of Chemical Reactions," NACA Report 1037.
+Kirkwood, J.G. and Oppenheim, I., 1961, Chemical
+Thermodynamics, McGraw-Hill Book Co., Inc.
+Lewis, G.N. and Randall, M., i96I, Thermodynamics,
+Second ed., McGraw-Hill Book Co., Inc., pp.
+667-668.
+Marsh, K.N., Das, A., Frenkel, M. Gadalla, N.M., and
+Wilhoit, R.C., 1988, TRC Thermodynamic Tables,
+Non-Hydrocarbons, Vols. 1-VIII; and Hydrocarbons,
+Vols. I-XII, Thermodynamics Research Center,
+Texas A&M University, College Station, TX.
+McBride, B.J. and Gordon S., 1961, "Thermodynamic
+Functions of Several Triatomic Molecules in the
+Ideal Gas State," Journal of Chemical Physics.,
+Vol. 35, No. 6, pp. 2198-2206.
+McBride, B.J., Heimel, S., Ehlers, J.G., and Gordon S.,
+1963, Thermodynamic Properties to 6000 K for 210
+Substances Involving the First 18 Elements, NASA
+SP-3001.
+McBride, B.J. and Gordon S., 1967, "FORTRAN IV
+Program for Calculation of Thermodynamic Data,"
+NASA TN D--4097.
+McBride, B.J. and Gordon, S., 1992, Computer Program
+for Calculating and Fining Thermodynamic Func-
+tions, NASA RP-1271.
+McBride, B.J., Gordon, S., and Reno, M.A., 1993a,
+"Thermodynamic Data for Fifty Reference Ele-
+ments," NASA TP-3287.
+McBride, B.J., Gordon, S., and Reno, M.A., 1993b,
+"Coefficients for Calculating Thermodynamic and
+Transport Properties of Individual Species," NASA
+TM--4513.
+Radhakrishnan, K. and Bittker, D.A., 1994, "LSENS, A
+General Chemical Kinetics and Sensitivity Analysis
+Code for Homogeneous Gas-Phase Reactions. II.
+Code Description and Usage," NASA RP-1329.
+Sutton, G.P. and Ross, D.M., 1976, Rocket Propulsion
+Elements, Fourth ed., John Wiley & Sons, Inc.
+Svehla, R.A., 1962, "Estimated Viscosities and Thermal
+Conductivities of Gases at High Temperatures,"
+NASA TR R-132.
+Svehla, R.A. and Brokaw, R.S., 1966, "Heat Capacity
+and the Lewis Number of a Reacting Gas,"
+American Institute of Aeronautics and Astronautics
+Journal, Vol. 4, No. 1, pp. 182-184.
+Svehla, R.A. and McBride, B.J., 1973, "FORTRAN IV
+Computer Program for Calculation of Thermo-
+dynamic and Transport Properties of Complex
+Chemical Systems," NASA TN D-7056.
+Svehla, R.A., 1995, "Transport Coefficients for the
+NASA Lewis Chemical Equilibrium Program,"
+NASA TM-4647.
+50
+
+
+[PDF PAGE 57]
+Zeleznik,F.J. and Gordon,S., 1960, "An Analytic
+nvestigation of Three General Methods of
+Calculating Chemical-Equilibrium Compositions,"
+NASA TN D-473.
+Zeleznik, F.J. and Gordon, S., 1961, "Simultaneous
+Least-Squares Approximation of a Function and Its
+First Integrals With Application to Thermodynamic
+Data," NASA TN D-767.
+Zeleznik, F.J. and Gordon, S., 1962a, "A General IBM
+704 or 7090 Computer Program for Computation of
+Chemical Equilibrium Compositions, Rocket Per-
+formance, and Chapman-Jouguet Detonations,"
+NASA TN D-1454.
+Zeleznik, F.J. and Gordon, S., 1962b, "Calculation of
+Detonation Properties and Effect of Independent
+Parameters on Gaseous Detonations," American
+Rocket Society Journal, Vol. 32, No. 4, pp. 606-615.
+Zeleznik, F.J. and Gordon, S., 1968, "Calculation of
+Complex Chemical Equilibria," Industrial and
+Engineering Chemistry, Vol. 60, No. 6, pp. 27-57.
+51
+
+
+[PDF PAGE 58]
+cI}
+r_
+e¢
+r_
+(J
+u_
+o
+o_
+Z
+0
+¢*q
+t ÷ ÷
+I !
+_ °_
+o
+"4-
+z_
+I
+÷
+.°[,,,1_.
+I
+÷ _
+_1_ ÷
+!
+!
+•4- ÷
+z_
+_D
+_S
+o Q_ _
+5
+_J
+_S
+o __I _
+_J
+_ J_q
+,v-
+52
+
+
+[PDF PAGE 59]
+o
+<
+cL
+E _
+o
+zo
+r4
+÷ ÷
+I I
+÷
+!
+÷
+ , ,
+v
+I
+5
+%
+!
+÷ ÷
+!
+I
+I
+S3
+
+
+[PDF PAGE 60]
+o
+r_
+f !
+r_ r_
+I
+E
+I
+O
+0
+C_
+_J
+I
+O
+I
+54
+
+
+[PDF PAGE 61]
+o
+i I _8 _
+• • . E_
+_S
+• o
+C_
+v _
+55
+
+
+[PDF PAGE 62]
+
+
+[PDF PAGE 63]
+
+
+[PDF PAGE 64]
+Form Approved
+REPORT DOCUMENTATION PAGE OMBNo.0704-0188
+Pub ic reporting burden Io¢ this collection of _fm-metion Is Ntirnat_l to average 1 hour per response, Including the time for reviewing Instructions, searching existing data sour.ces,
+gethedng and malnlalnlng the data needed, an<l cornpl_.lng and.ravtewlng !he collection, of Informetio_ Send co__maents ragardlng this bur oen est=mateorany olneras .p_..ol tnm
+collection of informetlo¢l, Itcludlng |uggestlon$ mr ranuclng this ouroen, to wasnlngton Heaoquarters _e_tVlC_i;, D_eclor. ate lotlntorrnatlon uperat+on.s ano Hapons, _,_lb uerrerson
+Davis Highway. Suite 1204, Arltngton.VA 22202-4302. and to the Office of Management and Budget, paperwork Heouctlon _toject (0704.0188). Wasmngton, L_ ;'0503.
+1, AGENCY USE ONLY (Leave b/ank) 2. REPORT DATE 3. REPORT TYPE AND DATES COVERED
+October 1994 Reference Publication
+4. TITLE AND SUBTITLE 5. FUNDING NUMBERS
+Computer Program for Calculation of Complex Chemical Equilibrium
+Compositions and Applications
+I. Analysis
+6. AUTHOR(S) WU-505--62-52
+Sanford Gordon and Bonnie J. McBride
+7. PERFORMINGORGANIZATIONNAME(S)ANDADDRESS{ES)
+National Aeronautics and Space Administration
+Lewis Research Center
+Cleveland, Ohio 44135-3191
+9. SPONSORING/MONITORINGAGENCYNAME(S)ANDADDRESS(ES)
+National Aeronautics and Space Administration
+Washington, D.C. 20546-0001
+11. SUPPLEMENTARY NOTES
+8. PERFORMING ORGANIZATION
+REPORT NUMBER
+E-8017
+10. SPONSORING/MONITORING
+AGENCY REPORTNUMBER
+NASA RP-1311
+Sanford Gordon, Sanford Gordon and Associates, Cleveland, Ohio, and Bonnie J. McBride, NASA Lewis Research Center.
+Responsible person, Bonnie J. McBride, organization code 2670, (216) 433-5870.
+12a. DISTRIBUTION/AVAILABILITY STATEMENT 12b. DISTRIBUTION CODE
+Unclassified - Unlimited
+Subject Categories 20 and 25
+13_ABSTRACT (Maximum 200 words)
+This report presents the latest in a number of versions of chemical equilibrium and applications programs developed at
+the NASA Lewis Research Center over more than 40 years. These programs have changed over the years to include
+additional features and improved calculation techniques and to take advantage of constandy improving computer capa-
+bilities. The minimization-of-free-energy approach to chemical equilibrium calculations has been used in all versions of
+the program since 1967. The two principal purposes of this report are presented in two parts. The first purpose, which is
+accomplished here in part I, is to present in detail a number of topics of general interest in complex equilibrium calcula-
+tions. These topics include mathematical analyses and techniques for obtaining chemical equilibrium; formulas for
+obtaining thermodynamic and transport mixture properties and thermodynamic derivatives; criteria for inclusion of
+condensed phases; calculations at a triple point; inclusion of ionized species; and various applications, such as constant-
+pressure or constant-volume combustion, rocket performance based on either a finite- or infinite-chamber-area model,
+shock wave calculations, and Chapman-Jouguet detonations. The second purpose of this report, to facilitate the use of the
+computer code, is accomplished in part II, entitled "Users Manual and Program Description." Various aspects of the
+computer code are discussed, and a number of examples are given to illustrate its versatility.
+14. SUBJECT TERMS
+Chemical equilibrium; Combustion products; Combustion temperatures; Computer
+program; Thermodynamic mixture properties; Thermal transport properties; Rocket
+performance
+17. SECURITY CLASSIFICATION 18. SECURITY CLASSIFICATION
+OF REPORT OF THIS PAGE
+Unclassified Unclassified
+4SN 7540_)1-280-5500
+19. SECURITY CLASSIFICATION
+OF ABSTRACT
+Unclassified
+15. NUMBER OF PAGES
+61
+16. PRICE CODE
+A_
+20. LIMITATION OF ABSTRACT
+Standard Form 298 (Rev. 2-89)
+Prescribed by ANSI Std. Z39-18
+298-102

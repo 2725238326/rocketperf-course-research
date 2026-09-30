@@ -1,0 +1,669 @@
+{
+  "topic": "02_cz10b",
+  "retrieved_at": "2026-09-29T16:06:54.8438066+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "聚焦作业指定的“长征十号乙”（Long March 10B / CZ-10B）：首先核查型号名称、它与长征十号、长征十号甲的区别，是否有官方一手资料确认具体构型。不要假定乙是甲的错字。查中国航天科技集团、中国运载火箭技术研究院、航天六院、官方主管部门与权威媒体。核查推进剂、各级发动机型号与数量、YF-100各后缀的准确适用关系、循环类型、可重复使用/节流/再起动能力、公布推力的工况。资料不足时明确哪些事实只针对长征十号/甲、不能迁移给乙。给出版本/日期/证据表，区分概念方案、试验、飞行状态。关注两型火箭比较所需的公开信息缺口，找5-7个高价值真实来源及短引文。\n",
+  "search_calls": [
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 OR \"长征10乙\" OR CZ-10B OR \"Long March 10B\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.universetoday.com/articles/china-successfully-tests-reusable-long-march-10b"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://spacelaunchnow.app/vehicle/launch_vehicle/554"
+          },
+          {
+            "type": "url",
+            "url": "https://pandaily.com/long-march-10b-sea-net-recovery-rocket-jul2026"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/china-recovers-rocket-booster-debuts"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" 航天科技集团 OR 运载火箭技术研究院 OR 航天六院",
+        "sources": [
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.baidu.com/link?url=xAJvbniJJgN-QGmmYj8OR0OOSIYqf5bkIHjSqa15bjj_5j_JRXAahIl2ZwlSGzMNT2ms2_51vPAvXP1-2lPyZJ6mThKyrdD7YdPbEDTa7Z_"
+          },
+          {
+            "type": "url",
+            "url": "http://www.baidu.com/link?url=KaaR50uJST08j4XhHVxmZAwEImMMINCT13Jm5kM6nVQpD6Bwys0TpPT4Q090OVz5Yosq0e4DEY22Tsc2JaaBTPtUQvn69_7FGd_FGehKGIG"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2026/0710/c1004-40757775.html"
+          },
+          {
+            "type": "url",
+            "url": "https://ep.ycwb.com/epaper/ycwb/html/2026-07/11/content_2976_758682.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.chinanews.com/wap/detail/cht/zwsp/10656656.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://news.gmw.cn/2026-07/11/content_38880000.htm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号甲 长征十号乙 区别 OR 构型",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://global.hk01.com/%E5%8D%B3%E6%97%B6%E4%B8%AD%E5%9B%BD/60368904/%E9%95%BF%E5%8D%81%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%E6%88%90%E5%8A%9F%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6-%E5%AE%83%E4%B8%8E%E9%95%BF%E5%8D%81%E7%94%B2-%E9%95%BF%E5%8D%81%E4%B8%99%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E7%89%B9%E5%88%AB"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2562559/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/988223809_100158206"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"Long March 10B\" OR \"CZ-10B\" OR \"Changzheng 10B\" rocket",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.universetoday.com/articles/china-successfully-tests-reusable-long-march-10b"
+          },
+          {
+            "type": "url",
+            "url": "https://nextspaceflight.com/rockets/320"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://news.cgtn.com/news/2026-07-10/China-achieves-reusable-rocket-breakthrough-with-Long-March-10B-1OF9e3z0u2Y/p.html"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.orbitalintel.org/launch/long-march-10-explained/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/07/china-update-20261507/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n689/c2573694/content.html"
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2562559/content.html"
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-219 发动机 长征十号乙 OR YF-100K OR YF-100N 航天六院",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/en/item/YF-100K%20engine/5876985"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://futurephecda.com/news/19060"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html"
+      }
+    },
+    {
+      "id": "ws_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea_call-e4225cf6-a46c-43a1-8604-7b143aceb98e-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "先检索官方与权威媒体对“长征十号乙/CZ-10B”的命名与构型表述，并与长征十号、长征十号甲对照。",
+          "logprobs": [],
+          "annotations": []
+        }
+      ],
+      "id": "msg_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    },
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "已定位到火箭院官方页面与首飞通稿，下一步打开原文并核对发动机型号。",
+          "logprobs": [],
+          "annotations": []
+        }
+      ],
+      "id": "msg_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    },
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**结论先说：长征十号乙（CZ-10B）是官方单独定名的商业复用构型，不是“甲”的错字。** 它与长征十号（登月基本型）、长征十号甲（近地载人/货运）并列。制造商公开页确认了两级、5米直径、一子级液氧煤油、二子级液氧甲烷、首飞入轨并网系回收；**未在官方产品页给出发动机台数、YF-100各后缀、YF-219循环/推力工况表。** 百科与外媒的七机并联、YF-100N/P/L、YF-219 等细节**不能当作已由制造商发布的飞行状态参数**。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n482/n498/c2579124/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hant/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hant/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://finance.people.com.cn/BIG5/n1/2026/0710/c1004-40757775.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://finance.people.com.cn/BIG5/n1/2026/0710/c1004-40757775.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/Long_March_10B",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/Long_March_10B"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.china-in-space.com/p/china-recovers-rocket-booster-debuts",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.china-in-space.com/p/china-recovers-rocket-booster-debuts"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n689/c2573694/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n689/c2573694/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-cn/YF-100",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-cn/YF-100"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://global.hk01.com/%E5%8D%B3%E6%97%B6%E4%B8%AD%E5%9B%BD/60368904/%E9%95%BF%E5%8D%81%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%E6%88%90%E5%8A%9F%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6-%E5%AE%83%E4%B8%8E%E9%95%BF%E5%8D%81%E7%94%B2-%E9%95%BF%E5%8D%81%E4%B8%99%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E7%89%B9%E5%88%AB",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://global.hk01.com/%E5%8D%B3%E6%97%B6%E4%B8%AD%E5%9B%BD/60368904/%E9%95%BF%E5%8D%81%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%E6%88%90%E5%8A%9F%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6-%E5%AE%83%E4%B8%8E%E9%95%BF%E5%8D%81%E7%94%B2-%E9%95%BF%E5%8D%81%E4%B8%99%E7%9B%B8%E6%AF%94%E6%9C%89%E4%BD%95%E7%89%B9%E5%88%AB"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20230604A00W7200",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20230604A00W7200"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.universetoday.com/articles/china-successfully-tests-reusable-long-march-10b",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.universetoday.com/articles/china-successfully-tests-reusable-long-march-10b"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nasaspaceflight.com/2026/07/china-update-20261507/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nasaspaceflight.com/2026/07/china-update-20261507/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://ep.ycwb.com/epaper/ycwb/html/2026-07/11/content_2976_758682.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://ep.ycwb.com/epaper/ycwb/html/2026-07/11/content_2976_758682.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sohu.com/a/988223809_100158206",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sohu.com/a/988223809_100158206"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20240618A0AJ3D00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://spacelaunchnow.app/vehicle/launch_vehicle/554",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://spacelaunchnow.app/vehicle/launch_vehicle/554"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.baidu.com/link?url=xAJvbniJJgN-QGmmYj8OR0OOSIYqf5bkIHjSqa15bjj_5j_JRXAahIl2ZwlSGzMNT2ms2_51vPAvXP1-2lPyZJ6mThKyrdD7YdPbEDTa7Z_",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.baidu.com/link?url=xAJvbniJJgN-QGmmYj8OR0OOSIYqf5bkIHjSqa15bjj_5j_JRXAahIl2ZwlSGzMNT2ms2_51vPAvXP1-2lPyZJ6mThKyrdD7YdPbEDTa7Z_"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://futurephecda.com/news/19060",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://futurephecda.com/news/19060"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.gmw.cn/2026-07/11/content_38880000.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.gmw.cn/2026-07/11/content_38880000.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.orbitalintel.org/launch/long-march-10-explained/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.orbitalintel.org/launch/long-march-10-explained/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/YF-219",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/YF-219"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2562559/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n482/n498/c2562559/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.baidu.com/link?url=KaaR50uJST08j4XhHVxmZAwEImMMINCT13Jm5kM6nVQpD6Bwys0TpPT4Q090OVz5Yosq0e4DEY22Tsc2JaaBTPtUQvn69_7FGd_FGehKGIG",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.baidu.com/link?url=KaaR50uJST08j4XhHVxmZAwEImMMINCT13Jm5kM6nVQpD6Bwys0TpPT4Q090OVz5Yosq0e4DEY22Tsc2JaaBTPtUQvn69_7FGd_FGehKGIG"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nextspaceflight.com/rockets/320",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nextspaceflight.com/rockets/320"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.chinanews.com/wap/detail/cht/zwsp/10656656.shtml",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.chinanews.com/wap/detail/cht/zwsp/10656656.shtml"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/en/item/YF-100K%20engine/5876985",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/en/item/YF-100K%20engine/5876985"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://novosti-kosmonavtiki.ru/articles/212443/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://novosti-kosmonavtiki.ru/articles/212443/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/Long_March_10",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/Long_March_10"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.cgtn.com/news/2026-07-10/China-achieves-reusable-rocket-breakthrough-with-Long-March-10B-1OF9e3z0u2Y/p.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.cgtn.com/news/2026-07-10/China-achieves-reusable-rocket-breakthrough-with-Long-March-10B-1OF9e3z0u2Y/p.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://pandaily.com/long-march-10b-sea-net-recovery-rocket-jul2026",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://pandaily.com/long-march-10b-sea-net-recovery-rocket-jul2026"
+            }
+          ]
+        }
+      ],
+      "id": "msg_d1ea7047-ba82-9b4f-ba99-6236a7fdf5ea",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 71495,
+    "input_tokens_details": {
+      "cached_tokens": 30336
+    },
+    "output_tokens": 3422,
+    "output_tokens_details": {
+      "reasoning_tokens": 2859
+    },
+    "total_tokens": 74917,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 10,
+    "cost_in_usd_ticks": 901261200,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 10,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 42176,
+      "output_tokens": 2131
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

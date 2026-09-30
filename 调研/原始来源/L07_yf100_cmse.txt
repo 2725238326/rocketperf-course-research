@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--1-->
+<title>130吨级泵后摆高压补燃液氧煤油发动机关键技术研究_中国载人航天官方网站</title>
+<script type="text/javascript" src="../../../../../../images/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../../../../images/mobile_v2020.js"></script>
+<link class="stylefile" rel="stylesheet" type="text/css" href="../../../../../../images/base_v2020.css" />
+<link class="stylefile" rel="stylesheet" type="text/css" href="../../../../../../images/index_v2020.css" />
+<link class="stylefile" rel="stylesheet" type="text/css" href="../../../../../../images/cmse_fwr_pc_v2020.css" />
+<link class="mobileStyle" rel="stylesheet" type="text/css" href="../../../../../../images/base_mobile_v2020.css" />
+<link class="mobileStyle" rel="stylesheet" type="text/css" href="../../../../../../images/swiper.min_v2019.css" />
+<link class="mobileStyle" rel="stylesheet" type="text/css" href="../../../../../../images/cmse_fwr_mobile_v2020.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">
+<script type="text/javascript" src="../../../../../../images/jquery.SuperSlide.2.1.3.js"></script>
+<script type="text/javascript">
+        var isPC = IsPC(); //获取是否为PC端
+        if (isPC) { //如果是PC端加载PC的js和css
+            $(".mobileStyle").remove();
+            dynamicLoadJs('/images/base_v2020.js')
+        } else { //如果是移动端加载移动端的js和css
+            $(".stylefile").remove();
+            dynamicLoadJs('/images/swiper.min_v2019.js')
+            dynamicLoadJs('/images/base_mobile_v2020.js')
+            dynamicLoadJs('/images/cmse_fwr_mobile_v2020.js')
+        }
+    </script>
+</head>
+<body>
+<div class="top wzxqP"> <div class="header">
+  <div class="headerRBox">
+    <div class="indexSearchBox">
+      <form action="/qwjs/" method="get" onsubmit="return searchTest()">
+      <input class="indexSSubmit1" type="submit" value="" />
+      <input class="indexSText" type="text" autocomplete="off" name="searchword" value="请输入内容..." onFocus="if(this.value==this.defaultValue){this.value='';}" onBlur="if(this.value==''||this.value==this.defaultValue){this.value=this.defaultValue;}" />
+      <input class="indexSSubmit2" type="submit" value="搜索" />
+       </form>
+    </div>
+    <ul class="headerIconUl">
+      <li class="headerIconLi1"><a href="http://mail.cmse.gov.cn/" target="_blank">邮箱</a></li>
+      <li class="headerIconLi2"><a href="http://en.cmse.gov.cn/" target="_blank">English</a></li>
+      <li class="headerIconLi3"><a></a><span></span></li>
+      <li class="headerIconLi4"><a></a><span></span></li>
+      <li class="headerIconLi5"><a></a><span></span></li>
+    </ul>
+  </div>
+  <a class="headerLogo" href="/"><img src="/images/indexImg1400_20200220_03.png" /></a> </div>
+<!--pc导航 开始-->
+<ul class="nav" id="daohang1">
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/xwzx/" target="_parent">新闻中心</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/xwzx/zhxw/" target="_parent">综合新闻<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/xwzx/yzjz/" target="_parent">研制进展<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/gygc/" target="_parent">关于工程</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/gygc/gcjj/" target="_parent">工程简介<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/gygc/xtzc/" target="_parent">系统组成<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/gygc/zzgl/" target="_parent">组织管理<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/gygc/gcwh/" target="_parent">工程文化<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/gygc/zscq/" target="_parent">知识产权<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/gfgg/" target="_parent">官方公告</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/gfgg/zgkjzgdcs/" target="_parent">中国空间站轨道参数<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/fxrw/" target="_parent">飞行任务</a>
+    <div class="navLiBox">
+
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/kjkx/" target="_parent">空间科学</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/kjkx/kjkxyjyyy/" target="_parent">空间科学研究与应用<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kjkx/htjssy/" target="_parent">航天技术试验<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kjkx/htyxsy/" target="_parent">航天医学实验<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kjkx/htyzdz/" target="_parent">航天育种搭载实验<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/gjhz/" target="_parent">国际合作</a>
+    <div class="navLiBox">
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/hqsy/" target="_parent">环球视野</a>
+    <div class="navLiBox">
+
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/ztbd/" target="_parent">专题报道</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/ztbd/xwfbh/" target="_parent">新闻发布会<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/ztbd/xsnh/" target="_parent">学术大会<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/ztbd/bz/" target="_parent">标准<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/ztbd/xwzt/" target="_parent">新闻专题<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/kpjy/" target="_parent">科普教育</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/kpjy/tgkt/" target="_parent">天宫课堂<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kpjy/kphd/" target="_parent">科普活动<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kpjy/tkkt/" target="_parent">太空课堂<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/kpjy/htzs/" target="_parent">航天知识<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/dmt/" target="_parent">多媒体</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/dmt/tgtv/" target="_parent">天宫TV<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/dmt/dhhsp/" target="_parent">视频<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/dmt/tj/" target="_parent">图片<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/dmt/cbw/" target="_parent">出版物<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/dmt/bqsm/" target="_parent">版权说明<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/hdjl/" target="_parent">互动交流</a>
+    <div class="navLiBox">
+         
+           <p><a href="https://www.cmse.gov.cn/hdjl/bszjhd/" target="_parent">载人航天飞行任务标识征集活动<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/hdjl/wzjy/" target="_parent">网站寄语<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/hdjl/lyjx/" target="_parent">留言精选<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/hdjl/zxly/" target="_parent">在线留言<i></i></a></p>
+         
+           <p><a href="https://www.cmse.gov.cn/hdjl/zb/" target="_parent">直播<i></i></a></p>
+         
+    </div>
+  </li>
+  <li><a class="navLiA" href="https://www.cmse.gov.cn/lxwm/" target="_parent">联系我们</a>
+    <div class="navLiBox">
+         
+    </div>
+  </li>
+</ul>
+<!--pc导航 结束-->
+<!--移动端导航 开始-->
+<div class="hjbWap-nav swiper-container1">
+  <ul class=" wapIndex-nav swiper-wrapper" id="daohang2">
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/xwzx/">新闻中心</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/gygc/">关于工程</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/gfgg/">官方公告</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/fxrw/">飞行任务</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/kjkx/">空间科学</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/gjhz/">国际合作</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/hqsy/">环球视野</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/ztbd/">专题报道</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/kpjy/">科普教育</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/dmt/">多媒体</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/hdjl/">互动交流</a></li>
+    <li class="swiper-slide"><a href="https://www.cmse.gov.cn/lxwm/">联系我们</a></li>
+  </ul>
+  <i></i> </div>
+<script>
+                       function searchTest(){
+                            //alert("功能维护中...");
+                            //return false;
+                             if($(".indexSText").val()=="" || $(".indexSText").val()=="请输入内容..."){
+                                alert("请输入检索词");
+                                return false;
+                            }
+                         }
+</script> </div>
+<!-- 内容区开始 -->
+<div class="artDet_crumbs">
+  <div class="cru">
+    <a href="../../../../../../" title="首页" class="CurrChnlCls">首页</a>&nbsp;&gt;&nbsp;<a href="../../../../../" title="多媒体" class="CurrChnlCls">多媒体</a>&nbsp;&gt;&nbsp;<a href="../../../../" title="出版物" class="CurrChnlCls">出版物</a>&nbsp;&gt;&nbsp;<a href="../../../" title="载人航天" class="CurrChnlCls">载人航天</a>&nbsp;&gt;&nbsp;<a href="../../" title="2022年" class="CurrChnlCls">2022年</a>&nbsp;&gt;&nbsp;<a href="../" title="2022年第四期" class="CurrChnlCls">2022年第四期</a>
+  </div>
+</div>
+<div class="mainCon wzxq" style="min-height:700px">
+  <div class="title"> 130吨级泵后摆高压补燃液氧煤油发动机关键技术研究 </div>
+  <div class="info">
+    <div class="pubDate">发布日期: <span>2023-02-21</span></div>
+<!--中国载人航天工程网-->
+<div class="source">信息来源: <span>中国载人航天工程网</span></div>
+<!---->
+
+    <div class="fontS mobile_none"> 字号:<span class="fontSpan"> [大]</span> <span class="fontSpan ">[中]</span> <span class="fontSpan active">[小]</span> <span  onclick="window.print()">[打印]</span> </div>
+  </div>
+  <div class="article" style="display:none"> 
+      <div class=TRS_Editor>【摘要】130吨级泵后摆高压补燃液氧煤油发动机是中国首型泵后摆大推力液体火箭发动机。对燃气摇摆装置、燃料摇摆装置等核心组件开展技术研究和试验验证,关键技术包括总体布局技术,摇摆补偿装置技术,大范围快速高精度推力调节技术,氧泵减振技术,系统稳定性技术等。可满足5m箭径内布置7 台发动机,解决了摇摆偏心问题,使摇摆力矩降低50%,发动机结构一阶频率提高至14Hz。已完成逾1万秒整机热试车考核,验证了发动机泵后摆技术的可靠性和稳定性。130吨发动机技术可进一步拓展形成二级主动力发动机和重复使用发动机。拓展火箭运载能力。
+<div>【关键词】<span style="font-size: 12pt;">载人运载火箭；泵后摆；液氧煤油发动机；关键技术</span></div>
+<div>【作者】李 斌，刘站国，吕发正，高乐乐，张森</div></div>
+<div class="pageSource_all"></div>
+ </div>
+</div>
+<!-- 内容区结束 -->
+<script>
+       $(function(){
+            $(".article .footer").remove()
+
+             if($(".nav").width() == "1200"){
+                 var fontArr = [20,18,16]
+             }else{
+                 var fontArr = [22,20,18]
+             }
+             $(".wzxq .article").css("font-size",fontArr[2]);
+             $(".fontS .fontSpan").click(function(){
+                  $(".fontS .fontSpan").removeClass("active");
+                  $(this).addClass("active");
+                  $(".wzxq .article").css("font-size",fontArr[$(this).index()])
+             })
+
+
+                  //适配table 宽度超出问题
+      setTimeout(function(){  
+           var winWidth=($(".article").width()); 
+           $("table").each(function(i){ 
+           var thisWidth = ($(this).width());
+           if(winWidth<thisWidth ){
+               $(this).css({'zoom':winWidth/thisWidth});
+           }  
+         }); 
+     },200) 
+     
+
+  //适配table 无边框问题
+   /* setTimeout(function(){  
+           $("table").each(function(i){ 
+               var borderL = $(this).find("td").css("border-left");
+               var borderR = $(this).find("td").css("border-right");
+               var borderT = $(this).find("td").css("border-top");
+               var borderB = $(this).find("td").css("border-bottom");
+               if(borderL.indexOf("0px")>-1&&borderR.indexOf("0px")>-1&&borderT.indexOf("0px")>-1&&borderB.indexOf("0px")>-1){
+                       $(this).css({"border-left":"1px solid #333","border-top":"1px solid #333"})
+                       $(this).find("td").css({"border-right":"1px solid #333","border-bottom":"1px solid #333"})
+                 }
+           }); 
+     },200) */
+
+
+//去除正文分享代码
+$("#dochtmlcon").find(".share").remove();
+
+ //去掉空格的
+       var htm=$(".article").html();
+       htm=htm.replace(/&nbsp;/ig, "");
+       htm=htm.replace(/　　/ig,'');
+       htm=htm.replace(/　/ig,'');
+       htm=htm.replace(/——;/ig,'——');
+
+       htm=htm.replace(/<\/div>/g, "</div><p>");
+  htm=htm.replace(/<br>/g, "</p ><p>");
+  htm='<p>'+htm+'</p >';
+
+        $(".article").html(htm);
+        $(".article p").each(function(){
+          if($(this).attr("style") && $(this).attr("style")!=""){
+            var thisAlign = $(this).css("text-align");
+            if(thisAlign!=""&&thisAlign){
+                $(this).attr("align",thisAlign)
+            }
+          }
+          var thisP = $(this).html();
+          $(this).html(thisP.replace(/<br>/g, "")); 
+          var thisPNbsp = thisP.replace(/&nbsp;/g,'');
+          thisPNbsp = thisPNbsp.replace(/[\r\n]/g,"");  
+          if(thisPNbsp.length==0){
+            $(this).remove();
+          }
+        })
+        $(".article div").each(function(){
+          if($(this).attr("style") && $(this).attr("style")!=""){
+            var thisAlign = $(this).css("text-align");
+            if(thisAlign!=""&&thisAlign){
+                $(this).attr("align",thisAlign)
+            }
+          }
+          var thisP = $(this).html();
+          $(this).html(thisP.replace(/<br>/g, "")); 
+          var thisPNbsp = thisP.replace(/&nbsp;/g,'');
+          thisPNbsp = thisPNbsp.replace(/[\r\n]/g,"");  
+          if(thisPNbsp.length==0){
+            $(this).remove();
+          }
+        })
+        $(".article").find("*").removeAttr("style"); 
+        
+        if($(".article .content")){
+           var className = ".article .content"
+        }else if($(".article .main")){
+           var className = ".article .main"
+        }else{
+           var className = ".article"
+        }
+
+
+        var articleDiv = 0;
+        var articleP = 0;
+        var articleSpan = 0;
+        var articleA = 0;
+        var articleFont = 0;
+
+        var articleDivIf = "flase";
+        var articlePIf = "flase";
+        var articleSpanIf = "flase";
+        var articleAIf = "flase";
+        var articleFontIf = "flase";
+
+        $(".article p").each(function(){
+            
+            var articlePText = $(this).text();
+            if(articlePText.indexOf("信息来源")>-1 && ($(this).hasClass('pagesource') || $(this).hasClass('pageSource'))){
+                 $(this).remove()
+            }
+            if(articlePText.indexOf("相关推荐")>-1  && $(this).hasClass('name') ){
+                 $(this).remove()
+            }
+            if(articlePText.indexOf("责任编辑")>-1  && ($(this).hasClass('pagesource1') || $(this).hasClass('pageSource1')) ){
+                 $(this).css({"text-align":"right","text-indent":"0"})
+            }
+            if($(this).attr('align') == "center" ){
+                 $(this).css({"text-align":"center","text-indent":"0"})
+            }
+            if($(this).attr('align') == "right" ){
+                 $(this).css({"text-align":"right","text-indent":"0"})
+            }
+            if($(this).find("img").length>0 && $(this).next().find("strong").length>0){
+               $(this).next().css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            if($(this).find("img").length>0 && $(this).next().find("b").length>0){
+               $(this).next().css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            if($(this).find("img").length>0 && $(this).find("a").length>0 && $(this).find("a img").length==0 && $(this).find("p").length==0 && $(this).find("div").length==0){
+               $(this).find("img").css({"display":"inline-block"})
+            }
+            if($(this).find("p").length==0 && $(this).find("div").length==0 && $(this).find("img").length>0 ){
+               $(this).css({"text-indent":"0"})
+            }
+            if(articlePText.indexOf("点击下载高清图片")>-1&& $(this).find("p").length==0 && $(this).find("div").length==0){
+                $(this).css({"text-align":"center","text-indent":"0"})
+            }
+            if($(this).find("p").length==0 && $(this).find("div").length==0 && (articlePText.indexOf("图为")>-1 || articlePText.indexOf("图片：")>-1 || articlePText.indexOf("图：")>-1 || articlePText.indexOf("图1")>-1  || articlePText.indexOf("图2")>-1  || articlePText.indexOf("图3")>-1  || articlePText.indexOf("图4")>-1  || articlePText.indexOf("图5")>-1  || articlePText.indexOf("图6")>-1  || articlePText.indexOf("图7")>-1  || articlePText.indexOf("图8")>-1  || articlePText.indexOf("图9")>-1  || articlePText.indexOf("图10")>-1  || articlePText.indexOf("图11")>-1  || articlePText.indexOf("图12")>-1  || articlePText.indexOf("图13")>-1  || articlePText.indexOf("图14")>-1  || articlePText.indexOf("图15")>-1)){
+                 $(this).css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            articleP++
+            if(articleP >= $(".article p").length){
+                articlePIf = "true";
+            }
+        })
+        
+        
+        $(".article div").each(function(){
+            
+            var articlePText = $(this).text();
+            if(articlePText.indexOf("信息来源")>-1 && ($(this).hasClass('pagesource') || $(this).hasClass('pageSource'))){
+                 $(this).remove()
+            }
+            if(articlePText.indexOf("相关推荐")>-1  && $(this).hasClass('name') ){
+                 $(this).remove()
+            }
+            if(articlePText.indexOf("责任编辑")>-1  && ($(this).hasClass('pagesource1') || $(this).hasClass('pageSource1')) ){
+                 $(this).css({"text-align":"right","text-indent":"0"})
+            }
+            if($(this).attr('align') == "center" ){
+                 $(this).css({"text-align":"center","text-indent":"0"})
+            }
+            if($(this).attr('align') == "right" ){
+                 $(this).css({"text-align":"right","text-indent":"0"})
+            }
+            if($(this).find("img").length>0 && $(this).next().find("strong").length>0){
+               $(this).next().css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            if($(this).find("img").length>0 && $(this).next().find("b").length>0){
+               $(this).next().css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            if($(this).find("img").length>0 && $(this).find("a").length>0 && $(this).find("a img").length==0 && $(this).find("p").length==0 && $(this).find("div").length==0){
+               $(this).find("img").css({"display":"inline-block"})
+            }
+            if($(this).find("p").length==0 && $(this).find("div").length==0 && $(this).find("img").length>0 ){
+               $(this).css({"text-indent":"0"})
+            }
+            if(articlePText.indexOf("点击下载高清图片")>-1&& $(this).find("p").length==0 && $(this).find("div").length==0){
+                $(this).css({"text-align":"center","text-indent":"0"})
+            }
+            if($(this).find("p").length==0 && $(this).find("div").length==0 && (articlePText.indexOf("图为")>-1 || articlePText.indexOf("图片：")>-1 || articlePText.indexOf("图：")>-1 || articlePText.indexOf("图1")>-1  || articlePText.indexOf("图2")>-1  || articlePText.indexOf("图3")>-1  || articlePText.indexOf("图4")>-1  || articlePText.indexOf("图5")>-1  || articlePText.indexOf("图6")>-1  || articlePText.indexOf("图7")>-1  || articlePText.indexOf("图8")>-1  || articlePText.indexOf("图9")>-1  || articlePText.indexOf("图10")>-1  || articlePText.indexOf("图11")>-1  || articlePText.indexOf("图12")>-1  || articlePText.indexOf("图13")>-1  || articlePText.indexOf("图14")>-1  || articlePText.indexOf("图15")>-1)){
+                 $(this).css({"text-align":"center","text-indent":"0","padding":"0 10%"})
+            }
+            articleDiv++
+            if(articleDiv >= $(".article div").length){
+                articleDivIf = "true";
+            }
+        })
+       
+       $(".article").find("span").each(function(){
+            var idName = $(this).attr("id");
+           if(idName && idName !=""){
+            if(idName.indexOf("baidu_bookmark") > -1){
+               $(this).remove()
+            }
+           }
+            articleSpan++
+            if(articleSpan >= $(".article span").length){
+                articleSpanIf = "true";
+            }
+       })
+
+       $(".article").find("a").each(function(){
+           var articleAText = $(this).text();
+            if(articleAText .indexOf("打印本页")>-1 ){
+                 $(this).remove()
+            }
+            if(articleAText .indexOf("关闭窗口")>-1  ){
+                 $(this).remove()
+            }
+            articleA++
+            if(articleA >= $(".article a").length){
+                articleAIf = "true";
+            }
+       })
+
+       $(".article").find("font").each(function(){
+           $(this).removeAttr("size");
+           articleFont++
+            if(articleFont >= $(".article font").length){
+                articleFontIf = "true";
+            }
+       })
+     
+     var interval = setInterval(function(){
+      if(articleFontIf && articleAIf && articleSpanIf && articleDivIf && articlePIf){
+        $(".article").show()  
+        clearInterval(interval);    
+      }
+     }, 1);
+
+       })
+    </script>
+
+       <!-- 开始提取文件附件里的文件附件--> 
+<script language="JavaScript" type="text/javascript"> 
+
+
+var appfiles=''; 
+var appurls=''; 
+
+var myappfile=appfiles.split("|"); 
+var myappurl=appurls.split("|"); 
+
+if (myappfile!=''){ 
+  var str = "";
+  for (var n=0;n<myappfile.length;n++){ 
+      str += '<div class="article articleFj"><span style="padding:15px 0 10px;display:block;">附件'+(n+1)+'：</span><p height="23" align="left" valign="middle">'+'<a href="'+myappurl[n]+'" target="_blank">'+myappfile[n]+'</a></p></div>' 
+  } 
+ $(".article").append(str);
+} 
+</script> 
+
+<!-- 结束提取文件附件里的文件附件--> 
+<script>
+$(document).ready(function(){
+//导航选中状态
+var chnlUrl=window.location.pathname;
+if(chnlUrl.indexOf("/xwzx/")!==-1){
+$("#daohang1").children().eq(0).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(0).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/gygc/")!==-1){
+$("#daohang1").children().eq(1).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(1).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/gfgg/")!==-1){
+$("#daohang1").children().eq(2).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(2).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/fxrw/")!==-1){
+$("#daohang1").children().eq(3).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(3).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/kjkx/")!==-1){
+$("#daohang1").children().eq(4).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(4).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/gjhz/")!==-1){
+$("#daohang1").children().eq(5).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(5).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/hqsy/")!==-1){
+$("#daohang1").children().eq(6).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(6).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/ztbd/")!==-1){
+$("#daohang1").children().eq(7).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(7).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/kpjy/")!==-1){
+$("#daohang1").children().eq(8).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(8).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/dmt/")!==-1){
+$("#daohang1").children().eq(9).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(9).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/hdjl/")!==-1){
+$("#daohang1").children().eq(10).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(10).addClass("active").siblings().removeClass("active")
+}else if(chnlUrl.indexOf("/lxwm/")!==-1){
+$("#daohang1").children().eq(11).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(11).addClass("active").siblings().removeClass("active")
+}/*else{
+$("#daohang1").children().eq(0).addClass("active").siblings().removeClass("active")
+$("#daohang2").children().eq(0).addClass("active").siblings().removeClass("active")
+}*/
+
+});
+</script>
+<!--底部 开始-->
+<div class="footer"> <img class="footerBgImg" src="/images/indexImg20200215_2_09.jpg" />
+  <div class="footerBox">
+    <div class="footerL">
+      <h2>友情链接</h2>
+      <ul class="footerYqUl">
+        
+		<li><a href="http://www.beidou.gov.cn/" target="_blank">北斗卫星导航系统</a></li>
+		
+		<li><a href="http://www.spacechina.com/n25/index.html" target="_blank">中国航天科技集团有限公司</a></li>
+		
+		<li><a href="http://www.casic.com.cn/" target="_blank">中国航天科工集团有限公司</a></li>
+		
+		<li><a href="http://www.cetc.com.cn/" target="_blank">中国电子科技集团有限公司</a></li>
+		
+		<li><a href="http://www.cas.cn/" target="_blank">中国科学院</a></li>
+		
+		<li><a href="http://www.msadc.cn/main/home" target="_blank">载人航天工程空间科学与应用数据共享服务平台</a></li>
+		
+		<li><a href="http://www.clep.org.cn/" target="_blank">中国探月与深空探测</a></li>
+		
+		<li><a href="http://www.sastind.gov.cn/n25770/index.html" target="_blank">中国高分辨率对地观测系统</a></li>
+		
+		<li><a href="http://www.nasa.gov/" target="_blank">美国国家航空航天局（NASA）</a></li>
+		
+		<li><a href="https://www.esa.int/ESA" target="_blank">欧洲航天局官网（ESA）</a></li>
+		
+		<li><a href="https://www.roscosmos.ru/" target="_blank">俄罗斯航天国家集团（ROSCOSMOS）</a></li>
+		
+      </ul>
+      <div class="footerLB"> <a class="footerLBLImgYd" href="####"> <img src="/images/indexYdImg_20200215_15.png" /> </a> <a class="footerLBLImg" href="####"> <img src="/images/indexFooterImgL_03.png" /> </a>
+        <div class="footerLBR">
+          <ul class="footerLBRUl">
+            <li><a href="http://www.cmse.gov.cn/hdjl/zxly/">在线留言</a></li>
+            <li><a href="http://www.cmse.gov.cn/lxwm/">联系我们</a></li>
+            <li><a href="http://mail.cmse.gov.cn/">邮箱登录</a></li>
+            <!--<li><a href="http://www.cmse.gov.cn/gywz/wzsm/">网站声明</a></li>
+            <li></li>
+            <li><a href="####">纠错</a></li>-->
+          </ul>
+          <p class="footerLBRP"> <span><i>版权所有：</i>中国载人航天工程官方网站</span> <span><i>主办方：</i>中国载人航天工程办公室</span> <span><i>备案序号：</i><a  target="_blank" href="https://beian.miit.gov.cn" style="color:#dee9f1;">京ICP备20027467号-1</a></span> </p>
+        </div>
+        <i class="goTop"></i> </div>
+    </div>
+    <div class="footerR"> <a> <img src="/images/indexImg20200215_80.png" /> <span>载人航天官方微信</span> </a> <a> <img src="/images/index_ewmWbDb_03.jpg" /> <span>载人航天小喇叭</span> </a> </div>
+  </div>
+</div>
+<!-- 栏目统计代码：PHPStat Start 
+<script language="javascript">var __$nodeid='614';</script>
+<script language="JavaScript" charset="utf-8" src="//statistics.cmse.gov.cn/phpstat/count/10000001/10000001.js"></script>-->
+<!-- /PHPStat End -->
+<!--底部 结束-->
+<script>
+$(function () {
+    $("[href='####']").removeAttr("href");
+});
+</script>
+<!-- PHPStat Start -->
+<script language="javascript">var __$nodeid='1000';var __$contentid='52733';var __$title='130吨级泵后摆高压补燃液氧煤油发动机关键技术研究';var __$AuthorPh='';var __$Editor='';var __$Liability='刘泽康';var __$pubtime='2023-02-21 15:20:00';var __$source='中国载人航天工程网';
+</script>
+<script language="JavaScript" charset="utf-8" src="//statistics.cmse.gov.cn/phpstat/count/10000001/10000001.js"></script>
+<!-- /PHPStat End -->
+</body>
+</html>

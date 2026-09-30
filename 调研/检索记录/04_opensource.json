@@ -1,0 +1,1184 @@
+{
+  "topic": "04_opensource",
+  "retrieved_at": "2026-09-29T16:04:11.9283100+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "核查开源工具能否支持C语言火箭发动机性能课程项目。优先官方仓库README、LICENSE、文档、发行记录，覆盖NASA CEA最新公开版本、sonofeft/RocketCEA、sonofeft/RocketIsp、Cantera、CoolProp、OpenMDAO/pyCycle、DLR EcosimPro相关开源替代或真正的液体火箭循环开源项目（找得到才列）。每个记录：仓库URL、许可证（未知别猜）、核心实现语言、C API是否存在及稳定状态、实际能力/不覆盖的问题、维护证据（只写能核实的日期）、安装依赖、对本作业适配。注意新版NASA CEA可能有C接口，但C接口不等于C核心；pyCycle以航空燃气轮机循环为主，不能说开箱即用适配液体火箭。找到真实火箭循环项目则评估成熟度，不以star数代替验证。项目多则优先深查CEA、RocketCEA、Cantera、一个火箭循环项目，其余给适用边界，6-8个足够。\n",
+  "search_calls": [
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NASA CEA Chemical Equilibrium Applications latest version C interface GitHub official",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/"
+          },
+          {
+            "type": "url",
+            "url": "https://cearun.grc.nasa.gov/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/installation.html"
+          },
+          {
+            "type": "url",
+            "url": "https://software.nasa.gov/software/LEW-20586-1"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea/tree/main/source"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/interfaces/excel_api.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/quick_start.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "sonofeft RocketCEA GitHub README LICENSE CEA wrapper C API",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA"
+          },
+          {
+            "type": "url",
+            "url": "https://rocketcea.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst"
+          },
+          {
+            "type": "url",
+            "url": "https://pypi.org/project/rocketcea/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft"
+          },
+          {
+            "type": "url",
+            "url": "https://libraries.io/pypi/rocketcea"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/std_examples.rst"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "sonofeft RocketIsp GitHub README LICENSE rocket engine performance",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketIsp"
+          },
+          {
+            "type": "url",
+            "url": "https://rocketisp.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp/efficiency"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketIsp/blob/master/docs/efficiencies.rst"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA"
+          },
+          {
+            "type": "url",
+            "url": "https://rocketisp.readthedocs.io/en/latest/models.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Cantera GitHub LICENSE C API rocket combustion equilibrium",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/cantera/cantera"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/kyleniemeyer/RoCt"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/Cantera/cantera/blob/main/License.txt"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/nasa/cea"
+          },
+          {
+            "type": "url",
+            "url": "https://cantera.org/~speth/doxysphinx-trial/cython/importing.html"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/Cantera/api-docs"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cantera.org/stable/reference/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/Cantera/cantera/blob/main/samples/cxx/combustor/combustor.cpp"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "CoolProp GitHub LICENSE C API thermodynamic properties rocket propellant",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/coolprop/coolprop"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/CoolProp"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/CoolProp/CoolProp.jl"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/orgs/CoolProp/repositories"
+          },
+          {
+            "type": "url",
+            "url": "https://coolprop.org/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/Cubics.rst"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/CoolProp/CoolProp/blob/CMakeDevelopment/include/CoolProp.h"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/HighLevelAPI.rst"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "OpenMDAO pyCycle GitHub gas turbine vs liquid rocket cycle open source liquid rocket engine cycle simulation",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/Jhawk414/F404"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/2226-4310/6/8/87"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/ask-hovik/pyskyfire"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=4GdHkPpi9AE"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/2226-4310/6/8/87"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/OpenMDAO/pyCycle/tree/master/example_cycles"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/397967392_Multidisciplinary_Design_Optimization_of_a_Turbofan_Engine_Using_pyCycle_and_OpenMDAO"
+          },
+          {
+            "type": "url",
+            "url": "https://relatedrepos.com/gh/OpenMDAO/pyCycle"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchsquare.com/article/rs-8123081/'https://www.researchsquare.com/article/rs-8123081/v1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/nasa/cea"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://nasa.github.io/cea/installation.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:nasa.github.io/cea C API Fortran CEA_ENABLE_BIND_C LICENSE Apache",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/installation.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/interface_index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/developer_guide.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/quick_start.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/interfaces/fortran_api.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/interfaces/excel_api.html"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/_sources/index.rst.txt"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/_sources/interfaces/python_api.rst.txt"
+          },
+          {
+            "type": "url",
+            "url": "https://nasa.github.io/cea/interfaces/python_api.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/ask-hovik/pyskyfire"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/Cantera/cantera"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "open source liquid rocket engine cycle simulation GitHub ESPSS EcosimPro alternative rocketcea LICENSE CoolProp CoolPropLib.h C API",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://github.com/ask-hovik/pyskyfire"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/coolprop/coolprop"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/280736761_Multi-Disciplinary_Propulsion_Simulations_at_Engineering_Level_by_means_of_the_European_Space_Propulsion_System_Simulation_ESPSS"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/sonofeft/RocketCEA"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/janstruzinski/RocketCycles"
+          },
+          {
+            "type": "url",
+            "url": "https://ecosimpro.com/products/espss/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/301892999_ESPSS_Simulation_Platform"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/orgs/CoolProp/repositories"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SpaceEngineerSS/EnSim"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://nasa.github.io/cea/interface_index.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-13",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/nasa/cea/blob/main/LICENSE.txt"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-14",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-15",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.cantera.org/stable/reference/"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-16",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/janstruzinski/RocketCycles"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-17",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-18",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://nasa.github.io/cea/interfaces/c_api.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-19",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://raw.githubusercontent.com/nasa/cea/main/LICENSE.txt"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-20",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/nasa/cea/blob/main/CHANGELOG.md"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-21",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://cantera.org/stable/clib/index.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-22",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://rocketcea.readthedocs.io/en/latest/quickstart.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-23",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/ask-hovik/pyskyfire/blob/main/CHANGELOG.md"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-24",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/OpenMDAO/pyCycle/blob/master/LICENSE.txt"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-25",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/LICENSE"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-26",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://coolprop.org/coolprop/wrappers/C/index.html"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-27",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/Cantera/cantera/releases"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-28",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://ecosimpro.com/products/espss/"
+      }
+    },
+    {
+      "id": "ws_ece4ff86-6fcc-9331-b37d-612c53146b2e_call-38cdd095-fc31-4e11-b3a1-3f1c93fa1a14-29",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://pypi.org/project/rocketisp/"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "先检索官方仓库与文档入口，再打开 README、LICENSE 与发行记录核对 C API 与液体火箭适配边界。",
+          "logprobs": [],
+          "annotations": []
+        }
+      ],
+      "id": "msg_ece4ff86-6fcc-9331-b37d-612c53146b2e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    },
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "已定位官方入口。接下来打开 README、LICENSE、C 接口文档和液体火箭循环项目页面核对实现语言与维护日期。",
+          "logprobs": [],
+          "annotations": []
+        }
+      ],
+      "id": "msg_ece4ff86-6fcc-9331-b37d-612c53146b2e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    },
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "继续打开 C 接口、LICENSE、发行记录和液体火箭循环项目文档，核对核心语言与维护日期。",
+          "logprobs": [],
+          "annotations": []
+        }
+      ],
+      "id": "msg_ece4ff86-6fcc-9331-b37d-612c53146b2e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    },
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**结论（截至2026-09-29）：** C语言火箭发动机**理论性能**课程作业可以做，最直接路径是官方 **NASA CEA v3** 的 **C绑定**（Fortran 2008核心 + C API，含 `cea_rocket_solver`）。C接口≠C核心。液体火箭**循环**（泵/涡轮/再生冷却闭环）没有成熟、可核验的C核心开源库；能找到的循环项目是Python。EcosimPro/ESPSS不是开源替代。pyCycle明确面向喷气发动机，不能当液体火箭循环开箱即用。\n\n## 资料表\n\n| 项目 | 仓库 | 许可证 | 核心语言 | C API | 能力/缺口 | 可核实维护 | 安装依赖 | 对本作业 |\n|---|---|---|---|---|---|---|---|---|\n| NASA CEA v3 | https://github.com/nasa/cea | Apache-2.0（LICENSE.txt正文） | Fortran 2008 | 有：C绑定Fortran API；`core-c`预设；文档标部分函数deprecated | 化学平衡、理论火箭性能、爆轰、激波；非泵/涡轮循环 | 文档3.3.4；CHANGELOG `[3.3.4] - 2026-08-28`；NESC TB 2026-08-21 | 源码：gfortran≥10或ifort 2021+、CMake≥3.19；Python包需3.11+ | **首选C调用库** |\n| RocketCEA | https://github.com/sonofeft/RocketCEA | GPL-3.0 | Python + 修改后的遗留CEA2 Fortran（f2py） | 无官方C API | rocket模式Isp/C*/Tcham等；非nasa/cea v3；非全循环 | PyPI 1.2.3，Released Jan 19, 2026 | numpy/matplotlib；源码需gfortran；Win可预编译wheel | 不适配纯C作业；copyleft |\n| RocketIsp | https://github.com/sonofeft/RocketIsp | GPL-3.0 | Python | 无 | 简化JANNAF交付Isp；依赖RocketCEA+RocketProps | 文档页标注2026-07-19 | Python；间接依赖RocketCEA | 只作交付Isp参考，非C库 |\n| Cantera | https://github.com/Cantera/cantera | BSD-3-Clause（License.txt） | C++ | 有，但官方写experimental；3.2 generated CLib；legacy将于3.3删除 | 平衡/动力学/输运/反应器；无官方火箭性能模块 | 稳定版3.2.0（发布页2025-11-18）；README写dev 4.0.0a2 | pip/conda或SCons编译 | 可做平衡对照；C API不稳定 |\n| CoolProp | https://github.com/CoolProp/CoolProp | MIT | C++ | 共享库C API：`CoolPropLib.h` | 流体热物性（类REFPROP）；不做CEA式火箭性能 | 文档8.0.0（2026-06-27）；组织页更新2026-09-28 | CMake；Python可用pip | 只适合物性，不替代CEA |\n| OpenMDAO/pyCycle | https://github.com/OpenMDAO/pyCycle | 有LICENSE.txt，**本次未能读正文，不猜** | Python（OpenMDAO） | 无 | README写primarily jet engine；例程为涡喷/涡扇 | README自身未给提交日 | `pip install om-pycycle`；依赖OpenMDAO | **非液体火箭循环** |\n| Pyskyfire | https://github.com/ask-hovik/pyskyfire | MIT | Python | 无 | 再冷液体火箭+循环；热气用官方`cea`包；CoolProp冷却剂 | CHANGELOG `[0.3.0] - 30-08-2026` | Python≥3.12；`uv pip install pyskyfire` | 循环算法参考，不能C链接 |\n| RocketCycles | https://github.com/janstruzinski/RocketCycles | GPL-3.0 | Python | 无 | 分级燃烧稳态循环；明确不做瞬态/管道摩擦等 | README未给发布日；仅见78 commits | pip git安装；nasaPoly、CoolProp/PyFluids、RocketCEA | 循环参考；GPL+Python |\n| ESPSS/EcosimPro | 非GitHub产品页 | 非开源 | EcosimPro环境 | 不适用 | 官方写仅ESA成员国机构可用 | 检索摘要2025-04-21 | 商业/ESA渠道 | **不能当开源替代** |\n\n## 1. NASA CEA v3（应深查）\n\n官方仓库与文档把v3写成对原CEA的**完整重写**，目标是现代工程实践和多语言API。核心在 `source/`，可见 `cea.f90`、`equilibrium.f90`、`rocket.f90` 等Fortran文件。开发者指南写明：`source/` 是 Fortran 2008 实现；`source/bind/` 是 Python/C 绑定，经 Cython/C-API 包Fortran核心。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://rocketisp.readthedocs.io/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://rocketisp.readthedocs.io/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/OpenMDAO/pyCycle/tree/master/example_cycles",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/OpenMDAO/pyCycle/tree/master/example_cycles"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Cantera/cantera/releases",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Cantera/cantera/releases"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Cantera/cantera/blob/main/License.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Cantera/cantera/blob/main/License.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://pypi.org/project/rocketcea/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://pypi.org/project/rocketcea/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Cantera/cantera/blob/main/samples/cxx/combustor/combustor.cpp",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Cantera/cantera/blob/main/samples/cxx/combustor/combustor.cpp"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/_sources/index.rst.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/_sources/index.rst.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://ecosimpro.com/products/espss/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://ecosimpro.com/products/espss/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp/efficiency",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp/efficiency"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/_sources/interfaces/python_api.rst.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/_sources/interfaces/python_api.rst.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://coolprop.org/coolprop/wrappers/C/index.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://coolprop.org/coolprop/wrappers/C/index.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/OpenMDAO/pyCycle/blob/master/README.md"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/nasa/cea",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/nasa/cea"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/installation.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/installation.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketIsp/tree/master/rocketisp"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nasa.gov/centers-and-facilities/nesc/tb-26-04-updates-and-modernization-of-nasas-chemical-equilibrium-with-applications-cea-code/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/faq.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/faq.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/interfaces/fortran_api.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/interfaces/fortran_api.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/janstruzinski/RocketCycles",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/janstruzinski/RocketCycles"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/nasa/cea/blob/main/LICENSE.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/nasa/cea/blob/main/LICENSE.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://libraries.io/pypi/rocketcea",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://libraries.io/pypi/rocketcea"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/ask-hovik/pyskyfire/blob/main/CHANGELOG.md",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/ask-hovik/pyskyfire/blob/main/CHANGELOG.md"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/LICENSE",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/LICENSE"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketIsp",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketIsp"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/orgs/CoolProp/repositories",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/orgs/CoolProp/repositories"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Cantera/cantera",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Cantera/cantera"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://cantera.org/stable/clib/index.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://cantera.org/stable/clib/index.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/quick_start.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/quick_start.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketIsp/blob/master/docs/efficiencies.rst",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketIsp/blob/master/docs/efficiencies.rst"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketCEA",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketCEA"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://software.nasa.gov/software/LEW-20586-1",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://software.nasa.gov/software/LEW-20586-1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/Cubics.rst",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/Cubics.rst"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/nasa/cea/tree/main/source",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/nasa/cea/tree/main/source"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/std_examples.rst",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketCEA/blob/master/docs/std_examples.rst"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nasa.gov/glenn/research/chemical-equilibrium-with-applications/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Cantera/api-docs",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Cantera/api-docs"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/kyleniemeyer/RoCt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/kyleniemeyer/RoCt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.mdpi.com/2226-4310/6/8/87",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.mdpi.com/2226-4310/6/8/87"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.youtube.com/watch?v=4GdHkPpi9AE",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.youtube.com/watch?v=4GdHkPpi9AE"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://cantera.org/~speth/doxysphinx-trial/cython/importing.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://cantera.org/~speth/doxysphinx-trial/cython/importing.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/developer_guide.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/developer_guide.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/CoolProp/CoolProp/blob/CMakeDevelopment/include/CoolProp.h",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/CoolProp/CoolProp/blob/CMakeDevelopment/include/CoolProp.h"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/cantera/cantera",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/cantera/cantera"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.researchgate.net/publication/301892999_ESPSS_Simulation_Platform",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.researchgate.net/publication/301892999_ESPSS_Simulation_Platform"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/interfaces/excel_api.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/interfaces/excel_api.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/interfaces/python_api.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/interfaces/python_api.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/nasa/cea/blob/main/CHANGELOG.md",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/nasa/cea/blob/main/CHANGELOG.md"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/ask-hovik/pyskyfire",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/ask-hovik/pyskyfire"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://cearun.grc.nasa.gov/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://cearun.grc.nasa.gov/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/HighLevelAPI.rst",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/HighLevelAPI.rst"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://rocketcea.readthedocs.io/en/latest/quickstart.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://rocketcea.readthedocs.io/en/latest/quickstart.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://relatedrepos.com/gh/OpenMDAO/pyCycle",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://relatedrepos.com/gh/OpenMDAO/pyCycle"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/Jhawk414/F404",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/Jhawk414/F404"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.researchsquare.com/article/rs-8123081/'https://www.researchsquare.com/article/rs-8123081/v1",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.researchsquare.com/article/rs-8123081/'https://www.researchsquare.com/article/rs-8123081/v1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/sonofeft/RocketCEA/blob/master/docs/index.rst"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.cantera.org/stable/reference/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.cantera.org/stable/reference/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/CoolProp",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/CoolProp"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/OpenMDAO/pyCycle/blob/master/LICENSE.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/OpenMDAO/pyCycle/blob/master/LICENSE.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://rocketcea.readthedocs.io/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://rocketcea.readthedocs.io/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://coolprop.org/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://coolprop.org/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.researchgate.net/publication/280736761_Multi-Disciplinary_Propulsion_Simulations_at_Engineering_Level_by_means_of_the_European_Space_Propulsion_System_Simulation_ESPSS",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.researchgate.net/publication/280736761_Multi-Disciplinary_Propulsion_Simulations_at_Engineering_Level_by_means_of_the_European_Space_Propulsion_System_Simulation_ESPSS"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/interfaces/c_api.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/interfaces/c_api.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nasa.github.io/cea/interface_index.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nasa.github.io/cea/interface_index.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/coolprop/coolprop",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/coolprop/coolprop"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/LiquidPropulsionGroup/RocketConfigurationVisualizer"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/SpaceEngineerSS/EnSim",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/SpaceEngineerSS/EnSim"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.researchgate.net/publication/397967392_Multidisciplinary_Design_Optimization_of_a_Turbofan_Engine_Using_pyCycle_and_OpenMDAO",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.researchgate.net/publication/397967392_Multidisciplinary_Design_Optimization_of_a_Turbofan_Engine_Using_pyCycle_and_OpenMDAO"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://rocketisp.readthedocs.io/en/latest/models.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://rocketisp.readthedocs.io/en/latest/models.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/CoolProp/CoolProp.jl",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://github.com/CoolProp/CoolProp.jl"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://raw.githubusercontent.com/nasa/cea/main/LICENSE.txt",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://raw.githubusercontent.com/nasa/cea/main/LICENSE.txt"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://pypi.org/project/rocketisp/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://pypi.org/project/rocketisp/"
+            }
+          ]
+        }
+      ],
+      "id": "msg_ece4ff86-6fcc-9331-b37d-612c53146b2e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 336677,
+    "input_tokens_details": {
+      "cached_tokens": 210944
+    },
+    "output_tokens": 6084,
+    "output_tokens_details": {
+      "reasoning_tokens": 4067
+    },
+    "total_tokens": 342761,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 30,
+    "cost_in_usd_ticks": 4175405600,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 30,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 96675,
+      "output_tokens": 3079
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

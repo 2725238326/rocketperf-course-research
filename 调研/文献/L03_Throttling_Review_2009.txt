@@ -1,0 +1,2601 @@
+[PDF PAGE 1]
+Liquid-Propellant Rocket Engine Throttling:                         
+A Comprehensive Review
+Matthew J. Casiano1
+NASA Marshall Space Flight Center, Huntsville, AL, 35812
+James R. Hulka2
+Jacobs Engineering, ESTS Group, Huntsville, AL, 35812
+and
+Vigor Yang3
+Georgia Institute of Technology, Atlanta, GA, 30332
+Liquid-Propellant Rocket Engines (LREs) are capable of on-command variable thrust or 
+thrust modulation, an operability advantage that has been studied intermittently since the 
+late 1930s.  Throttleable LREs can be used for planetary entry and descent, space 
+rendezvous, orbital maneuvering including orientation and stabilization in space, and 
+hovering and hazard avoidance during planetary landing.  Other applications have included 
+control of aircraft rocket e ngines, limiting of vehicle acceleration or velocity using 
+retrograde rockets, and ballistic missile defense trajectory control.  Throttleable LREs can 
+also continuously follow the most economical thrust curve in a given situation, compared to 
+discrete throttling changes over a few select operating points.  The effects of variable thrust 
+on the mechanics and dynamics of an LRE as well as difficulties and issues surrounding the 
+throttling process are important aspects of throttling behavior.  This review provides a 
+detailed survey of LRE throttling centered around engines from the United States.  Several 
+LRE throttling methods are discussed, including high -pressure-drop systems, dual-injector 
+manifolds, gas injection, multiple chambers, pulse modulation, thro at throttling, movable 
+injector components, and hydrodynamically dissipative injectors.  Concerns and issues 
+surrounding each method are examined, and the advantages and shortcomings compared.
+Nomenclature
+LRE = Liquid-Propellant Rocket Engine
+I. Introduction
+IQUID-Propellant Rocket Engines (LREs) with thrust that can be varied by command have been evaluated since 
+the late 1930s.  The Vision for Space Exploration, 1 outlined in the National Aeronautics and Space 
+Administration Authorization Act of 2005, 2 brought a renewed interest to such throttle capable LREs.  The Act 
+established a program to develop sustained human presence on the Moon as a stepping-stone to future exploration of 
+Mars and other remote destinations. 2  Throttleable LREs will undoubtedly play a significant role in these missions, 
+so understanding the dynamics of throttling LREs as well as the issues of the throttling process will be of critical 
+importance for the success of these missions.  This review provides a detailed survey of LRE throttling centered 
+around engines from the United States.
+The term ‘throttling’ is commonly used to describe a varying thrust profile or thrust modulation in an LRE.  This 
+nomenclature is used primarily because one of the most common methods of thrust control in an LRE is from 
+regulation of propellant flow rates by control valves.  While throttling an LRE is a critical requirement during a 
+                                                       
+1 Aerospace Engineer, Propulsion Systems Department, Mailstop ER42, Senior Member.
+2 Engineering Specialist, Propulsion Systems Department, Mailstop ER32, Senior Member.
+3 Department Chair, School of Aerospace Engineering, 313 Montgomory Knight Building, Fellow.
+L
+
+[PDF PAGE 2]
+lunar descent, there are many other applications for throttleable LREs.  A throttleable LRE that continuously follows 
+the most economical thrust curve provides optimum vehicle performance compared to discrete throttling changes 
+over a few percent of the rated power level.  The continually changing thrust reduces the amount of propellants 
+required for a mission, thus reducing the mass of the vehicle.  Throttleable LREs can also be used for planetary entry 
+and descent, space rendezvous, orbital maneuvering including orientation and stabilization in space, and hovering 
+and hazard avoidance during planetary landing. 3-5  Other applications include control of aircraft rocket engines, 
+limiting of vehicle acceleration or velocity using retrograde rockets, and ballistic missile defense trajectory control.5, 
+6  An early attempt at estimating throttling requirements for several such missions reported examples such as 10-to-1 
+throttling for lunar descent, 1.3-to-1 for Venus launch, and up to 100-to-1 for ballistic missiles and orbital 
+rendezvous with generally higher throttling ratios for more precise trajectory control. 7, 8  LREs can be customized 
+for particular flight applications, including a wide range of thrust values, quick restarts, fast pulsing, and quick 
+attitude changes and minor velocity changes.  References [3] and [9] describe other benefits of LREs, in general, 
+including that the thrust can be varied on command, which allows further tailoring of the flight application.  While 
+thrust profiles of rocket engines with solid propellants have become more flexible, LREs are still much simpler to 
+develop randomly-commanded controllable thrust profiles, since the combustion process is easier to control, stop, 
+and restart.  
+Throttleable LREs were originally developed during rocket aircraft experiments and research in Germany in the 
+late 1930s headed by Major-General Dr. Walter Dornberger (then Major) and Hellmuth Walter.  The first aircraft to 
+incorporate LREs for propulsion during a portion of the flight was the German Heinkel He 112 fighter aircraft in 
+early 1937 at Neuhardenberg airfield, 10, 11 powered by a version of an A2 (Aggregate 2) rocket motor.  This rocket 
+motor, designed by Dr. Wernher von Braun, was fitted to the He 112 aircraft and fueled from nitrogen-pressurized 
+alcohol and liquid oxygen tanks. 11  As an aside, there are reports and testimonies that describe conflicting dates, 
+places, and events during the mid-to-late 1930s.12-18  However, the matters of which aircraft, which engine, and what 
+date for the first rocket powered aircraft flight are corroborated by testimony from Heinkel, Dornberger, and von 
+Braun to have occurred as previously described.11  In November of 1937, another Heinkel He 112 aircraft was flown 
+at Neuhardenberg.  During a portion of its flight it used a TP-1 (Turbopump-1) rocket engine, designed and built by 
+Hellmuth Walter.  An 80%-concentration solution of H2O2 (20% concentration H2O) was forced into the combustion 
+chamber and mixed with a spray catalyst (water solution of sodium or calcium permanganate).  A manual pilot-
+operated stop -cock pneumatically regulated the flow of the H 2O2 solution to the combustion chamber. 11  The 
+maximum thrust was 220 lbs with an unknown amount of throttling, but this was the first known rocket engine to 
+incorporate manual thrust throttling. 17, 19  Prior to 1937, LREs were predominantly used by the early pioneers for 
+experimental and meteorological research rockets; these LREs operated at essentially constant thrust. 3   In April of 
+1938, the Heinkel He 112 became the first aircraft to be powered by rocket thrust alone through its entire takeoff and 
+flight at Peenemünde West airfield using the throttleable Walter -designed TP -1 engine. 11, 19   The resear ch on 
+throttling engines, after these pioneering works, focused on applicability to missile defense, weapons systems, and 
+then space vehicles.7, 8, 20
+There are several methods identified that can control thrust of an LRE.  Dressler describes nine methods that 
+have been used in past configurations.19 Many of these methods were described conceptually as early as 195021 and 
+several others in 1963. 7  Several had been demonstrated by this time, and are all discussed in this review. Several 
+methods are also discussed in Russian texts with attention to the details of injector element design.  The nine 
+methods mentioned in [19] will be discussed in more detail in this paper.
+There are only a few physical parameters that can be varied to change the thrust of a single engine, including the 
+propellant types or compositions, the propellant flow rates, the nozzle exit area, and the nozzle throat area.  The 
+propellants and nozzle exit area are difficult to control or vary due to physical restrictions, while the nozzle throat 
+area is difficult to vary if the heat fluxes are high.  Consequently, varying the propellant flow rates is found to be the 
+simplest recourse to varying thrust.  The simple relationship between thrust an d propellant flow rates comes from 
+the rocket thrust equation, 
+( )T e e a eF m v p p A     (1)
+This paper discusses several LRE throttling methods, including high -pressure-drop systems using propellant 
+flow regulation, dual -manifold inject ors, gas injection, multiple chambers, pulse modulation, throat throttling, 
+movable injector components, and hydrodynamically dissipative injectors.  Several significant projects and studies 
+are discussed.  Critical issues such as combustion instability,22 performance degradation, and excessive heat transfer 
+
+[PDF PAGE 3]
+are examined for each method.  Any further concerns and issues surrounding each method are examined, and the 
+advantages and shortcomings of the different methods are compared.
+II. Discussion
+A top level summary of pertinent i nformation from the reviewed projects, research tasks, and investigations are 
+combined in Table I.  The following sections review each of the throttling methods.
+A. High-Pressure-Drop Injectors
+A typical LRE with a single, fixed-geometry injector can generally be throttled approximately 2-to-1 or 3-to-1.6, 
+19  To accommodate deep throttling requirements – often 5-to-1 or more – with a fixed-geometry injector, higher-
+than-usual injector pressure drops or head losses are necessary to maintain a minimum injector pressure drop at 
+minimum thrust.  A satisfactory minimum injector pressure drop is required to ensure adequate resistance for system 
+stability and to ensure sufficient mixing and atomization for good performance.  In general, experience and analysis 
+have shown that a nominal injector stiffness (pinj/pc) should be around 15% to 20% to avoid combustion instability, 
+but can range from 5% to 25% depending on injector type and thermodynamic conditions.19, 23
+The primary advantage of a fixed -geometry injector is simplicity.  Flow of propellants can be regulated by 
+control valves in the propellant lines.  Propellants can also be regulated using variable area c avitating venturis.24, 25  
+However, since injector stiffness varies linearly with flow rate for liquid propellants, a 5% minimum pinj/pc at 10% 
+thrust would require 50% pinj/pc at 100% thrust.  Thus the primary disadvantage of a high-pressure-drop injector is 
+a high supply pressure requirement imposed on the pressurization system, tankage, and turbomachinery. 19
+1. Project Thumper (1948) 26
+Project Thumper, a program in the United States to develop high -altitude antiaircraft ballistic missile defense 
+against the German V -2 rockets, investigated early rocket engine throttling, including instabilities during throttling 
+operation, throttling engine performance, and the limits of rocket engine throttling .27  A low-pressure-drop injector 
+and several iterations of high-pressure-drop showerhead injectors were evaluated.  Initial tests with the low-
+pressure-drop injector developed externally observed oscillations between 10 Hz and 20 Hz, called motorboating, at 
+low thrust conditions.  These oscillations were eliminated with a high-pressure-drop injector, and this injector was 
+speculated to have eliminated liquid oxygen boiling in the manifold, damping pressure perturbations in the chamber 
+by increasing the resistance of the injector, and/or decreasing combustion transients at the injector face.  
+Additionally, erratic irregular fluctuations, called chugging, were encountered during testing below 65 psia chamber 
+pressure.  The chugging was described to be like an engine operating intermittently, such as an explosion-cycle 
+thrust chamber, and was attributed to pressure oscillations causing intermittent oxygen vaporization in the injection 
+orifice.  A transition between smooth combustion, motorboating, and then chugging was observed as chamber 
+pressure continued to decrease.  A high frequency instability between 1100 Hz and 1500 Hz, called whistling, was 
+present in most of the tests with the high-pressure-drop injector. 
+The performance over the throttling range generally agreed with theoretical model trends.  The characteristic 
+velocity efficiency is shown in Fig. 1.  However a significant reduction in performance occurred at less than roughly 
+30% chamber pressure.  Higher than expected propellant flow was observed to be necessary at low thrust and was 
+explained to be due to poorer combustion at the lower chamber pressures.  The various configurations plotted in Fig. 
+1 examined the effect on nozzle area expansion, chamber length, throat diameter, and injector modifications.
+Heat transfer rates remained constant over most of the throttling range down to r oughly 59% chamber pressure.  
+Below this, the heat transfer rate dropped off and was assumed to be due to separating flow in the nozzle.  At 56% 
+chamber pressure using the low -pressure-drop injector and at 87% chamber pressure using the high -pressure-drop 
+injector, the heat transfer rates increased 2.5x to 3x over normal, which was correlated to a 300 Hz oscillation in the 
+external environment, but it was not understood whether this was a cause or a symptom of the high heat transfer.  
+Below roughly 30% chamber pressure, fuel coolant was projected to vaporize in the regeneratively cooled engines.  
+To prevent vaporization of the coolant, the engine was required to operate with a low mixture ratio.  This helped 
+prevent roughness, burnout, or cessation of operation due to fuel vaporization in the coolant jacket.
+
+[PDF PAGE 4]
+Table I. Summary of Information from Reviewed Projects, Research Tasks, and Investigations
+Throttling 
+Methodology Program Program 
+Period Organizations
+Engine/ 
+Rocket 
+Designations
+Operating Parameters Throttling
+Propellant 
+Combinations/ 
+Injector Type
+Throttling Related
+Research Focus
+High-Pressure-
+Drop Injector
+Project 
+Thumper
+1948 –
+1949
+ General Electric
+ US Army  Malta Engine  1000 lbs rated thrust, 
+315 psia rated pc
+ 10% to 104%
+ Ethanol (with 
+silicone) / LO2
+ Malta Low-Pressure-
+Drop Injector
+ High-Pressure-Drop 
+Showerhead
+ Pursue development of 
+high-altitude antiaircraft 
+defense
+High-Pressure-
+Drop Injector
+Project MX-
+794 1950
+ Willow Run Research 
+Institute, University 
+of Michigan
+ USAF
+ Engine 0073
+ Engine 0150
+ Engine 0151
+ 1000 lbs rated thrust, 
+300 psia rated pc, 2.75 
+MR
+ 200 lbs rated thrust, 300 
+psia rated pc, 2.75 MR
+ 10% to 167%
+ 33% to 210%
+ 2.25 < MR < 5.0
+ 80% RFNA and 20% 
+aniline / furfuryl 
+alcohol
+ JP-3 (AN-F-58a) 
+(with aniline leader) / 
+RFNA
+ Doublet and OFO
+triplet
+ Obtain performance for 
+defense systems
+High-Pressure-
+Drop Injector NASA Study 1964
+ NASA Lewis 
+Research Center
+ Pratt & Whitney 
+Aircraft
+ Modified 
+RL10A-1
+ 15000 lbs rated thrust, 
+300 psia rated pc, 5.0 
+MR
+ 3.3% to 100%
+ 2.0 < MR < 6.0
+ LH2 / LO2
+ Swirl coax  - 20% ox 
+pressure drop
+ Shear coax - 33% ox 
+pressure drop
+ Swirl coax - 60% ox 
+pressure drop
+ Obtain steady-state and 
+dynamic characteristics 
+during throttling
+High-Pressure-
+Drop Injector
+ARES 
+Throttling-
+Scaling Design 
+Study 
+Program*
+1967 –
+1969
+ Aerojet-General Corp.
+ Air Force Rocket 
+Propulsion 
+Laboratory
+ NASA Marshall 
+Space Flight Center
+ ARES 
+Engine 
+Design*
+ 25000 lbs, 100000 lbs, 
+or 500000 lbs rated 
+thrust, 2800 psia rated 
+pc*
+ 10-to-1*
+ 33-to-1*
+ A-50 / N2O4*
+ HIPERTHIN platelet*  Design a throttleable and 
+restartable engine
+High-Pressure-
+Drop Injector
+DC-X and DC-
+XA
+1991 –
+1995
+ Pratt & Whitney
+ McDonnell Douglas
+ NASA
+ RL10A-5
+ 13500 lbs rated thrust, 
+485 psia rated pc, 6.0 
+MR
+ 3.3-to-1
+ 5.0 < MR < 6.0
+ LH2 / LO2
+ Swirl coax
+ Single-stage to orbit rocket 
+technology demonstrator
+High-Pressure-
+Drop Injector
+Joint 
+Cooperative 
+Study
+1996
+ NASA Marshall 
+Space Flight Center
+ Aerojet
+ Chemical Automatics 
+Design Bureau 
+(CADB)
+ RD-0120
+ 441000 lbs rated thrust, 
+3170 psia rated pc, 6.0 
+MR
+ 25% to 100%
+ 3.7 < MR < 6.4
+ LH2 / LO2
+ Shear coax
+ Potential use for the X-33 
+demonstrator vehicle 
+propulsion system
+High-Pressure-
+Drop Injector
+Joint 
+Cooperative 
+Study
+1997
+ Boeing Rocketdyne
+ NASA Marshall 
+Space Flight Center
+ SSME
+ 470000 lbs rated thrust, 
+3006 psia rated pc, 6.0 
+MR
+ 17% to 109%
+ 5.0 < MR < 6.0
+ LH2 / LO2
+ Swirl coax
+ Potential use for the X-33 
+demonstrator vehicle 
+propulsion system
+High-Pressure-
+Drop Injector
+Common 
+Extensible 
+Cryogenic 
+Engine
+2005 –
+current
+ Pratt & Whitney 
+Rocketdyne
+ NASA
+ Modified 
+RL10
+ 13700 lbs rated thrust, 
+381 psia rated pc, 5.6 
+MR
+ 9.5% to 100%
+ 2.9 < MR < 6.0
+ LH2 / LO2
+ Swirl coax
+ Technology development, 
+demonstration, risk 
+reduction, and maturation 
+of a deep throttling, highly 
+
+[PDF PAGE 5]
+reliable, reusable cryogenic 
+engine
+Dual-Manifold 
+Injector
+Advanced 
+Throttling 
+Concepts
+Studies
+1963 –
+1966
+ Pratt & Whitney 
+Aircraft
+ United Technology 
+Center
+ US Air Force
+ Research 
+Engine
+ 15000 lbs rated thrust, 
+300 psia rated pc, 1.7 
+MR
+ 1000 lbs rated thrust
+ 8500 lbs rated thrust
+ 0.8% to 108%
+ 12.8-to-1
+ 29.4-to-1
+ A-50 / N2O4
+ H2 / F2
+ BA1014 / F2*
+ Triplet element
+ Quadruplet element
+ Evaluate injector systems 
+that provide high 
+combustion performance 
+during deep throttling
+Dual-Manifold 
+Injector
+Chamber 
+Technology for 
+Space Storable 
+Propellants
+1964 –
+1969
+ Rocketdyne
+ NASA
+ Research 
+Engine
+ 1000 lbs rated thrust, 
+100 psia rated pc, 2.0 
+MR
+ 15% to 150%
+ MMH, butene-1, and 
+diborane / FLOX
+ Oxygen difluoride
+ Impinging
+ Develop design criteria for 
+selected space storable fuels
+Dual-Manifold 
+Injector
+Reusable 
+Rocket Engine 
+Program
+1967 –
+1972
+ Pratt & Whitney 
+Aircraft
+ Air Force Rocket 
+Propulsion 
+Laboratory
+ Advanced 
+Cryogenic 
+Engine
+ XLR-129-P-1
+ 250000 lbs rated thrust
+ 2740 psia main chamber 
+rated pc
+ 4793 psia preburner 
+rated pc
+ 5-to-1
+ 5 < MR < 7 
+main injector
+ 0.72 < MR < 
+1.26 preburner
+ LH2 / LO2
+ Stacked tangential 
+inlet
+ Demonstrate performance 
+and mechanical integrity of 
+rocket engine
+Dual-Manifold 
+Injector
+Throttleable 
+Primary 
+Injector for 
+Staged 
+Combustion 
+Engine 
+Program
+1968 –
+1970
+ Aerojet-General Corp.
+ Air Force Rocket 
+Propulsion 
+Laboratory
+ MIST 
+derived  50000 lbs rated thrust  10%
+ A-50 / N2O4
+ HIPERTHIN platelet, 
+impinging oxidizer/ 
+impinging fuel
+ Develop design criteria for 
+selected space storable fuels
+Dual-Manifold 
+Injector
+Advanced 
+Expander Test 
+Bed Program
+1990 –
+1993
+1996 –
+1997
+ Pratt & Whitney
+ NASA
+ Expander 
+cycle engine
+ 20000 lbs rated thrust
+ 25000 lbs rated thrust  Proprietary  H2 / LO2
+ swirl coax
+ Develop and demonstrate an 
+expander cycle oxygen-
+hydrogen engine 
+technology applicable for 
+space engines
+Gas Injection NACA 
+Research
+1956 –
+1957
+ NACA Lewis Flight 
+Propulsion 
+Laboratory
+ Research 
+Engine
+ 1000 lbs rated thrust
+ Helium gas
+ 34%-89%
+ 1.3 < MR < 2.4
+ NH3 (with lithium) / 
+WFNA
+ Doublet
+ Investigation into gas 
+injection throttling
+Gas Injection
+Feasibility 
+Study and 
+Experimental 
+Program
+1963  United Technology
+Center
+ Research 
+Engine
+ 500 lbs rated thrust, 300 
+psia pc
+ 500 lbs rated thrust, 150 
+psia pc
+ Helium gas
+ 6% to 223%
+ MMH / MON-15
+ A-50 / N2O4
+ Triplet FOF, duo-
+doublet FOOF, 
+showerhead, 25% 
+showerhead / 75% 
+duo-doublet
+ Investigation into gas 
+injection throttling using 
+various injection concepts
+Gas Injection LMDE Concept 1963 –
+1965  Rocketdyne  SE-10  10500 lbs rated thrust
+ Helium gas  10-to-1  A-50 / N2O4
+ Competing Apollo lunar 
+descent engine
+Gas Injection NASA Study 1964
+ NASA Lewis 
+Research Center
+ Pratt & Whitney 
+Aircraft
+ RL10A-1
+ 15000 lbs rated thrust, 
+300 psia rated pc, 5.0 
+MR
+ Helium gas, oxygen gas
+ 10-to-1
+ LH2 / LO2
+ Swirl coax  - 20% ox 
+pressure drop
+ Shear coax - 33% ox 
+pressure drop
+ Swirl coax - 60% ox 
+pressure drop
+ Obtain steady-state and 
+dynamic characteristics
+Gas Injection Advanced 1964  Pratt & Whitney  Research  15000 lbs rated thrust,  2% to 100%  A-50 / N2O4  Evaluate injector systems 
+
+[PDF PAGE 6]
+Throttling 
+Concepts Study
+Aircraft
+ Air Force
+Engine 300 psia rated pc, 1.7 
+MR
+ Cross-injection 
+combustion gas
+that provide high 
+combustion performance 
+during deep throttling
+Gas Injection Throttling 
+Concept Study 1965  Bendix Corporation  Research 
+Engine
+ 14 lbs rated thrust, 105 
+psia rated pc
+ Nitrogen gas
+ 35-to-1  A-50 / N2O4
+ Evaluate gas injection 
+technique
+Multiple 
+Chambers
+Advanced 
+Thrust 
+Chamber for 
+Space 
+Maneuvering 
+Propulsion 
+Program
+1965,
+1967
+ Rocketdyne
+ Air Force Rocket 
+Propulsion 
+Laboratory
+ Research 
+Engine
+ 30000 lbs + 3000 lbs 
+rated thrust
+ 2 chambers
+ 9-to-1  LH2 / LF2
+ Investigate an advanced 
+space maneuvering 
+propulsion system
+Multiple 
+Chambers N/A
+1976 –
+1986,
+1981 –
+1993
+ Glushko  RD-170 / 
+RD-171
+ 1777000 lbs rated thrust
+ 4 chambers  56% to 100%  RP-1 / LO2
+ Russian engine used on 
+Energia and Zenit vehicles
+Multiple 
+Chambers N/A 1992 –
+1999  Glushko  RD-180  933400 lbs rated thrust
+ 2 chambers  40% to 100%  RP-1 / LO2
+ Russian engine used on 
+Atlas III and Atlas V
+Pulse Modulation Lunar Flying 
+Vehicle Study 1964
+ Bell Aerospace 
+Company
+ NASA Marshall 
+Space Flight Center
+ Bell model 
+8414 
+Throttleable 
+Maneuvering 
+Engine
+ 100 lbs rated thrust, 80 
+psia rated pc
+ 1% to 12% to 
+100%
+ A-50 / N2O4
+ Triplet FOF
+ Engine development for use 
+in Lunar Flying Vehicle 
+Application
+Throat Throttling
+Reaction 
+Motors, Inc. 
+Study
+1947  Reaction Motors, Inc.
+ Navy
+  Research 
+Engine
+ 2000 lbs rated thrust, 
+315 psia rated pc
+ 6.25-to-1*
+ 60%, 75%  Aniline / acid  Design and develop a 
+variable thrust LRE
+Throat Throttling
+MIT Naval 
+Supersonic 
+Laboratory 
+Study
+1961
+ MIT Naval 
+Supersonic 
+Laboratory
+ Navy
+  Research 
+Engine
+ 1800 lbs rated thrust, 
+300 psia rated pc
+ N/A  Air
+ Investigate throttling by gas 
+injection into the nozzle 
+throat
+Variable Area 
+Injector
+Variable Thrust 
+Engine 
+Development 
+Program*
+1950  Reaction Motors, Inc.  Research 
+Engine  5000 lbs rated thrust*  50-to-1*
+ Hypergolic with 
+WFNA / WFNA*
+ Pintle-type injectors*
+ Rocket engine development 
+to meet the demand for 
+more flexibility by 
+continuously variable thrust
+Variable Area 
+Injector
+Project MX-
+794 1951
+ Willow Run Research 
+Center University of 
+Michigan
+ USAF
+ Engine 0151
+ 200 lbs rated thrust, 300 
+psia rated pc, 2.75 MR
+ 600 lbs rated thrust, 300 
+psia rated pc
+ 3000 lbs rated thrust, 
+300 psia rated pc
+ 7.5% to 205%
+ 35-to-1
+ 18-to-1
+ 6-to-1
+ 80% aniline and 20% 
+furfuryl / RFNA-
+6.5% NO2
+ NH3 / RFNA-20% 
+NO2
+ J-P3 (lead with 
+furfuryl alcohol) / 
+WFNA (with max. 
+2% H2O)
+ J-P4 (lead with 
+furfuryl alcohol) / 
+WFNA (with max. 
+2% H2O)
+ Evaluate for missile use
+
+[PDF PAGE 7]
+ Swirl, annular orifice, 
+multiport swirl 
+injectors
+Variable Area 
+Injector NACA Study 1955
+ NACA Lewis Flight 
+Propulsion 
+Laboratory
+ Research 
+Engine
+ 1000 lbs rated thrust, 
+300 psia rated pc
+ 9.6% to 171%
+ 8.6% to 159%
+ Liquid NH3 (with 
+lithium) / liquid 
+MON-29
+ Triplet impinging-jet 
+and swirl cup injector
+ Investigate variable thrust 
+methodology
+Variable Area 
+Injector
+Lunar Module 
+Descent Engine 
+Program
+1963 –
+1967
+ TRW Inc.
+ NASA
+ Apollo 
+LMDE
+ 9850 lbs rated thrust, 
+106 psia rated pc
+ 10% to 100%  A-50 / N2O4
+ Pintle injector
+ Develop and man-rate an 
+LMDE
+Variable Area 
+Injector
+TRW Inc. 
+Study
+1965, 
+1968
+ TRW Inc.
+ NASA  MIRA 150A  150 lbs rated thrust, 108 
+psia rated pc, 1.59 MR  18% to 122%
+ MMH / MON-10
+ A-50 / N2O4
+ Coaxial pintle injector
+ Design for use as an attitude 
+control engine on the 
+Surveyor spacecraft
+Variable Area 
+Injector
+Gaseous 
+Propellant 
+Throttling 
+Rocket Engine 
+Study
+1965 –
+1968  AFIT  Research 
+Engine
+ 100 lbs rated thrust, 350 
+psia rated pc, 2.0 MR
+ 70 lbs rated thrust, 230 
+psia rated pc
+ 75 lbs rated thrust, 2.0 
+MR
+ 76 lbs rated thrust
+ 4.1-to-1
+ 7-to-1
+ 5-to-1
+ GH2 / GOX
+ Research experiments using 
+gaseous propellants on 
+thrust variation
+Variable Area 
+Injector LSAM design 2005 –
+current
+ NGST
+ NASA  TR202
+ 8700 lbs rated thrust, 
+700 psia rated pc, 6.0 
+MR *
+ 5.3-to-1*
+ Injector and 
+chamber tested 
+10-to-1
+ LH2 / LO2*
+ GH2 / LO2 tested
+ Engine design to meet 
+LSAM requirements
+Hydrodynamic-
+ally Dissipative 
+Injector
+Demonstration 
+of Throttleable 
+LOX/H2
+Injection 
+Concepts
+2001
+ The Pennsylvania 
+State University
+ NASA Marshall 
+Space Flight Center
+ Research 
+Engine
+ 1000 psia rated pc, 6.0 
+MR
+ 10-to-1
+ 4.83 < MR 
+<7.21
+ GH2 / LO2
+ Russian swirl injector
+ Conduct hot-fire 
+experiments of a designed 
+swirl injector across the 
+throttleable range
+*Design Only
+
+[PDF PAGE 8]
+Figure 1.  Characteristic Velocity Efficiency from Project Thumper
+2. Project MX-794 (1950)21
+Under contract to the United States Air Force, the Willow Run Research Center at the University of Michigan 
+obtained rocket engine throttling performance to analyze and design ballistic and airborne defense systems.   Several 
+instabilities were encountered during the test program at lower chamber pressures.  These were described as 
+whistling, howling, rough burning, and chugging as the thrust was reduced.  During whistling and howling, the noise 
+intensity was high enough to shatter glassware, and standing wave patterns were visible in water on the test cell 
+floor.  Whistling was likely a high frequency combustion instability.  Howling and rough burning were likely low 
+frequency combustion instability, or chug in current nome nclature.  Chugging was described as an instability with 
+pulsing combustion, and was likely a low frequency hydraulic instability in the injector.  Heat transfer in the engine 
+rose abruptly during the combustion instabilities.  Performance was observed to decrease during throttling.  
+Hysteresis was observed when attempting to move in and out of the regions of instability.  
+One conclusion of this program was that unstable combustion was a serious problem in throttling and could 
+result in erratic operation and destruction of the rocket engine.  Other conclusions were that a variable area injector 
+would likely be required to successfully throttle over a range of 5 -to-1, and that it would be feasible to use 
+regenerative cooling over the full 10-to-1 throttling range.  
+Several throttling methodologies were also analyzed in these studies.  A table comparing these methods is shown 
+in Fig. 2.  Variable area injectors, described in a later section of this paper, were identified to be the most promising 
+throttling method.
+3. NASA Study – Modified RL10A-1 (1964)28
+A modified RL10A-1 engine was used to investigate ste ady state and dynamic characteristics during throttling 
+from 100% to 10% of thrust in an altitude facility at the NASA Lewis Research Center.  The modifications to the 
+standard regeneratively cooled and pump -fed RL10A-1 engine included the addition of a tu rbine bypass valve to 
+vary the amount of flow through the turbine, smaller oxygen injector orifice areas to increase injector pressure drop 
+
+[PDF PAGE 9]
+and provide better atomization at low thrust, and a chlorotrifluoraethylene monomer insulation between the oxygen 
+and hydrogen injector manifolds to reduce heat transfer that caused oxygen boiling at low thrust.  Analysis indicated 
+that rapid transients from high to low thrust could stall the fuel pump.  Emphasis was placed on determining the 
+steady and dynamic characteristics as well as the operational limitations due to interacting engine components.  
+Three injector configurations were tested, including a shear coax element injector with mid -level oxidizer 
+pressure drop (33% chamber pressure), and two swirl coax eleme nt injectors with low (20%) and high (60%) 
+oxidizer pressure drops.  All three injector configurations included the injector manifold insulation as well as a 
+transpiration cooled faceplate using approximately 2% of the total fuel.
+Figure 2.  Chart of Throttling Techniques from Project MX-794
+Chug at about 170 Hz was evident at low thrust for all three injectors.  However, the onset of chug occurred at 
+lowest chamber pressures with the higher pressure drop injectors, as shown in Fig. 3, although there w as a 
+significant influence of mixture ratio between the three injectors.  At a mixture ratio of 4.5, for example, the onset of 
+chug occurred at 32% thrust for the lowest pressure drop injector, 25% for the middle -pressure-drop injector, and 
+never occurred for the highest pressure drop injector.
+The regions of chug shown in Fig. 3 were defined to be any noticeable periodic oscillation greater than the noise 
+floor.  The highest amplitude peak -to-peak oscillations of about 80% of chamber pressure occurred at t he lower 
+thrust - lower mixture ratio region.  Figure 3 also shows that two of the injectors became stable again at chamber 
+pressures less than about 40 psia or around 10% thrust.  This restabilization at very low throttling is due to 
+gasification of the oxygen, probably due to heat transfer from the warm hydrogen, at a rate sufficient to increase the 
+oxygen pressure drop.  Figure 4 compares oxygen flow rate and pressure drop for the shear coax injector.  The 
+deviation from the linear pressure drop relationin the figure indicates a change in oxygen density, and that two-
+
+[PDF PAGE 10]
+  
+   
+a) Low-Pressure-Drop Injector      b) Middle-Pressure-Drop Injector     c) High-Pressure-Drop Injector
+Figure 3.  Chug Stability Limits of Three Injector Configurations
+Figure 4.  Hydraulic Characteristics while Throttling Liquid Oxygen Shear Coaxial Injector 
+phase flow begins to move through the oxidizer injector orifices.  The amount of deviation is shown in Fig. 4 to be 
+dependent on the temperature of the hydrogen fuel.   The ad ded injector resistance (increase in pressure drop) was 
+enough to overcome the negative effects on stability of the increased compliance (more vapor) in the manifold.  
+Several other methods to increase the oxidizer injector pressure drop were also proposed, including further reduction 
+of the oxidizer injector area if pump head rise was available, provide heat transfer to increase the amount of vapor in 
+the manifold, and provide gas injection into the liquid oxidizer manifold.
+The engine was also operated in pressurized mode without the pump.  Chamber pressures of 10 to 15 psia (about 
+3% to 5% chamber pressure) were explored over mixture ratios from 2 to 6.  The lower limit of 10 psia was due to 
+the inability of the exhaust nozzle to flow full at the available pressure ratio.  High temperatures were reached in the 
+jacket outlet temperature at mixture ratios of 5 and higher.  A temperature of 700 R at a mixture ratio of 5 was 
+determined to be the safe limit since discoloration, metal erosion, and tube burnouts occurred at higher mixture 
+ratios.  These tests demonstrated the feasibility to reach 3% thrust using pressure -fed propellants and inoperative 
+pumps.
+Reducing the chamber pressure from 100% to 33% reduced the specific impulse by about 3%, but the 
+performance decay was faster below 33% chamber pressure.  This influence was expected since for fixed -orifice-
+injectors the liquid oxygen pressure drop is reduced with the square of the propellant flow rate, which likely 
+worsened atomization and mixing.  Performan ce was also worsened with the onset of chug, which reduced 
+performance by an additional 8%.  The high -pressure-drop swirl coax injector performed the best at low thrust 
+compared to the other two injectors.  Both swirl injectors also performed better then the shear element injector.  
+At a mixture ratio of 5, chamber coolant jacket outlet temperature increased 100 R over the throttling range 
+from 100% to 25%.  The increase in temperature was due to the proportionate decrease in propellant flow rate (and 
+
+[PDF PAGE 11]
+coolant flow rate) with pressure.  Overall, cooling ability decreased at lower thrusts, however adequate cooling was 
+available over the range tested.
+In addition to chug, a flow instability between 1 Hz and 5 Hz occurred in the fuel system below chamber 
+pressures of 33% thrust, or when the coolant jacket pressure reached the hydrogen critical pressure.  Regions of mild 
+oscillations and severe oscillations were evident.  The mild oscillations were 10% to 20% of the fuel weight flow.  
+The severe oscillations at high mixture ratios required engine abort because of overheating of the coolant tubes.  
+Pump boundary conditions and effects were not a cause because of the demonstration of the phenomenon in engine 
+pressurized mode operating without the pump.  The specula tion was that an unstable liquid -vapor interface was 
+established in the chamber coolant channels.  The theory was verified when gas helium or hydrogen was injected 
+upstream of the coolant jacket, which created a finely distributed region of phase transitio n.  Gas weight flows of 
+20% of the hydrogen weight flow were needed for stabilization.  Another method to avoid the oscillation was to 
+operate at lower mixture ratios.  
+Dynamic characteristics were investigated during thrust transients.  At high decelera tion ramp transients, the 
+pump was driven into a stall condition.  This high deceleration ramp created a fuel flow excursion from normal flow 
+rates into the stall region.  The flow excursion, as simulated with an analytic system model, showed that the 
+accumulator action of the chamber cooling jacket and feed line maintains a high pump discharge pressure while the 
+head-rise potential of the pump decays rapidly during the transient.  No operational problems occurred with high 
+acceleration ramp transients.
+4. ARES Throttling - Scaling Design Study Program (1967)29-32
+The Air Force Rocket Propulsion Laboratory at Edwards Air Force Base sponsored development of a throttleable 
+and restartable staged-combustion cycle engine called the Advanced Rocket Engine Storable (ARES) engine at the 
+Aerojet General Corporation.  The design goal was 10 -to-1 throttling using a HIPERTHIN (HIgh PERformance 
+THrottling INjector) injector33 and a transpiration cooled chamber.  Although no testing was performed, details of 
+the design changes from a fixed thrust engine to a throttleable version are provided in the documentation along with 
+predictions of stability and performance.
+Aerojet Liquid Rocket Company also studied a throttling injector concept applicable to an advanced cryogenic 
+engine and suitable for staged combustion engi nes.  The engine system was to be throttleable over a 33 -to-1 thrust 
+range.  The unique injector design contained an integral heat exchanger to extend throttling by gasifying the 
+cryogenic propellants prior to injection.  The heat exchanger operated by tap ping off combustion gases which were 
+directed through a HIPERTHIN injector in a counterflow manner.  Predicting the pressure drop aspects of this 
+injection system was difficult because the propellant phase in the injector transitioned from supercritical, t o two-
+phase, to gas as the engine throttled down.  With gas injection, the injector maintains a constant pinj/pc over a wide 
+range of throttling, which is advantageous to an engine system because adequate feed system stiffness can be 
+maintained without using excessive injection pressure drops at full thrust.  Testing of the heat exchanger showed 
+nonuniform heat exchange surface in the injector manifold area and insufficient surface area.
+5. DC-X and DC-XA (1991)34
+The regeneratively cooled expander -cycle RL10A -5 engine, a sea -level throttleable der ivative of the RL10 
+engine family, was developed by Pratt & Whitney under contract to McDonnell Douglas through a Ballistic Missile 
+Defense Organization funded program, for use on the DC -X (Delta Clipper – Experimental) vehicle, a single-stage 
+to orbit roc ket technology demonstrator.  Four RL10A -5 engines were installed on the DC -X vehicle.  The three 
+major differences of the RL10A-5 engine from the rest of the RL10 engine family were sea level operation, throttle 
+capability from 100% to 30% of rated thrust, and reusability.   NASA later sponsored a continuation of the program 
+called DC-XA (Delta Clipper – Experimental Advanced), which used the same engines. 
+Several successful flights of the DC -X and DC -XA included vertical launch, hovering, translating, an d vertical 
+landing.  One flight reached an altitude of 10,500 ft.  On the third flight, two of the engines started slower than the 
+others and resulted in an uneven engine acceleration, but the engines recovered and performed nominally thereafter.  
+The prob lem was traced back to gaseous helium unwillingly being ingested into the liquid oxygen feed lines, 
+degrading combustion, and lowering thrust.  The RL10A-5 demonstrated a 3.3:1 throttling range.
+6. NASA-Aerojet Joint Cooperative Study – RD-0120 (1996)35
+Under a joint cooperative agreement with th e NASA Marshall Space Flight Center (MSFC), the Aerojet Liquid 
+Rocket Company in 1996 demonstrated off -nominal power operation of the staged combustion cycle RD -0120 
+
+[PDF PAGE 12]
+engine for Reusable Launch Vehicle (RLV) evaluations of the X-33 demonstrator vehicle propulsion system.  Rated 
+power levels between 25% and 100% were examined, including one test simulating an RLV abort scenario with 
+continuous operation at 25% power level of 480 seconds duration.  No combustion instability was observed during 
+any power level.  However, following the long duration test at 25% power level, about 20% of the nozzle brackets 
+which held the stiffening rings to the nozzle were found to be damaged, attributed to excessive nozzle vibration 
+during separated nozzle flow at the sea level facility.  The nozzle was not designed for operation at 25% power 
+level, and would be easily redesigned to eliminate damage.  
+7. NASA-Boeing Rocketdyne Joint Cooperative Study – SSME (1997)36, 37
+Under a joint cooperative agreement with the NASA MSFC, Boeing Rocketdyne in 1997 demonstrated off -
+nominal power operation of the staged combustion cycle Space Shuttle Main Engine (SSM E) for RLV evaluations 
+of the X-33 demonstrator vehicle propulsion system.   The SSME does not have a higher -than-usual pressure drop; 
+however it is classified in this section because at low thrust it still maintains a high enough pressure drop to operate
+sufficiently.  Rated power levels of 17%, 22%, 27%, 40%, 45% and 50% were examined.  Normal operation of the 
+SSME ranges from 65% to 109% rated power level.  Chamber pressure profiles from two tests are shown in Fig. 5.  
+The SSME was recently throttled again in 2008 at the NASA Stennis Space Center.
+Figure 5.  SSME Low Power Level Chamber Pressure
+Thrust was predominantly controlled by varying the oxidizer preburner oxidizer valve, and mixture ratio was 
+controlled by varying the fuel preburner oxidizer v alve.  At low thrust, the chamber coolant valve (CCV) was 
+partially closed more so than normally to help increase turbine inlet temperatures, due to a concern for production of 
+ice in the oxy gen preburner.  However, higher -than-expected nozzle separation heat loads in combination with the 
+CCV modification precluded icing concerns.  The mixture ratio also was fixed between 3 and 4 to provide a safe 
+margin from the high pressure fuel turbopump boilout point (or stall), which also provided additional cooling o f the 
+main combustion chamber at low thrust.  The stall point was the most significant issue that drove the operating point 
+balance.    
+Reduction of the thrust to 17% (or about 6.4:1 throttling from maximum power level) was achieved by further 
+closing of the fuel preburner oxidizer valve, since the oxidizer preburner oxidizer valve was already at a minimum 
+area.  High sample rate instrumentation did not include a chamber pressure measurement; however, there was no 
+evidence of combustion instability in acce lerometer measurements.  The oxidizer injector pressure drop was so 
+small that the measurements from the test data were not valid, but the pressure drops across the control valves were 
+high and possibly protected against chug.  A pump flow test program was recommended to establish safe operating 
+regimes for the pumps at thrusts lower than 17%.
+There were many pump-related concerns prior to running the throttling tests, including rotordynamic stability of 
+the turbopumps, running the high pressure turbopumps at shaft critical speeds, the ability of the high pressure fuel 
+turbopump thrust bearing to lift off, the ability of the hydrostatic bearing of the high pressure oxidizer turbopump to 
+run in the stall region, the possibility of the freezing in the high pre ssure turbopump turbines, the ability to sustain a 
+satisfactory axial thrust balance, the bi -stability of the high pressure oxidizer turbopump boost pump, and the 
+performance of the turbopumps at low flow -to-speed ratios.  A slight preburner boost pump bi -stability was 
+observed at 50% rated power level.
+
+[PDF PAGE 13]
+8. Deep Throttling Common Extensible Cryogenic Engine (2005)38, 39
+Pratt & Whitney Rocketdyne conducted tests of a modified RL10 engine, assembled from a mixture of heritage 
+development hardware and renamed the Common Extensible Cryogenic Engine (CECE) Demonstrator.  The engine 
+is for technology development and risk reduction applicable to a deep t hrottling cryogenic lunar descent engine.  
+Figure 6 shows the engine at multiple power levels during a hot run.  
+Figure 6. CECE shown at Multiple Power Levels
+Two major hardware modifications to the RL10 engine system were made for CECE.  First, features of the 
+injector were altered to allow adequate operation over the full throttling regime.  This included a reduction in area of 
+the oxidizer flow path and a reduction of the outer row mixture ratio.  These changes allowed full operation over the 
+throttling range and improved thermal margin.  The fuel -side flow area was similar to a base RL10 engine and 
+needed little modification.  T he second modification was the selection of a valve suite that provided the necessary 
+system control flexibility.  The valve suite used in CECE is discussed in more detail in [ 38] and [39], however two 
+key additions were the fuel turbine bypass flow to supplement the existing bypass flow route and the addition of the 
+variable area cavitating venturi.
+Over the Demo. 1.0, Demo. 1.5, and Demo. 1.6 test series, CECE has accumulated 5032 seconds of total run 
+time while achieving a throttle range in excess of 13-to-1. Figure 7 shows CECE at 30% power level with ice 
+formation on the nozzle rim due to the cooling and eventual freezing of the steam by the cryogenically cooled nozzle 
+wall. Swirl injector throttling, like the RL10 and CE CE throttling configuration, has also been recently studied in 
+[40] including effects of reduced mass flow rate and elevated chamber backpressure.  
+
+[PDF PAGE 14]
+Figure 7. CECE at 30% Power Levels Showing Ice Formation
+Chug oscillations were encountered at l ow throttle power levels similar to that observed in [ 28] and [41].  The 
+presence of vapor in the oxidizer manifold and feed system was deduced by extensive stability modeling as 
+responsible for the less than expected margin.  An injector revision that incorporated insulation in the LOX manifold 
+was tested in Demo. 1.6 similar to the injector revision in [ 28].  The insulation provided additional chug margin by 
+effectively decreased the onset of chug to a lower power level .  Also, the approach of gaseous helium injection 
+similar to that used in [28] was also examined.  The gas injection was successful in eliminating chug oscillations.
+B. Dual-Manifold Injectors
+A dual -manifold injector – also called two -stage, dual -element, dual -circuit, or dual -orifice – is an injector 
+designed to maintain satisfactory injector pressure drops at low thrust levels while not requiring the often excessive 
+pressure drops at full thrust compare d to the high -pressure-drop injectors described in the previous section.  The 
+dual-manifold injector essentially combines two fixed-area injectors into a common structure, with independent feed 
+systems controlling flow to each injector manifold.  Deep thro ttling is achieved by proceeding from two -manifold 
+(primary and secondary) operation at high thrust to single-manifold (primary) operation at low thrust, thus changing 
+the effective injection area.  Changing from two -manifold to single -manifold operation i s usually as simple as 
+closing a valve.  Several constraints must be optimized in the injector design from system requirements, including 
+the pressure drop at the minimum power point, the minimum pressure drop for the secondary manifold, and the 
+maximum injector pressure at full power (maximum thrust).  This injection method has been used for fuel injection 
+in turbojet engines, and also by German engineers in the early days of throttling LRE development. 19
+Higher pressure drop across the injector at low thrust is advantageous for both performance and stability, as 
+previously described.  Finer atomization of the propellants usually depends on higher injector pressure drop.42  The 
+injector stiffness to promote stable combustion is injector dependent, but generally should be at least 15% to 20% of 
+the chamber pressure.   
+Just like with the high-pressure-drop injectors previously described, continuous throttling is provided by control 
+valves in the propellant feed systems.  At the operating point where the pressure drop in the secondary manifold 
+reaches its minimum, the control valve feeding the secondary manifold closes, and all the flow transitions to the 
+primary manifold.  This abrupt reduction in injection area causes an abrupt increase in injector pressure drop across 
+the primary manifold when flow rate is held constant.  The transition historically has ranged between 20% and 50% 
+of full flow.  Studies have been performed to examine ways of smoothly transitioning by varying flow through both 
+manifolds appropriately.  
+1. Advanced Throttling Concepts Study (1963)43-45
+An Advanced Throttling Concept Study (1963 -1965) was conducted by Pratt & Whitney Aircraft (P&WA) and 
+United Technology Center and a parallel High Energy Advanced Throttlin g Concept Study (1964 -1966) was 
+conducted by Pratt & Whitney Aircraft under two separate Air Force contracts.  Prior to these studies, P&WA 
+sponsored tests of a dual -manifold subscale injector over a 23 -to-1 flow range with the same propellants as 
+described in the Advanced Throttling Concept Study.  The intent of the Advanced Throttling Concept Study was to 
+evaluate injector systems that provide high combustion performance during deep throttling (specified down to 50-to-
+1).  The engine was pressure -fed and used storable propellants.  Two injector patterns were examined in this study; 
+the triplet-element injector is shown in Fig. 8.  
+
+[PDF PAGE 15]
+a) Hardware Photo b) Schematic Diagram
+Figure 8.  Triplet-Element Dual-Manifold Injector
+Each individual pr opellant orifice consisted of a primary flow inner orifice and a secondary flow concentric 
+outer orifice, as illustrated in Fig. 9.  A flow divider valve controlled the flow split between the primary and 
+secondary flow paths.  High average injection veloci ties were maintained over a wide thrust range by the 
+controllable flow split and the momentum exchange between the two concentric streams, high enough to obtain 
+good inter-propellant mixing.   The primary flow accelerates the low secondary flow (even as lo w as 2% thrust) as 
+was demonstrated in water flow experiments.   Acoustic liners on the chamber walls were also used to damp high 
+frequency chamber pressure oscillations.
+Figure 9.  Dual-Manifold Injection Flow System Schematic
+System analyses prior to test found that the pressure inside the secondary oxidizer manifold would be below the 
+propellant vapor pressure at low thrust.  In the transition thrust range (with two -phase propellant) and pure vapor 
+thrust range at low power levels, there would be significant change in the primary-to-secondary flow split, but only a 
+small effect on total propellant flow, so the presence of vapor in the oxidizer secondary manifold was expected to 
+have a negligible effect on mixture ratio and chamber pressure.  A nonlinear dynamic system model also showed no 
+divergent oscillations in the chamber within the entire thrust range and was useful to design optimum propellant 
+supply line geometry.  Performance and throttling characteristics of both injectors are limited release data.
+The intent of the High Energy Advanced Throttling Concept Study was to evaluate the throttling capability and 
+performance of the dual-orifice injectors using high energy F2/H2 pump-fed propulsion systems for use in 
+maneuvering satellite applications.  Tests were performed with several subscale and full scale injectors with dual-
+manifold concentric injector orifices and upstream flow control valves as in the Advanced Throttling Concept Study.  
+The subscale injectors were throttled over a 12:1 thrust range.  The full scale injectors were throttled over a 29:1 
+thrust range.  Gaseous hydrogen was used as the fuel and thus only the oxidizer dual-manifold was needed.  
+
+[PDF PAGE 16]
+2. Chamber Technology for Space Storable Propellants (1964)46-49
+A five year analytical and experimental program called Chamber Technology for Space Storable Propellants 
+investigated dual -manifold injector throttling.  The program was to develop design criteria for selected space 
+storable fuels in combinat ion with oxygen difluoride.  FLOX (70% fluorine, 30% oxygen) was experimentally 
+verified as an excellent simulant for oxygen difluoride in terms of performance and heat transfer and was substituted 
+as an oxidizer in most tests because of its lower cost. Th e injector contained dual manifolds for both fuel and 
+oxidizer.  The transition to primary-only flow occurred at 49% thrust. The engine repeatedly throttled over a 10-to-1 
+range in a variety of duty cycles including demonstration of continuous throttling. The c* efficiency ranged from 
+92% to 98% over the thrust range.  
+Two valve flow control schemes, parallel and series as shown in Fig. 10, were investigated.  The parallel valve 
+scheme allowed control of the flow to both the primary and secondary manifold s simultaneously.  At the transition 
+chamber pressure, the secondary flow was cut off and the single throttle valve fully opened.  The difficulty with this 
+simple parallel system was that four valves were needed to operate simultaneously to ensure a smooth thrust change 
+at transition.  The series valve scheme provided independent flow control to each manifold propellant line.  
+Throttling began by reducing secondary flow with the primary valve still fully opened.  Upon closure of the 
+secondary valve, the pri mary flow was reduced to continue throttling.  The series scheme provided a performance 
+advantage at the mid-thrust range prior to throttling down through the predetermined chamber pressure.
+One case of instability occurred with rough combustion at 90% thr ust and 170 Hz and a peak -to-peak chamber 
+pressure oscillation of 13%.  This oscillation was eliminated upon closure of the secondary injector control valve.  
+Release of trapped injector purge gases between the fuel throttle valve and injector likely triggered the instability by 
+passing two-phase flow through the injection orifices.  A change to the fuel injector purge pneumatic system was 
+made for subsequent tests and no further instabilities were encountered.  Otherwise, all thrust levels demonstrated 
+excellent stability.  
+Peak performance occurred at secondary flow cut-off when there was a maximum injector pressure drop, or high 
+injection velocity.  The performance curve using the series valve configuration is shown in Fig. 11.  An empirical 
+correlation was developed that related injector design parameters to the combustion efficiency, based on an 
+empirical expression by Ingebo 50 that related volume mean droplet dia meter, D30, to jet diameter D and velocity V
+for impinging stream injectors.  The relationship is Eq. (2),
+1
+B
+c
+DA V 
+      
+(2)
+where A and B were empirical constants whose values changed for different propellant combinations and chamber 
+geometries.  The primary and secondary systems can be combined into a mass weighted average c* efficiency.  
+Additionally, no variation in the Rupe mixing efficiency, Em,51 was shown over the entire throttle range.
+      
+a) Parallel Scheme    b) Series Scheme
+Figure 10.  Dual-Manifold Flow Control Schemes
+
+[PDF PAGE 17]
+American Institute of Aeronautics and Astronautics
+17
+Figure 11.  Dual-Manifold Throttling Performance with Series Valve Configuration
+The system response in general was good although there was a significant delay when traversing from low thrust 
+to high thrust because of the need to prime the secondary manifold.  This would have to be corrected for fast thrust 
+response missions.  Continuously flowing fluid through the secondary manifold – either by a bleed flow through the 
+secondary valve or a bleed flow from the primary fluid flow – was proposed to reduce the response during 
+transition.
+The throttling heat transfer results suggested the boundary layer in the nozzle region would transition from 
+turbulent to transitional and/or laminar some time during the throttling range.  
+3. Reusable Rocket Engine Program (1967)52-63
+Pratt & Whitney contracted with the U. S. Air Force over several years in the late 1960s and early 1970s to 
+develop a reusable advanced cryogenic staged combustion engine.  The initial configuration of this engine was 
+required to throttle 5-to-1 and deliver 96% theoretical specific impulse at nominal thrust and 94% during throttling.  
+Consequently the injectors included dual -manifold systems in both oxidizer circuits of the preburner and main 
+injectors, and a variable area system in the fuel circuit of the preburner injector.  Both injectors used oxidizer 
+tangential-entry swirl coaxial element designs with dual-inlets, with the main injector including two tangential inlets 
+(also called a “stacked” configuration) and the preburner injector including one tangential inlet and one axial (not 
+self-atomizing) inlet.  Testing in component and staged combustion configurations revealed stable operation over the 
+5-to-1 range as well as dynamic stability demonstrated by combustion chamber pulse guns with up to 80 grains of 
+explosive.  However, the use of both dual -manifold oxidizer and variable -geometry fuel systems in the preburner 
+was found to be difficult to control, the variable area fuel circuit experienced mechanical problems, and the hot gas 
+temperature profile variability exceeded requirements.  The specific impulse efficiency of the main injector also was 
+about 93% at 100% power level, and about 90% at 20% power level, which also did not meet requirements.  The c* 
+efficiencies were about 98% and 96% at nominal and throttled conditions.  
+A subsequent phase of this program, with an engine renamed the XLR -129, modified both the preburner and 
+main injector in an attempt to satisfy these requirements, including a modification for 99% c* efficiency at rated 
+thrust and 97% efficiency during throttling.  The design for the main injector eliminated the dual-inlet (or “stacked”) 
+oxidizer circuit and used one major flow passage.  The design for the preburner eliminated the variable area fuel 
+system in favor of a fixed fuel area, but modified the dual -manifold oxidizer circuit from one tangential inlet and 
+one axial inlet to two tangential inlets.  This preburner configuration is shown in Fig. 12, and the dual -inlet oxidizer 
+swirl coaxial injector element is shown in Fig. 13.  Extensive cold flow testing of dozens of preburner element 
+design configurations was conducted to develop a hydrodynamically stable flow over the 5-to-1 operating range.
+
+[PDF PAGE 18]
+American Institute of Aeronautics and Astronautics
+18
+    a) Complete Injector                      b) Close-up of Oxidizer Dual-Manifold Configuration 
+Figure 12.  XLR-129 Dual-Manifold Preburner Configuration
+Figure 13.  XLR-129 Dual-Inlet Swirl Coax Oxidizer Element
+     Initial testing of the preburner showed satisfactory hot gas temperature profile variability, but chug was 
+encountered at 20% power level with amplitudes about 11% of chamber pressure and frequencies between 75 H z 
+and 150 Hz.  Development analysis and testing indicated the chug was caused by two factors – low secondary circuit 
+LOX pressure drop and excessive secondary LOX manifold volume.  Oxygen flowed through both oxidizer circuits 
+over the entire throttling range, so that at low power levels, pressure drop in the secondary manifold was reduced to 
+a few percent of chamber pressure.  The chug was never eliminated even by increasing the primary flow split to 90% 
+and increasing the mass -weighted percent pressure dro p to nearly 60%.  Preburner pressure oscillations were 
+postulated to bypass the high -pressure-drop primary flow and drive the system from the secondary flow.  This did 
+not happen during the initial phase of the program with a different inlet configuration, even with mass -weighted 
+pressure drops as low as 4% of chamber pressure.  A reduction of the secondary manifold by 20% -40% was 
+predicted to stabilize the system, and during component development a redesigned injector with reduced LOX 
+manifold volumes in b oth primary and secondary circuits operated without chug at the 20% power level, although 
+during many tests there was leakage between the primary and secondary circuits.
+4. Throttleable Primary Injector for Staged Combustion Engine Program (1968)64
+Aerojet Liquid Rocket Company under contract to the Air Force Rocket Propulsion Laboratory demonstrated a 
+throttleable main injector for a staged -combustion cycle, space engine using storable propellants and a platelet 
+HIPERTHIN injector.33  The engine concept was designed to operate over a 10 -to-1 throttling range.  Four injector 
+configurations were tested, including three single manifold injectors – showerhead oxidizer/showerhead fuel, 
+showerhead oxidizer/impinging fuel, and impinging oxidizer/impinging fuel – and one dual -manifold injector with 
+impinging oxidizer/impinging fuel.  The dual -manifold injector consisted of two fuel manifolds and two oxidizer 
+manifolds with independent platelet circuits for each manifold, as illustrated in Fig. 14.
+To achieve the full 10 -to-1 throttling range, the main injector include d dual manifolds in both fuel and oxidizer 
+circuits, although only a single manifold would be used at low thrust for fuel and oxidizer.  The lowest throttling 
+points were stable using single manifolds in both fuel and oxidizer.  Chug with peak -to-peak amplitudes 44% of 
+chamber pressure at 54 Hz to 115 Hz occurred when a dual manif old was used with one propellant, although dual 
+manifolds at low thrust was not the normal configuration.  Performance was favorable showing as good as or better 
+than the other single manifold designs at the tested mixture ratios, due to the increased atom ization of the higher 
+velocity elements producing more momentum exchange at the higher pressure drops.
+
+[PDF PAGE 19]
+American Institute of Aeronautics and Astronautics
+19
+Figure 14.  HIPERTHIN Platelet Dual-Manifold Injector Design
+5. Advanced Expander Test Bed Program (1990)65-71
+Pratt & Whitney was contracted by NASA to develop and demonstrate the Advanced Expander Test Bed 
+(AETB), an expander cycle oxygen-hydrogen engine technology applicable for space engines.  Among many other 
+features, the AETB was to have a high degree of thr ottleability with a requirement of 5-to-1 and a goal of 20 -to-1.  
+Design of the dual -manifold injector had been completed previously in an in -house Pratt & Whitney Space Engine 
+Component Technology Program.  Only the oxygen circuit used a dual manifold; th e fuel flowed through a single 
+manifold.  The two oxygen streams mixed within the injector element.  A lumped parameter electrical circuit 
+analogy analysis of the feed system predicted no chug at 5%, 10%, and 20% thrust.  Part of the AETB program 
+evolved into a separate technology development NASA Space Act Agreement.  This program involved testing a 25 
+Klbf Thrust Chamber Assembly designed for 20 -to-1 throttling capability using the same AETB dual -manifold 
+injector design.  Testing took place in 1996 at NA SA Marshall Space Flight Center; however the data are currently 
+Pratt & Whitney Rocketdyne proprietary. 
+C. Gas Injection
+Gas injection into the propellants, also referred to as foamed -flow or propellant aeration, is a throttling 
+methodology for LREs that red uces the bulk density of the propellants by introducing a much lower density 
+(sometimes inert) fluid into the propellant flow.  The change in flow rate is typically small.  For liquid flows at 
+constant flow rate, the pressure drop is inversely proportional to the bulk density.  Thus with gas injection at a 
+particular thrust level, the liquid circuit injector pressure drop is increased.  The higher pressure drop increases the 
+chug stability margin thrust range and may increase the performance for fixed -geometry injectors.  However, 
+Russian experience reports that gas injection can lead to the onset of high frequency pressure fluctuations.4
+1. NACA Research (1956) 72
+A research memorandum published in 1957 by the NACA Lewis Flight Propulsion Laboratory demonstrated 
+rocket thrust variation with foamed storable propellants using helium as the foaming gas.  Several qualitative tests of 
+the gas-injection device were made in water.  The final helium injector device consisted of a two inch long tube with 
+eleven circles of twenty small holes.  Careful calibration of the device was necessary to obtain smooth homogeneous 
+injection and to prevent surges of gas into the liquid.  For this system, helium pressure no more than 100 psi greater 
+than the liquid pressure was allowed to obtain smooth helium injection.
+A theoretical model was developed that calculated the reduction in liquid flow as a function of gas -to-liquid 
+ratio.  The model considered isothermal gas flow under thermal equilibrium and separately, adiabatic flow assuming 
+no energy exchange between the gas and liquid.  Less gas injection was shown to be needed at a particular thrust 
+level with a denser liquid propellant flo w.  Gas injection for thrust variation was shown to be a feasible technique 
+that did not impair combustion efficiency.  
+
+[PDF PAGE 20]
+American Institute of Aeronautics and Astronautics
+20
+However, several concerns expressed included evaluation of the weight penalty of an additional propellant and 
+its associated hardware, and that discharge coefficients and heat transfer characteristics for a foamed fluid at various 
+conditions would need to be characterized.  The importance of keeping the pressure difference between the liquid 
+and gas at a low value was necessary to produce homogenous, uniform, and stable foams.  Water flow experiments 
+showed that a large pressure difference created intermittent liquid flows, which could create low frequency 
+combustion instability.
+2. NASA Study – Modified RL10A-1 (1964)28, 41
+During throttling te sts of a modified RL10A -1 at the NASA LeRC, described in a previous section, chug 
+occurred at thrust levels higher than expected due to oxygen boiling in the manifold.  The sources of the boiling 
+were from increased fuel temperatures in the adjacent manifold along with reduced oxygen saturation temperatures.  
+Videos were taken of the liquid oxygen manifold through a sapphire window.  For a particular chug oscillation 
+cycle, oxygen vapor bubbles were observed to form inside the liquid oxygen manifold and then collapse at the same 
+frequency as the chamber oscillations.  A sequence of events postulated for this coupled dynamic system was as 
+follows:  1) bubbles began to appear and the liquid oxygen manifold pressure dropped; 2) as the size and number of 
+bubbles increased, the bulk density decreased and the injector pressure drop increased; 3) atomization improved and 
+the chamber pressure increased; 4) liquid oxygen flow was reduced and manifold pressure increased; 5) bubbles 
+condensed back into the liquid, which reduced the pressure drop and worsened atomization and lowered chamber 
+pressure; 6) manifold pressure reduced because of an increased liquid oxygen flow, 7) bubbles began to appear 
+again and the cycle is repeated.
+To eliminate chug, gaseous oxygen or helium was injected into the liquid oxygen propellant line at the manifold 
+inlet flange to produce a foamed liquid of reduced density.  The gas was injected through a vacant instrument port 
+and no attempt was made to distribute the gas or control the bubble si ze.  Video into the manifold showed that the 
+bubbles were too fine to see and appeared as a fog.  Helium injection of approximately 0.4% of the liquid oxygen 
+weight flow, or oxygen injection of 4% of the liquid oxygen weight flow, eliminated chug over the entire 10-to-1 
+throttling range.  Differences in required flows were due to the difference in gas volumes as well as condensation of 
+some of the gaseous oxygen.
+Gas injection restored the performance lost by the chug.  In one case, a 7.5% increase in pinj/pc to a value of 
+15% pinj/pc eliminated chug at 22% thrust.  The increase in pressure drop to stabilize the combustion with injected 
+gas agreed with the increase in pressure drop required without gas.  Helium was also injected into the oxygen 
+manifold at rated thrust levels to see if that improved performance, but only a negligible increase was noted.    
+3. Advanced Throttling Concepts Study (1964)43, 73
+Pratt & Whitney Aircraft also studied a gas injection technique called cross-injection, in which small amounts of 
+storable fuel were injected into the storable oxidizer propellant line and small amounts of oxidizer were injected into 
+the fuel propellant line, which produced combustion gas in the propellant lines.  The propellant line pressures were 
+increased which improved throttling capability.
+Two operational modes were considered using a fixed area injector.  In the first mode, an appropriate mixture 
+ratio (for the secondary cross injected flow) was determined for a particular thrust that provided a temperature and 
+pressure ris e in the propellant line at that thrust level.  A significant pressure drop was established across the 
+injector.  However, since the secondary line pressure remained constant as the propellant flows increased, the 
+pressure drop increase returned to that of a fixed injector case, so that this mode was only beneficial over a small 
+thrust range.
+The second mode requires control of the secondary propellant flow.  The secondary mixture ratio was held 
+constant over a thrust range (2% to ~20% in this case).  The disadvantage was that this required a more complicated 
+flow control, but it would maintain high injection pressures and velocities over the range of interest.  Figures 15 and 
+16 show the effect on injection pressure drop considering a small amount of second ary oxidizer flow into the 
+primary fuel line.
+The cross -injection technique was hot -fire tested with an injector in the secondary line that provided a 90
+hollow spray pattern in water flow giving fine atomization.  Secondary propellant flow mixture ratio s were ranged 
+from 0.003 to 0.009 for the fuel -into-oxidizer case and 147 to 525 for the oxidizer -into-fuel case.  Repeatable and 
+stable results were demonstrated, with only very small amplitude oscillations evident at 10 Hz and 170 Hz.  
+
+[PDF PAGE 21]
+American Institute of Aeronautics and Astronautics
+21
+Figure 15. System Pressures versus Fuel Flow 
+Rate with a Constant Secondary Mixture Ratio
+ Figure 16. System Pressures versus Fuel Flow 
+Rate with a Constant Secondary Oxidizer 
+Pressure
+4. Throttling Concept Study (1965)74
+The Bendix Co rporation investigated the gas injection technique using nitrogen gas with a storable propellant 
+injector.  A throttle range of 35 -to-1 was demonstrated with nitrogen, and a 50 -to-1 throttle range was considered 
+possible using helium gas instead of nitroge n.  Combustion was stable and efficiency was preserved over the entire 
+throttle range.  This concept evolved into the Bimode Bipropellant Attitude Control System which was capable of 
+both pulsing and continuous throttling.  Attitude control motors normally use maximum thrust to maneuver the 
+vehicle.  However, stabilization, being a much more complex mode, in general would benefit greatly from a varying 
+thrust capability. The Bimode concept keeps the advantage of short duration, maximum amplitude, thrust pulses that 
+result in the maximum unaccelerated coasting time.
+5. Other Engines
+The Rocketdyne SE -10 engine, a competitor to the variable area injector design for the Apollo lunar descent 
+engine, used the helium gas injection at low thrust to enable deep thrott ling.3, 19, 75   However a 200 Hz to 500 Hz 
+chug at low thrust as well as intermittent popping remained present with and without the helium injection.  
+Additional problems with self-induced first tangential modes occurred early in developmental tests, which were 
+solved by implementing a Y-shaped baffle arrangement.76  
+Attitude control thrusters and other very small thrusters (with thrusts of near 1 lb77)use the gas injection 
+technique to not necessarily increase the injector resistance to enable deep throttling, but to alter the total flow rate.  
+This is possible because at low thrust, the flow change due to the inception of gas is not negligible like at high 
+thrust.
+D. Multiple Chambers
+The principle of throttling with multiple chambers is through stopping flow through one or more chambers or 
+varying the thrust of each chamber independently.  A deeper throttling can be obtaine d by independently throttling 
+multiple chambers by a small amount.  This concept is primarily used in aerospike engines but has been used in 
+other rocket engine systems as well.  Disadvantages include feed system complexity and additional weight, as well 
+as managing propellants and thrust transients during each engine startup or shutdown.19  
+Russian engines often use this feature for reasons other than strictly for throttling.3, 78  It was experienced that 
+small diameter combustion chambers solved stability problems exhibited in larger diameter chambers.  With 
+multiple chambers, each chamber diameter can be reduced.  Additionally, smaller parts were easier to manufacture, 
+there was an improved capability to provide thrust vectoring, and the engine overall length was reduced.  The 
+'engine-out' reliability was said to be increased because one or more thrust chambers could be shut off and the total 
+thrust could be maintained by increasing the thrust of the other chambers.  Multiple chambers do not provide the 
+optimum engine weight.
+
+[PDF PAGE 22]
+American Institute of Aeronautics and Astronautics
+22
+1. Advanced Thrust Chamber for Space Maneuvering Propulsion Program (1965)79-84
+The Air Force Rocket Propulsion Laboratory at Edwards Air Force Base sponsored a Rocketdyne study in 1965 
+to investigate a space maneuvering propulsion system to be used f or satellite intercept or rendezvous.  The engine 
+design included multiple concentric regeneratively cooled thrust chambers.  Two multiple chamber concepts were 
+combined in one engine study.  The first concept was the aerospike engine which could be thrott led and contained 
+many small chambers and nozzles.  The second concept was to have a standard chamber and bell type nozzle inside 
+of the separate aerospike engine.  The outer primary thrust chamber was a toroidal aerospike, divided into segments, 
+producing 30 Klbf thrust, while the secondary inner thrust chamber included a bell nozzle producing 3.3 Klbf thrust.  
+The development focused on the primary chamber because of the unique toroidal features of the aerospike 
+chamber.  It included testing of a full size segment that was 1/47th of the toroid circumference.  Short duration tests 
+were performed over a chamber pressure range from 300 to 600 psia, and combustion efficiency remained high.
+Analysis and design for the follow -up Advanced Maneuvering Propulsion Technology Advanced Development 
+Program was initiated in 1967.  The final engine configuration is shown in Fig. 1 7.  Both the 3.3 Klbf chamber and 
+the 30 Klbf chamber would throttle 9 -to-1, providing a total effective throttling ratio of approximately 81 -to-1.    
+Combustion was stable during hot fire tests of the outer primary chamber segments over a chamber pressure range 
+from 650 psia to 72 psia.  Dynamically stable combustion was demonstrated with pulse gun testing.  Combustion 
+efficiency ranged from 98% to 100% over the entire throttling range of the tested segment.
+Figure 17. Advanced Maneuvering Propulsion Technology 
+Advanced Development Engine
+2. Other engines
+Many Russian engines have employed multiple chambers, although primarily for combustion s tability and 
+manufacturability.35  The recent RD-170 and RD-171 engines with four thrust chambers and the RD -180 with two 
+thrust chambers each include one turbopump with each engine system.  The RD-170 and RD171 provide 1,777 Klbf
+vacuum thrust and can throttle to 56% of maximum thrust, while the RD-180 provides 933.4 Klbf vacuum thrust and 
+can throttle to 40% thrust.
+E. Pulse Modulation
+Pulse modulation, short for Pulse-Width Modulation (PWM), is used predominantly in monopropellant engines.  
+PWM is on -off cycling that provides a quasi -steady state average thrust.  PWM in LREs has its roots in pulse jet 
+engines.  The German V-1 guided missile developed in Peenemünde contained a pulse jet engine that was flown for 
+military purposes in 1942 and most well known for the London bombing in 1944, and was also known as the ‘buzz 
+bomb’ because of the low frequency sputtering sound caused by set frequency pulses at 100 Hz and a resonant 
+combustion response at roughly 50 Hz.  The air intake shutters closed as the fuel ignited and gas expanded for a 
+short duration.85, 86
+
+[PDF PAGE 23]
+American Institute of Aeronautics and Astronautics
+23
+Pulse Detonation Engines (PDEs) are a similar recent technology, except that PDEs detonate the fuel and 
+oxidizer mixture while the flow is supersonic.  While the PDE combustion process is more effi cient than PWM, 
+there have been difficulties converting the energy into efficient thrust.  
+The primary issues related to PWM are fast response valves and low performance.  However, PWM is 
+advantageous when small thrust corrections are needed such as in s atellite rendezvous.  Throttling with PWM is 
+accomplished with tailoring of the thrust and durations of the pulses.  Other disadvantages are shock loading on the 
+vehicle, heat soak in the chamber head end, inefficient use of propellant due to chamber cooling channel and injector 
+dribble volume losses between pulses. 19  Additionally, the igniting each pulse can be difficult especially for very 
+short pulse widths.
+1. NASA Studies (1959)87, 88
+A 1959 NASA report examines rendezvous scenarios between two satellites, assuming that one satellite is 
+maneuverable with velocity increments tangential to the orbit.   Pulsed thrust was considered for the several 
+maneuvers required for various rendezvous scenarios.  The use of fixed -duration thrust pulses, in which pulses 
+provide the necessary total V or total amount of thrust necessary to complete a maneuver, was sli ghtly different 
+from the PWM methodology, which uses numerous pulses at a particular frequency and pulse width to provide an 
+average specific impulse and thrust profile.  However, the single impulsive thrust maneuver capability was 
+developed initially for use in satellite maneuvering.
+In 1961 NASA examined a PWM methodology to evaluate a linear system for applying thrust to a maneuverable 
+vehicle in the terminal phase of a rendezvous.  The throttleability limitations of an existing rocket engine are not 
+necessarily a major obstacle to the system design of a maneuverable satellite.  However, maneuverable satellites, 
+such as for terminal phase rendezvous systems, would need to employ systems that would average out to be the 
+same thrust as can be performed with a continually variable thrust engine, as illustrated in Fig. 1 8.  The average 
+thrust needed to complete a mission, for example, is shown in the first inset.  The second inset gives an effective 
+throttling approach by using pulse modulation of a constant width but with variable thrust.  The third inset gives an 
+effective throttling approach by using pulse modulation of variable width but constant thrust.  Both methods can be 
+designed to provide the same thrust profile.  
+Figure 18. Pulse-Width Modulation Throttling Approaches
+2. Lunar Flying Vehicle Study (1964)89
+Bell Aerospace Company began development of a 100-to-1 variable thrust engine in 1964, called the Bell model 
+8414 Throttleable Maneuvering Engine, for earth orbit, lunar, and planetary spacecraft maneuvering propulsion 
+systems.  This engine system combined a continually varying thrust engine and a pulse engine to provide continuous 
+throttling and pulse operation capabilities with maximum performance at highest thrust, where most of the 
+propellant would be consumed.  Deep throttling and pulsing performance could be provided without compromising 
+the high thrust performance. 
+A single fixed-type injector was optimized over the entire thrust range to maintain adequate injection velocities 
+and injector pressure drops for efficient and stable combustion.  Gas-injection methods were rejected because of the 
+increased complexity and system weight penalty and dual -manifold and variable area injector methods were also 
+rejected as too complex since most of the time the engine operated at high thrust.
+A six-element triplet injector was optimized for performance and pulse response – enough elements for high 
+performance and few enough to minimize manifolding volumes for maximum pulse response and pulse 
+performance.  Two independent valves were used, a throttling valve and a bipropellant variable area cavitating 
+venturi with an actuation time of 5 milliseconds attached directly to the manifold.
+
+[PDF PAGE 24]
+American Institute of Aeronautics and Astronautics
+24
+Continuous throttle, without pulsing, was achieved down to 12% of rated thrust.  Combustion was controllable, 
+stable, and reproducible.  Combustion performance was 94% at rated thrust with maximum specific impulse at 87% 
+thrust.  Pulse performance was measured from 100% to 20% rated thrust using pulse durations of 150 msec.  
+Ignition spikes reached a maximum 300% of the rated pressure.
+Figure 19 compares the performance curve for pulsing at a set thrust with continuous throttling of a set thrust and 
+illustrates one of the disadvantages of PWM.  There was a major degradation in performance at a specific thrust 
+level due to the short duration time and transient event of the pulse.  How much less performance an integrated 
+thrust of the pulse would be compared to a steady state set point of equivalent average thrust was not clear, although 
+it was still expected to be lower due to lower performing conditions during the transient.  With even shorter pulses, 
+there is more degradation in performance.  
+  
+   
+    a) Comparison of Steady b) Steady Performance c) Pulsing Performance at
+         and Pulsing Performance     150 msec Pulse-Width
+Figure 19.  Pulsing Performance Comparisons
+The program demonstrated the feasibility of combining single injector throttling with PWM to extend the thrust 
+to deep throttling of 100 -to-1.  Figure 2 0 shows the performance over the range of thrust with continuous variable 
+thrust down to 12% thrust and PWM down to 1% thrust.
+Figure 20. Dual-Mode Throttling Performance 
+3. The Bendix Corporation Study (1965)74
+The Bendix Corporation reviewed the state-of-the-art techniques of pulsing and variable area throttling in 1965.  
+The pulsing techniques in cluded problems such as low combustion efficiency, high electrical power consumption, 
+low response, materials problems, and unwieldy configurations.  Specific impulse was reduced when operating in a 
+regime that required short pulse widths.  The repeatabili ty and consistency of engine performance was dictated by 
+the control and minimization of fuel usage by the pulsing accuracy.  At that time, varying pulse widths using a 
+single thrust level was not successful and pulsing accuracy was not achieved. 
+
+[PDF PAGE 25]
+American Institute of Aeronautics and Astronautics
+25
+F. Throat Throttling
+The throat throttling method appears to have been one of the first methods to throttle LREs.  Two approaches 
+were defined, including use of a cooled mechanical pintle inserted and retracted through the nozzle throat, and 
+injection of a gas into t he throat region.  Both methods effectively changed the throat area by providing some 
+blockage into the flow field.  Both modes have a net effect on decreasing thrust, since at constant propellant 
+pressures, a throat restriction causes an increase in chamb er pressure and hence lower injection pressure drops and 
+reduced propellant flow rates.  Because of the high chamber pressures at low thrust, there is an associated maximum 
+theoretical performance at low thrust.  The major concerns are excessive vibrations and heat transfer of the pintle.  
+Other issues are that the injector design must provide high injection pressure drops at full flow conditions to 
+maintain minimum pressure drops at low flow rates.  Another disadvantage is the high pressure propellant feed
+system necessary.  
+1. Reaction Motors, Inc. Study (1947)90
+Reaction Motors, Inc. (RMI) developed a small acid -aniline propellant variable thrust LRE using a throat 
+throttling device called a bulb or restrictor to vary the area of the throat, as shown in Fig. 2 1.  The throat area was 
+varied by inserting and retracting the restrictor, which was internally cooled by fuel through the center shaft and the 
+restrictor bulb since materials that could withstand the temperature were not available to allow an uncooled design.  
+The fuel was then fed into the injector elements.  The nozzle and chamber walls were cooled by the oxidizer, which 
+was then also fed into the injector elements.
+  
+Figure 21.  Reaction Motors, Inc. Restrictor Device
+With a varying throat area needed for a throttle range of 6.25-to-1, the L* also varied from 43.5 in. to 272 in.  A 
+compromise L* design range was chosen for a single constant volume chamber.  Propellant flow rate wa s also 
+controlled to maintain constant chamber pressure based on the nozzle throat area using a closed loop control system.
+The nozzle throat area was originally varied with a restrictor bulb that gave poor expansion ratio characteristics 
+at low thrust, but this was later improved.   Large vibrations occurred in one test thought to be due to injector valve 
+flutter.  Stiffer propellant valve springs were to be incorporated in future designs.  Only a few tests were performed 
+at 60% and 75% thrust because of b roken lines and severe vibrations.  Limited performance information was 
+obtained because of these issues.
+2. Massachusetts Institute of Technology Naval Supersonic Laboratory Study (1961)91
+The Office of Naval Research sponsored res earch in the Naval Supersonic Laboratory (NSL) at Massachusetts 
+Institute of Technology (MIT) for throttling by gas injection into the nozzle throat.  A symmetric secondary flow 
+was injected into the nozzle throat to alter the nozzle flow.  The total flow ratio – or the ratio of primary flow 
+injected into the chamber plus the secondary flow to the primary flow with no secondary flow – was unity, which 
+indicated that the exhaust velocity did not change with injection rate and the flow behaved as though throt tling was 
+accomplished by varying the throat area.  Three separate models were developed to analyze this throttling method.  
+The models of Martin92 were the first analytical solutions to this flow throttling problem, but disagreed with the NSL 
+
+[PDF PAGE 26]
+American Institute of Aeronautics and Astronautics
+26
+data.  In [ 91] an improvement to these models was made.  The two models based off of Martin’s work were the 
+secondary mixing model and the sheet flow model.  A newer model, the secondary expansion model, was also 
+developed.  Basic assumptions to the se models include one -dimensional flow, perfect gas, and isentropic flow.  
+Two-dimensional and three -dimensional airflow investigations validated aspects of all three models.  Schlieren 
+photographs showed that all three types of flow occurred.  
+In addition to these three models, a flow analogy was developed and other pertinent variables investigated.  The 
+analogy treated the secondary flow as a blunt body and then combined the two flows with matching boundary 
+conditions.  Three variables investigated were temperature, secondary injection gas type, and combustion.  There 
+was a significant effect as the secondary fluid stagnation temperature was reduced lower than the primary flow 
+stagnation temperature.  Throttling was ineffective for a secondary stagnation temperature 5 times less than the 
+primary stagnation temperature.  This effect was also evident in Rocketdyne testing on the F1 engine and 
+additionally in United Aircraft Corporation (UAC) thrust vectoring experiments. 93  Rocketdyne showed that a 
+stagnation temperature ratio of 4 did not throttle the primary flow.  UAC showed that the effectiveness varied with 
+the square root of the secondary-to-primary stagnation temperature ratio.  The high temperature of the secondary 
+working fluid seems to limit the practicality of throat throttling with gas injection.  
+The type of injection gas also had an effect on throttling behavior.  A low specific heat ratio and low molecular 
+rate were desirable properties of the secondary gas because of the low molecular weight and low specific heat ratio 
+of the combustion gas.  Helium showed the most potential as a throttling secondary gas because of its low molecular 
+weight.
+Other variables examined were injection angle, nozzle throat pr essure gradient, and secondary flow injection 
+location.  Throttling increased with decreasing injection angle, the angle between the nozzle axis and the injection 
+axis.  A reduction in the nozzle throat pressure gradient had a small effect on increasing fl ow throttling.  The 
+location of the secondary flow injection needed to be at the throat because the influence is strongest there to create a 
+choked primary flow.
+3. Other Engines
+A February 1946 Aerojet report (Report No. RTM -20) described the development of a 100 lb thrust 
+nitromethane monopropellant variable thrust engine.  A stainless steel pintle was moved into the nozzle throat to 
+vary the thrust 10 -to-1.  Performance was measured only at 65% and 100 % thrust.  A 1948 M.W. Kellogg report 
+(Report No. SPD -156) described and presented a highly complex injector design that showed the throat throttling 
+methodology.  The throat was throttled by a pintle and the injector.  The injector contained movable concentric 
+injector rings.  A 1950 University of Michigan r eport (Report UMN -71) discussed variable thrust engines using 
+throat throttling, and concluded the method to be not feasible because of low pressure drops at low thrust.  The 
+report also stated that combustion instability would be likely with the RFNA and aniline propellants in an engine 
+with a 100 inch L*.  The variable L* was not taken into account.  An analytic study of variable thrust LREs was 
+performed by the Army Ballistic Missile Agency on the Redstone Arsenal in Alabama in 1961. 94  The analysis 
+compared the relative efficiencies between a variable throat area nozzle and a fixed nozzle geometry for storable 
+propellants.  The report concluded there would be a 10% weight savings of propellant due to the performance 
+increase gained with the variable throat area nozzle, which was insignificant to the overall vehicle weight.  The 
+underlying assumptions of the configurations and model were not provided. 
+G. Variable Area Injector
+The variable area injector is often referred to as a pintle injector because the majority of v ariable area injectors 
+contain a single central pintle feature that is moved to vary the injector orifice area.  The maximum thrust occurs 
+when the injection orifices are fully open.  As the injection area is reduced using movable injector components, the 
+chamber pressure and thrust are reduced.  Pressure drop increases as the engine throttles down because of the 
+decreasing injection area, which results in high injection velocities and good atomization and high combustion 
+efficiency over a wide throttle ran ge.  The most familiar variable area injector throttleable engine is certainly the 
+Apollo Lunar Module Descent Engine (LMDE).  
+The major advantages to this method are its design simplicity, but with some complexity of the actuating and 
+guiding elements.  Design requirements are sometimes conflicting, such as different injector pressure drops to obtain
+throttling chug stability and maximum combustion efficiency.  An optimization based on mission requirements 
+provides the tradeoff between performance and thr ottling capability.  Generally there is a need for flow control 
+valves in conjunction with variable area injection for complete mixture ratio and throttling control.  Performance 
+efficiency may not be as high as it would be in a multi-element injector.
+
+[PDF PAGE 27]
+American Institute of Aeronautics and Astronautics
+27
+1. Variable Thrust Engine Development Program (1950)95
+Reaction Motors, Inc. examined variable thrust pressure-fed engine designs based on injectors previously tested 
+under the U. S. Navy’s Bureau of Aeronautics (BuAer) and the U . S. Air Force.  Four injector concepts were 
+examined that represented methods to control the relationships of propellant flow rates, injector pressure drops, and 
+chamber pressure.  The first injector concept used a single controllable valve that changed t he injector annulus area 
+of one propellant.  The second injector concept used a single controllable valve for both injector holes.  Atomization 
+was promoted by having radially injected propellants impinge on a splash plate.  The third injector included val ve 
+control of the axial movement of a flow selector piston that covered or uncovered small holes permitting selection of 
+specified flow.  The propellant streams impinged on a splash plate prior to injection into the chamber.  The fourth 
+injector concept consisted of two poppet valves.  The variation of propellant inlet pressure gave a wide flow range 
+for a prespecified smaller range of injector pressure drop, which was accomplished by balancing the pressure drop 
+with poppet spring forces.  
+2. Project MX-794 (1951)96
+As follow-on to the propellant throttling study described in a previous section, two additional progress reports 
+were published by the Willow Run Research Center at the University of Michigan. The second and third progress 
+reports evaluated the variable area throttling methodology.  
+In the second progress report, an injector was converted into a throttling injector by using a plunger whose 
+movement simultaneously covered or uncovered both propellant ports, thus keeping the mixture ratio constant and 
+the propellant flow rates controlled from a constant supply pressure.  Multiple swirl injectors with various size 
+propellant orifices were tested to obtain performance information for a particular injector design configuration.  The 
+best performing injector was converted into a variable area injector.  Continuous throttling was achieved over a 
+range of 27-to-1.  With a constant supply pressure, the pressure drop increased as the engine throttled down, which 
+minimized rough burning at low chamber pressures.  The throttleable injector showed lower performance than single 
+thrust injectors tested with various size injection orifices, and the condition worsened as propellant flow decreased.  
+This result was attributed to the result of improper mixing due to the changing of the prope llant entry angle.  
+Covering of orifices by the plunger altered the entry angle of the flow so that less mixing was obtained.
+In the third progress report, different size injectors, different types of injectors, and different propellants were 
+tested.  The same remotely controlled plunger was used to cover and uncover the propellant orifices.  Continuous 
+throttling was achieved over a 35 -to-1 range for the lower thrust engines and 6 -to-1 for the larger thrust engines.  
+Triangular orifices maintained a consta nt geometric shape, as the plunger covered or uncovered the holes, which 
+provided better flow control at low flow rates, although the holes were difficult to fabricate.  The other injectors had 
+circular or rectangular orifices.
+High frequency combustion instability was encountered at higher chamber pressures with the low thrust WFNA 
+and jet fuel propellant combination.  The instability was eliminated by increasing the chamber contraction ratio from 
+8-to-1 to 16-to1.  The chamber diameter was increased and the chamber length was decreased with a net increase in 
+L*.
+For the mid -range thrust development tests, the propellant supply pressure was constant, which allowed the 
+pressure drop to increase with decreasing chamber pressure, and the mixing and spray formation to improve at lower 
+propellant rates.  No combustion instabilities were experienced even after reducing the pressure drop by lowering 
+the propellant tank pressures.  In one case the plunger seized, which was corrected with an o -ring seal between the 
+plunger and the injector body.
+3. NACA Study (1955)97
+An investigation to examine the performance and operating characteristics of two variable area injectors over a 
+wide thrust range was conducted by Tomazic in 1955.  The first injector was a triplet impinging-jet injector with six 
+groups of 10 triplet sets; each group was controlled by a pneumatic valve actuator, which varied the number of 
+triplet sets that were open.  The second injector was a swirl-cup injector where two fuel entry holes and two oxidizer 
+entry holes injected the propellants in a swirl pattern into a cup.  The orifices were arranged alternately 90 degrees 
+apart.  A movable piston formed the bottom of the cup and was moved by a pneumatic valve actuator.  The piston 
+moved over the entry holes to change the area.  Schematics of the two injectors are shown in Figs. 22 and 23.
+
+[PDF PAGE 28]
+American Institute of Aeronautics and Astronautics
+28
+Figure 22. Triplet Impinging-Jet Variable Area 
+Injector
+ Figure 23. Swirl-Cup Variable Area Injector
+The triplet impinging-jet injector was tested over a thrust range of 12 -to-1 and the swirl cup injector was tested 
+over a thrust range of 18.5-to-1. The triplet injector had 96% efficiency at full thrust, which steadily decreased until 
+20% thrust where it decreased sharply.  The swirl cup injector had 90% efficiency at full thrust which also decreased 
+sharply below 20%.  Figure 24 compares combustion efficiency for the two injectors. 
+Figure 24.  Theoretical Specific Impulse for Triplet Impinging-Jet Variable Area Injector
+One difficulty in this setup was leakage around the pistons, which degraded the spray pattern and altered the 
+mixture ratio.  The performance drop in the triplet injectors was attributed to this leakage and poor mix ture ratio 
+control.  The performance drop in the swirl -cup injector was attributed to poor mixing at low thrusts as was 
+demonstrated in water flow tests.
+4. Lunar Module Descent Engine Program (1963)19, 76, 98-101
+The most well k nown throttleable engine in the United States is certainly the Lunar Module Descent Engine 
+(LMDE).  Engine development began in 1963 and man-rated qualification was completed in 1967.  The engine was 
+first used on Apollo 5 in an unmanned configuration in J anuary 1968, and then on Apollo 9 for a manned flight in 
+March 1969.  On Apollo 11, the engine landed astronauts Neil Armstrong and Buzz Aldrin on the surface of the 
+moon.  The engine was also used to return the astronauts of Apollo 13 to an earth orbit fr om a lunar orbit after an 
+oxygen tank failure damaged the service module.
+The operating requirements of the LMDE included a 10 -to-1 throttling capability.  The nominal LMDE duty 
+cycle included a 33-second orbit injection burn, an hour on-orbit coast, and a 784-second descent burn, as shown in 
+Fig. 25.  Both engine burns started to 10% while the vehicle was stabilized.  The descent firing included a full thrust 
+
+[PDF PAGE 29]
+American Institute of Aeronautics and Astronautics
+29
+braking phase and a 60% thrust braking phase, followed by a slow reduction to 40% thrust during ve hicle flare-out, 
+and reduction to near 25% during the hovering phase.  
+Figure 25.  LMDE Nominal Duty Cycle
+The engine schematic is illustrated in Fig. 26.  Fuel cooled the injector faceplate and flowed into the combustion 
+chamber out of the annular orifice of the pintle injector element.  The annular orifice was created by an extension of 
+the injector face and a moveable sleeve.  A small portion of the fuel was injected along the side of the chamber wall 
+through thirty-six tubes.  The oxidizer flowed t hrough the center of the pintle and was injected radially near the tip 
+through thirty-six holes.  Movement of the fuel sleeve varied the injection area of both the fuel and oxidizer.
+Figure 26.  LMDE Engine Layout 
+Three fundamental requirements for the descent engine system were 1) accurate mixture ratio control over the 
+entire thrust range, 2) controlled injection for performance and combustion stability over the entire thrust range, and 
+3) simplicity of moving parts.  Two solutions were employed to solve these requirements.  First, the propellant flow 
+control was separated from the propellant injection functions, which allowed optimization of each without one 
+compromising the other.  Second, an injector with a centrally located single element pintle co ntained a single 
+moving part to vary both the oxidizer and fuel orifice areas.  This solution provided the greatest design simplicity.
+One disadvantage with variable area injectors is the inability to control mixture ratio, since as the injector orifice 
+area changes, the mixture ratio can change as well.  The method used to control the mixture ratio in LMDE was to 
+incorporate variable area cavitating venturis in the propellant lines in addition to the variable area injection orifices, 
+which ensured that the propellant flow rates would be insensitive to variations in downstream pressures that resulted 
+from injector orifice area changes.  Provided the manifold pressure stayed below the pressure required for cavitating 
+flow, the flow rate would remain constant.   The cavitation regime was active only below 70% thrust; otherwise the 
+propellant flow was controlled by the pressure drop of the entire system, which eliminated the large pressure loss 
+penalties associated with high cavitating flows.
+Combustion instabili ty was addressed by positioning the single element injector in a region that minimized 
+coupling with tangential acoustic modes of the chamber.  A centrally located injector element would be most stable 
+for a tangential acoustic mode, which has a pressure n ode line through the center of the chamber and is most 
+resistant to a driving combustion forcing function at this location.  On the other hand, a centralized element injector 
+would be susceptible to a radial acoustic mode, which has an antinode in the cent er of the chamber.  However, 
+
+[PDF PAGE 30]
+American Institute of Aeronautics and Astronautics
+30
+neither radial nor tangential modes were detected from over 2800 tests including 31 bomb tests.  The reason the first 
+radial mode was not excited may have been due to the reaction zone being annular rather than concentrated exa ctly 
+in the center of the chamber.   Low frequency pressure oscillations were present during throttling transition with 20 
+psi peak-to-peak in the 10 to 100 psi chamber pressure range.
+Performance remained relatively high over the throttling range, as shownin Fig. 27.     
+Figure 27.  LMDE Engine Specific Impulse Prior to Throat Erosion
+5. TRW Inc. Studies - MIRA 150A (1965)102-105
+The MIRA 150A variable thrust rocket engine was designed for attitude control on the Surveyor spacecraft.  The 
+engine was ablatively cooled because of the incompatibility of available coolant flow over the entire 5 -to-1 thrust 
+range.  The injector was a single element coaxial tube pintle.  A single moving sleeve provided variable area control 
+to the annular propellant orifices.  Propellant flows were also controlled by variable area cavitating venturis 
+upstream of the injector orifices.  The NASA MSFC later selected MIRA 150A as one of two engines to be 
+evaluated for a lunar exploration fly ing system.  The injection velocities were re -optimized for a new propellant 
+combination.  A total of 84 starts with 4 engine configurations demonstrated deep throttling (6.8 -to-1), chamber 
+durability, ballistic performance, and dynamic response.
+6. Gaseous Propellant Throttling Rocket Engine Study (1965)106-110
+Several gas injection rocket engine experiments were performed at a rocket engine test facility at the Air Force 
+Institute of Technology (AFIT) located on Wrig ht-Patterson Air Force Base in Ohio.   Although this study does not 
+use LREs, the features of this mode of throttling are very similar.  The variable area injector throttling method was 
+selected since it was most suitable for the design requirements and was compatible with the test facility at AFIT.  A 
+small engine was designed for 10 -to-1 throttling based on a constant thrust engine design by Ow. 110  The modified 
+throttleable engine incorporated a new injector plate and 3 movable pintles.  Movement of the central pintle 
+regulated the oxidizer flow while movement of the other two pintles regulated the fuel flow.  Ethylene propylene 
+rubber seals were used between the movable pintles and the injector front cover plate.  The engine assembly 
+schematic is shown in Fig. 28.  Fuel was injected radially through the side walls of the entire chamber and acted also 
+as film coolant.  The two fuel variable area orifices were located upstream of the film coolant manifold.  The self 
+impinging oxidizer was injected through a central orifice that was controlled by the central pintle.  
+The injector was later redesigned to a twin orifice showerhead injector which solved facility issues.  There was 
+one orifice in the chamber for fuel an d one orifice for oxidizer on the opposite side.  Two plates slid over each 
+propellant orifice to define the basic throttling mechanism.  The engine was throttled 4.1 -to-1, and no combustion 
+instabilities were observed.  Combustion efficiency increased at lower thrust levels.  
+Another modified variable thrust rocket engine incorporated a variable area injector using gaseous propellants.  
+The propellant lines included separate orifices, one for each propellant, and again plates slid over each propellant 
+orifice.  The impinging injector face contained one central hole for the oxidizer and ten surrounding holes for the 
+fuel, angled so that impingement occurred roughly two inches from the injector face.  Throttling over 7 -to-1 was 
+achieved.  Steady state set -point tests demonstrated the overall performance to remain nearly constant, with a very 
+slight drop-off of specific impulse.  The c* performance was highest at the low throttle conditions and was attributed 
+to the longer gas molecule chamber residence time. There was no indication of combustion instabilities. 
+
+[PDF PAGE 31]
+American Institute of Aeronautics and Astronautics
+31
+A hydraulic control system was later implemented that actuated the throttling mechanism and examined the 
+engine response to transient throttling over a thrust range of 5 -to-1.  Impulse throttling showe d that the decreasing 
+percent throttle tests required more time than increasing percent throttle tests to return to steady state performance 
+values.  This was attributed to flow pressures in the manifold and resulting friction forces.  There was no indicat ion 
+of combustion instabilities.
+Figure 28. Gaseous Propellant Variable Area Injector Engine Schematic
+7. Deep Throttling TR202 (2005)111-113
+Northrop Grumman Space Technology (NGST) is developing the TR202 engine, a closed expander cycle engine 
+with independent turbopumps and a variable area pintle injector, for technology development of a cryogenic 
+propellant applicable to the lunar descent engine.  The independent turbomachinery and variable area pintle would 
+enable full control over mixture ratio and thrust.  Injector tests have been performed at NASA Marshall Space Flight 
+Center.  Stable combustion performance was demonstrated with a pintle injector at several setpoints over a 10 -to-1 
+throttling range with LO2 and GH2 propellants.
+  The pintle injector would control the core and wall mixture ratios and maintain acceptable injection propellant 
+pressure drops, which should provide high combustion efficiency and combustion stability over the entire throttling 
+range.  An illustration of the pintle concept is shown in Fig. 29.  NGST lists several technology challenges, most 
+relating to behavior during deep throttling, including acceptable injector performance, continuous and deep 
+throttling with cryogenic propellants, stable combustion, acceptable cooling, balancing injector stiffness with pump 
+performance and pump exit pressures during throttling, maintaining mixture ratio at desired levels, avoiding pump 
+stall at low flow conditions, and developing deep throttling turbopump technology.  Most of these issues are general 
+concerns for any deep throttling technology.
+Figure 29. Pintle Injector Operation Illustration
+
+[PDF PAGE 32]
+American Institute of Aeronautics and Astronautics
+32
+The injector would be developed to a 10 -to-1 throttling range and the data used to update the engine de sign 
+based on program throttling needs.  As the engine throttles, the fuel stiffness will increase because the density is a 
+strong function of temperature.  The oxidizer stiffness will also increase because the variable area injector orifices 
+are sized for a specific pressure drop.  The stiffness would range from 20% at full thrust to 106% at minimum thrust.  
+This has no effect on the cycle balance because there is more power margin at lower throttle settings.  The ability to 
+control mixture ratio over the throttling range provides the ability to maximize propellant utilization, and the ability 
+to control stiffness eliminates the possibility of chug or high oxidizer pump exit pressures at high thrust.
+H. Hydrodynamically Dissipative Injector
+Hydrodynamically dissipative injectors use fluid dynamic methods to create adequate impedance across the 
+injector.  Methods to do this include use of capillary tubes which create a high pressure drop by means of viscous 
+losses, or long element features to create added fluid mass or inertance as additional impedance.  The most common 
+method, and widely used in Russia, 114 is to use swirling vortex tubes to effectively alter the discharge coefficient 
+over a throttling range in combination with propellant throttling. 4, 115, 116   A dua l-manifold approach is used in 
+combination with this technique.  These methods ensure that the injector is free of moving parts, however in some 
+cases additional valving is necessary.  Hydrodynamically dissipative injector methods are usually subsets of other 
+methodologies such as high-pressure-drop injectors or dual-manifold injectors.
+  
+1. Demonstration of Throttleable LOX/GH2 Injector Concepts (2001)117, 118
+A swirl injector with a two -channel liquid oxidizer system was designed and successfully tested at the 
+Pennsylvania State University with expert advising from visiting professor Vladimir Bazarov.  The tangential -entry 
+dual-inlet swirl injector is a common Russian design and is sometimes categorized in this section.  It is effectively a 
+dual-manifold injector design and throttling is performed by independently controlling flow through the two 
+channels.  Throttling behavior is quantified not only by mass flow variation, but also by variations in injector 
+discharge c oefficient.  A vortex tube is formed inside the injector element by considering element design and 
+managing pre-injection swirl flow.  The theory shows how controlling the hydraulics inside the injector element 
+influences the discharge coefficient.  Single throttle point experiments were conducted over a 10-to-1 throttle range, 
+and continuously throttling experiments were conducted by continuously varying propellant flow rates over a wide 
+operating range during a single run.  
+Chug (45 Hz with harmonics) was observed at the lowest chamber pressure while the dual -element injector was 
+in single-channel operating mode.  This instability, attributed to very long (33 ft) feedlines and inadequate pressure 
+drops, degraded performance at this operating point.  The c hug oscillation also appeared occasionally during 
+transient runs and also occurred at the transition between two -channel operation and single -channel operation, but 
+that could have been attributed to the closure of the LOX valve.
+Performance efficiencies w ere reduced during chug instabilities but also at high throttling conditions.  The 
+performance degradation at high throttling was shown possibly due to poor mixing caused from a fuel -oxidizer 
+momentum imbalance.  Much better performance was obtained when t he straight shearing gaseous fuel injection 
+plate was replaced with the swirling injector plate giving an adequately sized swirl jet. 
+I. Combined Methods
+Some throttling methods inherently combine techniques to utilize advantages from each particular method and 
+provide even deeper throttling, such as variable area injectors or hydrodynamically dissipative injectors.  Variable 
+area injectors commonly use valves in the propellant lines for additional flow control.  Hydrodynamically 
+dissipative injectors combine propellant throttling, dual -manifold injectors, and variable discharge coefficients.  
+Dual-manifold throttling requires propellant throttling.  Pulse modulation by Bell Aerospace combines high -
+pressure-drop injectors for 12-to-1 throttling and pulsing methods to increase throttling to 100-to-1.  Generally most 
+methods require propellant throttling to some extent.  Other throttling technology combinations are also possible.
+1. Advanced Throttling Concepts Study (1964)43, 73
+A combination constant area injector and variable area injector, as contradictory as it sounds, was investigated in 
+the Advanced Throttling Concept Study by Pratt & Whitney Aircraft in 1964. The intent of this study was to 
+evaluate injector systems that provide high combustion performance during deep throttling (specified down to 50-to-
+1).  The injector called the BIProportional Area Spring (BIPAS) was operated in two distinct modes.  At low thrust 
+levels it acted as a variable area injector to maintain a constant pressure drop, and at high thrust levels it had t he 
+characteristics of a constant area injector with variable pressure drop.  This allowed for a reasonable injector 
+
+[PDF PAGE 33]
+American Institute of Aeronautics and Astronautics
+33
+pressure drop over a wide thrust range while providing enough stiffness at high thrust to prevent low frequency 
+instabilities.  Spring rate of the poppet valves and the location of a physical stop restricting the poppet valves could 
+be changed based on the stability characteristics of the engine.  This injector design was not selected for 
+demonstration testing although it appeared superior to the variable area injector.
+III. Summary and Conclusions
+LREs are generally designed for fixed thrust operation with small variations about the design point for throttling.  
+However, there are many applications where variable thrust is required, including planetary entry and descent, space 
+rendezvous, orbital maneuvering including orientation and stabilization in space, and hovering and hazard avoidance 
+during planetary landing.  This paper reviewed the methods identified since the pioneering work for throttlingLREs.  
+The following paragraphs briefly summarize the important characteristics of each method.
+1. Summary – High-Pressure-Drop Injectors
+Project Thumper, one of the first extensive deep throttling investigations, touched on many of the issues related to 
+throttling with a fixed-geometry injector.  Performance was reduced at low power levels due to poor combustion at 
+low chamber pressures, mainly because there was insufficient injector pressure drop to sustain good atomization and 
+mixing of the propellants.  Instabilities were discovered at lower chamber pressures including whistling (high 
+frequency combustion instability), motorboating (chug), and hydraulic instability.  The instabilities increased the 
+heat transfer rates several times greater than expected w ithout instability.  Studies showed that the fuel in a 
+regeneratively cooled chamber would vaporize at low pressures, and in general, cooling ability was decreased at 
+lower thrusts.
+Similar characteristics were observed in other fixed -geometry injectors from other programs , including the 
+sequence of instabilities as chamber pressure was reduced and the increase in heat transfer during instability.  High-
+pressure-drop injectors have performed better than low-pressure-drop injectors in terms of stability and performance
+during throttling.  Several other solutions were proposed to improve stability, including reducing the injector area if 
+pump head rise was available, providing heat transfer to increase the amount of vapor in the manifold s and thus 
+increasing resistance, and providing gas injection into the liquid manifold s having the same increasing resistance 
+effect.  Low frequency system instabilities occurred when coolant flow vaporized inside the coolant jacket.
+Rapid transients over the throttling range we re also investigated.  In a pump -fed system, throttling from high 
+thrust to low thrust could stall the fuel pump.  Other pump -related concerns during throttling included rotordynamic 
+stability, running at shaft critical speeds, high pressure fuel turbopump thrust bearing lift off, hydrostatic bearing of 
+the high pressure oxidizer turbopump running in the stall region, freezing turbine gas, sustaining a satisfactory axial 
+thrust balance, bi-stability of the high pressure oxidizer turbopump boost pump, and performance of the turbopumps 
+at low flow-to-speed ratios.  Nozzle sideloads during the start and shutdown from low thrust were also concerns.
+2. Summary – Dual-Manifold Injector
+There are several common themes that occur in dual -manifold injector systems.  In general, higher performance 
+efficiency can be achieved at low thrust levels because the injector can be designed with high injection velocities at 
+low thrust so performance is acceptable, and high injector resistance so stability is acceptable.  Typically the 
+oxidizer side or liquid side contains the dual manifold because that circuit is generally the driving mechanism for
+combustion instability.  Complexity is increased over high-pressure-drop injectors because of the additional control 
+valves.
+There are combustion stability and operational concerns at the transition point.  Instability at the transition point 
+has occurred as well as at low thrust where only one manifold operates.  In one case, chug was attributed to liquid 
+flowing into the secondary manifold and compressing the trapped gas inside.  The chug was eliminated by bleeding 
+the secondary manifold to remove the gas.  In another case, instability was incited by two -phase flow entering the 
+secondary injector orifices and becoming trapped after the s econdary injector control valve was closed, and again 
+was eliminated by releasing the trapped injector purge gases in the secondary manifold.  The selection of the 
+transition point is a compromise to obtain adequate injector velocity from the secondary injector for good propellant 
+mixing and conformance to limiting system pressures as well as providing adequate stability margin.  Complete 
+closure of the secondary manifold can cause overheating of the secondary manifold, depletion of propellant from the 
+secondary manifolds, and contamination of the unprimed secondary manifold with combustion products.  Low thrust 
+over a long period of time can deplete the secondary manifold propellant and cause a significant time delay and 
+lower thrust for diversion of primary flow to re-prime the secondary manifold.
+
+[PDF PAGE 34]
+American Institute of Aeronautics and Astronautics
+34
+Other design challenges include the transient system response when flowing from low thrust to high thrust 
+because of the necessity to prime the secondary manifold.  The proposed method to obtain a fast response during the 
+transition is to continuously flow fluid through the secondary manifold either by a bleed flow through the secondary 
+valve or a bleed flow from the primary fluid flow.  Injector volume is typically minimized to generally ensure 
+adequate flow response during throttling.
+Stability and performance can be optimized by optimizing the flow splits between the primary and secondary 
+manifold.  In one example the secondary injector flow was not pumped evenly from the injector causing an uneven 
+mixture ratio distribution in the chamber.  
+The throttling heat transfer results indicate that the existence of a transitional and/or a laminar boundary layer in 
+the nozzle region may be encountered at some point over the throttling range.  This transition would likely occur if 
+the ejector system could not replicate vacuum conditions adequately. The total chamber heat load fits over the entire 
+throttling range generally with the classical heat transfer correlation of pc
+0.8.
+3. Summary – Gas Injection
+The primary advantage of the gas injection method for large thrust engines is to maintain a high injector pressure 
+drop over a wide throttling range by a lowering of the propellant bulk density.  This method has been shown to 
+eliminate instabilities by increasing injector resistance, and is generally only necessary when operating at low thrust.  
+For very small thrust engines the additional flow can increase thrust.  Additionally, performance is not reduced 
+during throttling, and in fact may increase, due to the increased pressu re drop as well as increased mixing from an 
+aerated propellant.  In most cases, however, the added weight and complexity for gas injection hardware including 
+valving, piping and control systems will reduce the payload gain from any performance increase.  As a minimum the 
+gas should be tapped off another system such as the tank pressurant.  The gas injection flow rate can be optimized 
+for both performance and stability but the flow rates required are generally less than 1% of the propellant flow.  
+The gas injection device must be designed so that smooth homogeneous gas injection occurs.  In one water flow 
+test, feed system instability was created by the surging gas into the injector manifold.  Another concern expressed 
+was maldistribution or nonuniformity of the aerated propellant, which could cause mixture ratio variations and local 
+hot and cold regions in the combustion chamber.  And lastly, one interesting technique used combustion in the 
+propellant lines to lower the density produced stable and repeatable results, but ha d obvious concerns of trying to 
+control reaction rates in the propellant lines.
+4. Summary – Multiple Chambers
+The primary advantage of throttling with multiple chambers is that a deeper throttling can be achieved by 
+controlling the thrust of each chamber independently.  Multiple chambers are commonly used in Russia for reasons 
+not specific to throttling, primarily for combustion stability and manufacturing advantages.  The obvious 
+disadvantages include the feed system complexity and less than optimum weight.  Aerospike engines can take 
+advantage of using multiple chambers.  Multiple small chambers make up banks that can be independently throttled 
+in the aerospike engine.
+5. Summary – Pulse Modulation
+The objective of pulse modulation is to obtai n a thrust profile by utilizing pulses of various thrust levels and 
+durations.  Two typical modes of operation include obtaining a thrust profile by using pulse modulation of a constant 
+width but varying the thrust level, and obtaining a thrust profile by pulse modulation of a constant thrust for each 
+pulse but with varying pulse width.  A fast response valve is essential to providing pulses of propellants into the 
+combustion chamber.  A small manifold provides maximum pulse response and pulse performance. 
+The performance from a pulsed thrust operating point is usually lower than that of an unpulsed or continuous 
+operating point due to the effect of including the transient as a significant portion of the duration in the overall 
+impulse.  The poorer mixing and atomization during the transients lower the average performance of the pulse. 
+Disadvantages also include shock loading on the vehicle, heat soak in the chamber head end, inefficient use of 
+propellant due to chamber cooling channel and injector dribble volume losses between pulses.  Ignition of each 
+pulse can be a concern depending on the pulse rate.
+Having the ability to pulse can provide extreme throttling capability.  Combining pulsing with continuous 
+operation has provided throttling to 1% of maximum thrust, but due to performance degradation while in pulse 
+mode, most of the time in the mission should occur at high thrustduring continuous operation. 
+
+[PDF PAGE 35]
+American Institute of Aeronautics and Astronautics
+35
+6. Summary – Throat Throttling
+The throat throttling method is unique in that it provides the highest p erformance and chamber pressure at low 
+thrust.  However there are many disadvantages with this method, including cooling the throat pintle and preventing 
+excessive vibrations of the pintle.  An uncooled throat pintle was historically not an option because of material 
+limitations, but there are higher temperature materials or thermal coatings available now.  The pintle could also be 
+regeneratively cooled. 
+Performance losses were attributed to gas separation in the nozzle cone because of the location of the pintle, 
+which was verified visually with exhaust gas directed at steeper angles during throttling.  An optimized pintle device 
+shape would be important to obtain maximum performance.  The effect of pintle design on nozzle coefficient should 
+be investigated to obtain the best performance during throttling.  Additionally, for a constant pressure propellant 
+system, it would be impossible to obtain optimized atomization and mixing with this method because there is not an 
+adequate pressure drop across the injector over the full range.  A compromise must be made in chamber size because 
+there are large variations in L* due to the varying throat area.  At low thrust, the L* is much higher and allows for 
+more complete combustion which improves efficiency.  Combustion instabilities are a concern at low thrust even 
+with the high chamber pressure because the injector pressure drop is small at low thrust.  A high rate of thrust 
+change can be designed by incorporating a good hydraulic system for the pintle device.  
+Finally, throat throttling by means of gas injection into the nozzle throat does not immediately seem practical.  
+The major drawback is the required high temperature needed for the injected gas.  In the ideal configuration, the 
+secondary gas injected would have a low specific heat ratio, a low molecular weight, and a high temperature, and be 
+injected at the throat.
+7. Summary – Variable Area Injection
+The variable area injector methodology is the most familiar throttling method because of the legacy of the 
+LMDE.  The major advantages of variable area injectors are the relative simplicity and the few incidences of high 
+frequency combustion instability.  The resistance to high frequency combustion instabilities probably occurs 
+because the location of energy release from the center -mounted pintle injector minimizes coupling with the 
+tangential and first radial acoustic modes.
+Disadvantages include the requirement for a propellant control system and heat transfer to a pintle injector 
+element.  Major concerns in early experiments included optimization of flow control and injector design, integration 
+of the variable area injector with the thrust control system, leakage around the pintle injector, and maintaining a 
+specific mixture ratio for a particular thrust.  Most of the problems were rectified by incorporating flow control 
+valves in the propellant lines.  In this way, both an appropriate injection pressure drop and a controlled mixture ratio 
+were possible.  Performance efficiency may not be as high as with a multi-element injector.
+8. Summary – Hydrodynamically Dissipative Injector
+The hydrodynamically dissipative injector uses fluid dynamics to improve the impedance across the injector.  
+Swirling vortex tubes are the most common method and enables deep throttling by altering the discharge coefficient.  
+The major advantage of this method is that the system remains simple because there are no moving parts in the 
+injector.  Although there is limited work in this area, an analytical framework allows the design of a two -channel 
+hydrodynamically dissipative injector, more specifically, a tangential -entry dual -inlet swirl injector.  Throttling 
+behavior is quantified not only by mass flow variation, but also by variations in injector discharge coefficient.  A 
+vortex tube is formed i nside an injector element by considering element design and managing pre -injection swirl 
+flow.  The theory shows how controlling the hydraulics inside the injector element influences the discharge 
+coefficient.
+Acknowledgments
+The authors greatly acknowledge the assistance of Dianne Moore and the librarians from the Redstone Scientific 
+Information Center (RSIC) and also Amy High from the Air Force Institute of Technology (AFIT) academic library.
+References
+    1"The Vision for Space Exploration," NASA, NASA NP-2004-01-334-HQ, Washington, DC.
+    2"NASA Authorization Act of 2005," Senate and House of Representatives, Washington, DC, 16 Dec. 2005.
+    3Sutton, G. P., History of Liquid Propellant Rocket Engines, AIAA, Reston, VA, 2006.
+
+[PDF PAGE 36]
+American Institute of Aeronautics and Astronautics
+36
+    4Bazarov, V. G., "Throttleable Liquid Propellant Engines Swirl Injectors for Deep Smooth Thrust Variations," 30th 
+AIAA/ASME/SAE/ASEE Joint Propulsion Conference, AIAA Paper 94-2978, 1994.
+    5Sutton, G. P., Rocket Propulsion Elements An Introduction to the Engineering of Rockets, 5th ed., John Wiley & Sons, New 
+York, NY, 1986.
+    6Huzel, D. K. and Huang, D. H., Seebass, A. R. (ed.) Modern Engineering for Design of Liquid -Propellant Rocket Engines, 
+Progress in Astronautics and Aeronautics, Vol. 147, AIAA, Washington, DC, 1992.
+    7Welton, D. E., Bensky, S. M., and Hiland, J. R., "Toward the Variable -Thrust Liquid -Rocket Engine," Astronautics and 
+Aerospace Engineering, Vol. 1, No. 11, 1963, pp. 77.
+    8Welton, D. E., Bensky, M. S., and Hiland, J., "Variable -Thrust Liquid Propellant Rocket Engines," AIAA Summer Meeting, 
+AIAA Paper 63-268, 1963.
+    9Sutton, G. P., "History of Liquid Propellant Rocket Engines in the United States," Journal of Propulsion and Power, Vol. 19, 
+No. 6, 2003, pp. 978-1007.
+    10Dornberger, W., V-2, The Viking Press, Inc., New York, 1954.
+    11Perry, R. L., "The Antecedents of the X-1," AIAA Second Annual Meeting, AIAA Paper 65-453, 1965.
+    12Walter, H., "Report on Rocket Power Plants based on T-Substance," NACA, NACA TM 1170, Washington, DC.
+    13Rusek, J. J., "New Decomposition Catalysts and Characterization Techniques for Rocket -Grade Hydrogen Peroxide," 
+Journal of Propulsion and Power, Vol. 12, No. 3, 1996, pp. 574-579.
+    14Andrews, D., "Advantages of Hydrogen Peroxide as a R ocket Oxidant," Journal of the British Interplanetary Society , Vol. 
+43, 1990, pp. 319-328.
+    15Walter, H., "Experience with the Application of Hydrogen Peroxide for Production of Power," Jet Propulsion, 1954, pp. 166-
+171.
+    16Clark, J. D., Ignition! An Informal History of Liquid Rocket Propellants , Rutgers University Press, New Brunswick, NJ, 
+1972.
+    17Smith, J. R., Kay, A. L., and Creek, E. J., German Aircraft of the Second World War, Putman & Company Limited, London, 
+1972.
+    18Myhra, D., Secret Aircraft Designs of the Third Reich, Schiffer Publishing Ltd., Atglen, PA, 1998.
+    19Dressler, G. A., "Summary of Deep Throttling Rocket Engines with Emphasis on Apollo LMDE," 42nd 
+AIAA/ASME/SAE/ASEE Joint Propulsion Conference & Exhibit, AIAA Paper 2006-5220, 2006.
+    20Rutkowski, E. V., "Variable-Thrust Rocket Engines," Astronautics, Vol. 4, No. 10, 1959, pp. 40.
+    21Amneus, J. S., "First Progress Report on Rocket Motor Throttling," Willow Run Research Center Engineering Research 
+Institute University of Michigan, UMM-71, Dec. 1950.
+    22Harrje, D. T. and Reardon, F. H., "Liquid Propellant Rocket Combustion Instability," NASA, NASA SP -194, Washington, 
+DC, 1972.
+    23Gill, G. S. and Nurick, W. H., "Liquid Rocket Engine Injectors," NASA, NASA SP-8089, Washington, DC, Mar. 1976.
+    24Zweig, F., Tuteur, F. B., Cunningham, W. J., and Bower, J. L., "The Dynamics of Throttling Hydraulic Systems," Yale 
+University, Report 8252-R, New Haven, CT, Jun. 1950.
+    25Merritt, F. and Dumont, L., "Supplemental Report - Wide Range Flow Control Program," Air Force, AFRPL -TR-69-141, 
+Edwards Air Force Base, CA, May 1969.
+    26Relyea, L. K., "Thumper Project: Rocket Motor Throttling Tests," General Electric Company, R49A0410, Schenectady, NY, 
+10 Jun. 1949.
+    27Papp, D. S. , "From Project Thumper to SDI - The Role of Ballistic Missile Defense in US Security Policy," Air & Space 
+Power Journal, Vol. I, No. 3, 1987.
+    28Wanhainen, J. P., Antl, R. J., Hannum, N. P., and Mansour, A. H., "Throttling Characteristics of a Hydrogen -Oxygen, 
+Regeneratively Cooled, Pump-Fed Rocket Engine," NASA, NASA TM X-1043, Washington, DC, Dec. 1964.
+    29"Advanced Injector Concepts Investigation Final Report," Aerojet Liquid Rocket Company: A Division of Aerojet General, 
+Report 21052-3F, 30 Apr. 1971.
+    30"Advanced Injector Concepts Investigation Final Summary Report," Aerojet Liquid Rocket Company: A Division of Aerojet 
+General, Report 21052-3FS, 30 Apr. 1971.
+    31Andrus, S. R., Bishop, H. L., Duckering, R. E., Gibb, J. A., Nelson, A. W., and Ransom, V. H., "Throttling and Scaling 
+Study for Advanced Storable Engine: Part 1 of Two Parts," Air Force Rocket Propulsion Laboratory, AFRPL-TR-68-2, Part 1, 
+Sacramento, CA, Jan. 1968.
+    32Andrus, S. R., Bishop, H. L., Gibb, J. A., and Nelson, A. W., "Throttling and Scaling Study for Advanced Storable Engine: 
+Part 2 of Two Parts," Air Force Rocket Propulsion Laboratory, AFRPL-TR-68-2, Part 2, Sacramento, CA, Jan. 1968.
+    33Addoms, J. F., Jr., Cordova, R., and McGough, C. B., Method of Making Composit e Ultra -Thin Metal Platelet having 
+Precisely Controlled Pattern of Flow Passages Therein, Patent No. 3,413,704, filed 26 Nov. 1965.
+    34Wilcoxen, M. L., "RL10A -5: An Assessment of Reusability Demonstrated during the SSRT Program," 32nd 
+AIAA/ASME/SAE/ASEE Joint Propulsion Conference, AIAA Paper 96-3110, 1996.
+    35Rachuk, V. S., Shostak, A. V., Dmitrenko, A. I., Goncharov, G. I., Hernandez, R., Starle, R. G., and Hulka, J., "Benchmark 
+Testing of an Enhanced Operability LO2/LH2 RD-0120 Engine," 32nd AIAA/ASME/SAE/ASEE Joint Propulsion Conference, 
+AIAA Paper 96-2609, 1996.
+    36Bradley, M. A., "SSME Off -Nominal Low Power Level Operation," 33rd AIAA/ASME/SAE/ASEE Joint Propulsion 
+Conference and Exhibit, AIAA Paper 1997-2685, 1997.
+
+[PDF PAGE 37]
+American Institute of Aeronautics and Astronautics
+37
+    37Anderson, B., Bradley , M. A., and Ives, J., "SSME Key Operations Demonstration," 33rd AIAA/ASME/SAE/ASEE Joint 
+Propulsion Conference and Exhibit, AIAA Paper 1997-2686, 1997.
+    38Giuliano, V. J., Leonard, T. G., Adamski, W. M., and Kim, T. S., "CECE: A Deep Throttling Demonst rator Cryogenic 
+Engine for NASA's Lunar Lander," 43rd AIAA/ASME/SAE/ASEE Joint Propulsion Conference & Exhibit, AIAA 2007-5480, 
+2007.
+    39Giuliano, V. J., Leonard, T. G., and Kim, T. S., "Development Status of the CECE Cryogenic Deep Throttling Demonstrator 
+Engine," Space Propulsion 2008, 2nd International Symposium on Propulsion for Space Transportation, 2008.
+    40Kenny, R. J., "Influence of Variable Thrust Parameters on Swirl Injector Fluid Mechanics," Doctor of Philosophy University 
+of Alabama in Huntsville, Huntsville, AL, 2008.
+    41Conrad, W., Hannum, N. P., and Bloomer, H. E., "Photographic Study of Liquid -Oxygen Boiling and Gas Injection in the 
+Injector of a Chugging Rocket Engine," NASA, NASA TM X-948, Washington, DC, Dec. 1964.
+    42Lefebvre, A. H., Chigier, N. (ed.) Atomization and Sprays, Combustion: An International Series, Taylor & Francis, 1989.
+    43Mitchell, J. P., "Technical Report No. 2 of Advanced Throttling Concepts Study," Pratt & Whitney Aircraft, Florida 
+Research and Development Center, PWA FR-1045, West Palm Beach, FL, 25 Jul. 1964.
+    44Mitchell, J. P., "Technical Report No. 3 of Advanced Throttling Concepts Study," Pratt & Whitney Aircraft, Florida 
+Research and Development Center, PWA FR-1108, West Palm Beach, FL, 15 Sep. 1964.
+    45Mitchell, J. P., "Technical Report No. 4 of Advanced Throttling Concepts Study," Pratt & Whitney Aircraft, Florida 
+Research and Development Center, PWA FR-1231, West Palm Beach, FL, 15 Dec. 1964.
+    46Zettle, E. V., Riebling, R. W., and Clapp, S. D., "Chamber Technology for Space -Storable Propellants," AIAA Joint 
+Propulsion Specialists Conference, 1965.
+    47Nagai, C. K., Bartlett, R. C., Knight, R. M., and Clapp, S. D., "Chamber Technology for the Space Storable OF 2 - MMH 
+Propellant Combination," AIAA Second Propulsion Joint Specialist Conference, AIAA Paper 66-623, 1966.
+    48"Final Report, Chamber Technology for Space Storable Propellants," NASA, NASA CR-110644, Canoga Park, Sep. 1969.
+    49Burry, R. V. and Pauckert, R. P., "Engine System Des igns for Space Storable Propellants," AIAA 4th Propulsion Joint 
+Specialist Conference, AIAA Paper 68-615, 1968.
+    50Ingebo, R. D., "Drop -Size Distributions for Impinging -Jet Breakup in Airstreams Simulating the Velocity Conditions in 
+Rocket Combustors," NACA, NACA TN 4222, Washington, Mar. 1958.
+    51Rupe, J. H., "The Liquid -Phase Mixing of a Pair of Impinging Streams," Jet Propulsion Laboratory, California Institute of 
+Technology, JPL-PR-20-195, 6 Aug. 1953.
+    52Atherton, R. R., "Advanced Cryogenic Rocket Engine Program Staged Combustion Concept, Final Report, Vol I," AFRPL-
+TR-67-298-VOL I, Dec. 1967.
+    53Atherton, R. R., "Advanced Cryogenic Rocket Engine Program Staged Combustion Concept, Final Report, Vol II," AFRPL-
+TR-67-298-VOL II, Dec. 1967.
+   54Atherton, R. R., "Advanced Cryogenic Rocket Engine Program Staged Combustion Concept, Final Report, Vol III," AFRPL-
+TR-67-298-VOL III, Dec. 1967.
+    55Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129 -P-1 First Annual Report, Vol I," U. S. Air Force, 
+AFRPL-TR-69-3-Vol I, Edwards, CA, Jan. 1969.
+    56Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129 -P-1 First Annual Report, Vol II," U. S. Air Force, 
+AFRPL-TR-69-3-Vol II, Edwards, CA, Jan. 1969.
+    57Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129-P-1 First Annual Report, Vol III," U. S. Air Force, 
+AFRPL-TR-69-3-Vol III, Edwards, CA, Jan. 1969.
+    58Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129-P-1 Engine Performance," U. S. Air Force, AFRPL-
+TR-69-19, Edwards, CA, Apr. 1969.
+    59Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129 -P-1 Demonstrator Engine Design, Vol 1," U. S. Air 
+Force, AFRPL-TR-70-6 Vol 1, Edwards, CA, Apr. 1970.
+    60Atherton, R. R., "Air Force Reusab le Rocket Engine Program XLR129-P-1 Demonstrator Engine Design, Vol 3," U. S. Air 
+Force, AFRPL-TR-70-6 Vol 3, Edwards, CA, Apr. 1970.
+    61Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129 -P-1 Final Report, Vol I," U. S. Air Force, AFRPL -
+TR-71-1-Vol I, Edwards, CA, Jan. 1971.
+    62Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129-P-1 Final Report, Vol II," U. S. Air Force, AFRPL -
+TR-71-1-Vol II, Edwards, CA, Jan. 1971.
+    63Atherton, R. R., "Air Force Reusable Rocket Engine Program XLR129-P-1 Final Report, Vol III," U. S. Air Force, AFRPL-
+TR-71-1-Vol III, Edwards, CA, Jan. 1971.
+    64Hankins, R. A. and Yankovich, M., "Throttlable [ sic] Primary Injector for Staged Combustion Engine," U. S. Air Force, 
+AFRL-TR-70-40, Edwards.
+    65Masters, A., "Advanced Expander Test Bed Program," AIAA Space Programs and Technologies Conference , AIAA Paper 
+90-3708, 1990.
+    66Masters, A. I. and Mitchell, J. C., "Advanced Expander Test Bed Program: Final Annual Technical Progress Report," NASA, 
+NASA CR 187082, West Palm Beach, FL, Apr. 1991.
+    67Masters, A. I. and Mitchell, J. C., "Advanced Expander Test Bed Program: Preliminary Design Review Report," NASA, 
+NASA CR 187081, West Palm Beach, FL, May 1991.
+
+[PDF PAGE 38]
+American Institute of Aeronautics and Astronautics
+38
+    68Masters, A. I. and Tabata, W. K., "Design of an Advanced Expander Test Bed," AIAA/NASA/OAI Conference on Advanced 
+SEI Technologies, AIAA Paper 91-3437, 1991.
+    69Riccardi, D. P. and Mitchell, J. P., "Advanced Expander Test Bed Program: Second Annual Technical Progress Report," 
+NASA, NASA CR 189130, West Palm Beach, FL, Mar. 1992.
+    70Mitchell, J. C. and Tabata, W. K., "Design of an Advanced Expander Test Bed," AIAA/SAE/ASME/ASEE 29th Joint 
+Propulsion Conference and Exhibit, AIAA Paper 93-2133, 1993.
+    71Riccardi, D. P. and Mitchell, J. C., "Advanced Expander Test Bed Program: Annual Technical Progress Report for 1992," 
+NASA, NASA CR 191049, Jan. 1993.
+    72Morrell, G., "Rocket Thrust Variation with Foamed Liquid Propellants," NACA, NACA-RM-E56K27, Washington, DC, 26 
+Feb. 1957.
+    73Mitchell, J. P., "Final Report of Advanced Throttling Concepts Study," Pratt & Whitney Aircraft, Florida Research and 
+Development Center, PWA FR-1279, West Palm Beach, FL, 19 Mar. 1965.
+    74Rivard, J. G., "New Techniques for Throttleable Bipropellant Roc ket Engines," AIAA Joint Propulsion Specialists 
+Conference, AIAA Paper No. 65-560, 1965.
+    75"CPIA/M5 Liquid Propellant Engine Manual," CPIA, CPIA M5, Columbia, MD.
+    76Hammock, W. R., Jr., Currie, E. C., and Fisher, A. E., "Apollo Experience Report - Descent Propulsion System," NASA, 
+NASA TN D-7143, Washington, DC, Mar. 1973.
+    77Ruddock, S. and McCrea, J., "Feasibility Study and Performance Modeling of a Throttleable Attitude Control Thruster," 
+Bachelor of Engineering with Honors University of Bristol, Bristol, United Kingdom, 1991.
+    78Sutton, G. P., "History of Liquid Propellant Rocket Engines in Russia, Formerly Soviet Union," Journal of Propulsion and 
+Power, Vol. 19, No. 6, 2003, pp. 1008-1037.
+    79Diem, H. G., "Advanced Thrust Chamber for Sp ace Maneuvering Propulsion Third Quarterly Report," U. S. Air Force, 
+AFRPL-TR-67-78, Edwards Air Force Base, CA, Mar. 1967.
+    80Wiswell, R. L., "Advanced Maneuvering Propulsion Technology Program (Second Quarterly Progress Report)," Air Force 
+Rocket Propulsion Laboratory, AFRPL-TR-68-20, Canoga Park, CA, May 1968.
+    81Wiswell, R. L., "Advanced Maneuvering Propulsion Technology Program (Third Quarterly Progress Report)," Air Force 
+Rocket Propulsion Laboratory, AFRPL-TR-68-154, Canoga Park, CA, Sep. 1968.
+    82Wiswell, R. L., "Advanced Maneuvering Propulsion Technology Program (Fourth Quarterly Progress Report)," Air Force 
+Rocket Propulsion Laboratory, AFRPL-TR-68-221, Canoga Park, CA, Dec. 1968.
+    83Wiswell, R. L., "Advanced Maneuvering Propulsion Tech nology Program (Fifth Quarterly Progress Report)," Air Force 
+Rocket Propulsion Laboratory, AFRPL-TR-69-47, Canoga Park, CA, Mar. 1969.
+    84Wiswell, R. L., "Advanced Maneuvering Propulsion Technology Program (Seventh Quarterly Progress Report)," Air Force
+Rocket Propulsion Laboratory, AFRPL-TR-69-189, Canoga Park, CA, Sep. 1969.
+    85Gunston, B., World Encyclopedia of Aero Engines: from  the Pioneers to the Present Day, 1992.
+    86Werrell, K. P., "The Evolution of the Cruise Missile," Air University, Maxwell Air Force Base, AL, Sep. 1985.
+    87Brunk, W. E. and Flaherty, R. J., "Methods and Velocity Requirements for the Rendezvous of Satellites in Circumplanetary 
+Orbits," NASA, NASA TN D-81, Washington, DC, Oct. 1959.
+    88Hord, R. A. and Durling, B. J., "Analysis of a Linear System for Variable -Thrust Control in the Terminal Phase of 
+Rendezvous," NASA, NASA TN D-953, Washington, DC, Sep. 1961.
+    89Carey, L., "Dual-Mode, 100:1 Thrust Modulation Rocket Engine," Journal of Spacecraft and Rockets, Vol. 5, No. 2, 1968, 
+pp. 168-172.
+    90Lawrence Jr., L., Nesbitt, M. W., Huse, A. K., and Olson, D., "Interim Engineering Report on 2000 Pound Acid Aniline 
+Variable Thrust Liquid Propellant Rocket Engine," Reaction Motors, Inc., RMI-205N-2, Dover, NJ, 22 Aug. 1947.
+    91Gunter, F. L. and Fahrenholz, F. E., "Final Report on a Study of Rocket Thrust Control by Gas Injection," Massachusetts 
+Institute of Technology Naval Supersonic Laboratory, Technical Report 448, Cambridge, MA, May 1961.
+    92Martin, A. I., "The Aerodynamic Variable Nozzle," Journal of the Aeronautical Sciences, Vol. 24, No. 5, 1957, pp. 357.
+    93"F-1 Thrust Vector Control Study," Rocketdyne Engineering, R-1717, 28 Oct. 1959.
+    94Riviere, R. R., "An Analytical Study on Efficiency of Variable Th rust Liquid Rocket Engines," U.S. Army, RP -TM-61-1, 
+Huntsville, AL, 12 Sep. 1961.
+    95"Proposed 5,000 Pound Variable Thrust Engine Development Program," Reaction Motors, Inc., 24, Oct. 1950.
+    96Fredrickson, H., Rice, P. J., and Amneus, J. S., "Second Progress Report on Rocket Motor Throttling," Willow Run Research 
+Center Engineering Research Institute University of Michigan, UMM-89, Jan. 1952.
+    97Tomazic, W. A., "Rocket-Engine Throttling," NACA, NACA RM E55J20, Cleveland, OH.
+    98Elverum Jr., G., Staudhammer, P., Miller, J., and Hoffman, A., "The Descent Engine for the Lunar Module," AIAA 3rd 
+Propulsion Joint Specialist Conference, AIAA Paper 67-521, 1967.
+    99Gilroy, R. and Sackheim, R., "The Lunar Module Descent Engine - A Historical Summary," AIAA/ASME/ASME/ASEE 25th 
+Joint Propulsion Conference, AIAA Paper 89-2385, 1989.
+    100Dressler, G. A., "The Deep Throttling Pintle Injector: History, Technology and Application to Near -Term Programs," 53rd 
+JANNAF Propulsion Meeting, 2005.
+    101Bennett, F. V., "Apollo Experience Report - Mission Planning for Lunar Module Descent and Ascent," National Aeronautics 
+and Space Administration, NASA TN D-6846, Washington, DC, Jun. 1972.
+
+[PDF PAGE 39]
+American Institute of Aeronautics and Astronautics
+39
+    102Johnson, R. J., Boyd, B. R., and Smith, T. H., "Application of the MI RA 150A Variable Thrust Rocket Engine to Manned 
+Lunar Exploration Flying Systems," AIAA 3rd Propulsion Joint Specialist Conference, AIAA Paper 67-505, 1967.
+    103Johnson, R. J., Boyd, B. R., and Smith, T. H., "Application of the MIRA 150A Variable -Thrust Engine to Manned Lunar 
+Flying Systems," Journal of Spacecraft and Rockets, Vol. 5, No. 7, 1968, pp. 849-851.
+    104Shieber, H. and Rupert, R. C., "Assurance of Service Life of the MIRA 150A Variable Thrust Rocket Engine," AIAA Joint 
+Propulsion Specialists Conference, AIAA 65-608, 1965.
+    105Shieber, H. and Rupert, R. C., "Assurance of Service Life of the MIRA 150A Variable Thrust Rocket Engine," Journal of 
+Spacecraft and Rockets, Vol. 3, No. 7, 1966, pp. 1034-1038.
+    106Watkins 1st Lt. USAF, F. E., "A Design for Throttling a Gaseous Propellant, Film Cooled, Rocket Motor by Injector Area 
+Variation," Master of Science Air Force Institute of Technology Air University, Wright-Patterson Air Force Base, OH, 1965.
+    107Smith III 1st Lt. USAF, C. D., "The Design, Construction, and Test of a Throttling System for a Gaseous Propellant Rocket 
+Motor," Master of Science Air Force Institute of Technology Air University, Wright-Patterson Air Force Base, OH, 1966.
+    108De Groot 1st Lt. USAF, F. J., "Thrust Variatio n of a Gaseous Propellant Rocket Engine," Master of Science Air Force 
+Institute of Technology Air University, Wright-Patterson Air Force Base, OH, 1967.
+    109Wernle II 1st Lt. USAF, C. F., "Throttling Rocket Engine," Master of Science Air Force Institute of Technology Air 
+University, Wright-Patterson Air Force Base, OH, 1968.
+    110Ow, G. Y. W., "An Evaluation of Film Cooled Gaseous Hydrogen and Oxygen Rocket Engine of 100 Pounds Thrust," 
+Master of Science Air Force Institute of Technology Air University, Wright-Patterson Air Force Base, OH, 1960.
+    111Chianese, S. G., Majamaki, A. N., and Gavitt, K. R., "NGST TR202 Throttling Lunar Descent Pintle Engine," 54th JANNAF 
+Propulsion Meeting, 2007.
+    112Majamaki, A. N., Chianese, S. G., and Kim, T. S., "TR 202 Deep Throttling Lunar Descent Engine Pintle Injector 
+Technology Development Status," JANNAF 6th MSS / 4th LPS / 3rd SPS Joint Meeting, 2008.
+    113Majamaki, A. N. and Chianese, S. G., "TR202 Variable Thrust Pintle Descent/Ascent Engine (Cumulative Thr ough Phase 
+II, Option I)," Northrop Grumman Space Technology, NASA CR-2008-215472, Sep. 2008.
+    114Mikhaylov, V. V. and Bazarov, V. G., "Throttled Liquid Propellant Rocket Engines (from Russian -  Drosseliruyemyye 
+Zhidkostnyye Raketnyye Dvigateli)," Report FTD-1D(RS)T-0960-86 Machine Translation, Wright-Patterson Air Force Base, 
+OH (Original - Moscow), 15 Dec. 1986 (Original - 1985).
+    115Bazarov, V., Yang, V., and Puri, P., "Design and Dynamics of Jet and Swirl Injectors," Vol. 200 American Institute o f 
+Aeronautics and Astronautics, Inc., Reston, VA, 2004, pp. 19-103.
+    116"Liquid Rocket Thrust Chambers: Aspects of Modeling, Analysis, and Design," Vol. 200 AIAA, Reston, VA, 2004.
+    117Santoro, R. J., "Demonstration of Throttleable LOX/GH2 Injector Concepts Final Technical Report," The Pennsylvania State 
+University, Dec. 2001.
+    118Greene, C., Woodward, R., Pal, S., and Santoro, R., "Design and Study of a LOX/GH 2 Throttleable Swirl Injector for 
+Rocket Applications," 38th JANNAF Combustion Subcommittee Meeting, CPIA-Publ-712-Vol-1, 2002.
+
+[PDF PAGE 40]
+Liquid-Propellant Rocket Engine Throttling:
+A Comprehensive Review
+Matt Casiano – NASA Marshall Space Flight Center
+Jim Hulka – Jacobs Engineering, ESTS Group
+Vigor Yang – Georgia Institute of Technology
+45th AIAA/ASME/SAE/ASEE Joint Propulsion Conference & Exhibit
+2 – 5 August 2009
+
+[PDF PAGE 41]
+Objective
+The Vision for Space Exploration outlined in the NASA Authorization Act of
+2005 brought a renewed interest to throttleable liquid rocket engines (LREs).
+• Throttling LREs can continuously follow the most economical thrust curve
+and are applicable to
+– Planetary entry and descent
+– Space rendezvous
+– Orbital maneuvering (orientation and stabilization in space)
+– Hovering / hazard avoidance
+– Aircraft rocket engine control
+– Ballistic missile defense trajectory control
+• The primary objective is to review LRE throttling techniques and to examine
+the concerns and issues as well as compare the advantages and
+shortcomings.
+Casiano/ER42 	 2
+
+[PDF PAGE 42]
+Outline
+• LRE Throttling Background
+• LRE Throttling Methods and Discussion of Selected Programs
+– High-pressure-drop systems
+– Dual-manifold injectors
+– Gas injection
+– Multiple chambers
+– Pulse modulation
+– Throat throttling
+– Variable area injectors
+– Hydrodynamically dissipative injectors
+– Combined methods
+• Summary
+Casiano/ER42 	 3
+
+[PDF PAGE 43]
+Throttling Background
+• Throttling – the nomenclature is used in variable thrust rocket engines
+primarily because one of the most common ways of thrust control is to
+regulate propellant flow using control valves
+• Throttling ranges are mission dependent with higher throttling ratios for
+more precise trajectory control
+• Thrust equation
+− pa) ⋅ AeFT = m^ ⋅ve + (pe
+• Controllable physical parameters
+– Propellant flow rates
+– Propellant types and composition
+– Nozzle exit area
+– Nozzle throat area
+Casiano/ER42 	 4
+
+[PDF PAGE 44]
+Throttling Background (cont.)
+• Throttleable LREs originally developed in Germany in late 1930s
+– Experiments and research led by Major-General Dr. Walter
+Dornberger (then Major) and Hellmuth Walter
+– November, 1937 a Heinkel He 112 flew at Neuhardenberg,
+Germany and was the 1 st aircraft powered by a manually
+throttleable rocket engine
+– Hellmuth Walter TP-1 rocket engine – 220 lbs rated thrust using a
+monopropellant hydrogen peroxide solution
+• Throttling Critical Issues
+– Combustion and system instabilities
+– Performance degradation
+– Excessive heat transfer
+– Pump dynamics
+Casiano/ER42 	 5
+
+[PDF PAGE 45]
+High-pressure-drop Systems
+• Single, fixed-geometry injectors can generally throttle 2:1 to 3:1 with a
+nominal injector configuration and a typical injector pressure drop
+• A higher-than-usual injector pressure drop is necessary to maintain a
+minimum injector pressure drop at minimum thrust for deep throttling
+– Injector stiffness varies linearly with flowrate for liquid propellants
+– 5% Op/pc at 10% thrust requires 50% Op/pc at 100% thrust
+• Project Thumper – 1948, a General Electric program sponsored by the
+US Army to develop high-altitude antiaircraft ballistic missile defense
+against the German V-2 rockets
+– One of the 1st extensive deep throttling investigations
+– High frequency combustion instability, chug, and hydraulic
+instabilities were present in the operational map as thrust was
+reduced
+• Other well known engines/programs using high-pressure-drop systems
+– DC-X and DC-XA, 1991
+– RD-0120, 1996
+– SS M E, 1997
+– CECE, 2005
+Casiano/ER42 	 6
+
+[PDF PAGE 46]
+Common Extensible
+Cryogenic Engine (CECE)
+at Varying Thrust (2005)
+High-pressure-drop Systems (cont.)
+• SSME, rated thrust – 470,000 lbs, 1997
+– Throttled to 17% of rated thrust
+– No issues, only a minor ox boost pump bi-
+stability at 50%
+– Concerns were mostly pump-related
+• Rotordynamic stability
+• Running at shaft critical speeds
+• HPFTP thrust bearing to lift off
+• Pump stall
+• Ox boost pump bi-stability
+• Pump performance
+• CECE, rated thrust – 13,700 lbs, 2005
+– Throttled to 8% of rated thrust
+– Early onset of chug from oxygen boiling
+• Insulated injector decreased the onset
+of chug to a lower power level
+Casiano/ER42 	 7
+
+[PDF PAGE 47]
+Example Dual-manifold Injector Stiffness
+Dual-manifold Injectors
+• Dual-manifold, two-stage, dual-element, dual-circuit, dual-orifice injector
+• Dual-manifold injector is designed to maintain satisfactory injector pressure
+drop at low thrust while not requiring excessive pressure drop at full thrust
+– Combines two fixed-area injectors into a common structure
+– Independent flow control to each injector manifold
+• Deep throttling is achieved by
+proceeding from two-manifold operation
+at high thrust to single-manifold
+operation at low thrust, thus changing the
+effective injection area
+– All the flow transitions to the primary
+manifold at the predetermined
+transition point
+– Transition point historically ranged
+between 20% and 50% of full flow
+– Operating parameters must be
+optimized and still conform to system
+pressures
+Casiano/ER42 	 8
+
+[PDF PAGE 48]
+• Usually on the oxidizer side only
+• The high injector pressure drop at low
+thrust provides better performance and
+improved stability margin
+• No moving parts, additional control
+valves
+Triplet-element Dual-manifold Injector Hardware (1963)
+Dual-manifold Injectors (cont.)
+P&WA Advanced Throttling Concept Study
+Triplet-element Dual-manifold Injector (1963)
+Transition can be difficult because of
+stability and operational issues
+– Instability incited during repriming
+of the manifold
+– Liquid compressed the gasified
+propellant; chug eliminated by
+bleeding the gas first
+– Complete closure of the secondary
+manifold can cause overheating
+and contamination with comb. gas9
+Casiano/ER42
+
+[PDF PAGE 49]
+Dual-manifold throttling performance in
+Rocketdyne research engine, FLOX / MMH
+• Other well-known programs
+– XLR-129, 1967
+– AETB, 1990
+Dual-manifold Injectors (cont.)
+• Chamber Technology for Space Storable
+Propellants, rated thrust – 1000 lbs, 1964
+– Rocketdyne research engine
+– Thrust varied from 15% to 150% rated
+thrust with FLOX / storable fuel
+– Transition at 49% thrust
+– Peak performance at secondary
+manifold flow cutoff, high injection
+velocity
+– System response delay occurred when
+throttling up due to the need to reprime
+the secondary manifold; continuous
+flow through secondary manifold
+proposed to reduce response time
+Casiano/ER42 	 10
+
+[PDF PAGE 50]
+Gas Injection
+• Gas Injection, foamed flow, propellant aeration
+• Gas injected into liquid propellant reduces the bulk density, and thus
+increases the injector pressure drop (while flow rate is essentially
+unchanged), and subsequently increases injector stiffness
+m^= CD⋅ Aj ⋅ 2⋅ ρ  ⋅Δp
+• Gas Injection comments
+– Improves performance at low thrust by improving atomization
+– Improves chug stability margin
+– Usually this requires a weight penalty for the equipment
+– Homogeneous gas injection to prevent low frequency instabilities
+• Other well-known programs
+– SE-10, 1963
+– CECE, 2005
+Casiano/ER42 	 11
+
+[PDF PAGE 51]
+Rocketdyne Advanced Development Engine (1965)
+Multiple Chambers
+• Multiple chamber throttling is performed by stopping flow through one or
+more chambers or varying thrust of each chamber independently
+– Can provide a deeper throttling by independently varying each
+chamber by a small amount
+• Used on aerospike engines by coordinating banks of chambers
+• Russians used multiple chambers for reasons other than throttling
+– Manufacturability
+– Combustion stability
+– Engine-out reliability
+• Multiple chambers do not
+provide optimum engine
+weight
+• Other well-known engines
+– RD-170, 1976-1986
+– RD-180, 1992-1999
+Casiano/ER42 	 12
+
+[PDF PAGE 52]
+Pulse Modulation
+• Pulse-width modulation is on-off cycling that provides quasi-steady state
+average thrust
+• Predominantly used in monopropellant engines
+• V-1 buzz bomb pulses at 100 Hz
+• Pulse detonation engines (PDEs) are a similar more recent technology
+– Oxidizer and fuel mixture is supersonic at detonation
+– Process is more efficient, but difficulties converting energy into
+efficient thrust
+• Pulsing concerns and disadvantages
+– Need fast response valving
+– Performance is low due to transients
+– Shock loading and heat soak into chamber head end
+• Pulsing techniques
+– Thrust interval is fixed, thrust magnitude is variable
+– Thrust interval is variable, thrust magnitude is fixed
+13
+
+[PDF PAGE 53]
+Pulse Modulation (cont.)
+• Bell Aerospace Lunar Flying Vehicle Study, rated thrust – 1000 lbs,
+1964
+– This engine pulses to obtain a range from 12% to 1 % thrust
+– Number of elements need to be
+optimized
+• High enough performance
+• Small enough manifold volume
+– Performance is lower for a
+comparable steady state operating
+point
+– Shorter duration
+– Transient effects
+Bell model 8414
+Throttleable Maneuvering Engine
+Casiano/ER42 	 14
+
+[PDF PAGE 54]
+Throat Throttling
+• Throat throttling achieved by two techniques
+– Cooled mechanical pintle inserted and retracted through the nozzle
+throat region
+– Gas injected into the throat
+• At constant propellant pressures, the throat restriction increases the
+chamber pressure, which decreases the injector pressure drop and
+subsequently reduces propellant flow rates and thrust
+• Chamber pressure increases as
+thrust is decreased
+– Maximum theoretical
+performance occurs at lower
+thrust
+Reaction Motors, Inc. Restrictor Device
+Casiano/ER42 	 15
+
+[PDF PAGE 55]
+Throat Throttling (cont.)
+• General Concerns
+– Combustion performance must be optimized since this method is
+characterized by a variable L*
+– Excessive heat transfer to the pintle device
+– Excessive vibrations
+– Need to optimize pintle shape – attributed to nozzle separation performance
+loss
+– Injector design must provide high injection pressure drops at max
+thrust to maintain a minimum injector pressure drop at low thrust
+– Gas injection into the throat is impractical for throttling
+• Effectiveness dependent on stagnation temperature of
+injected gas, needs to be high temperature
+Casiano/ER42 	 16
+
+[PDF PAGE 56]
+NACA Triplet Impinging Jet Variable Area Injector
+Variable Area Injectors
+• Most well-known throttleable engine is the Apollo Lunar Module Descent
+Engine (LMDE)
+• Maximum thrust occurs when the injection orifices are fully open; as the
+injection area is reduced using a movable injector component, the chamber
+pressure and thrust is reduced, and pressure drop is increased
+• Majority of variable area injectors contain a single central pintle feature
+• Generally there is a need for flow
+control valves in conjunction with
+the variable area injector for
+complete mixture ratio and throttling
+control
+Casiano/ER42 	 17
+
+[PDF PAGE 57]
+Pintle Injector Operation
+LMDE Schematic
+Variable Area Injectors (cont.)
+• Variable area injector comments
+– Design simplicity with some complexity in the
+actuating and guiding elements
+• Leakage is one concern
+– Higher injector pressure drop at lower thrust
+providing better atomization and stability
+margin at lower thrust
+• Requires an optimization between
+performance and throttling since the
+better atomization occurs at lower thrust
+– High frequency combustion stability is
+uncommon because of the central location of
+the injector element
+• First tangential acoustic mode has a
+central nodal line; annular reaction zone
+helps with radial instability
+• Encountered in an early study
+• Other well-known engines
+– LMDE, 1963
+Casiano/ER42– TR202, 2005	 18
+
+[PDF PAGE 58]
+LMDE Nominal Duty Cycle
+19
+Variable Area Injectors (cont.)
+• LMDE
+– Engine development began in 1963; man-rated by 1967
+– Used first in Apollo 5 in unmanned configuration in Jan. 1968
+– Used to return the astronauts of Apollo 13 to an earth orbit after an oxygen
+tank failure damaged the service module
+– Starts to 10% during vehicle stabilization
+– No high frequency combustion instabilities attributed to central location of
+the pintle element
+– Low frequency instability with 20 psi peak-to-peak
+– Fuel sleeve movement varied the
+injection area of both the fuel and
+oxidizer
+– Cavitating throttling valves were	 7HRll5T
+incorporated to maintain flowrate below
+70% thrust
+– Injector orifice changes did not
+affect mixture ratio
+– Eliminated large pressure loss	 L
+penalties at higher thrust that would
+Casiano/ER42 	 be present with high cavitating flow
+
+[PDF PAGE 59]
+Hydrodynamically Dissipative Injectors
+• Use fluid dynamics to obtain adequate impedance across the injector
+– Increased inertance by lengthening the elements
+– Increased resistance by using capillary tube elements
+– Effective control of the resistance by varying element hydraulics: variable
+discharge coefficient
+• Usually a subset of other methodologies such as high-pressure-drop injectors or
+dual-manifold injectors
+• Usually a simple design, but there is limited work in this area
+• Professor Bazarov has applied classic swirl theory to dual-channel tangential
+orifice injectors
+– Tangential-entry dual-inlet swirl injectors throttle by means of varying
+hydraulic conditions
+– Using a dual-channel injector element: the pre-injection swirl flow can be
+managed such that a vortex forms inside the injector passages
+– With the variation of flow to each inlet independently, the vortex and orifice
+conditions are affected - thus controlling the discharge coefficient
+– Penn State has experimented with Bazarov’s injectors over a 10:1 throttling
+range
+Casiano/ER42 	 20
+
+[PDF PAGE 60]
+Combined Methods
+• Combined methods allow an even deeper throttling by combining throttling
+methods
+– Carry the advantages of two or more methods
+– Usually adds complexity
+– Generally all methods need flow control to some extent
+• Some methods inherently are combined methods
+– Variable area injector
+– Dual-manifold injector
+– Hydrodynamically dissipative injectors
+• Bell Aerospace had combined high-pressure-drop injector with pulsing
+– 100-to-1 throttling achieved
+• Pratt & Whitney Aircraft combined a constant area injector with a variable area
+injector
+– At low thrust, a variable area injector maintained enough pressure drop
+– At higher thrust, a constant area injector allowed increasing pressure drop
+– Reasonable pressure drop over a wide range while providing enough
+stiffness at high thrust to prevent low frequency instabilities
+Casiano/ER42 	 21
+
+[PDF PAGE 61]
+Summary
+• Throttling critical issues
+– Combustion and system instabilities
+– Performance degradation
+– Excessive heat transfer
+– Pump dynamics
+• Throttling Methods
+– High-pressure-drop systems
+– Dual-manifold injectors
+– Gas injection
+– Multiple chambers
+– Pulse modulation
+– Throat throttling
+– Variable area injectors
+– Hydrodynamically dissipative injectors
+– Combined methods
+Casiano/ER42 	 22

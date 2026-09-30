@@ -1,0 +1,274 @@
+{
+  "topic": "05_cz10b_verify",
+  "retrieved_at": "2026-09-29T16:17:09.5385396+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "请只核查这几个来源及必要的关联一手资料：\nhttp://www.calt.com/n482/n498/c2579124/content.html\nhttp://www.calt.com/n689/c2573694/content.html\nhttp://www.calt.com/n482/n498/c2562559/content.html\nhttps://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html\nhttp://hi.people.com.cn/n2/2026/0711/c231190-41635784.html\n上轮搜索初步称长征十号乙与甲不同，一级液氧煤油、二级液氧甲烷，并称2026年7月首飞及网系回收。必须核查这些说法是否由原文直接支持，严禁拼接百科。按来源提供标题日期、原文支持短句及URL，说明“一级7台YF-100N/P/L”和“二级YF-219”的型号/数量/循环是否真有航天科技集团、火箭院、六院一手证据；如没有，就明确不能确认。约1200字，结束给简洁结论。\n",
+  "search_calls": [
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n689/c2573694/content.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2562559/content.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 发动机 OR YF-100 OR YF-219 site:calt.com OR site:spacechina.com OR site:casc.com.cn",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c3791564/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://zhuanti.spacechina.com/n1489207/n1489336/n1489361/c1501166/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n146/n238/n12985/c3961254/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n1991299/n1991333/c4270389/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c2914256/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323886/c4450526/content.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 YF-100N OR YF-100P OR YF-100L OR YF-219",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/KQ4TSLQ80511JTAO.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/YF%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD%E5%8F%91%E5%8A%A8%E6%9C%BA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/603819939_121254561"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-100"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" \"七台\" OR \"7台\" 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://faxiangongchang.com/reports/rocket-net-recovery-industry-2026"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+      }
+    },
+    {
+      "id": "ws_47debeba-aaea-9362-b630-91dc3dc94f0e_call-b79c5872-e21a-46a1-8ffe-872e6442e9dd-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**指定来源直接支持“乙与甲不同、一级液氧煤油、二级液氧甲烷、2026年7月10日首飞、海上网系回收”，但不支持具体发动机型号与数量细节。**\n\n## 指定来源核对表\n\n| 来源 | 标题与日期 | 原文支持短句 | URL |\n|------|------------|--------------|-----|\n| 火箭院官网型号页 | 长征十号乙（2026-07-10） | “5米直径两级串联构型……芯一级采用液氧煤油推进剂，芯二级采用液氧甲烷推进剂……2026年7月10日，成功首飞，一子级在海上回收平台通过网系捕获方式成功回收。” | http://www.calt.com/n482/n498/c2579124/content.html |\n| 火箭院新闻 | 创造历史！长十乙首飞成功……（2026-07-10） | “芯一级沿用长征十号甲运载火箭一子级状态，采用液氧煤油推进剂，芯二级采用液氧甲烷推进剂……一子级垂直返回，在海上回收平台通过网系捕获方式成功回收……全球首次运载火箭网系回收。” | http://www.calt.com/n689/c2573694/content.html |\n| 火箭院官网型号页 | 长征十号甲（2026-03-18） | “两级串联构型，芯级直径5米，一子级可重复使用……用于发射新一代近地载人飞船和天舟货运飞船……目前正处于研制阶段。”（未写推进剂组合，亦未写已首飞） | http://www.calt.com/n482/n498/c2562559/content.html |\n| 科技日报 | 长征十号甲、乙、丙“三兄弟”到底有啥区别？（2026-07-10） | 航天科技集团陈牧野：“长征十号乙火箭一子级沿用长征十号甲构型，二子级是我们新研发的液氧甲烷动力模块；长征十号丙的二级和长征十号乙的二级是一样的……” | https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html |\n| 人民网海南 | 长征十号乙首飞成功 我国运载火箭首次实现可控回收（2026-07-11，转海南日报） | “芯一级沿用长征十号甲运载火箭一子级状态，采用液氧煤油推进剂；芯二级采用液氧甲烷推进剂……一子级成功回收……全球首次实现运载火箭海上网系回收。” | http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html |\n\n以上五条均为2026年7月（甲型页为3月）公开发布，均在截止日期前。相互一致、无冲突：乙型与甲型的核心差异被原文写明为“一级沿用甲的一子级/液氧煤油状态 + 新研液氧甲烷二级”；首飞日期与回收方式为“2026年7月10日海南商业航天发射场发射、一子级海上平台网系捕获”。甲型页当时仍写“研制阶段”，与乙型7月已飞并不矛盾（乙明确沿用甲一子级状态）。上述页面均未出现发动机型号、台数或循环方式。[[1]](http://www.calt.com/n482/n498/c2579124/content.html)\n\n## 关联一手/准一手资料（集团、一院、六院口径）\n\n航天科技集团官网2026-07-15文章（中国航天报，集团层面）写明：长十乙“一子级130吨级泵后摆液氧煤油发动机”“二子级140吨级液氧甲烷发动机”，均由六院研制；甲烷发动机“从方案论证到整机试车仅用时7个月”。仍无YF编号、无“7台”、无N/P/L或YF-219字样。[[2]](https://m.spacechina.com/n2014703/n3482528/c4651819/content.html)\n\n央视新闻客户端2026-07-10报道（总台记者探访总装，直接引述航天科技集团陈牧野，与科技日报同一发言人）称：长十乙“七机并联的7台液发100系列发动机”（液氧煤油），“这7台中有5台是可以摇摆的，有2台是固定的。另外，这5台是可以二次启动的”；“在长十甲的一子级基础上，新研制了一个液氧甲烷二子级”。此为官员口述经权威媒体刊出，属准一手，但仍未给出YF-100N/P/L细分或YF-219编号。[[3]](https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html)\n\n更早的集团报道（2024年）仅记载长征十号系列一子级动力系统试车为“3台YF-100K”，属于研制过程中的分阶段试验，不能直接等同于乙型首飞构型。\n\n## 对“一级7台YF-100N/P/L、二级YF-219”的核查\n\n指定五源及上述集团/一院/六院直接文本中：\n- **可确认**：一级为液氧煤油、沿用甲型一子级；二级为新研液氧甲烷模块；一级采用“液发100系列”、七机并联、约890–900吨起飞推力量级、部分可摇摆、部分可二次启动（用于返回减速与挂网）；二级为140吨级液氧甲烷发动机（六院快速研制）。循环方式、精确子型号均未写。\n- **不能确认**：航天科技集团、火箭院（一院）、六院的一手页面或官方新闻正文中，均未出现“YF-100N”“YF-100P”“YF-100L”或“YF-219”与长征十号乙的对应关系，也未给出“3+2+2”的台数分配。130吨级泵后摆液氧煤油与公开资料中YF-100N的常见描述相符，但官方未在乙型语境下点名该编号；甲烷发动机仅称“140吨级液氧甲烷”，未公布YF-219或循环类型（开式/闭式等）。\n\n百科、自媒体及部分二次报道中的“7×（3N+2P+2L）+1×YF-219”属于外部拼接，本次核查范围内无集团/院所原文支撑，故不能作为已证实事实。\n\n未公开字段还包括：甲烷二级精确循环、单机真空推力标定、复用次数指标、整流罩具体构型等。甲型页截至2026年3月仍标“研制阶段”，后续是否已飞或状态变更，指定来源未更新。\n\n**简洁结论**：指定官方与权威报道原文直接支持长征十号乙区别于甲（一级沿用甲的液氧煤油一子级、二级为新研液氧甲烷）、2026年7月10日首飞并首次实现海上网系回收。一级7台“液发100系列”、二级140吨级液氧甲烷有集团官员及六院口径支持。具体“YF-100N/P/L”组合与“YF-219”编号在航天科技集团、火箭院、六院一手资料中均未出现，不能确认。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+              "start_index": 1247,
+              "end_index": 1305,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+              "start_index": 1470,
+              "end_index": 1541,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html",
+              "start_index": 1742,
+              "end_index": 1813,
+              "title": "3"
+            }
+          ]
+        }
+      ],
+      "id": "msg_47debeba-aaea-9362-b630-91dc3dc94f0e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 70389,
+    "input_tokens_details": {
+      "cached_tokens": 28672
+    },
+    "output_tokens": 4818,
+    "output_tokens_details": {
+      "reasoning_tokens": 2844
+    },
+    "total_tokens": 75207,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 10,
+    "cost_in_usd_ticks": 930705200,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 10,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 31870,
+      "output_tokens": 2694
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

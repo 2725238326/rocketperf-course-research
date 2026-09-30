@@ -1,0 +1,18 @@
+[
+  {"id":"O01_cea_readme","url":"https://raw.githubusercontent.com/nasa/cea/main/README.md"},
+  {"id":"O01_cea_license","url":"https://raw.githubusercontent.com/nasa/cea/main/LICENSE.txt"},
+  {"id":"O01_cea_changes","url":"https://raw.githubusercontent.com/nasa/cea/main/CHANGELOG.md"},
+  {"id":"O01_cea_c_api","url":"https://nasa.github.io/cea/interfaces/c_api.html"},
+  {"id":"O02_rocketcea_readme","url":"https://raw.githubusercontent.com/sonofeft/RocketCEA/master/README.rst"},
+  {"id":"O03_rocketisp_readme","url":"https://raw.githubusercontent.com/sonofeft/RocketIsp/master/README.rst"},
+  {"id":"O04_cantera_readme","url":"https://raw.githubusercontent.com/Cantera/cantera/main/README.rst"},
+  {"id":"O04_cantera_license","url":"https://raw.githubusercontent.com/Cantera/cantera/main/License.txt"},
+  {"id":"O04_cantera_c_api","url":"https://cantera.org/stable/clib/index.html"},
+  {"id":"O05_coolprop_readme","url":"https://raw.githubusercontent.com/CoolProp/CoolProp/master/Readme.md"},
+  {"id":"O06_pycycle_readme","url":"https://raw.githubusercontent.com/OpenMDAO/pyCycle/master/README.md"},
+  {"id":"O06_pycycle_license","url":"https://raw.githubusercontent.com/OpenMDAO/pyCycle/master/LICENSE.txt"},
+  {"id":"O07_pyskyfire_readme","url":"https://raw.githubusercontent.com/ask-hovik/pyskyfire/main/README.md"},
+  {"id":"O07_pyskyfire_license","url":"https://raw.githubusercontent.com/ask-hovik/pyskyfire/main/LICENSE"},
+  {"id":"O08_rocketcycles_readme","url":"https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/README.md"},
+  {"id":"O08_rocketcycles_license","url":"https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/LICENSE"}
+]

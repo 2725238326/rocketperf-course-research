@@ -1,0 +1,533 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" rel="stylesheet" href="../../../template/71/3112.css" />
+<link type="text/css" rel="stylesheet" href="../../../template/71/2840.css" />
+
+<!--start component 文档组件(2016文章标题)-->
+<!-- 页面等比例缩放 --> 
+<meta name="viewport" content="width=1220,minimum-scale=0.2,maximum-scale=1,user-scalable=yes"> 
+<!-- 页面等比例缩放 end -->
+<style>
+body { min-width: 1260px; }
+</style>
+
+<title>长征十号甲 - 中国运载火箭技术研究院</title>
+<!--end component 文档组件(2016文章标题)-->
+
+</head>
+
+<body>
+    
+<!--start component 导航条(2016通用导航)-->
+<style>
+.nav .nava{display:block; height:40px; width:119px; font-size:14px; color:#FFF; font-family:"微软雅黑"; display:block; line-height:36px; text-align:center;}
+.center { width: 1190px; }
+.nav .tab_div { width: 1198px; }
+</style>
+
+
+
+<div class="header" style="background: url('../../../dbsource/182/715.jpg') no-repeat center;">
+ <div class="header_con center">
+      <div class="logo"><a href="../../../index.html" >中国运载火箭技术研究院</a></div>
+        <div class="search">
+         <FORM action="http://calt.spacechina.com/searchweb/calt.jsp" target="_blank" name="form1" method=post >
+             <input type="text" class="text" name="fullText" id="top_search_input"/>
+                <a href="javascript:lcy()" class="submit" id="top_search_button" name="top_search_button"></a>
+<!--<input name="sortType"style="display:none;" id="sortType" value="1" />
+<input name="sortKey" style="display:none;"  id="sortKey" value="showTime" />
+<input name="sortFlag" style="display:none;" id="sortFlag" value="-1" />
+<input name="indexDB" style="display:none;" id="indexDB" value="css"> -->
+
+            </form>
+        </div> 
+     <!-- <div class="itext"><a href="../../../index.html" target="_blank">中文版</a> | <a href="../../../n840/index.html" target="_blank">English</a></div> -->
+    </div>
+</div>
+
+<div class="nav" style="background-repeat:repeat-x">
+ <div class="nav_con center" id="yeqian">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+            <td>
+                 <a href="../../../n481/index.html" class="nava">关于我们</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt  style=" width:260px; border:0px;" ><img src="../../../dbsource/76/316.jpg" width="100%" /></dt>
+                            <dd style="margin-left:20px;">
+                                <!-- <a href="../../../n481/n489/index.html" target="_blank">本院概况</a> -->
+                                <!-- <a href="../../../n481/n491/index.html" target="_blank">领导班子</a> -->
+                                <!-- <a href="../../../n481/n2437/index.html" target="_blank">信息公开</a> -->
+
+                                <a href="../../../n481/n586/index.html" target="_blank">历史沿革</a>
+                                <!--<a href="../../../n481/n2651/index.html" target="_blank">学习贯彻习近平新时代中国特色社会主义思想主题教育</a>
+                                <a href="../../../n481/n2648/index.html" target="_blank">学习贯彻党的二十大精神  </a>
+                                <a href="../../../n481/n2444/index.html" target="_blank">党史学习教育</a>
+                                <a href="../../../n481/n1764/index.html" target="_blank">不忘初心 牢记使命</a> -->
+                            </dd>
+ 
+                            <dd style="margin-left:20px;">
+                                <!-- <a href="#" target="_blank">“三高”全面发展</a>
+                               <a href="../../../n481/n898/index.html" target="_blank">委员代表</a> -->
+                               <!-- <a href="../../../n481/n839/index.html" target="_blank">大政方针</a> -->
+                            </dd>
+
+                            <dd style="margin-left:20px; border:0;">
+                                <!-- <a href="../../../n481/n497/index.html" target="_blank">火箭荣耀</a>                                  
+
+                                <a href="../../../n481/n698/index.html" target="_blank">社会责任</a> -->                                        
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                 <a href="../../../n482/index.html" class="nava">运载火箭</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt   style=" width:260px; border:0px;" ><img src="../../../dbsource/74/306.jpg" width="100%" /></dt>
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n482/n498/index.html" target="_blank">火箭型谱</a>
+                                 <a href="../../../n482/n741/index.html" target="_blank">长征三号甲系列火箭</a>
+                                 <a href="../../../n482/n2438/index.html" target="_blank">长征八号系列火箭</a> 
+                                 <a href="../../../n482/n756/index.html" target="_blank">综合消息</a>    
+                                 <!--<a href="../../../n482/n1590/index.html" target="_blank">未来航天</a> -->
+                            </dd>
+
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n482/n739/index.html" target="_blank">长征二号丙火箭</a>
+                                 <a href="../../../n482/n742/index.html" target="_blank">长征五号系列火箭</a>  
+                                 <a href="../../../n482/n744/index.html" target="_blank">长征十一号火箭</a>          
+                                 <a href="../../../n482/n505/index.html" target="_blank">院发射记录</a>
+                                 <a href="../../../n482/n699/index.html" target="_blank">火箭精彩图片</a>
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                 <a href="../../../n482/n740/index.html" target="_blank">长征二号F火箭</a>
+                                 <a href="../../../n482/n743/index.html" target="_blank">长征七号系列火箭</a> 
+                                 <a href="../../../n482/n2653/index.html" target="_blank">捷龙系列火箭</a>
+                                 <a href="../../../n482/n875/index.html" target="_blank">上面级</a>      
+                                 <!--<a href="../../../n482/n506/index.html" target="_blank">航天服</a> -->
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                 <a href="../../../n484/n2659/index.html" class="nava" style="width:245px;">航天技术应用产业和航天服务业</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt  style=" width:260px; border:0px;" ><img src="../../../dbsource/76/317.jpg" width="100%" /></dt>
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n484/n514/index.html" target="_blank">节能与环保</a>
+                                 <a href="../../../n484/n2660/index.html" target="_blank">特种车辆</a>
+                                 <a href="../../../n484/n2661/index.html" target="_blank">智能装备</a>
+                            </dd>
+
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n484/n2662/index.html" target="_blank">航天服务</a>
+                                 <a href="../../../n484/n520/index.html" target="_blank">上市公司</a>
+                                 <a href="../../../n484/n745/index.html" target="_blank">专题报道</a>
+                            </dd>
+                             
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+           
+
+             <!--  <td>
+                 <a href="../../../n485/index.html"  class="nava">合作共赢</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt style=" width:260px; border:0px;"><img src="../../../dbsource/74/309.jpg" width="100%" /></dt>
+                            <dd  style=" margin-left:20px;">
+                                 <a href="../../../n485/n700/index.html" target="_blank">高校合作</a>
+                                 <a href="../../../n485/n701/index.html" target="_blank">科研机构合作</a>
+                                <a href="../../../n485/n702/index.html" target="_blank">地方合作</a>
+                                <a href="../../../n485/n703/index.html" target="_blank">企业合作</a>
+                             <a href="../../../n485/n529/index.html" target="_blank">海外合作</a>
+                            </dd>
+
+                            <dd style="margin-left:20px;">
+                              <a href="../../../n485/n704/index.html" target="_blank">专利</a>
+                                 <a href="../../../n485/n841/index.html" target="_blank">商业航天</a>  
+                                 <a href="../../../n485/n707/index.html" target="_blank">产业发展平台</a>
+                                  <a href="../../../n485/n523/index.html" target="_blank">采购</a>  
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                 <a href="../../../n485/n527/index.html" target="_blank">国际标准</a>
+                                 <a href="../../../n485/n530/index.html" target="_blank">注册商标</a>
+                                 <a href="../../../n485/n531/index.html" target="_blank">合作授权</a> 
+                                 <a href="../../../n485/n532/index.html" target="_blank">权利声明</a>
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td> -->
+
+            <td>
+                 <a href="../../../n731/index.html"  class="nava">火箭人物</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt  style="width:260px; border:0px;" ><img src="../../../dbsource/68/329.jpg" width="100%" /></dt>
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n731/n847/index.html" target="_blank">两弹一星功勋</a>
+                                 <a href="../../../n731/n1492/index.html" target="_blank">中国航天“四老”</a>
+                                <!-- <a href="../../../n731/n850/index.html" target="_blank">技能大师工作室</a> -->
+                                 <a href="../../../n731/n860/index.html" target="_blank">全国劳模</a>
+                                
+                            </dd>
+
+                            <dd style="margin-left:20px;">
+                                 <a href="../../../n731/n848/index.html" target="_blank">两院院士</a>
+                                
+             
+                                 <a href="../../../n731/n735/index.html" target="_blank">身边的榜样</a>
+                              <!-- <a href="../../../n731/n852/index.html" target="_blank">五一劳动奖章获得者</a> -->
+                                 <a href="../../../n731/n849/index.html" target="_blank">中华技能大奖</a>
+                                
+                                
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                
+                                
+                              
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                 <a href="../../../n486/n2726/index.html"  class="nava">航天文化</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt  style="width:260px; border:0px;" ><img src="../../../dbsource/76/319.jpg" width="100%" /></dt>
+                            <dd style=" margin-left:20px;">
+                                 <a href="../../../n486/n705/index.html" target="_blank">航天精神</a>
+                                 <a href="../../../n486/n738/index.html" target="_blank">多彩航天人</a> 
+                                 <a href="../../../n486/n1594/index.html" target="_blank">群星灿烂</a>   
+                            </dd>
+
+                            <dd style="margin-left:20px;">
+                                 <a href="../../../n486/n533/index.html" target="_blank">企业文化</a>    
+                                <!--  <a href="../../../n486/n536/index.html" target="_blank">图书</a> -->
+                            </dd>
+
+                          
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                 <a href="../../../n487/index.html"  class="nava">人力资源</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt  style="width:260px; border:0px;" ><img src="../../../dbsource/74/311.jpg" width="100%" /></dt>
+                            
+                            <dd style="margin-left:20px;">
+                                 <a href="../../../n487/n568/n670/index.html" target="_blank">人才招聘</a>
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                 <a href="../../../n487/n570/index.html" target="_blank">长征培训中心</a>
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+
+          <!--   <td style="border-right:0px;">
+                 <a href="../../../n488/n752/index.html"  class="nava">你知道吗</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt   style="width:260px; border:0px;" ><img src="../../../dbsource/89/361.jpg" width="100%" /></dt>
+                             <dd style="margin-left:20px;">
+                                 <a href="../../../n488/n1053/index.html" target="_blank">专家顾问</a>  
+                                 <a href="../../../n488/n755/index.html" target="_blank">人物</a>
+                            </dd>
+
+                             <dd style="margin-left:20px;">
+                                 <a href="../../../n488/n752/index.html" target="_blank">科普</a>
+                                
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                 <a href="../../../n488/n754/index.html" target="_blank">历史</a>
+                            </dd>
+
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td> -->
+
+            <td style="border-right:0px;">
+                 <a href="../../../n2491/index.html"  class="nava">信息公开</a>
+
+                 <div class="tab_div" style="top:39px;">
+                    <div class="tab_con">
+                     <dl>
+                         <dt style="width:260px; border:0px;" ><img src="../../../dbsource/220/834.jpg"  width="100%"></dt>
+
+                             <dd style="margin-left:20px;">
+                                 <a href="../../../n2491/n2492/index.html" target="_blank">重大事项</a>
+                                 <a href="../../../n2491/n2493/index.html" target="_blank">经营管理</a>
+                                 <a href="../../../n2491/n2494/index.html" target="_blank">重大人事信息</a>
+                            </dd>
+
+                             <dd style="margin-left:20px;">
+                                 <a href="../../../n2491/n2495/index.html" target="_blank">社会责任</a>
+                                 <a href="../../../n2491/n2496/index.html" target="_blank">企业信息</a>
+                                 <a href="../../../n2491/n2497/index.html" target="_blank">上市公司</a>
+                            </dd>
+
+                            <dd style="border:0; margin-left:20px;">
+                                 <a href="../../../n2491/n2498/index.html" target="_blank">人才招聘</a>
+                            </dd>
+                        </dl>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script>
+function lcy(){
+var abc=document.getElementById("top_search_input").value;
+_vaq.push(['trackSiteSearch','abc', '', '']);
+   var pattern = /.*[/"@#$%^&.',"<>]{1,}.*/;
+   if((solecism = pattern.exec(form1.fullText.value))!= null){
+      alert("不能包含特殊字符!");
+      return;
+   }
+ form1.submit();
+}
+</script>
+
+<script>
+$(function (){
+ var nav_sum=$(".nava").length;
+ var tab_sum=$(".tab_div").length;
+ 
+
+ $("#yeqian td").mouseover(function (){
+  _show($("#yeqian  td").index(this));        
+ });
+
+
+
+
+ $("#yeqian td").mouseout(function (){_hide();});
+
+ var _hide=function (){
+  $(".tab_div").css('display','none');
+  $(".nava").attr("class","nava");
+ }
+
+ var _show=function (num){
+  for(var i=0; i<tab_sum; i++){
+   
+   if(num==i){
+    $(".nava:eq("+num+")").attr("class","nava navcurr");
+    $(".tab_div:eq("+num+")").css("display","block");
+   }else{
+    $(".nava:eq("+i+")").attr("class","nava");
+    $(".tab_div:eq("+i+")").css("display","none");
+   }
+   
+   
+  }
+ }
+
+});
+</script>
+<!--end component 导航条(2016通用导航)-->
+
+    
+<!--start component 当前路径(当前位置)-->
+<div class="mnav">
+  <div class="mn_con">当前位置：
+
+  
+  <a href=../../../index.html>首页</a>
+
+        &nbsp;>&nbsp;
+  
+  <a href=../../../n482/index.html>运载火箭</a>
+
+        &nbsp;>&nbsp;
+  
+  <a href=../../../n482/n498/index.html>火箭型号</a>
+
+  >&nbsp;正文
+
+   </div>
+</div>
+<!--end component 当前路径(当前位置)-->
+
+<!--start component 文档组件(文章内容)-->
+<style>
+.mc_connn{padding:0px 0px 14px 0px; font-size:24px; font-weight:bold; text-align:center;font-family:Microsoft YaHei;}
+.mc_conn h1{padding:0px 0px 14px 0px; font-size:28px; font-weight:bold; text-align:center;font-family:Microsoft YaHei;}
+</style>
+<div class="mcontent">
+<div class="mc_title"><h1>长征十号甲</h1></div>
+<div class="mc_info">发布时间 : 2026-03-18 
+&nbsp;&nbsp;&nbsp;&nbsp;来源 : 中国运载火箭技术研究院新闻中心</div>
+
+
+<div class="mc_con">
+<p align="" style="margin-top: 0px; margin-bottom: 1em; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 18px;">长征十号甲运载火箭是在长征十号运载火箭构型基础上，通过模块化、通用化设计形成的衍生构型，用于发射新一代近地载人飞船和天舟货运飞船。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 1em; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 18px;">火箭为两级串联构型，芯级直径5米，一子级可重复使用。全箭总长约67.4米（载人状态）／66.4米（载货状态），起飞重量约750吨，一子级回收状态近地轨道运载能力不小于14.2吨。</p> 
+<p align="" style="margin-top: 0px; margin-bottom: 1em; text-indent: 2em; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 18px;">长征十号甲火箭目前正处于研制阶段。</p>
+</div>
+
+
+
+<div class="mc_other">
+<a style="cursor:hand;" onClick="javascript:window.print();">【打印】</a>
+<a style="cursor:hand;" onClick="javascript:window.close();">【关闭】</a>
+</div>
+
+
+</div>
+<!--<div class="mc_comment">
+<form action="#" method="post">
+<textarea name="textarea" class="textarea" id="neirong"></textarea>
+<input class="submit" type="submit" value="　　" onclick="return tanchu()"/>
+</form>
+</div>
+<script>
+function tanchu(){
+var val=document.getElementById('neirong').innerText;
+if(val!=""){
+alert("您的评论已提交，谢谢参与！");
+document.getElementById('neirong').innerHTML="";
+return false;
+}else{
+
+alert("请填写内容后再进行提交！");
+return false;
+}
+
+
+}
+</script>
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><td align='center'>
+
+<script>
+var maxPageNum=1;
+if (maxPageNum>1){
+var pageName = 1;
+var ccc = pageName-10;
+if (ccc<1) ccc=1;
+var sss="";
+if (pageName>1){
+sss +="<a href='../../../n482/n498/c2562559/content_1.html' target='_self'>首页</a>&nbsp;";
+sss +="<a href='../../../n482/n498/c2562559/content_"+(pageName-1)+".html' target='_self'>上页</a>&nbsp;";
+}
+while (ccc<pageName){
+sss += "<a href='../../../n482/n498/c2562559/content_"+ccc+".html' target='_self'>"+ccc+"</a>&nbsp;";
+ccc++;
+}
+sss += "<font color=red>"+ccc+"</font>&nbsp;";
+ccc++;
+while (ccc<=maxPageNum && ccc<=(pageName+10)){
+sss += "<a href='../../../n482/n498/c2562559/content_"+ccc+".html' target='_self'>"+ccc+"</a>&nbsp;";
+ccc++;
+}
+if (pageName<maxPageNum){
+sss += "<a href='../../../n482/n498/c2562559/content_"+(pageName+1)+".html' target='_self'>下页</a>&nbsp;";
+sss += "<a href='../../../n482/n498/c2562559/content_"+maxPageNum+".html' target='_self'>尾页</a>";
+}
+document.write(sss);
+}
+</script>
+
+</td></tr>
+</table>
+</td></tr>
+</table>-->
+<!--end component 文档组件(文章内容)-->
+
+    
+<!--start component HTML组件(2016footer)-->
+<table border="0" align="center" cellpadding="0" cellspacing="0" class="footer" width="100%">
+  <tr>
+    <td>
+
+
+    <div style="width:980px; margin:0 auto;">
+        <table border="0" cellpadding="0" cellspacing="0" width="980" align="center">
+            <tr>
+                <td width="50"></td>
+                <td width="693"> 中国运载火箭技术研究院 <br />
+                联系地址：北京9200信箱1分箱 邮编：100076  邮箱：caltxwzx@spacechina.com<br />
+                新闻中心招聘邮箱：xwzxzp@126.com<br />
+                <a href="https://beian.miit.gov.cn" target="_blank" style="color:#db5471;">京ICP备05064801</a> <a style="color:#db5471;">京公网安备110401100112号</a>
+                </td>
+                <td align="center"><img src="../../../template/71/2854.jpg" width="81" height="81" /><br />微信</td>
+                <td width="10"></td>
+                <td align="center"><img src="../../../template/71/2856.jpg" width="81" height="81" /><br />微博</td>
+            </tr>
+        </table>
+
+</div>
+
+
+     </td>
+  </tr>
+</table>
+<style>.nav{background-repeat:repeat-x;}</style>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ca0c166dec43fece835bf5f5b00da955";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!--end component HTML组件(2016footer)-->
+
+</body>
+</html>

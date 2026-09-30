@@ -1,0 +1,404 @@
+[
+  {
+    "id": "L06_tq12a_abstract",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
+    "available": false
+  },
+  {
+    "id": "L06_tq12a_crossref",
+    "url": "https://api.crossref.org/works/10.1016/j.actaastro.2026.05.033",
+    "available": true,
+    "file": "L06_tq12a_crossref.txt",
+    "bytes": 9339,
+    "saved_at": "2026-09-29T08:37:19.2749634Z",
+    "sha256": "4CF0D727FE1B47A23C93AAFADC48678AB320C4F8DF9551C1B4CDDDC8F4A54C9C"
+  },
+  {
+    "id": "L07_yf100_cmse",
+    "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html",
+    "available": true,
+    "file": "L07_yf100_cmse.txt",
+    "bytes": 30410,
+    "saved_at": "2026-09-29T08:37:18.5436906Z",
+    "sha256": "37285CBCE9869EC41BF91BF3A172D17ECC77C7C4579DBFA4D4ABA14D4750CFA0"
+  },
+  {
+    "id": "O01_cea_c_api",
+    "url": "https://nasa.github.io/cea/interfaces/c_api.html",
+    "available": true,
+    "file": "O01_cea_c_api.txt",
+    "bytes": 282100,
+    "saved_at": "2026-09-29T08:11:25.4828415Z",
+    "sha256": "0B2A7C75F82495F328007C40A17A2A96D2AD9AF6F68AB3E32DB2667BA96C9071"
+  },
+  {
+    "id": "O01_cea_changes",
+    "url": "https://raw.githubusercontent.com/nasa/cea/main/CHANGELOG.md",
+    "available": true,
+    "file": "O01_cea_changes.txt",
+    "bytes": 17162,
+    "saved_at": "2026-09-29T08:11:25.4727029Z",
+    "sha256": "5196027A3454CE7B0D4FF14445DE85DB2C67917CB1AEEB867EEEA534BB8DA609"
+  },
+  {
+    "id": "O01_cea_license",
+    "url": "https://raw.githubusercontent.com/nasa/cea/main/LICENSE.txt",
+    "available": true,
+    "file": "O01_cea_license.txt",
+    "bytes": 9170,
+    "saved_at": "2026-09-29T08:11:26.1418722Z",
+    "sha256": "A60026BE9384468D074C19425E552F1BB4A6F507F805E55A96FAD586716168ED"
+  },
+  {
+    "id": "O01_cea_readme",
+    "url": "https://raw.githubusercontent.com/nasa/cea/main/README.md",
+    "available": true,
+    "file": "O01_cea_readme.txt",
+    "bytes": 8451,
+    "saved_at": "2026-09-29T08:11:25.3846182Z",
+    "sha256": "FDF305D8B5B458495833BCB5EFB3D85BD91B4874D9B2C81A4A88770B2DA8D41E"
+  },
+  {
+    "id": "O01_cea_repo",
+    "url": "https://api.github.com/repos/nasa/cea",
+    "available": true,
+    "file": "O01_cea_repo.txt",
+    "bytes": 6118,
+    "saved_at": "2026-09-29T08:19:38.8384264Z",
+    "sha256": "972109181B3CC537D47F77B0880D900D633B36DE6282DAD057402F64E3067426"
+  },
+  {
+    "id": "O02_rocketcea_license",
+    "url": "https://raw.githubusercontent.com/sonofeft/RocketCEA/master/LICENSE.txt",
+    "available": true,
+    "file": "O02_rocketcea_license.txt",
+    "bytes": 35136,
+    "saved_at": "2026-09-29T08:23:40.7937805Z",
+    "sha256": "5CCB9CA7F1423E7DC0CB2B400007E83578BC580937B48E220DEA57312DD33044"
+  },
+  {
+    "id": "O02_rocketcea_readme",
+    "url": "https://raw.githubusercontent.com/sonofeft/RocketCEA/master/README.rst",
+    "available": true,
+    "file": "O02_rocketcea_readme.txt",
+    "bytes": 1417,
+    "saved_at": "2026-09-29T08:11:25.4315347Z",
+    "sha256": "15CD33D7061E8D607D0D0D0FB65B5831923A45F8D57DC5BB04A38B1F4742425A"
+  },
+  {
+    "id": "O02_rocketcea_repo",
+    "url": "https://api.github.com/repos/sonofeft/RocketCEA",
+    "available": true,
+    "file": "O02_rocketcea_repo.txt",
+    "bytes": 5240,
+    "saved_at": "2026-09-29T08:19:37.4341283Z",
+    "sha256": "468A10652DE605B089F4369253F18AF7F79A528DCA478AA29A31C2A549623AFC"
+  },
+  {
+    "id": "O03_rocketisp_license",
+    "url": "https://raw.githubusercontent.com/sonofeft/RocketIsp/master/LICENSE.txt",
+    "available": true,
+    "file": "O03_rocketisp_license.txt",
+    "bytes": 35137,
+    "saved_at": "2026-09-29T08:23:40.6915286Z",
+    "sha256": "2AF043DAB4576613CF916DBB4E2480154A90E69664BD2F9D90671AD00E149E9D"
+  },
+  {
+    "id": "O03_rocketisp_readme",
+    "url": "https://raw.githubusercontent.com/sonofeft/RocketIsp/master/README.rst",
+    "available": true,
+    "file": "O03_rocketisp_readme.txt",
+    "bytes": 960,
+    "saved_at": "2026-09-29T08:11:28.3041242Z",
+    "sha256": "0F868458069091AA6622CE425A773656F2156A161CEA3115D790BAD681628946"
+  },
+  {
+    "id": "O03_rocketisp_repo",
+    "url": "https://api.github.com/repos/sonofeft/RocketIsp",
+    "available": true,
+    "file": "O03_rocketisp_repo.txt",
+    "bytes": 5277,
+    "saved_at": "2026-09-29T08:19:37.6501086Z",
+    "sha256": "622EB11C7F7758F8C1447167A667741062F13903CE57E0ED811FD3F2A418ED70"
+  },
+  {
+    "id": "O04_cantera_c_api",
+    "url": "https://cantera.org/stable/clib/index.html",
+    "available": true,
+    "file": "O04_cantera_c_api.txt",
+    "bytes": 32232,
+    "saved_at": "2026-09-29T08:11:26.6896707Z",
+    "sha256": "1C3DA0F5D722EE0826BBE26DA81DFBCCD6C2B642A3585B75CDB931C4816FDCB2"
+  },
+  {
+    "id": "O04_cantera_license",
+    "url": "https://raw.githubusercontent.com/Cantera/cantera/main/License.txt",
+    "available": true,
+    "file": "O04_cantera_license.txt",
+    "bytes": 1796,
+    "saved_at": "2026-09-29T08:11:26.1712279Z",
+    "sha256": "DFD8EC7A9A5CAD52EC86377A3BAC92F4A2473795335CAA74A268BBE2805F4738"
+  },
+  {
+    "id": "O04_cantera_readme",
+    "url": "https://raw.githubusercontent.com/Cantera/cantera/main/README.rst",
+    "available": true,
+    "file": "O04_cantera_readme.txt",
+    "bytes": 5622,
+    "saved_at": "2026-09-29T08:11:26.6055150Z",
+    "sha256": "B51BD11703309677D637C02CF4C7D1817B38EF20CF0B7172510E733C5E5C5C3D"
+  },
+  {
+    "id": "O04_cantera_repo",
+    "url": "https://api.github.com/repos/Cantera/cantera",
+    "available": true,
+    "file": "O04_cantera_repo.txt",
+    "bytes": 6061,
+    "saved_at": "2026-09-29T08:19:37.4654717Z",
+    "sha256": "F69640D5C8B23D5FC0D091F8145837D1056FC6688E50E2C336DE9D33143417DE"
+  },
+  {
+    "id": "O05_coolprop_c_api",
+    "url": "https://coolprop.org/coolprop/wrappers/C/index.html",
+    "available": false
+  },
+  {
+    "id": "O05_coolprop_library",
+    "url": "https://coolprop.org/coolprop/wrappers/SharedLibrary/index.html",
+    "available": true,
+    "file": "O05_coolprop_library.txt",
+    "bytes": 52232,
+    "saved_at": "2026-09-29T08:23:40.6824644Z",
+    "sha256": "8560617F5CECA32DE588FF4BFA933BBA7E5950161831369577AEBEC24066C9AC"
+  },
+  {
+    "id": "O05_coolprop_license",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/master/LICENSE",
+    "available": true,
+    "file": "O05_coolprop_license.txt",
+    "bytes": 1103,
+    "saved_at": "2026-09-29T08:23:41.7793701Z",
+    "sha256": "9BF835333EF602AF4CB19338B9F9D43671E174FA029B00280E9BDBA6EA4719B2"
+  },
+  {
+    "id": "O05_coolprop_readme",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/master/Readme.md",
+    "available": false
+  },
+  {
+    "id": "O05_coolprop_readme_api",
+    "url": "https://api.github.com/repos/CoolProp/CoolProp/readme",
+    "available": true,
+    "file": "O05_coolprop_readme_api.txt",
+    "bytes": 7911,
+    "saved_at": "2026-09-29T08:19:37.4356331Z",
+    "sha256": "D701F1D8846B49C02230B6346A428028392660C5F2B12E96F468231B67CC3D14"
+  },
+  {
+    "id": "O05_coolprop_repo",
+    "url": "https://api.github.com/repos/CoolProp/CoolProp",
+    "available": true,
+    "file": "O05_coolprop_repo.txt",
+    "bytes": 6225,
+    "saved_at": "2026-09-29T08:19:37.6551486Z",
+    "sha256": "7C8220EAE9BBB00F70983F449B3802CA1D87A2E7D9217210F7267C2D5D114C2B"
+  },
+  {
+    "id": "O06_pycycle_license",
+    "url": "https://raw.githubusercontent.com/OpenMDAO/pyCycle/master/LICENSE.txt",
+    "available": true,
+    "file": "O06_pycycle_license.txt",
+    "bytes": 554,
+    "saved_at": "2026-09-29T08:11:26.6113488Z",
+    "sha256": "036D18E49AE3978A3D44BD7EE9BD08547F557BCE36F234EBB2693894FADAFFDB"
+  },
+  {
+    "id": "O06_pycycle_readme",
+    "url": "https://raw.githubusercontent.com/OpenMDAO/pyCycle/master/README.md",
+    "available": true,
+    "file": "O06_pycycle_readme.txt",
+    "bytes": 6381,
+    "saved_at": "2026-09-29T08:11:26.5039046Z",
+    "sha256": "1F9F267968A29DB87E584F9DA95E8210D994C2800DCCA96DA13517C34669BE42"
+  },
+  {
+    "id": "O06_pycycle_repo",
+    "url": "https://api.github.com/repos/OpenMDAO/pyCycle",
+    "available": true,
+    "file": "O06_pycycle_repo.txt",
+    "bytes": 6124,
+    "saved_at": "2026-09-29T08:19:37.9326178Z",
+    "sha256": "876D943D830A0E78FED99C9890FB6193EAF31B7F5B6B5C6570824CFDBCBE055A"
+  },
+  {
+    "id": "O07_pyskyfire_license",
+    "url": "https://raw.githubusercontent.com/ask-hovik/pyskyfire/main/LICENSE",
+    "available": true,
+    "file": "O07_pyskyfire_license.txt",
+    "bytes": 1096,
+    "saved_at": "2026-09-29T08:11:26.9537638Z",
+    "sha256": "16EDC3B630B2381D218088404AD2303992E8F602755F817A419C33F11769FD7B"
+  },
+  {
+    "id": "O07_pyskyfire_readme",
+    "url": "https://raw.githubusercontent.com/ask-hovik/pyskyfire/main/README.md",
+    "available": true,
+    "file": "O07_pyskyfire_readme.txt",
+    "bytes": 8198,
+    "saved_at": "2026-09-29T08:11:26.6749601Z",
+    "sha256": "10C414BAE9318FB83A2CD992E747AEA5571223BE383788AD230D8EA86529D171"
+  },
+  {
+    "id": "O07_pyskyfire_repo",
+    "url": "https://api.github.com/repos/ask-hovik/pyskyfire",
+    "available": true,
+    "file": "O07_pyskyfire_repo.txt",
+    "bytes": 5282,
+    "saved_at": "2026-09-29T08:19:37.9365372Z",
+    "sha256": "C1EDFF81DC592271408DDD848991B6F47F69CE4F429792FED8B2B8846835BDCA"
+  },
+  {
+    "id": "O07_pyskyfire_validation",
+    "url": "https://ask-hovik.github.io/pyskyfire/validation/rl10a-3-3a.html",
+    "available": true,
+    "file": "O07_pyskyfire_validation.txt",
+    "bytes": 43968393,
+    "saved_at": "2026-09-29T08:19:51.7915665Z",
+    "sha256": "AECA3D5C1DEC362FABF22C0FF4638356B7F3C761ADDE5BC5DF49AF1ECB9D401C"
+  },
+  {
+    "id": "O08_rocketcycles_license",
+    "url": "https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/LICENSE",
+    "available": true,
+    "file": "O08_rocketcycles_license.txt",
+    "bytes": 35147,
+    "saved_at": "2026-09-29T08:11:27.0475411Z",
+    "sha256": "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903"
+  },
+  {
+    "id": "O08_rocketcycles_readme",
+    "url": "https://raw.githubusercontent.com/janstruzinski/RocketCycles/main/README.md",
+    "available": true,
+    "file": "O08_rocketcycles_readme.txt",
+    "bytes": 23042,
+    "saved_at": "2026-09-29T08:11:27.3849074Z",
+    "sha256": "F4027C104F1C65543AF22D85DA68B210B7F783A1C27ECE1F41A1FC332C014A2E"
+  },
+  {
+    "id": "O08_rocketcycles_repo",
+    "url": "https://api.github.com/repos/janstruzinski/RocketCycles",
+    "available": true,
+    "file": "O08_rocketcycles_repo.txt",
+    "bytes": 5652,
+    "saved_at": "2026-09-29T08:19:38.7345056Z",
+    "sha256": "475BA98ECBF5B0D6E397677D6A0A55407F3A5898AA9E035449CADDAA047E9C17"
+  },
+  {
+    "id": "V01_calt_cz10b",
+    "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+    "available": true,
+    "file": "V01_calt_cz10b.txt",
+    "bytes": 24764,
+    "saved_at": "2026-09-29T08:15:49.4228953Z",
+    "sha256": "281A977097134082DCA32818638C1CADAF839CCEA5664DFEAA034FD2CDD61F11"
+  },
+  {
+    "id": "V02_calt_news",
+    "url": "http://www.calt.com/n689/c2573694/content.html",
+    "available": true,
+    "file": "V02_calt_news.txt",
+    "bytes": 27990,
+    "saved_at": "2026-09-29T08:15:49.4259997Z",
+    "sha256": "AF95BE206E43BA6ED472901BF2A462A80555BEBD5B43F759DD20A03FE900EACD"
+  },
+  {
+    "id": "V03_calt_cz10a",
+    "url": "http://www.calt.com/n482/n498/c2562559/content.html",
+    "available": true,
+    "file": "V03_calt_cz10a.txt",
+    "bytes": 24755,
+    "saved_at": "2026-09-29T08:15:49.4262145Z",
+    "sha256": "3C448721029A9777B660726443129D0656FF08F6EE1AA505F273C5A453E0262D"
+  },
+  {
+    "id": "V04_stdaily_cz10b",
+    "url": "https://www.stdaily.com/web/gdxw/2026-07/10/content_545587.html",
+    "available": true,
+    "file": "V04_stdaily_cz10b.txt",
+    "bytes": 36862,
+    "saved_at": "2026-09-29T08:15:49.4262145Z",
+    "sha256": "EB07AF6395DDAE9B7714E7B6D570BC41EEE05B7E913D6EC86D1F1A8E40FEADA8"
+  },
+  {
+    "id": "V05_people_cz10b",
+    "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635784.html",
+    "available": true,
+    "file": "V05_people_cz10b.txt",
+    "bytes": 36358,
+    "saved_at": "2026-09-29T08:15:49.4283537Z",
+    "sha256": "2913833DA997E195619CB9620D77667EE26FD19BAA24F76DEDBE001AE279ACBF"
+  },
+  {
+    "id": "V06_casc_engines",
+    "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+    "available": true,
+    "file": "V06_casc_engines.txt",
+    "bytes": 18755,
+    "saved_at": "2026-09-29T08:23:40.5253955Z",
+    "sha256": "23D9EC4337618676F2FAB8B29C3D384720EE7A5655C3CB44D71A4A57197C0D36"
+  },
+  {
+    "id": "V07_cctv_interview",
+    "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html",
+    "available": true,
+    "file": "V07_cctv_interview.txt",
+    "bytes": 125864,
+    "saved_at": "2026-09-29T08:23:40.3845071Z",
+    "sha256": "463DABACE2EFCE8EF6AAD4A2C42F55D1D01E102016D0E6262E9B99CD599653DA"
+  },
+  {
+    "id": "V08_landspace_product",
+    "url": "https://www.landspace.com/product.html",
+    "available": true,
+    "file": "V08_landspace_product.txt",
+    "bytes": 35164,
+    "saved_at": "2026-09-29T08:25:49.6662953Z",
+    "sha256": "C9837B2CBB91AFA3B710DE267518CC08D3650A9604FD3A9D9E0ACD808F9D4728"
+  },
+  {
+    "id": "V09_zq3_y1",
+    "url": "https://www.landspace.com/news-detail.html?itemid=66",
+    "available": true,
+    "file": "V09_zq3_y1.txt",
+    "bytes": 24474,
+    "saved_at": "2026-09-29T08:25:49.6278084Z",
+    "sha256": "A8B66E39574D53B5159085ECB4D79FF4448390F018E729615A46CDD9F2ADAC2E"
+  },
+  {
+    "id": "V10_zq3_y2",
+    "url": "https://www.landspace.com/news-detail.html?itemid=76",
+    "available": true,
+    "file": "V10_zq3_y2.txt",
+    "bytes": 18113,
+    "saved_at": "2026-09-29T08:25:49.5559411Z",
+    "sha256": "1886DC4FDF020042CD89B3E8E9253683A130495EE4996924420EC5C757FE818B"
+  },
+  {
+    "id": "V11_tq15a",
+    "url": "https://www.landspace.com/news-detail.html?itemid=20",
+    "available": true,
+    "file": "V11_tq15a.txt",
+    "bytes": 16887,
+    "saved_at": "2026-09-29T08:25:49.5872126Z",
+    "sha256": "CBB0167C34A1166A4F2F7CFC11F809273E174509C1F38A668D0B7FE3CB6B7CDF"
+  },
+  {
+    "id": "V12_zq3_staticfire",
+    "url": "https://www.landspace.com/news-detail.html?itemid=64",
+    "available": true,
+    "file": "V12_zq3_staticfire.txt",
+    "bytes": 19993,
+    "saved_at": "2026-09-29T08:25:49.6092580Z",
+    "sha256": "8E227D64A3AD1FCB369A38672CBB4FFB7CFBCD99D06506C86DC7606351AF6B9C"
+  }
+]

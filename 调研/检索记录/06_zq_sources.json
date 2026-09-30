@@ -1,0 +1,352 @@
+{
+  "topic": "06_zq_sources",
+  "retrieved_at": "2026-09-29T16:23:19.6083235+08:00",
+  "cutoff": "2026-09-29",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "只进行聚焦检索：找蓝箭航天官方朱雀三号产品页、天鹊12A/15系列产品页或相关文章、朱雀三号首飞/二次飞行官方报道。返回3-5个URL、标题、日期和关于一级二级发动机配置/循环的短摘录即可（1000中文字符以内）。不需要详尽综述，不以百科为证据。\n",
+  "search_calls": [
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 朱雀三号 官方 产品页",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://podtail.com/podcast/what-s-next-3/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.beijing.gov.cn/ywdt/gzdt/202608/t20260821_4832099.html"
+          },
+          {
+            "type": "url",
+            "url": "https://wallstreetcn.com/articles/3762035"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 天鹊12A 天鹊15 发动机 官方",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=54"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "http://m.shsjb.com/index.php/home/article/index/appkey/258/date/2025-04-17/page/1591774/aid/8826788.html"
+          },
+          {
+            "type": "url",
+            "url": "https://futurephecda.com/news/9603"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.yangtse.com/news/jiangsu/wuxi/202505/t20250517_207266.html"
+          },
+          {
+            "type": "url",
+            "url": "https://epaper.gmw.cn/gmrb/html/2025-04/16/nw.D110000gmrb_20250416_4-08.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240307A07F1S00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacesgp.com/zh/insights/ffsc-rocket-engine-2026"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 首飞 二次飞行 蓝箭航天 官方",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://kw.beijing.gov.cn/xwdt/bmdt/202512/t20251203_4319494.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20251203A05BJF00"
+          },
+          {
+            "type": "url",
+            "url": "https://cbgc.scol.com.cn/news/7860968"
+          },
+          {
+            "type": "url",
+            "url": "https://m.bjnews.com.cn/detail/1787123859129207.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "LandSpace Zhuque-3 official engine configuration",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://nextspaceflight.com/rockets/293/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ru.wikipedia.org/wiki/%D0%A7%D0%B6%D1%83%D1%86%D1%8E%D1%8D-3"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=66"
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=76"
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:landspace.com 天鹊 发动机 循环 OR 燃气发生器 OR 全流量",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=20"
+      }
+    },
+    {
+      "id": "ws_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add_call-2f7b7304-3463-4ce0-a5b1-2f2d25ab58c7-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=64"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**官方来源（蓝箭航天官网 landspace.com，截止检索）：**\n\n1. https://www.landspace.com/product.html  \n标题：LANDSPACE 产品与服务  \n日期：官网当前页面（无单独发布日期）  \n摘录：朱雀三号采用蓝箭航天自研天鹊系列液氧甲烷发动机，一子级采用9台TQ-12B发动机，二子级配置1台TQ-15B真空发动机。天鹊（TQ-12A）80吨级液氧甲烷发动机...采用自身起动方式，具备推力调节和混合比高精度控制等功能。[[1]](https://www.landspace.com/product.html)\n\n2. https://www.landspace.com/news-detail.html?itemid=66  \n标题：朱雀三号重复使用遥一运载火箭入轨圆满成功  \n日期：2025-12-03  \n摘录：动力系统基于蓝箭航天自主研制的天鹊系列液氧甲烷发动机，一级采用九台天鹊12A发动机并联；二级采用一台天鹊15A真空型发动机。[[2]](https://www.landspace.com/news-detail.html?itemid=66)\n\n3. https://www.landspace.com/news-detail.html?itemid=76  \n标题：朱雀三号重复使用遥二运载火箭实现入轨及回收圆满成功  \n日期：2026-08-19  \n摘录：朱雀三号是蓝箭航天自主研制的新一代重复使用液氧甲烷运载火箭（文中未列具体发动机型号，对应产品页改进构型）。[[3]](https://www.landspace.com/news-detail.html?itemid=76)\n\n4. https://www.landspace.com/news-detail.html?itemid=20  \n标题：“天鹊”真空型发动机TQ-15A完成总装  \n日期：2022-09-27  \n摘录：TQ-15A与TQ-12A通用涡轮泵、阀门、燃气发生器等关键组合件，采用泵前摆方案（官方提及燃气发生器，未直接写“循环方式”）。[[4]](https://www.landspace.com/news-detail.html?itemid=20)\n\n5. https://www.landspace.com/news-detail.html?itemid=64  \n标题：朱雀三号一级动力系统九机并联地面点火试验成功  \n日期：2025-06-20  \n摘录：此次动力系统试车采用蓝箭航天自研天鹊-12A液氧甲烷发动机，9机并联总推力达7542kN。一级配置九台天鹊-12A发动机并联工作。[[5]](https://www.landspace.com/news-detail.html?itemid=64)\n\n（首飞Y1用12A/15A，产品页现为12B/15B改进型；循环未在以上官方页明确标注为“燃气发生器循环”，仅提及共享燃气发生器。无法核实处已注明。）",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/product.html",
+              "start_index": 239,
+              "end_index": 284,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=66",
+              "start_index": 451,
+              "end_index": 510,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=76",
+              "start_index": 673,
+              "end_index": 732,
+              "title": "3"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=20",
+              "start_index": 901,
+              "end_index": 960,
+              "title": "4"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=64",
+              "start_index": 1132,
+              "end_index": 1191,
+              "title": "5"
+            }
+          ]
+        }
+      ],
+      "id": "msg_2cf1dbc9-3947-9dd8-becc-c7c2e0e76add",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 89488,
+    "input_tokens_details": {
+      "cached_tokens": 55552
+    },
+    "output_tokens": 3677,
+    "output_tokens_details": {
+      "reasoning_tokens": 2783
+    },
+    "total_tokens": 93165,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 10,
+    "cost_in_usd_ticks": 900214000,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 10,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 33790,
+      "output_tokens": 1486
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

@@ -1,0 +1,43 @@
+name: C17 foundation checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        configuration: [Debug, Release]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Build and test
+        run: ./scripts/test.ps1 -Configuration ${{ matrix.configuration }}
+      - name: Offline project integrity
+        run: ./scripts/check-project.ps1
+      - name: CMake alternate build (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          cmake -S . -B build/cmake -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+          if ($LASTEXITCODE -ne 0) { throw 'CMake configure failed' }
+          cmake --build build/cmake
+          if ($LASTEXITCODE -ne 0) { throw 'CMake build failed' }
+          ctest --test-dir build/cmake --output-on-failure
+          if ($LASTEXITCODE -ne 0) { throw 'CTest failed' }
+      - name: Linux memory and undefined-behavior checks
+        if: runner.os == 'Linux' && matrix.configuration == 'Debug'
+        run: ./scripts/test.ps1 -Configuration Debug -Sanitize
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-${{ matrix.os }}-${{ matrix.configuration }}
+          path: |
+            build/**/build-manifest.json
+            build/**/test-report.json

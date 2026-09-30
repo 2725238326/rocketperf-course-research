@@ -1,0 +1,12 @@
+# Local environment and credentials; keep evidence and research data trackable.
+.env
+.env.*
+!.env.example
+apikey/
+.venv/
+__pycache__/
+*.pyc
+
+# Reproducible build artifacts; final releases belong in deliverables/.
+/build/
+/results/local/
