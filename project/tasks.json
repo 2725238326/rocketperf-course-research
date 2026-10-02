@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 7,
+  "revision": 12,
   "context": {
     "phase": "C17教学基线可用；真实型号研究待深化",
     "evidence_cutoff": "2026-09-29",
@@ -397,6 +397,38 @@
         "path": "project/evidence/TECH-001_b104cbd6eeec.json",
         "sha256": "6fc33bf67f7dfd06151f96e952512b4c6ce3072117e763eb3ad9cc3df3904fbf"
       }
+    },
+    {
+      "id": "DOC-002",
+      "title": "建立轻量研究结构与文档维护约定",
+      "status": "DONE",
+      "priority": 0,
+      "depends_on": [
+        "GOV-001"
+      ],
+      "required_artifacts": [
+        "docs/research-structure.md",
+        "docs/research-writing.md",
+        "docs/research-agenda.md",
+        "docs/project-plan.md",
+        "调研/专题/README.md",
+        "docs/templates/research-note.md",
+        "README.md",
+        "AGENTS.md",
+        "handoff.md"
+      ],
+      "acceptance": [
+        "研究问题、证据、参数/假设、方法/程序、结果、结论之间可追溯且不重复维护事实",
+        "研究写作规则明确禁止空泛AI套话、无证据精确值、伪造完成状态，并有正反例",
+        "项目入口/工作面/任务板/交接/议题和专题README指向同一研究流程，历史来源与阶段状态保留"
+      ],
+      "owner": "root",
+      "note": "文档群和研究维护规则完成；后续研究仍按RES-001等具体任务推进，历史来源与未完成状态保持可见。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-002_fc92720f3eb1.json",
+        "sha256": "62f6fb96b790ef9622a3808ba9aea2744afa817c9ece25fbe5d8964e59a37f29"
+      }
     }
   ],
   "events": [
@@ -687,6 +719,120 @@
       "note": "技术选型确定，功能实现状态与资料证据仍按任务推进；不把决定当成热化学/循环已验证。",
       "previous_hash": "8d07bd323dc2852002a6dcd27548aa10ba6b389a79f78d4623a78ed1c8daa458",
       "hash": "b23c44252174644c6a4fc15b28f88093392e13c2709440328e3b029cdcec476c"
+    },
+    {
+      "seq": 25,
+      "at": "2026-10-02T06:15:57+00:00",
+      "task": "DOC-002",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "b23c44252174644c6a4fc15b28f88093392e13c2709440328e3b029cdcec476c",
+      "hash": "b725bad4701cad304d73b683be25cf0d3198cd06921d8cff1fe7c837a3aab70b"
+    },
+    {
+      "seq": 26,
+      "at": "2026-10-02T06:15:58+00:00",
+      "task": "DOC-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户要求从现在起建立清晰研究结构、避免过分AI风格、持续跟进研究和全面更新文档。",
+      "previous_hash": "b725bad4701cad304d73b683be25cf0d3198cd06921d8cff1fe7c837a3aab70b",
+      "hash": "58cd3f1018a8115ebf77d520e38e13bd2b74b0835f87c5ed56bd1a611b5f4e95"
+    },
+    {
+      "seq": 27,
+      "at": "2026-10-02T06:19:12+00:00",
+      "task": "DOC-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收还覆盖入口/交接/模板与研究议题同步，所有研究记录按轻量格式维护",
+      "previous_hash": "58cd3f1018a8115ebf77d520e38e13bd2b74b0835f87c5ed56bd1a611b5f4e95",
+      "details": {
+        "contract_before": {
+          "id": "DOC-002",
+          "title": "建立轻量研究结构与文档维护约定",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "GOV-001"
+          ],
+          "required_artifacts": [
+            "docs/research-structure.md",
+            "docs/research-writing.md",
+            "docs/research-agenda.md",
+            "docs/project-plan.md",
+            "调研/专题/README.md"
+          ],
+          "acceptance": [
+            "研究问题、证据、参数/假设、方法/程序、结果、结论之间可追溯且不重复维护事实",
+            "研究写作规则明确禁止空泛AI套话、无证据精确值、伪造完成状态，并有正反例",
+            "项目入口/工作面/任务板/交接/议题和专题README指向同一研究流程，历史来源与阶段状态保留"
+          ],
+          "owner": "root",
+          "note": "用户要求从现在起建立清晰研究结构、避免过分AI风格、持续跟进研究和全面更新文档。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-002",
+          "title": "建立轻量研究结构与文档维护约定",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "GOV-001"
+          ],
+          "required_artifacts": [
+            "docs/research-structure.md",
+            "docs/research-writing.md",
+            "docs/research-agenda.md",
+            "docs/project-plan.md",
+            "调研/专题/README.md",
+            "docs/templates/research-note.md",
+            "README.md",
+            "AGENTS.md",
+            "handoff.md"
+          ],
+          "acceptance": [
+            "研究问题、证据、参数/假设、方法/程序、结果、结论之间可追溯且不重复维护事实",
+            "研究写作规则明确禁止空泛AI套话、无证据精确值、伪造完成状态，并有正反例",
+            "项目入口/工作面/任务板/交接/议题和专题README指向同一研究流程，历史来源与阶段状态保留"
+          ],
+          "owner": "root",
+          "note": "验收还覆盖入口/交接/模板与研究议题同步，所有研究记录按轻量格式维护",
+          "verification": null
+        }
+      },
+      "hash": "73ae261b94c02567457a565bd3312a4e32007358d54489d4c750367b9a1c57be"
+    },
+    {
+      "seq": 28,
+      "at": "2026-10-02T06:26:14+00:00",
+      "task": "DOC-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "研究结构、写作约定、研究议题和调研入口已同步；专题采用轻量问题记录，不重复维护事实和状态。",
+      "previous_hash": "73ae261b94c02567457a565bd3312a4e32007358d54489d4c750367b9a1c57be",
+      "hash": "f0547f1cca4bbc6f7299b8d4731dec9d3ddd1f857f505b7c45630a217eaffb13"
+    },
+    {
+      "seq": 29,
+      "at": "2026-10-02T06:26:15+00:00",
+      "task": "DOC-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "文档群和研究维护规则完成；后续研究仍按RES-001等具体任务推进，历史来源与未完成状态保持可见。",
+      "previous_hash": "f0547f1cca4bbc6f7299b8d4731dec9d3ddd1f857f505b7c45630a217eaffb13",
+      "hash": "03224261cbfea54ac0bd179b2768faab71c728bf8d46d38433936f2b284ba635"
     }
   ]
 }

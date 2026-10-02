@@ -18,6 +18,9 @@
     {"path":"docs/benchmarks.md","role":"教学参考推导与适用域","owner":"nozzle"},
     {"path":"docs/project-plan.md","role":"研究目标、里程碑与分工建议","owner":"tooling"},
     {"path":"docs/requirements-map.md","role":"老师要求到产物的映射","owner":"tooling"},
+    {"path":"docs/research-structure.md","role":"研究资料/问题/参数/结论的轻量组织方法","owner":"tooling"},
+    {"path":"docs/research-writing.md","role":"证据边界和简洁研究写作约定","owner":"tooling"},
+    {"path":"docs/research-agenda.md","role":"待回答的研究问题清单，不是完成状态表","owner":"tooling"},
     {"path":"docs/decisions.md","role":"决定及依据，不维护实时任务状态","owner":"tooling"}
   ]
 }

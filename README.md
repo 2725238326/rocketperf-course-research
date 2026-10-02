@@ -24,11 +24,12 @@ python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 
 | 工作 | 入口 |
 |---|---|
-| 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md) |
+| 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md)、[研究结构](docs/research-structure.md) |
 | 领取、交接、验收任务 | [worknow](worknow.md)、[handoff](handoff.md)、[治理命令](docs/governance.md) |
 | 理解业务与模块边界 | [架构三视图及模块契约](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
 | 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
 | 查文献与参数证据 | [调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
+| 写研究专题和结论 | [写作约定](docs/research-writing.md)、[研究议题](docs/research-agenda.md) |
 | 管目录、构建和Git | [目录地图](docs/project-map.md)、[环境说明](docs/environment.md)、[治理规范](docs/governance.md) |
 
 任务事实只维护在 `project/tasks.json`，worknow和任务板自动生成。模块与源码清单只维护在 `project/modules.json`，架构和两条构建路径共同使用。原始资料保留原路径和字节。

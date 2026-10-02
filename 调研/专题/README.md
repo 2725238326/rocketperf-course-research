@@ -9,4 +9,4 @@
 - RES-003：课程公式与基准算例。
 - RES-005：变工况、复用约束与改进候选。
 
-状态和验收以[任务板](../../docs/tasks.md)为准。新专题使用[研究记录模板](../../docs/templates/research-note.md)或[移植评估模板](../../docs/templates/port-review.md)。结项后在本页补一行链接、证据截止日期和主要结论，不复制整篇摘要。
+状态和验收以[任务板](../../docs/tasks.md)为准。新专题先用[轻量研究记录模板](../../docs/templates/research-note.md)；只有代码移植才用[移植评估模板](../../docs/templates/port-review.md)。结项后在本页补一行链接、证据截止日期和一句主要结论，不复制整篇摘要。
