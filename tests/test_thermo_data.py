@@ -8,6 +8,7 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import thermo_data
 import pipeline
 import cea_reference
+import combustion_reference
 
 
 class ThermoDataTests(unittest.TestCase):
@@ -38,6 +39,13 @@ class ThermoDataTests(unittest.TestCase):
             with self.subTest(log=log), self.assertRaises(ValueError):
                 pipeline.cli_test_count(log)
         self.assertEqual(pipeline.cli_test_count('Ran 13 tests in 0.1s\nOK'), 13)
+
+    def test_archived_combustion_results_are_consistent(self):
+        archives = sorted((ROOT / 'results/validation').glob('*/manifest.json'))
+        self.assertTrue(archives, 'Expected actual C/CEA result archive')
+        for manifest in archives:
+            with self.subTest(archive=manifest.parent.name):
+                self.assertEqual(combustion_reference.check_archive(manifest.parent)['status'], 'PASS')
 
 
 if __name__ == '__main__':

@@ -48,8 +48,8 @@ def business():
     body=""
     steps=[("研究问题",["对象、级段、比较条件"],"课程要求 → 研究契约"),
            ("证据与参数",["版本、单位、系统边界"],"已积累资料 · 继续核验"),
-           ("模型与算例",["假设、输入、独立基准"],"教学基准已有"),
-           ("C17 计算",["纯核心、显式状态"],"理想喷管基线可运行"),
+           ("模型与算例",["假设、输入、独立基准"],"气相方法基准已固定"),
+           ("C17 计算",["纯核心、显式状态"],"平衡 / 冻结喷管可运行"),
            ("验证与研究",["误差、敏感性、改进"],"基础验证已有 · 研究待深化"),
            ("可复现交付",["程序、报告、展示"],"最终课程成果待完成")]
     for i,(title,lines,footer) in enumerate(steps):
@@ -64,22 +64,26 @@ def business():
 
 def components(modules):
     m={x['id']:x for x in modules}
-    body=node(680,224,320,m['cli']['name'],["装载 → 求解 → 输出"],"src/cli · 用例入口",h=124)
-    body+=node(100,430,360,m['adapters']['name'],["算例校验 / JSON / UTF-8"],"src/adapters · 外部协议")
-    body+=node(660,430,360,m['nozzle']['name'],["定比热、准一维、明确适用域"],"src/nozzle · 当前物理核心")
-    body+=node(1220,430,360,m['core']['name'],["夹逼求根 / 容差 / 显式失败"],"src/core · 通用数值基础")
-    body+=arrow([(760,348),(760,390),(280,390),(280,430)],"文件与报告",488,377)
-    body+=arrow([(840,348),(840,430)],"调用",877,395)
-    body+=arrow([(1000,286),(1400,286),(1400,430)],"公共状态 / 版本",1200,271,True)
-    body+=arrow([(1020,489),(1220,489)],"数值策略",1120,477)
-    body+=arrow([(460,489),(660,489)],"SI 值类型",560,477,True)
-    body+=arrow([(460,535),(540,535),(540,614),(1400,614),(1400,562)],"虚线：公共值类型 / 状态契约依赖",958,603,True)
-    body+=text(100,665,"接口边界",20,GREEN,650)+text(250,665,"include/rocketperf：SI字段、显式状态；单点失败不改结果，扫描检查各点；核心无I/O。",19,MUTED)
-    body+=node(100,714,490,"工程工具与验证",["任务登记 / 构建测试 / 运行快照"],"tools · scripts · tests · project",h=122)
-    body+=node(660,714,430,m['thermo']['name'],["NASA9单物种 / 真实数据 / 参考测试"],"src/thermo · HP平衡尚未实现",state=m['thermo']['state'],h=122)
-    body+=arrow([(960,348),(960,366),(1600,366),(1600,688),(840,688),(840,714)],"物性查询",1480,677)
-    body+=node(1150,714,430,m['cycle']['name'],["控制体、支路、功率与损失"],"扩展计划，不冒充已实现",state="planned",h=122)
-    return frame("02","功能核心：边界清楚，模块可以独立维护","实线表示主要编排 / 调用；虚线表示接口依赖。灰色虚线框明确标出未实现扩展。",950,body)
+    body=node(650,224,380,m['cli']['name'],["run / thermo / combustion → JSON"],"src/cli · 用例入口",h=124)
+    body+=node(100,430,360,m['adapters']['name'],["INI校验 / JSON / UTF-8"],"src/adapters · 教学算例协议")
+    body+=node(650,430,400,m['thermo']['name'],["NASA9 → TP平衡 → HP燃烧室"],"九种C/H/O气体 · 组分 / cp / h / s",state=m['thermo']['state'])
+    body+=node(1220,430,360,m['core']['name'],["夹逼求根 / 显式失败 / 容差"],"src/core · 通用数值基础")
+    body+=node(650,676,400,m['nozzle']['name'],["定比热基线 / 燃烧室冻结温变"],"连续 / 能量 / 熵 / 喉部声速残差")
+    body+=arrow([(730,348),(730,382),(280,382),(280,430)],"文件与报告",488,369)
+    body+=arrow([(850,348),(850,430)],"TP / HP / 物性",947,393)
+    body+=arrow([(1030,286),(1400,286),(1400,430)],"状态 / 版本",1200,271,True)
+    body+=arrow([(1030,325),(1140,325),(1140,628),(1020,628),(1020,676)],"喷管求解",1225,615)
+    body+=arrow([(1050,490),(1220,490)],"状态契约",1135,477,True)
+    body+=arrow([(850,676),(850,562)],"组分 / 温变物性",950,621)
+    body+=arrow([(1050,742),(1400,742),(1400,562)],"数值策略",1220,729)
+    body+=arrow([(460,518),(554,518),(554,736),(650,736)],"SI值类型",574,717,True)
+    body+=arrow([(460,550),(500,550),(500,846),(1580,846),(1580,562)],"公共状态契约",1450,834,True)
+    body+=node(100,902,440,"工程工具与验证",["任务 / 构建 / 守恒 / CEA对照"],"tools · tests · project",h=122)
+    body+=node(1150,902,430,m['cycle']['name'],["控制体、支路、功率与损失"],"扩展计划，不冒充已实现",state="planned",h=122)
+    body+=text(600,942,"计算边界",20,GREEN,650)
+    body+=text(600,975,"核心无I/O；失败保持输出。",18,MUTED)
+    body+=text(600,1005,"气态方法基准 ≠ 真实发动机。",18,MUTED)
+    return frame("02","功能核心：燃烧室状态如何进入喷管","实线表示编排 / 调用；虚线表示公共值类型依赖。灰色虚线框是未实现的整机循环。",1130,body)
 
 
 def workflow():
@@ -101,8 +105,8 @@ def workflow():
 
 def expected_architecture(root):
     modules=read_json(root/"project/modules.json")["modules"]
-    visible={'cli','adapters','nozzle','core'}
-    drawn={('cli','adapters'),('cli','nozzle'),('cli','core'),('cli','thermo'),('adapters','core'),('adapters','nozzle'),('nozzle','core')}
+    visible={'cli','adapters','nozzle','core','thermo'}
+    drawn={('cli','adapters'),('cli','nozzle'),('cli','core'),('cli','thermo'),('adapters','core'),('adapters','nozzle'),('nozzle','core'),('nozzle','thermo'),('thermo','core')}
     actual={(m['id'],dep) for m in modules if m['id'] in visible for dep in m['allowed_dependencies']}
     if actual != drawn: raise ValueError('Module dependencies changed: update and visually verify the SVG layout')
     diagrams={"business":business(),"components":components(modules),"workflow":workflow()}
@@ -121,7 +125,7 @@ def expected_architecture(root):
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#15263c;font-family:"Microsoft YaHei",Arial,sans-serif}header{padding:30px 4vw 20px;background:white;border-bottom:1px solid #ccd7e3}header p{color:#52667c;max-width:900px;line-height:1.65}h1{font-size:29px;margin:0}nav{display:flex;gap:10px;flex-wrap:wrap}button{padding:11px 22px;border:1px solid #bdcad8;border-radius:5px;color:#15263c;background:white;font-size:16px;cursor:pointer}button[aria-selected=true]{background:#2261bd;color:white;border-color:#2261bd}main{max-width:1760px;margin:auto;padding:24px}.view{display:none;background:#f6f8fb;border:1px solid #dce3eb}.view.selected{display:block}svg{width:100%;height:auto;display:block}aside{padding:28px 20px;background:white;margin-top:24px}h2{font-size:22px}table{border-collapse:collapse;width:100%;line-height:1.7;font-size:15px}td,th{padding:13px;text-align:left;border-bottom:1px solid #dce3eb;vertical-align:top}th{color:#52667c}footer{padding:22px 4vw;color:#52667c;font-size:14px}@media print{header nav{display:none}.view{display:block;break-after:page}aside{break-before:page}main{padding:0}}@media(max-width:700px){main{padding:8px}aside{overflow:auto}header{padding:20px}h1{font-size:24px}}
 </style>
-<header><h1>Rocketperf · 项目架构</h1><p>按业务、计算和执行三个视角理解系统。图中明确区分当前教学基线与未来研究模块；任务实时状态另由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="business" aria-selected="true">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 任务流程</button></nav></header>
+<header><h1>Rocketperf · 项目架构</h1><p>按业务、计算和执行三个视角理解系统。教学基线、气相方法模型与尚未实现的整机循环分别标明；任务实时状态由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="business" aria-selected="true">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 任务流程</button></nav></header>
 <main>'''+sections+'''<aside><h2>模块维护契约</h2><table><thead><tr><th>模块</th><th>维护职责</th><th>边界</th><th>实现状态</th></tr></thead><tbody>'''+contracts+'''</tbody></table></aside></main><footer>离线可用，无CDN或网络请求。生成源：project/modules.json + tools/render_architecture.py；SVG与Mermaid源同目录保留。</footer>
 <script>document.querySelectorAll('button[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('button[data-view]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('.view').forEach(s=>s.classList.toggle('selected',s.id===b.dataset.view));}));</script></html>
 '''

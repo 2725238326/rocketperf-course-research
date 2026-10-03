@@ -42,7 +42,7 @@ CLI/input -> case/schema -> thermo -> nozzle -> cycle -> study -> result JSON
 - `study`：批量工况、情景和敏感性；只读取已冻结输入，不在扫描中偷偷调参。
 - `cli`：严格输入、结果JSON、运行manifest；不承载物理公式。
 
-上图是扩展设计，不是现状依赖图。当前只有`core/nozzle/adapters/cli`及工程工具；扫描C函数在`nozzle`，运行manifest由Python工具保存。实际源码和依赖以`project/modules.json`及[架构图](architecture/README.md)为准。
+上图是扩展设计，不是现状依赖图。当前有`core/thermo/nozzle/adapters/cli`及工程工具；受限TP/HP和温变冻结喷管已实现，循环尚未实现。扫描C函数在`nozzle`，运行manifest由Python工具保存。实际源码和依赖以`project/modules.json`及[架构图](architecture/README.md)为准。
 
 第三方项目只在`tools/`用于对照：NASA CEA作为热化学参考，Pyskyfire/RocketCycles作为模块组织参考。不要让Python/Fortran调用链穿透C业务核心。
 

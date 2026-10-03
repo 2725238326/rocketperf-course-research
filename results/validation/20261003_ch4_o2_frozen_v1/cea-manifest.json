@@ -1,0 +1,393 @@
+{
+  "schema_version": 2,
+  "tool": "NASA CEA",
+  "version": "3.3.4",
+  "commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+  "thermo_source": {
+    "path": "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+    "sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363"
+  },
+  "platform": "win32",
+  "executable_sha256": "1f6d3b30e078740291f61f85c6153480cc302bdfe7ced21527b5327c3f6dbba6",
+  "compiled_database_hashes": {
+    "thermo.lib": "93ae62dbe49108a4d88992442c55a2d66587eb8813fb39430be3f2bdb5651116",
+    "trans.lib": "c203d9330746405e1b57008cd697354745ab991694b4ca11ed556b18cb834111"
+  },
+  "cases": [
+    {
+      "id": "ch4_o2_tp",
+      "input": "tests/reference/cea/ch4_o2_tp.inp",
+      "input_sha256": "7dcaa5dac681ceb24fbf5944ec8cee5b097d558ecc98dc7eb12cf061277e96cb",
+      "output": "tests/reference/cea/raw/trace1e8/ch4_o2_tp.out",
+      "output_sha256": "acdee37bcc7623079f738ef1e67788453b8791702dc83e2640ff1ba323968121",
+      "summary": {
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3000.0
+          ],
+          "enthalpy_kj_kg": [
+            -4562.051
+          ],
+          "entropy_kj_kg_k": [
+            11.1424
+          ],
+          "molar_mass_kg_kmol": [
+            23.26756
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.06095
+          ],
+          "O2": [
+            0.001873
+          ],
+          "H2O": [
+            0.589564
+          ],
+          "CO": [
+            0.14289
+          ],
+          "CO2": [
+            0.186741
+          ],
+          "H": [
+            0.003904
+          ],
+          "O": [
+            0.0004898
+          ],
+          "OH": [
+            0.013587
+          ]
+        },
+        "output_trace_threshold": 1e-08,
+        "omitted_species": [
+          "CH4"
+        ],
+        "thermo_columns": [
+          "state"
+        ],
+        "performance_columns": []
+      }
+    },
+    {
+      "id": "ch4_o2_hp",
+      "input": "tests/reference/cea/ch4_o2_hp.inp",
+      "input_sha256": "c95ef5f61938c0985ea4af6f37ab02591eb2850a758641118cfd36277a43e9e1",
+      "output": "tests/reference/cea/raw/trace1e8/ch4_o2_hp.out",
+      "output_sha256": "432cd17229243d87d0faf12eb3ed82135a4cbdd376f8005498070f1cdcf93635",
+      "summary": {
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3673.61
+          ],
+          "enthalpy_kj_kg": [
+            -1056.854
+          ],
+          "entropy_kj_kg_k": [
+            12.1832
+          ],
+          "molar_mass_kg_kmol": [
+            21.46443
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.084502
+          ],
+          "O2": [
+            0.025567
+          ],
+          "H2O": [
+            0.473455
+          ],
+          "CO": [
+            0.183464
+          ],
+          "CO2": [
+            0.120622
+          ],
+          "H": [
+            0.025013
+          ],
+          "O": [
+            0.011962
+          ],
+          "OH": [
+            0.075416
+          ]
+        },
+        "output_trace_threshold": 1e-08,
+        "omitted_species": [
+          "CH4"
+        ],
+        "thermo_columns": [
+          "state"
+        ],
+        "performance_columns": []
+      }
+    },
+    {
+      "id": "ch4_o2_rocket_equilibrium",
+      "input": "tests/reference/cea/ch4_o2_rocket_equilibrium.inp",
+      "input_sha256": "baae2f73f024d0766a484268bb7e7a4360f8d84fbdb40808cf40e07d28a12ab8",
+      "output": "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_equilibrium.out",
+      "output_sha256": "f3388408814f1f5ab4fd86356adbcf560b4716f8d2fbda84383648dd6e58edac",
+      "summary": {
+        "rows": {
+          "pressure_bar": [
+            100.0,
+            57.8566,
+            1.5294,
+            0.2608
+          ],
+          "temperature_k": [
+            3673.61,
+            3493.65,
+            2480.75,
+            1940.85
+          ],
+          "enthalpy_kj_kg": [
+            -1056.854,
+            -1811.164,
+            -5795.631,
+            -7184.752
+          ],
+          "entropy_kj_kg_k": [
+            12.183,
+            12.183,
+            12.183,
+            12.183
+          ],
+          "molar_mass_kg_kmol": [
+            21.4644,
+            21.7548,
+            23.3148,
+            23.5165
+          ],
+          "mach": [
+            0.0,
+            1.0,
+            3.0612,
+            3.8757
+          ],
+          "area_ratio": [
+            1.0,
+            10.0,
+            40.0
+          ],
+          "cstar_m_s": [
+            1878.97,
+            1878.97,
+            1878.97
+          ],
+          "cf": [
+            0.6537,
+            1.6384,
+            1.8632
+          ],
+          "ivac_m_s": [
+            2315.36,
+            3365.93,
+            3696.84
+          ],
+          "isp_velocity_m_s": [
+            1228.26,
+            3078.56,
+            3500.83
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.084502,
+            0.080709,
+            0.066051,
+            0.076432
+          ],
+          "O2": [
+            0.025567,
+            0.022366,
+            0.001511,
+            7.534e-06
+          ],
+          "H2O": [
+            0.473455,
+            0.492185,
+            0.587372,
+            0.589365
+          ],
+          "CO": [
+            0.183464,
+            0.177389,
+            0.134911,
+            0.120367
+          ],
+          "CO2": [
+            0.120622,
+            0.13081,
+            0.195388,
+            0.212791
+          ],
+          "H": [
+            0.025013,
+            0.021771,
+            0.004806,
+            0.0005819
+          ],
+          "O": [
+            0.011962,
+            0.009534,
+            0.0004137,
+            2.251e-06
+          ],
+          "OH": [
+            0.075416,
+            0.065236,
+            0.009546,
+            0.0004538
+          ]
+        },
+        "output_trace_threshold": 1e-08,
+        "omitted_species": [
+          "CH4"
+        ],
+        "thermo_columns": [
+          "chamber",
+          "throat",
+          "exit_A10",
+          "exit_A40"
+        ],
+        "performance_columns": [
+          "throat",
+          "exit_A10",
+          "exit_A40"
+        ]
+      }
+    },
+    {
+      "id": "ch4_o2_rocket_frozen_chamber",
+      "input": "tests/reference/cea/ch4_o2_rocket_frozen_chamber.inp",
+      "input_sha256": "3a57af3f26a0455aa463409d0218148290da27049b52b32a5838a96376c0be49",
+      "output": "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_frozen_chamber.out",
+      "output_sha256": "1b3e36ddeb5488e2c4b5b42a2d049030c65ced81629bd1f5f22409e48af52854",
+      "summary": {
+        "rows": {
+          "pressure_bar": [
+            100.0,
+            56.4176,
+            1.1987,
+            0.1873
+          ],
+          "temperature_k": [
+            3673.61,
+            3339.54,
+            1691.56,
+            1173.07
+          ],
+          "enthalpy_kj_kg": [
+            -1056.854,
+            -1833.82,
+            -5472.573,
+            -6493.971
+          ],
+          "entropy_kj_kg_k": [
+            12.183,
+            12.183,
+            12.183,
+            12.183
+          ],
+          "molar_mass_kg_kmol": [
+            21.4644,
+            21.4644,
+            21.4644,
+            21.4644
+          ],
+          "mach": [
+            0.0,
+            1.0,
+            3.3067,
+            4.3578
+          ],
+          "area_ratio": [
+            1.0,
+            10.0,
+            40.0002
+          ],
+          "cstar_m_s": [
+            1839.39,
+            1839.39,
+            1839.39
+          ],
+          "cf": [
+            0.6777,
+            1.6156,
+            1.7928
+          ],
+          "ivac_m_s": [
+            2284.31,
+            3192.26,
+            3435.41
+          ],
+          "isp_velocity_m_s": [
+            1246.57,
+            2971.77,
+            3297.61
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.084502
+          ],
+          "O2": [
+            0.025567
+          ],
+          "H2O": [
+            0.473455
+          ],
+          "CO": [
+            0.183464
+          ],
+          "CO2": [
+            0.120622
+          ],
+          "H": [
+            0.025013
+          ],
+          "O": [
+            0.011962
+          ],
+          "OH": [
+            0.075416
+          ]
+        },
+        "output_trace_threshold": 1e-08,
+        "omitted_species": [
+          "CH4"
+        ],
+        "thermo_columns": [
+          "chamber",
+          "throat",
+          "exit_A10",
+          "exit_A40"
+        ],
+        "performance_columns": [
+          "throat",
+          "exit_A10",
+          "exit_A40"
+        ]
+      }
+    }
+  ],
+  "scope": "Restricted nine-species gas-feed method benchmark; not flight engine performance.",
+  "known_output_defects": [
+    "Initial trace=1e-12 TP/HP empty trace list contains invalid bytes; raw initial outputs retained.",
+    "Reactant ENERGY KJ/MOL label prints CH4 -74600; do not use this column as kJ/mol input."
+  ]
+}

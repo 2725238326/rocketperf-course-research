@@ -5,6 +5,8 @@
 | 层次 | 测试 | 覆盖 |
 |---|---|---|
 | 数学/核心 | test_core.c | 解析Mach与性能、连续/能量、缩放、求根失败、越域和有限数 |
+| 物性 | test_thermo.c / test_thermo_data.py | 固定NASA9、形成焓、134状态软件参考、数据/温区/输出失败契约 |
+| 燃烧/喷管 | test_combustion.c | TP/HP、元素与六条独立反应驻点、冻结喷管CEA对照、定cp解析极限和失败保持输出 |
 | 输出接口 | test_adapters.c | 写前拒绝非有限数/未终止文字/错误坐标或点数，控制字符转义 |
 | 外部协议 | test_cli.py | 输入严格性、中文路径、BOM/CRLF、JSON/退出码、确定性 |
 | 工程治理 | test_governance.py | 状态/依赖/WIP/负责人/事件/锁、契约修订、证据过期和架构边界 |
@@ -21,5 +23,5 @@ python tools/pipeline.py test --configuration Debug
 
 治理测试使用build下的独立临时项目，运行管理测试留下results/local中的独立测试运行，不改原始资料。runner测试需要Release的新鲜已测构建，统一质量入口按正确顺序准备。
 
-构建/测试报告记录RUNNING/PASS/FAIL与关联输入。Ubuntu WSL的ASan/UBSan已实际执行，含故意越界和整数溢出的检出检查，见[审查记录](../docs/review.md)。故意缺陷源码`fixtures/sanitizer_probe.c`不进入生产程序。远端CI尚未执行。
+构建/测试报告记录RUNNING/PASS/FAIL与关联输入。历史Ubuntu WSL的ASan/UBSan仅覆盖当时基线，未覆盖新燃烧/冻结喷管；本轮只运行Windows。故意缺陷源码`fixtures/sanitizer_probe.c`不进入生产程序。远端CI尚未执行。
 

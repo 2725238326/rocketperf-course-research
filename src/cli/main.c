@@ -2,6 +2,8 @@
 #include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
 #include "rocketperf/thermo.h"
+#include "rocketperf/combustion.h"
+#include "rocketperf/frozen_nozzle.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -163,6 +165,103 @@ static int thermo_main(const char *id, const char *temperature_text)
     return 0;
 }
 
+static int write_mixture(const RpGasMixture *gas)
+{
+    if (printf("{\"temperature_k\":%.17g,\"pressure_pa\":%.17g,\"molar_mass_kg_per_kmol\":%.17g,"
+               "\"gas_constant_j_per_kg_k\":%.17g,\"cp_frozen_j_per_kg_k\":%.17g,"
+               "\"h_j_per_kg\":%.17g,\"s_j_per_kg_k\":%.17g,\"mole_fractions\":{",
+               gas->temperature_k, gas->pressure_pa, gas->molar_mass_kg_per_kmol,
+               gas->gas_constant_j_per_kg_k, gas->cp_frozen_j_per_kg_k,
+               gas->h_j_per_kg, gas->s_j_per_kg_k) < 0) { return 0; }
+    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
+        if (printf("%s\"%s\":%.17g", i == 0U ? "" : ",", rp_cho_species_id(i), gas->mole_fractions[i]) < 0) { return 0; }
+    }
+    return fputs("}}", stdout) >= 0;
+}
+
+static int write_station(const RpFrozenFlowStation *station)
+{
+    return fputs("{\"gas\":", stdout) >= 0 && write_mixture(&station->gas) &&
+        printf(",\"velocity_m_per_s\":%.17g,\"mach\":%.17g,\"mass_flux_kg_per_m2_s\":%.17g,"
+               "\"energy_residual_j_per_kg\":%.17g,\"entropy_residual_j_per_kg_k\":%.17g}",
+               station->velocity_m_per_s, station->mach, station->mass_flux_kg_per_m2_s,
+               station->energy_residual_j_per_kg, station->entropy_residual_j_per_kg_k) >= 0;
+}
+
+static int combustion_main(int count, char **arguments)
+{
+    double values[6] = {0};
+    const char *mode = count > 0 ? arguments[0] : "";
+    const int tp = strcmp(mode, "tp") == 0;
+    const int hp = strcmp(mode, "hp") == 0;
+    const int frozen = strcmp(mode, "frozen") == 0;
+    RpCh4O2Feed feed;
+    RpCombustionResult result;
+    RpFrozenNozzleResult nozzle;
+    RpError error;
+    RpStatus status;
+    int written;
+    if ((!tp && !hp && !frozen) || count != (tp ? 6 : hp ? 5 : 7)) { goto usage; }
+    for (int i = 1; i < count; ++i) {
+        const char *next;
+        if (!parse_decimal_token(arguments[i], &next, &values[i - 1]) || *next != '\0') { goto usage; }
+    }
+    feed.pressure_pa = values[tp ? 1 : 0];
+    feed.oxidizer_fuel_mass_ratio = values[tp ? 2 : 1];
+    feed.fuel_temperature_k = values[tp ? 3 : 2];
+    feed.oxidizer_temperature_k = values[tp ? 4 : 3];
+    feed.phase = RP_FEED_GAS;
+    status = tp ? rp_ch4_o2_equilibrium_tp(&feed, values[0], NULL, &result, &error) :
+                  rp_ch4_o2_equilibrium_hp(&feed, NULL, &result, &error);
+    if (status == RP_OK && frozen) {
+        RpFrozenNozzleInput input = {0};
+        input.chamber_temperature_k = result.gas.temperature_k;
+        input.chamber_pressure_pa = result.gas.pressure_pa;
+        memcpy(input.mole_fractions, result.gas.mole_fractions, sizeof(input.mole_fractions));
+        input.area_ratio = values[4]; input.ambient_pressure_pa = values[5];
+        status = rp_nozzle_solve_frozen(&input, NULL, &nozzle, &error);
+    }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return 4;
+    }
+    written = printf("{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\","
+                     "\"inputs\":{\"feed_phase\":\"gas\",\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g,"
+                     "\"fuel_temperature_k\":%.17g,\"oxidizer_temperature_k\":%.17g",
+                     frozen ? "ch4_o2_chamber_frozen_v1" : "ch4_o2_gas_equilibrium_v1", mode, rp_thermo_dataset_id(),
+                     feed.pressure_pa, feed.oxidizer_fuel_mass_ratio, feed.fuel_temperature_k, feed.oxidizer_temperature_k) >= 0;
+    if (written && tp) { written = printf(",\"temperature_k\":%.17g", values[0]) >= 0; }
+    if (written && frozen) { written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g", values[4], values[5]) >= 0; }
+    written = written && fputs("},\"chamber\":", stdout) >= 0 && write_mixture(&result.gas) &&
+        printf(",\"diagnostics\":{\"element_relative_residual\":[%.17g,%.17g,%.17g],\"equilibrium_residual\":%.17g,"
+               "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u}",
+               result.element_relative_residual[0], result.element_relative_residual[1], result.element_relative_residual[2],
+               result.equilibrium_residual, result.enthalpy_residual_j_per_kg,
+               result.equilibrium_iterations, result.hp_iterations) >= 0;
+    if (written && frozen) {
+        written = fputs(",\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":", stdout) >= 0 &&
+            write_station(&nozzle.throat) && fputs(",\"exit\":", stdout) >= 0 && write_station(&nozzle.exit) &&
+            printf(",\"cstar_m_per_s\":%.17g,\"vacuum_effective_velocity_m_per_s\":%.17g,"
+                   "\"effective_velocity_m_per_s\":%.17g,\"thrust_coefficient\":%.17g,"
+                   "\"continuity_relative_residual\":%.17g,\"sonic_relative_residual\":%.17g}",
+                   nozzle.cstar_m_per_s, nozzle.vacuum_effective_velocity_m_per_s,
+                   nozzle.effective_velocity_m_per_s, nozzle.thrust_coefficient,
+                   nozzle.continuity_relative_residual, nozzle.sonic_relative_residual) >= 0;
+    }
+    written = written && fputs(",\"limitations\":[\"Restricted nine-species ideal gas; no ions, condensed phases or soot.\","
+                               "\"Gas-feed method calculation, not flight engine performance.\","
+                               "\"Frozen nozzle is chamber-frozen, inviscid and without shocks or separation.\"]}\n", stdout) >= 0;
+    if (!written || fflush(stdout) != 0) {
+        (void)fputs("io_error: Cannot write combustion JSON report.\n", stderr); return 3;
+    }
+    return 0;
+usage:
+    (void)fputs("Usage (gas feed, SI): rocketperf combustion tp T_K P_PA OF TF_K TO_K\n"
+                "                     rocketperf combustion hp P_PA OF TF_K TO_K\n"
+                "                     rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA\n", stderr);
+    return 2;
+}
+
 static int cli_main(int argc, char **argv)
 {
     RpCase study;
@@ -175,12 +274,18 @@ static int cli_main(int argc, char **argv)
         return 0;
     }
     if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+        (void)puts("       rocketperf combustion tp T_K P_PA OF TF_K TO_K (gas feed)");
+        (void)puts("       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)");
+        (void)puts("       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA");
         (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
     }
     if (argc == 4 && strcmp(argv[1], "thermo") == 0) {
         return thermo_main(argv[2], argv[3]);
+    }
+    if (argc >= 2 && strcmp(argv[1], "combustion") == 0) {
+        return combustion_main(argc - 2, &argv[2]);
     }
     if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
         return study_main(argv[3], argc - 4, &argv[4]);

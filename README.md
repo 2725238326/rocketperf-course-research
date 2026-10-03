@@ -1,6 +1,6 @@
 # 火箭发动机原理 · Rocketperf
 
-研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前计算能力是**经过验证的理想气体教学基线**；真实参数、热化学与循环模型仍需研究。
+研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九物种气态CH4/O2的TP/HP平衡和燃烧室冻结温变喷管。真实型号输入仍有缺口，整机循环尚未实现；方法基准不能当作飞行发动机性能。
 
 [打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
@@ -20,6 +20,18 @@ python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 
 运行工具核对新鲜的构建/测试证据，保存输入、实际二进制、报告和哈希到 `results/local/<RunId>/`。失败也保留记录。同名RunId不能覆盖。
 
+## 实际运行燃烧与喷管
+
+完整质量检查后，在Windows本地运行气态方法基准：
+
+```powershell
+./build/release/rocketperf.exe combustion hp 10000000 3.4 298.15 298.15
+./build/release/rocketperf.exe combustion frozen 10000000 3.4 298.15 298.15 40 0
+python tools/combustion_reference.py
+```
+
+第一条算燃烧室温度和组分；第二条继续算冻结喷管；第三条从已测具体构建复跑四个固定工况、与CEA自动比对并保留记录。`build/release`中的exe是便捷别名，追溯以manifest指向的实际构建为准。条件与验证见[热化学与喷管](docs/thermo-nozzle-validation.md)。
+
 ## 按职责找入口
 
 | 工作 | 入口 |
@@ -36,4 +48,4 @@ python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 
 课程节点：2026-10-16，周五第3—5节；展示≤10分钟、提问≤5分钟。最终交源码、发布版、报告和PPT。当前工程通过不等于课程研究已经完成。
 
-待补工作和本次发现见[审查记录](docs/review.md)。MinGW运行库问题及WSL sanitizer命令见[环境说明](docs/environment.md)。分支、HEAD和工作树状态看doctor；未添加远端或推送。
+待补工作和本次发现见[审查记录](docs/review.md)。MinGW运行库问题及历史WSL验证见[环境说明](docs/environment.md)。分支、HEAD、远端配置和工作树状态看doctor；阶段完成建立本地提交，不自动推送。

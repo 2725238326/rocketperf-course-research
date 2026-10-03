@@ -12,6 +12,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 import pipeline
+import combustion_reference
 from projectlib import atomic_json, digest, read_json
 
 
@@ -118,6 +119,17 @@ class ResultContractTests(unittest.TestCase):
 
 
 class LifecycleTests(unittest.TestCase):
+    def test_combustion_reference_preparation_failure_is_recorded(self):
+        (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='combustion-lifecycle-',dir=ROOT/'build/test-tmp') as folder:
+            run=Path(folder)/'run'
+            with mock.patch.object(combustion_reference,'check_reference',side_effect=ValueError('invalid CEA reference')),self.assertRaisesRegex(ValueError,'invalid CEA reference'):
+                combustion_reference.run_reference(Path(folder)/'missing.exe',run)
+            report=read_json(run/'manifest.json')
+            self.assertEqual(report['status'],'FAIL')
+            self.assertEqual(report['cases'],[])
+            with self.assertRaises(FileExistsError): combustion_reference.run_reference(Path(folder)/'missing.exe',run)
+
     def test_test_failure_replaces_old_pass_report(self):
         (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='lifecycle-',dir=ROOT/'build/test-tmp') as folder:
@@ -126,7 +138,8 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'build/debug/test-report.json',{'status':'PASS'})
             atomic_json(root/'tools/thermo_data.py',{'fixture':True})
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
-            with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaises(ValueError):
+            atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
+            with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):
                 pipeline.test(root)
             self.assertEqual(read_json(root/'build/debug/test-report.json')['status'],'FAIL')
 

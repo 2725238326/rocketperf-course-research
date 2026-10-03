@@ -1,0 +1,219 @@
+"""Run the pure-C gas method cases against pinned CEA printed values."""
+import argparse
+import math
+import re
+import subprocess
+import shutil
+import sys
+import uuid
+
+from cea_reference import check_reference
+from pipeline import strict_json, verified_build
+from projectlib import ROOT, atomic_json, atomic_text, digest, now, read_json, subprocess_env
+
+
+def compare_report(report, reference, mode, area=None):
+    """Check provenance, conservation and print-precision-aware reference errors."""
+    if not isinstance(report, dict):
+        raise ValueError('Combustion report must be an object')
+    expected_model = 'ch4_o2_chamber_frozen_v1' if mode == 'frozen' else 'ch4_o2_gas_equilibrium_v1'
+    if report.get('schema_version') != 1 or report.get('mode') != mode or report.get('model') != expected_model:
+        raise ValueError('Combustion mode/model/schema mismatch')
+    if report.get('dataset_id') != 'cea-v3.3.4-neutral-cho-n-v1' or not report.get('limitations'):
+        raise ValueError('Dataset or limitations missing')
+    expected_input = dict(feed_phase='gas', pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
+                          fuel_temperature_k=298.15, oxidizer_temperature_k=298.15)
+    if mode == 'tp':
+        expected_input['temperature_k'] = 3000.0
+    if mode == 'frozen':
+        expected_input.update(area_ratio=area, ambient_pressure_pa=0.0)
+    if report.get('inputs') != expected_input:
+        raise ValueError('Report does not correspond to the fixed method inputs')
+    errors = []
+
+    def bounded(name, actual, target, tolerance):
+        if isinstance(actual, bool) or not isinstance(actual, (int, float)) or not math.isfinite(actual):
+            raise ValueError(f'Non-finite or non-numeric {name}')
+        delta = actual - target
+        if abs(delta) > tolerance:
+            raise ValueError(f'{name} error {delta} exceeds {tolerance}')
+        errors.append(dict(field=name, actual=actual, reference=target, difference=delta, absolute_tolerance=tolerance))
+
+    chamber = report['chamber']
+    summary = reference['summary']
+    rows = summary['rows']
+    bounded('chamber.temperature_k', chamber['temperature_k'], rows['temperature_k'][0], 0.02)
+    bounded('chamber.pressure_pa', chamber['pressure_pa'], rows['pressure_bar'][0] * 1e5, 1e-5)
+    bounded('chamber.h_j_per_kg', chamber['h_j_per_kg'], rows['enthalpy_kj_kg'][0] * 1000, 3.0)
+    bounded('chamber.molar_mass_kg_per_kmol', chamber['molar_mass_kg_per_kmol'], rows['molar_mass_kg_kmol'][0], 5e-5)
+    bounded('chamber.s_j_per_kg_k', chamber['s_j_per_kg_k'], rows['entropy_kj_kg_k'][0] * 1000, 0.5)
+    expected_ids = {'H2', 'O2', 'H2O', 'CO', 'CO2', 'CH4', 'H', 'O', 'OH'}
+    fractions = chamber['mole_fractions']
+    if set(fractions) != expected_ids:
+        raise ValueError('Unexpected gas species set')
+    for species, value in fractions.items():
+        if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value) or value <= 0 or value > 1:
+            raise ValueError('Invalid or non-positive species fraction')
+        printed = summary['mole_fractions'].get(species)
+        if printed is None:
+            bounded('chamber.mole_fractions.' + species, value, 0.0, summary['output_trace_threshold'])
+        else:
+            bounded('chamber.mole_fractions.' + species, value, printed[0], 2e-6)
+    bounded('fraction_sum', sum(fractions.values()), 1.0, 1e-12)
+    carbon = fractions['CO'] + fractions['CO2'] + fractions['CH4']
+    hydrogen = 2 * fractions['H2'] + 2 * fractions['H2O'] + 4 * fractions['CH4'] + fractions['H'] + fractions['OH']
+    oxygen = 2 * fractions['O2'] + fractions['H2O'] + fractions['CO'] + 2 * fractions['CO2'] + fractions['O'] + fractions['OH']
+    bounded('element_ratio.H_C', hydrogen / carbon, 4.0, 2e-8)
+    bounded('element_ratio.O_C', oxygen / carbon, 2 * 3.4 * 16.04246 / 31.9988, 2e-8)
+    diagnostics = report['diagnostics']
+    if len(diagnostics['element_relative_residual']) != 3:
+        raise ValueError('Element residual dimension mismatch')
+    for i, residual in enumerate(diagnostics['element_relative_residual']):
+        bounded(f'diagnostics.element[{i}]', residual, 0.0, 2e-10)
+    bounded('diagnostics.equilibrium', diagnostics['equilibrium_residual'], 0.0, 1e-10)
+    if mode != 'tp':
+        bounded('diagnostics.enthalpy_j_per_kg', diagnostics['enthalpy_residual_j_per_kg'], 0.0, 0.01)
+    if mode == 'frozen':
+        nozzle = report['nozzle']
+        if nozzle['freeze_location'] != 'chamber':
+            raise ValueError('Wrong freeze location')
+        exit_col = 2 if area == 10 else 3
+        performance_col = 1 if area == 10 else 2
+        for name, col in [('throat', 1), ('exit', exit_col)]:
+            station = nozzle[name]
+            if station['gas']['mole_fractions'] != fractions:
+                raise ValueError('Frozen composition changed')
+            bounded(name + '.temperature_k', station['gas']['temperature_k'], rows['temperature_k'][col], 0.03)
+            bounded(name + '.pressure_pa', station['gas']['pressure_pa'], rows['pressure_bar'][col] * 1e5, 30.0 if name == 'throat' else 10.0)
+            bounded(name + '.velocity_m_per_s', station['velocity_m_per_s'], rows['isp_velocity_m_s'][0 if name == 'throat' else performance_col], 0.03)
+            bounded(name + '.mach', station['mach'], rows['mach'][col], 2e-4)
+            bounded(name + '.energy_residual', station['energy_residual_j_per_kg'], 0.0, 1e-5)
+            bounded(name + '.entropy_residual', station['entropy_residual_j_per_kg_k'], 0.0, 1e-7)
+            bounded(name + '.recomputed_energy', station['gas']['h_j_per_kg'] + station['velocity_m_per_s'] ** 2 / 2 - chamber['h_j_per_kg'], 0.0, 1e-5)
+        bounded('nozzle.cstar_m_per_s', nozzle['cstar_m_per_s'], rows['cstar_m_s'][performance_col], 0.03)
+        bounded('nozzle.ivac_m_per_s', nozzle['vacuum_effective_velocity_m_per_s'], rows['ivac_m_s'][performance_col], 0.03)
+        bounded('nozzle.continuity', nozzle['continuity_relative_residual'], 0.0, 1e-8)
+        bounded('nozzle.recomputed_continuity', nozzle['exit']['mass_flux_kg_per_m2_s'] * area / nozzle['throat']['mass_flux_kg_per_m2_s'] - 1.0, 0.0, 1e-8)
+        bounded('nozzle.sonic', nozzle['sonic_relative_residual'], 0.0, 1e-8)
+        flux = nozzle['throat']['mass_flux_kg_per_m2_s']
+        bounded('nozzle.recomputed_cstar', nozzle['cstar_m_per_s'], chamber['pressure_pa'] / flux, 1e-8)
+        bounded('nozzle.recomputed_ivac', nozzle['vacuum_effective_velocity_m_per_s'], nozzle['exit']['velocity_m_per_s'] + nozzle['exit']['gas']['pressure_pa'] * area / flux, 1e-8)
+        bounded('nozzle.recomputed_effective_velocity', nozzle['effective_velocity_m_per_s'], nozzle['vacuum_effective_velocity_m_per_s'], 1e-8)
+        bounded('nozzle.recomputed_cf', nozzle['thrust_coefficient'], nozzle['effective_velocity_m_per_s'] / nozzle['cstar_m_per_s'], 1e-10)
+    return errors
+
+
+def run_reference(binary, folder):
+    folder.mkdir(parents=True, exist_ok=False)
+    record = dict(schema_version=1, kind='combustion-reference', status='RUNNING', started_at=now(),
+                  cases=[], scope='Gas-feed method verification; no flight-engine or equilibrium-nozzle performance claim.')
+    atomic_json(folder / 'manifest.json', record)
+    # Snapshot both the actual binary and the complete reference manifest.
+    try:
+        references = check_reference()
+        cases = {case['id']: case for case in references['cases']}
+        record['binary_sha256'] = digest(binary)
+        record['cea_manifest_sha256'] = digest(ROOT / 'tests/reference/cea/manifest.json')
+        shutil.copy2(binary, folder / binary.name)
+        shutil.copy2(ROOT / 'tests/reference/cea/manifest.json', folder / 'cea-manifest.json')
+        executable = folder / binary.name
+        if digest(executable) != record['binary_sha256']:
+            raise ValueError('Binary snapshot changed')
+        specs = [('tp', None, ['3000', '10000000', '3.4', '298.15', '298.15'], 'ch4_o2_tp'),
+                 ('hp', None, ['10000000', '3.4', '298.15', '298.15'], 'ch4_o2_hp'),
+                 ('frozen', 10, ['10000000', '3.4', '298.15', '298.15', '10', '0'], 'ch4_o2_rocket_frozen_chamber'),
+                 ('frozen', 40, ['10000000', '3.4', '298.15', '298.15', '40', '0'], 'ch4_o2_rocket_frozen_chamber')]
+        for mode, area, arguments, ref_id in specs:
+            case_id = mode + (str(area) if area else '')
+            command = [str(executable), 'combustion', mode, *arguments]
+            completed = subprocess.run(command, cwd=ROOT, capture_output=True, encoding='utf-8', errors='strict', timeout=15, env=subprocess_env(), check=False)
+            atomic_text(folder / (case_id + '-stdout.json'), completed.stdout)
+            atomic_text(folder / (case_id + '-stderr.txt'), completed.stderr)
+            if completed.returncode or completed.stderr:
+                raise ValueError(f'{case_id}: exit={completed.returncode}, stderr={completed.stderr}')
+            errors = compare_report(strict_json(completed.stdout), cases[ref_id], mode, area)
+            record['cases'].append(dict(id=case_id, reference=ref_id, command=[executable.name, *command[1:]],
+                                        output_sha256=digest(folder / (case_id + '-stdout.json')), comparisons=errors))
+        record['status'] = 'PASS'
+    except Exception as exc:
+        record.update(status='FAIL', error=str(exc))
+        raise
+    finally:
+        record['finished_at'] = now()
+        atomic_json(folder / 'manifest.json', record)
+    return record
+
+
+def archive_reference(run_folder, archive_folder, build_path):
+    """Keep a small immutable result set in Git, binaries stay in build/."""
+    record = read_json(run_folder / 'manifest.json')
+    if record.get('status') != 'PASS':
+        raise ValueError('Cannot archive a failed reference run')
+    build_manifest = read_json(build_path)
+    test_report = read_json(build_path.parent / 'test-report.json')
+    if build_manifest.get('status') != 'PASS' or test_report.get('status') != 'PASS' or record['binary_sha256'] != build_manifest['application']['sha256']:
+        raise ValueError('Archive build/test/binary identity mismatch')
+    if test_report['build_manifest_sha256'] != digest(build_path):
+        raise ValueError('Archive test report refers to a different build')
+    # Copy only declared result files, not the executable or arbitrary run files.
+    archive_folder.mkdir(parents=True, exist_ok=False)
+    record['build_manifest_sha256'] = digest(build_path)
+    record['test_report_sha256'] = digest(build_path.parent / 'test-report.json')
+    record['build_inputs'] = build_manifest['inputs']
+    record['validation_inputs'] = test_report['validation_inputs']
+    for case in record['cases']:
+        filename = case['id'] + '-stdout.json'
+        source = run_folder / filename
+        if digest(source) != case['output_sha256']:
+            raise ValueError('Result changed before archive')
+        shutil.copy2(source, archive_folder / filename)
+        case['output'] = filename
+    shutil.copy2(run_folder / 'cea-manifest.json', archive_folder / 'cea-manifest.json')
+    atomic_json(archive_folder / 'manifest.json', record)
+
+
+def check_archive(folder):
+    record = read_json(folder / 'manifest.json')
+    if record.get('kind') != 'combustion-reference' or record.get('status') != 'PASS' or len(record['cases']) != 4:
+        raise ValueError('Incomplete combustion validation archive')
+    if digest(folder / 'cea-manifest.json') != record['cea_manifest_sha256']:
+        raise ValueError('Archived CEA manifest changed')
+    cases = {case['id']: case for case in read_json(folder / 'cea-manifest.json')['cases']}
+    expected = {'tp', 'hp', 'frozen10', 'frozen40'}
+    if {case['id'] for case in record['cases']} != expected:
+        raise ValueError('Archive case identities changed')
+    for case in record['cases']:
+        filename = case['id'] + '-stdout.json'
+        if case['output'] != filename or digest(folder / filename) != case['output_sha256']:
+            raise ValueError('Archived C result changed')
+        mode = 'frozen' if case['id'].startswith('frozen') else case['id']
+        area = int(case['id'][6:]) if mode == 'frozen' else None
+        errors = compare_report(strict_json((folder / filename).read_text(encoding='utf-8')), cases[case['reference']], mode, area)
+        if errors != case['comparisons']:
+            raise ValueError('Archived comparison changed')
+    return record
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--configuration', choices=['Debug', 'Release'], default='Release')
+    parser.add_argument('--archive-id', help='New immutable version directory under results/validation; refuses existing paths')
+    args = parser.parse_args()
+    if args.archive_id and not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,80}', args.archive_id):
+        raise ValueError('Unsafe archive ID')
+    build = verified_build(ROOT, args.configuration, require_tests=True)
+    manifest = read_json(build)
+    folder = ROOT / 'build/combustion-reference' / uuid.uuid4().hex
+    record = run_reference(ROOT / manifest['application']['path'], folder)
+    if args.archive_id:
+        archive_reference(folder, ROOT / 'results/validation' / args.archive_id, build)
+    print(f"C/CEA {record['status']}: {len(record['cases'])} runs; {folder}")
+
+
+if __name__ == '__main__':
+    sys.stdout.reconfigure(encoding='utf-8')
+    try:
+        main()
+    except (ValueError, OSError, KeyError, subprocess.SubprocessError) as exc:
+        print(f'combustion-reference: {exc}', file=sys.stderr)
+        sys.exit(1)

@@ -164,6 +164,9 @@ class GovernanceTests(unittest.TestCase):
         source=self.root/'src/core/root.c'
         source.write_text('#include "case_file.h"\n'+source.read_text(encoding='utf-8'),encoding='utf-8')
         self.assertTrue(any('Forbidden dependency' in x for x in project.architecture_checks(self.root)))
+        thermo=self.root/'src/thermo/mixture.c'
+        thermo.write_text(thermo.read_text(encoding='utf-8')+'\nvoid fixture_io(void) { printf("not pure"); }\n',encoding='utf-8')
+        self.assertTrue(any('Core purity boundary violated: src/thermo/mixture.c' in x for x in project.architecture_checks(self.root)))
 
     def test_secret_detection_does_not_print_secret(self):
         secret='sk-'+'a'*32

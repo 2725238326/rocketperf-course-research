@@ -130,13 +130,13 @@ def source_records(root):
     modules=read_json(root/"project/modules.json")["modules"]
     sources=[s for m in modules for s in m["sources"]]
     sources += [p.relative_to(root).as_posix() for folder in ("include","src") for p in (root/folder).rglob('*.h')]
-    sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
+    sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/test_combustion.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
     return file_records(root,sources)
 
 
 def test_records(root):
-    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data/thermo") for p in (root/folder).rglob('*') if p.suffix in {'.c','.h','.py','.json','.ini','.tsv','.inp','.out'}]
-    files += ['tools/thermo_data.py','tools/cea_reference.py']
+    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data/thermo","results/validation") for p in (root/folder).rglob('*') if p.suffix in {'.c','.h','.py','.json','.ini','.tsv','.inp','.out'}]
+    files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py']
     return file_records(root,files)
 
 
@@ -175,10 +175,12 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
             if sanitize: flags+=['-fsanitize=address,undefined','-fno-sanitize-recover=all','-fno-omit-frame-pointer']
             suffix='.exe' if os.name=='nt' else ''
             app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix); adapter=attempt/("test_adapters"+suffix); thermo=attempt/("test_thermo"+suffix)
+            combustion=attempt/("test_combustion"+suffix)
             commands=[[executable,*flags,*(['-municode'] if os.name=='nt' else []),*core,*adapters,'-lm','-o',str(app)],
                       [executable,*flags,*core,'tests/test_core.c','-lm','-o',str(unit)],
                       [executable,*flags,*core,*modules['adapters']['sources'],'tests/test_adapters.c','-lm','-o',str(adapter)],
-                      [executable,*flags,*core,'tests/test_thermo.c','-lm','-o',str(thermo)]]
+                      [executable,*flags,*core,'tests/test_thermo.c','-lm','-o',str(thermo)],
+                      [executable,*flags,*core,'tests/test_combustion.c','-lm','-o',str(combustion)]]
             if sanitize:
                 commands.append([executable,*flags,'tests/fixtures/sanitizer_probe.c','-o',str(attempt/'sanitizer_probe')])
             version=execute([executable,'--version'],root,attempt/'compiler.log',30).splitlines()[0]
@@ -188,10 +190,11 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
                             application={"path":app.relative_to(root).as_posix(),"sha256":digest(app)},
                             core_test={"path":unit.relative_to(root).as_posix(),"sha256":digest(unit)},
                             adapter_test={"path":adapter.relative_to(root).as_posix(),"sha256":digest(adapter)},
-                            thermo_test={"path":thermo.relative_to(root).as_posix(),"sha256":digest(thermo)})
+                            thermo_test={"path":thermo.relative_to(root).as_posix(),"sha256":digest(thermo)},
+                            combustion_test={"path":combustion.relative_to(root).as_posix(),"sha256":digest(combustion)})
             if sanitize: manifest['sanitizer_probe']={'path':(attempt/'sanitizer_probe').relative_to(root).as_posix(),'sha256':digest(attempt/'sanitizer_probe')}
             # Compatibility aliases. Consumers must use the manifest pointer, not trust old aliases.
-            for output in (app,unit,adapter,thermo):
+            for output in (app,unit,adapter,thermo,combustion):
                 destination=root/'build'/name/output.name
                 temporary=destination.with_name('.'+output.name+'.'+uuid.uuid4().hex)
                 shutil.copy2(output,temporary); os.replace(temporary,destination)
@@ -211,7 +214,7 @@ def verified_build(root,configuration="Debug",sanitize=False,require_tests=False
     path=local_path(root,pointer['manifest']); manifest=read_json(path)
     if manifest.get('status')!='PASS' or manifest.get('kind')!='build': raise ValueError("Latest build attempt did not pass")
     if manifest['inputs']!=source_records(root): raise ValueError("Build is stale for current source inputs")
-    for field in ('application','core_test','adapter_test','thermo_test',*(['sanitizer_probe'] if sanitize else [])):
+    for field in ('application','core_test','adapter_test','thermo_test','combustion_test',*(['sanitizer_probe'] if sanitize else [])):
         artifact=local_path(root,manifest[field]['path'])
         if not artifact.is_file() or digest(artifact)!=manifest[field]['sha256']: raise ValueError("Build artifact hash mismatch")
     if require_tests:
@@ -235,6 +238,7 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
         core_log=execute([local_path(root,manifest['core_test']['path'])],root,path.parent/'core-test.log')
         adapter_log=execute([local_path(root,manifest['adapter_test']['path'])],root,path.parent/'adapter-test.log')
         thermo_log=execute([local_path(root,manifest['thermo_test']['path'])],root,path.parent/'thermo-test.log')
+        combustion_log=execute([local_path(root,manifest['combustion_test']['path'])],root,path.parent/'combustion-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
         cli_count=cli_test_count(cli_log)
         data_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_thermo_data.py','-v'],root,path.parent/'thermo-data-test.log')
@@ -247,15 +251,16 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
                 atomic_text(path.parent/(mode+'-probe.log'),output)
                 if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','thermo-data','cea-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','combustion','thermo-data','cea-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
                       adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
                       thermo_checks=int(re.search(r'thermo: (\d+) checks',thermo_log).group(1)),
+                      combustion_checks=int(re.search(r'combustion: (\d+) checks',combustion_log).group(1)),
                       cli_groups=cli_count,cli_skipped=0,
                       thermo_data_groups=int(re.search(r'Ran (\d+) tests',data_log).group(1)),
                       cea_reference_groups=int(re.search(r'Ran (\d+) tests',reference_log).group(1)),
                       binary_sha256=manifest['application']['sha256'])
-        print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
+        print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(combustion_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:
         report.update(status='FAIL',error=str(exc)); raise
     finally:

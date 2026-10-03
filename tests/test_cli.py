@@ -1,11 +1,16 @@
 """Black-box CLI contract tests; standard library only, no engine data."""
 import argparse
+import copy
 import json
 import math
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+from combustion_reference import compare_report
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -193,6 +198,56 @@ class CliTests(unittest.TestCase):
                 self.assertEqual(result.returncode, code, result.stderr)
                 self.assertEqual(result.stdout, '')
                 self.assertTrue(result.stderr.strip())
+
+    def test_combustion_matches_pinned_cea(self):
+        references = json.loads((ROOT / 'tests/reference/cea/manifest.json').read_text(encoding='utf-8'))
+        cases = {case['id']: case for case in references['cases']}
+        for mode, area, arguments, ref_id in [
+            ('tp', None, ('3000', '10000000', '3.4', '298.15', '298.15'), 'ch4_o2_tp'),
+            ('hp', None, ('10000000', '3.4', '298.15', '298.15'), 'ch4_o2_hp'),
+            ('frozen', 10, ('10000000', '3.4', '298.15', '298.15', '10', '0'), 'ch4_o2_rocket_frozen_chamber'),
+            ('frozen', 40, ('10000000', '3.4', '298.15', '298.15', '40', '0'), 'ch4_o2_rocket_frozen_chamber')]:
+            with self.subTest(mode=mode, area=area):
+                result = self.run_app('combustion', mode, *arguments)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stderr, '')
+                report = json.loads(result.stdout)
+                self.assertGreaterEqual(len(compare_report(report, cases[ref_id], mode, area)), 20)
+
+    def test_combustion_rejects_invalid_inputs_without_output(self):
+        for arguments, code in [
+            ((), 2), (('hp',), 2), (('liquid', '10000000', '3.4', '298.15', '298.15'), 2),
+            (('hp', 'nan', '3.4', '298.15', '298.15'), 2),
+            (('hp', '0x1p2', '3.4', '298.15', '298.15'), 2),
+            (('hp', '10000000', '-3.4', '298.15', '298.15'), 4),
+            (('hp', '10000000', '3.4', '90', '298.15'), 4),
+            (('tp', '999', '10000000', '3.4', '298.15', '298.15'), 4),
+            (('frozen', '10000000', '3.4', '298.15', '298.15', '40', '100000'), 4),
+            (('frozen', '10000000', '3.4', '298.15', '298.15', '0.5', '0'), 4)]:
+            with self.subTest(arguments=arguments):
+                result = self.run_app('combustion', *arguments)
+                self.assertEqual(result.returncode, code, result.stderr)
+                self.assertEqual(result.stdout, '')
+                self.assertTrue(result.stderr.strip())
+
+    def test_combustion_validator_rejects_false_success(self):
+        result = self.run_app('combustion', 'frozen', '10000000', '3.4', '298.15', '298.15', '40', '0')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        reference = next(case for case in json.loads((ROOT / 'tests/reference/cea/manifest.json').read_text(encoding='utf-8'))['cases'] if case['id'] == 'ch4_o2_rocket_frozen_chamber')
+        for defect in ('model', 'input', 'nonfinite', 'negative', 'energy', 'composition', 'freeze', 'ivac', 'residual'):
+            broken = copy.deepcopy(report)
+            if defect == 'model': broken['model'] = 'flight-engine'
+            if defect == 'input': broken['inputs']['pressure_pa'] = 1e6
+            if defect == 'nonfinite': broken['chamber']['temperature_k'] = float('nan')
+            if defect == 'negative': broken['chamber']['mole_fractions']['H2'] = -0.1
+            if defect == 'energy': broken['nozzle']['exit']['gas']['h_j_per_kg'] += 1000
+            if defect == 'composition': broken['nozzle']['exit']['gas']['mole_fractions']['H2'] += 0.01
+            if defect == 'freeze': broken['nozzle']['freeze_location'] = 'throat'
+            if defect == 'ivac': broken['nozzle']['vacuum_effective_velocity_m_per_s'] = 3435.41 / 9.80665
+            if defect == 'residual': broken['diagnostics']['element_relative_residual'][0] = 0.01
+            with self.subTest(defect=defect), self.assertRaises(ValueError):
+                compare_report(broken, reference, 'frozen', 40)
 
 
 if __name__ == "__main__":

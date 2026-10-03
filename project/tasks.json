@@ -1,20 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 77,
+  "revision": 84,
   "context": {
-    "phase": "Windows主线：C燃烧平衡与温变喷管",
+    "phase": "Windows主线：燃烧与冻结喷管验收，接续整机循环与改进研究",
     "evidence_cutoff": "2026-10-03",
     "next_tasks": [
-      "MOD-002",
       "MOD-003",
       "ANA-002"
     ],
     "facts": [
       "NASA9十物种真实数据与134状态软件对照已完成。",
-      "CEA v3.3.4四个气态CH4/O2参考算例已归档并复跑；它不是飞行发动机性能。",
-      "当前C尚未实现HP平衡与温变喷管；下一步优先完成守恒和同条件对照。",
-      "两型室压/混合比/面积比等缺证字段继续保留unknown。",
-      "Windows主线持续；PPT和报告暂不推进。"
+      "C17九物种TP/HP与燃烧室冻结温变喷管可运行，固定CEA同条件对照已通过；不是飞行发动机性能。",
+      "整机支路/轴功率与改进代价/敏感性仍待后续任务，真实型号缺证输入保持unknown。",
+      "Windows主线持续；本轮不运行WSL，PPT和报告暂不推进。"
     ]
   },
   "tasks": [
@@ -575,26 +573,37 @@
     {
       "id": "MOD-002",
       "title": "受限HP平衡与温变冻结喷管",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "MOD-001",
         "REF-001"
       ],
       "required_artifacts": [
-        "docs/thermo-nozzle-validation.md"
+        "docs/thermo-nozzle-validation.md",
+        "include/rocketperf/combustion.h",
+        "include/rocketperf/frozen_nozzle.h",
+        "src/thermo/equilibrium.c",
+        "src/nozzle/frozen.c",
+        "tests/test_combustion.c",
+        "tools/combustion_reference.py",
+        "results/validation/20261003_ch4_o2_frozen_v2/manifest.json"
       ],
       "acceptance": [
         "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
       ],
       "owner": "codex",
-      "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
-      "verification": null
+      "note": "验收完成：固定气态CH4/O2方法算例与C自有实现同条件通过；v2验证归档和文档已更新。此DONE不表示真实发动机性能或独立人员科学审查完成。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/MOD-002_90d5628706e1.json",
+        "sha256": "a550c0044cb87de8866036037649f7a120a126caf3c835f6735ed4a037179171"
+      }
     },
     {
       "id": "MOD-003",
       "title": "稳态循环与整机边界计算",
-      "status": "PLANNED",
+      "status": "READY",
       "priority": 2,
       "depends_on": [
         "MOD-002",
@@ -613,7 +622,7 @@
     {
       "id": "ANA-002",
       "title": "改进研究与结果复核",
-      "status": "PLANNED",
+      "status": "READY",
       "priority": 1,
       "depends_on": [
         "DATA-002",
@@ -2079,6 +2088,223 @@
         }
       },
       "hash": "6702f834c2e8bba71aa103b0232b599af12d4fb12b49b2cf47bfb900fb0dfbc6"
+    },
+    {
+      "seq": 95,
+      "at": "2026-10-03T15:21:51+00:00",
+      "task": "MOD-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
+      "previous_hash": "6702f834c2e8bba71aa103b0232b599af12d4fb12b49b2cf47bfb900fb0dfbc6",
+      "details": {
+        "contract_before": {
+          "id": "MOD-002",
+          "title": "受限HP平衡与温变冻结喷管",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-001",
+            "REF-001"
+          ],
+          "required_artifacts": [
+            "docs/thermo-nozzle-validation.md"
+          ],
+          "acceptance": [
+            "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
+          ],
+          "owner": "codex",
+          "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-002",
+          "title": "受限HP平衡与温变冻结喷管",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-001",
+            "REF-001"
+          ],
+          "required_artifacts": [
+            "docs/thermo-nozzle-validation.md",
+            "include/rocketperf/combustion.h",
+            "include/rocketperf/frozen_nozzle.h",
+            "src/thermo/equilibrium.c",
+            "src/nozzle/frozen.c",
+            "tests/test_combustion.c",
+            "tools/combustion_reference.py",
+            "results/validation/20261003_ch4_o2_frozen_v1/manifest.json"
+          ],
+          "acceptance": [
+            "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
+          ],
+          "owner": "codex",
+          "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
+          "verification": null
+        }
+      },
+      "hash": "bee354bbe1caea7008b97546862e6cb0af4c0f958336993bfad7aec4fb0234f6"
+    },
+    {
+      "seq": 96,
+      "at": "2026-10-03T15:21:52+00:00",
+      "task": "MOD-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "TP/HP与燃烧室冻结喷管已通过Windows配置测试和固定CEA对照；准备完整质量验收与本地提交",
+      "previous_hash": "bee354bbe1caea7008b97546862e6cb0af4c0f958336993bfad7aec4fb0234f6",
+      "details": {
+        "context_before": {
+          "phase": "Windows主线：C燃烧平衡与温变喷管",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "MOD-002",
+            "MOD-003",
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种真实数据与134状态软件对照已完成。",
+            "CEA v3.3.4四个气态CH4/O2参考算例已归档并复跑；它不是飞行发动机性能。",
+            "当前C尚未实现HP平衡与温变喷管；下一步优先完成守恒和同条件对照。",
+            "两型室压/混合比/面积比等缺证字段继续保留unknown。",
+            "Windows主线持续；PPT和报告暂不推进。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows主线：燃烧与冻结喷管验收，接续整机循环与改进研究",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "MOD-003",
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种真实数据与134状态软件对照已完成。",
+            "C17九物种TP/HP与燃烧室冻结温变喷管可运行，固定CEA同条件对照已通过；不是飞行发动机性能。",
+            "整机支路/轴功率与改进代价/敏感性仍待后续任务，真实型号缺证输入保持unknown。",
+            "Windows主线持续；本轮不运行WSL，PPT和报告暂不推进。"
+          ]
+        }
+      },
+      "hash": "ca890e15f331d72d919cd456914104d858affe2ba511c82896220cd886a1f272"
+    },
+    {
+      "seq": 97,
+      "at": "2026-10-03T15:33:19+00:00",
+      "task": "MOD-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "最终验收指向初始化修正后的v2结果；v1保留为早期实跑记录",
+      "previous_hash": "ca890e15f331d72d919cd456914104d858affe2ba511c82896220cd886a1f272",
+      "details": {
+        "contract_before": {
+          "id": "MOD-002",
+          "title": "受限HP平衡与温变冻结喷管",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-001",
+            "REF-001"
+          ],
+          "required_artifacts": [
+            "docs/thermo-nozzle-validation.md",
+            "include/rocketperf/combustion.h",
+            "include/rocketperf/frozen_nozzle.h",
+            "src/thermo/equilibrium.c",
+            "src/nozzle/frozen.c",
+            "tests/test_combustion.c",
+            "tools/combustion_reference.py",
+            "results/validation/20261003_ch4_o2_frozen_v1/manifest.json"
+          ],
+          "acceptance": [
+            "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
+          ],
+          "owner": "codex",
+          "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-002",
+          "title": "受限HP平衡与温变冻结喷管",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-001",
+            "REF-001"
+          ],
+          "required_artifacts": [
+            "docs/thermo-nozzle-validation.md",
+            "include/rocketperf/combustion.h",
+            "include/rocketperf/frozen_nozzle.h",
+            "src/thermo/equilibrium.c",
+            "src/nozzle/frozen.c",
+            "tests/test_combustion.c",
+            "tools/combustion_reference.py",
+            "results/validation/20261003_ch4_o2_frozen_v2/manifest.json"
+          ],
+          "acceptance": [
+            "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
+          ],
+          "owner": "codex",
+          "note": "最终验收指向初始化修正后的v2结果；v1保留为早期实跑记录",
+          "verification": null
+        }
+      },
+      "hash": "be80fde5b4964fc5472800f1ff4447ac45c6fe1d1af98d26341fd1606b4d0265"
+    },
+    {
+      "seq": 98,
+      "at": "2026-10-03T15:37:41+00:00",
+      "task": "MOD-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "Windows C17 TP/HP与燃烧室冻结温变喷管已实现；元素/焓/化学势/连续/能量/熵/声速残差，CEA固定参考、CMake CTest、GCC analyzer与失败契约均有新鲜证据。真实型号、液态入口、凝聚相、循环仍明确不在范围。",
+      "previous_hash": "be80fde5b4964fc5472800f1ff4447ac45c6fe1d1af98d26341fd1606b4d0265",
+      "hash": "73cdfad4e53a19257ee0f6bf1b4c671638db18d08b17b8d56f90dce5a568377d"
+    },
+    {
+      "seq": 99,
+      "at": "2026-10-03T15:37:43+00:00",
+      "task": "MOD-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "验收完成：固定气态CH4/O2方法算例与C自有实现同条件通过；v2验证归档和文档已更新。此DONE不表示真实发动机性能或独立人员科学审查完成。",
+      "previous_hash": "73cdfad4e53a19257ee0f6bf1b4c671638db18d08b17b8d56f90dce5a568377d",
+      "hash": "7ce607d53fa41ca037877041e21ac23ea56fe1b105cc12e0fe6a27dbb04408cb"
+    },
+    {
+      "seq": 100,
+      "at": "2026-10-03T15:37:43+00:00",
+      "task": "MOD-003",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "7ce607d53fa41ca037877041e21ac23ea56fe1b105cc12e0fe6a27dbb04408cb",
+      "hash": "b5ad057e1ea9a0130ab9a3114f4a2fd643b7a5cf98d28f97bb607f6d6cac2565"
+    },
+    {
+      "seq": 101,
+      "at": "2026-10-03T15:37:43+00:00",
+      "task": "ANA-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "b5ad057e1ea9a0130ab9a3114f4a2fd643b7a5cf98d28f97bb607f6d6cac2565",
+      "hash": "a69c50b295194b1f1a7a3d0b208b204f7abd4e6587c511020c43dd0bb09731b7"
     }
   ]
 }
