@@ -36,4 +36,4 @@ python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 
 课程节点：2026-10-16，周五第3—5节；展示≤10分钟、提问≤5分钟。最终交源码、发布版、报告和PPT。当前工程通过不等于课程研究已经完成。
 
-Git分支、HEAD和脏状态以doctor输出为准。所有提交仍在本地，未添加远端或推送。CMake本机路径已补测，远端CI/Linux结果以实际运行记录为准。
+待补工作和本次发现见[审查记录](docs/review.md)。MinGW运行库问题及WSL sanitizer命令见[环境说明](docs/environment.md)。分支、HEAD和工作树状态看doctor；未添加远端或推送。

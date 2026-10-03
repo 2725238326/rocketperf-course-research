@@ -87,6 +87,29 @@ class ResultContractTests(unittest.TestCase):
             pipeline.run_case(ROOT,self.case,run_id=run_id,no_build=True)
         self.assertEqual(read_json(ROOT/'results/local'/run_id/'run-manifest.json')['status'],'FAILED')
 
+    def test_study_snapshot_and_reject_bad_points(self):
+        folder=pipeline.run_case(ROOT,self.case,run_id='test_study_'+uuid.uuid4().hex[:12],no_build=True,study=True)
+        report=read_json(folder/'result.json')
+        record=read_json(folder/'run-manifest.json')
+        self.assertEqual(record['point_counts'],{'ok':19,'out_of_domain':9})
+        self.assertEqual(record['command'][1:3],['study','area-ratio-ambient'])
+        for failure in ('coordinate','number','status','count','grid'):
+            candidate=copy.deepcopy(report)
+            if failure=='coordinate': candidate['points'][0]['area_ratio']=2
+            if failure=='number': candidate['points'][0]['results']['thrust_n']=float('nan')
+            if failure=='status': candidate['points'][0]={'area_ratio':1,'ambient_pressure_pa':0,'status':'numeric_error','error':'failed'}
+            if failure=='count': candidate['points'].pop()
+            if failure=='grid': candidate['grid']['area_ratios'][0]=True
+            with self.subTest(failure=failure),self.assertRaises(ValueError):
+                pipeline.validate_study(candidate,self.input,pipeline.DEFAULT_RATIOS,pipeline.DEFAULT_PRESSURES)
+
+    def test_custom_grid_is_archived_and_invalid_grid_rejected(self):
+        folder=pipeline.run_case(ROOT,self.case,run_id='test_custom_'+uuid.uuid4().hex[:12],no_build=True,study=True,area_ratios='1,1.6875',ambient_pressures='0,200000')
+        record=read_json(folder/'run-manifest.json')
+        self.assertEqual(record['requested_grid'],{'area_ratios':[1,1.6875],'ambient_pressures_pa':[0,200000]})
+        for value in ('1,','nan','0x1p0',','.join(['1']*33)):
+            with self.subTest(value=value),self.assertRaises(ValueError): pipeline.grid_axis(value)
+
     def test_python_diagnostics_preserve_unicode(self):
         log=ROOT/'build/test-tmp'/('utf8_'+uuid.uuid4().hex+'.log')
         output=pipeline.execute([sys.executable,'-c',"print('中文日志')"],ROOT,log)

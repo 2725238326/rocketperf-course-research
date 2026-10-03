@@ -40,7 +40,7 @@ def frame(number,title,subtitle,height,body):
             +text(60,111,title,36,INK,700)+text(60,150,subtitle,20,MUTED)
             +f'<line x1="60" y1="183" x2="1620" y2="183" stroke="{LINE}"/>'
             +body.replace('url(#arrow)',f'url(#arrow-{number})')+f'<line x1="60" y1="{height-64}" x2="1620" y2="{height-64}" stroke="{LINE}"/>'
-            +text(60,height-30,"边界先行 · 输入可追溯 · 结论有验证",16,MUTED)
+            +text(60,height-30,"输入来源、计算条件与验证记录分别保留",16,MUTED)
             +text(1620,height-30,"SVG / Mermaid 可编辑源 · 由项目登记生成",15,MUTED,anchor="end")+'</g></svg>\n')
 
 
@@ -74,7 +74,7 @@ def components(modules):
     body+=arrow([(1020,489),(1220,489)],"数值策略",1120,477)
     body+=arrow([(460,489),(660,489)],"SI 值类型",560,477,True)
     body+=arrow([(460,535),(540,535),(540,614),(1400,614),(1400,562)],"虚线：公共值类型 / 状态契约依赖",958,603,True)
-    body+=text(100,665,"接口边界",20,GREEN,650)+text(250,665,"include/rocketperf：SI字段、只读输入、成功才写输出；核心不依赖文件、网络或界面。",19,MUTED)
+    body+=text(100,665,"接口边界",20,GREEN,650)+text(250,665,"include/rocketperf：SI字段、显式状态；单点失败不改结果，扫描检查各点；核心无I/O。",19,MUTED)
     body+=node(100,714,490,"工程工具与验证",["任务登记 / 构建测试 / 运行快照"],"tools · scripts · tests · project",h=122)
     body+=node(660,714,430,m['thermo']['name'],["NASA9 / HP平衡，实现与验证待完成"],"技术路线已定 · 尚未实现",state="planned",h=122)
     body+=node(1150,714,430,m['cycle']['name'],["控制体、支路、功率与损失"],"扩展计划，不冒充已实现",state="planned",h=122)
@@ -95,7 +95,7 @@ def workflow():
     body+=node(60,530,450,"单一状态来源",["project/tasks.json + 事件链"],"自动生成任务板和 worknow",h=144)
     body+=node(600,530,470,"质量与运行证据",["文档 / 边界 / 测试 / 哈希 / 失败语义"],"过期报告不能提交为当前验收",h=144)
     body+=node(1160,530,460,"阻塞与交接",["BLOCKED：写清原因与解除条件","解除后重新检查依赖"],"移交负责人留事件，不直接改 Markdown",h=144)
-    return frame("03","执行闭环：任务、质量与 Git 相互校验","状态变更通过命令完成；产物、验证记录和历史事件共同定义完成，不靠勾选框。",770,body)
+    return frame("03","任务流程：执行、检查与本地提交","状态变更通过命令完成；测试记录证明软件检查，研究结论仍需按来源和模型审核。",770,body)
 
 
 def expected_architecture(root):
@@ -120,7 +120,7 @@ def expected_architecture(root):
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#15263c;font-family:"Microsoft YaHei",Arial,sans-serif}header{padding:30px 4vw 20px;background:white;border-bottom:1px solid #ccd7e3}header p{color:#52667c;max-width:900px;line-height:1.65}h1{font-size:29px;margin:0}nav{display:flex;gap:10px;flex-wrap:wrap}button{padding:11px 22px;border:1px solid #bdcad8;border-radius:5px;color:#15263c;background:white;font-size:16px;cursor:pointer}button[aria-selected=true]{background:#2261bd;color:white;border-color:#2261bd}main{max-width:1760px;margin:auto;padding:24px}.view{display:none;background:#f6f8fb;border:1px solid #dce3eb}.view.selected{display:block}svg{width:100%;height:auto;display:block}aside{padding:28px 20px;background:white;margin-top:24px}h2{font-size:22px}table{border-collapse:collapse;width:100%;line-height:1.7;font-size:15px}td,th{padding:13px;text-align:left;border-bottom:1px solid #dce3eb;vertical-align:top}th{color:#52667c}footer{padding:22px 4vw;color:#52667c;font-size:14px}@media print{header nav{display:none}.view{display:block;break-after:page}aside{break-before:page}main{padding:0}}@media(max-width:700px){main{padding:8px}aside{overflow:auto}header{padding:20px}h1{font-size:24px}}
 </style>
-<header><h1>Rocketperf · 项目架构</h1><p>按业务、计算和执行三个视角理解系统。图中明确区分当前教学基线与未来研究模块；任务实时状态另由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="business" aria-selected="true">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 执行闭环</button></nav></header>
+<header><h1>Rocketperf · 项目架构</h1><p>按业务、计算和执行三个视角理解系统。图中明确区分当前教学基线与未来研究模块；任务实时状态另由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="business" aria-selected="true">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 任务流程</button></nav></header>
 <main>'''+sections+'''<aside><h2>模块维护契约</h2><table><thead><tr><th>模块</th><th>维护职责</th><th>边界</th><th>实现状态</th></tr></thead><tbody>'''+contracts+'''</tbody></table></aside></main><footer>离线可用，无CDN或网络请求。生成源：project/modules.json + tools/render_architecture.py；SVG与Mermaid源同目录保留。</footer>
 <script>document.querySelectorAll('button[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('button[data-view]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('.view').forEach(s=>s.classList.toggle('selected',s.id===b.dataset.view));}));</script></html>
 '''

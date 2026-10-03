@@ -191,12 +191,52 @@ static void test_invalid_inputs(void)
     CHECK(rp_nozzle_solve_ideal(&input, NULL, &result, NULL) == RP_NUMERIC_ERROR);
 }
 
+static void test_area_ambient_scan(void)
+{
+    const double ratios[] = {1.0, 1.6875};
+    const double pressures[] = {0.0, 100000.0, 200000.0};
+    RpNozzleInput input = reference_input();
+    RpNozzleStudyGrid grid = {ratios, 2U, pressures, 3U};
+    RpNozzleStudyPoint points[6] = {{0}};
+    RpError error = {0};
+    size_t count = 0U;
+    CHECK(rp_nozzle_scan_area_ratio_ambient(&input, &grid, points, 6U, &count, &error) == RP_OK);
+    CHECK(count == 6U);
+    CHECK(points[0].status == RP_OK && points[1].status == RP_OK);
+    CHECK(points[3].status == RP_OK && points[4].status == RP_OK);
+    CHECK(points[5].status == RP_OUT_OF_DOMAIN);
+    CHECK(points[3].result.thrust_n > points[4].result.thrust_n);
+    count = 42U;
+    CHECK(rp_nozzle_scan_area_ratio_ambient(NULL, &grid, points, 6U, &count, &error) == RP_INVALID_ARGUMENT);
+    CHECK(count == 0U);
+    count = 42U;
+    CHECK(rp_nozzle_scan_area_ratio_ambient(&input, NULL, points, 6U, &count, &error) == RP_INVALID_ARGUMENT);
+    CHECK(count == 0U);
+    CHECK(rp_nozzle_scan_area_ratio_ambient(&input, &grid, points, 6U, NULL, &error) == RP_INVALID_ARGUMENT);
+    {
+        const double invalid[] = {0.5};
+        RpNozzleStudyGrid bad = {invalid, 1U, pressures, 3U};
+        CHECK(rp_nozzle_scan_area_ratio_ambient(&input, &bad, points, 6U, &count, &error) == RP_OUT_OF_DOMAIN);
+        CHECK(count == 0U);
+    }
+    {
+        RpNozzleStudyGrid bad = grid;
+        input.gamma = 1.0;
+        CHECK(rp_nozzle_scan_area_ratio_ambient(&input, &bad, points, 6U, &count, &error) == RP_OUT_OF_DOMAIN);
+        CHECK(count == 0U);
+        input = reference_input();
+        CHECK(rp_nozzle_scan_area_ratio_ambient(&input, &bad, points, 5U, &count, &error) == RP_INVALID_ARGUMENT);
+        CHECK(count == 0U);
+    }
+}
+
 int main(void)
 {
     test_root();
     test_analytic_reference();
     test_scaling_and_balance();
     test_invalid_inputs();
+    test_area_ambient_scan();
     (void)printf("core: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

@@ -1,0 +1,1 @@
+核实 GCC 14.2.0 官方源码 libsanitizer/configure.tgt 中 x86_64-w64-mingw32 是否支持 libasan/libubsan。优先 GCC 官方 git 镜像、LLVM 官方文档和 Ubuntu 官方包信息。明确区分 GCC MinGW 目标、Clang Windows ASan 和 Linux GCC ASan/UBSan。指出 -fsanitize 选项被接受是否意味着目标运行库可用，不要推荐复制其他 ABI 的库。给出原文短片段和精确源码 URL，不超过700字，不讨论火箭资料。

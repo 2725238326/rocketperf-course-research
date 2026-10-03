@@ -1,9 +1,131 @@
 #include "case_file.h"
+#include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
 
+#include <ctype.h>
+#include <errno.h>
 #include <locale.h>
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+#define RP_STUDY_GRID_LIMIT 32U
+
+static int parse_decimal_token(const char *start, const char **next, double *output)
+{
+    const char *cursor = start;
+    unsigned int digits = 0U;
+    char *end;
+    double value;
+    if (*cursor == '+' || *cursor == '-') { ++cursor; }
+    while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++digits; }
+    if (*cursor == '.') {
+        ++cursor;
+        while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++digits; }
+    }
+    if (digits == 0U) { return 0; }
+    if (*cursor == 'e' || *cursor == 'E') {
+        unsigned int exponent_digits = 0U;
+        ++cursor;
+        if (*cursor == '+' || *cursor == '-') { ++cursor; }
+        while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++exponent_digits; }
+        if (exponent_digits == 0U) { return 0; }
+    }
+    if (*cursor != '\0' && *cursor != ',' && !isspace((unsigned char)*cursor)) { return 0; }
+    errno = 0;
+    value = strtod(start, &end);
+    if (errno == ERANGE || end != cursor || !rp_isfinite(value)) { return 0; }
+    *next = cursor;
+    *output = value;
+    return 1;
+}
+
+static int parse_grid(const char *text, double *values, size_t *count, int pressure)
+{
+    const char *cursor = text;
+    size_t used = 0U;
+    if (text == NULL || values == NULL || count == NULL || *text == '\0') { return 0; }
+    while (*cursor != '\0') {
+        const char *end;
+        double value;
+        while (isspace((unsigned char)*cursor)) { ++cursor; }
+        if (*cursor == '\0' || *cursor == ',') { return 0; }
+        if (!parse_decimal_token(cursor, &end, &value)) { return 0; }
+        cursor = end;
+        while (isspace((unsigned char)*cursor)) { ++cursor; }
+        if (pressure ? value < 0.0 : value < 1.0 || value > 1e4) { return 0; }
+        if (used >= RP_STUDY_GRID_LIMIT) { return 0; }
+        values[used++] = value;
+        if (*cursor == '\0') { break; }
+        if (*cursor != ',') { return 0; }
+        ++cursor;
+        if (*cursor == '\0') { return 0; }
+    }
+    *count = used;
+    return used != 0U;
+}
+
+static int study_main(const char *case_path, int option_count, char **options)
+{
+    static const double default_ratios[] = {1.0, 1.25, 1.6875, 2.0, 4.0, 8.0, 16.0};
+    static const double default_pressures[] = {0.0, 25000.0, 50000.0, 100000.0};
+    double ratios[RP_STUDY_GRID_LIMIT];
+    double pressures[RP_STUDY_GRID_LIMIT];
+    RpNozzleStudyPoint points[RP_STUDY_GRID_LIMIT * RP_STUDY_GRID_LIMIT];
+    RpNozzleStudyGrid grid;
+    RpCase study;
+    RpError error = {0};
+    size_t ratio_count = sizeof(default_ratios) / sizeof(default_ratios[0]);
+    size_t pressure_count = sizeof(default_pressures) / sizeof(default_pressures[0]);
+    size_t point_count = 0U;
+    RpStatus status;
+    int seen_ratios = 0;
+    int seen_pressures = 0;
+    memcpy(ratios, default_ratios, sizeof(default_ratios));
+    memcpy(pressures, default_pressures, sizeof(default_pressures));
+    for (int i = 0; i < option_count; ++i) {
+        if (strcmp(options[i], "--area-ratios") == 0 && i + 1 < option_count) {
+            if (seen_ratios++ || !parse_grid(options[++i], ratios, &ratio_count, 0)) {
+                (void)fputs("Usage error: --area-ratios expects comma-separated values in 1...1e4.\n", stderr);
+                return 2;
+            }
+        } else if (strcmp(options[i], "--ambient-pressures") == 0 && i + 1 < option_count) {
+            if (seen_pressures++ || !parse_grid(options[++i], pressures, &pressure_count, 1)) {
+                (void)fputs("Usage error: --ambient-pressures expects comma-separated finite non-negative Pa values.\n", stderr);
+                return 2;
+            }
+        } else {
+            (void)fputs("Usage: rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n", stderr);
+            return 2;
+        }
+    }
+    status = rp_case_load(case_path, &study, &error);
+    if (status == RP_OK) {
+        grid.area_ratios = ratios;
+        grid.area_ratio_count = ratio_count;
+        grid.ambient_pressures_pa = pressures;
+        grid.ambient_pressure_count = pressure_count;
+        status = rp_nozzle_scan_area_ratio_ambient(&study.input, &grid, points,
+                                                   sizeof(points) / sizeof(points[0]),
+                                                   &point_count, &error);
+    }
+    if (status == RP_OK) { status = rp_case_write_study_json(stdout, &study, &grid, points, point_count, &error); }
+    if (status == RP_OK && fflush(stdout) != 0) {
+        status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush study JSON report.");
+    }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
+    }
+    for (size_t i = 0U; i < point_count; ++i) {
+        if (points[i].status != RP_OK && points[i].status != RP_OUT_OF_DOMAIN) {
+            (void)fputs("Study calculation failed; inspect per-point diagnostics in stdout.\n", stderr);
+            return 4;
+        }
+    }
+    return 0;
+}
 
 static int cli_main(int argc, char **argv)
 {
@@ -17,8 +139,11 @@ static int cli_main(int argc, char **argv)
         return 0;
     }
     if (argc == 2 && strcmp(argv[1], "--help") == 0) {
-        (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf --version\nThe v1 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
+        (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
+    }
+    if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
+        return study_main(argv[3], argc - 4, &argv[4]);
     }
     if (argc != 3 || strcmp(argv[1], "run") != 0) {
         (void)fputs("Usage: rocketperf run CASE.ini (or --help / --version)\n", stderr);

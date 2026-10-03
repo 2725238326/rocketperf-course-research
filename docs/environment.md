@@ -1,6 +1,6 @@
 # 环境与运行
 
-本机验证：Windows、Python 3.13、MinGW GCC 14.2.0、PowerShell 7.6.5、Git 2.46.2。另已在项目临时目录安装CMake 3.31.10和Ninja 1.13.2，完成Release构建与CTest。Linux/远端CI仍需真实运行。
+本机使用Windows、Python 3.13、MinGW GCC 14.2.0、PowerShell 7.6.5和Git 2.46.2。CMake 3.31.10/Ninja 1.13.2在项目build目录。另有Ubuntu 24.04 WSL，已安装GCC13.3并运行ASan/UBSan；远端CI尚未执行。
 
 ## 常用命令
 
@@ -11,6 +11,7 @@ python tools/project.py doctor
 python tools/project.py check
 python tools/quality.py
 python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
+python tools/pipeline.py run --study area-ratio-ambient --case cases/research/s1_area_ratio_ambient.ini
 ```
 
 只构建或单配置测试：
@@ -30,6 +31,29 @@ GCC命令可用--compiler指定。C运行时无Python物理求解依赖；Python
 - 运行：results/local/RunId/。--no-build要求当前已有新鲜的已测试构建，否则失败；默认缺证据时先构建测试。
 
 旧工程的v1运行记录保留，现行运行/构建manifest为v2。不要把旧报告文件存在等同当前通过。
+
+## libasan / libubsan
+
+当前MinGW GCC的目标是`x86_64-w64-mingw32`。GCC14.2.0的`libsanitizer/configure.tgt`未支持该目标，因此链接找不到这两个运行库不是简单的PATH问题。此前“安装包漏带库”的解释不准确；换一份同目标MinGW包也不能保证解决。不能复制Linux库或LLVM的运行库给该GCC链接，核验原文见[审查记录](review.md)。
+
+项目采用Windows正常构建、Linux sanitizer测试两条路径。Windows项目根目录可执行：
+
+```powershell
+wsl -d Ubuntu --cd /mnt/e/Work/火发原理 --exec python3 tools/pipeline.py test --configuration Debug --sanitize
+```
+
+插桩启用`address,undefined`，关闭错误后继续运行的行为，保留帧指针。除正常测试外，还运行两个故意缺陷：ASan应检出堆越界，UBSan应检出有符号整数溢出；任一个未检出，本次测试失败。诊断和实际命令保存在`build/artifacts/debug-sanitized/<build-id>/`，当前指针在`build/debug-sanitized/latest.json`。
+
+本机WSL网络启动失败，但文件系统和程序可用。本次在Windows下载Ubuntu官方快照的21个包，按WSL已有APT元数据的SHA256校验后安装：新增GCC和开发/运行库，没有升级或删除已有包，没有改Windows MinGW、PATH或WSL网络设置。脚本可复核：
+
+```powershell
+pwsh -NoProfile -File tools/wsl_gcc.ps1
+# 只有需要向既有Ubuntu发行版安装时才加 -Install
+```
+
+包清单在`build/tooling/wsl-gcc-packages/packages.json`。快照日期用于匹配本机已有APT版本，不代表推荐其他机器安装旧版本。有正常网络的Ubuntu使用其正常软件源安装GCC开发工具即可。
+
+Linux测试不能替代Windows程序测试，也不能证明所有内存问题都不存在。原生Windows sanitizer若有需要，另评估支持该目标的工具链；本轮未安装或验证Clang/MSVC。
 
 ## CMake本机复现（Windows）
 

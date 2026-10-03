@@ -10,5 +10,6 @@
 | quality.py | 统一质量入口及完整PASS/FAIL证据 |
 | render_architecture.py | 有布局设计的SVG、Mermaid、离线HTML三视图 |
 | migrate_governance.py | 一次性迁移旧手工任务板；已有任务登记时拒绝再次运行 |
+| wsl_gcc.ps1 | 为既有Ubuntu WSL获取经SHA256核验的GCC依赖；显式-Install才安装，不修改网络配置 |
 
 PowerShell脚本是兼容入口，不再重复实现另一份构建/执行逻辑。工具输出和文档不包含Grok凭据；调研HTTP脚本仍独立在`调研/scripts/`。

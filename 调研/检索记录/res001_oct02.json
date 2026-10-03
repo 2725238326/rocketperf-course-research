@@ -1,0 +1,2183 @@
+{
+  "topic": "res001_oct02",
+  "retrieved_at": "2026-10-02T14:35:09.2558558+08:00",
+  "cutoff": "2026-10-02",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "任务RES-001，证据截止2026-10-01。本轮只调查影响动力性能模型的构型与参数缺口，不泛泛综述。\n已有2026-09-29存档：蓝箭朱雀三号遥一通稿明确9台TQ-12A及1台TQ-15A，当前产品页为12B/15B，遥二通稿没有列后缀；长征十号乙官方明确一级液氧煤油、二级液氧甲烷，一级采访称7台液发100系列，集团文章称二级140吨级液氧甲烷发动机。\n请检索可直接读取的一手资料，回答：是否有明确证据把朱雀三号遥二与某发动机子型对应？是否有制造商/研制者材料明确长十乙二级发动机型号、数量、循环？这些具体飞行版本的室压、面积比、O/F定义和比冲工况是否有可靠公开数据？\n最多围绕3个问题给出高价值来源，逐项列题名、日期、URL、准确短引文、对象/批次、证据支持范围。已有背景只作线索，需要原文核查；同系列或百科不能自动补足真实装机。没有找到时说明检查了哪些入口及仍未知的字段，不猜数字。\n",
+  "search_calls": [
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 遥二 发动机 TQ-12 OR TQ-15 OR 蓝箭",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 二级 发动机 型号 OR 数量 OR 循环 OR 液氧甲烷",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"朱雀三号\" (遥二 OR \"第二次\" OR Yao-2) (TQ-12A OR TQ-12B OR TQ-15A OR TQ-15B)",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "LandSpace Zhuque-3 second flight OR Yao-2 engine TQ-12B OR TQ-15B",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 朱雀三号遥二 官方 OR 通稿 OR 新闻稿 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-219 长征十号乙 OR \"140吨\" 液氧甲烷 二级 官方 OR 航天科技集团 OR 六院",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+          },
+          {
+            "type": "url",
+            "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250518Q045PA00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+          },
+          {
+            "type": "url",
+            "url": "https://he.xilu.com/mi/1000010001259910_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://kan.china.com/article/5763806_3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/LandSpace"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/96156"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Zhuque-3"
+          },
+          {
+            "type": "url",
+            "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71563"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/58698"
+          },
+          {
+            "type": "url",
+            "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sohu.com/a/1061059172_121948416"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSpaceflight/status/1733356076152795234"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/99624"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+          },
+          {
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+          },
+          {
+            "type": "url",
+            "url": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=66"
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+      }
+    },
+    {
+      "id": "ws_29f64279-3797-91cf-95ce-7fb65f9a2c6e_call-2216d81d-53cd-4306-ab10-b2c61a8c7797-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=64"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**结论摘要（证据截止2026-10-01）：** 朱雀三号遥二（2026-08-19飞行）无蓝箭航天官方通稿将发动机明确对应至TQ-12B/TQ-15B子型；官方遥一及地面试车材料锁定66.1 m构型为9台天鹊-12A + 1台天鹊-15A，产品页描述的是目标76.6 m/12B/15B状态。长征十号乙官方（CALT）仅写芯二级液氧甲烷，未给型号/数量/循环；研制方六院材料明确140吨级开式（燃气发生器）液氧甲烷发动机，但未在火箭官方页直接绑定为“乙二级1台某型”。飞行版本室压、面积比（除媒体转述遥二二级喷管扩张比变化）、O/F精确定义及比冲工况（真空/海平面、混合物基准）均无可靠一手公开数据。以下按三问题列高价值一手或近一手来源，并说明检查入口与未知字段。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/api/rest_v1/page/html/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.china-in-space.com/p/landspace-recovers-chinas-second",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.china-in-space.com/p/landspace-recovers-chinas-second"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20250518Q045PA00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20250518Q045PA00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ckhq.net/html/344240a83f6058910901326adcb6a17f.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://he.xilu.com/mi/1000010001259910_3.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://he.xilu.com/mi/1000010001259910_3.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://kan.china.com/article/5763806_3.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://kan.china.com/article/5763806_3.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/LandSpace",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/LandSpace"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://spacenews.com/chinas-landspace-recovers-booster-with-second-orbital-launch-of-zhuque-3-rocket/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879923687_1d5ae17e706801dns6.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879996051_1d5af3293068018xwc.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.douyin.com/video/7660821554447568155?source=Baiduspider"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879849861_1d5acf78506801jp50.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.taibo.cn/p/96156",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.taibo.cn/p/96156"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879849861_1d5acf78506801jnga.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/YF-219",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/YF-219"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://x.com/CNSAWatcher/status/1737020443079454745",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://x.com/CNSAWatcher/status/1737020443079454745"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/Zhuque-3",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/Zhuque-3"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://spaceflightnow.com/2026/08/19/landspace-becomes-first-commercial-chinese-company-to-land-an-orbital-class-booster/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nbd.com.cn/articles/2026-08-19/4546117.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://finance.people.com.cn/n1/2025/0513/c1004-40479042.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.chinaerospace.com/article/71563",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.chinaerospace.com/article/71563"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://cn.chinadaily.com.cn/a/202505/14/WS6823d430a310205377032f80.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.taibo.cn/p/58698",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.taibo.cn/p/58698"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://tech.gmw.cn/2025-05/14/content_38024212.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://tech.gmw.cn/2025-05/14/content_38024212.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20240618A0AJ3D00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879777295_1d5abdc0f06801hrnq.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.hangyan.co/charts/3780795018101393310",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.hangyan.co/charts/3780795018101393310"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://finance.people.com.cn/BIG5/n1/2025/0514/c1004-40479295.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-tw/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sohu.com/a/1061059172_121948416",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sohu.com/a/1061059172_121948416"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.ifeng.com/c/8ue0kdgtqEf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.ifeng.com/c/8ue0kdgtqEf"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=66",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=66"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m-robo.datayes.com/feed/detail?id=571163",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m-robo.datayes.com/feed/detail?id=571163"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://x.com/CNSpaceflight/status/1733356076152795234",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://x.com/CNSpaceflight/status/1733356076152795234"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7880069127_1d5b05007068019zg6.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/w/index.php?title=%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD&oldid=90741100"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.baike.com/wikiid/3859078077634926164",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.baike.com/wikiid/3859078077634926164"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879996057_1d5af329906801yrmm.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.dotdotnews.com/a/202607/10/AP6a50c801e4b04b6c5d32ff17.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.taibo.cn/p/99624",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.taibo.cn/p/99624"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879849088_1d5acf48006801lc7a.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nasaspaceflight.com/2026/08/landspaces-zhuque-3-topples/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ezhejiang.gov.cn/2026-08/19/c_1206742.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.163.com/dy/article/L4MBC02P0556KLVE.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n482/n498/c2579124/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.unoosa.org/documents/pdf/copuos/stsc/2026/List_of_TP/Wednesday11/AM/PDF_Slides_China_Cai_Item_11.pdf"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=64",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=64"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/ZfuCHCNk7aJH4lpRl7uYUw"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.youtube.com/watch?v=sJFrs3b0aMY",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.youtube.com/watch?v=sJFrs3b0aMY"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://tvd.im/space/6017-landspace-zhuque-3.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://tvd.im/space/6017-landspace-zhuque-3.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.nasaspaceflight.com/2026/08/zhuque-3-second-flight-successful-landing/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2018089/n2018151/c4336249/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/product.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/product.html"
+            }
+          ]
+        }
+      ],
+      "id": "msg_29f64279-3797-91cf-95ce-7fb65f9a2c6e",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 143306,
+    "input_tokens_details": {
+      "cached_tokens": 84992
+    },
+    "output_tokens": 4481,
+    "output_tokens_details": {
+      "reasoning_tokens": 3859
+    },
+    "total_tokens": 147787,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 11,
+    "cost_in_usd_ticks": 1182434000,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 11,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 56886,
+      "output_tokens": 1248
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

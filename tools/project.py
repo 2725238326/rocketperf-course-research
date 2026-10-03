@@ -242,6 +242,29 @@ def amend_task(root,tid,actor,note,**changes):
         atomic_json(root/'project/tasks.json',state);render_views(root,state)
 
 
+def amend_context(root,tid,actor,note,**changes):
+    if not actor.strip() or not note.strip(): raise ValueError('Actor and reason required')
+    with lock(root):
+        state=read_json(root/'project/tasks.json')
+        problems=validate_registry(root,state)
+        if problems: raise ValueError('; '.join(problems))
+        task=next((t for t in state['tasks'] if t['id']==tid),None)
+        if task is None or task['status']!='ACTIVE' or task['owner']!=actor: raise ValueError('Context edit requires an active task owned by the actor')
+        before=copy.deepcopy(state['context'])
+        candidate=copy.deepcopy(before)
+        for field,value in changes.items():
+            if field not in {'phase','facts','next_tasks','evidence_cutoff'}: raise ValueError('Unknown context field')
+            if value is not None: candidate[field]=value
+        mapping={t['id']:t for t in state['tasks']}
+        if not isinstance(candidate['phase'],str) or not candidate['phase'].strip(): raise ValueError('Nonempty phase required')
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}',candidate['evidence_cutoff']): raise ValueError('Cutoff requires ISO date')
+        if not isinstance(candidate['facts'],list) or any(not isinstance(x,str) or not x.strip() for x in candidate['facts']): raise ValueError('Nonempty factual statements required')
+        if not isinstance(candidate['next_tasks'],list) or any(tid not in mapping or mapping[tid]['status'] in {'DONE','CANCELLED'} for tid in candidate['next_tasks']): raise ValueError('Next tasks must reference unfinished tasks')
+        state['context']=candidate
+        event_for(state,task,task['status'],actor,note,{'context_before':before,'context_after':candidate})
+        atomic_json(root/'project/tasks.json',state);render_views(root,state)
+
+
 def expected_views(state):
     tasks=state["tasks"]
     def cell(text): return str(text).replace("|","／").replace("\n"," ")
@@ -263,7 +286,9 @@ def expected_views(state):
           "", "## 正在执行", ""]
     head += [f"- **{t['id']} {t['title']}** · {t['status']} · 负责人：{t['owner']}\n  {t['note']}" for t in current] or ["当前无已领取任务。"]
     head += ["", "## 可领取任务", ""]+[f"- {t['id']}：{t['title']}（P{t['priority']}）" for t in ready]
-    head += ["", "建议接续顺序："+" → ".join(state["context"]["next_tasks"])+"。", "", "## 事实与边界", ""]
+    pending={t['id'] for t in tasks if t['status'] not in {'DONE','CANCELLED'}}
+    next_tasks=[tid for tid in state['context']['next_tasks'] if tid in pending]
+    head += ["", "建议接续顺序："+(" → ".join(next_tasks) if next_tasks else "按可领取任务和依赖推进")+"。", "", "## 事实与边界", ""]
     head += ["- "+x for x in state["context"]["facts"]]
     head += [f"- 已有在线证据截止：{state['context']['evidence_cutoff']}；文档/代码更新不自动刷新在线事实。",
              "- Git和环境实况用 `python tools/project.py doctor` 查看，不把易过时的提交状态复制到多份文档。",
@@ -443,6 +468,7 @@ def main():
     task=sub.add_parser("task"); task.add_argument("action",choices=["start","submit","complete","block","unblock","reopen","cancel","handoff"]); task.add_argument("id"); task.add_argument("--actor",required=True); task.add_argument("--note",required=True); task.add_argument("--evidence"); task.add_argument("--to")
     create=sub.add_parser("add"); create.add_argument("id"); create.add_argument("--title",required=True); create.add_argument("--actor",required=True); create.add_argument("--depends",action="append",default=[]); create.add_argument("--artifact",action="append",required=True); create.add_argument("--acceptance",action="append",required=True); create.add_argument("--priority",type=int,default=1)
     amend=sub.add_parser('amend');amend.add_argument('id');amend.add_argument('--actor',required=True);amend.add_argument('--note',required=True);amend.add_argument('--title');amend.add_argument('--depends',action='append');amend.add_argument('--artifact',action='append');amend.add_argument('--acceptance',action='append');amend.add_argument('--priority',type=int)
+    context=sub.add_parser('context');context.add_argument('--task',required=True);context.add_argument('--actor',required=True);context.add_argument('--note',required=True);context.add_argument('--phase');context.add_argument('--evidence-cutoff');context.add_argument('--next',action='append');context.add_argument('--fact',action='append')
     args=parser.parse_args(); root=args.root.resolve()
     if args.command=="render":
         render_views(root); print("Rendered worknow.md and docs/tasks.md from task registry")
@@ -461,6 +487,9 @@ def main():
     elif args.command=='amend':
         amend_task(root,args.id,args.actor,args.note,title=args.title,depends_on=args.depends,required_artifacts=args.artifact,acceptance=args.acceptance,priority=args.priority)
         print('Task contract amended with before/after history')
+    elif args.command=='context':
+        amend_context(root,args.task,args.actor,args.note,phase=args.phase,evidence_cutoff=args.evidence_cutoff,next_tasks=args.next,facts=args.fact)
+        print('Work context amended with before/after history')
     else:
         add_task(root,args.id,args.title,args.actor,args.depends,args.artifact,args.acceptance,args.priority)
         print("Task added with dependencies and acceptance contract")

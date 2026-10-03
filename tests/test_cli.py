@@ -117,6 +117,54 @@ class CliTests(unittest.TestCase):
         self.assertEqual(missing.returncode, 3)
         self.assertEqual(missing.stdout, "")
 
+    def test_area_ambient_study_scan_reports_domain_points(self):
+        result = self.run_app("study", "area-ratio-ambient", self.case(self.base),
+                              "--area-ratios", "1,1.6875",
+                              "--ambient-pressures", "0,100000,200000")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stderr, "")
+        report = json.loads(result.stdout)
+        self.assertEqual(set(report), {"schema_version", "program_version", "study", "base_inputs",
+                                       "grid", "points", "limitations"})
+        self.assertEqual(report["study"]["id"], "S1_area_ratio_ambient")
+        self.assertEqual(report["grid"]["area_ratios"], [1.0, 1.6875])
+        self.assertEqual(report["grid"]["ambient_pressures_pa"], [0.0, 100000.0, 200000.0])
+        self.assertEqual(len(report["points"]), 6)
+        self.assertEqual([(p["area_ratio"], p["ambient_pressure_pa"]) for p in report["points"]],
+                         [(1.0, 0.0), (1.0, 100000.0), (1.0, 200000.0),
+                          (1.6875, 0.0), (1.6875, 100000.0), (1.6875, 200000.0)])
+        self.assertEqual(report["points"][0]["status"], "ok")
+        self.assertEqual(report["points"][4]["status"], "ok")
+        self.assertEqual(report["points"][5]["status"], "out_of_domain")
+        self.assertEqual(set(report["points"][0]), {"area_ratio", "ambient_pressure_pa", "status", "results", "diagnostics"})
+        self.assertEqual(set(report["points"][5]), {"area_ratio", "ambient_pressure_pa", "status", "error"})
+        self.assertGreater(report["points"][3]["results"]["thrust_n"],
+                           report["points"][4]["results"]["thrust_n"])
+        self.assertIn("research scenario inputs", " ".join(report["limitations"]))
+
+    def test_area_ambient_study_grid_option_validation(self):
+        for options in (("--area-ratios", "0.5"), ("--area-ratios", "1,"),
+                        ("--area-ratios", "1, "), ("--area-ratios", "1,,2"),
+                        ("--area-ratios", ",".join(["1"] * 33)),
+                        ("--area-ratios", "1", "--area-ratios", "2"),
+                        ("--ambient-pressures", "0", "--ambient-pressures", "1"),
+                        ("--area-ratios", "0x1p0"),
+                        ("--ambient-pressures", "nan"),
+                        ("--unknown", "1")):
+            with self.subTest(options=options):
+                result = self.run_app("study", "area-ratio-ambient", self.case(self.base), *options)
+                self.assertEqual(result.returncode, 2)
+                self.assertEqual(result.stdout, "")
+                self.assertTrue(result.stderr.strip())
+
+    def test_numeric_failure_is_not_a_successful_study(self):
+        path=self.case(self.base.replace("stagnation_temperature_k=300", "stagnation_temperature_k=1e308"))
+        result=self.run_app("study", "area-ratio-ambient", path)
+        self.assertEqual(result.returncode,4,result.stderr)
+        report=json.loads(result.stdout)
+        self.assertTrue(any(p['status']=='numeric_error' for p in report['points']))
+        self.assertTrue(result.stderr.strip())
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

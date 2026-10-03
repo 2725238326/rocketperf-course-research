@@ -1,6 +1,6 @@
 # 工程治理：任务、文档、Git与目录
 
-本轮改造将“约定”落实为可执行检查。机械检查仍不替代科学判断、真实参数核验或独立人员审查。
+任务通过命令维护；软件检查不代替参数原文复核、模型验证或独立人员审查。
 
 ## 1. 唯一来源与派生视图
 
@@ -52,19 +52,21 @@ unblock回到READY或PLANNED，不自动开工。REVIEW重开回ACTIVE；DONE重
 
 修改任务契约用`amend ID --actor ... --note ...`，再传需要替换的title/depends/artifact/acceptance/priority；重复列表参数表示完整替换该列表。before/after进入事件链。REVIEW/DONE契约被冻结，必须先重开，不能在验收后悄悄降低标准。
 
+工作面背景用`context --task ACTIVE-ID --actor OWNER --note ... --phase ... --evidence-cutoff YYYY-MM-DD --next ID --fact ...`修改。next/fact可重复，完整替换相应列表；修改前后记录在活动任务的事件中。next不能指向已完成任务。证据截止据实际核验填写，不随文档日期自动更新。
+
 ## 3. 质量入口与证明范围
 
 `python tools/quality.py`顺序执行：
 
 1. 状态/事件链、派生文档/架构漂移、文档链接、目录归属、秘密模式、源码依赖和原始证据哈希。
 2. 治理行为测试：非法流转、循环依赖、WIP、负责人、锁、证据缺失/过期、状态篡改等。
-3. GCC Debug核心和CLI测试。
-4. GCC Release核心和CLI测试。
+3. GCC Debug核心、输出接口和CLI测试。
+4. GCC Release核心、输出接口和CLI测试。
 5. 运行管理测试：协议、输入对应、失败/超时/启动错误、旧通过状态、重复RunId和快照完整性。
 
 每次先写RUNNING，结束写PASS或FAIL，保留日志。未执行检查不算PASS。质量指纹覆盖实现、工具、治理策略、有效文档和原始档案；动态任务状态、生成任务视图、历史快照和验收快照排除，以避免报告引用自身。原始来源另有对历史索引的完整哈希检查，验收后改变档案字节同样会令证据过期。
 
-本轮已额外执行Windows CMake 3.31.10/Ninja 1.13.2构建及CTest；远端CI与Linux sanitizer未执行。配置存在不代表已经验证。
+Windows CMake和Ubuntu WSL的GCC sanitizer分别留有本机记录，见[环境说明](environment.md)与[审查记录](review.md)。远端CI未执行，配置文件不等于执行证据。
 
 ## 4. 构建、测试和运行记录
 
@@ -80,7 +82,7 @@ GCC和CMake共同读取模块登记的C源码清单，避免两套构建漏编�
 
 ## 5. Git的本地工作方式
 
-已有基线提交`cc6428b`记录治理改造前的可运行基础。本轮在`work/gov-001-governance`工作分支上迭代，完成后形成独立治理提交。实时分支/提交/脏状态用`python tools/project.py doctor`查看，文档不硬编码“没有提交”等容易过期的事实。
+实时分支、提交和工作树状态用`python tools/project.py doctor`查看。已有未提交修改时保留，不将来源不明的修改混入自动提交。
 
 建议以任务为单位创建分支、审查变更、运行质量入口，再做本地提交。不要用`git add`替代审查，也不把local commit说成已推送或已合并。
 

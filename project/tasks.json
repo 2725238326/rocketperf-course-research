@@ -1,18 +1,22 @@
 {
   "schema_version": 1,
-  "revision": 12,
+  "revision": 63,
   "context": {
-    "phase": "C17教学基线可用；真实型号研究待深化",
-    "evidence_cutoff": "2026-09-29",
+    "phase": "Windows主线：资料证据与C性能计算",
+    "evidence_cutoff": "2026-10-02",
     "next_tasks": [
-      "RES-001",
-      "RES-002",
-      "RES-003"
+      "DATA-002",
+      "MOD-001",
+      "REF-001",
+      "MOD-002",
+      "ANA-002"
     ],
     "facts": [
-      "核心为定比热理想喷管，不能作为真实发动机性能预测",
-      "本机GCC Debug/Release已验证；CMake/远端CI/Linux验证状态须据实际报告",
-      "已有43份来源快照与5份PDF，来源新鲜度与文件完整性分别核验"
+      "当前先完成两型动力系统资料、参数证据和字段缺口。",
+      "Windows可完成C17构建、测试、扫描和运行归档；WSL仅保留为附加历史验证。",
+      "当前L0/S1是教学基线与方法验证，不外推为真实发动机性能。",
+      "PPT、报告和发布打包暂不作为当前工作面。",
+      "真实型号字段缺证时保留unknown，不用同系列或不同批次数据补齐。"
     ]
   },
   "tasks": [
@@ -83,7 +87,7 @@
     {
       "id": "RES-001",
       "title": "型号版本与参数证据深化",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -92,14 +96,18 @@
       "acceptance": [
         "四类级段/发动机对象的版本、采用/候选参数与缺口可追溯，不强填未知"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：专题覆盖遥一/遥二与长十乙一级/二级四类对象，区分采用参数、候选信息与缺口；所有未公开字段均保留未知，质量证据仅证明工程与文档检查，不替代真实性能验证。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-001_826e8e5a929b.json",
+        "sha256": "ae93304683447102146891b29550ef5265e80b34d5dd6b02a7897f207b85ca7f"
+      }
     },
     {
       "id": "RES-002",
       "title": "开源核心代码及C移植评估",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -108,14 +116,18 @@
       "acceptance": [
         "至少两个优先项目的固定版本、真实调用链、核心依赖、许可与验证范围；给路线建议"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：至少两个优先项目有固定仓库快照、调用链、依赖、许可证和验证边界；文档明确C API与C核心区别，并给出自有C实现路线。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-002_7ef041c302c5.json",
+        "sha256": "2ca1e8d8b44d75e0bd244e38c83bde73420a90004fd817cf99c9d241be0badce"
+      }
     },
     {
       "id": "RES-003",
       "title": "课程公式和基准算例抽取",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -124,14 +136,18 @@
       "acceptance": [
         "符号/单位/假设及页码齐全，候选参考输入输出可定位，未复现项目明确标记"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：公式、页码、单位、假设、候选参考输入输出和未复现边界齐全；C0仍是教学基准，不是目标型号验证。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-003_d9c57976d5a3.json",
+        "sha256": "1a36a2d753f38cbe521ea7a069f06c046f36cab70d566f7e937a8c3aaa2e6360"
+      }
     },
     {
       "id": "RES-004",
       "title": "热化学与循环模型范围研究",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "RES-001",
@@ -144,14 +160,18 @@
       "acceptance": [
         "对低/高保真选择给理由，质量/功率关系和数据需求清楚"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：低/高保真选择有理由，质量与功率关系、输入需求、验证顺序和不可覆盖范围明确；循环家族证据未被外推成具体飞行子型。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-004_1af054ae7b69.json",
+        "sha256": "901f977cca49863af6b7f044ac0bbd9be651400ae4242c0c419c837b08851936"
+      }
     },
     {
       "id": "RES-005",
       "title": "变工况、冷却、复用与改进选题研究",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -160,9 +180,13 @@
       "acceptance": [
         "至少两个问题明确的候选，列数据条件/代价/验证方法，不假称真实寿命"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：候选问题可由零维/准一维实现，未把回收成功、设计复用次数或稳态包络当作寿命证明。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-005_3bb358dda203.json",
+        "sha256": "a1faa9a6aaf6a2f15a5130e79324962a6b23cc7b4f2ca32068a7110368948ea4"
+      }
     },
     {
       "id": "OPS-001",
@@ -212,7 +236,7 @@
     {
       "id": "DATA-001",
       "title": "建立可计算参数集",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "RES-001",
@@ -224,14 +248,18 @@
       "acceptance": [
         "单位、批次、边界、缺失值处理和数据角色清楚；不从调参值制造验证值"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：baseline.json可追溯、单位为SI、教学基准与真实型号事实分离，未知字段不会进入数值求解器。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DATA-001_b0121d0c0639.json",
+        "sha256": "6b0de7e55afbab8f173647b0340f3d383cd22867a8509888ec965749c3f738ba"
+      }
     },
     {
       "id": "DES-001",
       "title": "冻结首版模型与移植模块",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "RES-002",
@@ -245,14 +273,18 @@
       "acceptance": [
         "需求—模型—输入—输出—验证一一对应，用户选择/待确认事项不含糊"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义复核通过：设计契约可直接指导C实现，真实型号缺口、外部参考职责和未覆盖的寿命/控制问题均明确。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DES-001_94f15afd5dc4.json",
+        "sha256": "27ac2a8ed2028875534079e1c0a0438576ff0062023d0a673401d350fd5532cc"
+      }
     },
     {
       "id": "IMP-001",
       "title": "C核心整合与型号/研究算例",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "DES-001",
@@ -265,14 +297,18 @@
       "acceptance": [
         "核心实际为C，输入校验/异常/收敛处理与模型一致；延续基线验证后接入可追溯数据"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义验收通过：交付是L0/S1 C17研究实现与边界，不是真实发动机性能验证；quality证据和产物指纹新鲜。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/IMP-001_7a5a1639f46f.json",
+        "sha256": "a8c6f2591de296fceb23303eef5e2f0ace410b34e08fe5ef70e70d804319d146"
+      }
     },
     {
       "id": "VAL-001",
       "title": "分层验证与误差分析",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "IMP-001"
@@ -283,14 +319,18 @@
       "acceptance": [
         "分清代码错误、模型差异、输入/数据库差异，报告适用域"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义验收通过：适用域、不可外推结论和L1/L2验证门均已写清。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/VAL-001_5885a51fcfe8.json",
+        "sha256": "225397bf64834c24b4d39e1ff780ec9aca04b3697392bd6cb6b571e48b5feb07"
+      }
     },
     {
       "id": "ANA-001",
       "title": "两型分析与改进计算",
-      "status": "PLANNED",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "VAL-001",
@@ -302,9 +342,13 @@
       "acceptance": [
         "完成REQ-01/02/03实质论证，改进收益和代价有条件约束"
       ],
-      "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
-      "verification": null
+      "owner": "root",
+      "note": "语义验收通过：报告只把S1作为共同条件趋势，不把真实型号缺口外推成绝对性能或寿命结论。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-001_b605b29427a3.json",
+        "sha256": "89997017187c94cfeb96ea4ff79014ad4abee0e3275c407df0840a82eb870038"
+      }
     },
     {
       "id": "DOC-001",
@@ -312,16 +356,19 @@
       "status": "PLANNED",
       "priority": 2,
       "depends_on": [
-        "ANA-001"
+        "ANA-002",
+        "MOD-003"
       ],
       "required_artifacts": [
-        "deliverables/README.md"
+        "deliverables/report.md",
+        "deliverables/presentation.pptx",
+        "deliverables/contributions.md"
       ],
       "acceptance": [
-        "REQ-08/09/10覆盖，展示≤10分钟"
+        "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "note": "旧空气算例不足以支持最终报告；增加研究前置和实际报告/展示产物",
       "verification": null
     },
     {
@@ -429,6 +476,142 @@
         "path": "project/evidence/DOC-002_fc92720f3eb1.json",
         "sha256": "62f6fb96b790ef9622a3808ba9aea2744afa817c9ece25fbe5d8964e59a37f29"
       }
+    },
+    {
+      "id": "AUD-001",
+      "title": "运行库验证、代码补审与文档修订",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "docs/review.md"
+      ],
+      "acceptance": [
+        "核实GCC目标支持与实际Sanitizer运行；列出未完成的研究和交付项；修订活跃文档，不删除原始或历史证据"
+      ],
+      "owner": "root",
+      "note": "本批次运行库与代码/文档补审完成，详见docs/review.md；不视为独立科学审查。后续从DATA-002、MOD-001和REF-001推进，保留既有未提交修改。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/AUD-001_119560b3c1f2.json",
+        "sha256": "0d6a9b3f3183440e46bbf370521ed8b1f9d071cf7be19578326332a42afbd3f3"
+      }
+    },
+    {
+      "id": "DATA-002",
+      "title": "参数逐字段复核与输入校验",
+      "status": "ACTIVE",
+      "priority": 0,
+      "depends_on": [
+        "DATA-001"
+      ],
+      "required_artifacts": [
+        "data/parameters/assumptions.json",
+        "tools/check_data.py",
+        "docs/data-review.md"
+      ],
+      "acceptance": [
+        "逐字段定位原文和单位换算；事实/未知/假设分开；假设含范围、理由和模型ID；自动检查来源ID、重复ID、角色与单位，非法数据测试失败"
+      ],
+      "owner": "codex",
+      "note": "整理项目工作面：优先核对两型动力系统参数证据，Windows C计算作为当前交付主线。",
+      "verification": null
+    },
+    {
+      "id": "MOD-001",
+      "title": "NASA9物性与数据测试",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "RES-002"
+      ],
+      "required_artifacts": [
+        "src/thermo/nasa9.c",
+        "docs/thermo-validation.md"
+      ],
+      "acceptance": [
+        "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "REF-001",
+      "title": "CEA独立对照算例复现",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "RES-002"
+      ],
+      "required_artifacts": [
+        "tests/reference/cea/manifest.json",
+        "docs/reference-reproduction.md"
+      ],
+      "acceptance": [
+        "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "MOD-002",
+      "title": "受限HP平衡与温变冻结喷管",
+      "status": "PLANNED",
+      "priority": 1,
+      "depends_on": [
+        "MOD-001",
+        "REF-001"
+      ],
+      "required_artifacts": [
+        "docs/thermo-nozzle-validation.md"
+      ],
+      "acceptance": [
+        "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "MOD-003",
+      "title": "稳态循环与整机边界计算",
+      "status": "PLANNED",
+      "priority": 2,
+      "depends_on": [
+        "MOD-002",
+        "DATA-002"
+      ],
+      "required_artifacts": [
+        "docs/cycle-validation.md"
+      ],
+      "acceptance": [
+        "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "ANA-002",
+      "title": "改进研究与结果复核",
+      "status": "PLANNED",
+      "priority": 1,
+      "depends_on": [
+        "DATA-002",
+        "MOD-002"
+      ],
+      "required_artifacts": [
+        "docs/improvement-analysis.md",
+        "results/research/README.md"
+      ],
+      "acceptance": [
+        "区分型号事实与计算情景；基线/改进采用同一数据版本；分析面积比背压趋势、独立参考、至少一种代价和输入敏感性；结果归档并说明不能外推的结论"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
     }
   ],
   "events": [
@@ -833,6 +1016,729 @@
       "note": "文档群和研究维护规则完成；后续研究仍按RES-001等具体任务推进，历史来源与未完成状态保持可见。",
       "previous_hash": "f0547f1cca4bbc6f7299b8d4731dec9d3ddd1f857f505b7c45630a217eaffb13",
       "hash": "03224261cbfea54ac0bd179b2768faab71c728bf8d46d38433936f2b284ba635"
+    },
+    {
+      "seq": 30,
+      "at": "2026-10-02T06:31:48+00:00",
+      "task": "RES-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "开始整理四类级段/发动机对象的版本、采用参数、候选参数与缺口；沿用现有原始来源，不把推断写成事实。",
+      "previous_hash": "03224261cbfea54ac0bd179b2768faab71c728bf8d46d38433936f2b284ba635",
+      "hash": "3d29a1e504a3fda4392c2395cf4e6607d299cfba7b5b4ed3ae882af870b7390a"
+    },
+    {
+      "seq": 31,
+      "at": "2026-10-02T06:41:52+00:00",
+      "task": "RES-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "专题已新增并更新入口；四类对象的版本、已确认构型、候选信息、缺口和建模边界可追溯。统一质量入口通过，但这是证据整理验收，不是发动机真实性能验证。",
+      "previous_hash": "3d29a1e504a3fda4392c2395cf4e6607d299cfba7b5b4ed3ae882af870b7390a",
+      "hash": "078b537dd933c219e78dcbf4c6b27a89ebca9be81fc08b4e4ff0e38b23a8e1a8"
+    },
+    {
+      "seq": 32,
+      "at": "2026-10-02T06:43:46+00:00",
+      "task": "RES-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：专题覆盖遥一/遥二与长十乙一级/二级四类对象，区分采用参数、候选信息与缺口；所有未公开字段均保留未知，质量证据仅证明工程与文档检查，不替代真实性能验证。",
+      "previous_hash": "078b537dd933c219e78dcbf4c6b27a89ebca9be81fc08b4e4ff0e38b23a8e1a8",
+      "hash": "0c204dc0104f30c6b42b02c5042678e28657659d99409a1e4976448006010918"
+    },
+    {
+      "seq": 33,
+      "at": "2026-10-02T07:39:05+00:00",
+      "task": "RES-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "开始核查优先开源项目的固定版本、真实调用链、依赖、许可和验证边界；核心C要求按实际源码而非接口语言判断。",
+      "previous_hash": "0c204dc0104f30c6b42b02c5042678e28657659d99409a1e4976448006010918",
+      "hash": "f988df2eeaae2af2191744a4a7c72c14f03b58471359707335cbbb667e24a5db"
+    },
+    {
+      "seq": 34,
+      "at": "2026-10-02T07:49:54+00:00",
+      "task": "RES-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成源码级评估：固定NASA CEA、Pyskyfire、RocketCycles及Cantera/CoolProp来源，列出调用链、依赖、许可证和验证边界；明确C API不等于C核心，并给出自有C实现/外部校核路线。",
+      "previous_hash": "f988df2eeaae2af2191744a4a7c72c14f03b58471359707335cbbb667e24a5db",
+      "hash": "c59ed33c53a11fd09ad0b453c6050ae42820a8b94e7e624ebd34e6961c1064d7"
+    },
+    {
+      "seq": 35,
+      "at": "2026-10-02T07:50:23+00:00",
+      "task": "RES-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：至少两个优先项目有固定仓库快照、调用链、依赖、许可证和验证边界；文档明确C API与C核心区别，并给出自有C实现路线。",
+      "previous_hash": "c59ed33c53a11fd09ad0b453c6050ae42820a8b94e7e624ebd34e6961c1064d7",
+      "hash": "a911aab246cd5f3a332a4818f5ec67cb605db44641db79b462077acdb4d78c4e"
+    },
+    {
+      "seq": 36,
+      "at": "2026-10-02T07:50:23+00:00",
+      "task": "RES-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "开始从本地课程课件、课程范围档案和现有C基线抽取公式、单位、页码与独立参考算例。",
+      "previous_hash": "a911aab246cd5f3a332a4818f5ec67cb605db44641db79b462077acdb4d78c4e",
+      "hash": "87d48c4fd4e0b4708082525e221e375ffcff02399372c7f7a49e1acb808892f2"
+    },
+    {
+      "seq": 37,
+      "at": "2026-10-02T07:54:07+00:00",
+      "task": "RES-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成课程公式与C0基准整理：按课件P9/P11-P19/P23-P25/P28-P29给出符号、单位、控制体和模型边界，链接现有Mach2独立参考并明确未复现/不能迁移的内容。",
+      "previous_hash": "87d48c4fd4e0b4708082525e221e375ffcff02399372c7f7a49e1acb808892f2",
+      "hash": "e25b64413ae4717605f0015bca82a38640edcef6957f0573bca89c7bf52c3528"
+    },
+    {
+      "seq": 38,
+      "at": "2026-10-02T07:54:08+00:00",
+      "task": "RES-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：公式、页码、单位、假设、候选参考输入输出和未复现边界齐全；C0仍是教学基准，不是目标型号验证。",
+      "previous_hash": "e25b64413ae4717605f0015bca82a38640edcef6957f0573bca89c7bf52c3528",
+      "hash": "c0a4a9b58321999168fe22894f95399ffc44a832960b140a023995f880c64686"
+    },
+    {
+      "seq": 39,
+      "at": "2026-10-02T07:54:08+00:00",
+      "task": "RES-004",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "c0a4a9b58321999168fe22894f95399ffc44a832960b140a023995f880c64686",
+      "hash": "6a74309d2036e7b4e5aec5e41f9bfa6fd5524f1adfe2793bc5e54f9266b969b0"
+    },
+    {
+      "seq": 40,
+      "at": "2026-10-02T07:54:08+00:00",
+      "task": "DATA-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "6a74309d2036e7b4e5aec5e41f9bfa6fd5524f1adfe2793bc5e54f9266b969b0",
+      "hash": "b14514abf92a83857f098dad9b37e448f15cd004f154df04d87b51ac0696c720"
+    },
+    {
+      "seq": 41,
+      "at": "2026-10-02T07:55:03+00:00",
+      "task": "DATA-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "建立首版参数集，分离来源事实、派生换算、教学基准和研究假设；先收录可追溯构型与C0，不填未知真实发动机参数。",
+      "previous_hash": "b14514abf92a83857f098dad9b37e448f15cd004f154df04d87b51ac0696c720",
+      "hash": "2562b4c2454d99d709d624c49e6cec47284530902ecc943eacef99bd758b625d"
+    },
+    {
+      "seq": 42,
+      "at": "2026-10-02T08:00:21+00:00",
+      "task": "DATA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "首版参数集已建立：记录事实、派生、合成基准，分离批次/工况/系统边界，列出真实发动机缺失字段和禁止自动填值策略。",
+      "previous_hash": "2562b4c2454d99d709d624c49e6cec47284530902ecc943eacef99bd758b625d",
+      "hash": "99fd3f9c5f03b28630d88a993d642a0836cdae86e1c667862b942ad9a955f1d7"
+    },
+    {
+      "seq": 43,
+      "at": "2026-10-02T08:00:22+00:00",
+      "task": "DATA-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：baseline.json可追溯、单位为SI、教学基准与真实型号事实分离，未知字段不会进入数值求解器。",
+      "previous_hash": "99fd3f9c5f03b28630d88a993d642a0836cdae86e1c667862b942ad9a955f1d7",
+      "hash": "16e0fb0dbbc14c0a0da9242693d1aeb80b0d6488b0182bbeb60f6609c3f80a46"
+    },
+    {
+      "seq": 44,
+      "at": "2026-10-02T08:00:22+00:00",
+      "task": "RES-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "开始研究热化学与稳态循环的首版范围、边界、输入需求和可验证性，为大作业模型设计冻结提供依据。",
+      "previous_hash": "16e0fb0dbbc14c0a0da9242693d1aeb80b0d6488b0182bbeb60f6609c3f80a46",
+      "hash": "8f030228ff0ce77b38f624516b613d07240027eb97c255dbd0f91544d5f3005b"
+    },
+    {
+      "seq": 45,
+      "at": "2026-10-02T08:06:46+00:00",
+      "task": "RES-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成热化学与循环范围研究：以公开循环证据和课程边界为依据，冻结L0/L1/L2首版层级，列出质量/功率/推力控制体、数据需求、验证顺序和延期条件。",
+      "previous_hash": "8f030228ff0ce77b38f624516b613d07240027eb97c255dbd0f91544d5f3005b",
+      "hash": "bd116092f45f4369829cdb6a73dcc3edf680dea3ce28316106729ef416849ef4"
+    },
+    {
+      "seq": 46,
+      "at": "2026-10-02T08:06:46+00:00",
+      "task": "RES-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：低/高保真选择有理由，质量与功率关系、输入需求、验证顺序和不可覆盖范围明确；循环家族证据未被外推成具体飞行子型。",
+      "previous_hash": "bd116092f45f4369829cdb6a73dcc3edf680dea3ce28316106729ef416849ef4",
+      "hash": "7300b5ce8079307e75f21df08ff43b9318f1bfa070b396bf5b5ce87d280feb4d"
+    },
+    {
+      "seq": 47,
+      "at": "2026-10-02T08:07:48+00:00",
+      "task": "RES-005",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "筛选至少两个可验证的变工况/复用改进候选，列出数据条件、代价、验证方法和不可推断的寿命边界。",
+      "previous_hash": "7300b5ce8079307e75f21df08ff43b9318f1bfa070b396bf5b5ce87d280feb4d",
+      "hash": "4ea41ffa8ea5b8342a9ac6ddad30cb58ddc5855f727f222552505d8901d661aa"
+    },
+    {
+      "seq": 48,
+      "at": "2026-10-02T08:25:58+00:00",
+      "task": "RES-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成两个可验证改进候选：面积比—环境压力权衡、节流—集总冷却热拾取；列出数据、收益、代价、NASA/DLR对照和不能推断的寿命/控制边界，并冻结主选题为喷管面积比与环境压力。",
+      "previous_hash": "4ea41ffa8ea5b8342a9ac6ddad30cb58ddc5855f727f222552505d8901d661aa",
+      "hash": "16a840547d5fd8845e2d5739730cbda0d4ce03489f0cfd5236b9ee32b4543aa8"
+    },
+    {
+      "seq": 49,
+      "at": "2026-10-02T08:26:14+00:00",
+      "task": "RES-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：候选问题可由零维/准一维实现，未把回收成功、设计复用次数或稳态包络当作寿命证明。",
+      "previous_hash": "16a840547d5fd8845e2d5739730cbda0d4ce03489f0cfd5236b9ee32b4543aa8",
+      "hash": "07e7f3e199d440ecb23ee2506a9a3d884c252753368fd893fd4bb3086952a3fb"
+    },
+    {
+      "seq": 50,
+      "at": "2026-10-02T08:26:14+00:00",
+      "task": "DES-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "07e7f3e199d440ecb23ee2506a9a3d884c252753368fd893fd4bb3086952a3fb",
+      "hash": "391aa95a2f0814a24ba9a55c898ba85c6adfa5927c014c1dbf7d93d2f2c514b2"
+    },
+    {
+      "seq": 51,
+      "at": "2026-10-02T08:26:48+00:00",
+      "task": "DES-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "开始把RES-001至RES-005的证据、数据和主选题冻结为首版模型设计契约，明确需求—模型—输入—输出—验证映射。",
+      "previous_hash": "391aa95a2f0814a24ba9a55c898ba85c6adfa5927c014c1dbf7d93d2f2c514b2",
+      "hash": "7526ff19e6f8068c5a1ee119d99f746afe43536871be68243b79ad1a3cf70922"
+    },
+    {
+      "seq": 52,
+      "at": "2026-10-02T08:31:45+00:00",
+      "task": "DES-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "首版模型设计契约完成：需求—模型—输入—输出—验证映射、L0/L1/L2边界、C模块、数据角色、失败语义、主选题和延期条件已冻结。",
+      "previous_hash": "7526ff19e6f8068c5a1ee119d99f746afe43536871be68243b79ad1a3cf70922",
+      "hash": "f8d6ddd2945cb656c9b10aea1d6ff700f97d6c73165101bc4f847286f5e1abfa"
+    },
+    {
+      "seq": 53,
+      "at": "2026-10-02T08:31:47+00:00",
+      "task": "DES-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义复核通过：设计契约可直接指导C实现，真实型号缺口、外部参考职责和未覆盖的寿命/控制问题均明确。",
+      "previous_hash": "f8d6ddd2945cb656c9b10aea1d6ff700f97d6c73165101bc4f847286f5e1abfa",
+      "hash": "b4be10c651c62716dbba273089378b008197b926d70773628498cbb215a43277"
+    },
+    {
+      "seq": 54,
+      "at": "2026-10-02T08:31:47+00:00",
+      "task": "IMP-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "b4be10c651c62716dbba273089378b008197b926d70773628498cbb215a43277",
+      "hash": "9cbaed5e111a7b8a5136569a5be328754aeed3126cb952b99bac8c6b3c9857fa"
+    },
+    {
+      "seq": 55,
+      "at": "2026-10-02T08:36:35+00:00",
+      "task": "IMP-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实现S1面积比-环境压力研究切片：保持L0单算例兼容，新增显式研究扫描入口、结构化输出、输入边界与解析/单调性验证；不把真实型号缺失参数写入求解器。",
+      "previous_hash": "9cbaed5e111a7b8a5136569a5be328754aeed3126cb952b99bac8c6b3c9857fa",
+      "hash": "6670d5ea690ee5471f158ea0c2fee3cd9e4489502eada613b897f4e24c317ec3"
+    },
+    {
+      "seq": 56,
+      "at": "2026-10-02T09:06:43+00:00",
+      "task": "IMP-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "S1已实现并完成文档、研究数据边界和回归覆盖；质量入口五项PASS，扫描点逐点报告越域状态，不把真实型号缺口填入求解器。",
+      "previous_hash": "6670d5ea690ee5471f158ea0c2fee3cd9e4489502eada613b897f4e24c317ec3",
+      "hash": "7f0a020753257aa0dba8123b8795054e30815d912596c2fabb57436c0857b386"
+    },
+    {
+      "seq": 57,
+      "at": "2026-10-02T09:07:32+00:00",
+      "task": "IMP-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义验收通过：交付是L0/S1 C17研究实现与边界，不是真实发动机性能验证；quality证据和产物指纹新鲜。",
+      "previous_hash": "7f0a020753257aa0dba8123b8795054e30815d912596c2fabb57436c0857b386",
+      "hash": "775954885243334913e3203bb8182cb70057d6451e30131ba0a699b4e58fea8a"
+    },
+    {
+      "seq": 58,
+      "at": "2026-10-02T09:07:32+00:00",
+      "task": "VAL-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "775954885243334913e3203bb8182cb70057d6451e30131ba0a699b4e58fea8a",
+      "hash": "bab1a30c0e14327f2dd5486618ddd58898a3961d3becfd5dcb2bfb327f1a74b3"
+    },
+    {
+      "seq": 59,
+      "at": "2026-10-02T09:12:52+00:00",
+      "task": "VAL-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "基于C0/S1现有实现建立分层验证与误差分析文档：区分代码误差、模型差异和输入/数据库不确定性，记录适用域与不能外推的结论。",
+      "previous_hash": "bab1a30c0e14327f2dd5486618ddd58898a3961d3becfd5dcb2bfb327f1a74b3",
+      "hash": "530283c4d4bbe2cdb0675078069253ad40ae7758ab0ebb1171174001536e199c"
+    },
+    {
+      "seq": 60,
+      "at": "2026-10-02T09:16:24+00:00",
+      "task": "VAL-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成V0-V4分层验证文档，明确代码误差、模型差异和输入/数据库不确定性；quality五项PASS，未把软件回归容差冒充真实测量精度。",
+      "previous_hash": "530283c4d4bbe2cdb0675078069253ad40ae7758ab0ebb1171174001536e199c",
+      "hash": "6a669c756a00f8ec9a737687144467eb9260959ca47f127ec2608722c4b8a710"
+    },
+    {
+      "seq": 61,
+      "at": "2026-10-02T09:16:30+00:00",
+      "task": "VAL-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义验收通过：适用域、不可外推结论和L1/L2验证门均已写清。",
+      "previous_hash": "6a669c756a00f8ec9a737687144467eb9260959ca47f127ec2608722c4b8a710",
+      "hash": "a430fd450ee72d0dd0c1841a3fb2d0fd36901b0f63e69e931acccfb11f335241"
+    },
+    {
+      "seq": 62,
+      "at": "2026-10-02T09:16:30+00:00",
+      "task": "ANA-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "a430fd450ee72d0dd0c1841a3fb2d0fd36901b0f63e69e931acccfb11f335241",
+      "hash": "d98c3999bbf9f95bb587d9fca9367c983cdff8725fef5f41fe71592de19236f8"
+    },
+    {
+      "seq": 63,
+      "at": "2026-10-02T09:18:44+00:00",
+      "task": "ANA-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "基于已验证C17 S1默认网格整理两型研究报告契约：报告可计算的相对趋势、改进收益与代价、真实型号背景边界，不输出伪造绝对性能。",
+      "previous_hash": "d98c3999bbf9f95bb587d9fca9367c983cdff8725fef5f41fe71592de19236f8",
+      "hash": "9c5a4176a4defaf6bea0108726548aa28f3466bc0f1b96bcfb88b72ece08f36d"
+    },
+    {
+      "seq": 64,
+      "at": "2026-10-02T09:22:52+00:00",
+      "task": "ANA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成REQ-01/02/03实质论证：四类对象事实与缺口、S1 C17实际结果、喷管膨胀适应性收益/代价和两型比较口径；quality五项PASS。",
+      "previous_hash": "9c5a4176a4defaf6bea0108726548aa28f3466bc0f1b96bcfb88b72ece08f36d",
+      "hash": "9896d15f1bfb3e9422cdd8d03e18a29bc880f0260a4c77c1eaaf520db199c98e"
+    },
+    {
+      "seq": 65,
+      "at": "2026-10-02T09:22:53+00:00",
+      "task": "ANA-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "语义验收通过：报告只把S1作为共同条件趋势，不把真实型号缺口外推成绝对性能或寿命结论。",
+      "previous_hash": "9896d15f1bfb3e9422cdd8d03e18a29bc880f0260a4c77c1eaaf520db199c98e",
+      "hash": "65d85f23366792e0b7f2ec9405ca64d477158414e4e52f15876d6864ed8b6348"
+    },
+    {
+      "seq": 66,
+      "at": "2026-10-02T09:22:53+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "65d85f23366792e0b7f2ec9405ca64d477158414e4e52f15876d6864ed8b6348",
+      "hash": "7df5f6ab167bc572244a1065fb49c06c9346d5ac292ef4dfd9dc2afd49682b81"
+    },
+    {
+      "seq": 67,
+      "at": "2026-10-02T12:07:43+00:00",
+      "task": "AUD-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "7df5f6ab167bc572244a1065fb49c06c9346d5ac292ef4dfd9dc2afd49682b81",
+      "hash": "7449f6467e66beaab5a542ad23ba355f4cc74cf132cfa2916a4d0f0e4ec2d253"
+    },
+    {
+      "seq": 68,
+      "at": "2026-10-02T12:07:44+00:00",
+      "task": "AUD-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "检查现有WSL与GCC支持范围，修正代码/输出边界和失实文档，保留历史记录。",
+      "previous_hash": "7449f6467e66beaab5a542ad23ba355f4cc74cf132cfa2916a4d0f0e4ec2d253",
+      "hash": "56db0c2ed916445f6ab6a481a4e780c03b2fe11b0d503be7f67cbb7aac254b2b"
+    },
+    {
+      "seq": 69,
+      "at": "2026-10-02T12:26:21+00:00",
+      "task": "DATA-002",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "56db0c2ed916445f6ab6a481a4e780c03b2fe11b0d503be7f67cbb7aac254b2b",
+      "hash": "e581bf89ef9b78e1aef85b973d1cd6610bcc6d7f88f073e1be3bf32f8bade200"
+    },
+    {
+      "seq": 70,
+      "at": "2026-10-02T12:26:22+00:00",
+      "task": "MOD-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "e581bf89ef9b78e1aef85b973d1cd6610bcc6d7f88f073e1be3bf32f8bade200",
+      "hash": "c599ff78fd625cf83f7770998e1a7713241bb910de911a9ebff76db99f474cb9"
+    },
+    {
+      "seq": 71,
+      "at": "2026-10-02T12:26:23+00:00",
+      "task": "REF-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "c599ff78fd625cf83f7770998e1a7713241bb910de911a9ebff76db99f474cb9",
+      "hash": "f6322655a0aba0e537eb51ec831f4fb3fd898272897d5cf115b2fd52fd1ef0c3"
+    },
+    {
+      "seq": 72,
+      "at": "2026-10-02T12:26:25+00:00",
+      "task": "MOD-002",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "f6322655a0aba0e537eb51ec831f4fb3fd898272897d5cf115b2fd52fd1ef0c3",
+      "hash": "bf1d80a784d63965dac5c5d7be46c65114672424efb26a8c589c45c691fe225b"
+    },
+    {
+      "seq": 73,
+      "at": "2026-10-02T12:26:26+00:00",
+      "task": "MOD-003",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "bf1d80a784d63965dac5c5d7be46c65114672424efb26a8c589c45c691fe225b",
+      "hash": "f4a9e17b5b8509acfb63b4a7e653ac0941cff6d6240ff70cb1f2d0b34bdd4e85"
+    },
+    {
+      "seq": 74,
+      "at": "2026-10-02T12:26:27+00:00",
+      "task": "ANA-002",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "f4a9e17b5b8509acfb63b4a7e653ac0941cff6d6240ff70cb1f2d0b34bdd4e85",
+      "hash": "9cedf3c9ab7066ca3ac8b60e6dc0cde1e808ddd168917462663be80501155f5c"
+    },
+    {
+      "seq": 75,
+      "at": "2026-10-02T12:26:28+00:00",
+      "task": "DOC-001",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "旧空气算例不足以支持最终报告；增加研究前置和实际报告/展示产物",
+      "previous_hash": "9cedf3c9ab7066ca3ac8b60e6dc0cde1e808ddd168917462663be80501155f5c",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "READY",
+          "priority": 2,
+          "depends_on": [
+            "ANA-001"
+          ],
+          "required_artifacts": [
+            "deliverables/README.md"
+          ],
+          "acceptance": [
+            "REQ-08/09/10覆盖，展示≤10分钟"
+          ],
+          "owner": null,
+          "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "旧空气算例不足以支持最终报告；增加研究前置和实际报告/展示产物",
+          "verification": null
+        }
+      },
+      "hash": "c3a8ffc4a4442034cd3f4da03d6ea5d255c7f14bf51c0599bc0cbf75274e2ab9"
+    },
+    {
+      "seq": 76,
+      "at": "2026-10-02T12:26:29+00:00",
+      "task": "AUD-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "移除已完成任务的接续建议，登记需补的研究项和实际证据日期",
+      "previous_hash": "c3a8ffc4a4442034cd3f4da03d6ea5d255c7f14bf51c0599bc0cbf75274e2ab9",
+      "details": {
+        "context_before": {
+          "phase": "C17教学基线可用；真实型号研究待深化",
+          "evidence_cutoff": "2026-09-29",
+          "next_tasks": [
+            "RES-001",
+            "RES-002",
+            "RES-003"
+          ],
+          "facts": [
+            "核心为定比热理想喷管，不能作为真实发动机性能预测",
+            "本机GCC Debug/Release已验证；CMake/远端CI/Linux验证状态须据实际报告",
+            "已有43份来源快照与5份PDF，来源新鲜度与文件完整性分别核验"
+          ]
+        },
+        "context_after": {
+          "phase": "L0/S1教学计算已测试；数据复核、热物性和独立对照待完成",
+          "evidence_cutoff": "2026-10-02",
+          "next_tasks": [
+            "DATA-002",
+            "MOD-001",
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "当前物理核心是定比热理想喷管，不是目标型号真实发动机模型",
+            "Windows MinGW用于发布构建；Ubuntu WSL的ASan/UBSan验证Linux构建，分别留记录",
+            "旧研究任务DONE仅表示当时登记的专题产物完成；最终课程要求仍有缺项",
+            "原始来源和历史记录保留，Grok返回须核对原文后才引用"
+          ]
+        }
+      },
+      "hash": "fcd48a01922edeefd07cbaa85eb3348904f114e2249842c3532e4de80927fe6d"
+    },
+    {
+      "seq": 77,
+      "at": "2026-10-02T12:45:23+00:00",
+      "task": "AUD-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "GCC源码核验、WSL插桩与故意缺陷检出已完成；修正扫描/JSON/归档并更新文档和研究任务。五项软件质量通过，真实型号与高级模型未完成，Git待暂存审查。",
+      "previous_hash": "fcd48a01922edeefd07cbaa85eb3348904f114e2249842c3532e4de80927fe6d",
+      "hash": "36a9a0aed981620ab809612dc41dcdbdfd4e02ab1ad4c2a4c82be21c3b3a237c"
+    },
+    {
+      "seq": 78,
+      "at": "2026-10-02T12:45:24+00:00",
+      "task": "AUD-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "本批次运行库与代码/文档补审完成，详见docs/review.md；不视为独立科学审查。后续从DATA-002、MOD-001和REF-001推进，保留既有未提交修改。",
+      "previous_hash": "36a9a0aed981620ab809612dc41dcdbdfd4e02ab1ad4c2a4c82be21c3b3a237c",
+      "hash": "4955fef677a17089d8e389c3d65cc155e469f62eed9555af9cf2420ef5e57037"
+    },
+    {
+      "seq": 79,
+      "at": "2026-10-03T04:55:11+00:00",
+      "task": "DATA-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "整理项目工作面：优先核对两型动力系统参数证据，Windows C计算作为当前交付主线。",
+      "previous_hash": "4955fef677a17089d8e389c3d65cc155e469f62eed9555af9cf2420ef5e57037",
+      "hash": "7fe40dc743b27ada4c3dc2f0c01c95d5d63c6ed14e747f287cbcdc721ef91956"
+    },
+    {
+      "seq": 80,
+      "at": "2026-10-03T04:55:12+00:00",
+      "task": "DATA-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "将当前工作面明确为资料证据与Windows计算，后置展示和报告。",
+      "previous_hash": "7fe40dc743b27ada4c3dc2f0c01c95d5d63c6ed14e747f287cbcdc721ef91956",
+      "details": {
+        "context_before": {
+          "phase": "L0/S1教学计算已测试；数据复核、热物性和独立对照待完成",
+          "evidence_cutoff": "2026-10-02",
+          "next_tasks": [
+            "DATA-002",
+            "MOD-001",
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "当前物理核心是定比热理想喷管，不是目标型号真实发动机模型",
+            "Windows MinGW用于发布构建；Ubuntu WSL的ASan/UBSan验证Linux构建，分别留记录",
+            "旧研究任务DONE仅表示当时登记的专题产物完成；最终课程要求仍有缺项",
+            "原始来源和历史记录保留，Grok返回须核对原文后才引用"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows主线：资料证据与C性能计算",
+          "evidence_cutoff": "2026-10-02",
+          "next_tasks": [
+            "DATA-002",
+            "MOD-001",
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "当前先完成两型动力系统资料、参数证据和字段缺口。",
+            "Windows可完成C17构建、测试、扫描和运行归档；WSL仅保留为附加历史验证。",
+            "当前L0/S1是教学基线与方法验证，不外推为真实发动机性能。",
+            "PPT、报告和发布打包暂不作为当前工作面。",
+            "真实型号字段缺证时保留unknown，不用同系列或不同批次数据补齐。"
+          ]
+        }
+      },
+      "hash": "27ec709768434686595bc95afb19a8c553a6fb016b7003e3579c011d78d4a550"
     }
   ]
 }

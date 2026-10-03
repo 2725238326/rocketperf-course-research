@@ -66,7 +66,9 @@ class GovernanceTests(unittest.TestCase):
         self.assertEqual(self.task('WORK-001')['status'],'DONE')
         self.assertEqual(self.task('NEXT-001')['status'],'READY')
         self.assertEqual(project.validate_registry(self.root,self.state()),[])
-        self.assertIn('WORK-001',(self.root/'worknow.md').read_text(encoding='utf-8'))
+        view=(self.root/'worknow.md').read_text(encoding='utf-8')
+        self.assertIn('NEXT-001',view)
+        self.assertNotIn('WORK-001',view)  # Completed tasks are not suggested for resumption.
 
     def test_stale_and_incomplete_quality_rejected(self):
         self.change('start'); proof=self.proof()
@@ -118,6 +120,19 @@ class GovernanceTests(unittest.TestCase):
         self.assertIn('contract_before',self.state()['events'][-1]['details'])
         self.change('start');self.change('submit',evidence=self.proof())
         with self.assertRaises(ValueError): project.amend_task(self.root,'WORK-001','root','change',title='new')
+
+    def test_context_edit_requires_owner_and_preserves_history(self):
+        with self.assertRaises(ValueError): project.amend_context(self.root,'WORK-001','root','update',phase='new')
+        self.change('start')
+        before=self.state()['context']
+        project.amend_context(self.root,'WORK-001','root','data verified',phase='new',next_tasks=['NEXT-001'],evidence_cutoff='2026-10-02')
+        self.assertEqual(self.state()['events'][-1]['details']['context_before'],before)
+        self.assertEqual(self.state()['context']['next_tasks'],['NEXT-001'])
+        self.assertEqual(project.validate_registry(self.root,self.state()),[])
+        self.assertIn('NEXT-001',(self.root/'worknow.md').read_text(encoding='utf-8'))
+        for changes in ({'next_tasks':['BASE-001']},{'phase':''},{'evidence_cutoff':'yesterday'}):
+            with self.subTest(changes=changes),self.assertRaises(ValueError): project.amend_context(self.root,'WORK-001','root','invalid',**changes)
+        with self.assertRaises(ValueError): project.amend_context(self.root,'WORK-001','other','update',phase='wrong')
 
     def test_raw_evidence_change_invalidates_proof(self):
         archive=self.root/'调研/原始来源/a.txt';archive.parent.mkdir(parents=True);archive.write_text('old',encoding='utf-8')

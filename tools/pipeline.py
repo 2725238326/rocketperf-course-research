@@ -16,11 +16,64 @@ from projectlib import ROOT, atomic_json, atomic_text, digest, git, local_path, 
 
 CORE_KEYS={"gamma","gas_constant_j_kg_k","stagnation_temperature_k","stagnation_pressure_pa","area_ratio","throat_area_m2","ambient_pressure_pa"}
 RESULT_KEYS={"exit_mach","exit_temperature_k","exit_pressure_pa","exit_velocity_m_s","exit_area_m2","characteristic_velocity_m_s","mass_flow_kg_s","thrust_n","thrust_coefficient","specific_impulse_s"}
+DEFAULT_RATIOS=[1,1.25,1.6875,2,4,8,16]
+DEFAULT_PRESSURES=[0,25000,50000,100000]
 
 
 def strict_json(text):
     def bad(value): raise ValueError(f"Non-finite JSON constant: {value}")
     return json.loads(text,parse_constant=bad)
+
+
+def grid_axis(text, pressure=False):
+    tokens=text.split(',')
+    if not 1<=len(tokens)<=32 or any(not re.fullmatch(r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?',x.strip()) for x in tokens):
+        raise ValueError('Grid requires 1..32 comma-separated decimal values')
+    values=[float(x) for x in tokens]
+    if any(not math.isfinite(x) or (x<0 if pressure else not 1<=x<=1e4) for x in values):
+        raise ValueError('Grid values outside the supported range')
+    return values
+
+
+def validate_study(report, input_text, ratios, pressures):
+    required={'schema_version','program_version','study','base_inputs','grid','points','limitations'}
+    if not isinstance(report,dict) or set(report)!=required or type(report['schema_version']) is not int or report['schema_version']!=1:
+        raise ValueError('Result does not match S1 report schema')
+    expected_grid={'area_ratios':ratios,'ambient_pressures_pa':pressures,'ordering':'area_ratio_outer_ambient_pressure_inner'}
+    if report['grid']!=expected_grid: raise ValueError('Study grid differs from requested grid')
+    for axis in ('area_ratios','ambient_pressures_pa'):
+        if any(type(x) not in {int,float} or not math.isfinite(x) for x in report['grid'][axis]): raise ValueError('Invalid grid value')
+    values=dict(line.strip().split('=',1) for line in input_text.lstrip('\ufeff').splitlines() if line.strip() and not line.strip().startswith('#'))
+    expected_study={'id':'S1_area_ratio_ambient','model':values['model'],'case_id':values['case_id'],'kind':values['case_kind'],'source_ref':values['source_ref']}
+    if report['study']!=expected_study: raise ValueError('Study provenance differs from input snapshot')
+    if not isinstance(report['base_inputs'],dict) or set(report['base_inputs'])!=CORE_KEYS-{'area_ratio','ambient_pressure_pa'}:
+        raise ValueError('Study base input fields incomplete')
+    for key,x in report['base_inputs'].items():
+        if type(x) not in {int,float} or not math.isfinite(x) or x!=float(values[key]): raise ValueError('Study input mismatch')
+    points=report['points']
+    if not isinstance(points,list) or len(points)!=len(ratios)*len(pressures): raise ValueError('Study point count mismatch')
+    counts={'ok':0,'out_of_domain':0}
+    for i,point in enumerate(points):
+        ratio=ratios[i//len(pressures)];pressure=pressures[i%len(pressures)]
+        if not isinstance(point,dict) or any(type(point.get(key)) not in {int,float} or point[key]!=expected for key,expected in [('area_ratio',ratio),('ambient_pressure_pa',pressure)]):
+            raise ValueError('Study point coordinate/order mismatch')
+        status=point.get('status')
+        if status=='ok':
+            if set(point)!={'area_ratio','ambient_pressure_pa','status','results','diagnostics'}: raise ValueError('Invalid successful point schema')
+            inputs={**report['base_inputs'],'area_ratio':ratio,'ambient_pressure_pa':pressure}
+            synthetic={'schema_version':1,'program_version':report['program_version'],'model':values['model'],
+                'case':{'id':values['case_id'],'kind':values['case_kind'],'source_ref':values['source_ref']},
+                'inputs':inputs,'results':point['results'],'diagnostics':point['diagnostics'],'limitations':report['limitations']}
+            point_input='\n'.join(f'{k}={v}' for k,v in {**values,'area_ratio':ratio,'ambient_pressure_pa':pressure}.items())
+            validate_result(synthetic,point_input)
+        elif status=='out_of_domain':
+            if set(point)!={'area_ratio','ambient_pressure_pa','status','error'} or not isinstance(point['error'],str) or not point['error'].strip():
+                raise ValueError('Domain exclusion has no valid diagnostic')
+        else: raise ValueError('Calculation error is not an expected domain exclusion')
+        counts[status]+=1
+    if not re.fullmatch(r'\d+\.\d+\.\d+',str(report['program_version'])) or not isinstance(report['limitations'],list) or not report['limitations'] or any(not isinstance(x,str) or not x for x in report['limitations']):
+        raise ValueError('Study version/limitations missing')
+    return counts
 
 
 def validate_result(report, input_text):
@@ -70,7 +123,7 @@ def source_records(root):
     modules=read_json(root/"project/modules.json")["modules"]
     sources=[s for m in modules for s in m["sources"]]
     sources += [p.relative_to(root).as_posix() for folder in ("include","src/adapters") for p in (root/folder).rglob('*.h')]
-    sources += ["tests/test_core.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
+    sources += ["tests/test_core.c","tests/test_adapters.c","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
     return file_records(root,sources)
 
 
@@ -111,19 +164,24 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
             adapters=modules["adapters"]["sources"]+modules["cli"]["sources"]
             flags=['-std=c17','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wshadow','-Wstrict-prototypes','-Wmissing-prototypes','-fno-common','-Iinclude','-Isrc/adapters']
             flags += ['-O0','-g3'] if configuration=="Debug" else ['-O2','-DNDEBUG']
-            if sanitize: flags+=['-fsanitize=address,undefined','-fno-omit-frame-pointer']
+            if sanitize: flags+=['-fsanitize=address,undefined','-fno-sanitize-recover=all','-fno-omit-frame-pointer']
             suffix='.exe' if os.name=='nt' else ''
-            app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix)
+            app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix); adapter=attempt/("test_adapters"+suffix)
             commands=[[executable,*flags,*(['-municode'] if os.name=='nt' else []),*core,*adapters,'-lm','-o',str(app)],
-                      [executable,*flags,*core,'tests/test_core.c','-lm','-o',str(unit)]]
+                      [executable,*flags,*core,'tests/test_core.c','-lm','-o',str(unit)],
+                      [executable,*flags,*core,*modules['adapters']['sources'],'tests/test_adapters.c','-lm','-o',str(adapter)]]
+            if sanitize:
+                commands.append([executable,*flags,'tests/fixtures/sanitizer_probe.c','-o',str(attempt/'sanitizer_probe')])
             version=execute([executable,'--version'],root,attempt/'compiler.log',30).splitlines()[0]
             for index,command in enumerate(commands): execute(command,root,attempt/f'compile-{index}.log')
             if source_records(root)!=before: raise ValueError("Sources changed while compiling; build not published")
             manifest.update(status="PASS",compiler_version=version,flags=flags,inputs=before,commands=commands,
                             application={"path":app.relative_to(root).as_posix(),"sha256":digest(app)},
-                            core_test={"path":unit.relative_to(root).as_posix(),"sha256":digest(unit)})
+                            core_test={"path":unit.relative_to(root).as_posix(),"sha256":digest(unit)},
+                            adapter_test={"path":adapter.relative_to(root).as_posix(),"sha256":digest(adapter)})
+            if sanitize: manifest['sanitizer_probe']={'path':(attempt/'sanitizer_probe').relative_to(root).as_posix(),'sha256':digest(attempt/'sanitizer_probe')}
             # Compatibility aliases. Consumers must use the manifest pointer, not trust old aliases.
-            for output in (app,unit):
+            for output in (app,unit,adapter):
                 destination=root/'build'/name/output.name
                 temporary=destination.with_name('.'+output.name+'.'+uuid.uuid4().hex)
                 shutil.copy2(output,temporary); os.replace(temporary,destination)
@@ -143,7 +201,7 @@ def verified_build(root,configuration="Debug",sanitize=False,require_tests=False
     path=local_path(root,pointer['manifest']); manifest=read_json(path)
     if manifest.get('status')!='PASS' or manifest.get('kind')!='build': raise ValueError("Latest build attempt did not pass")
     if manifest['inputs']!=source_records(root): raise ValueError("Build is stale for current source inputs")
-    for field in ('application','core_test'):
+    for field in ('application','core_test','adapter_test',*(['sanitizer_probe'] if sanitize else [])):
         artifact=local_path(root,manifest[field]['path'])
         if not artifact.is_file() or digest(artifact)!=manifest[field]['sha256']: raise ValueError("Build artifact hash mismatch")
     if require_tests:
@@ -163,13 +221,22 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     atomic_json(root/'build'/name/'test-report.json',report)
     try:
         core_log=execute([local_path(root,manifest['core_test']['path'])],root,path.parent/'core-test.log')
+        adapter_log=execute([local_path(root,manifest['adapter_test']['path'])],root,path.parent/'adapter-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
+        if sanitize:
+            probe=local_path(root,manifest['sanitizer_probe']['path'])
+            for mode,expected in [('address','ERROR: AddressSanitizer'),('undefined','runtime error: signed integer overflow')]:
+                completed=subprocess.run([str(probe),mode],cwd=root,capture_output=True,text=True,timeout=15,env=subprocess_env())
+                output=completed.stdout+completed.stderr
+                atomic_text(path.parent/(mode+'-probe.log'),output)
+                if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":"core","status":"PASS"},{"name":"cli","status":"PASS"}],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
+                      adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
                       cli_groups=int(re.search(r'Ran (\d+) tests',cli_log).group(1)),
                       binary_sha256=manifest['application']['sha256'])
-        print(core_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
+        print(core_log.strip()); print(adapter_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:
         report.update(status='FAIL',error=str(exc)); raise
     finally:
@@ -178,7 +245,10 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     return path
 
 
-def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15):
+def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15,study=False,area_ratios=None,ambient_pressures=None):
+    if not study and (area_ratios is not None or ambient_pressures is not None): raise ValueError('Grid options require --study')
+    ratios=grid_axis(area_ratios) if area_ratios is not None else DEFAULT_RATIOS.copy()
+    pressures=grid_axis(ambient_pressures,True) if ambient_pressures is not None else DEFAULT_PRESSURES.copy()
     run_id=run_id or 'run_'+uuid.uuid4().hex[:16]
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,100}',run_id): raise ValueError("Unsafe RunId")
     case_path=Path(case_path)
@@ -202,15 +272,19 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         shutil.copy2(build_path,folder/'build-manifest.json')
         shutil.copy2(build_path.parent/'test-report.json',folder/'test-report.json')
         if digest(executable)!=build_manifest['application']['sha256']: raise ValueError("Binary changed during snapshot")
-        record.update(status='RUNNING',executable_sha256=digest(executable),build_manifest_sha256=digest(folder/'build-manifest.json'),test_report_sha256=digest(folder/'test-report.json'),command=[executable.name,'run','input.ini'])
+        arguments=['study','area-ratio-ambient','input.ini','--area-ratios',','.join(map(str,ratios)),'--ambient-pressures',','.join(map(str,pressures))] if study else ['run','input.ini']
+        record.update(status='RUNNING',executable_sha256=digest(executable),build_manifest_sha256=digest(folder/'build-manifest.json'),test_report_sha256=digest(folder/'test-report.json'),command=[executable.name,*arguments])
+        if study: record['requested_grid']={'area_ratios':ratios,'ambient_pressures_pa':pressures}
         atomic_json(folder/'run-manifest.json',record)
-        completed=subprocess.run([str(executable),'run',str(folder/'input.ini')],cwd=root,capture_output=True,encoding='utf-8',errors='strict',timeout=timeout,check=False)
+        completed=subprocess.run([str(executable),*arguments],cwd=folder,capture_output=True,encoding='utf-8',errors='strict',timeout=timeout,check=False,env=subprocess_env())
         atomic_text(folder/'stdout.txt',completed.stdout); atomic_text(folder/'stderr.txt',completed.stderr)
         record['exit_code']=completed.returncode
         if completed.returncode: raise ValueError(f"Case rejected with exit {completed.returncode}")
         if completed.stderr: raise ValueError("Success path unexpectedly wrote stderr")
         data=strict_json(completed.stdout)
-        validate_result(data,(folder/'input.ini').read_text(encoding='utf-8-sig'))
+        input_text=(folder/'input.ini').read_text(encoding='utf-8-sig')
+        if study: record['point_counts']=validate_study(data,input_text,ratios,pressures)
+        else: validate_result(data,input_text)
         if digest(folder/'input.ini')!=record['input_sha256']: raise ValueError("Input changed during execution")
         atomic_text(folder/'result.json',completed.stdout)
         record.update(status='SUCCESS',output_file='result.json',output_sha256=digest(folder/'result.json'))
@@ -230,10 +304,11 @@ def main():
     for name in ('build','test'):
         p=sub.add_parser(name);p.add_argument('--configuration',choices=['Debug','Release'],default='Debug');p.add_argument('--compiler',default='gcc');p.add_argument('--sanitize',action='store_true');p.add_argument('--python',default=sys.executable)
     p=sub.add_parser('run');p.add_argument('--case',default='cases/benchmarks/air_mach2_vacuum.ini');p.add_argument('--configuration',choices=['Debug','Release'],default='Release');p.add_argument('--run-id');p.add_argument('--no-build',action='store_true')
+    p.add_argument('--study',choices=['area-ratio-ambient']);p.add_argument('--area-ratios');p.add_argument('--ambient-pressures')
     args=parser.parse_args()
     if args.command=='build': build(ROOT,args.configuration,args.compiler,args.sanitize)
     elif args.command=='test': test(ROOT,args.configuration,args.compiler,args.sanitize,args.python)
-    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build)
+    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build,study=bool(args.study),area_ratios=args.area_ratios,ambient_pressures=args.ambient_pressures)
 
 
 if __name__=='__main__':

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "PASS",
+  "started_at": "2026-10-02T07:53:06+00:00",
+  "input_fingerprint": "a794cf7eb24746b4bc0fd6ea33ae1693513fe8e42e998b4731b91778abb39d27",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/quality/debug.log"
+    },
+    {
+      "name": "release",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Release"
+      ],
+      "log": "build/quality/release.log"
+    },
+    {
+      "name": "runner",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "log": "build/quality/runner.log"
+    }
+  ],
+  "finished_at": "2026-10-02T07:53:33+00:00"
+}
