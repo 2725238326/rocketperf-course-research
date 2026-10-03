@@ -117,6 +117,20 @@ class ResultContractTests(unittest.TestCase):
         self.assertEqual(output.strip(),'中文日志')
         self.assertEqual(log.read_text(encoding='utf-8').strip(),'中文日志')
 
+    def test_cycle_snapshot_and_false_accounting_rejected(self):
+        case=ROOT/'cases/benchmarks/prescribed_cycle.ini'
+        folder=pipeline.run_case(ROOT,case,run_id='test_cycle_'+uuid.uuid4().hex[:12],no_build=True,model='prescribed-cycle')
+        record=read_json(folder/'run-manifest.json')
+        self.assertEqual(record['status'],'SUCCESS'); self.assertGreater(record['accounting_checks'],80)
+        self.assertEqual(record['command'][1:3],['cycle','prescribed'])
+        broken=read_json(folder/'result.json'); broken['energy']['pump_power_w']*=2
+        run_id='test_cycle_bad_'+uuid.uuid4().hex[:12]
+        fake=subprocess.CompletedProcess([],0,json.dumps(broken),'')
+        with mock.patch.object(pipeline.subprocess,'run',return_value=fake),self.assertRaises(ValueError):
+            pipeline.run_case(ROOT,case,run_id=run_id,no_build=True,model='prescribed-cycle')
+        self.assertEqual(read_json(ROOT/'results/local'/run_id/'run-manifest.json')['status'],'FAILED')
+        self.assertFalse((ROOT/'results/local'/run_id/'result.json').exists())
+
 
 class LifecycleTests(unittest.TestCase):
     def test_combustion_reference_preparation_failure_is_recorded(self):
@@ -139,6 +153,7 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/thermo_data.py',{'fixture':True})
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
+            atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):
                 pipeline.test(root)
             self.assertEqual(read_json(root/'build/debug/test-report.json')['status'],'FAIL')

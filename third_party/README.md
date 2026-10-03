@@ -1,7 +1,9 @@
 # 外部代码与许可
 
-当前C核心按标准理想气体关系独立实现，没有复制或链接NASA CEA、RocketCycles、Pyskyfire、Cantera或CoolProp代码。运行依赖C运行库/数学库；Python只用于黑盒测试，PowerShell用于构建和运行记录。
+当前C算法按热力关系独立实现，没有复制或链接NASA CEA、RocketCycles、Pyskyfire、Cantera或CoolProp求解代码。NASA9固定系数属于已提取的数据依赖，保留[许可与NOTICE](../data/thermo/manifest.json)；不能把“无求解库链接”说成“完全没有第三方内容”。运行依赖C运行库/数学库；Python用于工程、校核和归档。
 
 后续移植外部模块时，必须记录仓库/原文件、固定commit、许可证、保留声明、修改范围、底层依赖及验证案例。不同许可不能通过改写语言消除。
 
 本项目尚未由用户选择对外发布许可证，因此未擅自添加MIT/Apache/GPL等整项目许可声明。现有上游LICENSE原文仍位于`调研/原始来源/`，不代表它们已成为代码依赖。
+
+MOD-003只参考Pyskyfire固定commit的涡轮方程和测试职责，没有复制其CoolProp调用或网络求解器；源码/许可原文与逐文件哈希见[核验专题](../调研/专题/MOD-003_循环边界与部件参考.md)。保留上游MIT原文不改变整项目未选择对外许可证的状态。

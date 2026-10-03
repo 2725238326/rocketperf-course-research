@@ -325,7 +325,7 @@ def architecture_checks(root):
             except ValueError as exc: issues.append(str(exc)); continue
             text=path.read_text(encoding="utf-8")
             stripped=re.sub(r"/\*.*?\*/|//[^\n]*", "", text, flags=re.S)
-            if source_owner in {"core","nozzle","thermo"} and re.search(r"\b(?:printf|fprintf|puts|fopen|fread|fwrite|malloc|calloc|realloc|free|system|exit|setlocale)\s*\(",stripped):
+            if source_owner in {"core","nozzle","thermo","cycle"} and re.search(r"\b(?:printf|fprintf|puts|fopen|fread|fwrite|malloc|calloc|realloc|free|system|exit|setlocale)\s*\(",stripped):
                 issues.append(f"Core purity boundary violated: {relative}")
             for include in re.findall(r'^\s*#include\s+"([^"]+)"',text,re.M):
                 candidates=[path.parent/include,root/"include"/include,root/"src/adapters"/include]

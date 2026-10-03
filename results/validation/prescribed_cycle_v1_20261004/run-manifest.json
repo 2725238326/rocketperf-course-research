@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_f3a79d7f8eb54c4d",
+  "status": "SUCCESS",
+  "started_at": "2026-10-03T17:02:03+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\cases\\benchmarks\\prescribed_cycle.ini",
+  "input_sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec",
+  "executable_sha256": "21e42c1e65486677631ff0d560699d7e195148c517bd1af7f3cdbe583ed60078",
+  "build_manifest_sha256": "068d6eae260323ec0ff0e7a91e1a5a4a34cf9ecc7f129404f9bf7b5d0d5dff87",
+  "test_report_sha256": "79cc91fa1ffd561c5f2f5c30d8fff9979d4369932e364303ac44e7e424a4f75e",
+  "command": [
+    "rocketperf.exe",
+    "cycle",
+    "prescribed",
+    "input.ini"
+  ],
+  "exit_code": 0,
+  "accounting_checks": 86,
+  "output_file": "result.json",
+  "output_sha256": "744e80f3da24b18880fc1ab6652cba7dd6efcc39a9d6eeccd8b0bb8ad6d580a4",
+  "finished_at": "2026-10-03T17:02:05+00:00"
+}

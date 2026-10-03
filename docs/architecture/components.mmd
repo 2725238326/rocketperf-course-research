@@ -5,14 +5,17 @@ flowchart TD
   cli[命令行用例编排 · implemented]
   tooling[任务 / 质量 / 运行追溯 · implemented]
   thermo[热化学与物性 · implemented]
-  cycle[整机循环与损失 · planned]
+  cycle[部件与整机边界 · prototype]
   nozzle --> core
   nozzle --> thermo
   adapters --> core
   adapters --> nozzle
+  adapters --> thermo
+  adapters --> cycle
   cli --> core
   cli --> nozzle
   cli --> thermo
+  cli --> cycle
   cli --> adapters
   thermo --> core
   cycle --> core

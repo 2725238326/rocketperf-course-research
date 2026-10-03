@@ -167,6 +167,9 @@ class GovernanceTests(unittest.TestCase):
         thermo=self.root/'src/thermo/mixture.c'
         thermo.write_text(thermo.read_text(encoding='utf-8')+'\nvoid fixture_io(void) { printf("not pure"); }\n',encoding='utf-8')
         self.assertTrue(any('Core purity boundary violated: src/thermo/mixture.c' in x for x in project.architecture_checks(self.root)))
+        cycle=self.root/'src/cycle/components.c'
+        cycle.write_text(cycle.read_text(encoding='utf-8')+'\nvoid fixture_io(void) { printf("not pure"); }\n',encoding='utf-8')
+        self.assertTrue(any('Core purity boundary violated: src/cycle/components.c' in x for x in project.architecture_checks(self.root)))
 
     def test_secret_detection_does_not_print_secret(self):
         secret='sk-'+'a'*32

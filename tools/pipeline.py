@@ -130,13 +130,13 @@ def source_records(root):
     modules=read_json(root/"project/modules.json")["modules"]
     sources=[s for m in modules for s in m["sources"]]
     sources += [p.relative_to(root).as_posix() for folder in ("include","src") for p in (root/folder).rglob('*.h')]
-    sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/test_combustion.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
+    sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/test_combustion.c","tests/test_cycle.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
     return file_records(root,sources)
 
 
 def test_records(root):
     files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data/thermo","results/validation") for p in (root/folder).rglob('*') if p.suffix in {'.c','.h','.py','.json','.ini','.tsv','.inp','.out'}]
-    files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py']
+    files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py','tools/cycle_validation.py']
     return file_records(root,files)
 
 
@@ -168,7 +168,7 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
         try:
             before=source_records(root)
             modules={m['id']:m for m in read_json(root/"project/modules.json")["modules"]}
-            core=modules["core"]["sources"]+modules["nozzle"]["sources"]+modules["thermo"]["sources"]
+            core=modules["core"]["sources"]+modules["nozzle"]["sources"]+modules["thermo"]["sources"]+modules["cycle"]["sources"]
             adapters=modules["adapters"]["sources"]+modules["cli"]["sources"]
             flags=['-std=c17','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wshadow','-Wstrict-prototypes','-Wmissing-prototypes','-fno-common','-Iinclude','-Isrc/adapters']
             flags += ['-O0','-g3'] if configuration=="Debug" else ['-O2','-DNDEBUG']
@@ -176,11 +176,13 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
             suffix='.exe' if os.name=='nt' else ''
             app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix); adapter=attempt/("test_adapters"+suffix); thermo=attempt/("test_thermo"+suffix)
             combustion=attempt/("test_combustion"+suffix)
+            cycle=attempt/("test_cycle"+suffix)
             commands=[[executable,*flags,*(['-municode'] if os.name=='nt' else []),*core,*adapters,'-lm','-o',str(app)],
                       [executable,*flags,*core,'tests/test_core.c','-lm','-o',str(unit)],
                       [executable,*flags,*core,*modules['adapters']['sources'],'tests/test_adapters.c','-lm','-o',str(adapter)],
                       [executable,*flags,*core,'tests/test_thermo.c','-lm','-o',str(thermo)],
-                      [executable,*flags,*core,'tests/test_combustion.c','-lm','-o',str(combustion)]]
+                      [executable,*flags,*core,'tests/test_combustion.c','-lm','-o',str(combustion)],
+                      [executable,*flags,*core,'tests/test_cycle.c','-lm','-o',str(cycle)]]
             if sanitize:
                 commands.append([executable,*flags,'tests/fixtures/sanitizer_probe.c','-o',str(attempt/'sanitizer_probe')])
             version=execute([executable,'--version'],root,attempt/'compiler.log',30).splitlines()[0]
@@ -191,10 +193,11 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
                             core_test={"path":unit.relative_to(root).as_posix(),"sha256":digest(unit)},
                             adapter_test={"path":adapter.relative_to(root).as_posix(),"sha256":digest(adapter)},
                             thermo_test={"path":thermo.relative_to(root).as_posix(),"sha256":digest(thermo)},
-                            combustion_test={"path":combustion.relative_to(root).as_posix(),"sha256":digest(combustion)})
+                            combustion_test={"path":combustion.relative_to(root).as_posix(),"sha256":digest(combustion)},
+                            cycle_test={"path":cycle.relative_to(root).as_posix(),"sha256":digest(cycle)})
             if sanitize: manifest['sanitizer_probe']={'path':(attempt/'sanitizer_probe').relative_to(root).as_posix(),'sha256':digest(attempt/'sanitizer_probe')}
             # Compatibility aliases. Consumers must use the manifest pointer, not trust old aliases.
-            for output in (app,unit,adapter,thermo,combustion):
+            for output in (app,unit,adapter,thermo,combustion,cycle):
                 destination=root/'build'/name/output.name
                 temporary=destination.with_name('.'+output.name+'.'+uuid.uuid4().hex)
                 shutil.copy2(output,temporary); os.replace(temporary,destination)
@@ -214,7 +217,7 @@ def verified_build(root,configuration="Debug",sanitize=False,require_tests=False
     path=local_path(root,pointer['manifest']); manifest=read_json(path)
     if manifest.get('status')!='PASS' or manifest.get('kind')!='build': raise ValueError("Latest build attempt did not pass")
     if manifest['inputs']!=source_records(root): raise ValueError("Build is stale for current source inputs")
-    for field in ('application','core_test','adapter_test','thermo_test','combustion_test',*(['sanitizer_probe'] if sanitize else [])):
+    for field in ('application','core_test','adapter_test','thermo_test','combustion_test','cycle_test',*(['sanitizer_probe'] if sanitize else [])):
         artifact=local_path(root,manifest[field]['path'])
         if not artifact.is_file() or digest(artifact)!=manifest[field]['sha256']: raise ValueError("Build artifact hash mismatch")
     if require_tests:
@@ -239,10 +242,12 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
         adapter_log=execute([local_path(root,manifest['adapter_test']['path'])],root,path.parent/'adapter-test.log')
         thermo_log=execute([local_path(root,manifest['thermo_test']['path'])],root,path.parent/'thermo-test.log')
         combustion_log=execute([local_path(root,manifest['combustion_test']['path'])],root,path.parent/'combustion-test.log')
+        cycle_log=execute([local_path(root,manifest['cycle_test']['path'])],root,path.parent/'cycle-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
         cli_count=cli_test_count(cli_log)
         data_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_thermo_data.py','-v'],root,path.parent/'thermo-data-test.log')
         reference_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_cea_reference.py','-v'],root,path.parent/'cea-reference-test.log')
+        cycle_reference_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_cycle_reference.py','-v'],root,path.parent/'cycle-reference-test.log')
         if sanitize:
             probe=local_path(root,manifest['sanitizer_probe']['path'])
             for mode,expected in [('address','ERROR: AddressSanitizer'),('undefined','runtime error: signed integer overflow')]:
@@ -251,16 +256,18 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
                 atomic_text(path.parent/(mode+'-probe.log'),output)
                 if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','combustion','thermo-data','cea-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','combustion','cycle','thermo-data','cea-reference','cycle-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
                       adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
                       thermo_checks=int(re.search(r'thermo: (\d+) checks',thermo_log).group(1)),
                       combustion_checks=int(re.search(r'combustion: (\d+) checks',combustion_log).group(1)),
+                      cycle_checks=int(re.search(r'cycle: (\d+) checks',cycle_log).group(1)),
                       cli_groups=cli_count,cli_skipped=0,
                       thermo_data_groups=int(re.search(r'Ran (\d+) tests',data_log).group(1)),
                       cea_reference_groups=int(re.search(r'Ran (\d+) tests',reference_log).group(1)),
+                      cycle_reference_groups=int(re.search(r'Ran (\d+) tests',cycle_reference_log).group(1)),
                       binary_sha256=manifest['application']['sha256'])
-        print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(combustion_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
+        print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(combustion_log.strip()); print(cycle_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:
         report.update(status='FAIL',error=str(exc)); raise
     finally:
@@ -269,7 +276,9 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     return path
 
 
-def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15,study=False,area_ratios=None,ambient_pressures=None):
+def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15,study=False,area_ratios=None,ambient_pressures=None,model='ideal'):
+    if model not in {'ideal','prescribed-cycle'}: raise ValueError('Unsupported run model')
+    if study and model != 'ideal': raise ValueError('Study grid is currently only supported by the ideal nozzle')
     if not study and (area_ratios is not None or ambient_pressures is not None): raise ValueError('Grid options require --study')
     ratios=grid_axis(area_ratios) if area_ratios is not None else DEFAULT_RATIOS.copy()
     pressures=grid_axis(ambient_pressures,True) if ambient_pressures is not None else DEFAULT_PRESSURES.copy()
@@ -296,7 +305,7 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         shutil.copy2(build_path,folder/'build-manifest.json')
         shutil.copy2(build_path.parent/'test-report.json',folder/'test-report.json')
         if digest(executable)!=build_manifest['application']['sha256']: raise ValueError("Binary changed during snapshot")
-        arguments=['study','area-ratio-ambient','input.ini','--area-ratios',','.join(map(str,ratios)),'--ambient-pressures',','.join(map(str,pressures))] if study else ['run','input.ini']
+        arguments=['study','area-ratio-ambient','input.ini','--area-ratios',','.join(map(str,ratios)),'--ambient-pressures',','.join(map(str,pressures))] if study else (['cycle','prescribed','input.ini'] if model=='prescribed-cycle' else ['run','input.ini'])
         record.update(status='RUNNING',executable_sha256=digest(executable),build_manifest_sha256=digest(folder/'build-manifest.json'),test_report_sha256=digest(folder/'test-report.json'),command=[executable.name,*arguments])
         if study: record['requested_grid']={'area_ratios':ratios,'ambient_pressures_pa':pressures}
         atomic_json(folder/'run-manifest.json',record)
@@ -308,6 +317,9 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         data=strict_json(completed.stdout)
         input_text=(folder/'input.ini').read_text(encoding='utf-8-sig')
         if study: record['point_counts']=validate_study(data,input_text,ratios,pressures)
+        elif model=='prescribed-cycle':
+            from cycle_validation import validate_cycle
+            record['accounting_checks']=len(validate_cycle(data,input_text))
         else: validate_result(data,input_text)
         if digest(folder/'input.ini')!=record['input_sha256']: raise ValueError("Input changed during execution")
         atomic_text(folder/'result.json',completed.stdout)
@@ -329,10 +341,11 @@ def main():
         p=sub.add_parser(name);p.add_argument('--configuration',choices=['Debug','Release'],default='Debug');p.add_argument('--compiler',default='gcc');p.add_argument('--sanitize',action='store_true');p.add_argument('--python',default=sys.executable)
     p=sub.add_parser('run');p.add_argument('--case',default='cases/benchmarks/air_mach2_vacuum.ini');p.add_argument('--configuration',choices=['Debug','Release'],default='Release');p.add_argument('--run-id');p.add_argument('--no-build',action='store_true')
     p.add_argument('--study',choices=['area-ratio-ambient']);p.add_argument('--area-ratios');p.add_argument('--ambient-pressures')
+    p.add_argument('--model',choices=['ideal','prescribed-cycle'],default='ideal')
     args=parser.parse_args()
     if args.command=='build': build(ROOT,args.configuration,args.compiler,args.sanitize)
     elif args.command=='test': test(ROOT,args.configuration,args.compiler,args.sanitize,args.python)
-    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build,study=bool(args.study),area_ratios=args.area_ratios,ambient_pressures=args.ambient_pressures)
+    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build,study=bool(args.study),area_ratios=args.area_ratios,ambient_pressures=args.ambient_pressures,model=args.model)
 
 
 if __name__=='__main__':

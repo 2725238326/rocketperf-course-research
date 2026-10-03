@@ -1,6 +1,6 @@
 # 火箭发动机原理 · Rocketperf
 
-研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九物种气态CH4/O2的TP/HP平衡和燃烧室冻结温变喷管。真实型号输入仍有缺口，整机循环尚未实现；方法基准不能当作飞行发动机性能。
+研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九物种气态CH4/O2的TP/HP平衡、燃烧室冻结温变喷管和给定热状态的稳态外排循环边界。真实型号输入仍有缺口；方法基准和循环合成算例不能当作飞行发动机性能。
 
 [打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
@@ -31,6 +31,14 @@ python tools/combustion_reference.py
 ```
 
 第一条算燃烧室温度和组分；第二条继续算冻结喷管；第三条从已测具体构建复跑四个固定工况、与CEA自动比对并保留记录。`build/release`中的exe是便捷别名，追溯以manifest指向的实际构建为准。条件与验证见[热化学与喷管](docs/thermo-nozzle-validation.md)。
+
+循环合成算例可直接运行并归档：
+
+```powershell
+python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
+```
+
+该命令输出并保存泵功、涡轮轴功、外排支路、两路推力及热交换/残差。首版拒绝非零涡轮回流，不是完整补燃循环，见[循环边界与验证](docs/cycle-validation.md)。
 
 ## 按职责找入口
 

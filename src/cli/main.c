@@ -1,4 +1,5 @@
 #include "case_file.h"
+#include "cycle_case.h"
 #include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
 #include "rocketperf/thermo.h"
@@ -274,6 +275,7 @@ static int cli_main(int argc, char **argv)
         return 0;
     }
     if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+        (void)puts("       rocketperf cycle prescribed CASE.ini (prescribed thermal states, no return)");
         (void)puts("       rocketperf combustion tp T_K P_PA OF TF_K TO_K (gas feed)");
         (void)puts("       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)");
         (void)puts("       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA");
@@ -286,6 +288,18 @@ static int cli_main(int argc, char **argv)
     }
     if (argc >= 2 && strcmp(argv[1], "combustion") == 0) {
         return combustion_main(argc - 2, &argv[2]);
+    }
+    if (argc >= 2 && strcmp(argv[1], "cycle") == 0) {
+        if (argc != 4 || strcmp(argv[2], "prescribed") != 0) {
+            (void)fputs("Usage: rocketperf cycle prescribed CASE.ini\n", stderr); return 2;
+        }
+        status = rp_cycle_case_run(argv[3], stdout, &error);
+        if (status == RP_OK && fflush(stdout) != 0) { status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush cycle report."); }
+        if (status != RP_OK) {
+            (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+            return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
+        }
+        return 0;
     }
     if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
         return study_main(argv[3], argc - 4, &argv[4]);

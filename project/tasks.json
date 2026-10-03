@@ -1,18 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 84,
+  "revision": 89,
   "context": {
-    "phase": "Windows主线：燃烧与冻结喷管验收，接续整机循环与改进研究",
-    "evidence_cutoff": "2026-10-03",
+    "phase": "Windows主线：燃烧、冻结喷管与外排循环验收；接续改进研究。",
+    "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "MOD-003",
       "ANA-002"
     ],
     "facts": [
-      "NASA9十物种真实数据与134状态软件对照已完成。",
-      "C17九物种TP/HP与燃烧室冻结温变喷管可运行，固定CEA同条件对照已通过；不是飞行发动机性能。",
-      "整机支路/轴功率与改进代价/敏感性仍待后续任务，真实型号缺证输入保持unknown。",
-      "Windows主线持续；本轮不运行WSL，PPT和报告暂不推进。"
+      "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
+      "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
+      "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
+      "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
     ]
   },
   "tasks": [
@@ -603,21 +602,34 @@
     {
       "id": "MOD-003",
       "title": "稳态循环与整机边界计算",
-      "status": "READY",
+      "status": "DONE",
       "priority": 2,
       "depends_on": [
         "MOD-002",
         "DATA-002"
       ],
       "required_artifacts": [
-        "docs/cycle-validation.md"
+        "docs/cycle-validation.md",
+        "include/rocketperf/cycle.h",
+        "src/cycle/components.c",
+        "src/cycle/prescribed.c",
+        "tests/test_cycle.c",
+        "cases/benchmarks/prescribed_cycle.ini",
+        "tools/cycle_validation.py",
+        "results/validation/prescribed_cycle_v1_20261004/manifest.json",
+        "调研/专题/MOD-003_循环边界与部件参考.md",
+        "taskshot/2026-10-04_019-prescribed-cycle.md"
       ],
       "acceptance": [
         "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "codex",
+      "note": "按任务契约验收给定热状态的外排控制体；完整质量5组PASS、16生产C源静态分析、Windows CMake 6/6 CTest。本人解释验收而非独立科学人审；无液态物性、补燃回流或真实型号闭合，接续ANA-002收益/代价/敏感性",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/MOD-003_d24b43582428.json",
+        "sha256": "821248c9cf6a6e95fb8ccb09d07a17065983f0d675d28f08146a44c3819ecafa"
+      }
     },
     {
       "id": "ANA-002",
@@ -2305,6 +2317,144 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "b5ad057e1ea9a0130ab9a3114f4a2fd643b7a5cf98d28f97bb607f6d6cac2565",
       "hash": "a69c50b295194b1f1a7a3d0b208b204f7abd4e6587c511020c43dd0bb09731b7"
+    },
+    {
+      "seq": 102,
+      "at": "2026-10-03T15:51:40+00:00",
+      "task": "MOD-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "实现有明确假设的稳态支路/泵/涡轮与整机推力边界；验证质量、能量、轴功率和零支路极限，不推定真实型号循环",
+      "previous_hash": "a69c50b295194b1f1a7a3d0b208b204f7abd4e6587c511020c43dd0bb09731b7",
+      "hash": "0bca7141a2b1fb5f3ebb1fc66ca2623e85d393c4b42e8a7dd5182f5521c84426"
+    },
+    {
+      "seq": 103,
+      "at": "2026-10-03T17:26:12+00:00",
+      "task": "MOD-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "将已实现的外排循环、C测试、严格输入和固定归档纳入实际验收产物；回流因混合化学未闭合显式拒绝，不降低原质量/轴功/能量/零支路要求",
+      "previous_hash": "0bca7141a2b1fb5f3ebb1fc66ca2623e85d393c4b42e8a7dd5182f5521c84426",
+      "details": {
+        "contract_before": {
+          "id": "MOD-003",
+          "title": "稳态循环与整机边界计算",
+          "status": "ACTIVE",
+          "priority": 2,
+          "depends_on": [
+            "MOD-002",
+            "DATA-002"
+          ],
+          "required_artifacts": [
+            "docs/cycle-validation.md"
+          ],
+          "acceptance": [
+            "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
+          ],
+          "owner": "codex",
+          "note": "实现有明确假设的稳态支路/泵/涡轮与整机推力边界；验证质量、能量、轴功率和零支路极限，不推定真实型号循环",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-003",
+          "title": "稳态循环与整机边界计算",
+          "status": "ACTIVE",
+          "priority": 2,
+          "depends_on": [
+            "MOD-002",
+            "DATA-002"
+          ],
+          "required_artifacts": [
+            "docs/cycle-validation.md",
+            "include/rocketperf/cycle.h",
+            "src/cycle/components.c",
+            "src/cycle/prescribed.c",
+            "tests/test_cycle.c",
+            "cases/benchmarks/prescribed_cycle.ini",
+            "tools/cycle_validation.py",
+            "results/validation/prescribed_cycle_v1_20261004/manifest.json",
+            "调研/专题/MOD-003_循环边界与部件参考.md",
+            "taskshot/2026-10-04_019-prescribed-cycle.md"
+          ],
+          "acceptance": [
+            "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
+          ],
+          "owner": "codex",
+          "note": "将已实现的外排循环、C测试、严格输入和固定归档纳入实际验收产物；回流因混合化学未闭合显式拒绝，不降低原质量/轴功/能量/零支路要求",
+          "verification": null
+        }
+      },
+      "hash": "e02bdc77f88c2c5ee6fee53dc3f070c1a17f749ee9556736b14e2df84863712e"
+    },
+    {
+      "seq": 104,
+      "at": "2026-10-03T17:26:14+00:00",
+      "task": "MOD-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "更新已实跑循环能力和后续研究入口；10月4日新增固定源码核验不代表两型性能参数更新",
+      "previous_hash": "e02bdc77f88c2c5ee6fee53dc3f070c1a17f749ee9556736b14e2df84863712e",
+      "details": {
+        "context_before": {
+          "phase": "Windows主线：燃烧与冻结喷管验收，接续整机循环与改进研究",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "MOD-003",
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种真实数据与134状态软件对照已完成。",
+            "C17九物种TP/HP与燃烧室冻结温变喷管可运行，固定CEA同条件对照已通过；不是飞行发动机性能。",
+            "整机支路/轴功率与改进代价/敏感性仍待后续任务，真实型号缺证输入保持unknown。",
+            "Windows主线持续；本轮不运行WSL，PPT和报告暂不推进。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows主线：燃烧、冻结喷管与外排循环验收；接续改进研究。",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
+            "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
+            "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
+            "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        }
+      },
+      "hash": "c31044dedbf490a5f8df13fd2f33827684f4d0db4fda8a024deca56b6c1448e4"
+    },
+    {
+      "seq": 105,
+      "at": "2026-10-03T17:35:49+00:00",
+      "task": "MOD-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "泵制造解、恒cp涡轮解析极限、轴功分流、主/支推力、零支路与三类记账均已C实现和实跑；Debug/Release分别241循环检查、22组CLI；固定合成归档86方程；非零回流明确拒绝，热交换为所需量而非独立燃烧预测",
+      "previous_hash": "c31044dedbf490a5f8df13fd2f33827684f4d0db4fda8a024deca56b6c1448e4",
+      "hash": "619d7f635f603b28375a6f05a13ef6f777f4120d1c1d63fe4ae656ba9e93ced0"
+    },
+    {
+      "seq": 106,
+      "at": "2026-10-03T17:35:50+00:00",
+      "task": "MOD-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "按任务契约验收给定热状态的外排控制体；完整质量5组PASS、16生产C源静态分析、Windows CMake 6/6 CTest。本人解释验收而非独立科学人审；无液态物性、补燃回流或真实型号闭合，接续ANA-002收益/代价/敏感性",
+      "previous_hash": "619d7f635f603b28375a6f05a13ef6f777f4120d1c1d63fe4ae656ba9e93ced0",
+      "hash": "3be6e54840502ad438046f4472e1645c700763a69a0455ec41b809d5b3eed267"
     }
   ]
 }

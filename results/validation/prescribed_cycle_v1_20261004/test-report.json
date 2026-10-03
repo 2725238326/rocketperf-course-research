@@ -1,0 +1,275 @@
+{
+  "schema_version": 2,
+  "kind": "test",
+  "status": "PASS",
+  "started_at": "2026-10-03T17:00:31+00:00",
+  "configuration": "Release",
+  "checks": [
+    {
+      "name": "core",
+      "status": "PASS"
+    },
+    {
+      "name": "adapters",
+      "status": "PASS"
+    },
+    {
+      "name": "thermo",
+      "status": "PASS"
+    },
+    {
+      "name": "combustion",
+      "status": "PASS"
+    },
+    {
+      "name": "cycle",
+      "status": "PASS"
+    },
+    {
+      "name": "thermo-data",
+      "status": "PASS"
+    },
+    {
+      "name": "cea-reference",
+      "status": "PASS"
+    },
+    {
+      "name": "cli",
+      "status": "PASS"
+    }
+  ],
+  "validation_inputs": [
+    {
+      "path": "cases/benchmarks/air_mach2_ambient.ini",
+      "sha256": "b4124739200416added34cce7ee563137975d604f9dcd1662f766981c49eb3b8"
+    },
+    {
+      "path": "cases/benchmarks/air_mach2_vacuum.ini",
+      "sha256": "4fbaaa246e939a0e816333aa259589f2c4411aab9ac301b3948e49861d70cb84"
+    },
+    {
+      "path": "cases/benchmarks/prescribed_cycle.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "data/thermo/cea_nasa9.tsv",
+      "sha256": "49bf217740522ce8ce39e2ebd45a2690fee654b70f5bae0de06e75127a6e79be"
+    },
+    {
+      "path": "data/thermo/fixture_nasa9.tsv",
+      "sha256": "9117569330c5b14840fd0c606841e6c76e976c1897ec39d31d1521691a1e1a53"
+    },
+    {
+      "path": "data/thermo/manifest.json",
+      "sha256": "0c42d9ce6e2cbe6d36a1f7dc62fab6b40e6f8e3926b553043a3c5849af47e31c"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/cea-manifest.json",
+      "sha256": "24c3f88d26194d2c045fa3fcf8748dad03af6196ac06bb06c472c24d8b7a3e34"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/frozen10-stdout.json",
+      "sha256": "0ec7ec570f0b35d9e2b1e370f5e1051840f15fd6de7833c30ad2b4864211a974"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/frozen40-stdout.json",
+      "sha256": "460dd24e5c18af9ec455efa8bcde2f70597cf58dd6faf4714ac1fb2df7b1e1a1"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/hp-stdout.json",
+      "sha256": "b8ae2ed6155e1f5e76f1b57a8cc46d206a9aeadf06bba8e298261b7e3424516e"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/manifest.json",
+      "sha256": "722de7e3645c18d460b9cc7fd7f712a2dd928392f2b7d6dd9518ee0b8c3c1763"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v1/tp-stdout.json",
+      "sha256": "d8e15c08c819d331406669b3efc46fb8f2a2d4fd9d7952196f279241dae029c7"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/cea-manifest.json",
+      "sha256": "24c3f88d26194d2c045fa3fcf8748dad03af6196ac06bb06c472c24d8b7a3e34"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/frozen10-stdout.json",
+      "sha256": "0ec7ec570f0b35d9e2b1e370f5e1051840f15fd6de7833c30ad2b4864211a974"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/frozen40-stdout.json",
+      "sha256": "460dd24e5c18af9ec455efa8bcde2f70597cf58dd6faf4714ac1fb2df7b1e1a1"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/hp-stdout.json",
+      "sha256": "b8ae2ed6155e1f5e76f1b57a8cc46d206a9aeadf06bba8e298261b7e3424516e"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/manifest.json",
+      "sha256": "5b84948e6ef7d348fa516a04950c0c87413e88bb48de555cef3c1b0ec619aea0"
+    },
+    {
+      "path": "results/validation/20261003_ch4_o2_frozen_v2/tp-stdout.json",
+      "sha256": "d8e15c08c819d331406669b3efc46fb8f2a2d4fd9d7952196f279241dae029c7"
+    },
+    {
+      "path": "tests/fixtures/overexpanded.ini",
+      "sha256": "f0726e822c193bfce0952f85aa4d99520afa814a63bf5d7f33c1c13b84ac3ab6"
+    },
+    {
+      "path": "tests/fixtures/sanitizer_probe.c",
+      "sha256": "0563159c14f9815bc90f48d54e360a81fbe0b0bc41576dd09c052da17b08e521"
+    },
+    {
+      "path": "tests/reference/air_mach2.json",
+      "sha256": "440b8231d6f451cb560b1fe6d92e17ae4fef1037f8af49c373978d98aff94702"
+    },
+    {
+      "path": "tests/reference/cea/ch4_o2_hp.inp",
+      "sha256": "c95ef5f61938c0985ea4af6f37ab02591eb2850a758641118cfd36277a43e9e1"
+    },
+    {
+      "path": "tests/reference/cea/ch4_o2_rocket_equilibrium.inp",
+      "sha256": "baae2f73f024d0766a484268bb7e7a4360f8d84fbdb40808cf40e07d28a12ab8"
+    },
+    {
+      "path": "tests/reference/cea/ch4_o2_rocket_frozen_chamber.inp",
+      "sha256": "3a57af3f26a0455aa463409d0218148290da27049b52b32a5838a96376c0be49"
+    },
+    {
+      "path": "tests/reference/cea/ch4_o2_tp.inp",
+      "sha256": "7dcaa5dac681ceb24fbf5944ec8cee5b097d558ecc98dc7eb12cf061277e96cb"
+    },
+    {
+      "path": "tests/reference/cea/manifest.json",
+      "sha256": "24c3f88d26194d2c045fa3fcf8748dad03af6196ac06bb06c472c24d8b7a3e34"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_hp.inp",
+      "sha256": "b3551ee70961035150c578444c4ba405bc889296c21ec5e464b49b0527efeac2"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_hp.out",
+      "sha256": "d2d01cbfaf8471ade09a4b62749f5fb5e93acdfe4c343d601e1898b894fe5151"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_rocket_equilibrium.inp",
+      "sha256": "29365c50436bbb336626b2d3b0effbc983b626d4cd30543be00c435e2d134be5"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_rocket_equilibrium.out",
+      "sha256": "abf08479ebdac96a19cfff60f504583ddecb0254db86b3f1820f25208127604f"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_rocket_frozen_chamber.inp",
+      "sha256": "45273ac5579eb560627b3755ae70536c6a095900b9017f06cd4948137d006cb3"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_rocket_frozen_chamber.out",
+      "sha256": "a32b92c55b0f03ab130799868dd78f1987996d85bc1a3cb533b530f33c72ee15"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_tp.inp",
+      "sha256": "c7706f568db23a0d7d005d857e96f4f74fa78b1f25109772517c6e69cc7ec1a6"
+    },
+    {
+      "path": "tests/reference/cea/raw/ch4_o2_tp.out",
+      "sha256": "1453018f3cc4dc2e61a7b02816d9a309cf6ede106ec4b02cc0f77dcc5b969b24"
+    },
+    {
+      "path": "tests/reference/cea/raw/trace1e8/ch4_o2_hp.out",
+      "sha256": "432cd17229243d87d0faf12eb3ed82135a4cbdd376f8005498070f1cdcf93635"
+    },
+    {
+      "path": "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_equilibrium.out",
+      "sha256": "f3388408814f1f5ab4fd86356adbcf560b4716f8d2fbda84383648dd6e58edac"
+    },
+    {
+      "path": "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_frozen_chamber.out",
+      "sha256": "1b3e36ddeb5488e2c4b5b42a2d049030c65ced81629bd1f5f22409e48af52854"
+    },
+    {
+      "path": "tests/reference/cea/raw/trace1e8/ch4_o2_tp.out",
+      "sha256": "acdee37bcc7623079f738ef1e67788453b8791702dc83e2640ff1ba323968121"
+    },
+    {
+      "path": "tests/reference/nasa9_cantera.h",
+      "sha256": "3f47bb940119735da5a28423edb0e8741856c647934f8d39833b84c0c38b5eaf"
+    },
+    {
+      "path": "tests/reference/nasa9_cantera.json",
+      "sha256": "36d043f9d3774f7504fae6ef471a4c7863ff2d14739f6c0f40c4357c44d217b8"
+    },
+    {
+      "path": "tests/test_adapters.c",
+      "sha256": "5b67e0bbfaa0944f3d7d6a024b89d7728402386c77873be8d238311cadf6d771"
+    },
+    {
+      "path": "tests/test_cea_reference.py",
+      "sha256": "4f1001b3f081271372e5882867309926e57d905e79ff034abfe0fc8b5cf63504"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "sha256": "8a80b70bb0b283ff688192ef27a39822b11def83b9a2ac74ec076f0e7b3b3044"
+    },
+    {
+      "path": "tests/test_combustion.c",
+      "sha256": "1d08f7edeae356bf66700148416997e27d31d08434dfdd505dd0e6ec73254f97"
+    },
+    {
+      "path": "tests/test_core.c",
+      "sha256": "e5887f9400b4132c07eef9227ef33d94c116f5d8c76af4fdc080d15d4d0df8fa"
+    },
+    {
+      "path": "tests/test_cycle.c",
+      "sha256": "87ec38b5784de893c030708d30da32678318301b99bb8e4201f1fc9d75e96b46"
+    },
+    {
+      "path": "tests/test_data.py",
+      "sha256": "c81862790da5d6648a2a203b4a80c74a354bca809e09ea1090f295fcafaa2234"
+    },
+    {
+      "path": "tests/test_governance.py",
+      "sha256": "cd79e355030548572655645835eb9db85550e962ba6c86566f3462285f94e857"
+    },
+    {
+      "path": "tests/test_runner.py",
+      "sha256": "d6b99831b208d7200b07ac440c709c99c3533b0d53564270417e03a372d2cac6"
+    },
+    {
+      "path": "tests/test_thermo.c",
+      "sha256": "33518a128c8db1366a1e54d9779534ce2c1b54bd45593942fe2f71b0ea85678e"
+    },
+    {
+      "path": "tests/test_thermo_data.py",
+      "sha256": "b795488828a4a2150f3e48dcd8c7094807f7958a389b3e107bd9f5e835a84e3c"
+    },
+    {
+      "path": "tools/cea_reference.py",
+      "sha256": "23c0e432e76053dff97dfc317bdc0a778b5b0ad8356493a14f94bff111ac62a4"
+    },
+    {
+      "path": "tools/combustion_reference.py",
+      "sha256": "3134739be9825c45edff7708d3ddbd40674e8a5168d13b6e3bdf3c05f651fcfd"
+    },
+    {
+      "path": "tools/cycle_validation.py",
+      "sha256": "b8ed670ebd974ef8425cc504b822cafda159fac590663d33f0b42dc611fd991e"
+    },
+    {
+      "path": "tools/thermo_data.py",
+      "sha256": "15a8c49c70f505cd1a6263b7ccd52b886a169bdb7544ef7877f70aeb34509084"
+    }
+  ],
+  "build_manifest_sha256": "068d6eae260323ec0ff0e7a91e1a5a4a34cf9ecc7f129404f9bf7b5d0d5dff87",
+  "core_checks": 207,
+  "adapter_checks": 29,
+  "thermo_checks": 1175,
+  "combustion_checks": 2512,
+  "cycle_checks": 241,
+  "cli_groups": 22,
+  "cli_skipped": 0,
+  "thermo_data_groups": 5,
+  "cea_reference_groups": 3,
+  "binary_sha256": "21e42c1e65486677631ff0d560699d7e195148c517bd1af7f3cdbe583ed60078",
+  "finished_at": "2026-10-03T17:00:42+00:00"
+}

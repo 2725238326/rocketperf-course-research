@@ -63,3 +63,11 @@ rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA
 全部为SI值，OF为氧化剂/燃料质量比；TF/TO为气态CH4/O2入口温度。使用完整十进制数，不接受NaN/Inf、十六进制、尾随文字、缺项或多余参数。JSON带`schema_version=1`、明确模型ID、mode、固定dataset、实际输入、燃烧室组分/冻结cp/h/s、残差和限制；冻结模式另带冻结位置、喉部/出口状态与c*、有效排气速度m/s。TP焓差可以非零；HP焓残差必须满足0.01 J/kg。
 
 模型与测试边界见[验证说明](thermo-nozzle-validation.md)。`tools/combustion_reference.py`仅归档固定方法基准；任意研究参数的通用追溯运行入口尚未接入，不能把现有L0运行manifest套到新模型结果。
+
+## 给定热状态循环协议
+
+`rocketperf cycle prescribed CASE.ini`使用独立模型`prescribed_thermal_cycle_v1`。字段清单以[合成输入](../cases/benchmarks/prescribed_cycle.ini)为准：5个元数据字段与28个SI数值字段全部必填；未知/重复/缺失字段、NUL、超长行、非有限或非十进制数全部拒绝。UTF-8 BOM、CRLF和中文文件路径可用，元数据值为有界可打印ASCII。泵流量不允许覆盖，由总流量/O/F推导。
+
+输出包含`boundary/case/inputs/flows/pumps/turbine/main_nozzle/branch_nozzle/performance/energy/diagnostics/limitations`；零支路的`branch_nozzle`为null，不输出伪造零温度状态。推力单位N、有效速度m/s、比冲s、功率与热交換W；入口h为J/kg且与NASA9形成焓同基准。`generator_required_heat_w`、`chamber_required_heat_w`是保持给定温度所需交换，不是燃烧预测。
+
+`python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini`共用正式运行生命周期；从当前已测具体构建启动，重算86条方程后才保存成功结果。退出码2/3/4沿用既有含义。加载/求解失败stdout为空，外排和回流边界见[模型说明](cycle-validation.md)。

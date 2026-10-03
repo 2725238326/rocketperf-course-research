@@ -9,6 +9,8 @@ import thermo_data
 import pipeline
 import cea_reference
 import combustion_reference
+import cycle_validation
+from projectlib import read_json
 
 
 class ThermoDataTests(unittest.TestCase):
@@ -40,12 +42,20 @@ class ThermoDataTests(unittest.TestCase):
                 pipeline.cli_test_count(log)
         self.assertEqual(pipeline.cli_test_count('Ran 13 tests in 0.1s\nOK'), 13)
 
-    def test_archived_combustion_results_are_consistent(self):
+    def test_archived_validation_results_are_consistent(self):
         archives = sorted((ROOT / 'results/validation').glob('*/manifest.json'))
         self.assertTrue(archives, 'Expected actual C/CEA result archive')
+        combustion_count = 0
         for manifest in archives:
             with self.subTest(archive=manifest.parent.name):
-                self.assertEqual(combustion_reference.check_archive(manifest.parent)['status'], 'PASS')
+                kind=read_json(manifest).get('kind')
+                if kind=='combustion-reference':
+                    self.assertEqual(combustion_reference.check_archive(manifest.parent)['status'], 'PASS')
+                    combustion_count += 1
+                elif kind=='cycle-accounting-validation':
+                    self.assertGreater(len(cycle_validation.check_archive(manifest.parent)),0)
+                else: self.fail(f'Unknown validation archive type: {kind}')
+        self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
 
 
 if __name__ == '__main__':

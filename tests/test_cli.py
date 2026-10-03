@@ -11,6 +11,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from combustion_reference import compare_report
+from cycle_validation import validate_cycle
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -23,6 +24,7 @@ class CliTests(unittest.TestCase):
             raise unittest.SkipTest("CLI tests require --binary <path>; use tools/pipeline.py test")
         cls.base = (ROOT / "cases/benchmarks/air_mach2_vacuum.ini").read_text(encoding="utf-8")
         cls.reference = json.loads((ROOT / "tests/reference/air_mach2.json").read_text(encoding="utf-8"))
+        cls.cycle = (ROOT / 'cases/benchmarks/prescribed_cycle.ini').read_text(encoding='utf-8')
         (ROOT / "build/test-tmp").mkdir(parents=True, exist_ok=True)
 
     def setUp(self):
@@ -248,6 +250,72 @@ class CliTests(unittest.TestCase):
             if defect == 'residual': broken['diagnostics']['element_relative_residual'][0] = 0.01
             with self.subTest(defect=defect), self.assertRaises(ValueError):
                 compare_report(broken, reference, 'frozen', 40)
+
+    def test_cycle_accounting_and_unicode_path(self):
+        result = self.run_app('cycle','prescribed',self.case(self.cycle))
+        self.assertEqual(result.returncode,0,result.stderr); self.assertEqual(result.stderr,'')
+        report=json.loads(result.stdout)
+        self.assertGreaterEqual(len(validate_cycle(report,self.cycle)),80)
+        self.assertAlmostEqual(report['energy']['pump_power_w'],1137201.607646175,places=6)
+        self.assertGreater(report['flows']['branch_mass_flow_kg_per_s'],0)
+        self.assertNotEqual(report['energy']['chamber_required_heat_w'],0)
+        self.assertIn('not an adiabatic',' '.join(report['limitations']))
+        self.assertEqual(result.stdout,self.run_app('cycle','prescribed',self.case(self.cycle)).stdout)
+        bom=b'\xef\xbb\xbf'+self.cycle.replace('\n','\r\n').encode('utf-8')
+        self.assertEqual(self.run_app('cycle','prescribed',self.case(bom)).returncode,0)
+
+    def test_cycle_schema_and_numeric_rejections(self):
+        variants=[self.cycle+'unknown=1\n',self.cycle+'return_fraction=0\n',
+                  self.cycle.replace('return_fraction=0\n',''),self.cycle.replace('prescribed_thermal_cycle_v1','flight_engine'),
+                  self.cycle.replace('synthetic_benchmark','verified_engine'),self.cycle.replace('schema_version=1','schema_version=2'),
+                  self.cycle.replace('main_area_ratio=10','main_area_ratio=10\x00hidden'),
+                  '#'+('x'*600)+'\n'+self.cycle,'# comment\n'*130+self.cycle]
+        for value in ('nan','inf','1e999','1e-999','0x1p2','1,4','10 # comment'):
+            variants.append(self.cycle.replace('main_area_ratio=10','main_area_ratio='+value))
+        for text in variants:
+            with self.subTest(text=text[-100:]):
+                result=self.run_app('cycle','prescribed',self.case(text))
+                self.assertEqual(result.returncode,3,result.stderr); self.assertEqual(result.stdout,'')
+        for args in ((),('prescribed',),('unknown','case.ini')):
+            self.assertEqual(self.run_app('cycle',*args).returncode,2)
+
+    def test_cycle_domain_and_zero_branch(self):
+        for old,new in [('return_fraction=0','return_fraction=0.5'),
+                        ('fuel_pump_outlet_pressure_pa=7000000','fuel_pump_outlet_pressure_pa=4000000'),
+                        ('maximum_branch_fraction=0.25','maximum_branch_fraction=0.000001'),
+                        ('ambient_pressure_pa=0','ambient_pressure_pa=1000000'),
+                        ('turbine_efficiency=0.7','turbine_efficiency=1.01')]:
+            with self.subTest(new=new):
+                result=self.run_app('cycle','prescribed',self.case(self.cycle.replace(old,new)))
+                self.assertEqual(result.returncode,4,result.stderr); self.assertEqual(result.stdout,'')
+        zero=self.cycle.replace('pump_inlet_pressure_pa=200000','pump_inlet_pressure_pa=7000000').replace('auxiliary_power_w=10000','auxiliary_power_w=0')
+        result=self.run_app('cycle','prescribed',self.case(zero)); self.assertEqual(result.returncode,0,result.stderr)
+        report=json.loads(result.stdout); self.assertIsNone(report['branch_nozzle'])
+        self.assertEqual(report['flows']['branch_mass_flow_kg_per_s'],0)
+        self.assertGreater(len(validate_cycle(report,zero)),50)
+
+    def test_cycle_validator_detects_wrong_accounting(self):
+        result=self.run_app('cycle','prescribed',self.case(self.cycle)); self.assertEqual(result.returncode,0,result.stderr)
+        report=json.loads(result.stdout)
+        for defect in ('schema','provenance','nonfinite','pump','shaft','branch','thrust','energy','composition','zero','input','negative','entropy','state','residual','heat'):
+            broken=copy.deepcopy(report)
+            if defect=='schema': broken.pop('energy')
+            if defect=='provenance': broken['case']['kind']='verified_engine'
+            if defect=='nonfinite': broken['performance']['total_thrust_n']=float('nan')
+            if defect=='pump': broken['pumps']['fuel']['shaft_power_w']*=2
+            if defect=='shaft': broken['energy']['turbine_power_w']*=2
+            if defect=='branch': broken['flows']['branch_mass_flow_kg_per_s']*=2
+            if defect=='thrust': broken['performance']['engine_specific_impulse_s']*=9.80665
+            if defect=='energy': broken['branch_nozzle']['exit']['gas']['h_j_per_kg']+=1000
+            if defect=='composition': broken['turbine']['outlet']['mole_fractions']['H2']+=0.01
+            if defect=='zero': broken['branch_nozzle']=None
+            if defect=='input': broken['inputs']['turbine_efficiency']=True
+            if defect=='negative': broken['performance']['branch_thrust_n']*=-1
+            if defect=='entropy': broken['turbine']['entropy_generation_j_per_kg_k']=-1
+            if defect=='state': broken['branch_nozzle']['chamber']['temperature_k']+=1
+            if defect=='residual': broken['diagnostics']['energy_relative_residual']=0.01
+            if defect=='heat': broken['energy']['chamber_required_heat_w']=0
+            with self.subTest(defect=defect),self.assertRaises(ValueError): validate_cycle(broken,self.cycle)
 
 
 if __name__ == "__main__":

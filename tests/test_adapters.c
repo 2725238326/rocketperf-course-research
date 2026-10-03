@@ -1,4 +1,5 @@
 #include "case_file.h"
+#include "cycle_case.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -58,6 +59,19 @@ int main(void)
     CHECK(strstr(text, "source\\u000a\\u0009\\u0001") != NULL);
     CHECK(strstr(text, "excluded\\u000apoint") != NULL);
     CHECK(fclose(stream) == 0);
+    {
+        RpCycleCase cycle, sentinel;
+        memset(&sentinel, 0x5a, sizeof(sentinel)); cycle = sentinel;
+        CHECK(rp_cycle_case_load(NULL, &cycle, &error) == RP_INVALID_ARGUMENT);
+        CHECK(rp_cycle_case_load("missing-cycle-case.ini", &cycle, &error) == RP_IO_ERROR);
+        CHECK(memcmp(&cycle, &sentinel, sizeof(cycle)) == 0);
+        stream = tmpfile(); CHECK(stream != NULL);
+        if (stream != NULL) {
+            CHECK(rp_cycle_case_run("missing-cycle-case.ini", stream, &error) == RP_IO_ERROR);
+            CHECK(ftell(stream) == 0L); CHECK(fclose(stream) == 0);
+        }
+        CHECK(rp_cycle_case_run(NULL, NULL, &error) == RP_INVALID_ARGUMENT);
+    }
     (void)printf("adapters: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }
