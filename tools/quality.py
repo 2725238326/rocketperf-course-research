@@ -23,12 +23,16 @@ def main():
            ('governance',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_governance.py','-v']),
            ('debug',[sys.executable,'tools/pipeline.py','test','--configuration','Debug']),
            ('release',[sys.executable,'tools/pipeline.py','test','--configuration','Release']),
-           ('runner',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_runner.py','-v'])]
+           ('runner',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_runner.py','-v']),
+           ('handoff',[sys.executable,'-m','unittest','discover','-s','tests','-p','test_handoff.py','-v'])]
     try:
         for name,command in steps:
             print(f'Quality: {name}',flush=True)
             completed=subprocess.run(command,cwd=ROOT,capture_output=True,encoding='utf-8',errors='replace',timeout=240,check=False,env=subprocess_env())
             atomic_text(folder/(name+'.log'),completed.stdout+completed.stderr)
+            if name in {'governance','runner','handoff'} and completed.returncode == 0:
+                from pipeline import cli_test_count
+                cli_test_count(completed.stdout+completed.stderr)
             report['checks'].append({'name':name,'status':'PASS' if completed.returncode==0 else 'FAIL','command':command,'log':(folder/(name+'.log')).relative_to(ROOT).as_posix()})
             atomic_json(path,report)
             if completed.returncode:

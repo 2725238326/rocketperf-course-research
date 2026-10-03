@@ -100,7 +100,9 @@ def workflow():
     body+=node(60,530,450,"单一状态来源",["project/tasks.json + 事件链"],"自动生成任务板和 worknow",h=144)
     body+=node(600,530,470,"质量与运行证据",["文档 / 边界 / 测试 / 哈希 / 失败语义"],"过期报告不能提交为当前验收",h=144)
     body+=node(1160,530,460,"阻塞与交接",["BLOCKED：写清原因与解除条件","解除后重新检查依赖"],"移交负责人留事件，不直接改 Markdown",h=144)
-    return frame("03","任务流程：执行、检查与本地提交","状态变更通过命令完成；测试记录证明软件检查，研究结论仍需按来源和模型审核。",770,body)
+    body+=text(60,744,"人员交接：版本固定 → 包内成功/失败演示 → 接手者复跑 → 明确维护/研究/讲解责任",21,INK,650)
+    body+=text(60,782,"交接包保留源码、已测程序和哈希；接收记录只证明软件复验，不代替科学结论审查。",18,MUTED)
+    return frame("03","任务流程：执行、检查、本地提交与交接","状态变更通过命令完成；测试记录证明软件检查，研究结论仍需按来源和模型审核。",880,body)
 
 
 def expected_architecture(root):
@@ -114,7 +116,7 @@ def expected_architecture(root):
     diagrams={"business":business(),"components":components(modules),"workflow":workflow()}
     mermaid={
         "business":"flowchart LR\n  Q[研究问题] --> E[证据与参数]\n  E --> M[模型与算例]\n  M --> C[C17计算]\n  C --> V[验证与研究]\n  V --> D[可复现交付]\n  V -. 证据或误差未解决 .-> E\n",
-        "workflow":"flowchart LR\n  R[READY] -->|领取与依赖检查| A[ACTIVE]\n  A -->|产物和质量证据| V[REVIEW]\n  V -->|新鲜指纹验收| D[DONE]\n  V -. 继续实现 .-> A\n  A -->|记录原因| B[BLOCKED]\n  B -->|依赖重检| R\n  D --> G[Git审查与本地提交]\n",
+        "workflow":"flowchart LR\n  R[READY] -->|领取与依赖检查| A[ACTIVE]\n  A -->|产物和质量证据| V[REVIEW]\n  V -->|新鲜指纹验收| D[DONE]\n  V -. 继续实现 .-> A\n  A -->|记录原因| B[BLOCKED]\n  B -->|依赖重检| R\n  D --> G[Git审查与本地提交]\n  G --> P[固定版本交接包]\n  P --> T[接手者复跑成功与失败]\n  T --> O[明确维护/研究/讲解责任]\n",
         "components":"flowchart TD\n"+"".join(f"  {m['id']}[{m['name']} · {m['state']}]\n" for m in modules)+"".join(f"  {m['id']} --> {d}\n" for m in modules for d in m['allowed_dependencies'])
     }
     outputs={f"docs/architecture/{name}.svg":svg for name,svg in diagrams.items()}

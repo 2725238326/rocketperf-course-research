@@ -13,7 +13,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_DIRS = {".git", "build", "__pycache__", ".venv", "node_modules", ".locks"}
 DYNAMIC_PATHS = {"project/tasks.json", "worknow.md", "docs/tasks.md"}
-QUALITY_CHECKS = {"project", "governance", "debug", "release", "runner"}
+QUALITY_CHECKS = {"project", "governance", "debug", "release", "runner", "handoff"}
 
 
 def now() -> str:
@@ -52,8 +52,35 @@ def local_path(root: Path, relative: str) -> Path:
     return resolved
 
 
+def strict_json(text: str):
+    """Reject ambiguous keys and both spellings of non-finite JSON numbers."""
+    def bad(value):
+        raise ValueError(f"Non-finite JSON constant: {value}")
+    def pairs(items):
+        value = {}
+        for key, item in items:
+            if key in value:
+                raise ValueError(f"Duplicate JSON key: {key}")
+            value[key] = item
+        return value
+    def real(text):
+        import math
+        value = float(text)
+        if not math.isfinite(value):
+            raise ValueError("Non-finite JSON number")
+        return value
+    def integer(text):
+        import math
+        value=int(text)
+        try: finite=math.isfinite(value)
+        except OverflowError: finite=False
+        if not finite: raise ValueError('JSON integer exceeds finite numeric range')
+        return value
+    return json.loads(text, parse_constant=bad, parse_float=real, parse_int=integer, object_pairs_hook=pairs)
+
+
 def read_json(path: Path):
-    return json.loads(path.read_text(encoding="utf-8-sig"))
+    return strict_json(path.read_text(encoding="utf-8-sig"))
 
 
 def atomic_text(path: Path, value: str) -> None:
@@ -129,6 +156,9 @@ def fingerprint(root: Path) -> str:
 
     Raw evidence is included so post-check archive changes invalidate acceptance.
     """
+    protected = read_json(root/'project/policy.json').get('archive_prefixes',[]) if (root/'project/policy.json').is_file() else []
+    protected = tuple(protected) + ('results/validation/','data/thermo/','tests/reference/cea/raw/')
+    text_suffixes={'.md','.py','.ps1','.c','.h','.json','.yml','.yaml','.txt','.ini','.tsv','.svg','.html','.mmd'}
     pairs = []
     for path in project_files(root):
         rel = path.relative_to(root).as_posix()
@@ -136,7 +166,12 @@ def fingerprint(root: Path) -> str:
             continue
         if path.suffix.lower() == ".pyc":
             continue
-        pairs.append((rel, digest(path)))
+        # Only editable text receives an EOL-independent identity. Byte archives do not.
+        if not rel.startswith(protected) and path.suffix.lower() in text_suffixes:
+            identity=hashlib.sha256(path.read_bytes().replace(b'\r\n',b'\n')).hexdigest()
+        else:
+            identity=digest(path)
+        pairs.append((rel, identity))
     return hashlib.sha256(canonical(pairs)).hexdigest()
 
 

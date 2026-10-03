@@ -16,6 +16,10 @@ Get-Content worknow.md
 
 需要验收时运行 `python tools/quality.py`，按[治理规范](docs/governance.md)提交REVIEW再DONE。不要直接改Markdown状态，也不要把过期PASS拿来验收新输入。
 
+交给组员或其他维护者的具体步骤见[接收与讲解说明](docs/receiving.md)：固定提交、运行包核验、成功/失败复跑、具名接收记录，随后明确维护/研究/讲解职责。正式包只从干净提交和新鲜完整质量证据生成，包内含离线源码bundle；当前是阶段基础，不是最终报告/PPT。
+
+验收漏项与数值反例已补审，新校验记录见[QA-001快照](taskshot/2026-10-04_020-quality-and-handoff.md)及[版本2循环归档](results/validation/prescribed_cycle_v2_20261004_qa001/manifest.json)。接续研究前运行当前质量入口，不借用旧报告。
+
 ## 下一步的研究入口
 
 现有专题和空气算例只是阶段产物，尚不足以完成课程研究。原任务中的DONE不表示真实型号数据、热化学或循环已实现。待补项目、原因和验收要求见[审查记录](docs/review.md)；领取顺序看 `worknow.md`。最终报告的前置任务已补上，不能从教学算例直接跳到结题。
@@ -56,7 +60,7 @@ S1 的实现入口是 `rocketperf study area-ratio-ambient CASE.ini`，契约见
 
 ## 给定热状态外排循环接续
 
-`rocketperf cycle prescribed cases/benchmarks/prescribed_cycle.ini`计算总消耗对应的泵功、涡轮分流、主/支推力和所需热交换。正式记录用`python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini`；与L0共用不可变构建/测试/运行哈希，成功前再重算86条计账方程。固定产物在`results/validation/prescribed_cycle_v1_20261004/`。
+`rocketperf cycle prescribed cases/benchmarks/prescribed_cycle.ini`计算总消耗对应的泵功、涡轮分流、主/支推力和所需热交换。正式记录用`python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini`；与L0共用不可变构建/测试/运行哈希，新校验版本执行132条计账/状态关系。旧固定产物在`results/validation/prescribed_cycle_v1_20261004/`，历史86条证据不改写。
 
 `return_fraction`和`return_pressure_drop_pa`必须为零；任何非零值失败，不是压力可达便能宣称补燃闭合。入口焓必须与NASA9形成焓同基准；密度、入口焓和温度都是给定条件，不是液态物性解。算例约302 s不属于目标型号；主室约193.65 MW热排出说明它不是绝热真实发动机循环。
 

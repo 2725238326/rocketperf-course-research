@@ -9,3 +9,6 @@
 调研/检索记录/** -text -whitespace
 # CEA raw output hashes include native line endings and defect bytes.
 tests/reference/cea/raw/** -text -whitespace
+# Saved validation identities are byte-based, never checkout-normalized.
+results/validation/** -text -whitespace
+data/thermo/** -text -whitespace

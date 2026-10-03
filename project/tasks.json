@@ -1,17 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 89,
+  "revision": 101,
   "context": {
-    "phase": "Windows主线：燃烧、冻结喷管与外排循环验收；接续改进研究。",
+    "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
       "ANA-002"
     ],
     "facts": [
-      "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
-      "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
-      "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
-      "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+      "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+      "C17给定热状态外排循环已落地；校验版本2基准132条，旧86条归档保持原样。",
+      "两型直接原文复查仍截至10月3日；未知字段继续unknown，不填假数。",
+      "七项本地验收漏项已修复；正式交接以干净提交、完整质量和接收复跑为准。",
+      "后续接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
     ]
   },
   "tasks": [
@@ -634,11 +635,13 @@
     {
       "id": "ANA-002",
       "title": "改进研究与结果复核",
-      "status": "READY",
+      "status": "PLANNED",
       "priority": 1,
       "depends_on": [
         "DATA-002",
-        "MOD-002"
+        "MOD-002",
+        "MOD-003",
+        "QA-001"
       ],
       "required_artifacts": [
         "docs/improvement-analysis.md",
@@ -648,8 +651,37 @@
         "区分型号事实与计算情景；基线/改进采用同一数据版本；分析面积比背压趋势、独立参考、至少一种代价和输入敏感性；结果归档并说明不能外推的结论"
       ],
       "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "note": "先完成已复现的验收修复和阶段交接，再使用循环结果推进改进研究",
       "verification": null
+    },
+    {
+      "id": "QA-001",
+      "title": "修复验收漏项并建立可运行交接",
+      "status": "REVIEW",
+      "priority": 1,
+      "depends_on": [
+        "MOD-003",
+        "DATA-002"
+      ],
+      "required_artifacts": [
+        "tools/cycle_validation.py",
+        "tools/check_data.py",
+        "tools/handoff.py",
+        "docs/receiving.md",
+        "docs/review.md"
+      ],
+      "acceptance": [
+        "已复现的七项问题均有修复或明确兼容处理与回归测试；统一质量入口实际执行数据和交接检查",
+        "旧原始归档保持字节；新循环归档完整复核物性、元素、喷管与残差；错误输入和失效证据不能保存成功结果",
+        "Windows可生成校验过的本地交接包，明确版本、运行命令、验收责任、模型边界和后续任务；全量质量与干净检出通过后本地提交，不推送"
+      ],
+      "owner": "root",
+      "note": "七项修复与完整质量已通过，提交可审查实现；正式包和独立检出仍待实际复验，不提前结项。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-001_66c5b56600c1.json",
+        "sha256": "8f6463e3d4c28c4f140d4b7056ed8b90ee0b5016734dd9aaefae12ca24ec83ca"
+      }
     }
   ],
   "events": [
@@ -2455,6 +2487,251 @@
       "note": "按任务契约验收给定热状态的外排控制体；完整质量5组PASS、16生产C源静态分析、Windows CMake 6/6 CTest。本人解释验收而非独立科学人审；无液态物性、补燃回流或真实型号闭合，接续ANA-002收益/代价/敏感性",
       "previous_hash": "619d7f635f603b28375a6f05a13ef6f777f4120d1c1d63fe4ae656ba9e93ced0",
       "hash": "3be6e54840502ad438046f4472e1645c700763a69a0455ec41b809d5b3eed267"
+    },
+    {
+      "seq": 107,
+      "at": "2026-10-03T18:39:43+00:00",
+      "task": "QA-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "3be6e54840502ad438046f4472e1645c700763a69a0455ec41b809d5b3eed267",
+      "hash": "a650eead06e23a0760486e8f3a7577f0f9bcdc05d6122ad508f8cdec349efa05"
+    },
+    {
+      "seq": 108,
+      "at": "2026-10-03T18:39:44+00:00",
+      "task": "QA-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按本地复现修复数据、报告与追溯契约，同时建设阶段交接；不扩展真实发动机模型或最终报告",
+      "previous_hash": "a650eead06e23a0760486e8f3a7577f0f9bcdc05d6122ad508f8cdec349efa05",
+      "hash": "5a890cd2fc2c09c0bd1ca0d3cd7a10f72b98d0c0bd1a3b7157e2567d0bb915bf"
+    },
+    {
+      "seq": 109,
+      "at": "2026-10-03T18:39:45+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "暂先闭合排查问题和阶段交接，再接续改进研究",
+      "previous_hash": "5a890cd2fc2c09c0bd1ca0d3cd7a10f72b98d0c0bd1a3b7157e2567d0bb915bf",
+      "details": {
+        "context_before": {
+          "phase": "Windows主线：燃烧、冻结喷管与外排循环验收；接续改进研究。",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
+            "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
+            "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
+            "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows验收修复与阶段交接；随后接续改进研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
+            "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
+            "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
+            "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        }
+      },
+      "hash": "b130743bc1577fbc4e2a4ac1609611687de23c466b7eaceb801c64bb2286e673"
+    },
+    {
+      "seq": 110,
+      "at": "2026-10-03T19:12:17+00:00",
+      "task": "ANA-002",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "先完成已复现的验收修复和阶段交接，再使用循环结果推进改进研究",
+      "previous_hash": "b130743bc1577fbc4e2a4ac1609611687de23c466b7eaceb801c64bb2286e673",
+      "details": {
+        "contract_before": {
+          "id": "ANA-002",
+          "title": "改进研究与结果复核",
+          "status": "READY",
+          "priority": 1,
+          "depends_on": [
+            "DATA-002",
+            "MOD-002"
+          ],
+          "required_artifacts": [
+            "docs/improvement-analysis.md",
+            "results/research/README.md"
+          ],
+          "acceptance": [
+            "区分型号事实与计算情景；基线/改进采用同一数据版本；分析面积比背压趋势、独立参考、至少一种代价和输入敏感性；结果归档并说明不能外推的结论"
+          ],
+          "owner": null,
+          "note": "Created with an explicit acceptance contract",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "ANA-002",
+          "title": "改进研究与结果复核",
+          "status": "PLANNED",
+          "priority": 1,
+          "depends_on": [
+            "DATA-002",
+            "MOD-002",
+            "MOD-003",
+            "QA-001"
+          ],
+          "required_artifacts": [
+            "docs/improvement-analysis.md",
+            "results/research/README.md"
+          ],
+          "acceptance": [
+            "区分型号事实与计算情景；基线/改进采用同一数据版本；分析面积比背压趋势、独立参考、至少一种代价和输入敏感性；结果归档并说明不能外推的结论"
+          ],
+          "owner": null,
+          "note": "先完成已复现的验收修复和阶段交接，再使用循环结果推进改进研究",
+          "verification": null
+        }
+      },
+      "hash": "f33a8c4f6474542102c59bf9f330e17cde204776eb68ee32165f85332335a319"
+    },
+    {
+      "seq": 111,
+      "at": "2026-10-03T19:35:45+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "七项验收修复与阶段交接产物已落地，待新鲜全量质量和独立检出复验",
+      "previous_hash": "f33a8c4f6474542102c59bf9f330e17cde204776eb68ee32165f85332335a319",
+      "details": {
+        "context_before": {
+          "phase": "Windows验收修复与阶段交接；随后接续改进研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种数据、九物种TP/HP与冻结喷管同条件CEA方法对照已完成；不是飞行性能。",
+            "C17给定热状态外排循环可算泵/涡轮/两路推力与残差；无回流混合、液态物性或真实型号闭合。",
+            "新增Pyskyfire固定源码核验；两型直接原文复查仍截至10月3日，未知字段继续unknown。",
+            "改进收益、代价与敏感性接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "C17给定热状态外排循环已落地；校验版本2基准132条，旧86条归档保持原样。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown，不填假数。",
+            "七项本地验收漏项已修复；正式交接以干净提交、完整质量和接收复跑为准。",
+            "后续接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        }
+      },
+      "hash": "f8f9428b740df50a6c1c8805763666dcf783c0d4333ca65643f9fc7b50159cc9"
+    },
+    {
+      "seq": 112,
+      "at": "2026-10-03T19:42:14+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "七项本地验收漏项已逐项修复并有回归测试；Release/Debug、运行管理、治理、交接全量质量通过，Windows CMake 6/6 CTest通过，版本2循环归档已保存。",
+      "previous_hash": "f8f9428b740df50a6c1c8805763666dcf783c0d4333ca65643f9fc7b50159cc9",
+      "hash": "3f735c20bb57e7e62fa20df26e90e14d6ef3d7dc8749d39e8341dc375608c47e"
+    },
+    {
+      "seq": 113,
+      "at": "2026-10-03T19:42:15+00:00",
+      "task": "QA-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：提交、程序、失败语义、交接包和接收复跑链路已建立；研究模型边界与真实型号缺口保留，后续接续ANA-002。",
+      "previous_hash": "3f735c20bb57e7e62fa20df26e90e14d6ef3d7dc8749d39e8341dc375608c47e",
+      "hash": "eb854bdab1a06f0fbcc2b7ef705c81461ef73f0a7bed56daf851c3c256609f28"
+    },
+    {
+      "seq": 114,
+      "at": "2026-10-03T19:42:15+00:00",
+      "task": "ANA-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "eb854bdab1a06f0fbcc2b7ef705c81461ef73f0a7bed56daf851c3c256609f28",
+      "hash": "3dbec824b959d267321ff1267c8dd02e9121f6b79845e051c2079e1b373dec41"
+    },
+    {
+      "seq": 115,
+      "at": "2026-10-03T19:43:10+00:00",
+      "task": "QA-001",
+      "from": "DONE",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "纠正过早DONE：完整质量与局部交接回归已通过，但正式包及独立干净检出尚未验完；完成这些实际验收后再结项。",
+      "previous_hash": "3dbec824b959d267321ff1267c8dd02e9121f6b79845e051c2079e1b373dec41",
+      "hash": "a63bce39e7f5d94dfcfc18861c6e912d094ad84ceb1d1ac453542018e1ea2feb"
+    },
+    {
+      "seq": 116,
+      "at": "2026-10-03T19:43:10+00:00",
+      "task": "ANA-002",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Upstream reopened; prerequisite readiness revoked",
+      "previous_hash": "a63bce39e7f5d94dfcfc18861c6e912d094ad84ceb1d1ac453542018e1ea2feb",
+      "hash": "2ef30919dd70e19e43cf2e656492e6f84e1e045c2dafc2e945a7f24b9f48fb49"
+    },
+    {
+      "seq": 117,
+      "at": "2026-10-03T19:43:11+00:00",
+      "task": "QA-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "补验正式交接包和独立干净检出；保留已有PASS与失败/修正记录。",
+      "previous_hash": "2ef30919dd70e19e43cf2e656492e6f84e1e045c2dafc2e945a7f24b9f48fb49",
+      "hash": "7f81b9325a5c2b840f9e687b21e87e8c03033b59335ab3d94bcd17d40e81ae3a"
+    },
+    {
+      "seq": 118,
+      "at": "2026-10-03T19:43:12+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "七项修复与完整质量已通过，提交可审查实现；正式包和独立检出仍待实际复验，不提前结项。",
+      "previous_hash": "7f81b9325a5c2b840f9e687b21e87e8c03033b59335ab3d94bcd17d40e81ae3a",
+      "hash": "103a9b0845d6936908a7ffa9385935408a2fefdd88eb05d21c400127c320e3e2"
     }
   ]
 }

@@ -15,6 +15,17 @@ from projectlib import QUALITY_CHECKS, atomic_json, canonical, fingerprint, lock
 
 
 class GovernanceTests(unittest.TestCase):
+    def test_editable_eol_identity_and_raw_archive_bytes(self):
+        code=self.root/'example.py'
+        code.write_bytes(b'print(1)\n')
+        before=fingerprint(self.root)
+        code.write_bytes(b'print(1)\r\n')
+        self.assertEqual(before,fingerprint(self.root))
+        archive=self.root/'results/validation/fixture/stdout.txt'
+        archive.parent.mkdir(parents=True);archive.write_bytes(b'result\n')
+        before=fingerprint(self.root)
+        archive.write_bytes(b'result\r\n')
+        self.assertNotEqual(before,fingerprint(self.root))
     def setUp(self):
         (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
         self.temp=tempfile.TemporaryDirectory(prefix='governance-',dir=ROOT/'build/test-tmp')

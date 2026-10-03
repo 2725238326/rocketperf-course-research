@@ -41,6 +41,28 @@ class ResultContractTests(unittest.TestCase):
             if field=='limits': candidate['limitations']=value
             with self.subTest(field=field),self.assertRaises(ValueError): pipeline.validate_result(candidate,self.input)
         with self.assertRaises(ValueError): pipeline.strict_json('{"value":NaN}')
+        for text in ('{"value":1,"value":2}', '{"value":1e999}'):
+            with self.assertRaises(ValueError): pipeline.strict_json(text)
+
+    def test_missing_input_and_directory_have_failed_records(self):
+        for path in (ROOT/'build'/(uuid.uuid4().hex+'.ini'), ROOT/'cases'):
+            run_id='test_missing_'+uuid.uuid4().hex[:12]
+            with self.assertRaises(ValueError): pipeline.run_case(ROOT,path,run_id=run_id,no_build=True)
+            folder=ROOT/'results/local'/run_id
+            self.assertEqual(read_json(folder/'run-manifest.json')['status'],'FAILED')
+            self.assertFalse((folder/'result.json').exists())
+
+    def test_large_flow_scaling_uses_same_residual_contract(self):
+        from cycle_validation import validate_cycle
+        text=(ROOT/'cases/benchmarks/prescribed_cycle.ini').read_text(encoding='utf-8')
+        for flow in (1e6,1e9):
+            with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+                case=Path(folder)/'large.ini'
+                scaled=text.replace('total_mass_flow_kg_per_s=100','total_mass_flow_kg_per_s='+str(flow)).replace('auxiliary_power_w=10000','auxiliary_power_w='+str(flow*100))
+                case.write_text(scaled,encoding='utf-8')
+                run=subprocess.run([str(self.binary),'cycle','prescribed',str(case)],cwd=ROOT,capture_output=True,encoding='utf-8')
+                self.assertEqual(run.returncode,0,run.stderr)
+                self.assertGreater(len(validate_cycle(pipeline.strict_json(run.stdout),scaled)),100)
 
     def test_success_snapshot_and_duplicate_reservation(self):
         run_id='test_success_'+uuid.uuid4().hex[:12]
@@ -133,6 +155,22 @@ class ResultContractTests(unittest.TestCase):
 
 
 class LifecycleTests(unittest.TestCase):
+    def test_archive_text_is_part_of_test_identity(self):
+        (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+            root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
+            path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py'):
+                atomic_json(root/'tools'/name,{'fixture':True})
+            before=pipeline.test_records(root)
+            path.write_text('damaged',encoding='utf-8')
+            self.assertNotEqual(before,pipeline.test_records(root))
+            self.assertIn(path.relative_to(root).as_posix(),{r['path'] for r in before})
+
+    def test_incomplete_test_report_is_rejected(self):
+        with self.assertRaises(ValueError):
+            pipeline.verify_test_report({'status':'PASS','checks':[]},{'application':{'sha256':'x'}},'x')
+
     def test_combustion_reference_preparation_failure_is_recorded(self):
         (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='combustion-lifecycle-',dir=ROOT/'build/test-tmp') as folder:
@@ -154,6 +192,8 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
+            for name in ('gas_checks.py','check_data.py','handoff.py'):
+                atomic_json(root/'tools'/name,{'fixture':True})
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):
                 pipeline.test(root)
             self.assertEqual(read_json(root/'build/debug/test-report.json')['status'],'FAIL')

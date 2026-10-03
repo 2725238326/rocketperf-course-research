@@ -4,6 +4,8 @@
 
 [打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
+交给其他同学时先看[阶段交接与接收验收](docs/receiving.md)。干净提交和完整质量通过后，`python tools/handoff.py create --destination build/handoff-NEW-ID`生成本地运行包与离线源码bundle；不依赖远端已推送，不等同于最终课程发布。
+
 技术路线已确定：[C17核心、零维/准一维/稳态模型、CLI与离线报告](docs/technology-stack.md)。该决定明确工具职责，不代表高级模型已实现。
 
 ![业务流程](docs/architecture/business.svg)

@@ -12,17 +12,12 @@ import subprocess
 import sys
 import uuid
 
-from projectlib import ROOT, atomic_json, atomic_text, digest, git, local_path, lock, now, read_json, subprocess_env
+from projectlib import ROOT, atomic_json, atomic_text, digest, git, local_path, lock, now, read_json, strict_json, subprocess_env
 
 CORE_KEYS={"gamma","gas_constant_j_kg_k","stagnation_temperature_k","stagnation_pressure_pa","area_ratio","throat_area_m2","ambient_pressure_pa"}
 RESULT_KEYS={"exit_mach","exit_temperature_k","exit_pressure_pa","exit_velocity_m_s","exit_area_m2","characteristic_velocity_m_s","mass_flow_kg_s","thrust_n","thrust_coefficient","specific_impulse_s"}
 DEFAULT_RATIOS=[1,1.25,1.6875,2,4,8,16]
 DEFAULT_PRESSURES=[0,25000,50000,100000]
-
-
-def strict_json(text):
-    def bad(value): raise ValueError(f"Non-finite JSON constant: {value}")
-    return json.loads(text,parse_constant=bad)
 
 
 def grid_axis(text, pressure=False):
@@ -135,9 +130,34 @@ def source_records(root):
 
 
 def test_records(root):
-    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data/thermo","results/validation") for p in (root/folder).rglob('*') if p.suffix in {'.c','.h','.py','.json','.ini','.tsv','.inp','.out'}]
-    files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py','tools/cycle_validation.py']
+    # Validation consumes archive stdout/stderr as well as JSON and raw references.
+    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data","results/validation")
+           for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc']
+    files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py',
+              'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py']
     return file_records(root,files)
+
+
+def verify_test_report(report, manifest, manifest_sha256):
+    if (not isinstance(report,dict) or not isinstance(manifest,dict)
+        or manifest.get('kind') != 'build' or manifest.get('status') != 'PASS'
+        or not isinstance(manifest.get('application'),dict) or not isinstance(manifest['application'].get('sha256'),str)):
+        raise ValueError('Test evidence has invalid report/build shape')
+    names = {'core','adapters','thermo','combustion','cycle','parameter-data','thermo-data','cea-reference','cycle-reference','cli'}
+    if manifest.get('sanitizer_enabled'): names.add('sanitizer-controls')
+    checks=report.get('checks',[])
+    if (type(report.get('schema_version')) is not int or report['schema_version'] != 2 or report.get('kind') != 'test' or report.get('status') != 'PASS'
+        or report.get('build_manifest_sha256') != manifest_sha256
+        or report.get('binary_sha256') != manifest['application']['sha256']
+        or report.get('configuration') != manifest.get('configuration')
+        or not isinstance(checks,list) or len(checks) != len(names)
+        or any(not isinstance(c,dict) or c.get('status') != 'PASS' for c in checks)
+        or any(not isinstance(c.get('name'),str) for c in checks) or {c.get('name') for c in checks} != names
+        or type(report.get('cli_skipped')) is not int or report['cli_skipped'] != 0
+        or any(type(report.get(k)) is not int or report[k] <= 0 for k in
+               ('core_checks','adapter_checks','thermo_checks','combustion_checks','cycle_checks','cli_groups',
+                'parameter_data_groups','thermo_data_groups','cea_reference_groups','cycle_reference_groups'))):
+        raise ValueError('Test evidence incomplete or inconsistent')
 
 
 def execute(arguments,root,log_path,timeout=180):
@@ -222,7 +242,8 @@ def verified_build(root,configuration="Debug",sanitize=False,require_tests=False
         if not artifact.is_file() or digest(artifact)!=manifest[field]['sha256']: raise ValueError("Build artifact hash mismatch")
     if require_tests:
         report=read_json(path.parent/'test-report.json')
-        if report.get('status')!='PASS' or report.get('build_manifest_sha256')!=digest(path) or report.get('validation_inputs')!=test_records(root):
+        verify_test_report(report,manifest,digest(path))
+        if report.get('validation_inputs')!=test_records(root):
             raise ValueError("Test evidence missing, failed or stale")
     return path
 
@@ -245,6 +266,7 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
         cycle_log=execute([local_path(root,manifest['cycle_test']['path'])],root,path.parent/'cycle-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
         cli_count=cli_test_count(cli_log)
+        parameter_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_data.py','-v'],root,path.parent/'parameter-data-test.log')
         data_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_thermo_data.py','-v'],root,path.parent/'thermo-data-test.log')
         reference_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_cea_reference.py','-v'],root,path.parent/'cea-reference-test.log')
         cycle_reference_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_cycle_reference.py','-v'],root,path.parent/'cycle-reference-test.log')
@@ -256,16 +278,17 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
                 atomic_text(path.parent/(mode+'-probe.log'),output)
                 if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','combustion','cycle','thermo-data','cea-reference','cycle-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','combustion','cycle','parameter-data','thermo-data','cea-reference','cycle-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
                       adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
                       thermo_checks=int(re.search(r'thermo: (\d+) checks',thermo_log).group(1)),
                       combustion_checks=int(re.search(r'combustion: (\d+) checks',combustion_log).group(1)),
                       cycle_checks=int(re.search(r'cycle: (\d+) checks',cycle_log).group(1)),
                       cli_groups=cli_count,cli_skipped=0,
-                      thermo_data_groups=int(re.search(r'Ran (\d+) tests',data_log).group(1)),
-                      cea_reference_groups=int(re.search(r'Ran (\d+) tests',reference_log).group(1)),
-                      cycle_reference_groups=int(re.search(r'Ran (\d+) tests',cycle_reference_log).group(1)),
+                      parameter_data_groups=cli_test_count(parameter_log),
+                      thermo_data_groups=cli_test_count(data_log),
+                      cea_reference_groups=cli_test_count(reference_log),
+                      cycle_reference_groups=cli_test_count(cycle_reference_log),
                       binary_sha256=manifest['application']['sha256'])
         print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(combustion_log.strip()); print(cycle_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:
@@ -286,12 +309,14 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,100}',run_id): raise ValueError("Unsafe RunId")
     case_path=Path(case_path)
     if not case_path.is_absolute(): case_path=root/case_path
-    case_path=case_path.resolve(strict=True)
     folder=local_path(root,'results/local/'+run_id)
     folder.mkdir(parents=True,exist_ok=False)  # Atomic reservation; race cannot overwrite a run.
     record={"schema_version":2,"kind":"run","run_id":run_id,"status":"PREPARING","started_at":now(),"original_case_path":str(case_path)}
     atomic_json(folder/'run-manifest.json',record)
     try:
+        case_path=case_path.resolve(strict=True)
+        if not case_path.is_file(): raise ValueError('Case input must be a regular file')
+        record['original_case_path']=str(case_path)
         shutil.copy2(case_path,folder/'input.ini')
         record['input_sha256']=digest(folder/'input.ini')
         try: build_path=verified_build(root,configuration,require_tests=True)
@@ -305,6 +330,10 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         shutil.copy2(build_path,folder/'build-manifest.json')
         shutil.copy2(build_path.parent/'test-report.json',folder/'test-report.json')
         if digest(executable)!=build_manifest['application']['sha256']: raise ValueError("Binary changed during snapshot")
+        if digest(folder/'build-manifest.json') != digest(build_path): raise ValueError('Build manifest changed during snapshot')
+        verify_test_report(read_json(folder/'test-report.json'),build_manifest,digest(folder/'build-manifest.json'))
+        if read_json(folder/'test-report.json')['validation_inputs'] != test_records(root):
+            raise ValueError('Test inputs changed during snapshot')
         arguments=['study','area-ratio-ambient','input.ini','--area-ratios',','.join(map(str,ratios)),'--ambient-pressures',','.join(map(str,pressures))] if study else (['cycle','prescribed','input.ini'] if model=='prescribed-cycle' else ['run','input.ini'])
         record.update(status='RUNNING',executable_sha256=digest(executable),build_manifest_sha256=digest(folder/'build-manifest.json'),test_report_sha256=digest(folder/'test-report.json'),command=[executable.name,*arguments])
         if study: record['requested_grid']={'area_ratios':ratios,'ambient_pressures_pa':pressures}
@@ -318,14 +347,19 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         input_text=(folder/'input.ini').read_text(encoding='utf-8-sig')
         if study: record['point_counts']=validate_study(data,input_text,ratios,pressures)
         elif model=='prescribed-cycle':
-            from cycle_validation import validate_cycle
+            from cycle_validation import VALIDATION_VERSION, validate_cycle
             record['accounting_checks']=len(validate_cycle(data,input_text))
+            record['validation_version']=VALIDATION_VERSION
         else: validate_result(data,input_text)
         if digest(folder/'input.ini')!=record['input_sha256']: raise ValueError("Input changed during execution")
         atomic_text(folder/'result.json',completed.stdout)
         record.update(status='SUCCESS',output_file='result.json',output_sha256=digest(folder/'result.json'))
     except Exception as exc:
         record.update(status='FAILED',error=str(exc),timed_out=isinstance(exc,subprocess.TimeoutExpired))
+        if isinstance(exc,subprocess.TimeoutExpired):
+            for filename,output in (('stdout.txt',exc.stdout),('stderr.txt',exc.stderr)):
+                if output is not None:
+                    atomic_text(folder/filename,output.decode('utf-8',errors='replace') if isinstance(output,bytes) else output)
         if not (folder/'stderr.txt').exists(): atomic_text(folder/'stderr.txt',str(exc)+'\n')
         raise ValueError(f"Run failed; diagnostics preserved: {folder}: {exc}") from exc
     finally:
