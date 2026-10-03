@@ -134,7 +134,18 @@ def test_records(root):
     files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data","results/validation")
            for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc']
     files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py',
-              'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py']
+              'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py',
+              '调研/原始来源/来源文件索引.json']
+    # Parameter checks resolve source IDs and local references; those inputs must
+    # invalidate a previous data PASS too. Task states are intentionally dynamic.
+    for dataset in (root/'data/parameters').glob('*.json'):
+        records=read_json(dataset).get('records',[])
+        for record in records:
+            if not isinstance(record,dict): continue
+            refs=record.get('source_refs',[])
+            if not isinstance(refs,list): continue
+            files += [ref.split('#',1)[0] for ref in refs
+                      if isinstance(ref,str) and ref.startswith(('docs/','调研/'))]
     return file_records(root,files)
 
 

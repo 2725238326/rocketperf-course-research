@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 108,
+  "revision": 113,
   "context": {
-    "phase": "Windows阶段基础已验收；接续改进代价与敏感性研究",
+    "phase": "Windows交接证据依赖补验；验收后接续改进研究",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
       "ANA-002"
     ],
     "facts": [
       "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
-      "给定热状态外排循环校验版本2基准132条；旧86条验证归档与原始来源保持原样。",
-      "七项验收问题修复完成；主工作区及独立源码检出完整质量6/6通过，正式模式交接预验通过。",
-      "交接采用固定提交、离线源码bundle、已测Windows程序与具名接收复跑；他人实际验收仍需在其机器完成。",
+      "给定热状态外排循环校验版本2基准132条；旧86条归档和原始来源保持原样。",
+      "七项验收问题已修复；补充参数来源索引/本地引用的测试指纹后，重新执行完整质量和正式交接。",
+      "独立检出曾发现固定夹具字节差异，已单独提交修复；旧包只作为诊断记录保留，不冒充最终包。",
       "两型直接原文复查仍截至10月3日；未知字段继续unknown。下一任务ANA-002，PPT/报告后置，不推送。"
     ]
   },
@@ -635,7 +635,7 @@
     {
       "id": "ANA-002",
       "title": "改进研究与结果复核",
-      "status": "READY",
+      "status": "PLANNED",
       "priority": 1,
       "depends_on": [
         "DATA-002",
@@ -657,7 +657,7 @@
     {
       "id": "QA-001",
       "title": "修复验收漏项并建立可运行交接",
-      "status": "DONE",
+      "status": "REVIEW",
       "priority": 1,
       "depends_on": [
         "MOD-003",
@@ -676,11 +676,11 @@
         "Windows可生成校验过的本地交接包，明确版本、运行命令、验收责任、模型边界和后续任务；全量质量与干净检出通过后本地提交，不推送"
       ],
       "owner": "root",
-      "note": "实际软件验收完成；本机交接预验和独立干净检出通过，具名外部接收及科学语义审查仍需接手人完成。保留真实型号/液态/回流边界，解锁ANA-002，不推送。",
+      "note": "新增来源索引及参数本地引用依赖后完整质量6/6通过，运行管理现20组；待本次源码新检出复验后结项。",
       "verification": {
         "kind": "quality",
-        "path": "project/evidence/QA-001_75f5e5dedf50.json",
-        "sha256": "8f6463e3d4c28c4f140d4b7056ed8b90ee0b5016734dd9aaefae12ca24ec83ca"
+        "path": "project/evidence/QA-001_daa21db31af5.json",
+        "sha256": "c5161498728c470de0df514cce9443e1fa5737e67b33d8295f03c6b8577a66f3"
       }
     }
   ],
@@ -2846,6 +2846,96 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "9ab854e3a9e012aecb9085b6d17a1137b03f78b3708f825a5afbedf8bd89f865",
       "hash": "2d8d35e80f1a9e07a6027d5e53a18f6b75b229c0725768278e5be95b1947bb9d"
+    },
+    {
+      "seq": 126,
+      "at": "2026-10-03T19:58:36+00:00",
+      "task": "QA-001",
+      "from": "DONE",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "最后依赖审查发现参数测试复用指纹还须覆盖来源索引及本地引用；重开补验，不沿用旧包或旧质量指纹。",
+      "previous_hash": "2d8d35e80f1a9e07a6027d5e53a18f6b75b229c0725768278e5be95b1947bb9d",
+      "hash": "aa69e465e4a6db3c1e2c0939f1592f9c4d8ab320d4989e2fd0dec8312c30549a"
+    },
+    {
+      "seq": 127,
+      "at": "2026-10-03T19:58:36+00:00",
+      "task": "ANA-002",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Upstream reopened; prerequisite readiness revoked",
+      "previous_hash": "aa69e465e4a6db3c1e2c0939f1592f9c4d8ab320d4989e2fd0dec8312c30549a",
+      "hash": "70c7470bfe67ed62bc56d74aca65a04cf6606b47befa68e672ae959120f9e53e"
+    },
+    {
+      "seq": 128,
+      "at": "2026-10-03T19:58:37+00:00",
+      "task": "QA-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "补齐参数证据输入依赖，增加定向回归，并重跑全量质量与正式交接。",
+      "previous_hash": "70c7470bfe67ed62bc56d74aca65a04cf6606b47befa68e672ae959120f9e53e",
+      "hash": "c4f94e9bec023f220b4a6037cd93c0d7842345ffc15160899e15ae44d6b9b188"
+    },
+    {
+      "seq": 129,
+      "at": "2026-10-03T19:59:51+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "新增来源索引依赖正在补验，避免生成工作面继续显示本轮已经最终验收。",
+      "previous_hash": "c4f94e9bec023f220b4a6037cd93c0d7842345ffc15160899e15ae44d6b9b188",
+      "details": {
+        "context_before": {
+          "phase": "Windows阶段基础已验收；接续改进代价与敏感性研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "给定热状态外排循环校验版本2基准132条；旧86条验证归档与原始来源保持原样。",
+            "七项验收问题修复完成；主工作区及独立源码检出完整质量6/6通过，正式模式交接预验通过。",
+            "交接采用固定提交、离线源码bundle、已测Windows程序与具名接收复跑；他人实际验收仍需在其机器完成。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown。下一任务ANA-002，PPT/报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows交接证据依赖补验；验收后接续改进研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "给定热状态外排循环校验版本2基准132条；旧86条归档和原始来源保持原样。",
+            "七项验收问题已修复；补充参数来源索引/本地引用的测试指纹后，重新执行完整质量和正式交接。",
+            "独立检出曾发现固定夹具字节差异，已单独提交修复；旧包只作为诊断记录保留，不冒充最终包。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown。下一任务ANA-002，PPT/报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "f12d9aad763aa5b2ffdead048636a666dce6baa326d236712626194cb18e8eec"
+    },
+    {
+      "seq": 130,
+      "at": "2026-10-03T20:02:46+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "新增来源索引及参数本地引用依赖后完整质量6/6通过，运行管理现20组；待本次源码新检出复验后结项。",
+      "previous_hash": "f12d9aad763aa5b2ffdead048636a666dce6baa326d236712626194cb18e8eec",
+      "hash": "0562e3148a971892fbed45a962cb9e5c601caa41dc0dd0634af7fcca26d0fb40"
     }
   ]
 }
