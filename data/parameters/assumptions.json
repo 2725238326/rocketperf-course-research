@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "dataset_id": "research-assumptions-2026-10-03",
+  "created_at": "2026-10-03",
+  "purpose": "Explicit bounded inputs for method studies when flight-batch engine data are not public.",
+  "status": "assumptions_not_flight_configuration",
+  "unit_system": "SI",
+  "source_cutoff": "2026-10-02",
+  "records": [
+    {
+      "id": "zq3_stage1_pressure_area_scenario",
+      "object": "ZQ-3",
+      "variant": "遥一-compatible research scenario",
+      "stage": "一级",
+      "parameter": "stagnation_pressure_pa_and_area_ratio",
+      "value": {"stagnation_pressure_pa": 7000000.0, "area_ratio": 18.0},
+      "range": {"min": 1.0, "max": 18.0},
+      "unit": "Pa and dimensionless",
+      "data_role": "assumption",
+      "operating_boundary": "steady ideal-gas method study; not a flight engine operating point",
+      "source_refs": ["V09", "docs/model-design.md"],
+      "model_id": "ideal_constant_gamma_v1",
+      "model_use": "bounded_sensitivity_only",
+      "rationale": "The public flight configuration identifies engines but does not publish chamber pressure or nozzle area ratio; the range is a numerical study envelope.",
+      "notes": "Do not label outputs as ZQ-3 measured performance. Replace only after a batch-specific source is found."
+    },
+    {
+      "id": "cz10b_stage1_pressure_area_scenario",
+      "object": "CZ-10B",
+      "variant": "首飞-compatible research scenario",
+      "stage": "一级",
+      "parameter": "stagnation_pressure_pa_and_area_ratio",
+      "value": {"stagnation_pressure_pa": 7000000.0, "area_ratio": 18.0},
+      "range": {"min": 1.0, "max": 18.0},
+      "unit": "Pa and dimensionless",
+      "data_role": "assumption",
+      "operating_boundary": "steady ideal-gas method study; not a flight engine operating point",
+      "source_refs": ["V06", "V07", "docs/model-design.md"],
+      "model_id": "ideal_constant_gamma_v1",
+      "model_use": "bounded_sensitivity_only",
+      "rationale": "Public sources give the first-stage engine family, layout and thrust class but not chamber pressure or nozzle area ratio.",
+      "notes": "The two rocket records use the same method envelope for a controlled comparison; this is not evidence that their engines share parameters."
+    },
+    {
+      "id": "teaching_air_gamma",
+      "object": "teaching_baseline",
+      "variant": "air",
+      "stage": "not_applicable",
+      "parameter": "gamma",
+      "value": 1.4,
+      "range": {"min": 1.4, "max": 1.4},
+      "unit": "dimensionless",
+      "data_role": "assumption",
+      "operating_boundary": "300 K constant-gamma air benchmark",
+      "source_refs": ["docs/benchmarks.md"],
+      "model_id": "ideal_constant_gamma_v1",
+      "model_use": "regression_only",
+      "rationale": "The analytic reference case defines a fixed heat-capacity ratio for software verification.",
+      "notes": "This is not a combustion-gas property."
+    }
+  ],
+  "missing_real_engine_fields": [
+    "flight_batch_chamber_pressure",
+    "flight_batch_nozzle_area_ratio",
+    "flight_batch_O_F_definition_and_value",
+    "flight_batch_Isp_condition",
+    "engine_mass_flow_map"
+  ],
+  "missing_value_policy": "Assumptions are allowed only in explicitly named research scenarios; they cannot overwrite fact records or enter a real-flight parameter set."
+}

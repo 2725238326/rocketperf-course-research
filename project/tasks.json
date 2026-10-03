@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 63,
+  "revision": 66,
   "context": {
     "phase": "Windows主线：资料证据与C性能计算",
     "evidence_cutoff": "2026-10-02",
@@ -500,7 +500,7 @@
     {
       "id": "DATA-002",
       "title": "参数逐字段复核与输入校验",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 0,
       "depends_on": [
         "DATA-001"
@@ -514,13 +514,17 @@
         "逐字段定位原文和单位换算；事实/未知/假设分开；假设含范围、理由和模型ID；自动检查来源ID、重复ID、角色与单位，非法数据测试失败"
       ],
       "owner": "codex",
-      "note": "整理项目工作面：优先核对两型动力系统参数证据，Windows C计算作为当前交付主线。",
-      "verification": null
+      "note": "DATA-002验收完成；真实型号缺失字段保持unknown，研究假设单独归档并带model_id和范围。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DATA-002_400bdb45b137.json",
+        "sha256": "cbd1de3967c2c1db13415220d381851ebd14e0f7db7f96b806217a99ecfc7482"
+      }
     },
     {
       "id": "MOD-001",
       "title": "NASA9物性与数据测试",
-      "status": "READY",
+      "status": "ACTIVE",
       "priority": 1,
       "depends_on": [
         "RES-002"
@@ -532,8 +536,8 @@
       "acceptance": [
         "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "owner": "codex",
+      "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
       "verification": null
     },
     {
@@ -1739,6 +1743,42 @@
         }
       },
       "hash": "27ec709768434686595bc95afb19a8c553a6fb016b7003e3579c011d78d4a550"
+    },
+    {
+      "seq": 81,
+      "at": "2026-10-03T05:22:26+00:00",
+      "task": "DATA-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "完成参数假设集、来源/角色/单位/范围校验器和正反例测试；两套数据集通过项目检查与质量链。",
+      "previous_hash": "27ec709768434686595bc95afb19a8c553a6fb016b7003e3579c011d78d4a550",
+      "hash": "12cb70e0e7a61b9e82005dea044d18584eb21772bfca436a97196909e3658f67"
+    },
+    {
+      "seq": 82,
+      "at": "2026-10-03T05:22:27+00:00",
+      "task": "DATA-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "DATA-002验收完成；真实型号缺失字段保持unknown，研究假设单独归档并带model_id和范围。",
+      "previous_hash": "12cb70e0e7a61b9e82005dea044d18584eb21772bfca436a97196909e3658f67",
+      "hash": "7c1f2785e387e2d0dcee83166785ef2ec62d182cf797ecfe6d9435e4dd942fd2"
+    },
+    {
+      "seq": 83,
+      "at": "2026-10-03T05:22:48+00:00",
+      "task": "MOD-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
+      "previous_hash": "7c1f2785e387e2d0dcee83166785ef2ec62d182cf797ecfe6d9435e4dd942fd2",
+      "hash": "dce407bf4f8ad6b81b36695a584e6854c826a3f79c2dbd6c6aba55ed0ce6c75a"
     }
   ]
 }
