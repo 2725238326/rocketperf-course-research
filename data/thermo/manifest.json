@@ -1,15 +1,598 @@
 {
   "schema_version": 1,
-  "dataset_id": "fixture-nasa9-v1",
-  "role": "formula_and_api_test_fixture",
-  "status": "not_a_species_database",
+  "dataset_id": "cea-v3.3.4-neutral-cho-n-v1",
+  "role": "real_species_thermodynamic_fits",
   "source": {
-    "kind": "project-authored-synthetic",
-    "license": "project-internal-test-data",
-    "sha256_required": true
+    "repository": "https://github.com/nasa/cea",
+    "release": "v3.3.4",
+    "commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+    "files": [
+      {
+        "path": "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+        "sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363"
+      },
+      {
+        "path": "调研/原始来源/20261003_cea_v3.3.4/LICENSE.txt",
+        "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed"
+      },
+      {
+        "path": "调研/原始来源/20261003_cea_v3.3.4/NOTICE.txt",
+        "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e"
+      }
+    ]
   },
+  "license_review": {
+    "distribution_license": "Apache-2.0",
+    "basis": "调研/原始来源/20261003_cea_v3.3.4/NOTICE.txt",
+    "scope": "NOTICE explicitly lists data/thermo.inp and NASA TP-2002-211556; retain LICENSE, NOTICE, species citations and modification record."
+  },
+  "modification_record": "Selected 10 neutral gas records; converted fixed-width input to TSV/C constants. Coefficients, molar masses and temperature bounds unchanged; offsets are zero.",
+  "reference_pressure_pa": 100000,
+  "reference_temperature_k": 298.15,
+  "gas_constant_j_kmol_k": 8314.51,
+  "enthalpy_basis": "Formation enthalpy included in b1; do not add the header Hf a second time.",
+  "mass_basis": "CEA source molar masses, not modern Cantera atomic-weight defaults",
+  "boundary_rule": "[Tmin,Tmax), final Tmax included; no extrapolation",
+  "generated": [
+    {
+      "path": "data/thermo/cea_nasa9.tsv",
+      "sha256": "49bf217740522ce8ce39e2ebd45a2690fee654b70f5bae0de06e75127a6e79be"
+    },
+    {
+      "path": "src/thermo/database_generated.h",
+      "sha256": "b1ed92c98dd61f59b55b7ec1be8f68f5918d5af2d5d8a2c5711a1ddabec16ad9"
+    }
+  ],
+  "species": [
+    {
+      "id": "H2",
+      "molar_mass_kg_per_kmol": 2.01588,
+      "elements": {
+        "H": 2.0
+      },
+      "formation_enthalpy_298_j_mol": 0.0,
+      "source_line": 5682,
+      "source_note": "Ref-Elm. Gurvich,1978 pt1 p103 pt2 p31.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            40783.2321,
+            -800.918604,
+            8.21470201,
+            -0.01269714457,
+            1.753605076e-05,
+            -1.20286027e-08,
+            3.36809349e-12,
+            2682.484665,
+            -30.43788844
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            560812.801,
+            -837.150474,
+            2.975364532,
+            0.001252249124,
+            -3.74071619e-07,
+            5.9366252e-11,
+            -3.6069941e-15,
+            5339.82441,
+            -2.202774769
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            496688412.0,
+            -314754.7149,
+            79.8412188,
+            -0.00841478921,
+            4.75324835e-07,
+            -1.371873492e-11,
+            1.605461756e-16,
+            2488433.516,
+            -669.572811
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O2",
+      "molar_mass_kg_per_kmol": 31.9988,
+      "elements": {
+        "O": 2.0
+      },
+      "formation_enthalpy_298_j_mol": 0.0,
+      "source_line": 8018,
+      "source_note": "Ref-Elm. Gurvich,1989 pt1 p94 pt2 p9.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            -34255.6342,
+            484.700097,
+            1.119010961,
+            0.00429388924,
+            -6.83630052e-07,
+            -2.0233727e-09,
+            1.039040018e-12,
+            -3391.45487,
+            18.4969947
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            -1037939.022,
+            2344.830282,
+            1.819732036,
+            0.001267847582,
+            -2.188067988e-07,
+            2.053719572e-11,
+            -8.19346705e-16,
+            -16890.10929,
+            17.38716506
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            497529430.0,
+            -286610.6874,
+            66.9035225,
+            -0.00616995902,
+            3.016396027e-07,
+            -7.4214166e-12,
+            7.27817577e-17,
+            2293554.027,
+            -553.062161
+          ]
+        }
+      ]
+    },
+    {
+      "id": "N2",
+      "molar_mass_kg_per_kmol": 28.0134,
+      "elements": {
+        "N": 2.0
+      },
+      "formation_enthalpy_298_j_mol": 0.0,
+      "source_line": 7384,
+      "source_note": "Ref-Elm. Gurvich,1978 pt1 p280 pt2 p207.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            22103.71497,
+            -381.846182,
+            6.08273836,
+            -0.00853091441,
+            1.384646189e-05,
+            -9.62579362e-09,
+            2.519705809e-12,
+            710.846086,
+            -10.76003744
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            587712.406,
+            -2239.249073,
+            6.06694922,
+            -0.00061396855,
+            1.491806679e-07,
+            -1.923105485e-11,
+            1.061954386e-15,
+            12832.10415,
+            -15.86640027
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            831013916.0,
+            -642073.354,
+            202.0264635,
+            -0.03065092046,
+            2.486903333e-06,
+            -9.70595411e-11,
+            1.437538881e-15,
+            4938707.04,
+            -1672.09974
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H2O",
+      "molar_mass_kg_per_kmol": 18.01528,
+      "elements": {
+        "H": 2.0,
+        "O": 1.0
+      },
+      "formation_enthalpy_298_j_mol": -241826.0,
+      "source_line": 5755,
+      "source_note": "Hf:Cox,1989. Woolley,1987. TRC(10/88) tuv25.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            -39479.6083,
+            575.573102,
+            0.931782653,
+            0.00722271286,
+            -7.34255737e-06,
+            4.95504349e-09,
+            -1.336933246e-12,
+            -33039.7431,
+            17.24205775
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            1034972.096,
+            -2412.698562,
+            4.64611078,
+            0.002291998307,
+            -6.83683048e-07,
+            9.42646893e-11,
+            -4.82238053e-15,
+            -13842.86509,
+            -7.97814851
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CO",
+      "molar_mass_kg_per_kmol": 28.0101,
+      "elements": {
+        "C": 1.0,
+        "O": 1.0
+      },
+      "formation_enthalpy_298_j_mol": -110535.196,
+      "source_line": 2623,
+      "source_note": "Gurvich,1979 pt1 p25 pt2 p29.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            14890.45326,
+            -292.2285939,
+            5.72452717,
+            -0.00817623503,
+            1.456903469e-05,
+            -1.087746302e-08,
+            3.027941827e-12,
+            -13031.31878,
+            -7.85924135
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            461919.725,
+            -1944.704863,
+            5.91671418,
+            -0.000566428283,
+            1.39881454e-07,
+            -1.787680361e-11,
+            9.62093557e-16,
+            -2466.261084,
+            -13.87413108
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            886866296.0,
+            -750037.784,
+            249.5474979,
+            -0.039563511,
+            3.29777208e-06,
+            -1.318409933e-10,
+            1.998937948e-15,
+            5701421.13,
+            -2060.704786
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CO2",
+      "molar_mass_kg_per_kmol": 44.0095,
+      "elements": {
+        "C": 1.0,
+        "O": 2.0
+      },
+      "formation_enthalpy_298_j_mol": -393510.0,
+      "source_line": 2701,
+      "source_note": "Gurvich,1991 pt1 p27 pt2 p24.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            49436.5054,
+            -626.411601,
+            5.30172524,
+            0.002503813816,
+            -2.127308728e-07,
+            -7.68998878e-10,
+            2.849677801e-13,
+            -45281.9846,
+            -7.04827944
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            117696.2419,
+            -1788.791477,
+            8.29152319,
+            -9.22315678e-05,
+            4.86367688e-09,
+            -1.891053312e-12,
+            6.33003659e-16,
+            -39083.5059,
+            -26.52669281
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            -1544423287.0,
+            1016847.056,
+            -256.140523,
+            0.0336940108,
+            -2.181184337e-06,
+            6.99142084e-11,
+            -8.8423515e-16,
+            -8043214.51,
+            2254.177493
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH4",
+      "molar_mass_kg_per_kmol": 16.04246,
+      "elements": {
+        "C": 1.0,
+        "H": 4.0
+      },
+      "formation_enthalpy_298_j_mol": -74600.0,
+      "source_line": 2521,
+      "source_note": "Gurvich,1991 pt1 p44 pt2 p36.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            -176685.0998,
+            2786.18102,
+            -12.0257785,
+            0.0391761929,
+            -3.61905443e-05,
+            2.026853043e-08,
+            -4.97670549e-12,
+            -23313.1436,
+            89.0432275
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            3730042.76,
+            -13835.01485,
+            20.49107091,
+            -0.001961974759,
+            4.72731304e-07,
+            -3.72881469e-11,
+            1.623737207e-15,
+            75320.6691,
+            -121.9124889
+          ]
+        }
+      ]
+    },
+    {
+      "id": "H",
+      "molar_mass_kg_per_kmol": 1.00794,
+      "elements": {
+        "H": 1.0
+      },
+      "formation_enthalpy_298_j_mol": 217998.828,
+      "source_line": 5372,
+      "source_note": "D0(H2):Herzberg,1970. Moore,1972. Gordon,1999.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            0.0,
+            0.0,
+            2.5,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            25473.70801,
+            -0.446682853
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            60.7877425,
+            -0.1819354417,
+            2.500211817,
+            -1.226512864e-07,
+            3.73287633e-11,
+            -5.68774456e-15,
+            3.410210197e-19,
+            25474.86398,
+            -0.448191777
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            217375769.4,
+            -131203.5403,
+            33.991742,
+            -0.00381399968,
+            2.432854837e-07,
+            -7.69427554e-12,
+            9.64410563e-17,
+            1067638.086,
+            -274.2301051
+          ]
+        }
+      ]
+    },
+    {
+      "id": "O",
+      "molar_mass_kg_per_kmol": 15.9994,
+      "elements": {
+        "O": 1.0
+      },
+      "formation_enthalpy_298_j_mol": 249175.003,
+      "source_line": 7928,
+      "source_note": "D0(O2):Brix,1954. Moore,1976. Gordon,1999.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            -7953.6113,
+            160.7177787,
+            1.966226438,
+            0.00101367031,
+            -1.110415423e-06,
+            6.5175075e-10,
+            -1.584779251e-13,
+            28403.62437,
+            8.40424182
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            261902.0262,
+            -729.872203,
+            3.31717727,
+            -0.000428133436,
+            1.036104594e-07,
+            -9.43830433e-12,
+            2.725038297e-16,
+            33924.2806,
+            -0.667958535
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            177900426.4,
+            -108232.8257,
+            28.10778365,
+            -0.002975232262,
+            1.854997534e-07,
+            -5.79623154e-12,
+            7.191720164e-17,
+            889094.263,
+            -218.1728151
+          ]
+        }
+      ]
+    },
+    {
+      "id": "OH",
+      "molar_mass_kg_per_kmol": 17.00734,
+      "elements": {
+        "O": 1.0,
+        "H": 1.0
+      },
+      "formation_enthalpy_298_j_mol": 37278.206,
+      "source_line": 7988,
+      "source_note": "D0(H-OH): Ruscic,2002. Gurvich,1978 pt1 p110 pt2 p37.",
+      "ranges": [
+        {
+          "t_min_k": 200.0,
+          "t_max_k": 1000.0,
+          "coefficients": [
+            -1998.85899,
+            93.0013616,
+            3.050854229,
+            0.001529529288,
+            -3.157890998e-06,
+            3.31544618e-09,
+            -1.138762683e-12,
+            2991.214235,
+            4.67411079
+          ]
+        },
+        {
+          "t_min_k": 1000.0,
+          "t_max_k": 6000.0,
+          "coefficients": [
+            1017393.379,
+            -2509.957276,
+            5.11654786,
+            0.000130529993,
+            -8.28432226e-08,
+            2.006475941e-11,
+            -1.556993656e-15,
+            20196.40206,
+            -11.01282337
+          ]
+        },
+        {
+          "t_min_k": 6000.0,
+          "t_max_k": 20000.0,
+          "coefficients": [
+            284723419.3,
+            -185953.2612,
+            50.082409,
+            -0.00514237498,
+            2.875536589e-07,
+            -8.22881796e-12,
+            9.56722902e-17,
+            1468393.908,
+            -402.355558
+          ]
+        }
+      ]
+    }
+  ],
   "limitations": [
-    "Coefficients are synthetic and must not be used as a real propellant or air species.",
-    "NASA CEA thermo.inp data has not yet been imported or frozen for production use."
+    "Neutral ideal-gas single-species reference properties only.",
+    "No equilibrium, liquid properties, ions, condensed carbon or engine calibration.",
+    "H2O/CH4 end at 6000 K; do not extend them to other species upper limits."
   ]
 }

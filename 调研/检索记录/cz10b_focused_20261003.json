@@ -1,0 +1,847 @@
+{
+  "topic": "cz10b_focused_20261003",
+  "retrieved_at": "2026-10-03T20:42:40.5451201+08:00",
+  "cutoff": "2026-10-03",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "只回答一个问题：截至2026-10-03，长征十号乙首飞实际构型的二级发动机，有没有官方公开的型号、台数或循环方式？优先中国航天科技集团、六院、人民日报官方采访。不要列家族推测，也不要把网民或独立研究者的报告作为官方证据。最多3个原文入口。逐条给标题、日期、完整URL、支持片段；读不到正文就说明。缺证字段写unknown。简短回答，但不得省略出处。\n",
+  "search_calls": [
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 二级发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=626758"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 首飞 发动机 航天科技集团 OR 六院",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html"
+          },
+          {
+            "type": "url",
+            "url": "https://wallstreetcn.com/articles/3776638"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnr.cn/hn/gstjhn/20260711/t20260711_527702879.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" 发动机 site:casc.com.cn OR site:spacechina.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4430152/content.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 二级 发动机 型号 OR 台数 OR 循环",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Long March 10B second stage engine official CASC",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://spacelaunchnow.me/vehicle/launch_vehicle/554"
+          },
+          {
+            "type": "url",
+            "url": "https://nextspaceflight.com/rockets/320"
+          },
+          {
+            "type": "url",
+            "url": "https://www.orbitalintel.org/launch/long-march-10-explained/"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 二级发动机 site:spacechina.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2414549/c4430152/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4624749/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 发动机 六院 OR \"航天推进技术研究院\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" 人民日报 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.bjd.com.cn/2026/07/10/11856576.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250816A022XE00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 二子级 发动机 型号 OR 台 OR 循环 site:spacechina.com OR site:calt.com OR site:people.com.cn",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://paper.people.com.cn/rmrbhwb/html/2024-06/15/content_26063611.htm"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/BIG5/n1/2024/0614/c1004-40256715.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://finance.people.com.cn/n1/2024/0615/c1004-40257045.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4623381/content.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html"
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_eada6420-a414-91a0-9228-6bd7d1cb2d4d_call-ad99edc2-8319-4ffa-ab5b-ac33e557b6a0-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "截至2026-10-03，长征十号乙首飞实际构型的二级发动机，官方未公开具体型号、台数或循环方式（仅公开为液氧甲烷推进剂的140吨级发动机）。缺证字段均为unknown。\n\n1. 标题：长十乙首飞成功 我国首次实现运载火箭可控回收  \n日期：2026-07-10  \n完整URL：https://m.spacechina.com/n2018089/n2018151/c4653153/content.html  \n支持片段：火箭芯一级沿用长征十号甲运载火箭一子级状态，采用液氧煤油推进剂，芯二级采用液氧甲烷推进剂  \n\n2. 标题：雄关漫道真如铁 而今迈步从头越——航天科技集团长十乙火箭团队以实干担当打赢我国重复使用火箭关键一役  \n日期：2026-07-15  \n完整URL：https://m.spacechina.com/n2014703/n3482528/c4651819/content.html  \n支持片段：与此同时，二子级140吨级液氧甲烷发动机的研制也在同步加速。  \n\n3. 标题：长征十号乙“首飞+回收”，缘何选中海南？  \n日期：2026-07-11  \n完整URL：http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html  \n支持片段：火箭二子级采用新研大推力液氧甲烷发动机，液氧甲烷推进剂具有环保、重复使用性强、比冲高等优势",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nextspaceflight.com/rockets/320",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://nextspaceflight.com/rockets/320"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n482/n498/c2579124/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://wallstreetcn.com/articles/3776638",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://wallstreetcn.com/articles/3776638"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.cnr.cn/hn/gstjhn/20260711/t20260711_527702879.shtml",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.cnr.cn/hn/gstjhn/20260711/t20260711_527702879.shtml"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://paper.people.com.cn/rmrbhwb/html/2024-06/15/content_26063611.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://paper.people.com.cn/rmrbhwb/html/2024-06/15/content_26063611.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.orbitalintel.org/launch/long-march-10-explained/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.orbitalintel.org/launch/long-march-10-explained/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.ifeng.com/c/8ue0kdgtqEf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.ifeng.com/c/8ue0kdgtqEf"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://finance.people.com.cn/n1/2024/0615/c1004-40257045.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://finance.people.com.cn/n1/2024/0615/c1004-40257045.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://spacelaunchnow.me/vehicle/launch_vehicle/554",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://spacelaunchnow.me/vehicle/launch_vehicle/554"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4624749/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2014809/c4624749/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://tidenews.com.cn/tmh_news.html?id=69f0a3c519886e0001094f21"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.tkww.hk/a/202607/10/AP6a508112e4b04773b0720dee.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m-robo.datayes.com/feed/detail?id=626758",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m-robo.datayes.com/feed/detail?id=626758"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.bjd.com.cn/2026/07/10/11856576.shtml",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.bjd.com.cn/2026/07/10/11856576.shtml"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4430152/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2414549/c4430152/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/Long_March_10B",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/Long_March_10B"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4623381/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacechina.com/n25/n2014789/n2414549/c4623381/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://finance.people.com.cn/BIG5/n1/2024/0614/c1004-40256715.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://finance.people.com.cn/BIG5/n1/2024/0614/c1004-40256715.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20250816A022XE00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20250816A022XE00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/Long_March_10",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/Long_March_10"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n689/c2573694/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.calt.com/n689/c2573694/content.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2014789/n2414549/c4430152/content.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.spacechina.com/n2014789/n2414549/c4430152/content.html"
+            }
+          ]
+        }
+      ],
+      "id": "msg_eada6420-a414-91a0-9228-6bd7d1cb2d4d",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 154931,
+    "input_tokens_details": {
+      "cached_tokens": 88960
+    },
+    "output_tokens": 3262,
+    "output_tokens_details": {
+      "reasoning_tokens": 2523
+    },
+    "total_tokens": 158193,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 13,
+    "cost_in_usd_ticks": 1316379600,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 13,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 64938,
+      "output_tokens": 1223
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

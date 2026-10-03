@@ -4,6 +4,8 @@
 *.pdf -text
 *.pptx -text
 # Archived byte hashes must survive checkout without newline conversion.
-调研/原始来源/** -text
-调研/文献/** -text
-调研/检索记录/** -text
+调研/原始来源/** -text -whitespace
+调研/文献/** -text -whitespace
+调研/检索记录/** -text -whitespace
+# CEA raw output hashes include native line endings and defect bytes.
+tests/reference/cea/raw/** -text -whitespace

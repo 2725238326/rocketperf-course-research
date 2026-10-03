@@ -124,7 +124,19 @@ class LifecycleTests(unittest.TestCase):
             root=Path(folder); path=root/'build/artifacts/fake/build-manifest.json'
             atomic_json(path,{'core_test':{'path':'fake.exe'},'application':{'path':'fake.exe'}})
             atomic_json(root/'build/debug/test-report.json',{'status':'PASS'})
+            atomic_json(root/'tools/thermo_data.py',{'fixture':True})
+            atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaises(ValueError):
+                pipeline.test(root)
+            self.assertEqual(read_json(root/'build/debug/test-report.json')['status'],'FAIL')
+
+    def test_preparation_failure_replaces_old_pass_report(self):
+        (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='lifecycle-',dir=ROOT/'build/test-tmp') as folder:
+            root=Path(folder); path=root/'build/artifacts/fake/build-manifest.json'
+            atomic_json(path,{'core_test':{'path':'fake.exe'},'application':{'path':'fake.exe'}})
+            atomic_json(root/'build/debug/test-report.json',{'status':'PASS'})
+            with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'test_records',side_effect=OSError('missing validation input')),self.assertRaises(OSError):
                 pipeline.test(root)
             self.assertEqual(read_json(root/'build/debug/test-report.json')['status'],'FAIL')
 

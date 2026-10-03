@@ -115,6 +115,13 @@ def config_name(configuration,sanitize):
     return configuration.lower()+("-sanitized" if sanitize else "")
 
 
+def cli_test_count(log):
+    summary=re.search(r'Ran (\d+) tests?\b',log)
+    if summary is None or int(summary.group(1)) == 0 or 'skipped' in log.lower() or not re.search(r'^OK\s*$', log, re.MULTILINE):
+        raise ValueError('CLI evidence requires executed tests and zero skips')
+    return int(summary.group(1))
+
+
 def file_records(root,paths):
     return [{"path":p,"sha256":digest(local_path(root,p))} for p in sorted(set(paths))]
 
@@ -122,13 +129,14 @@ def file_records(root,paths):
 def source_records(root):
     modules=read_json(root/"project/modules.json")["modules"]
     sources=[s for m in modules for s in m["sources"]]
-    sources += [p.relative_to(root).as_posix() for folder in ("include","src/adapters") for p in (root/folder).rglob('*.h')]
-    sources += ["tests/test_core.c","tests/test_adapters.c","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
+    sources += [p.relative_to(root).as_posix() for folder in ("include","src") for p in (root/folder).rglob('*.h')]
+    sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
     return file_records(root,sources)
 
 
 def test_records(root):
-    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks") for p in (root/folder).rglob('*') if p.suffix in {'.c','.py','.json','.ini'}]
+    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data/thermo") for p in (root/folder).rglob('*') if p.suffix in {'.c','.h','.py','.json','.ini','.tsv','.inp','.out'}]
+    files += ['tools/thermo_data.py','tools/cea_reference.py']
     return file_records(root,files)
 
 
@@ -218,14 +226,19 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     manifest=read_json(path)
     name=config_name(configuration,sanitize)
     report_path=path.parent/'test-report.json'
-    report={"schema_version":2,"kind":"test","status":"RUNNING","started_at":now(),"configuration":configuration,"checks":[],"validation_inputs":test_records(root),"build_manifest_sha256":digest(path)}
+    report={"schema_version":2,"kind":"test","status":"RUNNING","started_at":now(),"configuration":configuration,"checks":[],"validation_inputs":[],"build_manifest_sha256":digest(path)}
     atomic_json(report_path,report)
     atomic_json(root/'build'/name/'test-report.json',report)
     try:
+        report['validation_inputs']=test_records(root)
+        atomic_json(report_path,report)
         core_log=execute([local_path(root,manifest['core_test']['path'])],root,path.parent/'core-test.log')
         adapter_log=execute([local_path(root,manifest['adapter_test']['path'])],root,path.parent/'adapter-test.log')
         thermo_log=execute([local_path(root,manifest['thermo_test']['path'])],root,path.parent/'thermo-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
+        cli_count=cli_test_count(cli_log)
+        data_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_thermo_data.py','-v'],root,path.parent/'thermo-data-test.log')
+        reference_log=execute([python,'-m','unittest','discover','-s','tests','-p','test_cea_reference.py','-v'],root,path.parent/'cea-reference-test.log')
         if sanitize:
             probe=local_path(root,manifest['sanitizer_probe']['path'])
             for mode,expected in [('address','ERROR: AddressSanitizer'),('undefined','runtime error: signed integer overflow')]:
@@ -234,11 +247,13 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
                 atomic_text(path.parent/(mode+'-probe.log'),output)
                 if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','cli',*(['sanitizer-controls'] if sanitize else []))],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','thermo-data','cea-reference','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
                       adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
                       thermo_checks=int(re.search(r'thermo: (\d+) checks',thermo_log).group(1)),
-                      cli_groups=int(re.search(r'Ran (\d+) tests',cli_log).group(1)),
+                      cli_groups=cli_count,cli_skipped=0,
+                      thermo_data_groups=int(re.search(r'Ran (\d+) tests',data_log).group(1)),
+                      cea_reference_groups=int(re.search(r'Ran (\d+) tests',reference_log).group(1)),
                       binary_sha256=manifest['application']['sha256'])
         print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:

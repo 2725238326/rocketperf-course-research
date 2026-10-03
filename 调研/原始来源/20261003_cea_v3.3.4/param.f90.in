@@ -1,0 +1,70 @@
+module cea_param
+
+    ! Compiler-provided constants
+    use, intrinsic :: iso_fortran_env, only : &
+        sp     => real32,      &
+        dp     => real64,      &
+        stdin  => input_unit,  &
+        stdout => output_unit, &
+        stderr => error_unit
+
+    ! Software version information
+    character(*), parameter :: version_string = '@CEA_VERSION@'
+    integer, parameter      :: version_major  = @CEA_VERSION_MAJOR@
+    integer, parameter      :: version_minor  = @CEA_VERSION_MINOR@
+    integer, parameter      :: version_patch  = @CEA_VERSION_PATCH@
+
+    ! Software install location
+    character(*), parameter :: install_dir = '@CMAKE_INSTALL_PREFIX@'
+    character(*), parameter :: data_dirs(3) = [character(len(install_dir)+5) :: '.', 'data', install_dir//'/data']
+
+    ! Sizing constants
+    integer, parameter :: species_name_len = 15
+    integer, parameter :: element_name_len = 2
+
+    ! Program "Magic Numbers"
+    integer, parameter  :: empty_int = huge(0)
+    real(dp), parameter :: empty_dp  = huge(0.0d0)
+
+    ! Phyiscal Constants (CEA Legacy)
+    real(dp), parameter :: avogadro     = 6.0221367d0    ! 1/kmol x 10^26
+    real(dp), parameter :: boltzmann    = 1.3806580d0    ! J/K    x 10^-23
+    real(dp), parameter :: gas_constant = 8314.5100d+00  ! J/kmol-K
+    real(dp), parameter :: std_pressure = 1.00000d+05    ! Pa (reference pressure for thermodynamics)
+    real(dp), parameter :: std_atm      = 1.01325d+05    ! Pa (standard sea level pressure)
+    real(dp), parameter :: std_gravity  = 9.80665d+00    ! m/s
+
+    ! Math constants
+    real(dp), parameter :: pi        = acos(-1.0d0)
+    real(dp), parameter :: sqrt2     = sqrt(2.0d0)
+    real(dp), parameter :: sqrt3     = sqrt(3.0d0)
+    real(dp), parameter :: inv_pi    = 1.0d0/pi
+    real(dp), parameter :: inv_sqrt2 = 1.0d0/sqrt2
+    real(dp), parameter :: inv_sqrt3 = 1.0d0/sqrt3
+
+contains
+
+    subroutine get_data_search_dirs(search_dirs)
+        character(:), allocatable, intent(out) :: search_dirs(:)
+        character(:), allocatable :: env_dir
+        integer :: env_status, env_len, max_len
+
+        call get_environment_variable("CEA_DATA_DIR", length=env_len, status=env_status)
+        if (env_status == 0 .and. env_len > 0) then
+            allocate(character(env_len) :: env_dir)
+            call get_environment_variable("CEA_DATA_DIR", value=env_dir)
+        end if
+
+        if (allocated(env_dir)) then
+            max_len = max(len(env_dir), len(data_dirs(1)))
+            allocate(character(max_len) :: search_dirs(size(data_dirs) + 1))
+            search_dirs(1) = data_dirs(1)
+            search_dirs(2) = env_dir
+            search_dirs(3:) = data_dirs(2:)
+        else
+            allocate(character(len(data_dirs(1))) :: search_dirs(size(data_dirs)))
+            search_dirs = data_dirs
+        end if
+    end subroutine
+
+end module

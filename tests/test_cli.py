@@ -11,10 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
 
 
-@unittest.skipUnless(BINARY is not None, "CLI tests require --binary <path>; use tools/pipeline.py test")
 class CliTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        if BINARY is None:
+            raise unittest.SkipTest("CLI tests require --binary <path>; use tools/pipeline.py test")
         cls.base = (ROOT / "cases/benchmarks/air_mach2_vacuum.ini").read_text(encoding="utf-8")
         cls.reference = json.loads((ROOT / "tests/reference/air_mach2.json").read_text(encoding="utf-8"))
         (ROOT / "build/test-tmp").mkdir(parents=True, exist_ok=True)
@@ -165,6 +166,33 @@ class CliTests(unittest.TestCase):
         report=json.loads(result.stdout)
         self.assertTrue(any(p['status']=='numeric_error' for p in report['points']))
         self.assertTrue(result.stderr.strip())
+
+    def test_real_nasa9_species_reference(self):
+        reference = json.loads((ROOT / 'tests/reference/nasa9_cantera.json').read_text(encoding='utf-8'))
+        for state in reference['states']:
+            if state['temperature_k'] != 300.0:
+                continue
+            with self.subTest(species=state['id']):
+                result = self.run_app('thermo', state['id'], '300')
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stderr, '')
+                report = json.loads(result.stdout)
+                self.assertEqual(report['model'], 'nasa9_species_v1')
+                self.assertEqual(report['dataset_id'], 'cea-v3.3.4-neutral-cho-n-v1')
+                self.assertEqual(report['species'], state['id'])
+                self.assertEqual(report['reference_pressure_pa'], 100000)
+                for key in ('cp_j_per_kg_k', 'h_j_per_kg', 's_j_per_kg_k'):
+                    self.assertTrue(math.isclose(report[key], state[key], rel_tol=2e-11, abs_tol=1e-6))
+
+    def test_thermo_invalid_inputs_are_not_success_results(self):
+        for species, temperature, code in [('fixture_gas','300',4), ('H2O','6000.1',4),
+                                          ('H2O','199',4), ('O2','nan',2), ('O2','0',4),
+                                          ('O2','0x1p2',2), ('O2','300,400',2)]:
+            with self.subTest(species=species, temperature=temperature):
+                result = self.run_app('thermo', species, temperature)
+                self.assertEqual(result.returncode, code, result.stderr)
+                self.assertEqual(result.stdout, '')
+                self.assertTrue(result.stderr.strip())
 
 
 if __name__ == "__main__":

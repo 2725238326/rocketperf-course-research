@@ -1,6 +1,7 @@
 #include "case_file.h"
 #include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
+#include "rocketperf/thermo.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -127,6 +128,41 @@ static int study_main(const char *case_path, int option_count, char **options)
     return 0;
 }
 
+static int thermo_main(const char *id, const char *temperature_text)
+{
+    const RpNasa9Species *species = rp_thermo_find_species(id);
+    const char *next;
+    double temperature;
+    RpThermoState state;
+    RpError error;
+    RpStatus status;
+    if (!parse_decimal_token(temperature_text, &next, &temperature) || *next != '\0') {
+        (void)fputs("Usage: rocketperf thermo SPECIES TEMPERATURE_K\n", stderr);
+        return 2;
+    }
+    if (species == NULL) {
+        (void)fputs("out_of_domain: Unknown species in the pinned neutral NASA9 dataset.\n", stderr);
+        return 4;
+    }
+    status = rp_nasa9_evaluate(species, temperature, &state, &error);
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return 4;
+    }
+    if (printf("{\"schema_version\":1,\"model\":\"nasa9_species_v1\",\"dataset_id\":\"%s\","
+               "\"species\":\"%s\",\"temperature_k\":%.17g,\"reference_pressure_pa\":%.17g,"
+               "\"molar_mass_kg_per_kmol\":%.17g,\"cp_j_per_kg_k\":%.17g,"
+               "\"h_j_per_kg\":%.17g,\"s_j_per_kg_k\":%.17g,"
+               "\"limitations\":[\"Single-species standard-state ideal-gas properties, not combustion equilibrium.\"]}\n",
+               rp_thermo_dataset_id(), species->id, temperature, rp_thermo_reference_pressure_pa(),
+               species->molar_mass_kg_per_kmol, state.cp_j_per_kg_k,
+               state.h_j_per_kg, state.s_j_per_kg_k) < 0 || fflush(stdout) != 0) {
+        (void)fputs("io_error: Cannot write thermo JSON report.\n", stderr);
+        return 3;
+    }
+    return 0;
+}
+
 static int cli_main(int argc, char **argv)
 {
     RpCase study;
@@ -139,8 +175,12 @@ static int cli_main(int argc, char **argv)
         return 0;
     }
     if (argc == 2 && strcmp(argv[1], "--help") == 0) {
+        (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
+    }
+    if (argc == 4 && strcmp(argv[1], "thermo") == 0) {
+        return thermo_main(argv[2], argv[3]);
     }
     if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
         return study_main(argv[3], argc - 4, &argv[4]);

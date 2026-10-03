@@ -400,5 +400,140 @@
     "bytes": 19993,
     "saved_at": "2026-09-29T08:25:49.6092580Z",
     "sha256": "8E227D64A3AD1FCB369A38672CBB4FFB7CFBCD99D06506C86DC7606351AF6B9C"
+  },
+  {
+    "id": "O01_cea_v334_thermo",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/data/thermo.inp",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/thermo.inp",
+    "bytes": 1234323,
+    "saved_at": "2026-10-03T11:46:10.019Z",
+    "sha256": "FA7746572952D74E249E818A82A35C113829742FB421A308E167185528884363"
+  },
+  {
+    "id": "O01_cea_v334_license",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/LICENSE.txt",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/LICENSE.txt",
+    "bytes": 9170,
+    "saved_at": "2026-10-03T11:46:10.690Z",
+    "sha256": "A60026BE9384468D074C19425E552F1BB4A6F507F805E55A96FAD586716168ED"
+  },
+  {
+    "id": "O01_cea_v334_notice",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/NOTICE.txt",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/NOTICE.txt",
+    "bytes": 713,
+    "saved_at": "2026-10-03T11:46:10.250Z",
+    "sha256": "03B64364559D540D97615C31675A69E8EB1965E30DE8859A2F8C5C9A38ECB55E"
+  },
+  {
+    "id": "O01_cea_v334_thermo",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/source/thermo.f90",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/thermo.f90",
+    "bytes": 28336,
+    "saved_at": "2026-10-03T11:46:11.183Z",
+    "sha256": "D4EC5E3FA1B9AF7DA97192E6C4E6B2A5F9BBF55C8855D2648019EF933073F2AB"
+  },
+  {
+    "id": "O01_cea_v334_fits",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/source/fits.f90",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/fits.f90",
+    "bytes": 5233,
+    "saved_at": "2026-10-03T11:50:26.797Z",
+    "sha256": "79E0CC0C08BEB814DDC5F866517EEDEE0203C874C57A330252C9A07A6860E0FD"
+  },
+  {
+    "id": "O01_cea_v334_param",
+    "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/source/param.f90.in",
+    "available": true,
+    "file": "20261003_cea_v3.3.4/param.f90.in",
+    "bytes": 2845,
+    "saved_at": "2026-10-03T12:09:20.278Z",
+    "sha256": "A44447920BD1BA5F57B04E2806C2E3D44C9A3023E4F5A97BEF98EB3561E9EF92"
+  },
+  {
+    "id": "O06_cantera_v310_air",
+    "url": "https://raw.githubusercontent.com/Cantera/cantera/6e0027548cf295bd478b8acfe34816f2db6dd58b/data/airNASA9.yaml",
+    "available": true,
+    "file": "20261003_cantera_v3.1.0_airNASA9.yaml",
+    "bytes": 7251,
+    "saved_at": "2026-10-03T11:46:11.641Z",
+    "sha256": "34F53FDBE840B3E4AEC7F8A082335CC026CB6C02B2E2FC13F8A23230AA75F1E3"
+  },
+  {
+    "id": "O06_cantera_v310_license",
+    "url": "https://raw.githubusercontent.com/Cantera/cantera/6e0027548cf295bd478b8acfe34816f2db6dd58b/License.txt",
+    "available": true,
+    "file": "20261003_cantera_v3.1.0_License.txt",
+    "bytes": 1796,
+    "saved_at": "2026-10-03T11:46:12.069Z",
+    "sha256": "469FA95F76E0C652B4F204C2E5D3FFD184DBBB85B2A7FBC75355BEE3A16E48E2"
+  },
+  {
+    "id": "V_landspace_66_20261003",
+    "url": "https://www.landspace.com/news-detail.html?itemid=66",
+    "available": true,
+    "file": "20261003_engine_check/landspace_66.html",
+    "bytes": 24474,
+    "saved_at": "2026-10-03T12:12:12.653Z",
+    "sha256": "A8B66E39574D53B5159085ECB4D79FF4448390F018E729615A46CDD9F2ADAC2E"
+  },
+  {
+    "id": "V_landspace_76_20261003",
+    "url": "https://www.landspace.com/news-detail.html?itemid=76",
+    "available": true,
+    "file": "20261003_engine_check/landspace_76.html",
+    "bytes": 18113,
+    "saved_at": "2026-10-03T12:12:12.847Z",
+    "sha256": "1886DC4FDF020042CD89B3E8E9253683A130495EE4996924420EC5C757FE818B"
+  },
+  {
+    "id": "V_landspace_55_20261003",
+    "url": "https://www.landspace.com/news-detail.html?itemid=55",
+    "available": true,
+    "file": "20261003_engine_check/landspace_55.html",
+    "bytes": 20644,
+    "saved_at": "2026-10-03T12:12:13.096Z",
+    "sha256": "1EB0B1C7A0035EA73E4622F231223587E1D0F141C489BD2C2F8CE01D5061FBB8"
+  },
+  {
+    "id": "X_zenodo18890362",
+    "url": "https://zenodo.org/api/records/18890362",
+    "available": true,
+    "file": "20261003_engine_check/zenodo_18890362.json",
+    "bytes": 10704,
+    "saved_at": "2026-10-03T12:12:14.183Z",
+    "sha256": "1C12FEB6E8B8999754620097DA1B21051CBF77944FCC49595383E5C68021945B"
+  },
+  {
+    "id": "V_cz10b_check_1_20261003",
+    "url": "https://m.spacechina.com/n2018089/n2018151/c4653153/content.html",
+    "available": true,
+    "file": "20261003_engine_check/cz10b_casc_20261003.html",
+    "bytes": 12844,
+    "saved_at": "2026-10-03T12:44:59.491Z",
+    "sha256": "AE937BFAAF1E11D8984C85CF2303D9498863F6C7F386B1B68BF496F51DF43D93"
+  },
+  {
+    "id": "V_cz10b_check_2_20261003",
+    "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+    "available": true,
+    "file": "20261003_engine_check/cz10b_team_20261003.html",
+    "bytes": 18755,
+    "saved_at": "2026-10-03T12:44:59.850Z",
+    "sha256": "23D9EC4337618676F2FAB8B29C3D384720EE7A5655C3CB44D71A4A57197C0D36"
+  },
+  {
+    "id": "V_cz10b_check_3_20261003",
+    "url": "http://hi.people.com.cn/n2/2026/0711/c231190-41635783.html",
+    "available": true,
+    "file": "20261003_engine_check/cz10b_people_20261003.html",
+    "bytes": 40111,
+    "saved_at": "2026-10-03T12:44:59.495Z",
+    "sha256": "C29678454EC720D2808C459559624ED7B042D44F24E2C730DD632BE1002B870A"
   }
 ]

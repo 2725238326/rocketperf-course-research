@@ -1,0 +1,8 @@
+! Method benchmark only: gaseous feed, not a flight engine input.
+problem case=ch4_o2_tp tp p,bar=100 t,k=3000 o/f=3.4
+reactants
+ fuel=CH4 wt%=100 t,k=298.15
+ oxid=O2 wt%=100 t,k=298.15
+only H2 O2 H2O CO CO2 CH4 H O OH
+output siunits trace=1.e-8
+end

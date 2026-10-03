@@ -1,0 +1,1737 @@
+{
+  "topic": "engine_gaps_20261003",
+  "retrieved_at": "2026-10-03T19:44:47.0874538+08:00",
+  "cutoff": "2026-10-03",
+  "model": "grok-4.6",
+  "response_status": "completed",
+  "prompt": "研究截止2026-10-03。只补两型运载火箭公开参数的直接证据缺口：朱雀三号遥一TQ-12A/TQ-15A、遥二发动机后缀/实际点火台数，长征十号乙首飞一级液发100系列后缀和循环、二级液氧甲烷发动机型号/台数/循环；逐项找室压Pc、O/F、喷管面积比、海平面/真空比冲（明确主室或整机口径）。优先蓝箭航天、中国航天科技集团、航天六院及官方采访、作者论文。不要把不同批次产品页、设计目标、试车参数、家族参数拼成飞行子型。若仅有量级或没有找到直接证据则写unknown。分别列支持原文URL、日期、短引文、对象/工况/单位、对计算输入的作用；冲突保留。补充能支撑改进问题的节流/喷管面积比/支路损失的公开边界，不生成发动机假数。\n",
+  "search_calls": [
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 遥一 TQ-12A TQ-15A 发动机 参数",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 一级 液氧煤油 100系列 二级 液氧甲烷 发动机",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "蓝箭航天 朱雀三号 官方 天鹊 TQ-12A TQ-15A site:landspace.com OR 蓝箭",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "航天六院 长征十号 液氧甲烷发动机 型号 循环",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=66"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=76"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=22"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号遥二 天鹊 发动机 型号 OR TQ-12 OR TQ-15 官方 OR 蓝箭",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=55"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.chinaerospace.com/article/71226"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+      }
+    },
+    {
+      "id": "ws_39d1ae84-c944-927c-82fe-9e8e9db58200_call-fb8a1b86-95f1-4c88-a68b-bd3b2090e582-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-219 发动机 航天六院 OR 中国航天科技集团 循环 OR 参数 site:gov.cn OR 官方",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98878"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+          },
+          {
+            "type": "url",
+            "url": "https://www.bilibili.com/read/cv33184352/"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/3859078077634926164"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chinaerospace.com/article/71226"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20250818A053EM00"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ithome.com/0/644/825.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://feng.ifeng.com/c/8we6iEkYIjO"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/test/2005-05/24/content_340.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://m.fx361.com/news/2019/0425/12377461.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.baojiabao.com/a693877"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+          },
+          {
+            "type": "url",
+            "url": "https://www.chxlive.com/rockets/539"
+          },
+          {
+            "type": "url",
+            "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+          },
+          {
+            "type": "url",
+            "url": "https://news.ifeng.com/c/8ue0kdgtqEf"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sina.cn/news/detail/4818342533399314.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.baike.com/wikiid/7358398519903207460"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**朱雀三号遥一/遥二与长征十号乙首飞公开发动机参数直接证据梳理（截止2026-10-03）。** 仅采用蓝箭航天官网新闻/产品页、中国航天科技集团/六院相关报道及同期官方口径；不将设计目标、试车、家族参数或后续产品页拼入具体飞行子型。室压Pc、多数O/F精确值、喷管面积比、主室/整机比冲口径在公开原始页中多数为unknown。冲突与未公开字段单独保留。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.taibo.cn/p/98878",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.taibo.cn/p/98878"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://caifuhao.eastmoney.com/news/20251225170552141322780?from=guba&name=6ZSm5qyj55Sf5q6W5ZCn&gubaurl=aHR0cHM6Ly9ndWJhLmVhc3Rtb25leS5jb20vbGlzdCxoazAxOTUxLmh0bWw%253D"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.bilibili.com/read/cv33184352/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.bilibili.com/read/cv33184352/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20240618A0AJ3D00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20240618A0AJ3D00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.baike.com/wikiid/3859078077634926164",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.baike.com/wikiid/3859078077634926164"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.chinaerospace.com/article/71226",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.chinaerospace.com/article/71226"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E5%A4%A9%E9%B9%8A-12"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.hangyan.co/charts/3780795018101393310",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.hangyan.co/charts/3780795018101393310"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/index.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/index.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/IBHa5o2cwc3VNkTUtYbF9A?spm_id_from=333.1387.0.0"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-15A"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://gov.cn/zhengce/content/2017-07/20/content_5211996.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=64",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=64"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=62",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=62"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.qq.com/rain/a/20250818A053EM00",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.qq.com/rain/a/20250818A053EM00"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ithome.com/0/644/825.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ithome.com/0/644/825.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://feng.ifeng.com/c/8we6iEkYIjO",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://feng.ifeng.com/c/8we6iEkYIjO"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://gov.cn/test/2005-05/24/content_340.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://gov.cn/test/2005-05/24/content_340.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://gov.cn/lianbo/bumen/202502/content_7002932.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=76",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=76"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=53",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=53"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.wikiwand.com/zh-sg/%3Cspan_lang=%22zh-Hans-SG%22_dir=%22ltr%22%3E%3Cspan_class=%22mw-page-title-main%22%3E%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%3C/span%3E%3C/span%3E"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E8%93%9D%E7%AE%AD%E8%88%AA%E5%A4%A9"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-mo/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://gov.cn/zhengce/zhengceku/202411/content_6987846.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.fx361.com/news/2019/0425/12377461.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.fx361.com/news/2019/0425/12377461.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=66",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=66"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.baojiabao.com/a693877",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.baojiabao.com/a693877"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m-robo.datayes.com/feed/detail?id=571163",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m-robo.datayes.com/feed/detail?id=571163"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=55",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=55"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.spacelive.cn/launch/1e79a5e9-c02c-470f-882f-884120100fef"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E5%A4%A9%E9%B9%8A-12A"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.chxlive.com/rockets/539",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.chxlive.com/rockets/539"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.163.com/dy/article/JIM4SJN60511B8LM.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.ifeng.com/c/8ue0kdgtqEf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.ifeng.com/c/8ue0kdgtqEf"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sina.cn/news/detail/4818342533399314.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sina.cn/news/detail/4818342533399314.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=22",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=22"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=20",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=20"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/product.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/product.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://zenodo.org/records/18890362",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://zenodo.org/records/18890362"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.baike.com/wikiid/7358398519903207460",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m.baike.com/wikiid/7358398519903207460"
+            }
+          ],
+          "id": "cp_30_0"
+        }
+      ],
+      "id": "msg_39d1ae84-c944-927c-82fe-9e8e9db58200",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 133278,
+    "input_tokens_details": {
+      "cached_tokens": 75648
+    },
+    "output_tokens": 5101,
+    "output_tokens_details": {
+      "reasoning_tokens": 4528
+    },
+    "total_tokens": 138379,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 13,
+    "cost_in_usd_ticks": 1274546000,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 13,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 56271,
+      "output_tokens": 1635
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

@@ -3,6 +3,9 @@
 
 #include "rocketperf/status.h"
 
+#define RP_NASA9_MAX_RANGES 16U
+#define RP_UNIVERSAL_GAS_CONSTANT_J_KMOL_K 8314.5100
+
 typedef struct {
     double t_min_k;
     double t_max_k;
@@ -26,5 +29,9 @@ typedef struct {
 
 RpStatus rp_nasa9_evaluate(const RpNasa9Species *species, double temperature_k,
                            RpThermoState *state, RpError *error);
+RpStatus rp_nasa9_validate(const RpNasa9Species *species, RpError *error);
+const RpNasa9Species *rp_thermo_find_species(const char *id);
+const char *rp_thermo_dataset_id(void);
+double rp_thermo_reference_pressure_pa(void);
 
 #endif

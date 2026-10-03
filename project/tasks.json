@@ -1,22 +1,20 @@
 {
   "schema_version": 1,
-  "revision": 66,
+  "revision": 77,
   "context": {
-    "phase": "Windows主线：资料证据与C性能计算",
-    "evidence_cutoff": "2026-10-02",
+    "phase": "Windows主线：C燃烧平衡与温变喷管",
+    "evidence_cutoff": "2026-10-03",
     "next_tasks": [
-      "DATA-002",
-      "MOD-001",
-      "REF-001",
       "MOD-002",
+      "MOD-003",
       "ANA-002"
     ],
     "facts": [
-      "当前先完成两型动力系统资料、参数证据和字段缺口。",
-      "Windows可完成C17构建、测试、扫描和运行归档；WSL仅保留为附加历史验证。",
-      "当前L0/S1是教学基线与方法验证，不外推为真实发动机性能。",
-      "PPT、报告和发布打包暂不作为当前工作面。",
-      "真实型号字段缺证时保留unknown，不用同系列或不同批次数据补齐。"
+      "NASA9十物种真实数据与134状态软件对照已完成。",
+      "CEA v3.3.4四个气态CH4/O2参考算例已归档并复跑；它不是飞行发动机性能。",
+      "当前C尚未实现HP平衡与温变喷管；下一步优先完成守恒和同条件对照。",
+      "两型室压/混合比/面积比等缺证字段继续保留unknown。",
+      "Windows主线持续；PPT和报告暂不推进。"
     ]
   },
   "tasks": [
@@ -524,45 +522,60 @@
     {
       "id": "MOD-001",
       "title": "NASA9物性与数据测试",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "RES-002"
       ],
       "required_artifacts": [
         "src/thermo/nasa9.c",
+        "src/thermo/database.c",
+        "data/thermo/manifest.json",
+        "tests/reference/nasa9_cantera.json",
         "docs/thermo-validation.md"
       ],
       "acceptance": [
         "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
       ],
       "owner": "codex",
-      "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
-      "verification": null
+      "note": "契约已逐项实现并通过新鲜完整质量证据；仅完成NASA9单物种物性，HP平衡、混合熵和温变喷管留给MOD-002。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/MOD-001_7a642a6e0a51.json",
+        "sha256": "2b68d8caf98cd6e99e1cc5b9d708483a4443365c9b40ac61a4b66c6bf271f9e1"
+      }
     },
     {
       "id": "REF-001",
       "title": "CEA独立对照算例复现",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "RES-002"
       ],
       "required_artifacts": [
         "tests/reference/cea/manifest.json",
+        "tests/reference/cea/raw/trace1e8/ch4_o2_hp.out",
+        "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_equilibrium.out",
+        "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_frozen_chamber.out",
+        "tools/cea_reference.py",
         "docs/reference-reproduction.md"
       ],
       "acceptance": [
         "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "codex",
+      "note": "验收契约逐项满足并通过新鲜五项质量检查；只完成外部参考复现，尚未证明项目C热化学/喷管数值。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/REF-001_342dc1426d84.json",
+        "sha256": "724a07f40d98919e3d61ab55a7206cad05665f3c667c7474da3338dd457cb1f0"
+      }
     },
     {
       "id": "MOD-002",
       "title": "受限HP平衡与温变冻结喷管",
-      "status": "PLANNED",
+      "status": "ACTIVE",
       "priority": 1,
       "depends_on": [
         "MOD-001",
@@ -574,8 +587,8 @@
       "acceptance": [
         "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "owner": "codex",
+      "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
       "verification": null
     },
     {
@@ -1779,6 +1792,293 @@
       "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
       "previous_hash": "7c1f2785e387e2d0dcee83166785ef2ec62d182cf797ecfe6d9435e4dd942fd2",
       "hash": "dce407bf4f8ad6b81b36695a584e6854c826a3f79c2dbd6c6aba55ed0ce6c75a"
+    },
+    {
+      "seq": 84,
+      "at": "2026-10-03T12:59:13+00:00",
+      "task": "MOD-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "真实NASA9数据库与可重复参考已落地，补入产物契约；不更改原验收范围。",
+      "previous_hash": "dce407bf4f8ad6b81b36695a584e6854c826a3f79c2dbd6c6aba55ed0ce6c75a",
+      "details": {
+        "contract_before": {
+          "id": "MOD-001",
+          "title": "NASA9物性与数据测试",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "RES-002"
+          ],
+          "required_artifacts": [
+            "src/thermo/nasa9.c",
+            "docs/thermo-validation.md"
+          ],
+          "acceptance": [
+            "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
+          ],
+          "owner": "codex",
+          "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-001",
+          "title": "NASA9物性与数据测试",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "RES-002"
+          ],
+          "required_artifacts": [
+            "src/thermo/nasa9.c",
+            "src/thermo/database.c",
+            "data/thermo/manifest.json",
+            "tests/reference/nasa9_cantera.json",
+            "docs/thermo-validation.md"
+          ],
+          "acceptance": [
+            "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
+          ],
+          "owner": "codex",
+          "note": "真实NASA9数据库与可重复参考已落地，补入产物契约；不更改原验收范围。",
+          "verification": null
+        }
+      },
+      "hash": "e74043a41ba78ce079c432ae3f0e44e32ae2be8f2122321dabab673dda0b23ba"
+    },
+    {
+      "seq": 85,
+      "at": "2026-10-03T12:59:14+00:00",
+      "task": "MOD-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "10月3日固定热物性数据并复核型号原文；接续CEA固定算例，不将物性等同发动机计算。",
+      "previous_hash": "e74043a41ba78ce079c432ae3f0e44e32ae2be8f2122321dabab673dda0b23ba",
+      "details": {
+        "context_before": {
+          "phase": "Windows主线：资料证据与C性能计算",
+          "evidence_cutoff": "2026-10-02",
+          "next_tasks": [
+            "DATA-002",
+            "MOD-001",
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "当前先完成两型动力系统资料、参数证据和字段缺口。",
+            "Windows可完成C17构建、测试、扫描和运行归档；WSL仅保留为附加历史验证。",
+            "当前L0/S1是教学基线与方法验证，不外推为真实发动机性能。",
+            "PPT、报告和发布打包暂不作为当前工作面。",
+            "真实型号字段缺证时保留unknown，不用同系列或不同批次数据补齐。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows主线：真实物性与CEA参考算例",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "两型四类级段的型号参数仍按对象/批次/工况核验，缺字段保留unknown。",
+            "C17已实现理想喷管基线及十种NASA9单物种物性；HP平衡与温变喷管尚未实现。",
+            "CEA v3.3.4已在Windows构建并运行官方样例；下一步固定同条件参考。",
+            "Windows为当前唯一推进主线；PPT、报告和发布包仍后置。"
+          ]
+        }
+      },
+      "hash": "aa2f7c80fe91ccb078cba235eb009505f31bdd5ae29f11ef178ad70089722edf"
+    },
+    {
+      "seq": 86,
+      "at": "2026-10-03T13:04:13+00:00",
+      "task": "MOD-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "验收对应：CEA版本/NOTICE/哈希及十物种28温区固定；C计算cp/h/s；134状态Cantera软件对照；温区/导数/形成焓/非法输入/输出保持测试齐全，Debug/Release物性1175项与CLI15组零跳过。不是实验或发动机验证。",
+      "previous_hash": "aa2f7c80fe91ccb078cba235eb009505f31bdd5ae29f11ef178ad70089722edf",
+      "hash": "0b8317d81218e4f3565b5e6e5cfa5f42c24d6d7e7bc856e7d294b447ae12d660"
+    },
+    {
+      "seq": 87,
+      "at": "2026-10-03T13:04:13+00:00",
+      "task": "MOD-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "契约已逐项实现并通过新鲜完整质量证据；仅完成NASA9单物种物性，HP平衡、混合熵和温变喷管留给MOD-002。",
+      "previous_hash": "0b8317d81218e4f3565b5e6e5cfa5f42c24d6d7e7bc856e7d294b447ae12d660",
+      "hash": "aa247f21a5973547e6b92ec3f334c44bcb0068418c68270fd88b4e80eea1e3b4"
+    },
+    {
+      "seq": 88,
+      "at": "2026-10-03T13:04:14+00:00",
+      "task": "REF-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "已取得固定CEA源码并Windows构建成功；开始气相CH4/O2的TP/HP和平衡/燃烧室冻结算例归档及重现检查。",
+      "previous_hash": "aa247f21a5973547e6b92ec3f334c44bcb0068418c68270fd88b4e80eea1e3b4",
+      "hash": "cb5b3ba8d9a6d5dbdc39781be04d9cca32cbaca9ce50d2df8f8a0154b2a1cd74"
+    },
+    {
+      "seq": 89,
+      "at": "2026-10-03T13:26:26+00:00",
+      "task": "REF-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "四个固定CH4/O2气态方法算例已归档并独立复跑；补充可复跑工具、原始输出哈希和缺陷记录。",
+      "previous_hash": "cb5b3ba8d9a6d5dbdc39781be04d9cca32cbaca9ce50d2df8f8a0154b2a1cd74",
+      "details": {
+        "contract_before": {
+          "id": "REF-001",
+          "title": "CEA独立对照算例复现",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "RES-002"
+          ],
+          "required_artifacts": [
+            "tests/reference/cea/manifest.json",
+            "docs/reference-reproduction.md"
+          ],
+          "acceptance": [
+            "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
+          ],
+          "owner": "codex",
+          "note": "已取得固定CEA源码并Windows构建成功；开始气相CH4/O2的TP/HP和平衡/燃烧室冻结算例归档及重现检查。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "REF-001",
+          "title": "CEA独立对照算例复现",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "RES-002"
+          ],
+          "required_artifacts": [
+            "tests/reference/cea/manifest.json",
+            "tests/reference/cea/raw/trace1e8/ch4_o2_hp.out",
+            "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_equilibrium.out",
+            "tests/reference/cea/raw/trace1e8/ch4_o2_rocket_frozen_chamber.out",
+            "tools/cea_reference.py",
+            "docs/reference-reproduction.md"
+          ],
+          "acceptance": [
+            "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
+          ],
+          "owner": "codex",
+          "note": "四个固定CH4/O2气态方法算例已归档并独立复跑；补充可复跑工具、原始输出哈希和缺陷记录。",
+          "verification": null
+        }
+      },
+      "hash": "63be92bd8a81f04da33beef21de5bd02ffb185b1e17764caea32457a6d9933fe"
+    },
+    {
+      "seq": 90,
+      "at": "2026-10-03T13:27:03+00:00",
+      "task": "REF-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "固定CEA v3.3.4/提交与数据库；四卡原输入输出/日志/哈希已保存，TP/HP和平衡/燃烧室冻结条件一致；三次正式复跑数值一致，三组证据/缺陷反例测试接入质量入口。初始输出缺陷保留，不采用可疑标签列。仅方法参考。",
+      "previous_hash": "63be92bd8a81f04da33beef21de5bd02ffb185b1e17764caea32457a6d9933fe",
+      "hash": "5eb5995f6790192547903f320bfdb8c560963bff5a2d5b3304b7d0eca09ede3f"
+    },
+    {
+      "seq": 91,
+      "at": "2026-10-03T13:27:04+00:00",
+      "task": "REF-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "验收契约逐项满足并通过新鲜五项质量检查；只完成外部参考复现，尚未证明项目C热化学/喷管数值。",
+      "previous_hash": "5eb5995f6790192547903f320bfdb8c560963bff5a2d5b3304b7d0eca09ede3f",
+      "hash": "b7d91232ffea353791b67ac447d56dfe35baf89efdd61c836548fe10a45caa85"
+    },
+    {
+      "seq": 92,
+      "at": "2026-10-03T13:27:04+00:00",
+      "task": "MOD-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "b7d91232ffea353791b67ac447d56dfe35baf89efdd61c836548fe10a45caa85",
+      "hash": "5ce4af56494791568af697c3cbb3791567eadf9ff9aea665fda326c2ee6db8d7"
+    },
+    {
+      "seq": 93,
+      "at": "2026-10-03T13:27:04+00:00",
+      "task": "MOD-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
+      "previous_hash": "5ce4af56494791568af697c3cbb3791567eadf9ff9aea665fda326c2ee6db8d7",
+      "hash": "7af861cc58257cb493d9a7b7d3fca3c0f2e458679339eef56519bddb87bfda88"
+    },
+    {
+      "seq": 94,
+      "at": "2026-10-03T13:27:04+00:00",
+      "task": "MOD-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "物性与参考已完成，将工作面转入C热化学与温变喷管；缺失真实参数不以方法算例替换。",
+      "previous_hash": "7af861cc58257cb493d9a7b7d3fca3c0f2e458679339eef56519bddb87bfda88",
+      "details": {
+        "context_before": {
+          "phase": "Windows主线：真实物性与CEA参考算例",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "REF-001",
+            "MOD-002",
+            "ANA-002"
+          ],
+          "facts": [
+            "两型四类级段的型号参数仍按对象/批次/工况核验，缺字段保留unknown。",
+            "C17已实现理想喷管基线及十种NASA9单物种物性；HP平衡与温变喷管尚未实现。",
+            "CEA v3.3.4已在Windows构建并运行官方样例；下一步固定同条件参考。",
+            "Windows为当前唯一推进主线；PPT、报告和发布包仍后置。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows主线：C燃烧平衡与温变喷管",
+          "evidence_cutoff": "2026-10-03",
+          "next_tasks": [
+            "MOD-002",
+            "MOD-003",
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种真实数据与134状态软件对照已完成。",
+            "CEA v3.3.4四个气态CH4/O2参考算例已归档并复跑；它不是飞行发动机性能。",
+            "当前C尚未实现HP平衡与温变喷管；下一步优先完成守恒和同条件对照。",
+            "两型室压/混合比/面积比等缺证字段继续保留unknown。",
+            "Windows主线持续；PPT和报告暂不推进。"
+          ]
+        }
+      },
+      "hash": "6702f834c2e8bba71aa103b0232b599af12d4fb12b49b2cf47bfb900fb0dfbc6"
     }
   ]
 }

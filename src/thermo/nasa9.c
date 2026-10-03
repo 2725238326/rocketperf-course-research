@@ -4,80 +4,82 @@
 #include <math.h>
 #include <stddef.h>
 
-static int finite_range(const RpNasa9Range *range)
+RpStatus rp_nasa9_validate(const RpNasa9Species *species, RpError *error)
 {
-    unsigned int i;
-    if (range == NULL || !rp_isfinite(range->t_min_k) || !rp_isfinite(range->t_max_k) ||
-        range->t_min_k <= 0.0 || range->t_max_k <= range->t_min_k ||
-        !rp_isfinite(range->h_offset_j_per_kg) || !rp_isfinite(range->s_offset_j_per_kg_k)) {
-        return 0;
+    if (species == NULL || species->id == NULL || species->id[0] == '\0' ||
+        species->ranges == NULL || species->range_count == 0U ||
+        species->range_count > RP_NASA9_MAX_RANGES ||
+        !rp_isfinite(species->molar_mass_kg_per_kmol) || species->molar_mass_kg_per_kmol <= 0.0) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid NASA9 species metadata.");
     }
-    for (i = 0U; i < 9U; ++i) {
-        if (!rp_isfinite(range->coefficients[i])) {
-            return 0;
+    for (unsigned int index = 0U; index < species->range_count; ++index) {
+        const RpNasa9Range *range = &species->ranges[index];
+        if (!rp_isfinite(range->t_min_k) || !rp_isfinite(range->t_max_k) ||
+            range->t_min_k <= 0.0 || range->t_max_k <= range->t_min_k ||
+            !rp_isfinite(range->h_offset_j_per_kg) || !rp_isfinite(range->s_offset_j_per_kg_k) ||
+            (index != 0U && species->ranges[index - 1U].t_max_k != range->t_min_k)) {
+            return rp_error_set(error, RP_INVALID_ARGUMENT, "NASA9 ranges must be finite, ordered and contiguous.");
         }
-    }
-    return 1;
-}
-
-static const RpNasa9Range *select_range(const RpNasa9Species *species, double temperature_k)
-{
-    unsigned int i;
-    for (i = 0U; i < species->range_count; ++i) {
-        const RpNasa9Range *range = &species->ranges[i];
-        const int last = i + 1U == species->range_count;
-        if ((temperature_k >= range->t_min_k) &&
-            ((temperature_k < range->t_max_k) || (last && temperature_k <= range->t_max_k))) {
-            return range;
+        for (unsigned int coefficient = 0U; coefficient < 9U; ++coefficient) {
+            if (!rp_isfinite(range->coefficients[coefficient])) {
+                return rp_error_set(error, RP_INVALID_ARGUMENT, "NASA9 coefficients must be finite.");
+            }
         }
-    }
-    return NULL;
-}
-
-RpStatus rp_nasa9_evaluate(const RpNasa9Species *species, double temperature_k,
-                           RpThermoState *state, RpError *error)
-{
-    const RpNasa9Range *range;
-    const double *a;
-    const double t = temperature_k;
-    const double t2 = t * t;
-    const double t3 = t2 * t;
-    const double t4 = t3 * t;
-    const double inv_t = 1.0 / t;
-    double r_specific;
-    double cp_over_r;
-    double h_over_rt;
-    double s_over_r;
-
-    if (species == NULL || state == NULL || species->id == NULL || species->ranges == NULL ||
-        species->range_count == 0U || !rp_isfinite(species->molar_mass_kg_per_kmol) ||
-        species->molar_mass_kg_per_kmol <= 0.0 || !rp_isfinite(temperature_k) || temperature_k <= 0.0) {
-        return rp_error_set(error, RP_INVALID_ARGUMENT, "invalid NASA9 input");
-    }
-    range = select_range(species, temperature_k);
-    if (range == NULL) {
-        return rp_error_set(error, RP_OUT_OF_DOMAIN, "temperature outside NASA9 ranges");
-    }
-    if (!finite_range(range)) {
-        return rp_error_set(error, RP_NUMERIC_ERROR, "invalid NASA9 coefficients");
-    }
-    a = range->coefficients;
-    r_specific = 8314.46261815324 / species->molar_mass_kg_per_kmol;
-    cp_over_r = a[0] * inv_t * inv_t + a[1] * inv_t + a[2] + a[3] * t + a[4] * t2 +
-                 a[5] * t3 + a[6] * t4;
-    h_over_rt = -a[0] * inv_t * inv_t + a[1] * log(t) * inv_t + a[2] + 0.5 * a[3] * t +
-                (a[4] * t2) / 3.0 + 0.25 * a[5] * t3 + 0.2 * a[6] * t4 + a[7] * inv_t;
-    s_over_r = -0.5 * a[0] * inv_t * inv_t - a[1] * inv_t + a[2] * log(t) + a[3] * t +
-               0.5 * a[4] * t2 + (a[5] * t3) / 3.0 + 0.25 * a[6] * t4 + a[8];
-    state->cp_j_per_kg_k = r_specific * cp_over_r;
-    state->h_j_per_kg = r_specific * t * h_over_rt + range->h_offset_j_per_kg;
-    state->s_j_per_kg_k = r_specific * s_over_r + range->s_offset_j_per_kg_k;
-    if (!rp_isfinite(state->cp_j_per_kg_k) || !rp_isfinite(state->h_j_per_kg) ||
-        !rp_isfinite(state->s_j_per_kg_k) || state->cp_j_per_kg_k <= 0.0) {
-        return rp_error_set(error, RP_NUMERIC_ERROR, "NASA9 evaluation is not finite/positive");
     }
     rp_error_clear(error);
     return RP_OK;
 }
 
-
+RpStatus rp_nasa9_evaluate(const RpNasa9Species *species, double temperature_k,
+                           RpThermoState *state, RpError *error)
+{
+    const RpNasa9Range *range = NULL;
+    RpThermoState candidate;
+    RpStatus status;
+    double inverse_temperature;
+    double log_temperature;
+    double specific_gas_constant;
+    const double *coefficients;
+    if (state == NULL || !rp_isfinite(temperature_k) || temperature_k <= 0.0) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid NASA9 temperature or output.");
+    }
+    status = rp_nasa9_validate(species, error);
+    if (status != RP_OK) { return status; }
+    for (unsigned int index = 0U; index < species->range_count; ++index) {
+        const RpNasa9Range *interval = &species->ranges[index];
+        if (temperature_k >= interval->t_min_k &&
+            (temperature_k < interval->t_max_k ||
+             (index + 1U == species->range_count && temperature_k == interval->t_max_k))) {
+            range = interval;
+            break;
+        }
+    }
+    if (range == NULL) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Temperature outside NASA9 fit intervals.");
+    }
+    coefficients = range->coefficients;
+    inverse_temperature = 1.0 / temperature_k;
+    log_temperature = log(temperature_k);
+    specific_gas_constant = RP_UNIVERSAL_GAS_CONSTANT_J_KMOL_K / species->molar_mass_kg_per_kmol;
+    candidate.cp_j_per_kg_k = specific_gas_constant *
+        (coefficients[0] * inverse_temperature * inverse_temperature + coefficients[1] * inverse_temperature +
+         coefficients[2] + temperature_k * (coefficients[3] + temperature_k *
+         (coefficients[4] + temperature_k * (coefficients[5] + temperature_k * coefficients[6]))));
+    candidate.h_j_per_kg = specific_gas_constant *
+        (-coefficients[0] * inverse_temperature + coefficients[1] * log_temperature + coefficients[7] +
+         temperature_k * (coefficients[2] + temperature_k * (coefficients[3] / 2.0 + temperature_k *
+         (coefficients[4] / 3.0 + temperature_k * (coefficients[5] / 4.0 + temperature_k * coefficients[6] / 5.0))))) +
+        range->h_offset_j_per_kg;
+    candidate.s_j_per_kg_k = specific_gas_constant *
+        (-coefficients[0] * inverse_temperature * inverse_temperature / 2.0 - coefficients[1] * inverse_temperature +
+         coefficients[2] * log_temperature + coefficients[8] + temperature_k *
+         (coefficients[3] + temperature_k * (coefficients[4] / 2.0 + temperature_k *
+         (coefficients[5] / 3.0 + temperature_k * coefficients[6] / 4.0)))) + range->s_offset_j_per_kg_k;
+    if (!rp_isfinite(candidate.cp_j_per_kg_k) || !rp_isfinite(candidate.h_j_per_kg) ||
+        !rp_isfinite(candidate.s_j_per_kg_k) || candidate.cp_j_per_kg_k <= 0.0) {
+        return rp_error_set(error, RP_NUMERIC_ERROR, "NASA9 evaluation is non-finite or cp is not positive.");
+    }
+    *state = candidate;
+    rp_error_clear(error);
+    return RP_OK;
+}

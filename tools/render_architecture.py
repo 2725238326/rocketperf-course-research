@@ -76,7 +76,8 @@ def components(modules):
     body+=arrow([(460,535),(540,535),(540,614),(1400,614),(1400,562)],"虚线：公共值类型 / 状态契约依赖",958,603,True)
     body+=text(100,665,"接口边界",20,GREEN,650)+text(250,665,"include/rocketperf：SI字段、显式状态；单点失败不改结果，扫描检查各点；核心无I/O。",19,MUTED)
     body+=node(100,714,490,"工程工具与验证",["任务登记 / 构建测试 / 运行快照"],"tools · scripts · tests · project",h=122)
-    body+=node(660,714,430,m['thermo']['name'],["NASA9 / HP平衡，实现与验证待完成"],"技术路线已定 · 尚未实现",state="planned",h=122)
+    body+=node(660,714,430,m['thermo']['name'],["NASA9单物种 / 真实数据 / 参考测试"],"src/thermo · HP平衡尚未实现",state=m['thermo']['state'],h=122)
+    body+=arrow([(960,348),(960,366),(1600,366),(1600,688),(840,688),(840,714)],"物性查询",1480,677)
     body+=node(1150,714,430,m['cycle']['name'],["控制体、支路、功率与损失"],"扩展计划，不冒充已实现",state="planned",h=122)
     return frame("02","功能核心：边界清楚，模块可以独立维护","实线表示主要编排 / 调用；虚线表示接口依赖。灰色虚线框明确标出未实现扩展。",950,body)
 
@@ -101,7 +102,7 @@ def workflow():
 def expected_architecture(root):
     modules=read_json(root/"project/modules.json")["modules"]
     visible={'cli','adapters','nozzle','core'}
-    drawn={('cli','adapters'),('cli','nozzle'),('cli','core'),('adapters','core'),('adapters','nozzle'),('nozzle','core')}
+    drawn={('cli','adapters'),('cli','nozzle'),('cli','core'),('cli','thermo'),('adapters','core'),('adapters','nozzle'),('nozzle','core')}
     actual={(m['id'],dep) for m in modules if m['id'] in visible for dep in m['allowed_dependencies']}
     if actual != drawn: raise ValueError('Module dependencies changed: update and visually verify the SVG layout')
     diagrams={"business":business(),"components":components(modules),"workflow":workflow()}
@@ -113,7 +114,7 @@ def expected_architecture(root):
     outputs={f"docs/architecture/{name}.svg":svg for name,svg in diagrams.items()}
     outputs.update({f"docs/architecture/{name}.mmd":code for name,code in mermaid.items()})
     sections="".join(f'<section id="{name}" class="view {"selected" if i==0 else ""}">{svg}</section>' for i,(name,svg) in enumerate(diagrams.items()))
-    contracts="".join(f'<tr><td>{escape(m["name"])}</td><td>{escape(m["owner_role"])}</td><td>{escape(m["contract"])}</td><td>{"已实现" if m["state"]=="implemented" else "计划中"}</td></tr>' for m in modules)
+    contracts="".join(f'<tr><td>{escape(m["name"])}</td><td>{escape(m["owner_role"])}</td><td>{escape(m["contract"])}</td><td>{"已实现" if m["state"]=="implemented" else "部分实现" if m["state"]=="prototype" else "计划中"}</td></tr>' for m in modules)
     outputs["docs/architecture/index.html"]='''<!doctype html>
 <html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rocketperf · 架构与维护</title>
