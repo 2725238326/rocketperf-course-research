@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
 
 
+@unittest.skipUnless(BINARY is not None, "CLI tests require --binary <path>; use tools/pipeline.py test")
 class CliTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

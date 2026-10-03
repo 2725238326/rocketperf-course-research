@@ -24,6 +24,14 @@ Grok记录`sanitizer_oct02`没有搜索轨迹，还声称GCC14.2.0未发布、�
 
 旧`taskshot/2026-10-02_011-code-quality-audit.md`记录了当时测试，但“独立边界审查”的措辞过强，且未覆盖本次输出接口问题。保留其历史事实，以本次补审说明范围。源资料、检索返回和历史快照没有清洗或改写。
 
+## 2026-10-03 盘查补记
+
+- `python tools/quality.py` 已完成并返回 PASS：project、governance、debug、release、runner 五项均通过；Debug/Release 分别完成 207 项核心检查、21 项适配器检查和 13 组 CLI 黑盒测试。
+- 发现裸命令 `python -m unittest discover -s tests` 原先会加载 `tests/test_cli.py`，因未传 `--binary` 而产生 41 个 `WinError 2`。这是测试入口编排缺陷，不是 C 计算失败，也不应被静默忽略。
+- 已将 CLI 测试在缺少 `--binary` 时改为明确跳过，并在 `tests/README.md` 写明正确入口。修复后裸 discover：45 个测试、32 个通过、13 个明确跳过、0 个错误；通过流水线传入 Release 可执行文件时，CLI 仍为 13 组 PASS。
+- 运行管理测试在没有新鲜 Release 测试证据时会明确失败（`Test evidence missing, failed or stale`）；先运行 `python tools/pipeline.py test --configuration Release` 后恢复通过。这是证据新鲜度约束，不是计算错误。
+- 当前盘查未清理 `build/` 和 `results/local/`：它们由 `.gitignore` 排除，且存在可复现证据；原始资料和历史快照未改写。大文件仍需保留，不能以目录“清洁”为由删除。
+- MOD-001 仍未完成：NASA9 系数来源、版本、数据许可、哈希和焓基准尚未固定，不能先写未经证实的系数进入 C 源码。
 ## 尚需完成
 
 | 优先工作 | 缺什么 | 产物与验收 |
@@ -39,3 +47,4 @@ Grok记录`sanitizer_oct02`没有搜索轨迹，还声称GCC14.2.0未发布、�
 另需扩大L0的数值边界与编译器检查，将GCC静态分析做成可重复记录；当前测试通过不表示整个输入空间没有错误。绘图和离线研究报告应读取保存的结果，不重新计算或隐藏失败点。工程目录和工具已够用，接下来主要补数据、计算与分析，不继续增加空的组织模板。
 
 当前工作面只推进 A、B 两部分。DOC-001、REL-001 后置，暂不作为当前进度指标。10月5日检查新模型原型；如需缩减已选路线，说明失败与影响后由用户确认。
+
