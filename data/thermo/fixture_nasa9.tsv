@@ -1,0 +1,4 @@
+# id  molar_mass_kg_per_kmol  t_min_k  t_max_k  a0 a1 a2 a3 a4 a5 a6 a7 a8 h_offset_j_per_kg s_offset_j_per_kg_k
+# Synthetic coefficients: formula/API fixture only; not a species database and not CEA data.
+fixture_gas 28.0134 200.0 1000.0 0 0 3.500000 0 0 0 0 0 0 0 0
+fixture_gas 28.0134 1000.0 6000.0 0 0 3.700000 0 0 0 0 0 0 0 0

@@ -160,16 +160,17 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
         try:
             before=source_records(root)
             modules={m['id']:m for m in read_json(root/"project/modules.json")["modules"]}
-            core=modules["core"]["sources"]+modules["nozzle"]["sources"]
+            core=modules["core"]["sources"]+modules["nozzle"]["sources"]+modules["thermo"]["sources"]
             adapters=modules["adapters"]["sources"]+modules["cli"]["sources"]
             flags=['-std=c17','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wshadow','-Wstrict-prototypes','-Wmissing-prototypes','-fno-common','-Iinclude','-Isrc/adapters']
             flags += ['-O0','-g3'] if configuration=="Debug" else ['-O2','-DNDEBUG']
             if sanitize: flags+=['-fsanitize=address,undefined','-fno-sanitize-recover=all','-fno-omit-frame-pointer']
             suffix='.exe' if os.name=='nt' else ''
-            app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix); adapter=attempt/("test_adapters"+suffix)
+            app=attempt/("rocketperf"+suffix); unit=attempt/("test_core"+suffix); adapter=attempt/("test_adapters"+suffix); thermo=attempt/("test_thermo"+suffix)
             commands=[[executable,*flags,*(['-municode'] if os.name=='nt' else []),*core,*adapters,'-lm','-o',str(app)],
                       [executable,*flags,*core,'tests/test_core.c','-lm','-o',str(unit)],
-                      [executable,*flags,*core,*modules['adapters']['sources'],'tests/test_adapters.c','-lm','-o',str(adapter)]]
+                      [executable,*flags,*core,*modules['adapters']['sources'],'tests/test_adapters.c','-lm','-o',str(adapter)],
+                      [executable,*flags,*core,'tests/test_thermo.c','-lm','-o',str(thermo)]]
             if sanitize:
                 commands.append([executable,*flags,'tests/fixtures/sanitizer_probe.c','-o',str(attempt/'sanitizer_probe')])
             version=execute([executable,'--version'],root,attempt/'compiler.log',30).splitlines()[0]
@@ -178,10 +179,11 @@ def build(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False):
             manifest.update(status="PASS",compiler_version=version,flags=flags,inputs=before,commands=commands,
                             application={"path":app.relative_to(root).as_posix(),"sha256":digest(app)},
                             core_test={"path":unit.relative_to(root).as_posix(),"sha256":digest(unit)},
-                            adapter_test={"path":adapter.relative_to(root).as_posix(),"sha256":digest(adapter)})
+                            adapter_test={"path":adapter.relative_to(root).as_posix(),"sha256":digest(adapter)},
+                            thermo_test={"path":thermo.relative_to(root).as_posix(),"sha256":digest(thermo)})
             if sanitize: manifest['sanitizer_probe']={'path':(attempt/'sanitizer_probe').relative_to(root).as_posix(),'sha256':digest(attempt/'sanitizer_probe')}
             # Compatibility aliases. Consumers must use the manifest pointer, not trust old aliases.
-            for output in (app,unit,adapter):
+            for output in (app,unit,adapter,thermo):
                 destination=root/'build'/name/output.name
                 temporary=destination.with_name('.'+output.name+'.'+uuid.uuid4().hex)
                 shutil.copy2(output,temporary); os.replace(temporary,destination)
@@ -201,7 +203,7 @@ def verified_build(root,configuration="Debug",sanitize=False,require_tests=False
     path=local_path(root,pointer['manifest']); manifest=read_json(path)
     if manifest.get('status')!='PASS' or manifest.get('kind')!='build': raise ValueError("Latest build attempt did not pass")
     if manifest['inputs']!=source_records(root): raise ValueError("Build is stale for current source inputs")
-    for field in ('application','core_test','adapter_test',*(['sanitizer_probe'] if sanitize else [])):
+    for field in ('application','core_test','adapter_test','thermo_test',*(['sanitizer_probe'] if sanitize else [])):
         artifact=local_path(root,manifest[field]['path'])
         if not artifact.is_file() or digest(artifact)!=manifest[field]['sha256']: raise ValueError("Build artifact hash mismatch")
     if require_tests:
@@ -222,6 +224,7 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     try:
         core_log=execute([local_path(root,manifest['core_test']['path'])],root,path.parent/'core-test.log')
         adapter_log=execute([local_path(root,manifest['adapter_test']['path'])],root,path.parent/'adapter-test.log')
+        thermo_log=execute([local_path(root,manifest['thermo_test']['path'])],root,path.parent/'thermo-test.log')
         cli_log=execute([python,'tests/test_cli.py','--binary',local_path(root,manifest['application']['path'])],root,path.parent/'cli-test.log')
         if sanitize:
             probe=local_path(root,manifest['sanitizer_probe']['path'])
@@ -231,12 +234,13 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
                 atomic_text(path.parent/(mode+'-probe.log'),output)
                 if completed.returncode==0 or expected not in output: raise ValueError(f'{mode} negative control did not detect its deliberate defect')
         if manifest['inputs']!=source_records(root) or report['validation_inputs']!=test_records(root): raise ValueError("Validation inputs changed during tests")
-        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','cli',*(['sanitizer-controls'] if sanitize else []))],
+        report.update(status='PASS',checks=[{"name":name,"status":"PASS"} for name in ('core','adapters','thermo','cli',*(['sanitizer-controls'] if sanitize else []))],
                       core_checks=int(re.search(r'core: (\d+) checks',core_log).group(1)),
                       adapter_checks=int(re.search(r'adapters: (\d+) checks',adapter_log).group(1)),
+                      thermo_checks=int(re.search(r'thermo: (\d+) checks',thermo_log).group(1)),
                       cli_groups=int(re.search(r'Ran (\d+) tests',cli_log).group(1)),
                       binary_sha256=manifest['application']['sha256'])
-        print(core_log.strip()); print(adapter_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
+        print(core_log.strip()); print(adapter_log.strip()); print(thermo_log.strip()); print(f"CLI: {report['cli_groups']} groups PASS")
     except Exception as exc:
         report.update(status='FAIL',error=str(exc)); raise
     finally:

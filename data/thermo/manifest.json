@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "dataset_id": "fixture-nasa9-v1",
+  "role": "formula_and_api_test_fixture",
+  "status": "not_a_species_database",
+  "source": {
+    "kind": "project-authored-synthetic",
+    "license": "project-internal-test-data",
+    "sha256_required": true
+  },
+  "limitations": [
+    "Coefficients are synthetic and must not be used as a real propellant or air species.",
+    "NASA CEA thermo.inp data has not yet been imported or frozen for production use."
+  ]
+}
