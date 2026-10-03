@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 101,
+  "revision": 103,
   "context": {
     "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
     "evidence_cutoff": "2026-10-04",
@@ -676,10 +676,10 @@
         "Windows可生成校验过的本地交接包，明确版本、运行命令、验收责任、模型边界和后续任务；全量质量与干净检出通过后本地提交，不推送"
       ],
       "owner": "root",
-      "note": "七项修复与完整质量已通过，提交可审查实现；正式包和独立检出仍待实际复验，不提前结项。",
+      "note": "固定旧合成夹具当前原始字节，数值和本轮新鲜质量输入未改变；待新bundle的干净检出复验后再结项。",
       "verification": {
         "kind": "quality",
-        "path": "project/evidence/QA-001_66c5b56600c1.json",
+        "path": "project/evidence/QA-001_5a2b2765e174.json",
         "sha256": "8f6463e3d4c28c4f140d4b7056ed8b90ee0b5016734dd9aaefae12ca24ec83ca"
       }
     }
@@ -2732,6 +2732,30 @@
       "note": "七项修复与完整质量已通过，提交可审查实现；正式包和独立检出仍待实际复验，不提前结项。",
       "previous_hash": "7f81b9325a5c2b840f9e687b21e87e8c03033b59335ab3d94bcd17d40e81ae3a",
       "hash": "103a9b0845d6936908a7ffa9385935408a2fefdd88eb05d21c400127c320e3e2"
+    },
+    {
+      "seq": 119,
+      "at": "2026-10-03T19:47:55+00:00",
+      "task": "QA-001",
+      "from": "REVIEW",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "独立检出发现旧物性夹具混合行尾在Git中尚未按-text重固定，主/检出指纹不同；不放宽字节检查，先固定现有字节再复验。",
+      "previous_hash": "103a9b0845d6936908a7ffa9385935408a2fefdd88eb05d21c400127c320e3e2",
+      "hash": "95fb4e0c9f75f46834753772c878bb908ad05904d32cbd843ac0a6b5bf933252"
+    },
+    {
+      "seq": 120,
+      "at": "2026-10-03T19:49:01+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定旧合成夹具当前原始字节，数值和本轮新鲜质量输入未改变；待新bundle的干净检出复验后再结项。",
+      "previous_hash": "95fb4e0c9f75f46834753772c878bb908ad05904d32cbd843ac0a6b5bf933252",
+      "hash": "02481af5b699f690ce72b844a6c40de1993ab0d7a284703c0e2a90fd2d19ed02"
     }
   ]
 }
