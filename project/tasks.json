@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 103,
+  "revision": 108,
   "context": {
-    "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
+    "phase": "Windows阶段基础已验收；接续改进代价与敏感性研究",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
       "ANA-002"
     ],
     "facts": [
       "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
-      "C17给定热状态外排循环已落地；校验版本2基准132条，旧86条归档保持原样。",
-      "两型直接原文复查仍截至10月3日；未知字段继续unknown，不填假数。",
-      "七项本地验收漏项已修复；正式交接以干净提交、完整质量和接收复跑为准。",
-      "后续接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+      "给定热状态外排循环校验版本2基准132条；旧86条验证归档与原始来源保持原样。",
+      "七项验收问题修复完成；主工作区及独立源码检出完整质量6/6通过，正式模式交接预验通过。",
+      "交接采用固定提交、离线源码bundle、已测Windows程序与具名接收复跑；他人实际验收仍需在其机器完成。",
+      "两型直接原文复查仍截至10月3日；未知字段继续unknown。下一任务ANA-002，PPT/报告后置，不推送。"
     ]
   },
   "tasks": [
@@ -635,7 +635,7 @@
     {
       "id": "ANA-002",
       "title": "改进研究与结果复核",
-      "status": "PLANNED",
+      "status": "READY",
       "priority": 1,
       "depends_on": [
         "DATA-002",
@@ -657,7 +657,7 @@
     {
       "id": "QA-001",
       "title": "修复验收漏项并建立可运行交接",
-      "status": "REVIEW",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "MOD-003",
@@ -676,10 +676,10 @@
         "Windows可生成校验过的本地交接包，明确版本、运行命令、验收责任、模型边界和后续任务；全量质量与干净检出通过后本地提交，不推送"
       ],
       "owner": "root",
-      "note": "固定旧合成夹具当前原始字节，数值和本轮新鲜质量输入未改变；待新bundle的干净检出复验后再结项。",
+      "note": "实际软件验收完成；本机交接预验和独立干净检出通过，具名外部接收及科学语义审查仍需接手人完成。保留真实型号/液态/回流边界，解锁ANA-002，不推送。",
       "verification": {
         "kind": "quality",
-        "path": "project/evidence/QA-001_5a2b2765e174.json",
+        "path": "project/evidence/QA-001_75f5e5dedf50.json",
         "sha256": "8f6463e3d4c28c4f140d4b7056ed8b90ee0b5016734dd9aaefae12ca24ec83ca"
       }
     }
@@ -2756,6 +2756,96 @@
       "note": "固定旧合成夹具当前原始字节，数值和本轮新鲜质量输入未改变；待新bundle的干净检出复验后再结项。",
       "previous_hash": "95fb4e0c9f75f46834753772c878bb908ad05904d32cbd843ac0a6b5bf933252",
       "hash": "02481af5b699f690ce72b844a6c40de1993ab0d7a284703c0e2a90fd2d19ed02"
+    },
+    {
+      "seq": 121,
+      "at": "2026-10-03T19:54:02+00:00",
+      "task": "QA-001",
+      "from": "REVIEW",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "独立包及干净源码检出完整质量均PASS，补登记结项背景与验收快照后提交最终验收。",
+      "previous_hash": "02481af5b699f690ce72b844a6c40de1993ab0d7a284703c0e2a90fd2d19ed02",
+      "hash": "d272734025f0c9c90481605984cf84db7f71081e33dc6866fbe76f9e603b236a"
+    },
+    {
+      "seq": 122,
+      "at": "2026-10-03T19:54:04+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "阶段交接和独立检出验收完成，转入同条件改进研究准备；外部资料截止不变。",
+      "previous_hash": "d272734025f0c9c90481605984cf84db7f71081e33dc6866fbe76f9e603b236a",
+      "details": {
+        "context_before": {
+          "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "C17给定热状态外排循环已落地；校验版本2基准132条，旧86条归档保持原样。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown，不填假数。",
+            "七项本地验收漏项已修复；正式交接以干净提交、完整质量和接收复跑为准。",
+            "后续接续ANA-002；本轮不做PPT/报告，不运行WSL构建测试，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows阶段基础已验收；接续改进代价与敏感性研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "给定热状态外排循环校验版本2基准132条；旧86条验证归档与原始来源保持原样。",
+            "七项验收问题修复完成；主工作区及独立源码检出完整质量6/6通过，正式模式交接预验通过。",
+            "交接采用固定提交、离线源码bundle、已测Windows程序与具名接收复跑；他人实际验收仍需在其机器完成。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown。下一任务ANA-002，PPT/报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "fae808874e16eacec4949532d1c3d6811896e8a7ca0809b73316bdfb51ad0aa4"
+    },
+    {
+      "seq": 123,
+      "at": "2026-10-03T19:54:05+00:00",
+      "task": "QA-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "七项修复回归、主工作区完整质量6/6、CMake 6/6及正式包成功/失败复跑通过；cca01de独立bundle克隆完整质量6/6通过且指纹一致；字节固定和状态修正已留事件/快照。",
+      "previous_hash": "fae808874e16eacec4949532d1c3d6811896e8a7ca0809b73316bdfb51ad0aa4",
+      "hash": "21a0aa02626d299f4f51eae3bc1a748881c00710f8f9260e9f298c214d218651"
+    },
+    {
+      "seq": 124,
+      "at": "2026-10-03T19:54:06+00:00",
+      "task": "QA-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实际软件验收完成；本机交接预验和独立干净检出通过，具名外部接收及科学语义审查仍需接手人完成。保留真实型号/液态/回流边界，解锁ANA-002，不推送。",
+      "previous_hash": "21a0aa02626d299f4f51eae3bc1a748881c00710f8f9260e9f298c214d218651",
+      "hash": "9ab854e3a9e012aecb9085b6d17a1137b03f78b3708f825a5afbedf8bd89f865"
+    },
+    {
+      "seq": 125,
+      "at": "2026-10-03T19:54:06+00:00",
+      "task": "ANA-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "9ab854e3a9e012aecb9085b6d17a1137b03f78b3708f825a5afbedf8bd89f865",
+      "hash": "2d8d35e80f1a9e07a6027d5e53a18f6b75b229c0725768278e5be95b1947bb9d"
     }
   ]
 }
