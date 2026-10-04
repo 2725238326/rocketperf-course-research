@@ -18,12 +18,15 @@
 ├─ tools/                     治理、构建测试、运行记录的唯一行为实现
 ├─ scripts/                   PowerShell兼容入口和语法检查
 ├─ tests/ + cases/            独立基准、负向测试、教学/研究算例
-├─ data/                     真实参数契约；待研究落地
+├─ data/                     字段级参数/假设和固定NASA9数据
 ├─ third_party/              外部移植与许可约定
 ├─ taskshot/                 不可静默改写的工作历史
 ├─ 作业要求/ + 调研/          课程要求、原图、论文、证据与研究专题
 ├─ build/                    可再生构建、测试、临时工具（忽略）
-└─ results/local/            本地成功/失败运行快照（忽略）
+└─ results/
+   ├─ validation/            选定方法校验档案（Git，保留原字节）
+   ├─ research/              有版本的计算研究档案（Git）
+   └─ local/                 本地成功/失败试跑（忽略）
 ```
 
 ## 单一来源
@@ -47,7 +50,7 @@
 
 ## 产物与存储
 
-生产源码、规范、参数来源和选定验收证据进Git。build/results-local/锁/缓存忽略。正式研究结果未来放deliverables或有版本的结果目录，并明确引用输入与验证。
+生产源码、规范、参数来源和选定验证/研究证据进Git。build/results-local/锁/缓存忽略。计算研究在results/research保留版本与清单；deliverables留给最终课程交付。失败试跑不搬进源码目录，原始文件不重复复制到规范文档群。
 
 `python tools/project.py inventory`只读展示体积、大文件及旧构建候选；不会自动清理。原课件/论文/网页不属于可随意删除的缓存，已有44MB交互网页属于历史档案。未来新增超25MB内容需要先说明存储方案。
 

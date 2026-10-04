@@ -20,6 +20,49 @@ DEFAULT_RATIOS=[1,1.25,1.6875,2,4,8,16]
 DEFAULT_PRESSURES=[0,25000,50000,100000]
 
 
+def snapshot_values(input_text):
+    values={}
+    for line in input_text.lstrip('\ufeff').splitlines():
+        line=line.strip()
+        if not line or line.startswith('#'): continue
+        key,sep,value=line.partition('=')
+        if not sep or key.strip() in values: raise ValueError('Snapshot contains malformed/duplicate fields')
+        values[key.strip()]=value.strip()
+    return values
+
+
+def ideal_input_domain(inputs):
+    if (not 1 < inputs['gamma'] <= 2 or not 1 <= inputs['area_ratio'] <= 1e4
+        or inputs['ambient_pressure_pa'] < 0
+        or any(inputs[k] <= 0 for k in CORE_KEYS-{'gamma','area_ratio','ambient_pressure_pa'})):
+        raise ValueError('Ideal-nozzle inputs outside the C domain')
+
+
+def ideal_log_area(mach, gamma):
+    delta=gamma-1
+    return -math.log(mach)+(gamma+1)/(2*delta)*(math.log1p(delta*mach*mach/2)-math.log1p(delta/2))
+
+
+def check_relation(actual, expected, label, rel=1e-8, absolute=1e-10):
+    if not math.isfinite(expected) or not math.isclose(actual,expected,rel_tol=rel,abs_tol=absolute):
+        raise ValueError('Inconsistent result relation: '+label)
+
+
+def ideal_exclusion_supported(inputs):
+    """Invert pressure at the domain boundary, not the area/Mach root solve."""
+    ideal_input_domain(inputs)
+    pa=inputs['ambient_pressure_pa']/(1+1e-10)
+    if pa <= 0: return False
+    gamma=inputs['gamma']; delta=gamma-1; pc=inputs['stagnation_pressure_pa']
+    critical=pc*math.exp(-gamma/delta*math.log1p(delta/2))
+    if pa > critical: return True
+    mach=math.sqrt(2/delta*math.expm1(delta/gamma*math.log(pc/pa)))
+    # C's accepted area residual bounds the position of the pressure boundary.
+    # Retain that tiny numerical ambiguity, never reject a legitimate grid due
+    # to a few ulps or claim experimental accuracy for the exclusion threshold.
+    return ideal_log_area(mach,gamma) < math.log(inputs['area_ratio'])+1e-8
+
+
 def grid_axis(text, pressure=False):
     tokens=text.split(',')
     if not 1<=len(tokens)<=32 or any(not re.fullmatch(r'[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?',x.strip()) for x in tokens):
@@ -38,7 +81,9 @@ def validate_study(report, input_text, ratios, pressures):
     if report['grid']!=expected_grid: raise ValueError('Study grid differs from requested grid')
     for axis in ('area_ratios','ambient_pressures_pa'):
         if any(type(x) not in {int,float} or not math.isfinite(x) for x in report['grid'][axis]): raise ValueError('Invalid grid value')
-    values=dict(line.strip().split('=',1) for line in input_text.lstrip('\ufeff').splitlines() if line.strip() and not line.strip().startswith('#'))
+    values=snapshot_values(input_text)
+    if set(values)!=CORE_KEYS|{'schema_version','case_id','case_kind','source_ref','model'} or values['schema_version']!='1':
+        raise ValueError('Invalid ideal snapshot schema')
     expected_study={'id':'S1_area_ratio_ambient','model':values['model'],'case_id':values['case_id'],'kind':values['case_kind'],'source_ref':values['source_ref']}
     if report['study']!=expected_study: raise ValueError('Study provenance differs from input snapshot')
     if not isinstance(report['base_inputs'],dict) or set(report['base_inputs'])!=CORE_KEYS-{'area_ratio','ambient_pressure_pa'}:
@@ -64,6 +109,10 @@ def validate_study(report, input_text, ratios, pressures):
         elif status=='out_of_domain':
             if set(point)!={'area_ratio','ambient_pressure_pa','status','error'} or not isinstance(point['error'],str) or not point['error'].strip():
                 raise ValueError('Domain exclusion has no valid diagnostic')
+            inputs={**report['base_inputs'],'area_ratio':ratio,'ambient_pressure_pa':pressure}
+            if (point['error'] != 'Overexpanded/back-pressure flow is not supported by this model.'
+                or not ideal_exclusion_supported(inputs)):
+                raise ValueError('Domain exclusion is inconsistent with back-pressure/area inputs')
         else: raise ValueError('Calculation error is not an expected domain exclusion')
         counts[status]+=1
     if not re.fullmatch(r'\d+\.\d+\.\d+',str(report['program_version'])) or not isinstance(report['limitations'],list) or not report['limitations'] or any(not isinstance(x,str) or not x for x in report['limitations']):
@@ -75,13 +124,9 @@ def validate_result(report, input_text):
     required={"schema_version","program_version","model","case","inputs","results","diagnostics","limitations"}
     if not isinstance(report,dict) or set(report)!=required or type(report["schema_version"]) is not int or report["schema_version"]!=1:
         raise ValueError("Result does not match v1 report schema")
-    values={}
-    for line in input_text.lstrip('\ufeff').splitlines():
-        line=line.strip()
-        if not line or line.startswith('#'): continue
-        key,sep,value=line.partition('=')
-        if not sep or key.strip() in values: raise ValueError("Snapshot contains malformed/duplicate fields")
-        values[key.strip()]=value.strip()
+    values=snapshot_values(input_text)
+    if set(values)!=CORE_KEYS|{'schema_version','case_id','case_kind','source_ref','model'} or values['schema_version']!='1':
+        raise ValueError('Invalid ideal snapshot schema')
     if report["model"]!=values.get("model") or report["model"]!="ideal_constant_gamma_v1":
         raise ValueError("Result model differs from input snapshot")
     if not isinstance(report["program_version"],str) or not re.fullmatch(r"\d+\.\d+\.\d+",report["program_version"]):
@@ -101,7 +146,30 @@ def validate_result(report, input_text):
     if type(diag["root_iterations"]) is not int or not 0<=diag["root_iterations"]<=100000: raise ValueError("Invalid iteration count")
     residual=diag["relative_area_residual"]
     if type(residual) not in {int,float} or not math.isfinite(residual) or not 0<=residual<=1e-8: raise ValueError("Area residual exceeds contract")
-    if not isinstance(report["limitations"],list) or not report["limitations"] or any(not isinstance(x,str) for x in report["limitations"]): raise ValueError("Model limitations missing")
+    if not isinstance(report["limitations"],list) or not report["limitations"] or any(not isinstance(x,str) or not x.strip() for x in report["limitations"]): raise ValueError("Model limitations missing")
+    ideal_input_domain(report['inputs'])
+    i=report['inputs']; r=report['results']; g=i['gamma']; delta=g-1; mach=r['exit_mach']
+    if mach < 1: raise ValueError('Expected sonic/supersonic nozzle branch')
+    try:
+        area_residual=abs(math.expm1(ideal_log_area(mach,g)-math.log(i['area_ratio'])))
+        if area_residual > 1e-8: raise ValueError('Recomputed area residual exceeds contract')
+        check_relation(residual,area_residual,'area residual identity',absolute=2e-12)
+        te=i['stagnation_temperature_k']/(1+delta*mach*mach/2)
+        pe=i['stagnation_pressure_pa']*math.exp(-g/delta*math.log1p(delta*mach*mach/2))
+        if i['ambient_pressure_pa'] > pe*(1+1e-10): raise ValueError('Successful result outside back-pressure domain')
+        velocity=mach*math.sqrt(g*i['gas_constant_j_kg_k']*te)
+        area=i['throat_area_m2']*i['area_ratio']
+        cstar=math.sqrt(i['gas_constant_j_kg_k']*i['stagnation_temperature_k']/g)*math.exp((g+1)/(2*delta)*math.log1p(delta/2))
+        flow=i['stagnation_pressure_pa']*i['throat_area_m2']/cstar
+        thrust=flow*velocity+(pe-i['ambient_pressure_pa'])*area
+        expected={'exit_temperature_k':te,'exit_pressure_pa':pe,'exit_velocity_m_s':velocity,'exit_area_m2':area,
+                  'characteristic_velocity_m_s':cstar,'mass_flow_kg_s':flow,'thrust_n':thrust,
+                  'thrust_coefficient':thrust/(i['stagnation_pressure_pa']*i['throat_area_m2']),
+                  'specific_impulse_s':thrust/(flow*9.80665)}
+        for key,value in expected.items(): check_relation(r[key],value,key)
+        check_relation(flow,pe/(i['gas_constant_j_kg_k']*te)*velocity*area,'exit continuity')
+    except (OverflowError,ZeroDivisionError) as exc:
+        raise ValueError('Invalid ideal-nozzle algebraic state') from exc
 
 
 def config_name(configuration,sanitize):
@@ -131,15 +199,18 @@ def source_records(root):
 
 def test_records(root):
     # Validation consumes archive stdout/stderr as well as JSON and raw references.
-    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data","results/validation")
+    files=[p.relative_to(root).as_posix() for folder in ("tests","cases/benchmarks","data","results/validation","results/research")
            for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc']
     files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py',
-              'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py',
+              'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py','tools/cycle_study.py',
               '调研/原始来源/来源文件索引.json']
     # Parameter checks resolve source IDs and local references; those inputs must
     # invalidate a previous data PASS too. Task states are intentionally dynamic.
     for dataset in (root/'data/parameters').glob('*.json'):
-        records=read_json(dataset).get('records',[])
+        payload=read_json(dataset)
+        if not isinstance(payload,dict): raise ValueError('Parameter dataset must be an object: '+str(dataset))
+        records=payload.get('records',[])
+        if not isinstance(records,list): raise ValueError('Parameter records must be a list: '+str(dataset))
         for record in records:
             if not isinstance(record,dict): continue
             refs=record.get('source_refs',[])
@@ -310,7 +381,12 @@ def test(root=ROOT,configuration="Debug",compiler="gcc",sanitize=False,python=sy
     return path
 
 
-def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15,study=False,area_ratios=None,ambient_pressures=None,model='ideal'):
+def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,timeout=15,study=False,area_ratios=None,ambient_pressures=None,model='ideal',cycle_field=None,cycle_values=None):
+    if (cycle_field is None) != (cycle_values is None) or (cycle_field is not None and study): raise ValueError('Cycle study requires field/values and excludes S1')
+    if cycle_field is not None:
+        from cycle_study import FIELDS
+        if cycle_field not in FIELDS: raise ValueError('Unsupported cycle study field')
+        cycle_axis=grid_axis(cycle_values,True)
     if model not in {'ideal','prescribed-cycle'}: raise ValueError('Unsupported run model')
     if study and model != 'ideal': raise ValueError('Study grid is currently only supported by the ideal nozzle')
     if not study and (area_ratios is not None or ambient_pressures is not None): raise ValueError('Grid options require --study')
@@ -346,8 +422,10 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         if read_json(folder/'test-report.json')['validation_inputs'] != test_records(root):
             raise ValueError('Test inputs changed during snapshot')
         arguments=['study','area-ratio-ambient','input.ini','--area-ratios',','.join(map(str,ratios)),'--ambient-pressures',','.join(map(str,pressures))] if study else (['cycle','prescribed','input.ini'] if model=='prescribed-cycle' else ['run','input.ini'])
+        if cycle_field is not None: arguments=['study','prescribed-cycle','input.ini',cycle_field,','.join(map(str,cycle_axis))]
         record.update(status='RUNNING',executable_sha256=digest(executable),build_manifest_sha256=digest(folder/'build-manifest.json'),test_report_sha256=digest(folder/'test-report.json'),command=[executable.name,*arguments])
         if study: record['requested_grid']={'area_ratios':ratios,'ambient_pressures_pa':pressures}
+        if cycle_field is not None: record['requested_axis']={'field':cycle_field,'values':cycle_axis}
         atomic_json(folder/'run-manifest.json',record)
         completed=subprocess.run([str(executable),*arguments],cwd=folder,capture_output=True,encoding='utf-8',errors='strict',timeout=timeout,check=False,env=subprocess_env())
         atomic_text(folder/'stdout.txt',completed.stdout); atomic_text(folder/'stderr.txt',completed.stderr)
@@ -356,7 +434,10 @@ def run_case(root,case_path,configuration='Release',run_id=None,no_build=False,t
         if completed.stderr: raise ValueError("Success path unexpectedly wrote stderr")
         data=strict_json(completed.stdout)
         input_text=(folder/'input.ini').read_text(encoding='utf-8-sig')
-        if study: record['point_counts']=validate_study(data,input_text,ratios,pressures)
+        if cycle_field is not None:
+            from cycle_study import validate_study as validate_cycle_study
+            record['study_validation']=validate_cycle_study(data,input_text,cycle_field,cycle_axis,root)
+        elif study: record['point_counts']=validate_study(data,input_text,ratios,pressures)
         elif model=='prescribed-cycle':
             from cycle_validation import VALIDATION_VERSION, validate_cycle
             record['accounting_checks']=len(validate_cycle(data,input_text))
@@ -387,10 +468,11 @@ def main():
     p=sub.add_parser('run');p.add_argument('--case',default='cases/benchmarks/air_mach2_vacuum.ini');p.add_argument('--configuration',choices=['Debug','Release'],default='Release');p.add_argument('--run-id');p.add_argument('--no-build',action='store_true')
     p.add_argument('--study',choices=['area-ratio-ambient']);p.add_argument('--area-ratios');p.add_argument('--ambient-pressures')
     p.add_argument('--model',choices=['ideal','prescribed-cycle'],default='ideal')
+    p.add_argument('--cycle-field');p.add_argument('--cycle-values')
     args=parser.parse_args()
     if args.command=='build': build(ROOT,args.configuration,args.compiler,args.sanitize)
     elif args.command=='test': test(ROOT,args.configuration,args.compiler,args.sanitize,args.python)
-    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build,study=bool(args.study),area_ratios=args.area_ratios,ambient_pressures=args.ambient_pressures,model=args.model)
+    else: run_case(ROOT,args.case,args.configuration,args.run_id,args.no_build,study=bool(args.study),area_ratios=args.area_ratios,ambient_pressures=args.ambient_pressures,model=args.model,cycle_field=args.cycle_field,cycle_values=args.cycle_values)
 
 
 if __name__=='__main__':

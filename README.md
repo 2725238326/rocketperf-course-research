@@ -42,6 +42,14 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 该命令输出并保存泵功、涡轮轴功、外排支路、两路推力及热交换/残差。首版拒绝非零涡轮回流，不是完整补燃循环，见[循环边界与验证](docs/cycle-validation.md)。
 
+实际研究入口：
+
+```powershell
+python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycle-field main_area_ratio --cycle-values 10,20,40
+```
+
+C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限步响应；Python检查、保存，不代替求解。结果与边界见[改进分析](docs/improvement-analysis.md)和[研究归档](results/research/README.md)。当前重点是这些计算与证据，PPT/最终报告暂不推进。
+
 ## 按职责找入口
 
 | 工作 | 入口 |

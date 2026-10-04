@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from combustion_reference import compare_report
 from cycle_validation import validate_cycle
+from cycle_study import validate_study as validate_cycle_study
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -293,6 +294,37 @@ class CliTests(unittest.TestCase):
         report=json.loads(result.stdout); self.assertIsNone(report['branch_nozzle'])
         self.assertEqual(report['flows']['branch_mass_flow_kg_per_s'],0)
         self.assertGreater(len(validate_cycle(report,zero)),50)
+
+    def test_cycle_study_cost_and_finite_step_response(self):
+        result=self.run_app('study','prescribed-cycle',self.case(self.cycle),'main_area_ratio','10,20,40')
+        self.assertEqual(result.returncode,0,result.stderr);report=json.loads(result.stdout)
+        checked=validate_cycle_study(report,self.cycle,'main_area_ratio',[10,20,40])
+        self.assertEqual(checked['counts']['ok'],3)
+        self.assertEqual(report['points'][0]['metrics']['thrust_change_n'],0)
+        for key in report['points'][2]['metrics']:
+            candidate=copy.deepcopy(report)
+            candidate['points'][2]['metrics'][key]=False if key=='elasticity_defined' else candidate['points'][2]['metrics'][key]+1
+            with self.subTest(key=key),self.assertRaises(ValueError):
+                validate_cycle_study(candidate,self.cycle,'main_area_ratio',[10,20,40])
+
+    def test_cycle_study_axes_and_domain_exclusions(self):
+        for field,values in [('branch_axial_projection',[0,1,2]),('ambient_pressure_pa',[0,101325]),
+            ('turbine_efficiency',[0.693,0.7,0.707]),('chamber_temperature_k',[3267,3300,3333]),
+            ('overall_oxidizer_fuel_ratio',[3.366,3.4,3.434]),('fuel_pump_efficiency',[0.693,0.7,0.707]),
+            ('oxidizer_pump_efficiency',[0.7425,0.75,0.7575])]:
+            result=self.run_app('study','prescribed-cycle',self.case(self.cycle),field,','.join(map(str,values)))
+            self.assertEqual(result.returncode,0,result.stderr)
+            validate_cycle_study(json.loads(result.stdout),self.cycle,field,values)
+        result=self.run_app('study','prescribed-cycle',self.case(self.cycle),'ambient_pressure_pa','0,1000')
+        report=json.loads(result.stdout);report['points'][1]={'value':1000,'status':'out_of_domain','error':'forged'}
+        with self.assertRaises(ValueError): validate_cycle_study(report,self.cycle,'ambient_pressure_pa',[0,1000])
+
+    def test_cycle_study_invalid_cli_and_baseline(self):
+        for args in [('bad','1'),('main_area_ratio','nan'),('main_area_ratio','-1'),('main_area_ratio','1,')]:
+            result=self.run_app('study','prescribed-cycle',self.case(self.cycle),*args)
+            self.assertEqual(result.returncode,2);self.assertFalse(result.stdout)
+        result=self.run_app('study','prescribed-cycle',self.case(self.cycle.replace('return_fraction=0','return_fraction=0.1')),'main_area_ratio','10,20')
+        self.assertEqual(result.returncode,4);self.assertFalse(result.stdout)
 
     def test_cycle_validator_detects_wrong_accounting(self):
         result=self.run_app('cycle','prescribed',self.case(self.cycle)); self.assertEqual(result.returncode,0,result.stderr)

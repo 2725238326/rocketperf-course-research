@@ -28,6 +28,8 @@
     {"path":"docs/research-agenda.md","role":"待回答的研究问题清单，不是完成状态表","owner":"tooling"},
     {"path":"docs/decisions.md","role":"决定及依据，不维护实时任务状态","owner":"tooling"},
     {"path":"docs/cycle-validation.md","role":"稳态部件、控制体热交换、外排边界与验证","owner":"cycle"},
+    {"path":"docs/improvement-analysis.md","role":"合成同条件改进、几何代价、输入扰动及不可外推结论","owner":"cycle"},
+    {"path":"results/research/README.md","role":"研究计算版本、输入/构建/参考与复验入口","owner":"tooling"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]
 }

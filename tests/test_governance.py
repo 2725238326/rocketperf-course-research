@@ -48,7 +48,7 @@ class GovernanceTests(unittest.TestCase):
     def proof(self):
         (self.root/'result.txt').write_text('real fixture result',encoding='utf-8')
         relative='build/quality/latest.json'
-        report={'kind':'quality','status':'PASS','input_fingerprint':fingerprint(self.root),'checks':[{'name':name,'status':'PASS'} for name in sorted(QUALITY_CHECKS)]}
+        report={'schema_version':1,'kind':'quality','status':'PASS','input_fingerprint':fingerprint(self.root),'checks':[{'name':name,'status':'PASS'} for name in sorted(QUALITY_CHECKS)]}
         atomic_json(self.root/relative,report)
         return relative
 
@@ -93,6 +93,18 @@ class GovernanceTests(unittest.TestCase):
         (self.root/'result.txt').write_text('post-review change',encoding='utf-8')
         with self.assertRaisesRegex(ValueError,'stale'): self.change('complete')
         self.assertEqual(self.task('WORK-001')['status'],'REVIEW')
+
+    def test_quality_shapes_duplicates_and_version_rejected(self):
+        self.change('start'); proof=self.proof(); valid=read_json(self.root/proof)
+        for mode in ('list','entry','duplicate','name','version'):
+            payload=copy.deepcopy(valid)
+            if mode=='list': payload=[]
+            if mode=='entry': payload['checks'][0]=1
+            if mode=='duplicate': payload['checks'].append(payload['checks'][0])
+            if mode=='name': payload['checks'][0]['name']=[]
+            if mode=='version': payload['schema_version']=True
+            atomic_json(self.root/proof,payload)
+            with self.subTest(mode=mode),self.assertRaises(ValueError): self.change('submit',evidence=proof)
 
     def test_block_handoff_and_resume(self):
         self.change('start'); self.change('block')

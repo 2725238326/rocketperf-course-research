@@ -12,9 +12,21 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from cycle_validation import check_archive, validate_cycle
 from gas_checks import database, mixture
+from cycle_study import verify as verify_study
 
 
 class CycleArchiveTests(unittest.TestCase):
+    def test_research_grid_states_comparisons_and_provenance(self):
+        self.assertEqual(verify_study(ROOT/'results/research/prescribed_cycle_scan_v1_20261004'),10)
+
+    def test_research_mutation_and_duplicate_inventory_rejected(self):
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as temporary:
+            folder=Path(temporary)/'research'
+            shutil.copytree(ROOT/'results/research/prescribed_cycle_scan_v1_20261004',folder)
+            manifest=json.loads((folder/'manifest.json').read_text(encoding='utf-8'))
+            manifest['files'].append(manifest['files'][0])
+            (folder/'manifest.json').write_text(json.dumps(manifest),encoding='utf-8')
+            with self.assertRaises(ValueError): verify_study(folder)
     def setUp(self):
         self.archive=ROOT/'results/validation/prescribed_cycle_v1_20261004'
         self.report=json.loads((self.archive/'result.json').read_text(encoding='utf-8'))

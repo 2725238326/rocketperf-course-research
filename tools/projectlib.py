@@ -157,7 +157,7 @@ def fingerprint(root: Path) -> str:
     Raw evidence is included so post-check archive changes invalidate acceptance.
     """
     protected = read_json(root/'project/policy.json').get('archive_prefixes',[]) if (root/'project/policy.json').is_file() else []
-    protected = tuple(protected) + ('results/validation/','data/thermo/','tests/reference/cea/raw/')
+    protected = tuple(protected) + ('results/validation/','results/research/','data/thermo/','tests/reference/cea/raw/')
     text_suffixes={'.md','.py','.ps1','.c','.h','.json','.yml','.yaml','.txt','.ini','.tsv','.svg','.html','.mmd'}
     pairs = []
     for path in project_files(root):

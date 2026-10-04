@@ -207,3 +207,50 @@ RpStatus rp_cycle_case_run(const char *utf8_path, FILE *stream, RpError *error)
     if (!write_report(stream, &study, &result)) { return rp_error_set(error, RP_IO_ERROR, "Cannot write cycle JSON report."); }
     rp_error_clear(error); return RP_OK;
 }
+RpStatus rp_cycle_case_study(const char *utf8_path, RpCycleStudyField field,
+                             const double *values, size_t count, FILE *stream, RpError *error)
+{
+    RpCycleCase study;
+    RpCycleResult baseline;
+    RpCycleStudyPoint points[32];
+    size_t used = 0U;
+    int numeric_failure = 0;
+    RpStatus status;
+    if (stream == NULL || count > 32U) { return rp_error_set(error, RP_INVALID_ARGUMENT, "Study stream/point limit invalid."); }
+    status = rp_cycle_case_load(utf8_path, &study, error);
+    if (status == RP_OK) { status = rp_cycle_scan_prescribed(&study.input, field, values, count, &baseline, points, 32U, &used, error); }
+    if (status != RP_OK) { return status; }
+    if (fprintf(stream, "{\"schema_version\":1,\"study\":\"prescribed_cycle_scan_v1\",\"field\":\"%s\",\"baseline\":",
+                rp_cycle_study_field_name(field)) < 0 || !write_report(stream, &study, &baseline) ||
+        fputs(",\"points\":[", stream) < 0) { goto io_failure; }
+    for (size_t i = 0U; i < used; ++i) {
+        const RpCycleStudyPoint *p = &points[i];
+        if (fprintf(stream, "%s{\"value\":%.17g,\"status\":\"%s\"", i == 0U ? "" : ",", p->value, rp_status_name(p->status)) < 0) { goto io_failure; }
+        if (p->status == RP_OK) {
+            const RpCycleStudyMetrics *m = &p->metrics;
+            RpCycleCase scenario = study;
+            scenario.input = p->input;
+            if (fputs(",\"report\":", stream) < 0 || !write_report(stream, &scenario, &p->result) ||
+                fprintf(stream, ",\"metrics\":{\"thrust_change_n\":%.17g,\"isp_change_s\":%.17g,"
+                    "\"branch_flow_change_kg_per_s\":%.17g,\"required_heat_change_w\":%.17g,"
+                    "\"main_exit_area_m2\":%.17g,\"main_exit_diameter_m\":%.17g,\"main_exit_area_change_m2\":%.17g,"
+                    "\"thrust_relative_change\":%.17g,\"isp_relative_change\":%.17g,\"elasticity_defined\":%s,"
+                    "\"thrust_secant_elasticity\":%.17g,\"isp_secant_elasticity\":%.17g}",
+                    m->thrust_change_n, m->isp_change_s, m->branch_flow_change_kg_per_s, m->required_heat_change_w,
+                    m->main_exit_area_m2, m->main_exit_diameter_m, m->main_exit_area_change_m2,
+                    m->thrust_relative_change, m->isp_relative_change, m->elasticity_defined ? "true" : "false",
+                    m->thrust_secant_elasticity, m->isp_secant_elasticity) < 0) { goto io_failure; }
+        } else {
+            if (fputs(",\"error\":", stream) < 0 || !write_string(stream, p->message)) { goto io_failure; }
+            if (p->status != RP_OUT_OF_DOMAIN && p->status != RP_INVALID_ARGUMENT) { numeric_failure = 1; }
+        }
+        if (fputc('}', stream) == EOF) { goto io_failure; }
+    }
+    if (fputs("],\"limitations\":[\"Synthetic fixed-state comparison, not flight engine optimization.\","
+        "\"Exit area/diameter is a geometry proxy, not nozzle mass, length, side-load or life.\","
+        "\"Secant elasticity is a finite-step response, not a probability or infinitesimal derivative.\"]}\n", stream) < 0) { goto io_failure; }
+    if (numeric_failure) { return rp_error_set(error, RP_NUMERIC_ERROR, "Study contains unexpected numerical failures."); }
+    rp_error_clear(error); return RP_OK;
+io_failure:
+    return rp_error_set(error, RP_IO_ERROR, "Cannot write cycle study JSON report.");
+}

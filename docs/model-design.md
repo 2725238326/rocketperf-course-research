@@ -2,7 +2,7 @@
 
 版本：DES-001 v0.1；设计日期：2026-10-02
 
-本文件把作业问题、研究证据、数据角色、C模块、输出和验证连接起来。它是实现契约，不代表高级热化学和循环模块已经完成。
+本文件连接研究证据、数据角色、C模块、输出和验证。L0/S1与受限L1已实现，L2只有给定热状态外排原型；完整液态推进剂/发生器/补燃/冷却闭合尚未实现。
 
 ## 1. 交付问题
 
@@ -42,7 +42,7 @@ CLI/input -> case/schema -> thermo -> nozzle -> cycle -> study -> result JSON
 - `study`：批量工况、情景和敏感性；只读取已冻结输入，不在扫描中偷偷调参。
 - `cli`：严格输入、结果JSON、运行manifest；不承载物理公式。
 
-上图是扩展设计，不是现状依赖图。当前有`core/thermo/nozzle/cycle/adapters/cli`及工程工具；受限TP/HP、温变冻结喷管和给定热状态的外排循环已实现。循环不做回流混合化学闭合，扫描C函数在`nozzle`，运行manifest由Python工具保存。实际源码和依赖以`project/modules.json`及[架构图](architecture/README.md)为准。
+上图是扩展设计，不是现状依赖图。当前有`core/thermo/nozzle/cycle/adapters/cli`及工程工具；受限TP/HP、冻结喷管和给定热状态外排原型已实现。扫描在`nozzle`与`cycle`；CLI不写manifest，由Python保存。Newton/LU目前是thermo内部实现，不是core公共接口；也没有独立study模块。实际依赖以[架构图](architecture/README.md)和模块登记为准。
 
 第三方项目只在`tools/`用于对照：NASA CEA作为热化学参考，Pyskyfire/RocketCycles作为模块组织参考。不要让Python/Fortran调用链穿透C业务核心。
 
@@ -50,12 +50,13 @@ CLI/input -> case/schema -> thermo -> nozzle -> cycle -> study -> result JSON
 
 每个字段必须有：对象/批次、原值和SI值、单位、工况、控制体、`data_role`、来源、适用范围和用途。
 
-`data_role`只有四类：
+`data_role`支持事实、派生、教学输入、研究假设和未知；未知不能进入求解器。已有baseline包含前三类，研究假设另存`data/parameters/assumptions.json`，缺口另有明确记录：
 
 - `fact`：原始来源直接支持的事实；如ZQ-3遥一 9×TQ-12A。
 - `derived`：由事实和明确公式换算；如吨力到N。
 - `synthetic_benchmark`：人为构造且有独立解析参考的教学输入。
 - `assumption`：为研究情景选取的范围或点值，必须有理由、敏感性和模型ID。
+- `unknown`：字段值未获适用原文支持，不用估计值掩盖。
 
 `data/parameters/baseline.json`只保存前三类和缺失清单；真实型号缺失字段不能被求解器读取。假设必须以独立记录进入研究算例，并在结果JSON显示假设编号。
 
@@ -89,8 +90,8 @@ CLI/input -> case/schema -> thermo -> nozzle -> cycle -> study -> result JSON
 ## 8. 实施顺序
 
 1. 保留L0解析基准，维护已实现的S1入口与输出检查。
-2. 实现NASA9物性并完成独立校核，再进入L1。
-3. 明确主室/整机控制体和支路边界，完成L2守恒，再考虑S2。
+2. 复用已固定的NASA9、TP/HP和冻结喷管参考，扩大适用域前补独立对照。
+3. 复用已实现的外排质量/轴功率/热交换计账；冷却和S2仍需新热边界，不能由原型自动推出。
 4. 结果、图表和报告只引用已通过验证的模型ID。
 5. 若L1/L2不能按计划通过验证，记录问题并向用户确认范围调整；不以外部求解器补齐缺失结果。
 
@@ -102,4 +103,4 @@ CLI/input -> case/schema -> thermo -> nozzle -> cycle -> study -> result JSON
 
 ## 结论
 
-现有S1可用于回归和方法演示。后续先补数据及独立参考，再实现热化学和循环；这些工作不需要等待所有型号字段齐全，但缺少的字段必须保持未知。
+现有S1用于回归与教学；受限L1和给定热状态循环用于有边界的研究情景。接续做同条件收益/代价/扰动分析，不等待全部型号参数，也不补假数。新增循环扫描的有限步响应和几何代价见[改进分析](improvement-analysis.md)。

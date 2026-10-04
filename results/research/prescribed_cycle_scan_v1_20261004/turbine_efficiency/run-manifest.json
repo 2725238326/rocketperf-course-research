@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_4dd3e48f4e4c42a9",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T06:01:36+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\cases\\benchmarks\\prescribed_cycle.ini",
+  "input_sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec",
+  "executable_sha256": "ffa46a201ca4571b54dba9ff175d6ff15abc8482942c4bc15ffae2644bbdd710",
+  "build_manifest_sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd",
+  "test_report_sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856",
+  "command": [
+    "rocketperf.exe",
+    "study",
+    "prescribed-cycle",
+    "input.ini",
+    "turbine_efficiency",
+    "0.693,0.7,0.707"
+  ],
+  "requested_axis": {
+    "field": "turbine_efficiency",
+    "values": [
+      0.693,
+      0.7,
+      0.707
+    ]
+  },
+  "exit_code": 0,
+  "study_validation": {
+    "counts": {
+      "ok": 3,
+      "out_of_domain": 0,
+      "invalid_argument": 0
+    },
+    "state_checks": 528,
+    "metric_checks": 36
+  },
+  "output_file": "result.json",
+  "output_sha256": "35f79ff8dba0c842195fa04be70844975ce0879e83cf1042d2c45dd2191f88dd",
+  "finished_at": "2026-10-04T06:01:36+00:00"
+}

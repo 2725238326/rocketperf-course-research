@@ -1,4 +1,5 @@
 #include "rocketperf/cycle.h"
+#include "rocketperf/cycle_study.h"
 #include "rocketperf/numeric.h"
 
 #include <math.h>
@@ -247,9 +248,46 @@ static void test_cycle_failures(void)
 #undef PUMP_OFFSET
     }
 }
+static void test_study(void)
+{
+    RpCycleInput input = benchmark();
+    RpCycleResult baseline, saved;
+    RpCycleStudyPoint points[3], sentinel[3];
+    size_t count = 99U;
+    const double ratios[] = {10.0, 20.0, 40.0};
+    const double projections[] = {0.0, 1.0, 2.0};
+    const double invalid[] = {10.0, NAN};
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_MAIN_AREA_RATIO, ratios, 3U, &baseline, points, 3U, &count, NULL) == RP_OK);
+    CHECK(count == 3U && points[0].status == RP_OK && points[1].status == RP_OK && points[2].status == RP_OK);
+    CHECK(points[0].metrics.thrust_change_n == 0.0 && !points[0].metrics.elasticity_defined);
+    CHECK(points[2].result.total_thrust_n > points[1].result.total_thrust_n);
+    CHECK(near(points[2].metrics.main_exit_area_m2, 4.0 * points[0].metrics.main_exit_area_m2, 1e-12));
+    CHECK(near(points[2].metrics.main_exit_diameter_m, 2.0 * points[0].metrics.main_exit_diameter_m, 1e-12));
+    CHECK(points[2].metrics.branch_flow_change_kg_per_s == 0.0 && points[2].metrics.required_heat_change_w == 0.0);
+    CHECK(near(points[2].metrics.isp_secant_elasticity, points[2].metrics.isp_relative_change / 3.0, 1e-12));
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_BRANCH_PROJECTION, projections, 3U, &baseline, points, 3U, &count, NULL) == RP_OK);
+    CHECK(points[0].status == RP_OK && points[1].status == RP_OK && points[2].status == RP_INVALID_ARGUMENT);
+    CHECK(near(points[0].metrics.thrust_change_n, -baseline.branch_thrust_n, 1e-8));
+    CHECK(points[0].metrics.required_heat_change_w == 0.0 && points[0].metrics.branch_flow_change_kg_per_s == 0.0);
+    CHECK(points[2].message[0] != '\0');
+    saved = baseline; memset(sentinel, 0x5a, sizeof(sentinel)); memcpy(points, sentinel, sizeof(points));
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_MAIN_AREA_RATIO, invalid, 2U, &baseline, points, 3U, &count, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(count == 0U && memcmp(&baseline, &saved, sizeof(saved)) == 0 && memcmp(points, sentinel, sizeof(points)) == 0);
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_MAIN_AREA_RATIO, ratios, 3U, &baseline, points, 2U, &count, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_FIELD_COUNT, ratios, 3U, &baseline, points, 3U, &count, NULL) == RP_INVALID_ARGUMENT);
+    input.return_fraction = 0.1;
+    CHECK(rp_cycle_scan_prescribed(&input, RP_CYCLE_MAIN_AREA_RATIO, ratios, 3U, &baseline, points, 3U, &count, NULL) == RP_OUT_OF_DOMAIN);
+    CHECK(count == 0U && memcmp(&baseline, &saved, sizeof(saved)) == 0 && memcmp(points, sentinel, sizeof(points)) == 0);
+    for (int f = 0; f < RP_CYCLE_FIELD_COUNT; ++f) {
+        CHECK(rp_cycle_study_field_name((RpCycleStudyField)f) != NULL);
+        CHECK(rp_isfinite(rp_cycle_study_input_value(&input, (RpCycleStudyField)f)));
+    }
+    CHECK(rp_cycle_study_field_name(RP_CYCLE_FIELD_COUNT) == NULL);
+    CHECK(!rp_isfinite(rp_cycle_study_input_value(NULL, RP_CYCLE_MAIN_AREA_RATIO)));
+}
 int main(void)
 {
-    test_pump(); test_turbine(); test_cycle(); test_cycle_failures();
+    test_pump(); test_turbine(); test_cycle(); test_cycle_failures(); test_study();
     (void)printf("cycle: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

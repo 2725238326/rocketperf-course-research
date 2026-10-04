@@ -127,11 +127,15 @@ def event_for(state, task, before, actor, note, metadata=None):
 
 def quality_proof(root: Path, relative: str):
     report = read_json(local_path(root, relative))
-    if report.get("kind") != "quality" or report.get("status") != "PASS":
+    if (not isinstance(report,dict) or type(report.get('schema_version')) is not int or report['schema_version'] != 1
+        or report.get("kind") != "quality" or report.get("status") != "PASS"):
         raise ValueError("A PASS report from tools/quality.py is required")
     if report.get("input_fingerprint") != fingerprint(root):
         raise ValueError("Quality proof is stale; run quality again after code/docs changes")
-    if not report.get("checks") or {c.get('name') for c in report['checks']}!=QUALITY_CHECKS or any(c.get("status") != "PASS" for c in report["checks"]):
+    checks=report.get('checks')
+    if (not isinstance(checks,list) or len(checks)!=len(QUALITY_CHECKS)
+        or any(not isinstance(c,dict) or not isinstance(c.get('name'),str) or c.get('status')!='PASS' for c in checks)
+        or {c['name'] for c in checks}!=QUALITY_CHECKS):
         raise ValueError("Quality report contains missing/failed checks")
     return report
 

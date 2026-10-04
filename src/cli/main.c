@@ -166,6 +166,31 @@ static int thermo_main(const char *id, const char *temperature_text)
     return 0;
 }
 
+static int cycle_study_main(const char *path, const char *field_name, const char *csv)
+{
+    double values[RP_STUDY_GRID_LIMIT];
+    size_t count = 0U;
+    RpCycleStudyField field;
+    RpError error = {0};
+    RpStatus status;
+    for (field = 0; field < RP_CYCLE_FIELD_COUNT; field = (RpCycleStudyField)(field + 1)) {
+        if (strcmp(field_name, rp_cycle_study_field_name(field)) == 0) { break; }
+    }
+    /* All currently exposed study axes are nonnegative. C solver enforces the
+     * narrower physical domain and records each rejected scenario. */
+    if (field == RP_CYCLE_FIELD_COUNT || !parse_grid(csv, values, &count, 1)) {
+        (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV (1..32 finite nonnegative values)\n", stderr);
+        return 2;
+    }
+    status = rp_cycle_case_study(path, field, values, count, stdout, &error);
+    if (status == RP_OK && fflush(stdout) != 0) { status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush cycle study."); }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return status == RP_IO_ERROR || status == RP_PARSE_ERROR ? 3 : 4;
+    }
+    return 0;
+}
+
 static int write_mixture(const RpGasMixture *gas)
 {
     if (printf("{\"temperature_k\":%.17g,\"pressure_pa\":%.17g,\"molar_mass_kg_per_kmol\":%.17g,"
@@ -280,6 +305,7 @@ static int cli_main(int argc, char **argv)
         (void)puts("       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)");
         (void)puts("       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA");
         (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
+        (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
     }
@@ -303,6 +329,10 @@ static int cli_main(int argc, char **argv)
     }
     if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
         return study_main(argv[3], argc - 4, &argv[4]);
+    }
+    if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "prescribed-cycle") == 0) {
+        if (argc != 6) { (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV\n", stderr); return 2; }
+        return cycle_study_main(argv[3], argv[4], argv[5]);
     }
     if (argc != 3 || strcmp(argv[1], "run") != 0) {
         (void)fputs("Usage: rocketperf run CASE.ini (or --help / --version)\n", stderr);

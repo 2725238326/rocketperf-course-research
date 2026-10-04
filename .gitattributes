@@ -11,4 +11,5 @@
 tests/reference/cea/raw/** -text -whitespace
 # Saved validation identities are byte-based, never checkout-normalized.
 results/validation/** -text -whitespace
+results/research/** -text -whitespace
 data/thermo/** -text -whitespace

@@ -67,4 +67,4 @@ python tools/pipeline.py run --study area-ratio-ambient --case cases/research/s1
 
 ## 5. 结果可信度和后续工作
 
-代码、模型与输入误差见[分层验证](model-validation.md)。需补的工作见[审查记录](review.md)：逐字段数据复核、NASA9物性、CEA独立运行、温变喷管、循环和改进分析。已有空气算例保持为回归基准，不改名充当燃烧算例。
+本页保留L0阶段结果，不能作为当前能力总表。逐字段数据复核、NASA9、CEA、受限冻结喷管和外排循环原型均已有产物；新增收益/代价/扰动结果见[改进分析](improvement-analysis.md)。真实型号输入、完整循环参考和更宽物理范围仍缺，见[审查记录](review.md)。空气算例不改名充当燃烧算例。

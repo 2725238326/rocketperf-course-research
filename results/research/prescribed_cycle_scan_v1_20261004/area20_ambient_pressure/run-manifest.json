@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_d97fcc9aca9347b9",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T06:01:39+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\build\\research-draft\\f3189d27225e49ffa90aec449fc7e791\\inputs\\area20.ini",
+  "input_sha256": "65ffd09e345e5bb5c80dc6cb94def2a1ebc4f2288f36f5416460dccd157b81ec",
+  "executable_sha256": "ffa46a201ca4571b54dba9ff175d6ff15abc8482942c4bc15ffae2644bbdd710",
+  "build_manifest_sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd",
+  "test_report_sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856",
+  "command": [
+    "rocketperf.exe",
+    "study",
+    "prescribed-cycle",
+    "input.ini",
+    "ambient_pressure_pa",
+    "0.0,1000.0,5000.0,25000.0,50000.0,101325.0"
+  ],
+  "requested_axis": {
+    "field": "ambient_pressure_pa",
+    "values": [
+      0.0,
+      1000.0,
+      5000.0,
+      25000.0,
+      50000.0,
+      101325.0
+    ]
+  },
+  "exit_code": 0,
+  "study_validation": {
+    "counts": {
+      "ok": 3,
+      "out_of_domain": 3,
+      "invalid_argument": 0
+    },
+    "state_checks": 528,
+    "metric_checks": 36
+  },
+  "output_file": "result.json",
+  "output_sha256": "ea22cb87f74f3bece64d7871ccf03a2cf3ce6cb49f74e7894511adedec58e0f9",
+  "finished_at": "2026-10-04T06:01:39+00:00"
+}

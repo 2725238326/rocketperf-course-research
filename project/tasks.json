@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 118,
+  "revision": 127,
   "context": {
-    "phase": "Windows阶段基础与交接已验收；接续改进代价和敏感性研究",
+    "phase": "合成改进与审阅已验收；接续实际研究状态参考覆盖",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-002"
+      "ANA-003"
     ],
     "facts": [
-      "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
-      "给定热状态外排循环校验版本2基准132条；旧86条归档和原始来源保持原样。",
-      "七项验收问题及来源依赖补验完成；主工作区与独立源码检出完整质量6/6通过，运行管理20组。",
-      "交接采用固定提交、离线源码bundle、已测Windows程序与具名复跑；本机预验不能冒充他人接收或科学审查。",
-      "两型直接原文复查仍截至10月3日；未知字段继续unknown。接续ANA-002，PPT/报告后置，不推送。"
+      "C17已有NASA9、九物种气相TP/HP、冻结喷管与给定热状态外排原型及扫描；不是型号真实性能求解。",
+      "L0正数篡改/伪越域、CEA负物性/布尔版本、质量证明形状漏项修正；主工作区完整质量6/6通过。",
+      "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不能当置信区间或固定硬件响应。",
+      "固定CEA四卡及新C方法对照已复跑；实际研究状态/完整循环参考仍需补，接续ANA-003。",
+      "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进；PPT/报告后置，不推送。"
     ]
   },
   "tasks": [
@@ -353,7 +353,8 @@
       "priority": 2,
       "depends_on": [
         "ANA-002",
-        "MOD-003"
+        "MOD-003",
+        "ANA-003"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -364,7 +365,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "旧空气算例不足以支持最终报告；增加研究前置和实际报告/展示产物",
+      "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
       "verification": null
     },
     {
@@ -635,7 +636,7 @@
     {
       "id": "ANA-002",
       "title": "改进研究与结果复核",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "DATA-002",
@@ -650,9 +651,13 @@
       "acceptance": [
         "区分型号事实与计算情景；基线/改进采用同一数据版本；分析面积比背压趋势、独立参考、至少一种代价和输入敏感性；结果归档并说明不能外推的结论"
       ],
-      "owner": null,
-      "note": "先完成已复现的验收修复和阶段交接，再使用循环结果推进改进研究",
-      "verification": null
+      "owner": "root",
+      "note": "合成研究契约核对完成；真实型号参数和实际状态独立参考不冒充完成，后续ANA-003；PPT报告继续后置",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-002_709637a9c33f.json",
+        "sha256": "d83e8b699f113a62ed44cdfb32afce4d398f1e4fe2e2f18ca8a751790fd188ff"
+      }
     },
     {
       "id": "QA-001",
@@ -682,6 +687,27 @@
         "path": "project/evidence/QA-001_b4b605b04689.json",
         "sha256": "c5161498728c470de0df514cce9443e1fa5737e67b33d8295f03c6b8577a66f3"
       }
+    },
+    {
+      "id": "ANA-003",
+      "title": "实际研究状态的参考覆盖与固定几何边界",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-002"
+      ],
+      "required_artifacts": [
+        "docs/research-reference-coverage.md",
+        "results/research/reference-coverage/README.md"
+      ],
+      "acceptance": [
+        "为扫描实际5MPa/3300K分流后主室及6MPa/1800K发生器增加固定CEA同条件TP参考；适用物种/版本和打印精度明确，不冒称全循环实验验证",
+        "扩大至少一组温度或O/F邻域参考，记录成功/失败；区分给定流量重新定尺寸与固定几何运行边界；保存原始卡/输出与输入构建身份",
+        "结合两型现有原文说明哪些推论有据、哪些只能合成；不新增无来源型号点值或提前开展报告PPT"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
     }
   ],
   "events": [
@@ -3026,6 +3052,249 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "a12cd981256eea136f6ed3c12e273bac0fb084cdc8eb4eaeb8c4f51e125f68a6",
       "hash": "fe84abe6e00dfe86d97e1cb9018ec41e8b095c8634a8dbc9402a3040b7bcb63e"
+    },
+    {
+      "seq": 136,
+      "at": "2026-10-04T05:28:14+00:00",
+      "task": "ANA-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "审阅当前代码/证据/活跃文档，修正误导与维护缺陷；开展C核心同条件扫描、改进代价及敏感性，PPT报告后置。",
+      "previous_hash": "fe84abe6e00dfe86d97e1cb9018ec41e8b095c8634a8dbc9402a3040b7bcb63e",
+      "hash": "f1fd271b1c02d2a45c0ffd836c01734cff19bc4358de552cf10309dcc3bed6db"
+    },
+    {
+      "seq": 137,
+      "at": "2026-10-04T06:27:35+00:00",
+      "task": "ANA-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收漏项已复现修正，39点实际研究归档，继续真实研究状态的参考覆盖；不启动PPT报告",
+      "previous_hash": "f1fd271b1c02d2a45c0ffd836c01734cff19bc4358de552cf10309dcc3bed6db",
+      "details": {
+        "context_before": {
+          "phase": "Windows阶段基础与交接已验收；接续改进代价和敏感性研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "NASA9十物种、九物种气相TP/HP与冻结喷管方法对照已有；不是飞行性能。",
+            "给定热状态外排循环校验版本2基准132条；旧86条归档和原始来源保持原样。",
+            "七项验收问题及来源依赖补验完成；主工作区与独立源码检出完整质量6/6通过，运行管理20组。",
+            "交接采用固定提交、离线源码bundle、已测Windows程序与具名复跑；本机预验不能冒充他人接收或科学审查。",
+            "两型直接原文复查仍截至10月3日；未知字段继续unknown。接续ANA-002，PPT/报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排原型；非真实型号闭合。",
+            "L0正数篡改、伪越域、CEA负物性/布尔版本和质量证明形状漏项已补回归；当前证据必须重跑。",
+            "实际C研究10份39点，31成功/8背压域排除，含几何代价和五组±1%局部扰动；不是置信区间。",
+            "四个固定方法参考已复跑；研究实际状态/完整循环参考覆盖仍需补，原始资料保持字节。",
+            "两型直接原文仍截至2026-10-03；未知字段不补假数。Windows本地推进，PPT/报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "dcff28e35c722d7386b9507c45f201b50df4d956086860d6d59ec243c5379aee"
+    },
+    {
+      "seq": 138,
+      "at": "2026-10-04T06:29:07+00:00",
+      "task": "ANA-003",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "dcff28e35c722d7386b9507c45f201b50df4d956086860d6d59ec243c5379aee",
+      "hash": "756c19ff2bf03e4926bc668b3efa5756ddb8958296b2d10bf4107832cf57b050"
+    },
+    {
+      "seq": 139,
+      "at": "2026-10-04T06:29:09+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
+      "previous_hash": "756c19ff2bf03e4926bc668b3efa5756ddb8958296b2d10bf4107832cf57b050",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "旧空气算例不足以支持最终报告；增加研究前置和实际报告/展示产物",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
+          "verification": null
+        }
+      },
+      "hash": "a1668de31eb9505514f25ed096afef31fdb0ec0ca7e834e37e4d77f71071071b"
+    },
+    {
+      "seq": 140,
+      "at": "2026-10-04T06:29:12+00:00",
+      "task": "ANA-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "把剩余科学参考覆盖明确接续为ANA-003，报告/PPT继续研究前置",
+      "previous_hash": "a1668de31eb9505514f25ed096afef31fdb0ec0ca7e834e37e4d77f71071071b",
+      "details": {
+        "context_before": {
+          "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-002"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排原型；非真实型号闭合。",
+            "L0正数篡改、伪越域、CEA负物性/布尔版本和质量证明形状漏项已补回归；当前证据必须重跑。",
+            "实际C研究10份39点，31成功/8背压域排除，含几何代价和五组±1%局部扰动；不是置信区间。",
+            "四个固定方法参考已复跑；研究实际状态/完整循环参考覆盖仍需补，原始资料保持字节。",
+            "两型直接原文仍截至2026-10-03；未知字段不补假数。Windows本地推进，PPT/报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-003"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排原型；非真实型号闭合。",
+            "L0正数篡改、伪越域、CEA负物性/布尔版本和质量证明形状漏项已补回归；当前证据必须重跑。",
+            "实际C研究10份39点，31成功/8背压域排除，含几何代价和五组±1%局部扰动；不是置信区间。",
+            "四个固定方法参考已复跑；研究实际状态/完整循环参考覆盖仍需补，原始资料保持字节。",
+            "两型直接原文仍截至2026-10-03；未知字段不补假数。Windows本地推进，PPT/报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "9a81db98e6427606ece88d6f52475e520243a56e2625867a94d57bf0858a4217"
+    },
+    {
+      "seq": 141,
+      "at": "2026-10-04T06:34:55+00:00",
+      "task": "ANA-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "六项完整质量通过，记录合成研究完成边界，接续实际状态参考覆盖，报告PPT后置",
+      "previous_hash": "9a81db98e6427606ece88d6f52475e520243a56e2625867a94d57bf0858a4217",
+      "details": {
+        "context_before": {
+          "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-003"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排原型；非真实型号闭合。",
+            "L0正数篡改、伪越域、CEA负物性/布尔版本和质量证明形状漏项已补回归；当前证据必须重跑。",
+            "实际C研究10份39点，31成功/8背压域排除，含几何代价和五组±1%局部扰动；不是置信区间。",
+            "四个固定方法参考已复跑；研究实际状态/完整循环参考覆盖仍需补，原始资料保持字节。",
+            "两型直接原文仍截至2026-10-03；未知字段不补假数。Windows本地推进，PPT/报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "合成改进与审阅已验收；接续实际研究状态参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-003"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管与给定热状态外排原型及扫描；不是型号真实性能求解。",
+            "L0正数篡改/伪越域、CEA负物性/布尔版本、质量证明形状漏项修正；主工作区完整质量6/6通过。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不能当置信区间或固定硬件响应。",
+            "固定CEA四卡及新C方法对照已复跑；实际研究状态/完整循环参考仍需补，接续ANA-003。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进；PPT/报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "ef4becb184ad9f9667fcc4a6ba18475234cacfb39f751ab531dd643d9395dfcc"
+    },
+    {
+      "seq": 142,
+      "at": "2026-10-04T06:34:57+00:00",
+      "task": "ANA-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "同一数据版本39点C扫描、两项收益与几何代价、五组输入扰动、固定CEA方法复跑及限制均归档；六项质量通过，非整机科学验证",
+      "previous_hash": "ef4becb184ad9f9667fcc4a6ba18475234cacfb39f751ab531dd643d9395dfcc",
+      "hash": "a1ccfcb82b5a87f1393f7fc193277986eb4ae0555cf9432b86a1f2d567160d52"
+    },
+    {
+      "seq": 143,
+      "at": "2026-10-04T06:34:58+00:00",
+      "task": "ANA-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "合成研究契约核对完成；真实型号参数和实际状态独立参考不冒充完成，后续ANA-003；PPT报告继续后置",
+      "previous_hash": "a1ccfcb82b5a87f1393f7fc193277986eb4ae0555cf9432b86a1f2d567160d52",
+      "hash": "0c8eb0ff9391178b7711cbe63d4d9083918c31f665bf537148cfc3f68d00c83f"
+    },
+    {
+      "seq": 144,
+      "at": "2026-10-04T06:34:58+00:00",
+      "task": "ANA-003",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "0c8eb0ff9391178b7711cbe63d4d9083918c31f665bf537148cfc3f68d00c83f",
+      "hash": "4845b7397e573cad2eaf7efeb36dc4136851daf41085ba5027159fc22638300c"
     }
   ]
 }

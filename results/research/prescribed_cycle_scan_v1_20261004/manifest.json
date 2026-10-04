@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "kind": "cycle-research",
+  "status": "PASS",
+  "started_at": "2026-10-04T06:01:34+00:00",
+  "source_head": "5ae274131ea94580deacf57cf8e0cfd00cd6994a",
+  "source_dirty": true,
+  "scope": "Synthetic fixed-state study; no flight engine claim, experimental error bar or whole-cycle independent reference.",
+  "runs": [
+    {
+      "field": "main_area_ratio",
+      "values": [
+        10,
+        20,
+        40
+      ],
+      "directory": "main_area_ratio",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "ambient_pressure_pa",
+      "values": [
+        0,
+        1000,
+        5000,
+        25000,
+        50000,
+        101325
+      ],
+      "directory": "ambient_pressure_pa",
+      "validation": {
+        "counts": {
+          "ok": 4,
+          "out_of_domain": 2,
+          "invalid_argument": 0
+        },
+        "state_checks": 660,
+        "metric_checks": 48
+      }
+    },
+    {
+      "field": "branch_axial_projection",
+      "values": [
+        0,
+        0.5,
+        1
+      ],
+      "directory": "branch_axial_projection",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "turbine_efficiency",
+      "values": [
+        0.693,
+        0.7,
+        0.707
+      ],
+      "directory": "turbine_efficiency",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "chamber_temperature_k",
+      "values": [
+        3267,
+        3300,
+        3333
+      ],
+      "directory": "chamber_temperature_k",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "overall_oxidizer_fuel_ratio",
+      "values": [
+        3.366,
+        3.4,
+        3.434
+      ],
+      "directory": "overall_oxidizer_fuel_ratio",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "fuel_pump_efficiency",
+      "values": [
+        0.693,
+        0.7,
+        0.707
+      ],
+      "directory": "fuel_pump_efficiency",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "oxidizer_pump_efficiency",
+      "values": [
+        0.7425,
+        0.75,
+        0.7575
+      ],
+      "directory": "oxidizer_pump_efficiency",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 0,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "ambient_pressure_pa",
+      "values": [
+        0,
+        1000,
+        5000,
+        25000,
+        50000,
+        101325
+      ],
+      "directory": "area20_ambient_pressure",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 3,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    },
+    {
+      "field": "ambient_pressure_pa",
+      "values": [
+        0,
+        1000,
+        5000,
+        25000,
+        50000,
+        101325
+      ],
+      "directory": "area40_ambient_pressure",
+      "validation": {
+        "counts": {
+          "ok": 3,
+          "out_of_domain": 3,
+          "invalid_argument": 0
+        },
+        "state_checks": 528,
+        "metric_checks": 36
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "ambient_pressure_pa/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "ambient_pressure_pa/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "ambient_pressure_pa/result.json",
+      "sha256": "e56a6949012d2c9292fdd40161ba3245914340a32ad1b66f6b38e6bd30c6ca4b"
+    },
+    {
+      "path": "ambient_pressure_pa/run-manifest.json",
+      "sha256": "2e3b875dfc50d9dbfdf853e1b642cd173b775b3a80a56ef718cd6d7fdd7e4de8"
+    },
+    {
+      "path": "ambient_pressure_pa/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ambient_pressure_pa/stdout.txt",
+      "sha256": "e56a6949012d2c9292fdd40161ba3245914340a32ad1b66f6b38e6bd30c6ca4b"
+    },
+    {
+      "path": "ambient_pressure_pa/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "area20_ambient_pressure/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "area20_ambient_pressure/input.ini",
+      "sha256": "65ffd09e345e5bb5c80dc6cb94def2a1ebc4f2288f36f5416460dccd157b81ec"
+    },
+    {
+      "path": "area20_ambient_pressure/result.json",
+      "sha256": "ea22cb87f74f3bece64d7871ccf03a2cf3ce6cb49f74e7894511adedec58e0f9"
+    },
+    {
+      "path": "area20_ambient_pressure/run-manifest.json",
+      "sha256": "ef6db8ba248b5a864799b0b66e8c71a56c60f00b89791026ecb18f108314c3b6"
+    },
+    {
+      "path": "area20_ambient_pressure/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "area20_ambient_pressure/stdout.txt",
+      "sha256": "ea22cb87f74f3bece64d7871ccf03a2cf3ce6cb49f74e7894511adedec58e0f9"
+    },
+    {
+      "path": "area20_ambient_pressure/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "area40_ambient_pressure/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "area40_ambient_pressure/input.ini",
+      "sha256": "de305b7a76a09c26dce8294547558395b5374ac27e9bece7f7cb1fe6373bb21b"
+    },
+    {
+      "path": "area40_ambient_pressure/result.json",
+      "sha256": "a6600fe02d77ed78d5cd6fbaba0b5c1c503cfabd8a1266b17fa5326845e5448f"
+    },
+    {
+      "path": "area40_ambient_pressure/run-manifest.json",
+      "sha256": "d644aa64cfa230873a138f58ecdb4ac8a44df29bd93a65311f6896a5d48f6385"
+    },
+    {
+      "path": "area40_ambient_pressure/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "area40_ambient_pressure/stdout.txt",
+      "sha256": "a6600fe02d77ed78d5cd6fbaba0b5c1c503cfabd8a1266b17fa5326845e5448f"
+    },
+    {
+      "path": "area40_ambient_pressure/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "branch_axial_projection/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "branch_axial_projection/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "branch_axial_projection/result.json",
+      "sha256": "2388578eb491925801c9f5c32261fd9adf45541cde4158776f831283298b480f"
+    },
+    {
+      "path": "branch_axial_projection/run-manifest.json",
+      "sha256": "32702e9051df1bc8c8fe8c7c25123b905f6ed90fd4c74c9115f88e9c4589f213"
+    },
+    {
+      "path": "branch_axial_projection/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "branch_axial_projection/stdout.txt",
+      "sha256": "2388578eb491925801c9f5c32261fd9adf45541cde4158776f831283298b480f"
+    },
+    {
+      "path": "branch_axial_projection/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "chamber_temperature_k/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "chamber_temperature_k/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "chamber_temperature_k/result.json",
+      "sha256": "77157046e6307428d44eea683ad191c9bc1334db0c814fd9b6abe38d737b7ec6"
+    },
+    {
+      "path": "chamber_temperature_k/run-manifest.json",
+      "sha256": "a4fd93b3e229130b8691c8172763d183e852fc4864a076c0facee35790d41ab0"
+    },
+    {
+      "path": "chamber_temperature_k/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "chamber_temperature_k/stdout.txt",
+      "sha256": "77157046e6307428d44eea683ad191c9bc1334db0c814fd9b6abe38d737b7ec6"
+    },
+    {
+      "path": "chamber_temperature_k/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "fuel_pump_efficiency/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "fuel_pump_efficiency/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "fuel_pump_efficiency/result.json",
+      "sha256": "35af148e3e8492be9f1be9eb6c3feb8f9eed776ad0958269f0c1c3e19c07b17c"
+    },
+    {
+      "path": "fuel_pump_efficiency/run-manifest.json",
+      "sha256": "0c21189a1f361f3b4c2aa40d26862cfadc312ae06eeacdcb4a5a55c5b98f0aaa"
+    },
+    {
+      "path": "fuel_pump_efficiency/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fuel_pump_efficiency/stdout.txt",
+      "sha256": "35af148e3e8492be9f1be9eb6c3feb8f9eed776ad0958269f0c1c3e19c07b17c"
+    },
+    {
+      "path": "fuel_pump_efficiency/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "inputs/area20.ini",
+      "sha256": "65ffd09e345e5bb5c80dc6cb94def2a1ebc4f2288f36f5416460dccd157b81ec"
+    },
+    {
+      "path": "inputs/area40.ini",
+      "sha256": "de305b7a76a09c26dce8294547558395b5374ac27e9bece7f7cb1fe6373bb21b"
+    },
+    {
+      "path": "main_area_ratio/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "main_area_ratio/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "main_area_ratio/result.json",
+      "sha256": "629aac17dbb8da38dee6b48786ea4d9da4485492509be5f97eb711f7bb7207e2"
+    },
+    {
+      "path": "main_area_ratio/run-manifest.json",
+      "sha256": "697df93eaa52ae7ccfb227c961ec0ed731f45b280a2f03d6e708be63513a620b"
+    },
+    {
+      "path": "main_area_ratio/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "main_area_ratio/stdout.txt",
+      "sha256": "629aac17dbb8da38dee6b48786ea4d9da4485492509be5f97eb711f7bb7207e2"
+    },
+    {
+      "path": "main_area_ratio/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/result.json",
+      "sha256": "f836cdb0967dbff2b2659c154dc43a1f0d7f935a02a7073fa358925e1a2a4dea"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/run-manifest.json",
+      "sha256": "976d83ea5629dae9b97aa6bbbc1c0c5e5cdc698a3aead0186cd4a7a1c3db3765"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/stdout.txt",
+      "sha256": "f836cdb0967dbff2b2659c154dc43a1f0d7f935a02a7073fa358925e1a2a4dea"
+    },
+    {
+      "path": "overall_oxidizer_fuel_ratio/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/result.json",
+      "sha256": "8cea86e9a1ac025655d605d9281248af9023c492f2373579cb85bcc841f899a7"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/run-manifest.json",
+      "sha256": "5006b8c2464b3a03d3a2cf5e8c34ed5a0e2f437c19b173b8ae4d01f4b834b9b0"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/stdout.txt",
+      "sha256": "8cea86e9a1ac025655d605d9281248af9023c492f2373579cb85bcc841f899a7"
+    },
+    {
+      "path": "oxidizer_pump_efficiency/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    },
+    {
+      "path": "turbine_efficiency/build-manifest.json",
+      "sha256": "b95c6b472b882da097ae9cc5c5ef5192f61d01c7e0b6ae68ccca40508f66b8bd"
+    },
+    {
+      "path": "turbine_efficiency/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "turbine_efficiency/result.json",
+      "sha256": "35f79ff8dba0c842195fa04be70844975ce0879e83cf1042d2c45dd2191f88dd"
+    },
+    {
+      "path": "turbine_efficiency/run-manifest.json",
+      "sha256": "33e4035f3b4b1c772727887e7339faaddd368be627b241bb2d7fe6bbd6c8531d"
+    },
+    {
+      "path": "turbine_efficiency/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "turbine_efficiency/stdout.txt",
+      "sha256": "35f79ff8dba0c842195fa04be70844975ce0879e83cf1042d2c45dd2191f88dd"
+    },
+    {
+      "path": "turbine_efficiency/test-report.json",
+      "sha256": "ce90163428689018299fe5237f487d779113ea24c9414ec95f0e5e707f768856"
+    }
+  ],
+  "finished_at": "2026-10-04T06:01:40+00:00"
+}

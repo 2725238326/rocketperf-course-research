@@ -52,6 +52,27 @@ class ResultContractTests(unittest.TestCase):
             self.assertEqual(read_json(folder/'run-manifest.json')['status'],'FAILED')
             self.assertFalse((folder/'result.json').exists())
 
+    def test_positive_mutations_and_false_residual_rejected(self):
+        for key in pipeline.RESULT_KEYS:
+            candidate=copy.deepcopy(self.report);candidate['results'][key]*=2
+            with self.subTest(key=key),self.assertRaises(ValueError): pipeline.validate_result(candidate,self.input)
+        candidate=copy.deepcopy(self.report);candidate['diagnostics']['relative_area_residual']=1e-9
+        with self.assertRaises(ValueError): pipeline.validate_result(candidate,self.input)
+        for text in (self.input+'\nunknown=1',self.input.replace('schema_version=1','schema_version=2')):
+            with self.assertRaises(ValueError): pipeline.validate_result(self.report,text)
+
+    def test_false_domain_exclusion_and_duplicate_snapshot_rejected(self):
+        run=subprocess.run([str(self.binary),'study','area-ratio-ambient',str(self.case)],cwd=ROOT,capture_output=True,text=True,check=True)
+        report=pipeline.strict_json(run.stdout)
+        with self.assertRaises(ValueError):
+            pipeline.validate_study(report,self.input+'\ngamma=1.4',pipeline.DEFAULT_RATIOS,pipeline.DEFAULT_PRESSURES)
+        for index in (0,5):
+            candidate=copy.deepcopy(report); point=candidate['points'][index]
+            point.pop('results');point.pop('diagnostics');point['status']='out_of_domain'
+            point['error']='Overexpanded/back-pressure flow is not supported by this model.'
+            with self.subTest(index=index),self.assertRaises(ValueError):
+                pipeline.validate_study(candidate,self.input,pipeline.DEFAULT_RATIOS,pipeline.DEFAULT_PRESSURES)
+
     def test_large_flow_scaling_uses_same_residual_contract(self):
         from cycle_validation import validate_cycle
         text=(ROOT/'cases/benchmarks/prescribed_cycle.ini').read_text(encoding='utf-8')
@@ -153,14 +174,28 @@ class ResultContractTests(unittest.TestCase):
         self.assertEqual(read_json(ROOT/'results/local'/run_id/'run-manifest.json')['status'],'FAILED')
         self.assertFalse((ROOT/'results/local'/run_id/'result.json').exists())
 
+    def test_cycle_study_run_and_false_comparison_rejected(self):
+        case=ROOT/'cases/benchmarks/prescribed_cycle.ini'
+        folder=pipeline.run_case(ROOT,case,run_id='test_cycle_study_'+uuid.uuid4().hex[:12],no_build=True,cycle_field='main_area_ratio',cycle_values='10,20,40')
+        self.assertEqual(read_json(folder/'run-manifest.json')['study_validation']['counts']['ok'],3)
+        broken=read_json(folder/'result.json');broken['points'][2]['metrics']['thrust_change_n']*=2
+        run_id='test_study_bad_'+uuid.uuid4().hex[:12]
+        with mock.patch.object(pipeline.subprocess,'run',return_value=subprocess.CompletedProcess([],0,json.dumps(broken),'')),self.assertRaises(ValueError):
+            pipeline.run_case(ROOT,case,run_id=run_id,no_build=True,cycle_field='main_area_ratio',cycle_values='10,20,40')
+        self.assertEqual(read_json(ROOT/'results/local'/run_id/'run-manifest.json')['status'],'FAILED')
+
 
 class LifecycleTests(unittest.TestCase):
+    def test_nonobject_parameter_dataset_is_controlled_failure(self):
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+            root=Path(folder);atomic_json(root/'data/parameters/bad.json',[])
+            with self.assertRaisesRegex(ValueError,'must be an object'): pipeline.test_records(root)
     def test_archive_text_is_part_of_test_identity(self):
         (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             before=pipeline.test_records(root)
@@ -171,7 +206,7 @@ class LifecycleTests(unittest.TestCase):
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             index=root/'调研/原始来源/来源文件索引.json'
             atomic_json(index,[])
@@ -209,7 +244,7 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):

@@ -20,17 +20,17 @@
   },
   "physics": {
     "current_baseline": {"model": "ideal_constant_gamma_v1", "status": "implemented_and_tested_on_synthetic_cases"},
-    "properties": {"method": "NASA9 temperature polynomials", "status": "selected_not_implemented", "data_pin": "required before ingestion"},
-    "combustion": {"method": "element-constrained Gibbs minimization with TP inner and HP outer solve", "scope": "validated subset of neutral C/H/O gas species; no condensed phases or ionization", "status": "selected_not_implemented"},
-    "nozzle_extension": {"method": "quasi-1D adiabatic variable-property frozen-composition expansion", "freeze_plane": "chamber exit", "status": "selected_not_implemented"},
-    "cycle": {"method": "0D steady component mass/energy/shaft-power balance", "status": "selected_not_implemented"},
+    "properties": {"method": "NASA9 temperature polynomials", "status": "implemented_software_reference_checked", "data_pin": "cea-v3.3.4-neutral-cho-n-v1"},
+    "combustion": {"method": "element-constrained Gibbs minimization with TP inner and HP outer solve", "scope": "nine neutral C/H/O gases; no condensed phases or ionization", "status": "implemented_fixed_cea_reference_checked"},
+    "nozzle_extension": {"method": "quasi-1D adiabatic variable-property frozen-composition expansion", "freeze_plane": "chamber exit", "status": "implemented_fixed_cea_reference_checked"},
+    "cycle": {"method": "prescribed thermal-state external branch mass/energy/shaft accounting", "status": "prototype_accounting_and_component_limits_checked", "excluded": "return, liquid EOS, adiabatic real-engine closure"},
     "scalar_solver": "bracketed bisection",
     "coupled_solver": "damped Newton with residual scaling and line search; C partial-pivot LU",
     "study": "C-generated parameter scans, local sensitivities and bounded scenarios"
   },
   "references": [
-    {"name": "NASA CEA", "role": "primary thermochemical theory/examples and independent reference", "reference_release": "3.3.4", "runtime_link": false, "reference_execution_verified": false},
-    {"name": "Pyskyfire", "role": "preferred selective component/validation reference", "license_observed": "MIT", "source_commit": null, "pin_and_review_before_reuse": true},
+    {"name": "NASA CEA", "role": "primary thermochemical theory/examples and independent reference", "reference_release": "3.3.4", "runtime_link": false, "reference_execution_verified": true},
+    {"name": "Pyskyfire", "role": "selected turbine equations/tests; not whole-library port", "license_observed": "MIT", "source_commit": "aad239b9332e6be6eea8716a913da9a279ddcf67", "review_scope": "7 pinned files; MOD-003"},
     {"name": "RocketCycles", "role": "cycle methodology/result comparison; not default source translation", "runtime_link": false},
     {"name": "Cantera/CoolProp/RocketCEA/RocketIsp", "role": "optional independent comparison only", "runtime_link": false}
   ],

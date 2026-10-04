@@ -202,9 +202,9 @@ def verify(package):
         if record.get('source_bundle') != 'source.bundle': raise ValueError('Source bundle required')
         quality=read_json(package/'quality-report.json')
         checks=quality.get('checks',[]) if isinstance(quality,dict) else []
-        if (not isinstance(quality,dict) or quality.get('schema_version') != 1 or quality.get('kind') != 'quality'
+        if (not isinstance(quality,dict) or type(quality.get('schema_version')) is not int or quality.get('schema_version') != 1 or quality.get('kind') != 'quality'
             or quality.get('status') != 'PASS' or not isinstance(checks,list) or len(checks) != len(QUALITY_CHECKS)
-            or any(not isinstance(c,dict) or c.get('status') != 'PASS' for c in checks)
+            or any(not isinstance(c,dict) or not isinstance(c.get('name'),str) or c.get('status') != 'PASS' for c in checks)
             or {c.get('name') for c in checks} != QUALITY_CHECKS
             or not isinstance(record.get('source_fingerprint'),str)
             or not re.fullmatch(r'[a-f0-9]{64}',record['source_fingerprint'])
