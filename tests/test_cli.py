@@ -233,6 +233,34 @@ class CliTests(unittest.TestCase):
                 self.assertEqual(result.stdout, '')
                 self.assertTrue(result.stderr.strip())
 
+    def test_tp_frozen_fixed_geometry_scaling_and_backpressure(self):
+        arguments=('3300','5000000','3.436135057526204','298.15','298.15','10')
+        reports=[]
+        for ambient, throat in [('0','0.03388974483'),('0','0.06777948966'),('5000','0.03388974483')]:
+            run=self.run_app('combustion','frozen-tp',*arguments,ambient,throat)
+            self.assertEqual(run.returncode,0,run.stderr);self.assertEqual(run.stderr,'')
+            report=json.loads(run.stdout);reports.append(report)
+            self.assertEqual(report['model'],'ch4_o2_tp_frozen_fixed_area_v1')
+            self.assertEqual(report['chamber']['temperature_k'],3300)
+            self.assertEqual(report['diagnostics']['hp_iterations'],0)
+            geometry=report['geometry'];nozzle=report['nozzle']
+            self.assertTrue(math.isclose(geometry['mass_flow_kg_per_s'],float(throat)*nozzle['throat']['mass_flux_kg_per_m2_s'],rel_tol=1e-12))
+        base,doubled,ambient=reports
+        self.assertTrue(math.isclose(doubled['geometry']['mass_flow_kg_per_s'],2*base['geometry']['mass_flow_kg_per_s'],rel_tol=1e-12))
+        self.assertTrue(math.isclose(doubled['geometry']['thrust_n'],2*base['geometry']['thrust_n'],rel_tol=1e-12))
+        self.assertEqual(doubled['geometry']['specific_impulse_s'],base['geometry']['specific_impulse_s'])
+        self.assertEqual(ambient['geometry']['mass_flow_kg_per_s'],base['geometry']['mass_flow_kg_per_s'])
+        self.assertTrue(math.isclose(base['geometry']['thrust_n']-ambient['geometry']['thrust_n'],5000*base['geometry']['exit_area_m2'],abs_tol=1e-7))
+
+    def test_tp_frozen_rejects_invalid_geometry_and_temperature(self):
+        base=['3300','5000000','3.4','298.15','298.15','10','0','0.01']
+        for index,value,code in [(0,'999',4),(5,'0.5',4),(6,'100000',4),(7,'0',4),(7,'-1',4),(7,'nan',2),(7,'1e308',4)]:
+            args=list(base);args[index]=value
+            with self.subTest(index=index,value=value):
+                run=self.run_app('combustion','frozen-tp',*args)
+                self.assertEqual(run.returncode,code,run.stderr);self.assertEqual(run.stdout,'');self.assertTrue(run.stderr.strip())
+        self.assertEqual(self.run_app('combustion','frozen-tp',*base[:-1]).returncode,2)
+
     def test_combustion_validator_rejects_false_success(self):
         result = self.run_app('combustion', 'frozen', '10000000', '3.4', '298.15', '298.15', '40', '0')
         self.assertEqual(result.returncode, 0, result.stderr)

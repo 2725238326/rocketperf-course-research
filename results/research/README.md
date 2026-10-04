@@ -17,6 +17,6 @@ python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycl
 
 分析与外推限制见[研究说明](../../docs/improvement-analysis.md)。固定四工况的新C复跑在[方法归档](../validation/ana002_method_reference_20261004/manifest.json)，不与循环扫描混称同条件整机参考。原CEA卡与原始输出保持字节；本机上游四卡也重新运行。
 
-## 2026-10-04 实际研究状态TP参考
+## 2026-10-04 实际研究状态与冻结喷管参考
 
-[六状态归档](reference-coverage/README.md)从上面保存的循环状态取主室/发生器及温度、总体O/F邻域条件，新运行固定CEA与已测C程序。六状态、126项比较通过，详细差值和打印精度在[参考覆盖说明](../../docs/research-reference-coverage.md)。这补上具体状态的热化学对照，不等于冻结喷管或整个循环已同条件外部验证。
+[参考入口](reference-coverage/README.md)从上面保存的循环状态取主室/发生器及温度、总体O/F邻域条件，新运行固定CEA与已测C程序。TP六状态、126项比较；冻结五组主室状态、11个固定面积C点、484条打印/关系检查。详细差值和打印精度在[参考覆盖说明](../../docs/research-reference-coverage.md)。这补上具体状态的热化学/主喷管对照，不等于支路或整个循环已同条件外部验证。

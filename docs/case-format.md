@@ -58,9 +58,12 @@ manifest证明文件关联和执行情况，不代替物理验证，也不保证
 rocketperf combustion tp T_K P_PA OF TF_K TO_K
 rocketperf combustion hp P_PA OF TF_K TO_K
 rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA
+rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2
 ```
 
 全部为SI值，OF为氧化剂/燃料质量比；TF/TO为气态CH4/O2入口温度。使用完整十进制数，不接受NaN/Inf、十六进制、尾随文字、缺项或多余参数。JSON带`schema_version=1`、明确模型ID、mode、固定dataset、实际输入、燃烧室组分/冻结cp/h/s、残差和限制；冻结模式另带冻结位置、喉部/出口状态与c*、有效排气速度m/s。TP焓差可以非零；HP焓残差必须满足0.01 J/kg。
+
+`frozen`保持气态入口HP含义；`frozen-tp`先求指定主室TP，再在主室冻结。新模型ID为`ch4_o2_tp_frozen_fixed_area_v1`，必须给正有限喉面积m²；`geometry`返回喉/出口面积m²、由阻塞通量求得的流量kg/s、推力N和单喷管比冲s。面积比/背压适用域继承冻结核心；这不是轴功/分流/入口闭合。指定TP的焓差可以非零，但HP迭代数必须为0。
 
 模型与测试边界见[验证说明](thermo-nozzle-validation.md)。`tools/combustion_reference.py`仅归档固定方法基准；任意研究参数的通用追溯运行入口尚未接入，不能把现有L0运行manifest套到新模型结果。
 

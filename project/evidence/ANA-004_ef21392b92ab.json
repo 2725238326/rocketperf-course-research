@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "PASS",
+  "started_at": "2026-10-04T08:22:59+00:00",
+  "input_fingerprint": "96b6ddc3115f25168f22763328f00a3fb17964fd92ea00f2da0f67839684de82",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/quality/debug.log"
+    },
+    {
+      "name": "release",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Release"
+      ],
+      "log": "build/quality/release.log"
+    },
+    {
+      "name": "runner",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "log": "build/quality/runner.log"
+    },
+    {
+      "name": "handoff",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_handoff.py",
+        "-v"
+      ],
+      "log": "build/quality/handoff.log"
+    }
+  ],
+  "finished_at": "2026-10-04T08:26:29+00:00"
+}

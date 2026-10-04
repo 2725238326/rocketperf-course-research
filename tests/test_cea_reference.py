@@ -15,12 +15,101 @@ sys.path.insert(0, str(ROOT / "tools"))
 import cea_reference
 from combustion_reference import check_archive, compare_report
 import research_tp_reference
+import research_frozen_reference
 from projectlib import digest
 
 TP_ARCHIVE = ROOT / "results/research/reference-coverage/tp_v1_20261004"
+FROZEN_ARCHIVE = ROOT / "results/research/reference-coverage/frozen_v1"
 
 
 class CeaReferenceTests(unittest.TestCase):
+    def test_actual_frozen_archive_and_existing_destination(self):
+        self.assertEqual(research_frozen_reference.verify(FROZEN_ARCHIVE), 11)
+        with self.assertRaises(FileExistsError):
+            research_frozen_reference.archive(FROZEN_ARCHIVE.relative_to(ROOT).as_posix())
+
+    def test_frozen_provenance_and_geometry_types_rejected(self):
+        for defect in (
+            "schema",
+            "scope",
+            "source",
+            "cea",
+            "hp_index",
+            "duplicate",
+            "ambient_bool",
+            "comparison_bool",
+            "directory",
+            "card",
+        ):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory() as temporary:
+                folder = Path(temporary) / "archive"
+                shutil.copytree(FROZEN_ARCHIVE, folder)
+                path = folder / "manifest.json"
+                r = json.loads(path.read_text(encoding="utf-8"))
+                if defect == "schema":
+                    r["schema_version"] = True
+                if defect == "scope":
+                    r["scope"] = "Flight engine validated"
+                if defect == "source":
+                    r["assigned_tp_source_hashes"]["main.f90"] = "0" * 64
+                if defect == "cea":
+                    r["cea_binary_sha256"] = "0" * 64
+                if defect == "hp_index":
+                    r["cases"][1]["point_index"] = False
+                if defect == "duplicate":
+                    r["cases"][1] = copy.deepcopy(r["cases"][0])
+                if defect == "ambient_bool":
+                    r["cases"][0]["points"][0]["inputs"]["ambient_pressure_pa"] = False
+                if defect == "comparison_bool":
+                    r["cases"][0]["points"][0]["comparisons"][0]["difference"] = False
+                if defect == "directory":
+                    (folder / "undeclared").mkdir()
+                if defect == "card":
+                    filename = "main_base.inp"
+                    source = folder / filename
+                    source.write_text(
+                        source.read_text(encoding="utf-8").replace("nfz=1", "nfz=2"),
+                        encoding="utf-8",
+                    )
+                    next(f for f in r["files"] if f["path"] == filename)["sha256"] = digest(source)
+                path.write_text(json.dumps(r), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    research_frozen_reference.verify(folder)
+
+    def test_frozen_numeric_mutations_rejected_after_rehash(self):
+        for defect in ("flow", "area", "thrust", "isp", "mach", "pressure", "hp", "boolambient"):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory() as temporary:
+                folder = Path(temporary) / "archive"
+                shutil.copytree(FROZEN_ARCHIVE, folder)
+                filename = "main_base_A10-c.json"
+                path = folder / filename
+                r = json.loads(path.read_text(encoding="utf-8"))
+                if defect == "flow":
+                    r["geometry"]["mass_flow_kg_per_s"] *= 2
+                if defect == "area":
+                    r["geometry"]["exit_area_m2"] *= 2
+                if defect == "thrust":
+                    r["geometry"]["thrust_n"] *= 2
+                if defect == "isp":
+                    r["geometry"]["specific_impulse_s"] *= 2
+                if defect == "mach":
+                    r["nozzle"]["exit"]["mach"] *= 2
+                if defect == "pressure":
+                    r["nozzle"]["exit"]["gas"]["pressure_pa"] *= 2
+                if defect == "hp":
+                    r["diagnostics"]["hp_iterations"] = 1
+                if defect == "boolambient":
+                    r["inputs"]["ambient_pressure_pa"] = False
+                path.write_text(json.dumps(r), encoding="utf-8")
+                path = folder / "manifest.json"
+                record = json.loads(path.read_text(encoding="utf-8"))
+                next(f for f in record["files"] if f["path"] == filename)["sha256"] = digest(
+                    folder / filename
+                )
+                path.write_text(json.dumps(record), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    research_frozen_reference.verify(folder)
+
     def test_reference_timeout_preserves_partial_logs_and_raises(self):
         with tempfile.TemporaryDirectory() as temporary:
             folder = Path(temporary)

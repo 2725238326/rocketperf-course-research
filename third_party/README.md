@@ -7,3 +7,5 @@
 本项目尚未由用户选择对外发布许可证，因此未擅自添加MIT/Apache/GPL等整项目许可声明。现有上游LICENSE原文仍位于`调研/原始来源/`，不代表它们已成为代码依赖。
 
 MOD-003只参考Pyskyfire固定commit的涡轮方程和测试职责，没有复制其CoolProp调用或网络求解器；源码/许可原文与逐文件哈希见[核验专题](../调研/专题/MOD-003_循环边界与部件参考.md)。保留上游MIT原文不改变整项目未选择对外许可证的状态。
+
+ANA-004的[frozen_v1](../results/research/reference-coverage/frozen_v1/manifest.json)另保存CEA v3.3.4固定commit的`source/main.f90`和`source/rocket.f90`原字节，只用于核查指定TP与冻结位置；未修改、未编入本项目核心。上游Apache-2.0 [LICENSE](../调研/原始来源/20261003_cea_v3.3.4/LICENSE.txt)与[NOTICE](../调研/原始来源/20261003_cea_v3.3.4/NOTICE.txt)保持原文并随完整源码交接保留；来源提交和逐文件哈希见归档清单。

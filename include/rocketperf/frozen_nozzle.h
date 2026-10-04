@@ -31,11 +31,29 @@ typedef struct {
     double sonic_relative_residual;
 } RpFrozenNozzleResult;
 
+typedef struct {
+    RpFrozenNozzleResult nozzle;
+    double throat_area_m2;
+    double exit_area_m2;
+    double mass_flow_kg_per_s;
+    double thrust_n;
+    double specific_impulse_s;
+} RpFrozenNozzleFixedResult;
+
 /* Adiabatic inviscid gas, chamber-frozen composition, supersonic exit.
  * Ambient pressure must not exceed exit pressure. No shocks/separation.
  * NULL options uses model defaults. Failure leaves output unchanged. */
 RpStatus rp_nozzle_solve_frozen(const RpFrozenNozzleInput *input,
                                 const RpRootOptions *options,
                                 RpFrozenNozzleResult *output, RpError *error);
+
+/* Fixed throat area and input area ratio; derives mass flow from choked flux.
+ * Single nozzle only: not shaft, feed-system or full-cycle hardware closure.
+ * Same supported flow domain and failure-keeps-output contract as above. */
+RpStatus rp_nozzle_solve_frozen_fixed_area(const RpFrozenNozzleInput *input,
+                                           double throat_area_m2,
+                                           const RpRootOptions *options,
+                                           RpFrozenNozzleFixedResult *output,
+                                           RpError *error);
 
 #endif

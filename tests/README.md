@@ -6,9 +6,9 @@
 |---|---|---|
 | 数学/核心 | test_core.c | 解析Mach与性能、连续/能量、缩放、求根失败、越域和有限数 |
 | 物性 | test_thermo.c / test_thermo_data.py | 固定NASA9、形成焓、134状态软件参考、数据/温区/输出失败契约 |
-| 燃烧/喷管 | test_combustion.c | TP/HP、元素与六条独立反应驻点、冻结喷管CEA对照、定cp解析极限和失败保持输出 |
+| 燃烧/喷管 | test_combustion.c | TP/HP、元素与六条独立反应驻点、冻结喷管CEA对照、固定喉面积流量/推力缩放、定cp解析极限和失败保持输出 |
 | 外排/研究 | test_cycle.c / test_cycle_reference.py | 泵/涡轮解析极限、分流与两路推力、热量计账、C扫描比较量和归档篡改 |
-| CEA证据 | test_cea_reference.py | 固定四卡、实际六状态TP、原输出trace/类型检查及重算哈希后仍拒绝数值错误 |
+| CEA证据 | test_cea_reference.py | 固定四卡、实际六状态TP/五状态冻结、原输出trace/类型/冻结位置与固定几何检查及重算哈希后仍拒绝数值错误 |
 | 输出接口 | test_adapters.c | 写前拒绝非有限数/未终止文字/错误坐标或点数，控制字符转义 |
 | 外部协议 | test_cli.py | 输入严格性、中文路径、BOM/CRLF、JSON/退出码、确定性 |
 | 工程治理 | test_governance.py | 状态/依赖/WIP/负责人/事件/锁、契约修订、证据过期和架构边界 |

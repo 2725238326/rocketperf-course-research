@@ -135,3 +135,32 @@ RpStatus rp_nozzle_solve_frozen(const RpFrozenNozzleInput *input,
     rp_error_clear(error);
     return RP_OK;
 }
+
+RpStatus rp_nozzle_solve_frozen_fixed_area(const RpFrozenNozzleInput *input,
+                                           double throat_area_m2,
+                                           const RpRootOptions *options,
+                                           RpFrozenNozzleFixedResult *output,
+                                           RpError *error)
+{
+    RpFrozenNozzleFixedResult result = {0};
+    RpStatus status;
+    if (output == NULL || !rp_isfinite(throat_area_m2) || throat_area_m2 <= 0.0) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Fixed throat area must be finite and positive.");
+    }
+    status = rp_nozzle_solve_frozen(input, options, &result.nozzle, error);
+    if (status != RP_OK) { return status; }
+    result.throat_area_m2 = throat_area_m2;
+    result.exit_area_m2 = throat_area_m2 * input->area_ratio;
+    result.mass_flow_kg_per_s = throat_area_m2 * result.nozzle.throat.mass_flux_kg_per_m2_s;
+    result.thrust_n = result.mass_flow_kg_per_s * result.nozzle.effective_velocity_m_per_s;
+    result.specific_impulse_s = result.nozzle.effective_velocity_m_per_s / 9.80665;
+    if (!rp_isfinite(result.exit_area_m2) || result.exit_area_m2 <= 0.0 ||
+        !rp_isfinite(result.mass_flow_kg_per_s) || result.mass_flow_kg_per_s <= 0.0 ||
+        !rp_isfinite(result.thrust_n) || result.thrust_n <= 0.0 ||
+        !rp_isfinite(result.specific_impulse_s) || result.specific_impulse_s <= 0.0) {
+        return rp_error_set(error, RP_NUMERIC_ERROR, "Fixed-geometry nozzle dimensions or performance overflow/underflow.");
+    }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
+}

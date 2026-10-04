@@ -1,0 +1,8 @@
+! Assigned TP, infinite-area chamber; nfz=1 freezes at chamber, not throat.
+problem case=main_of_minus rocket frozen nfz=1 p,bar=50 t,k=3300 o/f=3.4014271845273223 supar=10,40
+reactants
+ fuel=CH4 wt%=100 t,k=298.15
+ oxid=O2 wt%=100 t,k=298.15
+only H2 O2 H2O CO CO2 CH4 H O OH
+output siunits trace=1.e-8
+end

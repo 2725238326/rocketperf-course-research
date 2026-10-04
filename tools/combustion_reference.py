@@ -15,13 +15,16 @@ from gas_checks import database, mixture
 
 def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     """Check provenance, conservation and print-precision-aware reference errors."""
-    if mode not in {'tp','hp','frozen'} or (mode == 'frozen' and area not in {10,40}):
+    nozzle_mode = mode in {'frozen','frozen-tp'}
+    fixed = mode == 'frozen-tp'
+    if mode not in {'tp','hp','frozen','frozen-tp'} or (nozzle_mode and area not in {10,40}):
         raise ValueError('Unsupported fixed reference mode/area')
     if not isinstance(report, dict):
         raise ValueError('Combustion report must be an object')
-    expected_model = 'ch4_o2_chamber_frozen_v1' if mode == 'frozen' else 'ch4_o2_gas_equilibrium_v1'
+    expected_model = 'ch4_o2_tp_frozen_fixed_area_v1' if fixed else 'ch4_o2_chamber_frozen_v1' if nozzle_mode else 'ch4_o2_gas_equilibrium_v1'
     required={'schema_version','model','mode','dataset_id','inputs','chamber','diagnostics','limitations'}
-    if mode == 'frozen': required.add('nozzle')
+    if nozzle_mode: required.add('nozzle')
+    if fixed: required.add('geometry')
     if (set(report)!=required or type(report.get('schema_version')) is not int or report['schema_version'] != 1
         or report.get('mode') != mode or report.get('model') != expected_model):
         raise ValueError('Combustion mode/model/schema mismatch')
@@ -31,14 +34,19 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         raise ValueError('Dataset or limitations missing')
     expected_input = dict(feed_phase='gas', pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
                           fuel_temperature_k=298.15, oxidizer_temperature_k=298.15)
-    if mode == 'tp':
+    if mode in {'tp','frozen-tp'}:
         expected_input['temperature_k'] = 3000.0
-    if mode == 'frozen':
+    if nozzle_mode:
         expected_input.update(area_ratio=area, ambient_pressure_pa=0.0)
+    if fixed:
+        expected_input['throat_area_m2'] = 1.0
+        if expected_inputs is None: raise ValueError('Fixed geometry reference requires explicit TP inputs')
     if expected_inputs is not None:
-        if (mode != 'tp' or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
+        if (mode not in {'tp','frozen-tp'} or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
             or expected_inputs.get('feed_phase')!='gas'
-            or any(type(x) not in (int,float) or not math.isfinite(x) or x<=0 for k,x in expected_inputs.items() if k!='feed_phase')):
+            or any(type(x) not in (int,float) or not math.isfinite(x) or (x<0 if k=='ambient_pressure_pa' else x<=0)
+                   for k,x in expected_inputs.items() if k!='feed_phase')
+            or (fixed and expected_inputs.get('area_ratio') != area)):
             raise ValueError('Custom reference inputs require a positive numeric gas TP contract')
         expected_input=dict(expected_inputs)
     actual_input = report.get('inputs')
@@ -116,12 +124,14 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     same(diagnostics['enthalpy_residual_j_per_kg'],chamber['h_j_per_kg']-(fuel+of_ratio*oxidizer)/(1+of_ratio),'enthalpy residual identity',1e-5)
     if len(diagnostics['element_relative_residual']) != 3:
         raise ValueError('Element residual dimension mismatch')
+    if mode in {'tp','frozen-tp'} and diagnostics['hp_iterations'] != 0:
+        raise ValueError('Assigned-TP report cannot claim HP iterations')
     for i, residual in enumerate(diagnostics['element_relative_residual']):
         bounded(f'diagnostics.element[{i}]', residual, 0.0, 2e-10)
     bounded('diagnostics.equilibrium', diagnostics['equilibrium_residual'], 0.0, 1e-10)
-    if mode != 'tp':
+    if mode in {'hp','frozen'}:
         bounded('diagnostics.enthalpy_j_per_kg', diagnostics['enthalpy_residual_j_per_kg'], 0.0, 0.01)
-    if mode == 'frozen':
+    if nozzle_mode:
         nozzle = report['nozzle']
         if (not isinstance(nozzle,dict) or set(nozzle)!={'freeze_location','throat','exit','cstar_m_per_s','vacuum_effective_velocity_m_per_s','effective_velocity_m_per_s','thrust_coefficient','continuity_relative_residual','sonic_relative_residual'}):
             raise ValueError('Invalid frozen nozzle shape')
@@ -158,10 +168,26 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         flux = nozzle['throat']['mass_flux_kg_per_m2_s']
         bounded('nozzle.recomputed_cstar', nozzle['cstar_m_per_s'], chamber['pressure_pa'] / flux, 1e-8)
         bounded('nozzle.recomputed_ivac', nozzle['vacuum_effective_velocity_m_per_s'], nozzle['exit']['velocity_m_per_s'] + nozzle['exit']['gas']['pressure_pa'] * area / flux, 1e-8)
-        bounded('nozzle.recomputed_effective_velocity', nozzle['effective_velocity_m_per_s'], nozzle['vacuum_effective_velocity_m_per_s'], 1e-8)
+        bounded('nozzle.recomputed_effective_velocity', nozzle['effective_velocity_m_per_s'], nozzle['vacuum_effective_velocity_m_per_s']-expected_input['ambient_pressure_pa']*area/flux, 1e-8)
         bounded('nozzle.recomputed_cf', nozzle['thrust_coefficient'], nozzle['effective_velocity_m_per_s'] / nozzle['cstar_m_per_s'], 1e-10)
         same(nozzle['sonic_relative_residual'],nozzle['throat']['mach']**2-1,'sonic residual identity',1e-12)
         same(nozzle['continuity_relative_residual'],nozzle['exit']['mass_flux_kg_per_m2_s']*area/flux-1,'continuity residual identity',1e-12)
+        if fixed:
+            geometry=report['geometry']
+            keys={'throat_area_m2','exit_area_m2','mass_flow_kg_per_s','thrust_n','specific_impulse_s'}
+            if (not isinstance(geometry,dict) or set(geometry)!=keys
+                or any(type(x) not in (int,float) or not math.isfinite(x) or x<=0 for x in geometry.values())):
+                raise ValueError('Invalid fixed-geometry quantities')
+            throat=expected_input['throat_area_m2'];flow=throat*flux
+            for key,target in {'throat_area_m2':throat,'exit_area_m2':throat*area,
+                               'mass_flow_kg_per_s':flow,'thrust_n':flow*nozzle['effective_velocity_m_per_s'],
+                               'specific_impulse_s':nozzle['effective_velocity_m_per_s']/9.80665}.items():
+                same(geometry[key],target,'geometry.'+key)
+            same(geometry['thrust_n'],flow*nozzle['exit']['velocity_m_per_s']+
+                 (nozzle['exit']['gas']['pressure_pa']-expected_input['ambient_pressure_pa'])*geometry['exit_area_m2'],
+                 'momentum plus pressure thrust')
+            if expected_input['ambient_pressure_pa']>nozzle['exit']['gas']['pressure_pa']:
+                raise ValueError('Fixed-geometry output outside back-pressure domain')
     return errors
 
 

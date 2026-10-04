@@ -1,19 +1,20 @@
 {
   "schema_version": 1,
-  "revision": 135,
+  "revision": 142,
   "context": {
-    "phase": "实际六状态TP参考已完成；接续冻结喷管与固定几何研究",
+    "phase": "指定TP冻结参考与固定面积单喷管已实现，正在验收；接续入口焓和热边界",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-004"
+      "ANA-005"
     ],
     "facts": [
-      "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
-      "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
-      "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
-      "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
-      "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
-      "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
+      "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
+      "合成循环10份39点，31成功/8背压域排除；五组±1%扰动为固定流量重新定尺寸，不是置信区间。",
+      "实际六状态CEA TP及五组主室冻结/11个C固定面积点已有原始档案；同源物性实现对照，不是整机或实验验证。",
+      "固定喉面积由阻塞通量求流量，升温比冲与推力趋势不可照搬重新定尺寸扫描；未闭合轴功/分流/液态入口。",
+      "接续入口焓基准和热边界；约193.65MW合成所需排热不是冷却设计要求；液态煤油及整机独立参考仍缺。",
+      "两型直接原文截至2026-10-03，未知字段保持unknown；Windows本地推进，PPT报告后置，不推送。",
+      "Git及环境实况用doctor；代码文档更新不自动刷新截至2026-10-04的已有在线记录。"
     ]
   },
   "tasks": [
@@ -356,7 +357,8 @@
         "ANA-002",
         "MOD-003",
         "ANA-003",
-        "ANA-004"
+        "ANA-004",
+        "ANA-005"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -367,7 +369,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
+      "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
       "verification": null
     },
     {
@@ -718,7 +720,7 @@
     {
       "id": "ANA-004",
       "title": "实际冻结喷管参考与固定几何可行性",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-003"
@@ -731,6 +733,30 @@
         "为5MPa/3300K实际主室和至少一组扰动提供同温压O/F及冻结位置的外部喷管参考，保存输入、原输出、来源版本及打印精度；不可直接复用10MPa/HP族冒称同条件",
         "参考工具如不能保持给定TP，记录可复现的失败和限定替代，不能修改温度或卡口径制造通过；C与参考状态及cstar、出口和推力口径逐项对应",
         "明确固定At/面积比时流量如何从阻塞通量获得，给出C计算/限制，不将重新定尺寸曲线称固定硬件循环响应；保留整机闭合和液态煤油缺口，PPT报告后置"
+      ],
+      "owner": "root",
+      "note": "按指定TP冻结参考、固定面积单喷管C结果和边界说明合同验收。源码核实CEA可以保持指定TP，未变更温度制造通过；旧归档字节/运行历史保持。ANA-005接续入口焓与热边界，非完整硬件循环，PPT报告后置。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-004_ef21392b92ab.json",
+        "sha256": "8e38c28c180d007acd77ff74e92e55b3a008fba85bece93556f86f79bb04f2a8"
+      }
+    },
+    {
+      "id": "ANA-005",
+      "title": "入口焓基准与控制体热边界审阅",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-004"
+      ],
+      "required_artifacts": [
+        "docs/research-thermal-boundary.md"
+      ],
+      "acceptance": [
+        "逐字段追溯当前燃料/氧化剂入口密度与焓的来源、相态、单位和NASA9形成焓基准；区分有证据值、合成假设和未知，不拼凑液态数据或虚构型号输入",
+        "从已有C保存结果复核发生器与主室热交换符号、控制体范围及主要假设影响；说明约193.65MW为何不能直接当真实冷却设计负荷，不能用倒算热量证明绝热燃烧",
+        "给出可实施的下一模型输入/失败契约及参考需求；无液态/煤油数据时保留缺口而非填假数，PPT最终报告继续后置"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -3528,6 +3554,172 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "97c96557d4f6141fb47f7f4251d6be7d8d22013c675a839dbbb0fcc2179a97e4",
       "hash": "7fdce5fc3dcb88603d2217f35b0447a2c3ce1fadec512da95f5534e79e5d041b"
+    },
+    {
+      "seq": 153,
+      "at": "2026-10-04T07:48:28+00:00",
+      "task": "ANA-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "从六状态TP继续：核对固定CEA对给定主室温度的支持，补实际冻结喷管及固定At响应；不制作PPT报告",
+      "previous_hash": "7fdce5fc3dcb88603d2217f35b0447a2c3ce1fadec512da95f5534e79e5d041b",
+      "hash": "54c4d4e0b8dc054e1dcc9f093adb103ef0906384f82b8ee805c23221ed5e0f3b"
+    },
+    {
+      "seq": 154,
+      "at": "2026-10-04T08:22:14+00:00",
+      "task": "ANA-005",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "54c4d4e0b8dc054e1dcc9f093adb103ef0906384f82b8ee805c23221ed5e0f3b",
+      "hash": "e35be9d57d9f5d6805775ce48c6c5e2cc1dce5251d81a36996d90dc32121043f"
+    },
+    {
+      "seq": 155,
+      "at": "2026-10-04T08:22:14+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
+      "previous_hash": "e35be9d57d9f5d6805775ce48c6c5e2cc1dce5251d81a36996d90dc32121043f",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
+          "verification": null
+        }
+      },
+      "hash": "d0c0f9a4c67d7607043fe81049b376680d853dead61bf4c767e695d8ac415c76"
+    },
+    {
+      "seq": 156,
+      "at": "2026-10-04T08:22:16+00:00",
+      "task": "ANA-004",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "同条件冻结参考及C固定喉面积已有产物，待新鲜全量验收；接续入口焓/热边界审阅",
+      "previous_hash": "d0c0f9a4c67d7607043fe81049b376680d853dead61bf4c767e695d8ac415c76",
+      "details": {
+        "context_before": {
+          "phase": "实际六状态TP参考已完成；接续冻结喷管与固定几何研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-004"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
+            "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
+            "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
+            "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "指定TP冻结参考与固定面积单喷管已实现，正在验收；接续入口焓和热边界",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-005"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
+            "合成循环10份39点，31成功/8背压域排除；五组±1%扰动为固定流量重新定尺寸，不是置信区间。",
+            "实际六状态CEA TP及五组主室冻结/11个C固定面积点已有原始档案；同源物性实现对照，不是整机或实验验证。",
+            "固定喉面积由阻塞通量求流量，升温比冲与推力趋势不可照搬重新定尺寸扫描；未闭合轴功/分流/液态入口。",
+            "接续入口焓基准和热边界；约193.65MW合成所需排热不是冷却设计要求；液态煤油及整机独立参考仍缺。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown；Windows本地推进，PPT报告后置，不推送。",
+            "Git及环境实况用doctor；代码文档更新不自动刷新截至2026-10-04的已有在线记录。"
+          ]
+        }
+      },
+      "hash": "5cd82aca9eb79d1e136faadd0e55d375674806c0dbc33a9913dd5a8791f4abc4"
+    },
+    {
+      "seq": 157,
+      "at": "2026-10-04T08:28:05+00:00",
+      "task": "ANA-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "5MPa/3300K及温度/O/F邻域五张CEA指定TP、nfz=1卡与11个固定At C点逐项对照；保存上游原源码、原输出和构建/测试身份；484项含打印及内部关系，不是独立实验。C单喷管从阻塞通量求流量，明确固定流量重定尺寸不同；热/液态煤油与整机闭合仍缺。Windows全量6/6及新建归档复跑通过。",
+      "previous_hash": "5cd82aca9eb79d1e136faadd0e55d375674806c0dbc33a9913dd5a8791f4abc4",
+      "hash": "7880d2b130ebdf7df002405a8e522763a02c537909c2626f1a4bc01829155d0a"
+    },
+    {
+      "seq": 158,
+      "at": "2026-10-04T08:28:06+00:00",
+      "task": "ANA-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按指定TP冻结参考、固定面积单喷管C结果和边界说明合同验收。源码核实CEA可以保持指定TP，未变更温度制造通过；旧归档字节/运行历史保持。ANA-005接续入口焓与热边界，非完整硬件循环，PPT报告后置。",
+      "previous_hash": "7880d2b130ebdf7df002405a8e522763a02c537909c2626f1a4bc01829155d0a",
+      "hash": "fd0f00b5649c126e8207ffb2bcf259f52628a06c67d5e140530d0df634a8156f"
+    },
+    {
+      "seq": 159,
+      "at": "2026-10-04T08:28:06+00:00",
+      "task": "ANA-005",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "fd0f00b5649c126e8207ffb2bcf259f52628a06c67d5e140530d0df634a8156f",
+      "hash": "539a73fee14b5f2150a9532102206cd12d91678052b6aedd14ce1082a2677a6c"
     }
   ]
 }

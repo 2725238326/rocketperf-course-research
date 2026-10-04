@@ -3,6 +3,7 @@
 #include "rocketperf/numeric.h"
 
 #include <math.h>
+#include <float.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -276,6 +277,54 @@ static void test_constant_cp_limit(void)
     input.area_ratio = 1e4;
     CHECK(rp_nozzle_solve_frozen(&input, NULL, &result, NULL) == RP_NOT_BRACKETED);
 }
+static void test_fixed_geometry(void)
+{
+    const double gamma = 5.0 / 3.0;
+    const double rg = RP_UNIVERSAL_GAS_CONSTANT_J_KMOL_K / rp_thermo_find_species("H")->molar_mass_kg_per_kmol;
+    const double cstar = sqrt(rg * 700.0 / gamma) * pow((gamma + 1.0) / 2.0, (gamma + 1.0) / (2.0 * (gamma - 1.0)));
+    RpFrozenNozzleInput input = {0};
+    RpFrozenNozzleFixedResult result, doubled, sentinel;
+    RpRootOptions roots = rp_root_default_options();
+    const double bad_areas[] = {0.0, -1.0, NAN, INFINITY};
+    input.chamber_temperature_k = 700.0; input.chamber_pressure_pa = 1e6;
+    input.mole_fractions[6] = 1.0; input.area_ratio = 1.2;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, &result, NULL) == RP_OK);
+    CHECK(near(result.mass_flow_kg_per_s, 1e6 * 0.01 / cstar, 1e-9));
+    CHECK(near(result.exit_area_m2, 0.012, 1e-15));
+    CHECK(near(result.thrust_n, result.mass_flow_kg_per_s * result.nozzle.exit.velocity_m_per_s +
+               result.nozzle.exit.gas.pressure_pa * result.exit_area_m2, 1e-7));
+    CHECK(near(result.specific_impulse_s, result.thrust_n / (result.mass_flow_kg_per_s * 9.80665), 1e-10));
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.02, NULL, &doubled, NULL) == RP_OK);
+    CHECK(near(doubled.mass_flow_kg_per_s, 2.0 * result.mass_flow_kg_per_s, 1e-10));
+    CHECK(near(doubled.thrust_n, 2.0 * result.thrust_n, 1e-7));
+    CHECK(near(doubled.specific_impulse_s, result.specific_impulse_s, 1e-12));
+    input.chamber_pressure_pa = 2e6;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, &doubled, NULL) == RP_OK);
+    CHECK(near(doubled.mass_flow_kg_per_s, 2.0 * result.mass_flow_kg_per_s, 1e-9));
+    input.chamber_pressure_pa = 1e6; input.ambient_pressure_pa = 10000.0;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, &doubled, NULL) == RP_OK);
+    CHECK(near(doubled.mass_flow_kg_per_s, result.mass_flow_kg_per_s, 1e-10));
+    CHECK(near(result.thrust_n - doubled.thrust_n, 10000.0 * result.exit_area_m2, 1e-7));
+    memset(&sentinel, 0x5a, sizeof(sentinel)); result = sentinel;
+    for (size_t i = 0U; i < sizeof(bad_areas) / sizeof(bad_areas[0]); ++i) {
+        CHECK(rp_nozzle_solve_frozen_fixed_area(&input, bad_areas[i], NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    }
+    CHECK(rp_nozzle_solve_frozen_fixed_area(NULL, 0.01, NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, DBL_MAX, NULL, &result, NULL) == RP_NUMERIC_ERROR);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    input.chamber_pressure_pa = 100.0; input.ambient_pressure_pa = 0.0;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, DBL_TRUE_MIN, NULL, &result, NULL) == RP_NUMERIC_ERROR);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    input.chamber_pressure_pa = 1e6;
+    input.ambient_pressure_pa = 1e6;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, &result, NULL) == RP_OUT_OF_DOMAIN);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    input.ambient_pressure_pa = 0.0; roots.max_iterations = 1U;
+    CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, &roots, &result, NULL) == RP_NO_CONVERGENCE);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+}
 int main(void)
 {
     test_tp_hp_reference();
@@ -283,6 +332,7 @@ int main(void)
     test_failures();
     test_mixture_failure_contract();
     test_constant_cp_limit();
+    test_fixed_geometry();
     (void)printf("combustion: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }
