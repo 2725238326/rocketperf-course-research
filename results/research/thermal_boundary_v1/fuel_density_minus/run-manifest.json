@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_4fd84d596d8f49d6",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T08:52:17+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\build\\thermal-study-draft\\4f3ddae7ce6848659ae625e5cabc8b64\\generated-inputs\\fuel_density_minus.ini",
+  "input_sha256": "c4abc1c841739f66169139816b87b88ede866c35768ac9e99f6ad16ab6a0cb0b",
+  "executable_sha256": "1a264a36e8a61ea40016b72a62c3d2538f1603c4f1be62b17f1959e3042488ee",
+  "build_manifest_sha256": "52baeb3a5f7dde84584a4539383486274843f1d84aea832ffedb8df3ede72b87",
+  "test_report_sha256": "2245d13411ea0dc9a862e6b3cc707ae6572da6815de74649cc0dc93fc0445330",
+  "command": [
+    "rocketperf.exe",
+    "cycle",
+    "prescribed",
+    "input.ini"
+  ],
+  "exit_code": 0,
+  "accounting_checks": 132,
+  "validation_version": 2,
+  "output_file": "result.json",
+  "output_sha256": "af5a787c83612ea4210091989e82747e4ab43e7fd9d8755f09ab548e6d89f393",
+  "finished_at": "2026-10-04T08:52:18+00:00"
+}

@@ -20,3 +20,13 @@ python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycl
 ## 2026-10-04 实际研究状态与冻结喷管参考
 
 [参考入口](reference-coverage/README.md)从上面保存的循环状态取主室/发生器及温度、总体O/F邻域条件，新运行固定CEA与已测C程序。TP六状态、126项比较；冻结五组主室状态、11个固定面积C点、484条打印/关系检查。详细差值和打印精度在[参考覆盖说明](../../docs/research-reference-coverage.md)。这补上具体状态的热化学/主喷管对照，不等于支路或整个循环已同条件外部验证。
+
+## 2026-10-04 入口焓与密度诊断
+
+[thermal_boundary_v1](thermal_boundary_v1/manifest.json)保存七份实际C运行：基线、两种焓各±100 kJ/kg、两种密度各×0.9。每次只变一个输入；每点132条状态检查，另复核热量/焓率与泵功/分流的跨工况解析关系。共用构建和测试清单，严格文件清单、输入、stdout/stderr及身份校验；没有重复exe。
+
+```powershell
+python tools/thermal_boundary.py verify results/research/thermal_boundary_v1
+```
+
+步长只是诊断情景，不是有依据的液体物性范围。焓变化在给定温度模型中不改变推力，密度变化影响泵功和分流；结果和新的模型契约见[热边界审阅](../../docs/research-thermal-boundary.md)。`source_dirty=true`和此前HEAD保持历史原样，实际C源码由构建输入哈希固定。重建使用已测Release与新目录，不能覆盖旧版本。

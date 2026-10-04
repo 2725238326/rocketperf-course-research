@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_9431aad63330401f",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T08:52:14+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\build\\thermal-study-draft\\4f3ddae7ce6848659ae625e5cabc8b64\\generated-inputs\\fuel_h_plus.ini",
+  "input_sha256": "0e9bf3e39794168e04977488e547ba715d271d50a65aa1587709283f6fdb46ad",
+  "executable_sha256": "1a264a36e8a61ea40016b72a62c3d2538f1603c4f1be62b17f1959e3042488ee",
+  "build_manifest_sha256": "52baeb3a5f7dde84584a4539383486274843f1d84aea832ffedb8df3ede72b87",
+  "test_report_sha256": "2245d13411ea0dc9a862e6b3cc707ae6572da6815de74649cc0dc93fc0445330",
+  "command": [
+    "rocketperf.exe",
+    "cycle",
+    "prescribed",
+    "input.ini"
+  ],
+  "exit_code": 0,
+  "accounting_checks": 132,
+  "validation_version": 2,
+  "output_file": "result.json",
+  "output_sha256": "837e847c01874e5dd1576c545d8ea4a7107f5a8674a6ac5a6afca038c2003b4d",
+  "finished_at": "2026-10-04T08:52:15+00:00"
+}

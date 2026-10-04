@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "revision": 144,
+  "revision": 151,
   "context": {
-    "phase": "指定TP冻结参考与固定面积单喷管已验收；入口焓和控制体热边界初查",
+    "phase": "七点入口焓与密度诊断、热边界审阅与作业总览已形成；本轮验收后接续显式焓绝热气相方法",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-005"
+      "ANA-006"
     ],
     "facts": [
       "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
-      "合成循环10份39点，31成功/8背压域排除；五组±1%扰动为固定流量重新定尺寸，不是置信区间。",
-      "实际六状态CEA TP及五组主室冻结/11个C固定面积点已有原始档案；同源物性实现对照，不是整机或实验验证。",
-      "固定喉面积由阻塞通量求流量，升温比冲与推力趋势不可照搬重新定尺寸扫描；未闭合轴功/分流/液态入口。",
-      "接续入口焓基准和热边界；约193.65MW合成所需排热不是冷却设计要求；液态煤油及整机独立参考仍缺。",
-      "两型直接原文截至2026-10-03，未知字段保持unknown；Windows本地推进，PPT报告后置，不推送。",
-      "Git及环境实况用doctor；代码文档更新不自动刷新截至2026-10-04的已有在线记录。"
+      "合成循环10份39点及六状态TP、五组主室冻结/11点参考已保存；同源物性实现对照，不是整机或实验验证。",
+      "新增七份C入口诊断，每点132条状态检查；h改变只平移所需Q，rho改变经泵功/分流传播，不是液体物性范围。",
+      "约193.65MW所需排热不是冷却负荷；液态温压/焓基准、煤油及整机独立参考仍缺。",
+      "作业总览对应三条研究主线与四项交付；已有方法、条件性结论和未覆盖项分别标明。",
+      "固定面积单喷管不等于全循环固定硬件；接续同NASA9基准的显式入口焓HP，不提前宣称真实绝热循环。",
+      "两型直接原文截至2026-10-03；Windows本地推进，PPT报告后置，不推送。"
     ]
   },
   "tasks": [
@@ -358,7 +358,8 @@
         "MOD-003",
         "ANA-003",
         "ANA-004",
-        "ANA-005"
+        "ANA-005",
+        "ANA-006"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -369,7 +370,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
+      "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
       "verification": null
     },
     {
@@ -745,21 +746,48 @@
     {
       "id": "ANA-005",
       "title": "入口焓基准与控制体热边界审阅",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-004"
       ],
       "required_artifacts": [
-        "docs/research-thermal-boundary.md"
+        "docs/research-thermal-boundary.md",
+        "results/research/thermal_boundary_v1/manifest.json",
+        "docs/architecture/assignment.svg"
       ],
       "acceptance": [
         "逐字段追溯当前燃料/氧化剂入口密度与焓的来源、相态、单位和NASA9形成焓基准；区分有证据值、合成假设和未知，不拼凑液态数据或虚构型号输入",
-        "从已有C保存结果复核发生器与主室热交换符号、控制体范围及主要假设影响；说明约193.65MW为何不能直接当真实冷却设计负荷，不能用倒算热量证明绝热燃烧",
-        "给出可实施的下一模型输入/失败契约及参考需求；无液态/煤油数据时保留缺口而非填假数，PPT最终报告继续后置"
+        "实际运行C入口焓及密度单输入扰动，保存输入/结果/构建与测试身份，复核热交换符号、控制体范围及假设影响；说明约193.65MW不能直接当真实冷却负荷，不用倒算热量证明绝热燃烧",
+        "给出有来源的新模型输入/失败契约与参考需求；作业对接SVG区分老师要求、实现选择、当前能力和待交付，实际渲染视觉核验；液态煤油未知保留，PPT报告继续后置"
       ],
       "owner": "root",
-      "note": "冻结喷管已提交，开始入口焓/密度假设与控制体热边界初查；当前不是液态物性或冷却设计实现",
+      "note": "产物与三条验收契约核对完成，质量指纹新鲜；真实型号入口、液态煤油、完整硬件循环及冷却未覆盖，接续ANA-006，PPT报告后置",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-005_73da88fabaf3.json",
+        "sha256": "26a0872d2fccdf111eab4bb27a6c848a1b0b2cc590c966abd46a2638ff017dfb"
+      }
+    },
+    {
+      "id": "ANA-006",
+      "title": "同基准入口焓的绝热气相方法与固定喷管验证",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-005"
+      ],
+      "required_artifacts": [
+        "docs/adiabatic-inlet-validation.md",
+        "results/validation/adiabatic_inlet_v1/manifest.json"
+      ],
+      "acceptance": [
+        "C17提供独立显式入口焓HP接口，采用固定NASA9形成焓基准和CH4/O2气态元素库存，不静默改动旧TP/温度入口接口，不宣称液态煤油或整机循环已闭合",
+        "与等价气态温度入口HP及固定CEA同条件参考比较，并验证固定喉面积喷管的质量/能量/推力关系；保留输入/构建/测试/原始参考与结果身份",
+        "非有限输入、错误相态/基准、温区越界、未夹逼/未收敛明确失败，保持输出；独立API和CLI反例、Windows构建及统一质量通过，补充适用范围和缺口"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
       "verification": null
     }
   ],
@@ -3778,6 +3806,219 @@
         }
       },
       "hash": "3234fe90826065c2c32186ec967117a0c88b4192098d924e609531e5dc6ee95d"
+    },
+    {
+      "seq": 162,
+      "at": "2026-10-04T08:44:40+00:00",
+      "task": "ANA-005",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "增加有C实际运行/验证的入口焓与密度扰动档案，并按本轮用户要求补作业对接SVG；不开展PPT报告",
+      "previous_hash": "3234fe90826065c2c32186ec967117a0c88b4192098d924e609531e5dc6ee95d",
+      "details": {
+        "contract_before": {
+          "id": "ANA-005",
+          "title": "入口焓基准与控制体热边界审阅",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "ANA-004"
+          ],
+          "required_artifacts": [
+            "docs/research-thermal-boundary.md"
+          ],
+          "acceptance": [
+            "逐字段追溯当前燃料/氧化剂入口密度与焓的来源、相态、单位和NASA9形成焓基准；区分有证据值、合成假设和未知，不拼凑液态数据或虚构型号输入",
+            "从已有C保存结果复核发生器与主室热交换符号、控制体范围及主要假设影响；说明约193.65MW为何不能直接当真实冷却设计负荷，不能用倒算热量证明绝热燃烧",
+            "给出可实施的下一模型输入/失败契约及参考需求；无液态/煤油数据时保留缺口而非填假数，PPT最终报告继续后置"
+          ],
+          "owner": "root",
+          "note": "冻结喷管已提交，开始入口焓/密度假设与控制体热边界初查；当前不是液态物性或冷却设计实现",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "ANA-005",
+          "title": "入口焓基准与控制体热边界审阅",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "ANA-004"
+          ],
+          "required_artifacts": [
+            "docs/research-thermal-boundary.md",
+            "results/research/thermal_boundary_v1/manifest.json",
+            "docs/architecture/assignment.svg"
+          ],
+          "acceptance": [
+            "逐字段追溯当前燃料/氧化剂入口密度与焓的来源、相态、单位和NASA9形成焓基准；区分有证据值、合成假设和未知，不拼凑液态数据或虚构型号输入",
+            "实际运行C入口焓及密度单输入扰动，保存输入/结果/构建与测试身份，复核热交换符号、控制体范围及假设影响；说明约193.65MW不能直接当真实冷却负荷，不用倒算热量证明绝热燃烧",
+            "给出有来源的新模型输入/失败契约与参考需求；作业对接SVG区分老师要求、实现选择、当前能力和待交付，实际渲染视觉核验；液态煤油未知保留，PPT报告继续后置"
+          ],
+          "owner": "root",
+          "note": "增加有C实际运行/验证的入口焓与密度扰动档案，并按本轮用户要求补作业对接SVG；不开展PPT报告",
+          "verification": null
+        }
+      },
+      "hash": "595afc1347229cf7a9dba60ccce072e760f39800a6fcbe9279108615a23194fa"
+    },
+    {
+      "seq": 163,
+      "at": "2026-10-04T10:12:57+00:00",
+      "task": "ANA-006",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "595afc1347229cf7a9dba60ccce072e760f39800a6fcbe9279108615a23194fa",
+      "hash": "1c4c0176a44f7f02818711396814a2c7ac203cd16c8b79b9f8337ce42bc85713"
+    },
+    {
+      "seq": 164,
+      "at": "2026-10-04T10:12:58+00:00",
+      "task": "ANA-005",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "七点入口诊断已复核，更新后续气相HP工作面；线上事实截止不改变",
+      "previous_hash": "1c4c0176a44f7f02818711396814a2c7ac203cd16c8b79b9f8337ce42bc85713",
+      "details": {
+        "context_before": {
+          "phase": "指定TP冻结参考与固定面积单喷管已验收；入口焓和控制体热边界初查",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-005"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
+            "合成循环10份39点，31成功/8背压域排除；五组±1%扰动为固定流量重新定尺寸，不是置信区间。",
+            "实际六状态CEA TP及五组主室冻结/11个C固定面积点已有原始档案；同源物性实现对照，不是整机或实验验证。",
+            "固定喉面积由阻塞通量求流量，升温比冲与推力趋势不可照搬重新定尺寸扫描；未闭合轴功/分流/液态入口。",
+            "接续入口焓基准和热边界；约193.65MW合成所需排热不是冷却设计要求；液态煤油及整机独立参考仍缺。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown；Windows本地推进，PPT报告后置，不推送。",
+            "Git及环境实况用doctor；代码文档更新不自动刷新截至2026-10-04的已有在线记录。"
+          ]
+        },
+        "context_after": {
+          "phase": "七点入口焓与密度诊断、热边界审阅与作业总览已形成；本轮验收后接续显式焓绝热气相方法",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-006"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
+            "合成循环10份39点及六状态TP、五组主室冻结/11点参考已保存；同源物性实现对照，不是整机或实验验证。",
+            "新增七份C入口诊断，每点132条状态检查；h改变只平移所需Q，rho改变经泵功/分流传播，不是液体物性范围。",
+            "约193.65MW所需排热不是冷却负荷；液态温压/焓基准、煤油及整机独立参考仍缺。",
+            "作业总览对应三条研究主线与四项交付；已有方法、条件性结论和未覆盖项分别标明。",
+            "固定面积单喷管不等于全循环固定硬件；接续同NASA9基准的显式入口焓HP，不提前宣称真实绝热循环。",
+            "两型直接原文截至2026-10-03；Windows本地推进，PPT报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "9b4732efeb263707b1407c205058aa77da4c1e9ef62a8e698fbdfd467a2aeb45"
+    },
+    {
+      "seq": 165,
+      "at": "2026-10-04T10:18:33+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
+      "previous_hash": "9b4732efeb263707b1407c205058aa77da4c1e9ef62a8e698fbdfd467a2aeb45",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
+          "verification": null
+        }
+      },
+      "hash": "2a31e5a835842b4243f5ac5d4b009182ec449713b95bc4b0916404fb0bbe1a0e"
+    },
+    {
+      "seq": 166,
+      "at": "2026-10-04T10:18:34+00:00",
+      "task": "ANA-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "逐字段入口假设/NASA9形成焓、七组实际C结果和132条状态及解析响应、Q符号/冷却边界、新模型失败契约均已审；作业SVG已渲染核验，全量6/6 PASS；不含液态煤油或独立科学人审",
+      "previous_hash": "2a31e5a835842b4243f5ac5d4b009182ec449713b95bc4b0916404fb0bbe1a0e",
+      "hash": "4d29096c6c3eefc4abb31c8394f8360d7d34e85d532aa361fdc07a6e04f2388d"
+    },
+    {
+      "seq": 167,
+      "at": "2026-10-04T10:18:34+00:00",
+      "task": "ANA-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "产物与三条验收契约核对完成，质量指纹新鲜；真实型号入口、液态煤油、完整硬件循环及冷却未覆盖，接续ANA-006，PPT报告后置",
+      "previous_hash": "4d29096c6c3eefc4abb31c8394f8360d7d34e85d532aa361fdc07a6e04f2388d",
+      "hash": "e2d9b0d542f346d5121f4ec6963f2f8acbe876cb4576f7a9b4a162ddb021792e"
+    },
+    {
+      "seq": 168,
+      "at": "2026-10-04T10:18:34+00:00",
+      "task": "ANA-006",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "e2d9b0d542f346d5121f4ec6963f2f8acbe876cb4576f7a9b4a162ddb021792e",
+      "hash": "534788b28e3aa28fffd7b0274aeab3da2fce5a5225d8c9775fe766103248909d"
     }
   ]
 }

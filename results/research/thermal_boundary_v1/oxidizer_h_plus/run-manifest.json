@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_aa72756a3f374b2b",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T08:52:16+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\build\\thermal-study-draft\\4f3ddae7ce6848659ae625e5cabc8b64\\generated-inputs\\oxidizer_h_plus.ini",
+  "input_sha256": "ac6bb1c64d335941e76cf12a38554dd2c6d84aa2129b0b46604115137cb9e255",
+  "executable_sha256": "1a264a36e8a61ea40016b72a62c3d2538f1603c4f1be62b17f1959e3042488ee",
+  "build_manifest_sha256": "52baeb3a5f7dde84584a4539383486274843f1d84aea832ffedb8df3ede72b87",
+  "test_report_sha256": "2245d13411ea0dc9a862e6b3cc707ae6572da6815de74649cc0dc93fc0445330",
+  "command": [
+    "rocketperf.exe",
+    "cycle",
+    "prescribed",
+    "input.ini"
+  ],
+  "exit_code": 0,
+  "accounting_checks": 132,
+  "validation_version": 2,
+  "output_file": "result.json",
+  "output_sha256": "8486f8b9f525c65c22434a0f7a2d5e6482b0981c17555ca7e7f0a736e518eef8",
+  "finished_at": "2026-10-04T08:52:17+00:00"
+}

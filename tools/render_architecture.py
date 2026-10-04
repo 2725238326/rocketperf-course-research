@@ -1,6 +1,7 @@
 """Deterministic, editable SVG/Mermaid/offline HTML architecture views."""
 from html import escape
 import json
+from assignment_diagram import assignment, MERMAID as ASSIGNMENT_MERMAID
 from projectlib import ROOT, atomic_text, read_json
 
 INK="#15263c"; MUTED="#52667c"; BLUE="#2261bd"; GREEN="#087f78"; LINE="#bdcad8"; BG="#f6f8fb"
@@ -113,8 +114,9 @@ def expected_architecture(root):
            ('nozzle','core'),('nozzle','thermo'),('thermo','core'),('cycle','core'),('cycle','nozzle'),('cycle','thermo')}
     actual={(m['id'],dep) for m in modules if m['id'] in visible for dep in m['allowed_dependencies']}
     if actual != drawn: raise ValueError('Module dependencies changed: update and visually verify the SVG layout')
-    diagrams={"business":business(),"components":components(modules),"workflow":workflow()}
+    diagrams={"assignment":assignment(),"business":business(),"components":components(modules),"workflow":workflow()}
     mermaid={
+        "assignment":ASSIGNMENT_MERMAID,
         "business":"flowchart LR\n  Q[研究问题] --> E[证据与参数]\n  E --> M[模型与算例]\n  M --> C[C17计算]\n  C --> V[验证与研究]\n  V --> D[可复现交付]\n  V -. 证据或误差未解决 .-> E\n",
         "workflow":"flowchart LR\n  R[READY] -->|领取与依赖检查| A[ACTIVE]\n  A -->|产物和质量证据| V[REVIEW]\n  V -->|新鲜指纹验收| D[DONE]\n  V -. 继续实现 .-> A\n  A -->|记录原因| B[BLOCKED]\n  B -->|依赖重检| R\n  D --> G[Git审查与本地提交]\n  G --> P[固定版本交接包]\n  P --> T[接手者复跑成功与失败]\n  T --> O[明确维护/研究/讲解责任]\n",
         "components":"flowchart TD\n"+"".join(f"  {m['id']}[{m['name']} · {m['state']}]\n" for m in modules)+"".join(f"  {m['id']} --> {d}\n" for m in modules for d in m['allowed_dependencies'])
@@ -129,8 +131,8 @@ def expected_architecture(root):
 <style>
 *{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#15263c;font-family:"Microsoft YaHei",Arial,sans-serif}header{padding:30px 4vw 20px;background:white;border-bottom:1px solid #ccd7e3}header p{color:#52667c;max-width:900px;line-height:1.65}h1{font-size:29px;margin:0}nav{display:flex;gap:10px;flex-wrap:wrap}button{padding:11px 22px;border:1px solid #bdcad8;border-radius:5px;color:#15263c;background:white;font-size:16px;cursor:pointer}button[aria-selected=true]{background:#2261bd;color:white;border-color:#2261bd}main{max-width:1760px;margin:auto;padding:24px}.view{display:none;background:#f6f8fb;border:1px solid #dce3eb}.view.selected{display:block}svg{width:100%;height:auto;display:block}aside{padding:28px 20px;background:white;margin-top:24px}h2{font-size:22px}table{border-collapse:collapse;width:100%;line-height:1.7;font-size:15px}td,th{padding:13px;text-align:left;border-bottom:1px solid #dce3eb;vertical-align:top}th{color:#52667c}footer{padding:22px 4vw;color:#52667c;font-size:14px}@media print{header nav{display:none}.view{display:block;break-after:page}aside{break-before:page}main{padding:0}}@media(max-width:700px){main{padding:8px}aside{overflow:auto}header{padding:20px}h1{font-size:24px}}
 </style>
-<header><h1>Rocketperf · 项目架构</h1><p>按业务、计算和执行三个视角理解系统。教学基线、气相模型与给定热状态的外排循环分别标明；任务实时状态由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="business" aria-selected="true">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 任务流程</button></nav></header>
-<main>'''+sections+'''<aside><h2>模块维护契约</h2><table><thead><tr><th>模块</th><th>维护职责</th><th>边界</th><th>实现状态</th></tr></thead><tbody>'''+contracts+'''</tbody></table></aside></main><footer>离线可用，无CDN或网络请求。生成源：project/modules.json + tools/render_architecture.py；SVG与Mermaid源同目录保留。</footer>
+<header><h1>Rocketperf · 作业与项目架构</h1><p>先看作业要求如何对应证据、C计算、研究分析和四项交付，再按业务、计算与执行三个视角查看维护边界。图中的方法能力不是两型真实性能；任务实况由项目登记维护。</p><nav role="tablist" aria-label="架构视图"><button data-view="assignment" aria-selected="true">作业对接总览</button><button data-view="business" aria-selected="false">01 业务流程</button><button data-view="components" aria-selected="false">02 功能核心</button><button data-view="workflow" aria-selected="false">03 任务流程</button></nav></header>
+<main>'''+sections+'''<aside><h2>模块维护契约</h2><table><thead><tr><th>模块</th><th>维护职责</th><th>边界</th><th>实现状态</th></tr></thead><tbody>'''+contracts+'''</tbody></table></aside></main><footer>离线可用，无CDN或网络请求。生成源：project/modules.json、tools/render_architecture.py与tools/assignment_diagram.py；SVG与Mermaid源同目录保留。</footer>
 <script>document.querySelectorAll('button[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('button[data-view]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('.view').forEach(s=>s.classList.toggle('selected',s.id===b.dataset.view));}));</script></html>
 '''
     return outputs
@@ -138,4 +140,4 @@ def expected_architecture(root):
 
 if __name__=="__main__":
     for relative,content in expected_architecture(ROOT).items(): atomic_text(ROOT/relative,content)
-    print("Rendered 3 SVG, 3 Mermaid sources and offline HTML architecture browser")
+    print("Rendered 4 SVG, 4 Mermaid sources and offline HTML architecture browser")

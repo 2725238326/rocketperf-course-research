@@ -7,14 +7,37 @@ import shutil
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 import project
+from render_architecture import expected_architecture
 from projectlib import QUALITY_CHECKS, atomic_json, canonical, fingerprint, lock, read_json
 
 
 class GovernanceTests(unittest.TestCase):
+    def test_assignment_diagram_requirements_links_and_generation(self):
+        outputs = expected_architecture(ROOT)
+        source = outputs["docs/architecture/assignment.svg"]
+        svg = ET.fromstring(source)
+        self.assertEqual(svg.attrib["viewBox"], "0 0 1920 1480")
+        text = "".join(svg.itertext())
+        for requirement in ("REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-11"):
+            self.assertIn(requirement, text)
+        for required in ("朱雀三号", "长征十号乙", "给定热状态", "非液态物性",
+                         "不是绝热整机闭合", "软件PASS", "程序源代码", "程序发布版", "展示PPT", "研究报告"):
+            self.assertIn(required, text)
+        namespace = {"s": "http://www.w3.org/2000/svg"}
+        self.assertFalse(svg.findall(".//s:script", namespace))
+        self.assertFalse(svg.findall(".//s:image", namespace))
+        for element in svg.findall(".//s:a", namespace):
+            target = element.attrib["href"]
+            self.assertNotIn("://", target)
+            self.assertTrue((ROOT / "docs/architecture" / target).resolve().is_file())
+        self.assertEqual((ROOT / "docs/architecture/assignment.svg").read_text(encoding="utf-8"), source)
+        self.assertIn('data-view="assignment" aria-selected="true"', outputs["docs/architecture/index.html"])
+
     def test_editable_eol_identity_and_raw_archive_bytes(self):
         code=self.root/'example.py'
         code.write_bytes(b'print(1)\n')

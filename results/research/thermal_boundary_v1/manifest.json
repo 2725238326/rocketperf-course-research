@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "kind": "thermal-boundary-study",
+  "status": "PASS",
+  "started_at": "2026-10-04T08:52:12+00:00",
+  "scope": "Synthetic prescribed-state inlet assumptions; no liquid property, adiabatic cycle, wall cooling or flight-engine validation.",
+  "source_head": "863305c154d50a08eb0594b5d323d344c860c3cd",
+  "source_dirty": true,
+  "baseline_sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec",
+  "runs": [
+    {
+      "id": "baseline",
+      "state_checks": 132
+    },
+    {
+      "id": "fuel_h_minus",
+      "state_checks": 132
+    },
+    {
+      "id": "fuel_h_plus",
+      "state_checks": 132
+    },
+    {
+      "id": "oxidizer_h_minus",
+      "state_checks": 132
+    },
+    {
+      "id": "oxidizer_h_plus",
+      "state_checks": 132
+    },
+    {
+      "id": "fuel_density_minus",
+      "state_checks": 132
+    },
+    {
+      "id": "oxidizer_density_minus",
+      "state_checks": 132
+    }
+  ],
+  "files": [
+    {
+      "path": "baseline/input.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "baseline/result.json",
+      "sha256": "744e80f3da24b18880fc1ab6652cba7dd6efcc39a9d6eeccd8b0bb8ad6d580a4"
+    },
+    {
+      "path": "baseline/run-manifest.json",
+      "sha256": "11d776cb854c5a00b6546cb6d1f0bf2cc9b28fd61ffea076596a1f143c83d9ab"
+    },
+    {
+      "path": "baseline/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline/stdout.txt",
+      "sha256": "744e80f3da24b18880fc1ab6652cba7dd6efcc39a9d6eeccd8b0bb8ad6d580a4"
+    },
+    {
+      "path": "build-manifest.json",
+      "sha256": "52baeb3a5f7dde84584a4539383486274843f1d84aea832ffedb8df3ede72b87"
+    },
+    {
+      "path": "fuel_density_minus/input.ini",
+      "sha256": "c4abc1c841739f66169139816b87b88ede866c35768ac9e99f6ad16ab6a0cb0b"
+    },
+    {
+      "path": "fuel_density_minus/result.json",
+      "sha256": "af5a787c83612ea4210091989e82747e4ab43e7fd9d8755f09ab548e6d89f393"
+    },
+    {
+      "path": "fuel_density_minus/run-manifest.json",
+      "sha256": "bb2d79c0e0e90ff464aaae5121a8075b22ef1ad1d4b461e9e3b1bac2ee8b996f"
+    },
+    {
+      "path": "fuel_density_minus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fuel_density_minus/stdout.txt",
+      "sha256": "af5a787c83612ea4210091989e82747e4ab43e7fd9d8755f09ab548e6d89f393"
+    },
+    {
+      "path": "fuel_h_minus/input.ini",
+      "sha256": "33f456530d65e9d29fae63252644e9456128ccc19250aff6e93e59865197afc0"
+    },
+    {
+      "path": "fuel_h_minus/result.json",
+      "sha256": "15e5de1ca20cce1cd9beb559e14504e414ca6c803524e670aeee5514cc70424a"
+    },
+    {
+      "path": "fuel_h_minus/run-manifest.json",
+      "sha256": "bc7ed6ec536d50de7e64eca8fc23c0b763681157e388ec7d83594e15d176d71e"
+    },
+    {
+      "path": "fuel_h_minus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fuel_h_minus/stdout.txt",
+      "sha256": "15e5de1ca20cce1cd9beb559e14504e414ca6c803524e670aeee5514cc70424a"
+    },
+    {
+      "path": "fuel_h_plus/input.ini",
+      "sha256": "0e9bf3e39794168e04977488e547ba715d271d50a65aa1587709283f6fdb46ad"
+    },
+    {
+      "path": "fuel_h_plus/result.json",
+      "sha256": "837e847c01874e5dd1576c545d8ea4a7107f5a8674a6ac5a6afca038c2003b4d"
+    },
+    {
+      "path": "fuel_h_plus/run-manifest.json",
+      "sha256": "36c3fa7ffd82624a74bd46cc865c4d2eccab7b1f77d6bcb116b460db5e52a126"
+    },
+    {
+      "path": "fuel_h_plus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fuel_h_plus/stdout.txt",
+      "sha256": "837e847c01874e5dd1576c545d8ea4a7107f5a8674a6ac5a6afca038c2003b4d"
+    },
+    {
+      "path": "oxidizer_density_minus/input.ini",
+      "sha256": "53749b8a57db7ac3aac9a5299b4bccf73c34173680090aeaf23216c70c0d5c2d"
+    },
+    {
+      "path": "oxidizer_density_minus/result.json",
+      "sha256": "6e1b2a5c7a31c22c5385ada3f572078c33232c05835660d44641782ea927d6ff"
+    },
+    {
+      "path": "oxidizer_density_minus/run-manifest.json",
+      "sha256": "c006ae6d32cfb17b576c1e3592ba7f55a067be6055cb88aea09b8e760d74a4fd"
+    },
+    {
+      "path": "oxidizer_density_minus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxidizer_density_minus/stdout.txt",
+      "sha256": "6e1b2a5c7a31c22c5385ada3f572078c33232c05835660d44641782ea927d6ff"
+    },
+    {
+      "path": "oxidizer_h_minus/input.ini",
+      "sha256": "e4f251ec4ca2ec20173b2319eb78ea97e6d15bed2e10d848a0b203c6f242c1ed"
+    },
+    {
+      "path": "oxidizer_h_minus/result.json",
+      "sha256": "8b4568c9a1e9c4b71c76e540dd31c6e251a9dfcee9f0c7522d3117e9fc7f0d2a"
+    },
+    {
+      "path": "oxidizer_h_minus/run-manifest.json",
+      "sha256": "d23569c8144cb1aa9c96564f28f178d09dfaf13e9d34888c2ad855dfe8364f64"
+    },
+    {
+      "path": "oxidizer_h_minus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxidizer_h_minus/stdout.txt",
+      "sha256": "8b4568c9a1e9c4b71c76e540dd31c6e251a9dfcee9f0c7522d3117e9fc7f0d2a"
+    },
+    {
+      "path": "oxidizer_h_plus/input.ini",
+      "sha256": "ac6bb1c64d335941e76cf12a38554dd2c6d84aa2129b0b46604115137cb9e255"
+    },
+    {
+      "path": "oxidizer_h_plus/result.json",
+      "sha256": "8486f8b9f525c65c22434a0f7a2d5e6482b0981c17555ca7e7f0a736e518eef8"
+    },
+    {
+      "path": "oxidizer_h_plus/run-manifest.json",
+      "sha256": "f5a8b3f01efed2a1fc7566972ddb11cbd5f2b2dd29705baeb28208e9550e80d5"
+    },
+    {
+      "path": "oxidizer_h_plus/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxidizer_h_plus/stdout.txt",
+      "sha256": "8486f8b9f525c65c22434a0f7a2d5e6482b0981c17555ca7e7f0a736e518eef8"
+    },
+    {
+      "path": "test-report.json",
+      "sha256": "2245d13411ea0dc9a862e6b3cc707ae6572da6815de74649cc0dc93fc0445330"
+    }
+  ],
+  "finished_at": "2026-10-04T08:52:19+00:00"
+}

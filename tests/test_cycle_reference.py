@@ -13,9 +13,90 @@ sys.path.insert(0,str(ROOT/'tools'))
 from cycle_validation import check_archive, validate_cycle
 from gas_checks import database, mixture
 from cycle_study import verify as verify_study
+from projectlib import atomic_json, digest, read_json
+from thermal_boundary import verify as verify_thermal
 
 
 class CycleArchiveTests(unittest.TestCase):
+    def thermal_copy(self, temporary):
+        folder = Path(temporary) / "thermal"
+        shutil.copytree(ROOT / "results/research/thermal_boundary_v1", folder)
+        return folder
+
+    def rehash_thermal(self, folder):
+        """Simulate a changed archive whose file hashes were recomputed too."""
+        manifest = read_json(folder / "manifest.json")
+        for item in manifest["files"]:
+            item["sha256"] = digest(folder / item["path"])
+        atomic_json(folder / "manifest.json", manifest)
+
+    def test_thermal_seven_c_experiments_and_analytical_response(self):
+        self.assertEqual(verify_thermal(ROOT / "results/research/thermal_boundary_v1"), 7)
+
+    def test_thermal_scope_types_and_inventory_rejected(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build/test-tmp") as temporary:
+            folder = self.thermal_copy(temporary)
+            original = read_json(folder / "manifest.json")
+            for key, value in (("schema_version", True), ("source_dirty", 1),
+                               ("scope", "Flight engine validation"), ("started_at", 1)):
+                candidate = copy.deepcopy(original)
+                candidate[key] = value
+                atomic_json(folder / "manifest.json", candidate)
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    verify_thermal(folder)
+            atomic_json(folder / "manifest.json", original)
+            (folder / "undeclared").mkdir()
+            with self.assertRaisesRegex(ValueError, "inventory"):
+                verify_thermal(folder)
+
+    def test_thermal_rehashed_bad_protocol_and_timestamp_rejected(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build/test-tmp") as temporary:
+            folder = self.thermal_copy(temporary)
+            path = folder / "fuel_h_plus/run-manifest.json"
+            original = read_json(path)
+            for key, value in (
+                ("exit_code", False), ("accounting_checks", True),
+                ("command", ["rocketperf.exe", "run", "input.ini"]),
+                ("finished_at", "2020-01-01T00:00:00+00:00"),
+                ("extra", "undeclared"),
+            ):
+                candidate = copy.deepcopy(original)
+                candidate[key] = value
+                atomic_json(path, candidate)
+                self.rehash_thermal(folder)
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    verify_thermal(folder)
+
+    def test_thermal_wrong_result_rehashed_and_matching_stdout_rejected(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build/test-tmp") as temporary:
+            folder = self.thermal_copy(temporary)
+            result = folder / "fuel_h_plus/result.json"
+            candidate = read_json(result)
+            candidate["energy"]["chamber_required_heat_w"] += 100000
+            atomic_json(result, candidate)
+            shutil.copy2(result, folder / "fuel_h_plus/stdout.txt")
+            run = read_json(folder / "fuel_h_plus/run-manifest.json")
+            run["output_sha256"] = digest(result)
+            atomic_json(folder / "fuel_h_plus/run-manifest.json", run)
+            self.rehash_thermal(folder)
+            with self.assertRaises(ValueError):
+                verify_thermal(folder)
+
+    def test_thermal_rehashed_changed_recipe_rejected(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / "build/test-tmp") as temporary:
+            folder = self.thermal_copy(temporary)
+            input_path = folder / "fuel_h_plus/input.ini"
+            input_path.write_text(
+                input_path.read_text(encoding="utf-8").replace("-4550000", "-4500000"),
+                encoding="utf-8",
+            )
+            run = read_json(folder / "fuel_h_plus/run-manifest.json")
+            run["input_sha256"] = digest(input_path)
+            atomic_json(folder / "fuel_h_plus/run-manifest.json", run)
+            self.rehash_thermal(folder)
+            with self.assertRaisesRegex(ValueError, "input changed"):
+                verify_thermal(folder)
+
     def test_research_grid_states_comparisons_and_provenance(self):
         self.assertEqual(verify_study(ROOT/'results/research/prescribed_cycle_scan_v1_20261004'),10)
 

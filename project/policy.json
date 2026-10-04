@@ -17,7 +17,7 @@
     {"path":"rules.md","role":"用户约束和执行规则","owner":"tooling"},
     {"path":"handoff.md","role":"接手方式、风险与最近快照入口；不重复任务状态","owner":"tooling"},
     {"path":"docs/governance.md","role":"任务、文档、Git和目录治理规范","owner":"tooling"},
-    {"path":"docs/architecture/README.md","role":"业务/计算/治理三视图和模块契约入口","owner":"tooling"},
+    {"path":"docs/architecture/README.md","role":"作业对接总览、业务/计算/治理三视图与模块契约入口","owner":"tooling"},
     {"path":"docs/engineering.md","role":"物理核心和接口设计契约","owner":"nozzle"},
     {"path":"docs/case-format.md","role":"外部输入输出协议","owner":"adapters"},
     {"path":"docs/benchmarks.md","role":"教学参考推导与适用域","owner":"nozzle"},
@@ -31,6 +31,7 @@
     {"path":"docs/improvement-analysis.md","role":"合成同条件改进、几何代价、输入扰动及不可外推结论","owner":"cycle"},
     {"path":"results/research/README.md","role":"研究计算版本、输入/构建/参考与复验入口","owner":"tooling"},
     {"path":"docs/research-reference-coverage.md","role":"实际TP/冻结参考、打印精度和固定几何边界","owner":"thermo"},
+    {"path":"docs/research-thermal-boundary.md","role":"入口焓/密度假设传播、热交换范围与有来源的扩展契约","owner":"cycle"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]
 }

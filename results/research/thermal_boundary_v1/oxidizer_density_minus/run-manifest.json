@@ -1,0 +1,24 @@
+{
+  "schema_version": 2,
+  "kind": "run",
+  "run_id": "run_9096cce9cba04f5c",
+  "status": "SUCCESS",
+  "started_at": "2026-10-04T08:52:18+00:00",
+  "original_case_path": "E:\\Work\\火发原理\\build\\thermal-study-draft\\4f3ddae7ce6848659ae625e5cabc8b64\\generated-inputs\\oxidizer_density_minus.ini",
+  "input_sha256": "53749b8a57db7ac3aac9a5299b4bccf73c34173680090aeaf23216c70c0d5c2d",
+  "executable_sha256": "1a264a36e8a61ea40016b72a62c3d2538f1603c4f1be62b17f1959e3042488ee",
+  "build_manifest_sha256": "52baeb3a5f7dde84584a4539383486274843f1d84aea832ffedb8df3ede72b87",
+  "test_report_sha256": "2245d13411ea0dc9a862e6b3cc707ae6572da6815de74649cc0dc93fc0445330",
+  "command": [
+    "rocketperf.exe",
+    "cycle",
+    "prescribed",
+    "input.ini"
+  ],
+  "exit_code": 0,
+  "accounting_checks": 132,
+  "validation_version": 2,
+  "output_file": "result.json",
+  "output_sha256": "6e1b2a5c7a31c22c5385ada3f572078c33232c05835660d44641782ea927d6ff",
+  "finished_at": "2026-10-04T08:52:19+00:00"
+}

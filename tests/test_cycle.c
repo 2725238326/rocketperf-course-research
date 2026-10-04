@@ -184,6 +184,40 @@ static void test_cycle(void)
     CHECK(near(sideways.total_thrust_n, 2.0 * result.total_thrust_n, 1e-5));
     CHECK(near(sideways.engine_specific_impulse_s, result.engine_specific_impulse_s, 1e-10));
 }
+static void test_inlet_assumptions(void)
+{
+    RpCycleInput input = benchmark();
+    RpCycleResult base, changed;
+    const double shifts[] = {-1e5, 1e5};
+    CHECK(rp_cycle_solve_prescribed(&input, NULL, &base, NULL) == RP_OK);
+    for (int side = 0; side < 2; ++side) {
+        for (size_t i = 0U; i < sizeof(shifts) / sizeof(shifts[0]); ++i) {
+            const double feed = side == 0 ? base.fuel_mass_flow_kg_per_s : base.oxidizer_mass_flow_kg_per_s;
+            const double main = side == 0 ? base.main_fuel_mass_flow_kg_per_s : base.main_oxidizer_mass_flow_kg_per_s;
+            const double branch = side == 0 ? base.branch_fuel_mass_flow_kg_per_s : base.branch_oxidizer_mass_flow_kg_per_s;
+            input = benchmark();
+            if (side == 0) { input.fuel_pump.inlet_h_j_per_kg += shifts[i]; }
+            else { input.oxidizer_pump.inlet_h_j_per_kg += shifts[i]; }
+            CHECK(rp_cycle_solve_prescribed(&input, NULL, &changed, NULL) == RP_OK);
+            CHECK(near(changed.pump_power_w, base.pump_power_w, 1e-8));
+            CHECK(near(changed.branch_mass_flow_kg_per_s, base.branch_mass_flow_kg_per_s, 1e-12));
+            CHECK(near(changed.total_thrust_n, base.total_thrust_n, 1e-8));
+            CHECK(near(changed.engine_specific_impulse_s, base.engine_specific_impulse_s, 1e-10));
+            CHECK(near(changed.generator_heat_w - base.generator_heat_w, -branch * shifts[i], 1e-6));
+            CHECK(near(changed.chamber_heat_w - base.chamber_heat_w, -main * shifts[i], 1e-6));
+            CHECK(near(changed.inlet_enthalpy_rate_w - base.inlet_enthalpy_rate_w, feed * shifts[i], 1e-6));
+            CHECK(fabs(changed.energy_relative_residual) < 1e-10);
+        }
+        input = benchmark();
+        if (side == 0) { input.fuel_pump.density_kg_per_m3 *= 0.9; }
+        else { input.oxidizer_pump.density_kg_per_m3 *= 0.9; }
+        CHECK(rp_cycle_solve_prescribed(&input, NULL, &changed, NULL) == RP_OK);
+        CHECK(changed.pump_power_w > base.pump_power_w);
+        CHECK(changed.branch_mass_flow_kg_per_s > base.branch_mass_flow_kg_per_s);
+        CHECK(near(changed.turbine.specific_work_j_per_kg, base.turbine.specific_work_j_per_kg, 1e-6));
+        check_cycle(&input, &changed);
+    }
+}
 static void test_cycle_failures(void)
 {
     RpCycleInput input = benchmark();
@@ -287,7 +321,7 @@ static void test_study(void)
 }
 int main(void)
 {
-    test_pump(); test_turbine(); test_cycle(); test_cycle_failures(); test_study();
+    test_pump(); test_turbine(); test_cycle(); test_inlet_assumptions(); test_cycle_failures(); test_study();
     (void)printf("cycle: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

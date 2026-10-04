@@ -297,7 +297,7 @@ def expected_views(state):
     head += [f"- 已有在线证据截止：{state['context']['evidence_cutoff']}；文档/代码更新不自动刷新在线事实。",
              "- Git和环境实况用 `python tools/project.py doctor` 查看，不把易过时的提交状态复制到多份文档。",
              "", "完整验收：[任务板](docs/tasks.md)。执行规则：[rules](rules.md)。接手：[handoff](handoff.md)。",
-             "架构：[三视图](docs/architecture/README.md)。统一检查：`python tools/quality.py`。", ""]
+             "架构：[作业对接与三视图](docs/architecture/README.md)。统一检查：`python tools/quality.py`。", ""]
     return {"docs/tasks.md":"\n".join(lines),"worknow.md":"\n".join(head)}
 
 

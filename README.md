@@ -2,13 +2,13 @@
 
 研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九物种气态CH4/O2的TP/HP平衡、燃烧室冻结温变喷管和给定热状态的稳态外排循环边界。真实型号输入仍有缺口；方法基准和循环合成算例不能当作飞行发动机性能。
 
-[打开架构三视图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
+[打开作业对接与架构图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
 交给其他同学时先看[阶段交接与接收验收](docs/receiving.md)。干净提交和完整质量通过后，`python tools/handoff.py create --destination build/handoff-NEW-ID`生成本地运行包与离线源码bundle；不依赖远端已推送，不等同于最终课程发布。
 
 技术路线已确定：[C17核心、零维/准一维/稳态模型、CLI与离线报告](docs/technology-stack.md)。该决定明确工具职责，不代表高级模型已实现。
 
-![业务流程](docs/architecture/business.svg)
+![作业要求与研究架构](docs/architecture/assignment.svg)
 
 ## 开始工作
 
@@ -48,7 +48,7 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycle-field main_area_ratio --cycle-values 10,20,40
 ```
 
-C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限步响应；Python检查、保存，不代替求解。结果与边界见[改进分析](docs/improvement-analysis.md)和[研究归档](results/research/README.md)。当前重点是这些计算与证据，PPT/最终报告暂不推进。
+C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限步响应；Python检查、保存，不代替求解。结果与边界见[改进分析](docs/improvement-analysis.md)和[研究归档](results/research/README.md)。[入口焓审阅](docs/research-thermal-boundary.md)保存七组C诊断运行，说明入口假设如何传播，以及约193.65 MW排热为何不是真实冷却负荷。当前重点是这些计算与证据，PPT/最终报告暂不推进。
 
 ## 按职责找入口
 
@@ -56,7 +56,7 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 |---|---|
 | 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md)、[研究结构](docs/research-structure.md) |
 | 领取、交接、验收任务 | [worknow](worknow.md)、[handoff](handoff.md)、[治理命令](docs/governance.md) |
-| 理解业务与模块边界 | [架构三视图及模块契约](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
+| 理解作业、业务与模块边界 | [作业对接与三视图](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
 | 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
 | 查文献与参数证据 | [调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
 | 写研究专题和结论 | [写作约定](docs/research-writing.md)、[研究议题](docs/research-agenda.md) |
