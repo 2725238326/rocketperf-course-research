@@ -12,6 +12,7 @@
 | thermo_data.py / cea_reference.py | 固定物性与CEA原始数据/参考完整性；Cantera仅参考生成路径 |
 | gas_checks.py / cycle_validation.py | 对保存状态和计账关系独立复算；不作生产平衡/循环求解 |
 | cycle_study.py | 校核C扫描的逐点状态、比较量和有限步响应，归档与复验研究版本 |
+| research_tp_reference.py | 从保存合成循环取实际主室/发生器TP条件，运行固定CEA与C并保存六状态参考 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | render_architecture.py | 有布局设计的SVG、Mermaid、离线HTML三视图 |

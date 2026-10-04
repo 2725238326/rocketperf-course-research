@@ -24,9 +24,21 @@ def parse_output(data, rocket=False, frozen=False):
     text = data.decode('ascii', errors='strict')
     if '\x00' in text or 'ERROR' in text or 'WARNING' in text:
         raise ValueError('CEA output contains invalid bytes or diagnostics')
-    rows = {}; fractions = {}; in_species = False
+    rows = {}; fractions = {}; in_species = False; in_trace = False; trace_species = set()
     for line in text.splitlines():
         stripped = line.strip()
+        if stripped.startswith('NOTE. WEIGHT FRACTION OF FUEL'):
+            in_trace = False
+            continue
+        if stripped.startswith('WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS'):
+            in_trace = True
+            continue
+        if in_trace and stripped:
+            tokens=stripped.split()
+            if any(x not in SPECIES or x in trace_species for x in tokens):
+                raise ValueError('Invalid or duplicate CEA omitted species list')
+            trace_species.update(tokens)
+            continue
         for prefix, key in ROWS.items():
             if stripped.startswith(prefix + ' '):
                 values = [float(x) for x in stripped[len(prefix):].split()]
@@ -43,6 +55,7 @@ def parse_output(data, rocket=False, frozen=False):
             tokens = stripped.split()
             if tokens[0] not in SPECIES:
                 raise ValueError('Unexpected species in restricted CEA result')
+            if tokens[0] in fractions: raise ValueError('Repeated CEA species row')
             fractions[tokens[0]] = [float(x) for x in tokens[1:]]
     columns = 4 if rocket else 1
     for key in ('pressure_bar', 'temperature_k', 'enthalpy_kj_kg', 'entropy_kj_kg_k', 'molar_mass_kg_kmol'):
@@ -59,8 +72,8 @@ def parse_output(data, rocket=False, frozen=False):
     for values in fractions.values():
         if len(values) != (1 if frozen else columns) or any(not math.isfinite(x) or x < 0 for x in values):
             raise ValueError('Invalid CEA mole-fraction table')
-    if not fractions or set(SPECIES) - set(fractions) - {'CH4'}:
-        raise ValueError('Missing non-trace species')
+    if not fractions or set(SPECIES)-set(fractions) != trace_species:
+        raise ValueError('Missing species without an explicit CEA trace declaration')
     for index in range(1 if frozen else columns):
         if abs(sum(values[index] for values in fractions.values()) - 1) > 2e-5:
             raise ValueError('Printed mole fractions do not sum to one')

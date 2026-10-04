@@ -1,0 +1,58 @@
+
+ ! Restricted gas TP reference for saved synthetic cycle state, not whole engine.
+ problem case=main_t_plus tp p,bar=50 t,k=3333 o/f=3.436135057526204
+ reactants
+  fuel=CH4 wt%=100 t,k=298.15
+  oxid=O2 wt%=100 t,k=298.15
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-8
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM PROPERTIES AT ASSIGNED
+
+                           TEMPERATURE AND PRESSURE
+
+ CASE = main_t_plus
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4               100.000  -74600.000    298.15
+     O2                100.000      -0.000    298.15
+O/F =    3.43614    % Fuel =  22.54215    r, Eq. Ratio =  1.16097    phi, Eq. Ratio =  1.16097
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar                50.00000
+ T, K                   3333.00
+ Density, kg/m^3      0.4042E+1
+ H, kJ/kg             -2783.845
+ U, kJ/kg             -4020.722
+ G, kJ/kg            -42494.958
+ S, kJ/kg-K             11.9145
+ 
+ M, (1/n)              22.40501
+ (dln(V)/dln(P))t      -1.02865
+ (dln(V)/dln(T))p       1.54984
+ Cp, kJ/kg-K            6.25822
+ Gamma_s                1.12839
+ Son. Vel., m/s        1181.390
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.069999
+ O2                    0.017093
+ H2O                   0.527073
+ CO                    0.162351
+ CO2                   0.152474
+ H                     0.014875
+ O                     0.005853
+ OH                    0.050281
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

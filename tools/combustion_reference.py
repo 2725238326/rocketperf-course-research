@@ -13,7 +13,7 @@ from projectlib import ROOT, atomic_json, atomic_text, digest, now, read_json, s
 from gas_checks import database, mixture
 
 
-def compare_report(report, reference, mode, area=None):
+def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     """Check provenance, conservation and print-precision-aware reference errors."""
     if mode not in {'tp','hp','frozen'} or (mode == 'frozen' and area not in {10,40}):
         raise ValueError('Unsupported fixed reference mode/area')
@@ -35,7 +35,17 @@ def compare_report(report, reference, mode, area=None):
         expected_input['temperature_k'] = 3000.0
     if mode == 'frozen':
         expected_input.update(area_ratio=area, ambient_pressure_pa=0.0)
-    if report.get('inputs') != expected_input:
+    if expected_inputs is not None:
+        if (mode != 'tp' or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
+            or expected_inputs.get('feed_phase')!='gas'
+            or any(type(x) not in (int,float) or not math.isfinite(x) or x<=0 for k,x in expected_inputs.items() if k!='feed_phase')):
+            raise ValueError('Custom reference inputs require a positive numeric gas TP contract')
+        expected_input=dict(expected_inputs)
+    actual_input = report.get('inputs')
+    if (not isinstance(actual_input, dict) or set(actual_input) != set(expected_input)
+        or any(type(value) not in (int, float) or not math.isfinite(value)
+               for key, value in actual_input.items() if key != 'feed_phase')
+        or actual_input != expected_input):
         raise ValueError('Report does not correspond to the fixed method inputs')
     errors = []
 
@@ -94,14 +104,16 @@ def compare_report(report, reference, mode, area=None):
     hydrogen = 2 * fractions['H2'] + 2 * fractions['H2O'] + 4 * fractions['CH4'] + fractions['H'] + fractions['OH']
     oxygen = 2 * fractions['O2'] + fractions['H2O'] + fractions['CO'] + 2 * fractions['CO2'] + fractions['O'] + fractions['OH']
     bounded('element_ratio.H_C', hydrogen / carbon, 4.0, 2e-8)
-    bounded('element_ratio.O_C', oxygen / carbon, 2 * 3.4 * 16.04246 / 31.9988, 2e-8)
+    of_ratio=expected_input['oxidizer_fuel_mass_ratio']
+    bounded('element_ratio.O_C', oxygen / carbon, 2 * of_ratio * 16.04246 / 31.9988, 2e-8)
     diagnostics = report['diagnostics']
     if (not isinstance(diagnostics,dict) or set(diagnostics)!={'element_relative_residual','equilibrium_residual','enthalpy_residual_j_per_kg','equilibrium_iterations','hp_iterations'}
         or not isinstance(diagnostics['element_relative_residual'],list)
         or any(type(diagnostics[k]) is not int or not 0<=diagnostics[k]<=100000 for k in ('equilibrium_iterations','hp_iterations'))):
         raise ValueError('Invalid combustion diagnostics shape/counts')
-    fuel=mixture({'CH4':1.0},298.15,1e7,fits)['h_j_per_kg']; oxidizer=mixture({'O2':1.0},298.15,1e7,fits)['h_j_per_kg']
-    same(diagnostics['enthalpy_residual_j_per_kg'],chamber['h_j_per_kg']-(fuel+3.4*oxidizer)/4.4,'enthalpy residual identity',1e-5)
+    fuel=mixture({'CH4':1.0},expected_input['fuel_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
+    oxidizer=mixture({'O2':1.0},expected_input['oxidizer_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
+    same(diagnostics['enthalpy_residual_j_per_kg'],chamber['h_j_per_kg']-(fuel+of_ratio*oxidizer)/(1+of_ratio),'enthalpy residual identity',1e-5)
     if len(diagnostics['element_relative_residual']) != 3:
         raise ValueError('Element residual dimension mismatch')
     for i, residual in enumerate(diagnostics['element_relative_residual']):

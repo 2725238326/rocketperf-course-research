@@ -1,18 +1,19 @@
 {
   "schema_version": 1,
-  "revision": 127,
+  "revision": 135,
   "context": {
-    "phase": "合成改进与审阅已验收；接续实际研究状态参考覆盖",
+    "phase": "实际六状态TP参考已完成；接续冻结喷管与固定几何研究",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-003"
+      "ANA-004"
     ],
     "facts": [
-      "C17已有NASA9、九物种气相TP/HP、冻结喷管与给定热状态外排原型及扫描；不是型号真实性能求解。",
-      "L0正数篡改/伪越域、CEA负物性/布尔版本、质量证明形状漏项修正；主工作区完整质量6/6通过。",
-      "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不能当置信区间或固定硬件响应。",
-      "固定CEA四卡及新C方法对照已复跑；实际研究状态/完整循环参考仍需补，接续ANA-003。",
-      "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进；PPT/报告后置，不推送。"
+      "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
+      "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
+      "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
+      "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
+      "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
+      "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
     ]
   },
   "tasks": [
@@ -354,7 +355,8 @@
       "depends_on": [
         "ANA-002",
         "MOD-003",
-        "ANA-003"
+        "ANA-003",
+        "ANA-004"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -365,7 +367,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
+      "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
       "verification": null
     },
     {
@@ -691,7 +693,7 @@
     {
       "id": "ANA-003",
       "title": "实际研究状态的参考覆盖与固定几何边界",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-002"
@@ -704,6 +706,31 @@
         "为扫描实际5MPa/3300K分流后主室及6MPa/1800K发生器增加固定CEA同条件TP参考；适用物种/版本和打印精度明确，不冒称全循环实验验证",
         "扩大至少一组温度或O/F邻域参考，记录成功/失败；区分给定流量重新定尺寸与固定几何运行边界；保存原始卡/输出与输入构建身份",
         "结合两型现有原文说明哪些推论有据、哪些只能合成；不新增无来源型号点值或提前开展报告PPT"
+      ],
+      "owner": "root",
+      "note": "六状态TP、邻域和边界说明按合同验收；强类型/trace/重哈希数值反例通过。实际冻结喷管与固定几何实现接续ANA-004，液态煤油和整机独立参考仍缺，不启动PPT报告。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-003_84890ac520c6.json",
+        "sha256": "44f3eeb999f090dd12e891d85ad03bea73ac797f5716a4ae75a750210669590a"
+      }
+    },
+    {
+      "id": "ANA-004",
+      "title": "实际冻结喷管参考与固定几何可行性",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-003"
+      ],
+      "required_artifacts": [
+        "docs/research-reference-coverage.md",
+        "results/research/reference-coverage/frozen_v1/manifest.json"
+      ],
+      "acceptance": [
+        "为5MPa/3300K实际主室和至少一组扰动提供同温压O/F及冻结位置的外部喷管参考，保存输入、原输出、来源版本及打印精度；不可直接复用10MPa/HP族冒称同条件",
+        "参考工具如不能保持给定TP，记录可复现的失败和限定替代，不能修改温度或卡口径制造通过；C与参考状态及cstar、出口和推力口径逐项对应",
+        "明确固定At/面积比时流量如何从阻塞通量获得，给出C计算/限制，不将重新定尺寸曲线称固定硬件循环响应；保留整机闭合和液态煤油缺口，PPT报告后置"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -3295,6 +3322,212 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "0c8eb0ff9391178b7711cbe63d4d9083918c31f665bf537148cfc3f68d00c83f",
       "hash": "4845b7397e573cad2eaf7efeb36dc4136851daf41085ba5027159fc22638300c"
+    },
+    {
+      "seq": 145,
+      "at": "2026-10-04T06:39:16+00:00",
+      "task": "ANA-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "从已提交的合成研究接续：实际主室和发生器TP独立参考，固定几何区别；PPT报告继续后置",
+      "previous_hash": "4845b7397e573cad2eaf7efeb36dc4136851daf41085ba5027159fc22638300c",
+      "hash": "fffb20059302d2022003dc9ac9371e7ecd418c0644fc01f7a85ed0d89606588e"
+    },
+    {
+      "seq": 146,
+      "at": "2026-10-04T07:15:55+00:00",
+      "task": "ANA-004",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "fffb20059302d2022003dc9ac9371e7ecd418c0644fc01f7a85ed0d89606588e",
+      "hash": "8ceb8be86d07cfbde741197c3a10e17eb88fc51c98738868f57bde08e3e0aa8a"
+    },
+    {
+      "seq": 147,
+      "at": "2026-10-04T07:15:57+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
+      "previous_hash": "8ceb8be86d07cfbde741197c3a10e17eb88fc51c98738868f57bde08e3e0aa8a",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
+          "verification": null
+        }
+      },
+      "hash": "d8afc5ea70d5e829b1589556287259249e1236fd44fa21ee0c8ea85caf868798"
+    },
+    {
+      "seq": 148,
+      "at": "2026-10-04T07:15:58+00:00",
+      "task": "ANA-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "六状态实际TP参考和类型/trace反例已落地，准备全量验收；后续实际冻结喷管独立任务",
+      "previous_hash": "d8afc5ea70d5e829b1589556287259249e1236fd44fa21ee0c8ea85caf868798",
+      "details": {
+        "context_before": {
+          "phase": "合成改进与审阅已验收；接续实际研究状态参考覆盖",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-003"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管与给定热状态外排原型及扫描；不是型号真实性能求解。",
+            "L0正数篡改/伪越域、CEA负物性/布尔版本、质量证明形状漏项修正；主工作区完整质量6/6通过。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不能当置信区间或固定硬件响应。",
+            "固定CEA四卡及新C方法对照已复跑；实际研究状态/完整循环参考仍需补，接续ANA-003。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进；PPT/报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "合成研究与实际六状态TP已产出；验收后接续冻结喷管参考",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-004"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
+            "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
+            "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
+            "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
+          ]
+        }
+      },
+      "hash": "aa028ef03e781b47c9d8b5fc8289eaedc0b0972e54f75a4f0c858df0ef41eef3"
+    },
+    {
+      "seq": 149,
+      "at": "2026-10-04T07:23:40+00:00",
+      "task": "ANA-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实际六状态TP和类型/trace审阅完成；在最终代码文档上重跑验收后落地提交",
+      "previous_hash": "aa028ef03e781b47c9d8b5fc8289eaedc0b0972e54f75a4f0c858df0ef41eef3",
+      "details": {
+        "context_before": {
+          "phase": "合成研究与实际六状态TP已产出；验收后接续冻结喷管参考",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-004"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
+            "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
+            "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
+            "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "实际六状态TP参考已完成；接续冻结喷管与固定几何研究",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-004"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种气相TP/HP、冻结喷管和给定热状态外排扫描；仍不是型号真实性能求解。",
+            "L0正数篡改/伪越域、质量证明、CEA负物性及布尔输入漏检已补反例；质量结论以新鲜完整报告为准。",
+            "C研究10份39点，31成功/8背压域排除；含尺寸代价和五组±1%扰动，不是置信区间或固定硬件响应。",
+            "实际主室/发生器及温度、O/F邻域六状态CEA TP已运行并复验126项；同源物性实现对照，不是整机或实验验证。",
+            "实际冻结喷管同条件参考接续ANA-004；固定几何全循环、液态入口与煤油闭合仍缺，PPT/报告后置。",
+            "两型直接原文截至2026-10-03，未知字段保持unknown。Windows本地推进，不推送。"
+          ]
+        }
+      },
+      "hash": "cc8ec144c48a0ed437c9f250e7ec0159855975606e17ccd74cd10cffbdc5d018"
+    },
+    {
+      "seq": 150,
+      "at": "2026-10-04T07:32:29+00:00",
+      "task": "ANA-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "六个保存研究状态的同条件CEA TP及新C对照通过126项检查；温度和总体O/F邻域、原始输入输出/构建身份及打印精度已归档；固定几何与重新定尺寸、两型可用边界已说明。验收限于该合同，不是整机或实验验证。",
+      "previous_hash": "cc8ec144c48a0ed437c9f250e7ec0159855975606e17ccd74cd10cffbdc5d018",
+      "hash": "c8dc1ce039c35d8a9c67b1bea69c0dba0b34d2b063084d96a5d213176b710050"
+    },
+    {
+      "seq": 151,
+      "at": "2026-10-04T07:32:30+00:00",
+      "task": "ANA-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "六状态TP、邻域和边界说明按合同验收；强类型/trace/重哈希数值反例通过。实际冻结喷管与固定几何实现接续ANA-004，液态煤油和整机独立参考仍缺，不启动PPT报告。",
+      "previous_hash": "c8dc1ce039c35d8a9c67b1bea69c0dba0b34d2b063084d96a5d213176b710050",
+      "hash": "97c96557d4f6141fb47f7f4251d6be7d8d22013c675a839dbbb0fcc2179a97e4"
+    },
+    {
+      "seq": 152,
+      "at": "2026-10-04T07:32:30+00:00",
+      "task": "ANA-004",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "97c96557d4f6141fb47f7f4251d6be7d8d22013c675a839dbbb0fcc2179a97e4",
+      "hash": "7fdce5fc3dcb88603d2217f35b0447a2c3ce1fadec512da95f5534e79e5d041b"
     }
   ]
 }

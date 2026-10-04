@@ -5,10 +5,10 @@
 ## 现在有什么
 
 - C17：定比热教学喷管、十物种NASA9、九种中性C/H/O气体TP/HP、燃烧室冻结温变喷管、给定热状态外排循环及其单输入扫描。
-- 固定参考：NASA9/Cantera软件对照、四个CEA受限气相方法工况、泵/涡轮解析极限。没有完整发动机独立实验或整机循环同条件外部参考。
+- 固定参考：NASA9/Cantera软件对照、四个CEA受限气相方法工况、合成循环实际六状态CEA TP、泵/涡轮解析极限。没有完整发动机独立实验或整机循环同条件外部参考。
 - 工程：模块依赖、严格输入、不可变构建、失败运行记录、统一验收和固定提交交接。成功结果还要通过关系复算，不能只凭JSON可解析或数值为正。
 
-架构看[三视图](docs/architecture/README.md)。模型限制看[热化学/喷管](docs/thermo-nozzle-validation.md)与[循环](docs/cycle-validation.md)。研究结果看[改进与代价](docs/improvement-analysis.md)，保存文件从[研究归档](results/research/README.md)进入。
+架构看[三视图](docs/architecture/README.md)。模型限制看[热化学/喷管](docs/thermo-nozzle-validation.md)与[循环](docs/cycle-validation.md)。研究结果看[改进与代价](docs/improvement-analysis.md)和[实际状态参考](docs/research-reference-coverage.md)，保存文件从[研究归档](results/research/README.md)进入。
 
 ## 怎么复跑
 
@@ -17,6 +17,7 @@ python tools/project.py check
 python tools/quality.py
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycle-field main_area_ratio --cycle-values 10,20,40
+python tools/research_tp_reference.py verify results/research/reference-coverage/tp_v1_20261004
 ```
 
 正式运行从manifest指向的新鲜已测构建开始。`build/release/rocketperf.exe`仅是便捷别名。新RunId不得覆盖旧记录；正式研究归档新增版本，保留成功、拒绝点、stdout/stderr和输入/构建/测试哈希。
@@ -34,4 +35,4 @@ python tools/pipeline.py run --case cases/benchmarks/prescribed_cycle.ini --cycl
 
 按[接收与讲解说明](docs/receiving.md)固定Git提交、生成离线源码/运行包，再由接收者具名复跑成功与失败案例。旧`build/handoff-20261004`对应旧提交，不自动包含本轮研究；只有干净提交和新鲜完整质量证据可生成新包。软件复验不是独立科学审查。
 
-本轮修正与证据见[审阅快照](taskshot/2026-10-04_021-audit-and-research.md)；前阶段见[QA-001快照](taskshot/2026-10-04_020-quality-and-handoff.md)。原始来源、旧快照、参考输出和本地旧构建未删除或改写。每个实质批次落地本地提交，不自动推送。
+本轮实际参考、回归和接续见[参考快照](taskshot/2026-10-04_022-actual-state-reference.md)；代码/文档整顿见[审阅快照](taskshot/2026-10-04_021-audit-and-research.md)，前阶段见[QA-001快照](taskshot/2026-10-04_020-quality-and-handoff.md)。原始来源、旧快照、参考输出和本地旧构建未删除或改写。每个实质批次落地本地提交，不自动推送。

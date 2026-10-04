@@ -195,7 +195,7 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             before=pipeline.test_records(root)
@@ -203,10 +203,24 @@ class LifecycleTests(unittest.TestCase):
             self.assertNotEqual(before,pipeline.test_records(root))
             self.assertIn(path.relative_to(root).as_posix(),{r['path'] for r in before})
 
+    def test_research_navigation_readme_is_not_numeric_test_identity(self):
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+            root=Path(folder)
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py'):
+                atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'调研/原始来源/来源文件索引.json',[])
+            navigation=root/'results/research/example/README.md'
+            navigation.parent.mkdir(parents=True);navigation.write_text('navigation only',encoding='utf-8')
+            before=pipeline.test_records(root)
+            navigation.write_text('updated navigation',encoding='utf-8')
+            self.assertEqual(before,pipeline.test_records(root))
+            numeric=navigation.parent/'result.json';numeric.write_text('{"value":1}',encoding='utf-8')
+            self.assertNotEqual(before,pipeline.test_records(root))
+
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             index=root/'调研/原始来源/来源文件索引.json'
             atomic_json(index,[])
@@ -244,7 +258,7 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):
