@@ -27,6 +27,21 @@ typedef struct {
     RpEnthalpyBasis basis;
 } RpCh4O2EnthalpyFeed;
 typedef struct {
+    double pressure_pa;
+    double oxidizer_fuel_mass_ratio;
+    const char *fuel_anchor_id;
+    const char *oxidizer_anchor_id;
+    double fuel_temperature_k;
+    double oxidizer_temperature_k;
+    RpFeedPhase phase;
+} RpCh4O2AnchorFeed;
+typedef struct {
+    double fuel_h_j_per_kg;
+    double oxidizer_h_j_per_kg;
+    double mixture_h_j_per_kg;
+    double element_inventory_kmol_per_kg[RP_CHO_ELEMENT_COUNT];
+} RpAnchorInlet;
+typedef struct {
     double equilibrium_tolerance;
     double enthalpy_tolerance_j_per_kg;
     double hp_lower_temperature_k;
@@ -85,5 +100,19 @@ RpStatus rp_ch4_o2_inlet_enthalpy(const RpCh4O2EnthalpyFeed *feed,
 RpStatus rp_ch4_o2_equilibrium_hp_enthalpy(const RpCh4O2EnthalpyFeed *feed,
                                           const RpCombustionOptions *options,
                                           RpCombustionResult *output, RpError *error);
+
+/* Pinned CEA CH4(L) at exactly 111.643 K and O2(L) at exactly 90.170 K.
+ * Assigned chemical enthalpies include formation contributions. No caller h
+ * override, NASA9 extrapolation, liquid EOS/density or pressure correction.
+ * pressure_pa is product chamber pressure, not a measured liquid inlet pressure.
+ * Only those IDs and RP_FEED_LIQUID are accepted. Same p/O-F and HP guards.
+ * Products remain restricted ideal gases. No pump, phase-stability or cycle solve.
+ * NULL options uses defaults. Every failure leaves output unchanged. */
+const char *rp_anchor_dataset_id(void);
+RpStatus rp_ch4_o2_anchor_inlet(const RpCh4O2AnchorFeed *feed,
+                                RpAnchorInlet *output, RpError *error);
+RpStatus rp_ch4_o2_equilibrium_hp_anchor(const RpCh4O2AnchorFeed *feed,
+                                         const RpCombustionOptions *options,
+                                         RpCombustionResult *output, RpError *error);
 
 #endif

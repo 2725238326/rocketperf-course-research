@@ -68,7 +68,7 @@ def components(modules):
     body=node(60,230,310,m['cli']['name'],["run / thermo / combustion","cycle / study"],"src/cli · 用例入口",h=145)
     body+=node(470,230,430,m['adapters']['name'],["闭合INI / JSON / UTF-8路径"],"src/adapters · 成功求解后才输出",h=145)
     body+=node(470,510,430,m['cycle']['name'],["液泵 → 轴功率 → 外排支路","主 / 支推力与所需热交换","单输入扫描 · 几何代价 · 有限步响应"],"prototype · 给定热状态，拒绝回流",state=m['cycle']['state'],h=165)
-    body+=node(1160,230,460,m['thermo']['name'],["NASA9 → TP / HP燃烧室","温度 / 显式入口焓（同基准气态）"],"九种C/H/O理想气体 · cp / h / s",h=145)
+    body+=node(1160,230,460,m['thermo']['name'],["NASA9 → 九气相产物TP / HP","气态温度/焓 · 固定液态反应物锚点"],"液态焓非EOS · 气相产物cp / h / s",h=145)
     body+=node(1160,510,460,m['nozzle']['name'],["定比热 / 温变冻结 / 固定喉部","单喷管流量、推力与显式残差"],"主喷管与支路复用 · 非整机闭合",h=165)
     body+=node(650,870,430,m['core']['name'],["夹逼求根 / 状态码 / 显式失败"],"所有计算模块允许依赖的公共基础",h=120)
     body+=arrow([(370,280),(470,280)],"文件流程",420,266)

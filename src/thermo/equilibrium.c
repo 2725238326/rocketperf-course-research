@@ -164,13 +164,21 @@ static RpStatus solve_temperature(double temperature, double log_pressure,
     }
 }
 
-/* Validated inlet scalars share a solver, not a fabricated temperature feed. */
-static RpStatus equilibrium_tp(double pressure_pa, double of_ratio, double feed_enthalpy,
+static void gas_inventory(double of_ratio, double inventory[RP_CHO_ELEMENT_COUNT])
+{
+    inventory[0] = 1.0;
+    inventory[1] = 4.0;
+    inventory[2] = 2.0 * of_ratio * rp_thermo_find_species("CH4")->molar_mass_kg_per_kmol /
+                   rp_thermo_find_species("O2")->molar_mass_kg_per_kmol;
+}
+
+/* Inventory and inlet h are separate from product Gibbs data; no fabricated feed T. */
+static RpStatus equilibrium_tp(double pressure_pa, const double supplied_inventory[RP_CHO_ELEMENT_COUNT], double feed_enthalpy,
                                double temperature_k, const RpCombustionOptions *policy,
                                RpCombustionResult *output, RpError *error)
 {
     RpCombustionResult result = {0};
-    double inventory[RP_CHO_ELEMENT_COUNT] = {1.0, 4.0, 0.0};
+    double inventory[RP_CHO_ELEMENT_COUNT];
     double variables[RP_EQUILIBRIUM_DIMENSION];
     double logs[RP_CHO_SPECIES_COUNT];
     double initial_gibbs[RP_CHO_SPECIES_COUNT];
@@ -179,12 +187,15 @@ static RpStatus equilibrium_tp(double pressure_pa, double of_ratio, double feed_
     double continuation = 6000.0;
     double total = 0.0;
     RpStatus status;
-    if (temperature_k < 1000.0 || temperature_k > 6000.0 || pressure_pa < 100.0 || pressure_pa > 1e9 ||
-        of_ratio < 0.1 || of_ratio > 20.0) {
-        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Restricted gas equilibrium: T=1000..6000 K, p=100..1e9 Pa, O/F=0.1..20.");
+    if (temperature_k < 1000.0 || temperature_k > 6000.0 || pressure_pa < 100.0 || pressure_pa > 1e9) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Restricted gas equilibrium: T=1000..6000 K, p=100..1e9 Pa.");
     }
-    inventory[2] = 2.0 * of_ratio * rp_thermo_find_species("CH4")->molar_mass_kg_per_kmol /
-                   rp_thermo_find_species("O2")->molar_mass_kg_per_kmol;
+    for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+        if (!rp_isfinite(supplied_inventory[e]) || supplied_inventory[e] <= 0.0) {
+            return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid product elemental inventory.");
+        }
+        inventory[e] = supplied_inventory[e] / supplied_inventory[0];
+    }
     log_pressure = log(pressure_pa) - log(rp_thermo_reference_pressure_pa());
     status = gibbs_at_temperature(continuation, initial_gibbs, error);
     if (status != RP_OK) { return status; }
@@ -231,17 +242,22 @@ RpStatus rp_ch4_o2_equilibrium_tp(const RpCh4O2Feed *feed, double temperature_k,
 {
     const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
     double enthalpy;
+    double inventory[RP_CHO_ELEMENT_COUNT];
     RpStatus status;
     if (output == NULL || !valid_options(&policy) || !rp_isfinite(temperature_k) || temperature_k <= 0.0) {
         return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid equilibrium temperature, options or output.");
     }
     status = rp_ch4_o2_feed_enthalpy(feed, &enthalpy, error);
     if (status != RP_OK) { return status; }
-    return equilibrium_tp(feed->pressure_pa, feed->oxidizer_fuel_mass_ratio, enthalpy, temperature_k,
+    if (feed->oxidizer_fuel_mass_ratio < 0.1 || feed->oxidizer_fuel_mass_ratio > 20.0) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Gas equilibrium O/F=0.1..20.");
+    }
+    gas_inventory(feed->oxidizer_fuel_mass_ratio, inventory);
+    return equilibrium_tp(feed->pressure_pa, inventory, enthalpy, temperature_k,
                           &policy, output, error);
 }
 
-static RpStatus equilibrium_hp(double pressure_pa, double of_ratio, double enthalpy,
+static RpStatus equilibrium_hp(double pressure_pa, const double inventory[RP_CHO_ELEMENT_COUNT], double enthalpy,
                                const RpCombustionOptions *policy,
                                RpCombustionResult *output, RpError *error)
 {
@@ -250,9 +266,9 @@ static RpStatus equilibrium_hp(double pressure_pa, double of_ratio, double entha
     double lower = policy->hp_lower_temperature_k;
     double upper = policy->hp_upper_temperature_k;
     RpStatus status;
-    status = equilibrium_tp(pressure_pa, of_ratio, enthalpy, lower, policy, &lower_state, error);
+    status = equilibrium_tp(pressure_pa, inventory, enthalpy, lower, policy, &lower_state, error);
     if (status != RP_OK) { return status; }
-    status = equilibrium_tp(pressure_pa, of_ratio, enthalpy, upper, policy, &upper_state, error);
+    status = equilibrium_tp(pressure_pa, inventory, enthalpy, upper, policy, &upper_state, error);
     if (status != RP_OK) { return status; }
     if (fabs(lower_state.enthalpy_residual_j_per_kg) <= policy->enthalpy_tolerance_j_per_kg) {
         *output = lower_state; rp_error_clear(error); return RP_OK;
@@ -269,7 +285,7 @@ static RpStatus equilibrium_hp(double pressure_pa, double of_ratio, double entha
         if (middle == lower || middle == upper) {
             return rp_error_set(error, RP_NO_CONVERGENCE, "HP temperature bracket stagnated before enthalpy tolerance.");
         }
-        status = equilibrium_tp(pressure_pa, of_ratio, enthalpy, middle, policy, &result, error);
+        status = equilibrium_tp(pressure_pa, inventory, enthalpy, middle, policy, &result, error);
         if (status != RP_OK) { return status; }
         if (fabs(result.enthalpy_residual_j_per_kg) <= policy->enthalpy_tolerance_j_per_kg) {
             result.hp_iterations = iteration;
@@ -290,13 +306,18 @@ RpStatus rp_ch4_o2_equilibrium_hp(const RpCh4O2Feed *feed,
 {
     const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
     double enthalpy;
+    double inventory[RP_CHO_ELEMENT_COUNT];
     RpStatus status;
     if (output == NULL || !valid_options(&policy)) {
         return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid HP options or output.");
     }
     status = rp_ch4_o2_feed_enthalpy(feed, &enthalpy, error);
     if (status != RP_OK) { return status; }
-    return equilibrium_hp(feed->pressure_pa, feed->oxidizer_fuel_mass_ratio, enthalpy, &policy, output, error);
+    if (feed->oxidizer_fuel_mass_ratio < 0.1 || feed->oxidizer_fuel_mass_ratio > 20.0) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Gas equilibrium O/F=0.1..20.");
+    }
+    gas_inventory(feed->oxidizer_fuel_mass_ratio, inventory);
+    return equilibrium_hp(feed->pressure_pa, inventory, enthalpy, &policy, output, error);
 }
 
 RpStatus rp_ch4_o2_equilibrium_hp_enthalpy(const RpCh4O2EnthalpyFeed *feed,
@@ -305,11 +326,29 @@ RpStatus rp_ch4_o2_equilibrium_hp_enthalpy(const RpCh4O2EnthalpyFeed *feed,
 {
     const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
     double enthalpy;
+    double inventory[RP_CHO_ELEMENT_COUNT];
     RpStatus status;
     if (output == NULL || !valid_options(&policy)) {
         return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid explicit-enthalpy HP options or output.");
     }
     status = rp_ch4_o2_inlet_enthalpy(feed, &enthalpy, error);
     if (status != RP_OK) { return status; }
-    return equilibrium_hp(feed->pressure_pa, feed->oxidizer_fuel_mass_ratio, enthalpy, &policy, output, error);
+    gas_inventory(feed->oxidizer_fuel_mass_ratio, inventory);
+    return equilibrium_hp(feed->pressure_pa, inventory, enthalpy, &policy, output, error);
+}
+
+RpStatus rp_ch4_o2_equilibrium_hp_anchor(const RpCh4O2AnchorFeed *feed,
+                                         const RpCombustionOptions *options,
+                                         RpCombustionResult *output, RpError *error)
+{
+    const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
+    RpAnchorInlet inlet;
+    RpStatus status;
+    if (output == NULL || !valid_options(&policy)) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid fixed-anchor HP options or output.");
+    }
+    status = rp_ch4_o2_anchor_inlet(feed, &inlet, error);
+    if (status != RP_OK) { return status; }
+    return equilibrium_hp(feed->pressure_pa, inlet.element_inventory_kmol_per_kg,
+                          inlet.mixture_h_j_per_kg, &policy, output, error);
 }

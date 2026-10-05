@@ -1,6 +1,6 @@
 # 环境与运行
 
-本机使用Windows、Python 3.13、MinGW GCC 14.2.0、PowerShell 7.6.5和Git 2.46.2。CMake 3.31.10/Ninja 1.13.2在项目build目录。另有Ubuntu 24.04 WSL，已安装GCC13.3并运行ASan/UBSan；远端CI尚未执行。
+当前仅执行Windows任务：Python 3.13、MinGW GCC 14.2.0、PowerShell 7.6.5和Git 2.46.2。CMake 3.31.10/Ninja 1.13.2在项目build目录。已有Ubuntu WSL与早期ASan/UBSan记录只作为历史证据保留，不是当前构建依赖；远端CI尚未执行。
 
 ## 常用命令
 
@@ -36,20 +36,11 @@ GCC命令可用--compiler指定。C运行时无Python物理求解依赖；Python
 
 当前MinGW GCC的目标是`x86_64-w64-mingw32`。GCC14.2.0的`libsanitizer/configure.tgt`未支持该目标，因此链接找不到这两个运行库不是简单的PATH问题。此前“安装包漏带库”的解释不准确；换一份同目标MinGW包也不能保证解决。不能复制Linux库或LLVM的运行库给该GCC链接，核验原文见[审查记录](review.md)。
 
-项目采用Windows正常构建、Linux sanitizer测试两条路径。Windows项目根目录可执行：
+Windows正常构建不依赖这两个库。当前用Debug/Release测试、GCC静态分析和独立CMake构建检查；它们不是ASan/UBSan插桩，不能冒称具有同样检测范围。用户已限定只做Windows任务，不为补这两个库调用WSL。历史Linux sanitizer细节如下，供追溯，不是当前执行步骤。
 
-```powershell
-wsl -d Ubuntu --cd /mnt/e/Work/火发原理 --exec python3 tools/pipeline.py test --configuration Debug --sanitize
-```
+早期插桩启用`address,undefined`，关闭错误后继续运行的行为，保留帧指针。除正常测试外，运行两个故意缺陷：ASan检出堆越界，UBSan检出有符号整数溢出；诊断和实际命令保存在`build/artifacts/debug-sanitized/<build-id>/`，历史指针在`build/debug-sanitized/latest.json`。它不覆盖后续新增源码。
 
-插桩启用`address,undefined`，关闭错误后继续运行的行为，保留帧指针。除正常测试外，还运行两个故意缺陷：ASan应检出堆越界，UBSan应检出有符号整数溢出；任一个未检出，本次测试失败。诊断和实际命令保存在`build/artifacts/debug-sanitized/<build-id>/`，当前指针在`build/debug-sanitized/latest.json`。
-
-本机WSL网络启动失败，但文件系统和程序可用。本次在Windows下载Ubuntu官方快照的21个包，按WSL已有APT元数据的SHA256校验后安装：新增GCC和开发/运行库，没有升级或删除已有包，没有改Windows MinGW、PATH或WSL网络设置。脚本可复核：
-
-```powershell
-pwsh -NoProfile -File tools/wsl_gcc.ps1
-# 只有需要向既有Ubuntu发行版安装时才加 -Install
-```
+早期WSL网络启动失败，但文件系统和程序可用。当时在Windows下载Ubuntu官方快照的21个包，按已有APT元数据SHA256校验后新增GCC及开发/运行库，没有升级或删除已有包，没有改Windows MinGW、PATH或WSL网络设置。历史脚本`tools/wsl_gcc.ps1`保留，不在当前任务运行。
 
 包清单在`build/tooling/wsl-gcc-packages/packages.json`。快照日期用于匹配本机已有APT版本，不代表推荐其他机器安装旧版本。有正常网络的Ubuntu使用其正常软件源安装GCC开发工具即可。
 

@@ -57,6 +57,7 @@ python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
 1. 先说课程研究问题和资料缺口，不把公开构型资料补成发动机性能卡。
 2. 再说明输入、控制体和模型 ID：NASA9、九物种气相 TP/HP、冻结喷管、给定热状态外排循环。
    新`hp-h`/`frozen-h`需说明相态与形成焓基准，用[保存版本](../results/validation/adiabatic_inlet_v1/manifest.json)演示，不把气态零热交换燃烧室说成液态/整机闭合。
+   `hp-liquid`/`frozen-liquid`另有[固定液态锚点版本](liquid-anchor-validation.md)，只用指定温度化学焓与元素库存；PowerShell反应物ID需加引号。讲清“液态反应物记录”不等于液体EOS、泵入口或整机性能。
 3. 演示一个成功算例和一个失败边界，展示 stdout、stderr、run-manifest 和残差。
 4. 展示独立参考与数据来源的定位，说明它们是同条件方法核验，不是飞行性能验证。
    用[固定喷管入口响应](adiabatic-inlet-study.md)讲解为什么比冲升高时推力可以略降；从清单定位原C/CEA输出，不只展示曲线截图。

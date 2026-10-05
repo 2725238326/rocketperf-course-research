@@ -20,7 +20,9 @@ ROWS = {'P, bar': 'pressure_bar', 'T, K': 'temperature_k', 'H, kJ/kg': 'enthalpy
         'Cf': 'cf', 'Ivac, m/s': 'ivac_m_s', 'Isp, m/s': 'isp_velocity_m_s'}
 
 
-def parse_output(data, rocket=False, frozen=False):
+def parse_output(data, rocket=False, frozen=False, trace_threshold=1e-8):
+    if type(trace_threshold) not in (int, float) or not math.isfinite(trace_threshold) or not 0 < trace_threshold <= 1e-7:
+        raise ValueError('Unsupported CEA printed trace threshold')
     text = data.decode('ascii', errors='strict')
     if '\x00' in text or 'ERROR' in text or 'WARNING' in text:
         raise ValueError('CEA output contains invalid bytes or diagnostics')
@@ -30,7 +32,10 @@ def parse_output(data, rocket=False, frozen=False):
         if stripped.startswith('NOTE. WEIGHT FRACTION OF FUEL'):
             in_trace = False
             continue
-        if stripped.startswith('WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS'):
+        if stripped.startswith('WERE LESS THAN '):
+            expected = f'WERE LESS THAN {trace_threshold:.6E} FOR ALL ASSIGNED CONDITIONS'
+            if stripped != expected:
+                raise ValueError('CEA printed trace threshold differs from input contract')
             in_trace = True
             continue
         if in_trace and stripped:
@@ -77,7 +82,7 @@ def parse_output(data, rocket=False, frozen=False):
     for index in range(1 if frozen else columns):
         if abs(sum(values[index] for values in fractions.values()) - 1) > 2e-5:
             raise ValueError('Printed mole fractions do not sum to one')
-    return {'rows': rows, 'mole_fractions': fractions, 'output_trace_threshold': 1e-8,
+    return {'rows': rows, 'mole_fractions': fractions, 'output_trace_threshold': trace_threshold,
             'omitted_species': sorted(set(SPECIES) - set(fractions)),
             'thermo_columns': ['chamber', 'throat', 'exit_A10', 'exit_A40'] if rocket else ['state'],
             'performance_columns': ['throat', 'exit_A10', 'exit_A40'] if rocket else []}

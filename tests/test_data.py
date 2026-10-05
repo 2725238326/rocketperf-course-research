@@ -89,6 +89,8 @@ class DataContractTests(unittest.TestCase):
 
     def test_feed_candidates_match_fixed_sources(self):
         self.assertEqual(feed_candidates.check(), 11)
+        self.assertEqual((ROOT / feed_candidates.HEADER).read_text(encoding="utf-8"),
+                         feed_candidates.anchor_header())
 
     def test_feed_anchors_are_single_temperature_assigned_enthalpies(self):
         dataset = feed_candidates.generate()

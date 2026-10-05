@@ -15,6 +15,7 @@ import combustion_reference
 import cycle_validation
 import adiabatic_inlet
 import adiabatic_study
+import liquid_anchor
 from projectlib import read_json, atomic_json, digest
 
 
@@ -61,8 +62,82 @@ class ThermoDataTests(unittest.TestCase):
                     self.assertGreater(len(cycle_validation.check_archive(manifest.parent)),0)
                 elif kind=='adiabatic-inlet-validation':
                     self.assertEqual(adiabatic_inlet.verify(manifest.parent),15)
+                elif kind=='liquid-anchor-validation':
+                    self.assertEqual(liquid_anchor.verify(manifest.parent),(21,6))
                 else: self.fail(f'Unknown validation archive type: {kind}')
         self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
+
+    def test_liquid_anchor_archive_and_semantic_tampering(self):
+        source = ROOT/'results/validation/liquid_anchor_v1'
+        # Before the first archive is created, unit/CLI tests still verify the C
+        # contract. Once archived, no numeric evidence may bypass replay checks.
+        if not source.exists():
+            self.assertEqual(len(liquid_anchor.recipes()), 21)
+            return
+        self.assertEqual(liquid_anchor.verify(source), (21,6))
+        with self.assertRaises(FileExistsError):
+            liquid_anchor.archive(source.relative_to(ROOT).as_posix())
+        for defect in ('scope','exit_bool','duplicate','anchor','card','trace','enthalpy',
+                       'inventory','phase','density','thrust','pressure_correction','comparison_bool',
+                       'limits','reference_nul','undeclared','run_object','cea_run_object',
+                       'timestamp_type','timestamp_order','run_extra','cea_run_extra'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(prefix='anchor-',dir=ROOT/'build') as temp:
+                folder = Path(temp)/'archive'
+                shutil.copytree(source, folder)
+                manifest = read_json(folder/'manifest.json')
+                filename = None
+                if defect == 'scope': manifest['scope'] = 'Real flight engine performance'
+                elif defect == 'exit_bool': manifest['runs'][0]['exit_code'] = False
+                elif defect == 'duplicate': manifest['runs'][1] = manifest['runs'][0]
+                elif defect == 'anchor': manifest['anchors'][0]['assigned_enthalpy_j_per_mol'] += 1
+                elif defect == 'comparison_bool': manifest['comparisons']['base_hp'][0]['difference'] = False
+                elif defect == 'undeclared': (folder/'undeclared').mkdir()
+                elif defect == 'run_object': manifest['runs'][0] = None
+                elif defect == 'cea_run_object': manifest['cea_runs'][0] = []
+                elif defect == 'timestamp_type': manifest['finished_at'] = True
+                elif defect == 'timestamp_order': manifest['finished_at'] = '2020-01-01T00:00:00+00:00'
+                elif defect == 'run_extra': manifest['runs'][0]['unexpected'] = 'not part of a run'
+                elif defect == 'cea_run_extra': manifest['cea_runs'][0]['unexpected'] = 'not part of a run'
+                elif defect == 'card':
+                    filename = 'base_rocket.inp'
+                    (folder/filename).write_text(liquid_anchor.case_card('base_rocket',3.4,'rocket').replace('nfz=1','nfz=2'),encoding='utf-8')
+                elif defect == 'trace':
+                    filename = 'base_hp.out'
+                    (folder/filename).write_bytes((folder/filename).read_bytes().replace(b'1.000000E-07',b'1.000000E-08'))
+                elif defect == 'reference_nul':
+                    filename = 'base_hp.out'
+                    (folder/filename).write_bytes((folder/filename).read_bytes()+b'\x00')
+                else:
+                    filename = 'base_A10-stdout.txt'
+                    report = read_json(folder/filename)
+                    if defect == 'enthalpy': report['boundary']['fuel_h_j_per_kg'] += 100
+                    elif defect == 'inventory': report['boundary']['element_inventory_kmol_per_kg'][0] *= 2
+                    elif defect == 'phase': report['inputs']['feed_phase'] = 'gas'
+                    elif defect == 'density': report['boundary']['density_kg_per_m3'] = 1141
+                    elif defect == 'thrust': report['geometry']['thrust_n'] *= 2
+                    elif defect == 'pressure_correction': report['boundary']['pressure_correction_applied'] = 0
+                    elif defect == 'limits': report['limitations'] = ['Flight engine validated']
+                    atomic_json(folder/filename,report)
+                if filename:
+                    next(item for item in manifest['files'] if item['path']==filename)['sha256'] = digest(folder/filename)
+                atomic_json(folder/'manifest.json',manifest)
+                with self.assertRaises(ValueError):
+                    liquid_anchor.verify(folder)
+
+    def test_liquid_anchor_preparation_failure_is_archived(self):
+        from unittest import mock
+        with tempfile.TemporaryDirectory(prefix='anchor-failure-',dir=ROOT/'build') as temp:
+            root=Path(temp)
+            with mock.patch.object(liquid_anchor,'ROOT',root), \
+                 mock.patch.object(liquid_anchor,'verified_build',side_effect=ValueError('test evidence stale')), \
+                 self.assertRaisesRegex(ValueError,'test evidence stale'):
+                liquid_anchor.archive('results/validation/fixture')
+            manifests=list((root/'build/liquid-anchor').glob('*/manifest.json'))
+            self.assertEqual(len(manifests),1)
+            record=read_json(manifests[0])
+            self.assertEqual(record['status'],'FAIL')
+            self.assertIn('finished_at',record)
+            self.assertFalse((root/'results/validation/fixture').exists())
 
     def test_adiabatic_archive_rejects_tampering(self):
         self.assertEqual(len(adiabatic_inlet.recipes(0,0)),15)

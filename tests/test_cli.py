@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
 from combustion_reference import compare_report
 from cycle_validation import validate_cycle
 from cycle_study import validate_study as validate_cycle_study
+import liquid_anchor
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -126,6 +127,51 @@ class CliTests(unittest.TestCase):
         missing = self.run_app("run", self.folder / "missing.ini")
         self.assertEqual(missing.returncode, 3)
         self.assertEqual(missing.stdout, "")
+
+    def test_fixed_liquid_anchor_success_and_geometry(self):
+        baseline = None
+        for name, args, code in liquid_anchor.recipes():
+            if code:
+                continue
+            run = self.run_app(*args)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            self.assertEqual(run.stderr, "")
+            report = json.loads(run.stdout)
+            if name == "old_gas":
+                self.assertGreater(report["chamber"]["temperature_k"], baseline["chamber"]["temperature_k"])
+                continue
+            self.assertEqual(report["reactant_dataset_id"], liquid_anchor.ANCHOR_DATASET)
+            self.assertIs(report["boundary"]["pressure_correction_applied"], False)
+            of = report["inputs"]["oxidizer_fuel_mass_ratio"]
+            expected_h = (-89233000/16.04246 - of*12979000/31.9988)/(1+of)
+            self.assertAlmostEqual(report["boundary"]["inlet_mixture_h_j_per_kg"], expected_h, places=7)
+            self.assertLessEqual(abs(report["diagnostics"]["enthalpy_residual_j_per_kg"]), 0.01)
+            self.assertAlmostEqual(report["chamber"]["h_j_per_kg"], expected_h, delta=0.01)
+            self.assertNotIn("density_kg_per_m3", report["boundary"])
+            if name == "base_hp":
+                baseline = report
+            if "geometry" in report:
+                geometry = report["geometry"]
+                self.assertAlmostEqual(geometry["mass_flow_kg_per_s"],
+                                       1e7*geometry["throat_area_m2"]/report["nozzle"]["cstar_m_per_s"], places=8)
+                self.assertAlmostEqual(geometry["thrust_n"], geometry["mass_flow_kg_per_s"]*
+                                       report["nozzle"]["effective_velocity_m_per_s"], places=7)
+                if name.startswith("base_"):
+                    self.assertEqual(report["chamber"], baseline["chamber"])
+
+    def test_fixed_liquid_anchor_failure_protocol_and_strict_syntax(self):
+        for name, args, code in liquid_anchor.recipes():
+            if not code:
+                continue
+            with self.subTest(name=name):
+                run = self.run_app(*args)
+                self.assertEqual(run.returncode, code, run.stderr)
+                self.assertEqual(run.stdout, "")
+                self.assertTrue(run.stderr.startswith("Usage" if code == 2 else "out_of_domain:"))
+        for numeric in ("inf", "NaN", "1e999", "0x1p0", "111.643x"):
+            args = liquid_anchor.arguments(liquid_anchor.inputs(), "hp-liquid")
+            args[-2] = numeric
+            self.assertEqual(self.run_app(*args).returncode, 2)
 
     def test_area_ambient_study_scan_reports_domain_points(self):
         result = self.run_app("study", "area-ratio-ambient", self.case(self.base),

@@ -1,0 +1,58 @@
+
+ ! Fixed liquid assigned enthalpies; no density or pressure correction.
+ problem case=of_4_2_hp hp p,bar=100 o/f=4.2000000000000002
+ reactants
+  fuel=CH4(L) wt%=100 t,k=111.643
+  oxid=O2(L) wt%=100 t,k=90.170
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = of_4_2_hp
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4(L)            100.000  -89233.000    111.64
+     O2(L)             100.000  -12979.000     90.17
+O/F =    4.20000    % Fuel =  19.23077    r, Eq. Ratio =  0.94982    phi, Eq. Ratio =  0.94982
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               100.00000
+ T, K                   3598.29
+ Density, kg/m^3      0.7890E+1
+ H, kJ/kg             -1397.281
+ U, kJ/kg             -2664.787
+ G, kJ/kg            -42236.285
+ S, kJ/kg-K             11.3496
+ 
+ M, (1/n)              23.60386
+ (dln(V)/dln(P))t      -1.04162
+ (dln(V)/dln(T))p       1.74013
+ Cp, kJ/kg-K            6.85205
+ Gamma_s                1.12873
+ Son. Vel., m/s        1196.110
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.039975
+ O2                    0.080866
+ H2O                   0.473475
+ CO                    0.117570
+ CO2                   0.165380
+ H                     0.014685
+ O                     0.017837
+ OH                    0.090211
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

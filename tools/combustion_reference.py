@@ -11,24 +11,39 @@ from cea_reference import check_reference
 from pipeline import strict_json, verified_build
 from projectlib import ROOT, atomic_json, atomic_text, digest, now, read_json, subprocess_env
 from gas_checks import database, mixture
+from feed_candidates import parse_anchors
+from thermo_data import RAW, SOURCE_HASHES
+
+ANCHOR_DATASET = "cea-v3.3.4-ch4l-o2l-assigned-v1"
+
+
+def liquid_anchors():
+    path = ROOT / RAW / "thermo.inp"
+    if digest(path) != SOURCE_HASHES["thermo.inp"]:
+        raise ValueError("Pinned assigned-reactant source differs")
+    return parse_anchors(path.read_text(encoding="ascii"))[:2]
 
 
 def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     """Check provenance, conservation and print-precision-aware reference errors."""
     explicit_h = mode in {'hp-h','frozen-h'}
-    nozzle_mode = mode in {'frozen','frozen-tp','frozen-h'}
-    fixed = mode in {'frozen-tp','frozen-h'}
-    if mode not in {'tp','hp','frozen','frozen-tp','hp-h','frozen-h'} or (nozzle_mode and area not in {10,40}):
+    anchor = mode in {'hp-liquid','frozen-liquid'}
+    nozzle_mode = mode in {'frozen','frozen-tp','frozen-h','frozen-liquid'}
+    fixed = mode in {'frozen-tp','frozen-h','frozen-liquid'}
+    if mode not in {'tp','hp','frozen','frozen-tp','hp-h','frozen-h','hp-liquid','frozen-liquid'} or (nozzle_mode and area not in {10,40}):
         raise ValueError('Unsupported fixed reference mode/area')
     if not isinstance(report, dict):
         raise ValueError('Combustion report must be an object')
     expected_model = 'ch4_o2_tp_frozen_fixed_area_v1' if fixed else 'ch4_o2_chamber_frozen_v1' if nozzle_mode else 'ch4_o2_gas_equilibrium_v1'
     if explicit_h:
         expected_model = 'ch4_o2_hp_enthalpy_frozen_fixed_area_v1' if fixed else 'ch4_o2_hp_enthalpy_v1'
+    if anchor:
+        expected_model = 'ch4l_o2l_hp_frozen_fixed_area_v1' if fixed else 'ch4l_o2l_hp_assigned_v1'
     required={'schema_version','model','mode','dataset_id','inputs','chamber','diagnostics','limitations'}
     if nozzle_mode: required.add('nozzle')
     if fixed: required.add('geometry')
-    if explicit_h: required.add('boundary')
+    if explicit_h or anchor: required.add('boundary')
+    if anchor: required.add('reactant_dataset_id')
     if (set(report)!=required or type(report.get('schema_version')) is not int or report['schema_version'] != 1
         or report.get('mode') != mode or report.get('model') != expected_model):
         raise ValueError('Combustion mode/model/schema mismatch')
@@ -36,6 +51,17 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     if (report.get('dataset_id') != 'cea-v3.3.4-neutral-cho-n-v1' or not isinstance(limits,list) or not limits
         or any(not isinstance(x,str) or not x.strip() for x in limits)):
         raise ValueError('Dataset or limitations missing')
+    if anchor:
+        expected_limits = [
+            "Restricted nine-species ideal-gas products; no ions, condensed products or soot.",
+            "Fixed liquid reactant enthalpies only; no liquid EOS, density, pressure correction or phase-stability solve.",
+            "Frozen nozzle is chamber-frozen, inviscid and without shocks or separation.",
+        ]
+        if fixed:
+            expected_limits.append("Fixed-area performance is single-nozzle only, not feed-system or full-cycle closure.")
+        expected_limits.append("Pressure denotes ideal-gas product chamber pressure; no pump, shaft work or real-engine validation.")
+        if limits != expected_limits:
+            raise ValueError('Fixed anchor limitations do not match implemented scope')
     expected_input = dict(feed_phase='gas', pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
                           fuel_temperature_k=298.15, oxidizer_temperature_k=298.15)
     if explicit_h:
@@ -43,6 +69,13 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
                               pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
                               fuel_h_j_per_kg=0.0, oxidizer_h_j_per_kg=0.0)
         if expected_inputs is None: raise ValueError('Explicit enthalpy requires independent declared inputs')
+    if anchor:
+        expected_input = dict(feed_phase='liquid', anchor_dataset_id=ANCHOR_DATASET,
+                              fuel_anchor_id='CH4(L)', oxidizer_anchor_id='O2(L)',
+                              pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
+                              fuel_temperature_k=111.643, oxidizer_temperature_k=90.170)
+        if report['reactant_dataset_id'] != ANCHOR_DATASET or expected_inputs is None:
+            raise ValueError('Assigned inlet requires pinned dataset and independent declared inputs')
     if mode in {'tp','frozen-tp'}:
         expected_input['temperature_k'] = 3000.0
     if nozzle_mode:
@@ -51,19 +84,22 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         expected_input['throat_area_m2'] = 1.0
         if expected_inputs is None: raise ValueError('Fixed geometry reference requires explicit TP inputs')
     if expected_inputs is not None:
-        if (mode not in {'tp','frozen-tp','hp-h','frozen-h'} or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
-            or expected_inputs.get('feed_phase')!='gas'
+        strings = {'feed_phase','enthalpy_basis','anchor_dataset_id','fuel_anchor_id','oxidizer_anchor_id'}
+        if (mode not in {'tp','frozen-tp','hp-h','frozen-h','hp-liquid','frozen-liquid'} or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
+            or expected_inputs.get('feed_phase')!=('liquid' if anchor else 'gas')
             or (explicit_h and expected_inputs.get('enthalpy_basis')!='nasa9-cea-v3.3.4')
+            or (anchor and any(expected_inputs.get(k) != expected_input[k] for k in
+                {'anchor_dataset_id','fuel_anchor_id','oxidizer_anchor_id','fuel_temperature_k','oxidizer_temperature_k'}))
             or any(type(x) not in (int,float) or not math.isfinite(x)
                    or (k not in {'fuel_h_j_per_kg','oxidizer_h_j_per_kg'} and (x<0 if k=='ambient_pressure_pa' else x<=0))
-                   for k,x in expected_inputs.items() if k not in {'feed_phase','enthalpy_basis'})
+                   for k,x in expected_inputs.items() if k not in strings)
             or (fixed and expected_inputs.get('area_ratio') != area)):
             raise ValueError('Custom reference inputs require a positive numeric gas TP contract')
         expected_input=dict(expected_inputs)
     actual_input = report.get('inputs')
     if (not isinstance(actual_input, dict) or set(actual_input) != set(expected_input)
         or any(type(value) not in (int, float) or not math.isfinite(value)
-               for key, value in actual_input.items() if key not in {'feed_phase','enthalpy_basis'})
+               for key, value in actual_input.items() if key not in {'feed_phase','enthalpy_basis','anchor_dataset_id','fuel_anchor_id','oxidizer_anchor_id'})
         or actual_input != expected_input):
         raise ValueError('Report does not correspond to the fixed method inputs')
     errors = []
@@ -130,7 +166,33 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         or not isinstance(diagnostics['element_relative_residual'],list)
         or any(type(diagnostics[k]) is not int or not 0<=diagnostics[k]<=100000 for k in ('equilibrium_iterations','hp_iterations'))):
         raise ValueError('Invalid combustion diagnostics shape/counts')
-    if explicit_h:
+    if anchor:
+        fuel_anchor, oxidizer_anchor = liquid_anchors()
+        fuel = fuel_anchor['assigned_enthalpy_j_per_mol']*1000/fuel_anchor['molar_mass_kg_per_kmol']
+        oxidizer = oxidizer_anchor['assigned_enthalpy_j_per_mol']*1000/oxidizer_anchor['molar_mass_kg_per_kmol']
+        boundary = report['boundary']
+        if (not isinstance(boundary,dict) or set(boundary)!={
+            'fuel_h_j_per_kg','oxidizer_h_j_per_kg','inlet_mixture_h_j_per_kg',
+            'heat_transfer_j_per_kg','pressure_correction_applied','element_inventory_kmol_per_kg'}
+            or boundary['pressure_correction_applied'] is not False
+            or type(boundary['heat_transfer_j_per_kg']) not in (int,float)
+            or boundary['heat_transfer_j_per_kg']!=0
+            or not isinstance(boundary['element_inventory_kmol_per_kg'],list)
+            or len(boundary['element_inventory_kmol_per_kg'])!=3):
+            raise ValueError('Assigned inlet boundary mismatch')
+        same(boundary['fuel_h_j_per_kg'],fuel,'assigned fuel h',1e-7)
+        same(boundary['oxidizer_h_j_per_kg'],oxidizer,'assigned oxidizer h',1e-7)
+        same(boundary['inlet_mixture_h_j_per_kg'],(fuel+of_ratio*oxidizer)/(1+of_ratio),'assigned mixed inlet h',1e-7)
+        for e, element in enumerate(('C','H','O')):
+            expected = (fuel_anchor['elements'].get(element,0)/fuel_anchor['molar_mass_kg_per_kmol'] +
+                        of_ratio*oxidizer_anchor['elements'].get(element,0)/oxidizer_anchor['molar_mass_kg_per_kmol'])/(1+of_ratio)
+            same(boundary['element_inventory_kmol_per_kg'][e],expected,'assigned element '+element,1e-14)
+            amount=sum(y*int(next(s for s in fits['species'] if s['id']==species)['elements'].get(element,0))
+                       for species,y in fractions.items())/chamber['molar_mass_kg_per_kmol']
+            same(amount,expected,'product inventory '+element,1e-11)
+        if not 100<=expected_input['pressure_pa']<=1e9 or not 0.1<=of_ratio<=20 or not 1000<=chamber['temperature_k']<=6000:
+            raise ValueError('Assigned inlet outside product guards')
+    elif explicit_h:
         fuel=expected_input['fuel_h_j_per_kg']; oxidizer=expected_input['oxidizer_h_j_per_kg']
         for species,value in [('CH4',fuel),('O2',oxidizer)]:
             bounds=[mixture({species:1.0},t,expected_input['pressure_pa'],fits)['h_j_per_kg'] for t in (200,6000)]
@@ -153,7 +215,7 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     for i, residual in enumerate(diagnostics['element_relative_residual']):
         bounded(f'diagnostics.element[{i}]', residual, 0.0, 2e-10)
     bounded('diagnostics.equilibrium', diagnostics['equilibrium_residual'], 0.0, 1e-10)
-    if mode in {'hp','frozen','hp-h','frozen-h'}:
+    if mode in {'hp','frozen','hp-h','frozen-h','hp-liquid','frozen-liquid'}:
         bounded('diagnostics.enthalpy_j_per_kg', diagnostics['enthalpy_residual_j_per_kg'], 0.0, 0.01)
     if nozzle_mode:
         nozzle = report['nozzle']
@@ -212,6 +274,15 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
                  'momentum plus pressure thrust')
             if expected_input['ambient_pressure_pa']>nozzle['exit']['gas']['pressure_pa']:
                 raise ValueError('Fixed-geometry output outside back-pressure domain')
+            if anchor:
+                # Derived from independently printed CEA c*/Ivac, not experimental thrust.
+                ref_cstar=rows['cstar_m_s'][performance_col]
+                ref_flow=expected_input['pressure_pa']*throat/ref_cstar
+                ref_velocity=rows['ivac_m_s'][performance_col]-expected_input['ambient_pressure_pa']*area*ref_cstar/expected_input['pressure_pa']
+                bounded('geometry.cea_derived_mass_flow',geometry['mass_flow_kg_per_s'],ref_flow,
+                        ref_flow*0.03/(ref_cstar-0.03)+1e-8)
+                bounded('geometry.cea_derived_thrust',geometry['thrust_n'],ref_flow*ref_velocity,
+                        abs(ref_flow*rows['ivac_m_s'][performance_col])*0.03/(ref_cstar-0.03)+ref_flow*0.03+1e-6)
     return errors
 
 

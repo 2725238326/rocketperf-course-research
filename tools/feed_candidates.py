@@ -6,11 +6,12 @@ import json
 import sys
 from datetime import datetime, timezone
 
-from projectlib import ROOT, atomic_json, digest, local_path, read_json
+from projectlib import ROOT, atomic_json, atomic_text, digest, local_path, read_json
 from thermo_data import COMMIT, RAW, SOURCE_HASHES, number
 
 
 OUTPUT = "data/parameters/feed_property_candidates.json"
+HEADER = "src/thermo/reactants_generated.h"
 SOURCE_MANIFEST = "调研/feed_sources.json"
 SOURCE_INDEX = "调研/原始来源/来源文件索引.json"
 ANCHORS = ("CH4(L)", "O2(L)", "RP-1")
@@ -103,6 +104,28 @@ def parse_anchors(text):
             "source_line": cursor + 1, "source_note": lines[cursor][18:].strip(),
         })
     return records
+
+
+def anchor_header(root=ROOT):
+    path = root / RAW / "thermo.inp"
+    if digest(path) != SOURCE_HASHES["thermo.inp"]:
+        raise ValueError("Pinned CEA reactant source differs")
+    anchors = parse_anchors(path.read_text(encoding="ascii"))[:2]
+    rows = []
+    for a in anchors:
+        elements = ", ".join(format(a["elements"].get(e, 0), ".17g") for e in ("C", "H", "O"))
+        rows.append('    {"%s", %.17g, %.17g, %.17g, {%s}}' % (
+            a["name"], a["molar_mass_kg_per_kmol"], a["assigned_temperature_k"],
+            a["assigned_enthalpy_j_per_mol"], elements))
+    return (
+        "/* GENERATED from pinned NASA CEA v3.3.4 thermo.inp; do not hand-edit. */\n"
+        "#ifndef RP_REACTANTS_GENERATED_H\n#define RP_REACTANTS_GENERATED_H\n"
+        '#define RP_ANCHOR_DATASET_ID "cea-v3.3.4-ch4l-o2l-assigned-v1"\n'
+        "typedef struct {\n    const char *id;\n    double molar_mass_kg_per_kmol;\n"
+        "    double temperature_k;\n    double enthalpy_j_per_mol;\n    double elements[3];\n"
+        "} RpAssignedReactant;\nstatic const RpAssignedReactant rp_assigned_reactants[2] = {\n"
+        + ",\n".join(rows) + "\n};\n#endif\n"
+    )
 
 
 def base_record(identity, object_name, variant, parameter, value, unit, role, refs, notes):
@@ -241,7 +264,7 @@ def check(root=ROOT):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("register-sources", "generate", "check"))
+    parser.add_argument("command", choices=("register-sources", "generate", "check", "generate-header", "check-header"))
     parser.add_argument("--source-manifest", default=SOURCE_MANIFEST,
                         help="Manifest for append-only source registration")
     args = parser.parse_args()
@@ -250,6 +273,13 @@ def main():
     elif args.command == "generate":
         atomic_json(ROOT / OUTPUT, generate())
         print(f"Generated {OUTPUT}; no production physics computed")
+    elif args.command == "generate-header":
+        atomic_text(ROOT / HEADER, anchor_header())
+        print(f"Generated {HEADER}; two fixed reactant records, not a liquid EOS")
+    elif args.command == "check-header":
+        if (ROOT / HEADER).read_text(encoding="utf-8") != anchor_header():
+            raise ValueError("Fixed reactant C header differs from pinned source")
+        print("Fixed reactant header matches pinned CEA source")
     else:
         print(f"Feed candidates: {check()} records checked against source identities")
 

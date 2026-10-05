@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "revision": 179,
+  "revision": 186,
   "context": {
-    "phase": "液态与煤油候选已核验；接续固定液态反应物HP的C17方法基准",
+    "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
     "evidence_cutoff": "2026-10-05",
     "next_tasks": [
-      "ANA-008"
+      "RES-007"
     ],
     "facts": [
-      "C17已有气態TP/HP、显式同基准气态焓、冻结/固定面积喷管和给定热状态外排；不是真实发动机模型。",
-      "固定入口研究保存51次C/12次CEA运行；固定Pc/At升比冲不自动升推力，不含整机预热设备代价。",
-      "RES-006锁定CEA单温度CH4(L)/O2(L)/RP-1化学焓、CoolProp7.1.0 EOS和NIST surrogate；11条候选记录，未接入液态生产计算。",
-      "下一任务以固定液态反应物焓/元素库存解气相HP，不伪造低温NASA9；连续液体温压/密度/焓基准与中国煤油批次仍未知。",
+      "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
+      "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
+      "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
+      "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
       "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
-      "两型原文截至2026-10-03；入口来源截至2026-10-05，资料/摘要/软件对照不等于真实型号或实验验证。",
+      "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
       "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
     ]
   },
@@ -850,7 +850,7 @@
     {
       "id": "ANA-008",
       "title": "固定液态反应物锚点的C17绝热燃烧室与固定喷管验证",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "RES-006"
@@ -863,6 +863,32 @@
         "独立C17接口使用固定CEA CH4(L)111.643K/O2(L)90.170K指定焓与元素库存，不低温外推气相NASA9，不改旧气态接口；锚点/相态/非有限/温区/未收敛显式失败并保持输出",
         "固定版本CEA同九气相产物HP和燃烧室冻结新运行，对照温度/组成/c*/固定面积推力；保存输入/原输出/构建/测试身份，明确忽略液体密度/压力修正/泵/真实型号",
         "C/CLI成功失败回归、归档语义反例、Windows完整质量和架构视觉核验通过；更新交接并本地提交，不做PPT报告"
+      ],
+      "owner": "root",
+      "note": "契约产物与新鲜质量一致，软件和同源物性方法对照通过；并非独立科学审查。旧气态API保留，连续液体/煤油/完整循环未完成。RES-007接续离线单相温压与摩尔焓对齐，本批次审查后本地提交、不推送。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-008_f7d32c4416c7.json",
+        "sha256": "eebdbd43022af74963ea1669b88c50a141207bd96b4cc8b594c07d47c1529444"
+      }
+    },
+    {
+      "id": "RES-007",
+      "title": "连续单相CH4/O2离线参考与摩尔焓基准对齐",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-008"
+      ],
+      "required_artifacts": [
+        "调研/专题/RES-007_连续液体基准.md",
+        "results/research/liquid_feed_reference_v1/manifest.json",
+        "docs/liquid-feed-contract.md"
+      ],
+      "acceptance": [
+        "固定CoolProp7.1.0软件/流体JSON/许可证身份，离线生成明确假设的CH4/O2单相温压点；保存原输入/输出/环境/来源/文件哈希，绝不当真实型号入口参数",
+        "按摩尔量区分理想与残余焓并对齐固定CEA/NASA9化学焓；核验气体常数/分子量/理想cp差异，保留不能由单零点匹配消除的偏差，不用无来源压力校准CEA液态锚点",
+        "独立核对相态/饱和边界和密度/焓参考，建立插值域与超域/两相/临界邻域拒绝契约和篡改反例；未验收前不接生产EOS，不移植整库，不连带声明泵或循环已闭合"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -4699,6 +4725,158 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "53a1948828e21900a614fb30ae9582832640013c685daa13c530d613e8dd1015",
       "hash": "50772d0a8f2b08d0ad58861b8fe9589c647ec5bc15c0be0fee19742691bc3906"
+    },
+    {
+      "seq": 197,
+      "at": "2026-10-05T08:45:11+00:00",
+      "task": "ANA-008",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "接入固定CEA液态反应物焓与元素库存；新C17接口及同条件CEA燃烧室冻结参考，不扩展液体EOS或真实整机",
+      "previous_hash": "50772d0a8f2b08d0ad58861b8fe9589c647ec5bc15c0be0fee19742691bc3906",
+      "hash": "f5952503c83228a15cbd69d79fdc7cd30b8254a64e971ea1ae1a922558b0faad"
+    },
+    {
+      "seq": 198,
+      "at": "2026-10-05T09:46:20+00:00",
+      "task": "RES-007",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "f5952503c83228a15cbd69d79fdc7cd30b8254a64e971ea1ae1a922558b0faad",
+      "hash": "e518769de9000abc16ffd19e3bdc63626ffb3d33d0b1ca4eacd5b0c8e3b0091c"
+    },
+    {
+      "seq": 199,
+      "at": "2026-10-05T09:46:21+00:00",
+      "task": "ANA-008",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定液态锚点C17与新CEA结果已落地，连续液体参考独立接续",
+      "previous_hash": "e518769de9000abc16ffd19e3bdc63626ffb3d33d0b1ca4eacd5b0c8e3b0091c",
+      "details": {
+        "context_before": {
+          "phase": "液态与煤油候选已核验；接续固定液态反应物HP的C17方法基准",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "ANA-008"
+          ],
+          "facts": [
+            "C17已有气態TP/HP、显式同基准气态焓、冻结/固定面积喷管和给定热状态外排；不是真实发动机模型。",
+            "固定入口研究保存51次C/12次CEA运行；固定Pc/At升比冲不自动升推力，不含整机预热设备代价。",
+            "RES-006锁定CEA单温度CH4(L)/O2(L)/RP-1化学焓、CoolProp7.1.0 EOS和NIST surrogate；11条候选记录，未接入液态生产计算。",
+            "下一任务以固定液态反应物焓/元素库存解气相HP，不伪造低温NASA9；连续液体温压/密度/焓基准与中国煤油批次仍未知。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型原文截至2026-10-03；入口来源截至2026-10-05，资料/摘要/软件对照不等于真实型号或实验验证。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "固定液态锚点HP已计算；完成本轮验收后接续连续单相物性基准",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-007"
+          ],
+          "facts": [
+            "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
+            "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
+            "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
+            "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        }
+      },
+      "hash": "494b975c7364ec11f9bb04d5a92eab1a0fe7d94c5ebdfdf4711c3230ec866509"
+    },
+    {
+      "seq": 200,
+      "at": "2026-10-05T10:02:48+00:00",
+      "task": "ANA-008",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "本轮统一质量6/6及独立构建已通过，工作面接续连续单相参考",
+      "previous_hash": "494b975c7364ec11f9bb04d5a92eab1a0fe7d94c5ebdfdf4711c3230ec866509",
+      "details": {
+        "context_before": {
+          "phase": "固定液态锚点HP已计算；完成本轮验收后接续连续单相物性基准",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-007"
+          ],
+          "facts": [
+            "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
+            "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
+            "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
+            "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-007"
+          ],
+          "facts": [
+            "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
+            "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
+            "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
+            "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        }
+      },
+      "hash": "df84777b78f27a9023c0b399c4e0fce9ca9b9c7f1bca1a9a01df029fc5bdf947"
+    },
+    {
+      "seq": 201,
+      "at": "2026-10-05T10:02:49+00:00",
+      "task": "ANA-008",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "逐项验收：独立C17锚点焓/库存接口和输出保持反例；21次C/6次新CEA同条件HP/燃烧室冻结及推力派生对照；22种归档语义篡改、Windows6/6质量、18源静态分析、独立CTest6/6和SVG视觉检查。固定锚点不含液体EOS/泵/相态稳定或真实型号；见032快照和验证文档。",
+      "previous_hash": "df84777b78f27a9023c0b399c4e0fce9ca9b9c7f1bca1a9a01df029fc5bdf947",
+      "hash": "17acf19f9403dfa2ed1b27a319df6d06d5ece8fc65636099c2e75a0b330f0a28"
+    },
+    {
+      "seq": 202,
+      "at": "2026-10-05T10:02:50+00:00",
+      "task": "ANA-008",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "契约产物与新鲜质量一致，软件和同源物性方法对照通过；并非独立科学审查。旧气态API保留，连续液体/煤油/完整循环未完成。RES-007接续离线单相温压与摩尔焓对齐，本批次审查后本地提交、不推送。",
+      "previous_hash": "17acf19f9403dfa2ed1b27a319df6d06d5ece8fc65636099c2e75a0b330f0a28",
+      "hash": "f822a891e45b389df8696071df1aa7ed7358459e0da79849fa194e75e4769598"
+    },
+    {
+      "seq": 203,
+      "at": "2026-10-05T10:02:50+00:00",
+      "task": "RES-007",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "f822a891e45b389df8696071df1aa7ed7358459e0da79849fa194e75e4769598",
+      "hash": "db1624344d478eed7059a6b66c10c7c82d74331aff46f106872c51f72c82391a"
     }
   ]
 }

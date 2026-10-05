@@ -195,7 +195,7 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
@@ -213,7 +213,7 @@ class LifecycleTests(unittest.TestCase):
     def test_research_navigation_readme_is_not_numeric_test_identity(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
@@ -229,7 +229,7 @@ class LifecycleTests(unittest.TestCase):
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
@@ -277,7 +277,7 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})

@@ -23,6 +23,19 @@ FROZEN_ARCHIVE = ROOT / "results/research/reference-coverage/frozen_v1"
 
 
 class CeaReferenceTests(unittest.TestCase):
+    def test_declared_trace_threshold_is_verified_not_silently_relaxed(self):
+        path = ROOT/'results/validation/liquid_anchor_v1/base_hp.out'
+        if not path.exists():
+            with self.assertRaises(ValueError):
+                cea_reference.parse_output(b'',trace_threshold=True)
+            return
+        summary = cea_reference.parse_output(path.read_bytes(),trace_threshold=1e-7)
+        self.assertEqual(summary['output_trace_threshold'],1e-7)
+        self.assertEqual(summary['omitted_species'],['CH4'])
+        with self.assertRaises(ValueError):
+            cea_reference.parse_output(path.read_bytes())
+        with self.assertRaises(ValueError):
+            cea_reference.parse_output(path.read_bytes(),trace_threshold=True)
     def test_actual_frozen_archive_and_existing_destination(self):
         self.assertEqual(research_frozen_reference.verify(FROZEN_ARCHIVE), 11)
         with self.assertRaises(FileExistsError):
