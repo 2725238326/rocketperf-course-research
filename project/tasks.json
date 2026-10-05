@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 189,
+  "revision": 190,
   "context": {
     "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
     "evidence_cutoff": "2026-10-05",
@@ -897,7 +897,7 @@
     {
       "id": "GOV-002",
       "title": "交接包接续任务与工作面一致",
-      "status": "REVIEW",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-008"
@@ -913,7 +913,7 @@
         "Windows完整质量通过，审查后本地提交，从干净提交生成和接收新包；不改旧包、不推进PPT、不推送"
       ],
       "owner": "root",
-      "note": "工作面显式接续/未就绪状态/稳定优先级/null选择与v2任务快照一致性已覆盖；10组交接专项及完整6/6质量通过，旧v1包实读成功。审查后建立REVIEW检查点，生成新包再完成最终验收。",
+      "note": "10组交接与完整6/6质量通过；a448b60正式v2包推荐RES-007，包内21案例复跑通过，离线bundle克隆再次完整6/6。验收事实/哈希见taskshot/2026-10-05_035-handoff-receipt.md，旧包/历史不回写；同机同agent复验，不冒称独立人员科学审查。",
       "verification": {
         "kind": "quality",
         "path": "project/evidence/GOV-002_ebf5fbd11dc1.json",
@@ -4939,6 +4939,18 @@
       "note": "工作面显式接续/未就绪状态/稳定优先级/null选择与v2任务快照一致性已覆盖；10组交接专项及完整6/6质量通过，旧v1包实读成功。审查后建立REVIEW检查点，生成新包再完成最终验收。",
       "previous_hash": "16ec476130898a3cbb2edb0e78b9c1bf4ea72410dd403f7e75c6ae91cbd7971d",
       "hash": "56cd14db2d890c101b0130804e624384eabecc2dccc5d3415889e91437aed1cc"
+    },
+    {
+      "seq": 207,
+      "at": "2026-10-05T10:35:00+00:00",
+      "task": "GOV-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "10组交接与完整6/6质量通过；a448b60正式v2包推荐RES-007，包内21案例复跑通过，离线bundle克隆再次完整6/6。验收事实/哈希见taskshot/2026-10-05_035-handoff-receipt.md，旧包/历史不回写；同机同agent复验，不冒称独立人员科学审查。",
+      "previous_hash": "56cd14db2d890c101b0130804e624384eabecc2dccc5d3415889e91437aed1cc",
+      "hash": "da9e7382317d0ae7cc53b29dac2789ca1409c585caee35577cc0091d204ed8ba"
     }
   ]
 }
