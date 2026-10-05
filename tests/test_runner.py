@@ -195,8 +195,9 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             before=pipeline.test_records(root)
@@ -212,8 +213,9 @@ class LifecycleTests(unittest.TestCase):
     def test_research_navigation_readme_is_not_numeric_test_identity(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             navigation=root/'results/research/example/README.md'
@@ -227,8 +229,9 @@ class LifecycleTests(unittest.TestCase):
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             index=root/'调研/原始来源/来源文件索引.json'
             atomic_json(index,[])
@@ -244,6 +247,14 @@ class LifecycleTests(unittest.TestCase):
     def test_incomplete_test_report_is_rejected(self):
         with self.assertRaises(ValueError):
             pipeline.verify_test_report({'status':'PASS','checks':[]},{'application':{'sha256':'x'}},'x')
+
+    def test_feed_sources_and_generator_are_in_test_identity(self):
+        files = {entry['path'] for entry in pipeline.test_records(ROOT)}
+        self.assertIn('tools/feed_candidates.py', files)
+        self.assertIn('调研/feed_sources.json', files)
+        dataset = read_json(ROOT/'data/parameters/feed_property_candidates.json')
+        for identity in dataset['source_files'] + dataset['cea_source_files']:
+            self.assertIn(identity['path'], files)
 
     def test_combustion_reference_preparation_failure_is_recorded(self):
         (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
@@ -266,8 +277,9 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'调研/feed_sources.json',[])
             atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):

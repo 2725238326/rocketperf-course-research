@@ -374,6 +374,9 @@ def check(root=ROOT, skip_hashes=False):
                     link_count+=1
                     if target and not (path.parent/target).exists(): issues.append(f"Broken document link: {relative} -> {target}")
     source_index=read_json(root/"调研/原始来源/来源文件索引.json")
+    source_ids=[source["id"] for source in source_index]
+    if len(source_ids)!=len(set(source_ids)):
+        issues.append("Archived source index contains duplicate IDs")
     hashes=0
     for source in source_index:
         if not source["available"]: continue

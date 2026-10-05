@@ -1,0 +1,424 @@
+{
+  "schema_version": 1,
+  "dataset_id": "feed-property-candidates-v1",
+  "evidence_cutoff": "2026-10-05",
+  "status": "research_candidates_not_production",
+  "cea_commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+  "cea_source_files": [
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+      "sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363"
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/LICENSE.txt",
+      "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed"
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/NOTICE.txt",
+      "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e"
+    }
+  ],
+  "source_files": [
+    {
+      "id": "F01_coolprop_highlevel_20261005",
+      "url": "https://coolprop.org/coolprop/HighLevelAPI.html",
+      "path": "调研/原始来源/F01_coolprop_highlevel_20261005.txt",
+      "sha256": "4778fcd8b5bd3b8dbb30ed02d45a9678f6fa4c003123447b0b23f7c03777dbfd"
+    },
+    {
+      "id": "F02_coolprop_methane_7_1_0",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Methane.json",
+      "path": "调研/原始来源/F02_coolprop_methane_7_1_0.txt",
+      "sha256": "5cb01cbafb6da28da358f3fd1c0985be39c99cb9aef8b872ff2b5807a6a79dff"
+    },
+    {
+      "id": "F03_coolprop_oxygen_7_1_0",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Oxygen.json",
+      "path": "调研/原始来源/F03_coolprop_oxygen_7_1_0.txt",
+      "sha256": "7ed571aa8753b7ed8a421f625fb4c896e17d17ec506bcd264642e5d88f34eadc"
+    },
+    {
+      "id": "F04_coolprop_license_7_1_0",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/LICENSE",
+      "path": "调研/原始来源/F04_coolprop_license_7_1_0.txt",
+      "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2"
+    },
+    {
+      "id": "F05_coolprop_methane_page_20261005",
+      "url": "https://coolprop.org/fluid_properties/fluids/Methane.html",
+      "path": "调研/原始来源/F05_coolprop_methane_page_20261005.txt",
+      "sha256": "ca523e896a25df667a10f0469f0da0699b52dc7ee1c4674794183cbd8af372c5"
+    },
+    {
+      "id": "F06_coolprop_oxygen_page_20261005",
+      "url": "https://coolprop.org/fluid_properties/fluids/Oxygen.html",
+      "path": "调研/原始来源/F06_coolprop_oxygen_page_20261005.txt",
+      "sha256": "261ff4a629142fcf9ab447d6e78a2b36ca0400f4adb6cecd299675730817f6c6"
+    },
+    {
+      "id": "F07_coolprop_bibliography_7_1_0",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/CoolPropBibTeXLibrary.bib",
+      "path": "调研/原始来源/F07_coolprop_bibliography_7_1_0.txt",
+      "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6"
+    },
+    {
+      "id": "F08_nist_rp_surrogate_20261005",
+      "url": "https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1",
+      "path": "调研/原始来源/F08_nist_rp_surrogate_20261005.txt",
+      "sha256": "e165f2b0182238892f9faac909d62738acfe1a44801f25c4d5ed00b8ec738a2c"
+    },
+    {
+      "id": "F09_nist_rp_phase_i_20261005",
+      "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i",
+      "path": "调研/原始来源/F09_nist_rp_phase_i_20261005.txt",
+      "sha256": "0f419190719fef66a12009e54723d6d6b9eeb49f5635bb47ad1120d0ee9fe453"
+    },
+    {
+      "id": "F10_nist_rp_variability_20261005",
+      "url": "https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1",
+      "path": "调研/原始来源/F10_nist_rp_variability_20261005.txt",
+      "sha256": "a7f45ccdaf8748b3bb3194a53a33440f658d028ebf7649429ec9db99211af296"
+    },
+    {
+      "id": "F11_nist_surrogate_pdf_20261005",
+      "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=900238",
+      "path": "调研/原始来源/20261005_feed/nist_surrogate_900238.pdf",
+      "sha256": "a986704a9184ce32c4499c94f818a520dff859da19554318c3cfa06469eeef4e"
+    },
+    {
+      "id": "F12_nist_ir6646_pdf_20261005",
+      "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6646.pdf",
+      "path": "调研/原始来源/20261005_feed/nist_ir6646.pdf",
+      "sha256": "9475a1e69c8e0703ab6dab640eff32ce3cbc276331b19b3133e7d96e64b2ba5f"
+    }
+  ],
+  "records": [
+    {
+      "id": "FP-CH4-L-ANCHOR",
+      "object": "CH4(L)",
+      "variant": "CEA v3.3.4 fixed reactant record",
+      "stage": "not_applicable",
+      "parameter": "assigned_enthalpy",
+      "value": -89233.0,
+      "unit": "J/mol",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+        "调研/文献/L02_CEA_Manual_1996.txt"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Single-temperature assigned enthalpy. Not a temperature interval, EOS, density, pressure correction or experimental identification of Chinese kerosene.",
+      "phase": "condensed",
+      "source_phase_code": 1,
+      "temperature_interval_count": 0,
+      "anchor": {
+        "name": "CH4(L)",
+        "elements": {
+          "C": 1.0,
+          "H": 4.0
+        },
+        "molar_mass_kg_per_kmol": 16.04246,
+        "assigned_temperature_k": 111.643,
+        "assigned_enthalpy_j_per_mol": -89233.0,
+        "source_line": 15506,
+        "source_note": "Methane. McBride,1996 pp85,93."
+      },
+      "enthalpy_basis": "CEA assigned chemical enthalpy; includes formation contribution",
+      "pressure_pa": null,
+      "density_kg_per_m3": null,
+      "derived": {
+        "data_role": "derived",
+        "enthalpy_j_per_kg": -5562301.54228217,
+        "equation": "h_mass = 1000 * h_molar / M_kg_per_kmol"
+      },
+      "supported_state": "Exact assigned temperature only; pressure dependence not supplied"
+    },
+    {
+      "id": "FP-O2-L-ANCHOR",
+      "object": "O2(L)",
+      "variant": "CEA v3.3.4 fixed reactant record",
+      "stage": "not_applicable",
+      "parameter": "assigned_enthalpy",
+      "value": -12979.0,
+      "unit": "J/mol",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+        "调研/文献/L02_CEA_Manual_1996.txt"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Single-temperature assigned enthalpy. Not a temperature interval, EOS, density, pressure correction or experimental identification of Chinese kerosene.",
+      "phase": "condensed",
+      "source_phase_code": 1,
+      "temperature_interval_count": 0,
+      "anchor": {
+        "name": "O2(L)",
+        "elements": {
+          "O": 2.0
+        },
+        "molar_mass_kg_per_kmol": 31.9988,
+        "assigned_temperature_k": 90.17,
+        "assigned_enthalpy_j_per_mol": -12979.0,
+        "source_line": 15766,
+        "source_note": "Oxygen. McBride,1996 pp85,93."
+      },
+      "enthalpy_basis": "CEA assigned chemical enthalpy; includes formation contribution",
+      "pressure_pa": null,
+      "density_kg_per_m3": null,
+      "derived": {
+        "data_role": "derived",
+        "enthalpy_j_per_kg": -405608.9603360126,
+        "equation": "h_mass = 1000 * h_molar / M_kg_per_kmol"
+      },
+      "supported_state": "Exact assigned temperature only; pressure dependence not supplied"
+    },
+    {
+      "id": "FP-RP1-ANCHOR",
+      "object": "RP-1",
+      "variant": "CEA v3.3.4 fixed reactant record",
+      "stage": "not_applicable",
+      "parameter": "assigned_enthalpy",
+      "value": -24717.7,
+      "unit": "J/mol",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+        "调研/文献/L02_CEA_Manual_1996.txt"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Single-temperature assigned enthalpy. Not a temperature interval, EOS, density, pressure correction or experimental identification of Chinese kerosene.",
+      "phase": "condensed",
+      "source_phase_code": 1,
+      "temperature_interval_count": 0,
+      "anchor": {
+        "name": "RP-1",
+        "elements": {
+          "C": 1.0,
+          "H": 1.95
+        },
+        "molar_mass_kg_per_kmol": 13.976183,
+        "assigned_temperature_k": 298.15,
+        "assigned_enthalpy_j_per_mol": -24717.7,
+        "source_line": 15775,
+        "source_note": "Mehta et.al. AIAA 95-2962 1995. Hcomb(high) = 19923.BTU/#"
+      },
+      "enthalpy_basis": "CEA assigned chemical enthalpy; includes formation contribution",
+      "pressure_pa": null,
+      "density_kg_per_m3": null,
+      "derived": {
+        "data_role": "derived",
+        "enthalpy_j_per_kg": -1768558.6973210066,
+        "equation": "h_mass = 1000 * h_molar / M_kg_per_kmol"
+      },
+      "supported_state": "Exact assigned temperature only; pressure dependence not supplied"
+    },
+    {
+      "id": "FP-RP1-SURROGATE-2009",
+      "object": "RP-1",
+      "variant": "Huber et al. 2009 fitted sample surrogate",
+      "stage": "not_applicable",
+      "parameter": "surrogate_mole_fractions",
+      "value": {
+        "alpha-methyldecalin": 0.354,
+        "5-methylnonane": 0.15,
+        "n-dodecane": 0.183,
+        "heptylcyclohexane": 0.313
+      },
+      "unit": "mol/mol",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "F11_nist_surrogate_pdf_20261005",
+        "F08_nist_rp_surrogate_20261005"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Published model composition, not measured batch composition. Table 2/abstract and following paragraph agree; one preceding sentence reverses the component counts.",
+      "locator": "Printed p.3086, Table 2; PDF p.4, visually verified",
+      "property_scope": "Sample-specific fitted thermophysical properties; no imported formation enthalpies",
+      "component_count": 4,
+      "production_dependency": false,
+      "chemical_enthalpy_basis": null,
+      "density_table": null,
+      "license_scope": "NIST-hosted author paper retained as evidence; MIT license applies only to CoolProp"
+    },
+    {
+      "id": "FP-RP2-SURROGATE-2009",
+      "object": "RP-2",
+      "variant": "Huber et al. 2009 fitted sample surrogate",
+      "stage": "not_applicable",
+      "parameter": "surrogate_mole_fractions",
+      "value": {
+        "alpha-methyldecalin": 0.354,
+        "5-methylnonane": 0.084,
+        "2,4-dimethylnonane": 0.071,
+        "n-dodecane": 0.158,
+        "heptylcyclohexane": 0.333
+      },
+      "unit": "mol/mol",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "F11_nist_surrogate_pdf_20261005",
+        "F08_nist_rp_surrogate_20261005"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Published model composition, not measured batch composition. Table 2/abstract and following paragraph agree; one preceding sentence reverses the component counts.",
+      "locator": "Printed p.3086, Table 2; PDF p.4, visually verified",
+      "property_scope": "Sample-specific fitted thermophysical properties; no imported formation enthalpies",
+      "component_count": 5,
+      "production_dependency": false,
+      "chemical_enthalpy_basis": null,
+      "density_table": null,
+      "license_scope": "NIST-hosted author paper retained as evidence; MIT license applies only to CoolProp"
+    },
+    {
+      "id": "FP-METHANE-EOS",
+      "object": "Methane",
+      "variant": "CoolProp v7.1.0 HEOS",
+      "stage": "not_applicable",
+      "parameter": "reference_software_metadata",
+      "value": {
+        "eos_citation": "Setzmann-JPCRD-1991",
+        "t_max_k": 625,
+        "p_max_pa": 1000000000,
+        "molar_mass_kg_per_mol": 0.0160428,
+        "gas_constant_j_per_mol_k": 8.31451,
+        "minimum_saturation_temperature_k": 90.6941
+      },
+      "unit": "mixed; individual field suffixes define SI units",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "F02_coolprop_methane_7_1_0",
+        "F04_coolprop_license_7_1_0",
+        "F07_coolprop_bibliography_7_1_0"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Software metadata, not a validated liquid-state table. Global EOS bounds do not prove single-phase validity. Default reference enthalpy is not the NASA formation basis.",
+      "license": "MIT",
+      "production_dependency": false,
+      "ideal_helmholtz_terms": [
+        "IdealGasHelmholtzLead",
+        "IdealGasHelmholtzLogTau",
+        "IdealGasHelmholtzPlanckEinsteinFunctionT",
+        "IdealGasHelmholtzEnthalpyEntropyOffset"
+      ],
+      "residual_helmholtz_terms": [
+        "ResidualHelmholtzPower",
+        "ResidualHelmholtzGaussian"
+      ],
+      "reference_state_policy": "Record offsets; align chemical enthalpy before use"
+    },
+    {
+      "id": "FP-OXYGEN-EOS",
+      "object": "Oxygen",
+      "variant": "CoolProp v7.1.0 HEOS",
+      "stage": "not_applicable",
+      "parameter": "reference_software_metadata",
+      "value": {
+        "eos_citation": "Schmidt-FPE-1985,Stewart-JPCRD-1991",
+        "t_max_k": 2000,
+        "p_max_pa": 80000000,
+        "molar_mass_kg_per_mol": 0.0319988,
+        "gas_constant_j_per_mol_k": 8.31434,
+        "minimum_saturation_temperature_k": 54.361000000000004
+      },
+      "unit": "mixed; individual field suffixes define SI units",
+      "data_role": "fact",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "F03_coolprop_oxygen_7_1_0",
+        "F04_coolprop_license_7_1_0",
+        "F07_coolprop_bibliography_7_1_0"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Software metadata, not a validated liquid-state table. Global EOS bounds do not prove single-phase validity. Default reference enthalpy is not the NASA formation basis.",
+      "license": "MIT",
+      "production_dependency": false,
+      "ideal_helmholtz_terms": [
+        "IdealGasHelmholtzLead",
+        "IdealGasHelmholtzLogTau",
+        "IdealGasHelmholtzPlanckEinstein",
+        "IdealGasHelmholtzEnthalpyEntropyOffset"
+      ],
+      "residual_helmholtz_terms": [
+        "ResidualHelmholtzPower"
+      ],
+      "reference_state_policy": "Record offsets; align chemical enthalpy before use"
+    },
+    {
+      "id": "FP-CH4-L-DENSITY",
+      "object": "CH4(L)",
+      "variant": "unidentified engine inlet",
+      "stage": "not_applicable",
+      "parameter": "engine_inlet_density",
+      "value": null,
+      "unit": "kg/m^3",
+      "data_role": "unknown",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/专题/RES-006_液态与煤油入口.md"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Engine inlet T/P and verified single-phase table have not been established."
+    },
+    {
+      "id": "FP-O2-L-DENSITY",
+      "object": "O2(L)",
+      "variant": "unidentified engine inlet",
+      "stage": "not_applicable",
+      "parameter": "engine_inlet_density",
+      "value": null,
+      "unit": "kg/m^3",
+      "data_role": "unknown",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/专题/RES-006_液态与煤油入口.md"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Engine inlet T/P and verified single-phase table have not been established."
+    },
+    {
+      "id": "FP-CN-KEROSENE-COMPOSITION",
+      "object": "Chinese engine kerosene",
+      "variant": "unidentified engine inlet",
+      "stage": "not_applicable",
+      "parameter": "batch_composition",
+      "value": null,
+      "unit": "mass fraction",
+      "data_role": "unknown",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/专题/RES-006_液态与煤油入口.md"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "CEA RP-1 and n-dodecane are not evidence of the flown fuel composition."
+    },
+    {
+      "id": "FP-CN-KEROSENE-ENTHALPY",
+      "object": "Chinese engine kerosene",
+      "variant": "unidentified engine inlet",
+      "stage": "not_applicable",
+      "parameter": "inlet_chemical_enthalpy",
+      "value": null,
+      "unit": "J/kg",
+      "data_role": "unknown",
+      "operating_boundary": "Property-method candidate only; not a flight-engine input",
+      "source_refs": [
+        "调研/专题/RES-006_液态与煤油入口.md"
+      ],
+      "model_use": "Research and future C17 contract; not enabled in production",
+      "notes": "Fuel identity, batch, T/P, phase and chemical enthalpy reference are not established."
+    }
+  ],
+  "missing_real_engine_fields": [
+    "Propellant batch and purity",
+    "Inlet temperature, pressure and phase",
+    "State-dependent liquid density and chemically aligned enthalpy",
+    "Pump outlet thermal state and physical phase envelope"
+  ],
+  "missing_value_policy": "Unknowns remain null; no synthetic or analogous value is promoted to engine fact."
+}

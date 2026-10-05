@@ -204,7 +204,8 @@ def test_records(root):
            and not (folder=='results/research' and p.name=='README.md')]
     files += ['tools/thermo_data.py','tools/cea_reference.py','tools/combustion_reference.py',
               'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py','tools/cycle_study.py','tools/research_tp_reference.py','tools/research_frozen_reference.py','tools/thermal_boundary.py','tools/adiabatic_inlet.py','tools/adiabatic_study.py',
-              '调研/原始来源/来源文件索引.json','docs/adiabatic-inlet-response.svg']
+              '调研/原始来源/来源文件索引.json','docs/adiabatic-inlet-response.svg',
+              'tools/feed_candidates.py','调研/feed_sources.json']
     # Parameter checks resolve source IDs and local references; those inputs must
     # invalidate a previous data PASS too. Task states are intentionally dynamic.
     for dataset in (root/'data/parameters').glob('*.json'):
@@ -218,6 +219,15 @@ def test_records(root):
             if not isinstance(refs,list): continue
             files += [ref.split('#',1)[0] for ref in refs
                       if isinstance(ref,str) and ref.startswith(('docs/','调研/'))]
+        if payload.get('dataset_id') == 'feed-property-candidates-v1':
+            for collection in ('source_files', 'cea_source_files'):
+                entries = payload.get(collection)
+                if not isinstance(entries, list) or not entries:
+                    raise ValueError('Feed property source identities must be nonempty arrays')
+                for entry in entries:
+                    if not isinstance(entry,dict) or not isinstance(entry.get('path'),str):
+                        raise ValueError('Feed property source identity requires a path')
+                    files.append(entry['path'])
     return file_records(root,files)
 
 

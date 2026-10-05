@@ -45,6 +45,9 @@ def validate_dataset(path: Path, source_index_path: Path, root=ROOT) -> list[str
     if any(not isinstance(item,dict) or not isinstance(item.get('id'),str) or not item['id'].strip()
            or type(item.get('available')) is not bool for item in source_index):
         return ["source index entries require nonempty id and boolean available"]
+    source_ids = [item["id"] for item in source_index]
+    if len(source_ids) != len(set(source_ids)):
+        return ["source index contains duplicate ids"]
     records = dataset.get("records")
     if not isinstance(records, list) or not records:
         problems.append("records must be a non-empty array")

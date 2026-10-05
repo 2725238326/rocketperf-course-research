@@ -429,7 +429,7 @@
     "sha256": "03B64364559D540D97615C31675A69E8EB1965E30DE8859A2F8C5C9A38ECB55E"
   },
   {
-    "id": "O01_cea_v334_thermo",
+    "id": "O01_cea_v334_thermo_source",
     "url": "https://raw.githubusercontent.com/nasa/cea/4c5c612efa2002a94e3a5a1f33b1674d55c65340/source/thermo.f90",
     "available": true,
     "file": "20261003_cea_v3.3.4/thermo.f90",
@@ -598,5 +598,113 @@
     "bytes": 4395,
     "saved_at": "2026-10-03T17:04:25.7202427Z",
     "sha256": "d53ea5bb6275d8455899ecaf87a06bda48f7a6210d1bb74ad9113b36bbb311cc"
+  },
+  {
+    "id": "F01_coolprop_highlevel_20261005",
+    "url": "https://coolprop.org/coolprop/HighLevelAPI.html",
+    "available": true,
+    "file": "F01_coolprop_highlevel_20261005.txt",
+    "bytes": 125646,
+    "saved_at": "2026-10-05T07:19:46.900049+00:00",
+    "sha256": "4778fcd8b5bd3b8dbb30ed02d45a9678f6fa4c003123447b0b23f7c03777dbfd"
+  },
+  {
+    "id": "F02_coolprop_methane_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Methane.json",
+    "available": true,
+    "file": "F02_coolprop_methane_7_1_0.txt",
+    "bytes": 123331,
+    "saved_at": "2026-10-05T07:19:44.825906+00:00",
+    "sha256": "5cb01cbafb6da28da358f3fd1c0985be39c99cb9aef8b872ff2b5807a6a79dff"
+  },
+  {
+    "id": "F03_coolprop_oxygen_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Oxygen.json",
+    "available": true,
+    "file": "F03_coolprop_oxygen_7_1_0.txt",
+    "bytes": 128671,
+    "saved_at": "2026-10-05T07:19:44.879686+00:00",
+    "sha256": "7ed571aa8753b7ed8a421f625fb4c896e17d17ec506bcd264642e5d88f34eadc"
+  },
+  {
+    "id": "F04_coolprop_license_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/LICENSE",
+    "available": true,
+    "file": "F04_coolprop_license_7_1_0.txt",
+    "bytes": 1103,
+    "saved_at": "2026-10-05T07:19:44.744112+00:00",
+    "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2"
+  },
+  {
+    "id": "F05_coolprop_methane_page_20261005",
+    "url": "https://coolprop.org/fluid_properties/fluids/Methane.html",
+    "available": true,
+    "file": "F05_coolprop_methane_page_20261005.txt",
+    "bytes": 46973,
+    "saved_at": "2026-10-05T07:19:45.231731+00:00",
+    "sha256": "ca523e896a25df667a10f0469f0da0699b52dc7ee1c4674794183cbd8af372c5"
+  },
+  {
+    "id": "F06_coolprop_oxygen_page_20261005",
+    "url": "https://coolprop.org/fluid_properties/fluids/Oxygen.html",
+    "available": true,
+    "file": "F06_coolprop_oxygen_page_20261005.txt",
+    "bytes": 50423,
+    "saved_at": "2026-10-05T07:19:45.269710+00:00",
+    "sha256": "261ff4a629142fcf9ab447d6e78a2b36ca0400f4adb6cecd299675730817f6c6"
+  },
+  {
+    "id": "F07_coolprop_bibliography_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/CoolPropBibTeXLibrary.bib",
+    "available": true,
+    "file": "F07_coolprop_bibliography_7_1_0.txt",
+    "bytes": 134407,
+    "saved_at": "2026-10-05T07:19:45.309523+00:00",
+    "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6"
+  },
+  {
+    "id": "F08_nist_rp_surrogate_20261005",
+    "url": "https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1",
+    "available": true,
+    "file": "F08_nist_rp_surrogate_20261005.txt",
+    "bytes": 83108,
+    "saved_at": "2026-10-05T07:31:20.942549+00:00",
+    "sha256": "e165f2b0182238892f9faac909d62738acfe1a44801f25c4d5ed00b8ec738a2c"
+  },
+  {
+    "id": "F09_nist_rp_phase_i_20261005",
+    "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i",
+    "available": true,
+    "file": "F09_nist_rp_phase_i_20261005.txt",
+    "bytes": 84215,
+    "saved_at": "2026-10-05T07:31:21.574638+00:00",
+    "sha256": "0f419190719fef66a12009e54723d6d6b9eeb49f5635bb47ad1120d0ee9fe453"
+  },
+  {
+    "id": "F10_nist_rp_variability_20261005",
+    "url": "https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1",
+    "available": true,
+    "file": "F10_nist_rp_variability_20261005.txt",
+    "bytes": 82250,
+    "saved_at": "2026-10-05T07:31:21.001845+00:00",
+    "sha256": "a7f45ccdaf8748b3bb3194a53a33440f658d028ebf7649429ec9db99211af296"
+  },
+  {
+    "id": "F11_nist_surrogate_pdf_20261005",
+    "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=900238",
+    "available": true,
+    "file": "20261005_feed/nist_surrogate_900238.pdf",
+    "bytes": 952463,
+    "saved_at": "2026-10-05T07:33:02.096704+00:00",
+    "sha256": "a986704a9184ce32c4499c94f818a520dff859da19554318c3cfa06469eeef4e"
+  },
+  {
+    "id": "F12_nist_ir6646_pdf_20261005",
+    "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6646.pdf",
+    "available": true,
+    "file": "20261005_feed/nist_ir6646.pdf",
+    "bytes": 5116073,
+    "saved_at": "2026-10-05T07:33:04.896766+00:00",
+    "sha256": "9475a1e69c8e0703ab6dab640eff32ce3cbc276331b19b3133e7d96e64b2ba5f"
   }
 ]

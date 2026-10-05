@@ -1,0 +1,129 @@
+{
+  "topic": "15_nist_fuel_bibliography_20261005",
+  "retrieved_at": "2026-10-05T15:27:25.7542624+08:00",
+  "cutoff": "2026-10-05",
+  "model": "grok-4.6",
+  "response_status": "completed",
+  "prompt": "请用web_search实际搜索一次：\nsite:nist.gov \"RP-1\" \"surrogate\" \"Thermophysical\"\n输出已经取得的搜索结果中3个具体URL及标题；如果无法执行搜索，直接说明，不能把工具调用文字或预计结果当作已搜索。不写物性数值，不写工程设计。\n",
+  "search_calls": [
+    {
+      "id": "ws_59647379-f8e4-9087-be67-3a8a158a45cc_call-9eedfcca-fd03-4dd2-9612-c04995c47f81-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:nist.gov \"RP-1\" \"surrogate\" \"Thermophysical\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i"
+          },
+          {
+            "type": "url",
+            "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=900238"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1"
+          },
+          {
+            "type": "url",
+            "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=905293"
+          },
+          {
+            "type": "url",
+            "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=50165"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/programs-projects/reference-fluid-thermodynamic-and-transport-properties-database-refprop"
+          },
+          {
+            "type": "url",
+            "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=900238"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-rocket-propellants-rp-1-and-rp-2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/surrogate-mixture-model-thermophysical-properties-synthetic-aviation-fuel-s-8"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "已实际执行指定检索（site:nist.gov \"RP-1\" \"surrogate\" \"Thermophysical\"），从结果中选取3个具体条目如下：\n\n1. URL: https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1  \n标题: Preliminary Surrogate Mixture Models for the Thermophysical Properties of Rocket Propellants RP-1 and RP-2 | NIST[[1]](https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1)\n\n2. URL: https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i  \n标题: Thermophysical Properties Measurements and Models for Rocket Propellant RP-1: Phase I | NIST[[2]](https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i)\n\n3. URL: https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1  \n标题: Assessment of Variability in the Thermophysical Properties of Rocket Propellant RP-1 | NIST[[3]](https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1)",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1",
+              "start_index": 326,
+              "end_index": 453,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i",
+              "start_index": 676,
+              "end_index": 797,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1",
+              "start_index": 1010,
+              "end_index": 1122,
+              "title": "3"
+            }
+          ]
+        }
+      ],
+      "id": "msg_59647379-f8e4-9087-be67-3a8a158a45cc",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 7966,
+    "input_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "output_tokens": 1156,
+    "output_tokens_details": {
+      "reasoning_tokens": 875
+    },
+    "total_tokens": 9122,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 1,
+    "cost_in_usd_ticks": 121223200,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 1,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 6786,
+      "output_tokens": 1028
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

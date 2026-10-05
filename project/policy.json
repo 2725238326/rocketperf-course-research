@@ -34,6 +34,7 @@
     {"path":"docs/research-thermal-boundary.md","role":"入口焓/密度假设传播、热交换范围与有来源的扩展契约","owner":"cycle"},
     {"path":"docs/adiabatic-inlet-validation.md","role":"显式同基准气态入口焓HP、固定面积喷管及参考/失败验证","owner":"thermo"},
     {"path":"docs/adiabatic-inlet-study.md","role":"固定喷管的气态入口焓/O-F响应、新CEA参考和不可外推结论","owner":"thermo"},
+    {"path":"调研/专题/RES-006_液态与煤油入口.md","role":"固定液态反应物/EOS/煤油surrogate候选、焓基准与后续C实现边界","owner":"thermo"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]
 }

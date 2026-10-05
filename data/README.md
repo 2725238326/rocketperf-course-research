@@ -4,6 +4,8 @@
 
 当前真实型号资料在`调研/证据与参数台账.md`及原始来源中，本目录尚无可直接投入计算的真实发动机参数集。
 
-教学输入在`cases/benchmarks/`，参考值在`tests/reference/`。DATA-001已留下首版台账，但还没有来源ID、单位和数据角色的自动检查。DATA-002负责逐字段原文复核、明确假设记录和数据校验；没有完成前，不把台账称为可直接计算的型号参数集。
+教学输入在`cases/benchmarks/`，参考值在`tests/reference/`。DATA-001/002已完成首版台账、逐字段复核与来源ID/单位/数据角色检查；未知型号字段仍保持null，校验通过不等于有完整真实输入。
+
+`parameters/feed_property_candidates.json`是RES-006的研究候选档案，不是生产输入。它保留CEA单温度液态反应物锚点、CoolProp EOS身份、NIST surrogate和未知的真实发动机字段；运行`python tools/feed_candidates.py check`可按固定原始来源重生成并核对。
 
 初版CLI只支持`synthetic_benchmark`和`research_scenario`。增加真实型号类别前须先设计并验证字段级证据契约，而非仅增加一个标签。

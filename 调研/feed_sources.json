@@ -1,0 +1,52 @@
+[
+  {
+    "id": "F01_coolprop_highlevel_20261005",
+    "url": "https://coolprop.org/coolprop/HighLevelAPI.html"
+  },
+  {
+    "id": "F02_coolprop_methane_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Methane.json"
+  },
+  {
+    "id": "F03_coolprop_oxygen_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Oxygen.json"
+  },
+  {
+    "id": "F04_coolprop_license_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/LICENSE"
+  },
+  {
+    "id": "F05_coolprop_methane_page_20261005",
+    "url": "https://coolprop.org/fluid_properties/fluids/Methane.html"
+  },
+  {
+    "id": "F06_coolprop_oxygen_page_20261005",
+    "url": "https://coolprop.org/fluid_properties/fluids/Oxygen.html"
+  },
+  {
+    "id": "F07_coolprop_bibliography_7_1_0",
+    "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/CoolPropBibTeXLibrary.bib"
+  },
+  {
+    "id": "F08_nist_rp_surrogate_20261005",
+    "url": "https://www.nist.gov/publications/preliminary-surrogate-mixture-models-thermophysical-properties-rocket-propellants-rp-1"
+  },
+  {
+    "id": "F09_nist_rp_phase_i_20261005",
+    "url": "https://www.nist.gov/publications/thermophysical-properties-measurements-and-models-rocket-propellant-rp-1-phase-i"
+  },
+  {
+    "id": "F10_nist_rp_variability_20261005",
+    "url": "https://www.nist.gov/publications/assessment-variability-thermophysical-properties-rocket-propellant-rp-1"
+  },
+  {
+    "id": "F11_nist_surrogate_pdf_20261005",
+    "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=900238",
+    "file": "20261005_feed/nist_surrogate_900238.pdf"
+  },
+  {
+    "id": "F12_nist_ir6646_pdf_20261005",
+    "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6646.pdf",
+    "file": "20261005_feed/nist_ir6646.pdf"
+  }
+]

@@ -1,0 +1,1563 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>High-Level Interface &#8212; CoolProp 8.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sponsor-banner.css?v=601bc810" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../_static/documentation_options.js?v=f663eb4a"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/3Dmol-min.js?v=4d10db6a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area", "enableExplorer": false, "enableAssistiveMml": false}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}}</script>
+    <script defer="defer" src="../_static/MathJax-4.0.0/tex-mml-chtml.js?v=d369c7b5"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'coolprop/HighLevelAPI';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/sponsor-banner.js?v=1e541bf9"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Low Level Interface" href="LowLevelAPI.html" />
+    <link rel="prev" title="MSYS2 Setup" href="wrappers/MSYS2/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="8.0" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../contents.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/CoolPropLogo.png" class="logo__image only-light" alt="CoolProp 8.0.0 documentation - Home"/>
+    <img src="../_static/CoolPropLogo.png" class="logo__image only-dark pst-js-only" alt="CoolProp 8.0.0 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul class="navbar-nav">
+  <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="../citation.html">Citation</a></li>
+  <li class="nav-item"><a class="nav-link" href="http://ibell.pythonanywhere.com">CoolProp Online</a></li>
+  <li class="nav-item"><a class="nav-link" href="examples.html">Examples</a></li>
+  <li class="nav-item"><a class="nav-link" href="../develop/code.html">Code</a></li>
+  <li class="nav-item"><a class="nav-link" href="wrappers/index.html">Interfaces</a></li>
+  <li class="nav-item"><a class="nav-link" href="https://github.com/sponsors/CoolProp" target="_blank" rel="noopener">💚 Sponsor</a></li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item"><ul class="navbar-nav">
+  <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="../citation.html">Citation</a></li>
+  <li class="nav-item"><a class="nav-link" href="http://ibell.pythonanywhere.com">CoolProp Online</a></li>
+  <li class="nav-item"><a class="nav-link" href="examples.html">Examples</a></li>
+  <li class="nav-item"><a class="nav-link" href="../develop/code.html">Code</a></li>
+  <li class="nav-item"><a class="nav-link" href="wrappers/index.html">Interfaces</a></li>
+  <li class="nav-item"><a class="nav-link" href="https://github.com/sponsors/CoolProp" target="_blank" rel="noopener">💚 Sponsor</a></li>
+</ul></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<h3><a href="../contents.html">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../citation.html">Citation for CoolProp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/CoolProp.html">CoolProp package</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../general_information.html">General Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../online/index.html">CoolProp Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fluid_properties/index.html">Fluid Properties</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CoolProp</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wrappers/index.html">Available Wrappers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">High-Level Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#versions">Versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#propssi-function">PropsSI function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vapor-liquid-and-saturation-states">Vapor, Liquid, and Saturation States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#imposing-the-phase-optional">Imposing the Phase (Optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fluid-information">Fluid information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#trivial-inputs">Trivial inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#phasesi-function">PhaseSI function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#partial-derivatives">Partial Derivatives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-partial-derivatives-for-single-phase-states">First Partial Derivatives for Single-phase States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-partial-derivatives-for-single-phase-states">Second Partial Derivatives for Single-Phase States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#first-saturation-derivatives">First Saturation Derivatives</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#predefined-mixtures">Predefined Mixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-defined-mixtures">User-Defined Mixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference-states">Reference States</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calling-refprop">Calling REFPROP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-fluids">Adding Fluids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-sample-code">C++ Sample Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-sample-code-output">C++ Sample Code Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sample-code">Sample Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-of-string-inputs-to-propssi-function">Table of string inputs to PropsSI function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LowLevelAPI.html">Low Level Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tabular.html">Tabular Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SVDSBTL.html">SVDSBTL — SVD-Compressed Tabular Lookup Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BackendOptions.html">Backend Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Configuration.html">Configuration Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="REFPROP.html">REFPROP Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cubics.html">Cubic Equations of State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PCSAFT.html">PC-SAFT Equations of State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html">Changelog for CoolProp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SuperAncillary.html">Superancillaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HSFlash.html">Robust, fast <span class="math notranslate nohighlight">\(H\)</span>,<span class="math notranslate nohighlight">\(S\)</span> flash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IdealGas.html">Ideal-gas properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/index.html">Information for Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sponsor.html">Support CoolProp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography.html">Bibliography</a></li>
+</ul>
+</div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../contents.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">CoolProp</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">High-Level Interface</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="high-level-interface">
+<span id="high-level-api"></span><h1><a class="toc-backref" href="#id3" role="doc-backlink">High-Level Interface</a><a class="headerlink" href="#high-level-interface" title="Link to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#high-level-interface" id="id3">High-Level Interface</a></p>
+<ul>
+<li><p><a class="reference internal" href="#versions" id="id4">Versions</a></p></li>
+<li><p><a class="reference internal" href="#propssi-function" id="id5">PropsSI function</a></p></li>
+<li><p><a class="reference internal" href="#vapor-liquid-and-saturation-states" id="id6">Vapor, Liquid, and Saturation States</a></p></li>
+<li><p><a class="reference internal" href="#imposing-the-phase-optional" id="id7">Imposing the Phase (Optional)</a></p></li>
+<li><p><a class="reference internal" href="#fluid-information" id="id8">Fluid information</a></p></li>
+<li><p><a class="reference internal" href="#trivial-inputs" id="id9">Trivial inputs</a></p></li>
+<li><p><a class="reference internal" href="#phasesi-function" id="id10">PhaseSI function</a></p></li>
+<li><p><a class="reference internal" href="#partial-derivatives" id="id11">Partial Derivatives</a></p></li>
+<li><p><a class="reference internal" href="#predefined-mixtures" id="id12">Predefined Mixtures</a></p></li>
+<li><p><a class="reference internal" href="#user-defined-mixtures" id="id13">User-Defined Mixtures</a></p></li>
+<li><p><a class="reference internal" href="#reference-states" id="id14">Reference States</a></p></li>
+<li><p><a class="reference internal" href="#calling-refprop" id="id15">Calling REFPROP</a></p></li>
+<li><p><a class="reference internal" href="#adding-fluids" id="id16">Adding Fluids</a></p></li>
+<li><p><a class="reference internal" href="#c-sample-code" id="id17">C++ Sample Code</a></p></li>
+<li><p><a class="reference internal" href="#c-sample-code-output" id="id18">C++ Sample Code Output</a></p></li>
+<li><p><a class="reference internal" href="#sample-code" id="id19">Sample Code</a></p></li>
+<li><p><a class="reference internal" href="#table-of-string-inputs-to-propssi-function" id="id20">Table of string inputs to PropsSI function</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="versions">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Versions</a><a class="headerlink" href="#versions" title="Link to this heading">#</a></h2>
+<p>The version that is currently in use</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp</span><span class="p">;</span> <span class="n">CP</span> <span class="o">=</span> <span class="n">CoolProp</span><span class="o">.</span><span class="n">CoolProp</span>
+
+<span class="gp">In [2]: </span><span class="n">CoolProp</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span> <span class="n">CP</span><span class="o">.</span><span class="n">get_global_param_string</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span>
+<span class="gh">Out[2]: </span><span class="go">(&#39;8.0.0&#39;, &#39;8.0.0&#39;)</span>
+
+<span class="gp">In [3]: </span><span class="n">CoolProp</span><span class="o">.</span><span class="n">__gitrevision__</span><span class="p">,</span> <span class="n">CP</span><span class="o">.</span><span class="n">get_global_param_string</span><span class="p">(</span><span class="s2">&quot;gitrevision&quot;</span><span class="p">)</span>
+<span class="gh">Out[3]: </span>
+<span class="go">(&#39;ae81610e7d23efc57f9d051c8e70a4d66e87537f&#39;,</span>
+<span class="go"> &#39;ae81610e7d23efc57f9d051c8e70a4d66e87537f&#39;)</span>
+</pre></div>
+</div>
+</section>
+<section id="propssi-function">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">PropsSI function</a><a class="headerlink" href="#propssi-function" title="Link to this heading">#</a></h2>
+<p>For many users, all that is needed is a simple call to the <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code> function for pure fluids, pseudo-pure fluids and mixtures.  For humid air properties, see <a class="reference internal" href="../fluid_properties/HumidAir.html#humid-air"><span class="std std-ref">Humid air properties</span></a>.  An example using <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import the PropsSI function</span>
+<span class="gp">In [4]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropsSI</span>
+
+<span class="go"># Saturation temperature of Water at 1 atm in K</span>
+<span class="gp">In [5]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[5]: </span><span class="go">373.12429584766636</span>
+</pre></div>
+</div>
+<p>In this example, the first parameter, <span class="math notranslate nohighlight">\(T\)</span>, is the <em>output</em> property that will be returned from <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code>.  The second and fourth parameters are the specified <em>input pair</em> of properties that determine the state point where the output property will be calculated.  The <em>output</em> property and <em>input pair</em> properties are text strings and must be quoted.  The third and fifth parameters are the <em>values</em> of the <em>input pair</em> properties and will determine the state point.  The sixth and last parameter is the fluid for which the <em>output</em> property will be calculated; also a quoted string.</p>
+<p>More information:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#parameter-table"><span class="std std-ref">Table of inputs to PropsSI function</span></a></p></li>
+<li><p><a class="reference internal" href="#props-sample"><span class="std std-ref">More examples of the high-level API</span></a></p></li>
+<li><p><a class="reference external" href="https://coolprop.org/_static/doxygen/html/_cool_prop_2_cool_prop_lib_8h.html">Documentation for all high-level functions exposed</a></p></li>
+</ul>
+<p>All <a class="reference internal" href="wrappers/index.html#wrappers"><span class="std std-ref">the wrappers</span></a> wrap this function in exactly the same way.</p>
+<p>For pure and pseudo-pure fluids, two state variables are required to fix the state.  The equations of state are based on <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\rho\)</span> as state variables, so <span class="math notranslate nohighlight">\(T, \rho\)</span> will always be the fastest inputs.  <span class="math notranslate nohighlight">\(P,T\)</span> will be a bit slower (3-10 times), followed by input pairs where neither <span class="math notranslate nohighlight">\(T\)</span> nor <span class="math notranslate nohighlight">\(\rho\)</span> are specified, like <span class="math notranslate nohighlight">\(P,H\)</span>; these will be much slower.  If speed is an issue, you can look into the <a class="reference internal" href="SVDSBTL.html#svdsbtl"><span class="std std-ref">SVDSBTL</span></a> SVD-compressed tabular backend; or if you are only interested in Water properties, you can look into using the <a class="reference internal" href="../fluid_properties/IF97.html#if97"><span class="std std-ref">IF97</span></a> (industrial formulation) backend.</p>
+</section>
+<section id="vapor-liquid-and-saturation-states">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Vapor, Liquid, and Saturation States</a><a class="headerlink" href="#vapor-liquid-and-saturation-states" title="Link to this heading">#</a></h2>
+<p>If the input pair (say, <span class="math notranslate nohighlight">\(P,T\)</span>) defines a state point that lies in the <em>vapor</em> region, then the vapor property at that state point will be returned.  Likewise, if the state point lies in the <em>liquid</em> region, then the liquid state property at that state point will be returned.  If the state point defined by the input pair lies within 1E-4 % of the saturation pressure, then CoolProp may return an error, because both <em>liquid</em> and <em>vapor</em> are defined along the saturation curve.</p>
+<p>To retrieve either the <em>vapor</em> or <em>liquid</em> properties along the saturation curve, provide an input pair that includes either the saturation temperature, <span class="math notranslate nohighlight">\(T\)</span>, or saturation pressure, <span class="math notranslate nohighlight">\(p\)</span>, along with the <em>vapor quality</em>, <span class="math notranslate nohighlight">\(Q\)</span>.  Use a value of <span class="math notranslate nohighlight">\(Q=1\)</span> for the saturated <em>vapor</em> property or <span class="math notranslate nohighlight">\(Q=0\)</span> for the saturated <em>liquid</em> property.  For example, at a saturation pressure of 1 atm, the <em>liquid</em> and <em>vapor</em> enthalpies can be returned as follows.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Import the PropsSI function</span>
+<span class="gp">In [6]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropsSI</span>
+
+<span class="go"># Saturated vapor enthalpy of Water at 1 atm in J/kg</span>
+<span class="gp">In [7]: </span><span class="n">H_V</span> <span class="o">=</span> <span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">H_V</span><span class="p">)</span>
+<span class="go">2675529.32550072</span>
+
+<span class="go"># Saturated liquid enthalpy of Water at 1 atm in J/kg</span>
+<span class="gp">In [8]: </span><span class="n">H_L</span> <span class="o">=</span> <span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">H_L</span><span class="p">)</span>
+<span class="go">419057.7330939922</span>
+
+<span class="go"># Latent heat of vaporization of Water at 1 atm in J/kg</span>
+<span class="gp">In [9]: </span><span class="n">H_V</span> <span class="o">-</span> <span class="n">H_L</span>
+<span class="gh">Out[9]: </span><span class="go">2256471.592406728</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <em>latent heat of vaporization</em> can be calculated using the difference between the vapor and liquid enthalpies at the same point on the saturation curve.</p>
+</div>
+</section>
+<section id="imposing-the-phase-optional">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Imposing the Phase (Optional)</a><a class="headerlink" href="#imposing-the-phase-optional" title="Link to this heading">#</a></h2>
+<p>Each call to <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> requires the phase to be determined based on the provided input pair, and may require a non-trivial flash calculation to determine if the state point is in the single-phase or two-phase region and to generate a sensible initial guess for the solver. For computational efficiency, <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> allows the phase to be manually imposed through the input key parameters.  If unspecified, PropsSI will attempt to determine the phase automatically.</p>
+<p>Depending on the input pair, there may or may not be a speed benefit to imposing a phase.  However, some state points may not be able to find a suitable initial guess for the solver and being able to impose the phase manually may offer a solution if the solver is failing.  Additionally,  with an input pair in the two-phase region, it can be useful to impose a liquid or gas phase to instruct <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> to return the saturated liquid or saturated gas properties.</p>
+<p>To specify the phase to be used, add the “|” delimiter to one (and only one) of the input key strings followed by one of the phase strings in the table below:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Phase String</p></th>
+<th class="head"><p>Phase Region</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“liquid”</p></td>
+<td><p>p &lt; pcrit &amp; T &lt; Tcrit ; above saturation</p></td>
+</tr>
+<tr class="row-odd"><td><p>“gas”</p></td>
+<td><p>p &lt; pcrit &amp; T &lt; Tcrit ; below saturation</p></td>
+</tr>
+<tr class="row-even"><td><p>“twophase”</p></td>
+<td><p>p &lt; pcrit &amp; T &lt; Tcrit ; mixed liquid/gas</p></td>
+</tr>
+<tr class="row-odd"><td><p>“supercritical_liquid”</p></td>
+<td><p>p &gt; pcrit &amp; T &lt; Tcrit</p></td>
+</tr>
+<tr class="row-even"><td><p>“supercritical_gas”</p></td>
+<td><p>p &lt; pcrit &amp; T &gt; Tcrit</p></td>
+</tr>
+<tr class="row-odd"><td><p>“supercritical”</p></td>
+<td><p>p &gt; pcrit &amp; T &gt; Tcrit</p></td>
+</tr>
+<tr class="row-even"><td><p>“not_imposed”</p></td>
+<td><p>(Default) CoolProp to determine phase</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Get the density of Water at T = 461.1 K and P = 5.0e6 Pa, imposing the liquid phase</span>
+<span class="gp">In [10]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T|liquid&#39;</span><span class="p">,</span><span class="mf">461.1</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mf">5e6</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go">881.000853334732</span>
+
+<span class="go"># Get the density of Water at T = 597.9 K and P = 5.0e6 Pa, imposing the gas phase</span>
+<span class="gp">In [11]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">597.9</span><span class="p">,</span><span class="s1">&#39;P|gas&#39;</span><span class="p">,</span><span class="mf">5e6</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[11]: </span><span class="go">20.508496070580005</span>
+</pre></div>
+</div>
+<p>On each call to <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code>, the imposed phase is reset to “not_imposed” as long as no imposed phase strings are used.  A phase string must be appended to an Input key string on each and every call to <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> to impose the phase.  <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> will return an error for any of the following syntax conditions:</p>
+<ul class="simple">
+<li><p>If anything other than the pipe, “|”, symbol is used as the delimiter</p></li>
+<li><p>If the phase string is not one of the valid phase strings in the table above</p></li>
+<li><p>If the phase string is applied to more than one of the Input key parameters</p></li>
+</ul>
+<p>In addition, for consistency with the low-level interface, the valid phase strings in the table above may be prefixed with either “phase_” or “iphase_” and still be recognized as a valid phase string.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When specifying an imposed phase, it is absolutely <strong>critical</strong> that the input pair actually lie within the imposed phase region.  If an incorrect phase is imposed for the given input pair, <code class="docutils literal notranslate"><span class="pre">PropsSI()</span></code> may throw unexpected errors or incorrect results may possibly be returned from the property functions.  If the state point phase is not absolutely known, it is best to let CoolProp determine the phase.</p>
+</div>
+</section>
+<section id="fluid-information">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Fluid information</a><a class="headerlink" href="#fluid-information" title="Link to this heading">#</a></h2>
+<p>You can obtain string-encoded information about the fluid from the <code class="docutils literal notranslate"><span class="pre">get_fluid_param_string</span></code> function with something like:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [13]: </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;formula&#39;</span><span class="p">,</span><span class="s1">&#39;CAS&#39;</span><span class="p">,</span><span class="s1">&#39;aliases&#39;</span><span class="p">,</span><span class="s1">&#39;ASHRAE34&#39;</span><span class="p">,</span><span class="s1">&#39;REFPROP_name&#39;</span><span class="p">,</span><span class="s1">&#39;pure&#39;</span><span class="p">,</span><span class="s1">&#39;INCHI&#39;</span><span class="p">,</span><span class="s1">&#39;INCHI_Key&#39;</span><span class="p">,</span><span class="s1">&#39;CHEMSPIDER_ID&#39;</span><span class="p">]:</span>
+<span class="gp">   ....: </span>    <span class="n">item</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="s1">&#39; --&gt; &#39;</span> <span class="o">+</span> <span class="n">CP</span><span class="o">.</span><span class="n">get_fluid_param_string</span><span class="p">(</span><span class="s2">&quot;R125&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+<span class="go">formula --&gt; C_{2}F_{5}H_{1}</span>
+<span class="go">CAS --&gt; 354-33-6</span>
+<span class="go">aliases --&gt; </span>
+<span class="go">ASHRAE34 --&gt; UNKNOWN</span>
+<span class="go">REFPROP_name --&gt; R125</span>
+<span class="go">pure --&gt; true</span>
+<span class="go">INCHI --&gt; InChI=1S/C2HF5/c3-1(4)2(5,6)7/h1H</span>
+<span class="go">INCHI_Key --&gt; GTLACDSXYULKMZ-UHFFFAOYSA-N</span>
+<span class="go">CHEMSPIDER_ID --&gt; 9256</span>
+</pre></div>
+</div>
+</section>
+<section id="trivial-inputs">
+<span id="id1"></span><h2><a class="toc-backref" href="#id9" role="doc-backlink">Trivial inputs</a><a class="headerlink" href="#trivial-inputs" title="Link to this heading">#</a></h2>
+<p>In order to obtain trivial inputs that do not depend on the thermodynamic state, in wrappers that support the <code class="docutils literal notranslate"><span class="pre">Props1SI</span></code> function, you can obtain the trivial parameter (in this case the critical temperature of water) like:</p>
+<blockquote>
+<div><p>Props1SI(“Tcrit”,”Water”)</p>
+</div></blockquote>
+<p>In python, the <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code> function is overloaded to also accept two inputs:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [15]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Tcrit&quot;</span><span class="p">,</span><span class="s2">&quot;Water&quot;</span><span class="p">)</span>
+<span class="gh">Out[15]: </span><span class="go">647.0959999999873</span>
+
+<span class="gp">In [16]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Tcrit&quot;</span><span class="p">,</span><span class="s2">&quot;REFPROP::WATER&quot;</span><span class="p">)</span>
+<span class="gh">Out[16]: </span><span class="go">647.096</span>
+</pre></div>
+</div>
+<p>Furthermore, you can in all languages call the <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code> function directly using dummy arguments for the other unused parameters:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [18]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Tcrit&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;Water&quot;</span><span class="p">)</span>
+<span class="gh">Out[18]: </span><span class="go">647.0959999999873</span>
+</pre></div>
+</div>
+</section>
+<section id="phasesi-function">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">PhaseSI function</a><a class="headerlink" href="#phasesi-function" title="Link to this heading">#</a></h2>
+<p>It can be useful to know what the phase of a given state point is.  A high-level function called <code class="docutils literal notranslate"><span class="pre">PhaseSI</span></code> has been implemented to allow for access to the phase.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [20]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PhaseSI</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[20]: </span><span class="go">&#39;twophase&#39;</span>
+</pre></div>
+</div>
+<p>The phase index (as floating point number) can also be obtained using the PropsSI function. In python you would do:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [22]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;Phase&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go">6.0</span>
+</pre></div>
+</div>
+<p>where you can obtain the integer indices corresponding to the phase flags using the <code class="docutils literal notranslate"><span class="pre">get_phase_index</span></code> function:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [24]: </span><span class="n">CP</span><span class="o">.</span><span class="n">get_phase_index</span><span class="p">(</span><span class="s1">&#39;phase_twophase&#39;</span><span class="p">)</span>
+<span class="gh">Out[24]: </span><span class="go">phases.iphase_twophase</span>
+
+<span class="go"># Or for liquid</span>
+<span class="gp">In [25]: </span><span class="n">CP</span><span class="o">.</span><span class="n">get_phase_index</span><span class="p">(</span><span class="s1">&#39;phase_liquid&#39;</span><span class="p">)</span>
+<span class="gh">Out[25]: </span><span class="go">phases.iphase_liquid</span>
+</pre></div>
+</div>
+<p>For a given fluid, the phase can be plotted in T-p coordinates:</p>
+<p>(<a class="reference download internal" download="" href="../_downloads/3ad22646e9f5f5a4addca1326825a9cd/HighLevelAPI-1.py"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../_downloads/bef89271af6021c9ca4bd56ed133127b/HighLevelAPI-1.png"><code class="xref download docutils literal notranslate"><span class="pre">png</span></code></a>, <a class="reference download internal" download="" href="../_downloads/0364d2e56cf1bfa1506d23e3fd5b37f5/HighLevelAPI-1..pdf"><code class="xref download docutils literal notranslate"><span class="pre">.pdf</span></code></a>)</p>
+<figure class="align-default">
+<img alt="../_images/HighLevelAPI-1.png" class="plot-directive" src="../_images/HighLevelAPI-1.png" />
+</figure>
+</section>
+<section id="partial-derivatives">
+<span id="partial-derivatives-high-level"></span><h2><a class="toc-backref" href="#id11" role="doc-backlink">Partial Derivatives</a><a class="headerlink" href="#partial-derivatives" title="Link to this heading">#</a></h2>
+<section id="first-partial-derivatives-for-single-phase-states">
+<h3>First Partial Derivatives for Single-phase States<a class="headerlink" href="#first-partial-derivatives-for-single-phase-states" title="Link to this heading">#</a></h3>
+<p>For some applications it can be useful to have access to partial derivatives of thermodynamic properties.  A generalized first partial derivative has been implemented into CoolProp, which can be obtained using the <code class="docutils literal notranslate"><span class="pre">PropsSI</span></code> function by encoding the desired derivative as a string.  The format of the string is <code class="docutils literal notranslate"><span class="pre">d(OF)/d(WRT)|CONSTANT</span></code> which is the same as</p>
+<div class="math notranslate nohighlight">
+\[\left. \frac{\partial OF}{\partial WRT}\right|_{CONSTANT}\]</div>
+<p>At the low-level, the CoolProp code calls the function <a class="reference external" href="https://coolprop.org/_static/doxygen/html/class_cool_prop_1_1_abstract_state.html#a8593e36dd1d70a9faf51dc608c3074b4">AbstractState::first_partial_deriv()</a>.  Refer to the function documentation to see how the generalized derivative works.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This derivative formulation is currently only valid for homogeneous (single-phase) states.  Two phase derivatives are not defined, and are for many combinations, invalid.</p>
+</div>
+<p>Here is an example of calculating the constant pressure specific heat, which is defined by the relation</p>
+<div class="math notranslate nohighlight">
+\[c_p = \left.\frac{\partial h}{\partial T}\right|_{p}\]</div>
+<p>and called through python</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="go"># c_p using c_p</span>
+<span class="gp">In [27]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[27]: </span><span class="go">4180.635776557353</span>
+
+<span class="go"># c_p using derivative</span>
+<span class="gp">In [28]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;d(Hmass)/d(T)|P&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[28]: </span><span class="go">4180.635776557354</span>
+</pre></div>
+</div>
+<p>It is also possible to call the derivatives directly using the <a class="reference internal" href="LowLevelAPI.html#partial-derivatives-low-level"><span class="std std-ref">low-level partial derivatives functionality</span></a>.  The low-level routine is in general faster because it avoids the string parsing.</p>
+</section>
+<section id="second-partial-derivatives-for-single-phase-states">
+<h3>Second Partial Derivatives for Single-Phase States<a class="headerlink" href="#second-partial-derivatives-for-single-phase-states" title="Link to this heading">#</a></h3>
+<p>In a similar fashion it is possible to evaluate second derivatives.  For instance, the derivative of <span class="math notranslate nohighlight">\(c_p\)</span> with respect to mass-based specific enthalpy at constant pressure could be obtained by</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="go"># c_p using derivative</span>
+<span class="gp">In [30]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;d(d(Hmass)/d(T)|P)/d(Hmass)|P&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[30]: </span><span class="go">-7.76798947010636e-05</span>
+</pre></div>
+</div>
+<p>where the inner part <code class="docutils literal notranslate"><span class="pre">d(Hmass)/d(T)|P</span></code> is the definition of <span class="math notranslate nohighlight">\(c_p\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This derivative formulation is currently only valid for homogeneous (single-phase) states.  Two phase derivatives are not defined, and are for many combinations, invalid.</p>
+</div>
+<p>It is also possible to call the derivatives directly using the <a class="reference internal" href="LowLevelAPI.html#partial-derivatives-low-level"><span class="std std-ref">low-level partial derivatives functionality</span></a>.  The low-level routine is in general faster because it avoids the string parsing.</p>
+</section>
+<section id="first-saturation-derivatives">
+<h3>First Saturation Derivatives<a class="headerlink" href="#first-saturation-derivatives" title="Link to this heading">#</a></h3>
+<p>It is also possible to retrieve the derivatives along the saturation curves using the high-level interface, encoding the desired derivative as a string just like for the single-phase derivatives.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This derivative formulation is currently only valid for saturated states where the vapor quality is either 0 or 1.</p>
+</div>
+<p>For instance, to calculate the saturation derivative of enthalpy ALONG the saturated vapor curve, you could do:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp</span>
+
+<span class="gp">In [32]: </span><span class="n">CoolProp</span><span class="o">.</span><span class="n">CoolProp</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;d(Hmolar)/d(T)|sigma&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go">28.427795995715456</span>
+</pre></div>
+</div>
+<p>It is also possible to call the derivatives directly using the <a class="reference internal" href="LowLevelAPI.html#partial-derivatives-low-level"><span class="std std-ref">low-level partial derivatives functionality</span></a>.  The low-level routine is in general faster because it avoids the string parsing.</p>
+</section>
+</section>
+<section id="predefined-mixtures">
+<span id="id2"></span><h2><a class="toc-backref" href="#id12" role="doc-backlink">Predefined Mixtures</a><a class="headerlink" href="#predefined-mixtures" title="Link to this heading">#</a></h2>
+<p>A number of predefined mixtures are included in CoolProp.  You can retrieve the list of predefined mixtures by calling <code class="docutils literal notranslate"><span class="pre">get_global_param_string(&quot;predefined_mixtures&quot;)</span></code> which will return a comma-separated list of predefined mixtures.  In Python, to get the first 6 mixtures, you would do</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [34]: </span><span class="n">CP</span><span class="o">.</span><span class="n">get_global_param_string</span><span class="p">(</span><span class="s1">&#39;predefined_mixtures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="gh">Out[34]: </span>
+<span class="go">[&#39;AIR.MIX&#39;,</span>
+<span class="go"> &#39;AMARILLO.MIX&#39;,</span>
+<span class="go"> &#39;Air.mix&#39;,</span>
+<span class="go"> &#39;Amarillo.mix&#39;,</span>
+<span class="go"> &#39;EKOFISK.MIX&#39;,</span>
+<span class="go"> &#39;Ekofisk.mix&#39;]</span>
+</pre></div>
+</div>
+<p>and then to calculate the density of air using the mixture model at 1 atmosphere (=101325 Pa) and 300 K, you could do</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [36]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;Air.mix&#39;</span><span class="p">)</span>
+<span class="gh">Out[36]: </span><span class="go">1.1766918914834088</span>
+</pre></div>
+</div>
+<p>Exactly the same methodology can be used from other wrappers.</p>
+</section>
+<section id="user-defined-mixtures">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">User-Defined Mixtures</a><a class="headerlink" href="#user-defined-mixtures" title="Link to this heading">#</a></h2>
+<p>When using mixtures in CoolProp, you can specify mixture components and composition by encoding the mixture components and mole fractions by doing something like</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [38]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;HEOS::R32[0.697615]&amp;R125[0.302385]&#39;</span><span class="p">)</span>
+<span class="gh">Out[38]: </span><span class="go">2.9868857539629334</span>
+</pre></div>
+</div>
+<p>You can handle ternary and multi-component mixtures in the same fashion, just add the other components to the fluid string with a <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> separating components and the fraction of the component in <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code> brackets</p>
+</section>
+<section id="reference-states">
+<span id="high-level-set-reference-state"></span><h2><a class="toc-backref" href="#id14" role="doc-backlink">Reference States</a><a class="headerlink" href="#reference-states" title="Link to this heading">#</a></h2>
+<p>Enthalpy and entropy are <em>relative</em> properties!  You should always be comparing <em>differences</em> in enthalpy rather than absolute values of the enthalpy or entropy.  That said, if can be useful to set the reference state values for enthalpy and entropy to one of a few standard values.  This is done by the use of the <code class="docutils literal notranslate"><span class="pre">set_reference_state</span></code> function in python, or the <code class="docutils literal notranslate"><span class="pre">set_reference_stateS</span></code> function most everywhere else.  For documentation of the underlying C++ function, see <a class="reference external" href="https://coolprop.org/_static/doxygen/html/namespace_cool_prop.html#a1146998229df998ab2637f6a61aa0873">CoolProp::set_reference_stateS()</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The changing of the reference state should be part of the initialization of your program, and it is not recommended to change the reference state during the course of making calculations</p>
+</div>
+<p>A number of reference states can be used:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IIR</span></code>: h = 200 kJ/kg, s=1 kJ/kg/K at 0C saturated liquid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ASHRAE</span></code>: h = 0, s = 0 &#64; -40C saturated liquid</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NBP</span></code>: h=0, s=0 for saturated liquid at 1 atmosphere</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEF</span></code>: Go back to the default reference state for the fluid</p></li>
+</ul>
+<p>which can be used like</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [40]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_reference_state</span><span class="p">(</span><span class="s1">&#39;n-Propane&#39;</span><span class="p">,</span><span class="s1">&#39;ASHRAE&#39;</span><span class="p">)</span>
+
+<span class="go"># Should be zero (or very close to it)</span>
+<span class="gp">In [41]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mf">233.15</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n-Propane&#39;</span><span class="p">)</span>
+<span class="gh">Out[41]: </span><span class="go">1.464219296919336e-11</span>
+
+<span class="go"># Back to the original value</span>
+<span class="gp">In [42]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_reference_state</span><span class="p">(</span><span class="s1">&#39;n-Propane&#39;</span><span class="p">,</span><span class="s1">&#39;DEF&#39;</span><span class="p">)</span>
+
+<span class="go"># Should not be zero</span>
+<span class="gp">In [43]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="mf">233.15</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;n-Propane&#39;</span><span class="p">)</span>
+<span class="gh">Out[43]: </span><span class="go">105123.27213761483</span>
+</pre></div>
+</div>
+<p>For non-standard reference states, you can specify them directly for the given temperature and molar(!) density.  Here is an example of setting the enthalpy and entropy at 298.15 K and 1 atm to some specified values</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [45]: </span><span class="n">Dmolar</span> <span class="o">=</span> <span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Dmolar&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span> <span class="s2">&quot;NH3&quot;</span><span class="p">)</span>
+
+<span class="gp">In [46]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_reference_state</span><span class="p">(</span><span class="s1">&#39;NH3&#39;</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="n">Dmolar</span><span class="p">,</span> <span class="o">-</span><span class="mf">60000.12</span><span class="p">,</span> <span class="mf">314.159</span><span class="p">)</span> <span class="c1"># fluid, T, D (mol/m^3), h (J/mol), s (J/mol/K)</span>
+
+<span class="gp">In [47]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Hmolar&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span> <span class="s2">&quot;NH3&quot;</span><span class="p">)</span>
+<span class="gh">Out[47]: </span><span class="go">-60000.119999999995</span>
+
+<span class="gp">In [48]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s2">&quot;Smolar&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="mf">298.15</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="mi">101325</span><span class="p">,</span> <span class="s2">&quot;NH3&quot;</span><span class="p">)</span>
+<span class="gh">Out[48]: </span><span class="go">314.15900000000005</span>
+
+<span class="go"># Back to the original value</span>
+<span class="gp">In [49]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_reference_state</span><span class="p">(</span><span class="s1">&#39;NH3&#39;</span><span class="p">,</span><span class="s1">&#39;DEF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calling-refprop">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Calling REFPROP</a><a class="headerlink" href="#calling-refprop" title="Link to this heading">#</a></h2>
+<p>If you have the <a class="reference external" href="https://www.nist.gov/srd/nist23.cfm">REFPROP library</a> installed, you can call REFPROP in the same way that you call CoolProp, but with <code class="docutils literal notranslate"><span class="pre">REFPROP::</span></code> preceding the fluid name. For instance, as in python:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="go"># Using properties from CoolProp to get R410A density</span>
+<span class="gp">In [51]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;HEOS::R32[0.697615]&amp;R125[0.302385]&#39;</span><span class="p">)</span>
+<span class="gh">Out[51]: </span><span class="go">2.9868857539629334</span>
+
+<span class="go"># Using properties from REFPROP to get R410A density</span>
+<span class="gp">In [52]: </span><span class="n">CP</span><span class="o">.</span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;REFPROP::R32[0.697615]&amp;R125[0.302385]&#39;</span><span class="p">)</span>
+<span class="gh">Out[52]: </span><span class="go">2.9868867801892165</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-fluids">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Adding Fluids</a><a class="headerlink" href="#adding-fluids" title="Link to this heading">#</a></h2>
+<p>The fluids in CoolProp are all compiled into the library itself, and are given in the <a class="reference external" href="https://json.org">JSON</a> format.  They are all stored in the <code class="docutils literal notranslate"><span class="pre">dev/fluids</span></code> folder relative to the root of the repository.  If you want to obtain the JSON data for a fluid from CoolProp, print out a part of it, and then load it back into CoolProp, you could do:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="go"># Get the JSON structure for Water</span>
+<span class="gp">In [54]: </span><span class="n">jj</span> <span class="o">=</span> <span class="n">CP</span><span class="o">.</span><span class="n">get_fluid_param_string</span><span class="p">(</span><span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="s2">&quot;JSON&quot;</span><span class="p">)</span>
+
+<span class="go"># Now load it back into CoolProp - Oops! This isn&#39;t going to work because it is already there.</span>
+<span class="gp">In [55]: </span><span class="n">CP</span><span class="o">.</span><span class="n">add_fluids_as_JSON</span><span class="p">(</span><span class="s2">&quot;HEOS&quot;</span><span class="p">,</span> <span class="n">jj</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">55</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">CP</span><span class="o">.</span><span class="n">add_fluids_as_JSON</span><span class="p">(</span><span class="s2">&quot;HEOS&quot;</span><span class="p">,</span> <span class="n">jj</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: Unable to load fluid [Water] due to error: Cannot load fluid [Water:7732-18-5] because it is already in library; index = [63] of [136]; Consider enabling the config boolean variable OVERWRITE_FLUIDS
+
+<span class="c1"># Set the configuration variable allowing for overwriting</span>
+<span class="gp">In [56]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_config_bool</span><span class="p">(</span><span class="n">CP</span><span class="o">.</span><span class="n">OVERWRITE_FLUIDS</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="go"># Now load it back into CoolProp - Success!</span>
+<span class="gp">In [57]: </span><span class="n">CP</span><span class="o">.</span><span class="n">add_fluids_as_JSON</span><span class="p">(</span><span class="s2">&quot;HEOS&quot;</span><span class="p">,</span> <span class="n">jj</span><span class="p">)</span>
+<span class="gh">Out[57]: </span><span class="go">True</span>
+
+<span class="go"># Turn overwriting back off</span>
+<span class="gp">In [58]: </span><span class="n">CP</span><span class="o">.</span><span class="n">set_config_bool</span><span class="p">(</span><span class="n">CP</span><span class="o">.</span><span class="n">OVERWRITE_FLUIDS</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="c-sample-code">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">C++ Sample Code</a><a class="headerlink" href="#c-sample-code" title="Link to this heading">#</a></h2>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;CoolProp/CoolProp.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">CoolProp</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// First type (slowest, due to most string processing, exposed in DLL)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSI</span><span class="p">(</span><span class="s">&quot;Dmolar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Propane[0.5]&amp;Ethane[0.5]&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// Default backend is HEOS</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSI</span><span class="p">(</span><span class="s">&quot;Dmolar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HEOS::Propane[0.5]&amp;Ethane[0.5]&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSI</span><span class="p">(</span><span class="s">&quot;Dmolar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">298</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;REFPROP::Propane[0.5]&amp;Ethane[0.5]&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Vector example</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">z</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Second type (C++ only, a bit faster, allows for vector inputs and outputs)</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fluids</span><span class="p">;</span>
+<span class="w">    </span><span class="n">fluids</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;Propane&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fluids</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;Ethane&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">outputs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;Dmolar&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">298</span><span class="p">),</span><span class="w"> </span><span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSImulti</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fluids</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// Default backend is HEOS</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSImulti</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HEOS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fluids</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Comment me out if REFPROP is not installed</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PropsSImulti</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;REFPROP&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fluids</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// All done return</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="c-sample-code-output">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">C++ Sample Code Output</a><a class="headerlink" href="#c-sample-code-output" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">40.8269</span>
+<span class="mf">40.8269</span>
+<span class="mf">40.8269</span>
+<span class="mf">40.8269</span>
+<span class="mf">40.8269</span>
+<span class="mf">40.8269</span>
+</pre></div>
+</div>
+</section>
+<section id="sample-code">
+<span id="props-sample"></span><h2><a class="toc-backref" href="#id19" role="doc-backlink">Sample Code</a><a class="headerlink" href="#sample-code" title="Link to this heading">#</a></h2>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">CoolProp</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">CP</span>
+
+<span class="gp">In [60]: </span><span class="nb">print</span><span class="p">(</span><span class="n">CP</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="go">8.0.0</span>
+
+<span class="gp">In [61]: </span><span class="nb">print</span><span class="p">(</span><span class="n">CP</span><span class="o">.</span><span class="n">__gitrevision__</span><span class="p">)</span>
+<span class="go">ae81610e7d23efc57f9d051c8e70a4d66e87537f</span>
+
+<span class="go">#Import the things you need</span>
+<span class="gp">In [62]: </span><span class="kn">from</span><span class="w"> </span><span class="nn">CoolProp.CoolProp</span><span class="w"> </span><span class="kn">import</span> <span class="n">PropsSI</span>
+
+<span class="go"># Specific heat (J/kg/K) of 20% ethylene glycol as a function of T</span>
+<span class="gp">In [63]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">298.15</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;INCOMP::MEG-20%&#39;</span><span class="p">)</span>
+<span class="gh">Out[63]: </span><span class="go">3905.2706242925874</span>
+
+<span class="go"># Density of Air at standard atmosphere in kg/m^3</span>
+<span class="gp">In [64]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">298.15</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Air&#39;</span><span class="p">)</span>
+<span class="gh">Out[64]: </span><span class="go">1.1843184839089664</span>
+
+<span class="go"># Saturation temperature of Water at 1 atm</span>
+<span class="gp">In [65]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[65]: </span><span class="go">373.12429584766636</span>
+
+<span class="go"># Saturated vapor enthalpy of R134a at 0C (Q=1)</span>
+<span class="gp">In [66]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">273.15</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;R134a&#39;</span><span class="p">)</span>
+<span class="gh">Out[66]: </span><span class="go">398603.45362765493</span>
+
+<span class="go"># Saturated liquid enthalpy of R134a at 0C (Q=0)</span>
+<span class="gp">In [67]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mf">273.15</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;R134a&#39;</span><span class="p">)</span>
+<span class="gh">Out[67]: </span><span class="go">199999.98852614488</span>
+
+<span class="go"># Using properties from CoolProp to get R410A density</span>
+<span class="gp">In [68]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;HEOS::R32[0.697615]&amp;R125[0.302385]&#39;</span><span class="p">)</span>
+<span class="gh">Out[68]: </span><span class="go">2.9868857539629334</span>
+
+<span class="go"># Using properties from REFPROP to get R410A density</span>
+<span class="gp">In [69]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;REFPROP::R32[0.697615]&amp;R125[0.302385]&#39;</span><span class="p">)</span>
+<span class="gh">Out[69]: </span><span class="go">2.9868867801892165</span>
+
+<span class="go"># Check that the same as using pseudo-pure</span>
+<span class="gp">In [70]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="mi">101325</span><span class="p">,</span><span class="s1">&#39;R410A&#39;</span><span class="p">)</span>
+<span class="gh">Out[70]: </span><span class="go">2.986868076922677</span>
+
+<span class="go"># Using IF97 to get Water saturated vapor density at 100C</span>
+<span class="gp">In [71]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;IF97::Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[71]: </span><span class="go">1.369249628304668</span>
+
+<span class="go"># Check the IF97 result using the default HEOS</span>
+<span class="gp">In [72]: </span><span class="n">PropsSI</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="s1">&#39;Q&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;Water&#39;</span><span class="p">)</span>
+<span class="gh">Out[72]: </span><span class="go">1.36940754100682</span>
+</pre></div>
+</div>
+</section>
+<section id="table-of-string-inputs-to-propssi-function">
+<span id="parameter-table"></span><h2><a class="toc-backref" href="#id20" role="doc-backlink">Table of string inputs to PropsSI function</a><a class="headerlink" href="#table-of-string-inputs-to-propssi-function" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that any parameter that is indicated as a trivial parameter can be obtained from the <code class="docutils literal notranslate"><span class="pre">Props1SI</span></code> function as shown above in <a class="reference internal" href="#trivial-inputs"><span class="std std-ref">Trivial inputs</span></a></p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Units</p></th>
+<th class="head"><p>Input/Output</p></th>
+<th class="head"><p>Trivial</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DELTA</span></code>, <code class="docutils literal notranslate"><span class="pre">Delta</span></code></p></td>
+<td></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Reduced density (rho/rhoc)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Dmolar</span></code></p></td>
+<td><p>mol/m^3</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Molar density</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">DMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Dmass</span></code></p></td>
+<td><p>kg/m^3</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Mass density</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Hmolar</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific enthalpy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">H</span></code>, <code class="docutils literal notranslate"><span class="pre">HMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Hmass</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific enthalpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">P</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Pressure</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">QMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Qmass</span></code></p></td>
+<td><p>kg/kg</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Mass-basis vapor quality</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td><p>mol/mol</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Molar vapor quality</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Smolar</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific entropy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">SMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Smass</span></code></p></td>
+<td><p>J/kg/K</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific entropy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TAU</span></code>, <code class="docutils literal notranslate"><span class="pre">Tau</span></code></p></td>
+<td></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Reciprocal reduced temperature (Tc/T)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>K</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Umolar</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific internal energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">U</span></code>, <code class="docutils literal notranslate"><span class="pre">UMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Umass</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>IO</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific internal energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ACENTRIC</span></code>, <code class="docutils literal notranslate"><span class="pre">acentric</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Acentric factor</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ALPHA0</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha0</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal Helmholtz energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ALPHAR</span></code>, <code class="docutils literal notranslate"><span class="pre">alphar</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Residual Helmholtz energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">SPEED_OF_SOUND</span></code>, <code class="docutils literal notranslate"><span class="pre">speed_of_sound</span></code></p></td>
+<td><p>m/s</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Speed of sound</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">BVIRIAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Bvirial</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Second virial coefficient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CONDUCTIVITY</span></code>, <code class="docutils literal notranslate"><span class="pre">L</span></code>, <code class="docutils literal notranslate"><span class="pre">conductivity</span></code></p></td>
+<td><p>W/m/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Thermal conductivity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CP0MASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Cp0mass</span></code></p></td>
+<td><p>J/kg/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas mass specific constant pressure specific heat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CP0MOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Cp0molar</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas molar specific constant pressure specific heat</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CPMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Cpmolar</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific constant pressure specific heat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CVIRIAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Cvirial</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Third virial coefficient</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CVMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Cvmass</span></code>, <code class="docutils literal notranslate"><span class="pre">O</span></code></p></td>
+<td><p>J/kg/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific constant volume specific heat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CVMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Cvmolar</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific constant volume specific heat</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">CPMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Cpmass</span></code></p></td>
+<td><p>J/kg/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific constant pressure specific heat</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">D2ALPHA0_DDELTA2_CONSTTAU</span></code>, <code class="docutils literal notranslate"><span class="pre">d2alpha0_ddelta2_consttau</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Second derivative of ideal Helmholtz energy with delta</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">D3ALPHA0_DDELTA3_CONSTTAU</span></code>, <code class="docutils literal notranslate"><span class="pre">d3alpha0_ddelta3_consttau</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Third derivative of ideal Helmholtz energy with delta</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DALPHA0_DDELTA_CONSTTAU</span></code>, <code class="docutils literal notranslate"><span class="pre">dalpha0_ddelta_consttau</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of ideal Helmholtz energy with delta</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DALPHA0_DTAU_CONSTDELTA</span></code>, <code class="docutils literal notranslate"><span class="pre">dalpha0_dtau_constdelta</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of ideal Helmholtz energy with tau</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DALPHAR_DDELTA_CONSTTAU</span></code>, <code class="docutils literal notranslate"><span class="pre">dalphar_ddelta_consttau</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of residual Helmholtz energy with delta</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DALPHAR_DTAU_CONSTDELTA</span></code>, <code class="docutils literal notranslate"><span class="pre">dalphar_dtau_constdelta</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of residual Helmholtz energy with tau</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DBVIRIAL_DT</span></code>, <code class="docutils literal notranslate"><span class="pre">dBvirial_dT</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of second virial coefficient with respect to T</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DCVIRIAL_DT</span></code>, <code class="docutils literal notranslate"><span class="pre">dCvirial_dT</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Derivative of third virial coefficient with respect to T</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DIPOLE_MOMENT</span></code>, <code class="docutils literal notranslate"><span class="pre">dipole_moment</span></code></p></td>
+<td><p>C m</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Dipole moment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FH</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Flammability hazard</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FRACTION_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">fraction_max</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Fraction (mole, mass, volume) maximum value for incompressible solutions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">FRACTION_MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">fraction_min</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Fraction (mole, mass, volume) minimum value for incompressible solutions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">FUNDAMENTAL_DERIVATIVE_OF_GAS_DYNAMICS</span></code>, <code class="docutils literal notranslate"><span class="pre">fundamental_derivative_of_gas_dynamics</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Fundamental derivative of gas dynamics</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GAS_CONSTANT</span></code>, <code class="docutils literal notranslate"><span class="pre">gas_constant</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Molar gas constant</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GMOLAR_RESIDUAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Gmolar_residual</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Residual molar Gibbs energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Gmolar</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific Gibbs energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GWP100</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>100-year global warming potential</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GWP20</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>20-year global warming potential</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GWP500</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>500-year global warming potential</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">G</span></code>, <code class="docutils literal notranslate"><span class="pre">GMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Gmass</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific Gibbs energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HELMHOLTZMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">Helmholtzmass</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Mass specific Helmholtz energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HELMHOLTZMOLAR</span></code>, <code class="docutils literal notranslate"><span class="pre">Helmholtzmolar</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Molar specific Helmholtz energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HH</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Health hazard</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HMASS_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Hmass_idealgas</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas specific enthalpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HMOLAR_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Hmolar_idealgas</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas molar enthalpy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HMOLAR_RESIDUAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Hmolar_residual</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Residual molar enthalpy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ISENTROPIC_EXPANSION_COEFFICIENT</span></code>, <code class="docutils literal notranslate"><span class="pre">isentropic_expansion_coefficient</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Isentropic expansion coefficient</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ISOBARIC_EXPANSION_COEFFICIENT</span></code>, <code class="docutils literal notranslate"><span class="pre">isobaric_expansion_coefficient</span></code></p></td>
+<td><p>1/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Isobaric expansion coefficient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ISOTHERMAL_COMPRESSIBILITY</span></code>, <code class="docutils literal notranslate"><span class="pre">isothermal_compressibility</span></code></p></td>
+<td><p>1/Pa</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Isothermal compressibility</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">I</span></code>, <code class="docutils literal notranslate"><span class="pre">SURFACE_TENSION</span></code>, <code class="docutils literal notranslate"><span class="pre">surface_tension</span></code></p></td>
+<td><p>N/m</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Surface tension</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">M</span></code>, <code class="docutils literal notranslate"><span class="pre">MOLARMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">MOLAR_MASS</span></code>, <code class="docutils literal notranslate"><span class="pre">MOLEMASS</span></code>, <code class="docutils literal notranslate"><span class="pre">molar_mass</span></code>, <code class="docutils literal notranslate"><span class="pre">molarmass</span></code>, <code class="docutils literal notranslate"><span class="pre">molemass</span></code></p></td>
+<td><p>kg/mol</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Molar mass</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ODP</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Ozone depletion potential</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PCRIT</span></code>, <code class="docutils literal notranslate"><span class="pre">P_CRITICAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Pcrit</span></code>, <code class="docutils literal notranslate"><span class="pre">p_critical</span></code>, <code class="docutils literal notranslate"><span class="pre">pcrit</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Pressure at the critical point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PHASE</span></code>, <code class="docutils literal notranslate"><span class="pre">Phase</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Phase index as a float</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PH</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Physical hazard</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PIP</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Phase identification parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PMAX</span></code>, <code class="docutils literal notranslate"><span class="pre">P_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">P_max</span></code>, <code class="docutils literal notranslate"><span class="pre">pmax</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Maximum pressure limit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PMIN</span></code>, <code class="docutils literal notranslate"><span class="pre">P_MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">P_min</span></code>, <code class="docutils literal notranslate"><span class="pre">pmin</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Minimum pressure limit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PRANDTL</span></code>, <code class="docutils literal notranslate"><span class="pre">Prandtl</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Prandtl number</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PTRIPLE</span></code>, <code class="docutils literal notranslate"><span class="pre">P_TRIPLE</span></code>, <code class="docutils literal notranslate"><span class="pre">p_triple</span></code>, <code class="docutils literal notranslate"><span class="pre">ptriple</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Pressure at the triple point (pure only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">P_REDUCING</span></code>, <code class="docutils literal notranslate"><span class="pre">p_reducing</span></code></p></td>
+<td><p>Pa</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Pressure at the reducing point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RHOCRIT</span></code>, <code class="docutils literal notranslate"><span class="pre">RHOMASS_CRITICAL</span></code>, <code class="docutils literal notranslate"><span class="pre">rhocrit</span></code>, <code class="docutils literal notranslate"><span class="pre">rhomass_critical</span></code></p></td>
+<td><p>kg/m^3</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Mass density at critical point</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RHOMASS_REDUCING</span></code>, <code class="docutils literal notranslate"><span class="pre">rhomass_reducing</span></code></p></td>
+<td><p>kg/m^3</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Mass density at reducing point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RHOMOLAR_CRITICAL</span></code>, <code class="docutils literal notranslate"><span class="pre">rhomolar_critical</span></code></p></td>
+<td><p>mol/m^3</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Molar density at critical point</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RHOMOLAR_REDUCING</span></code>, <code class="docutils literal notranslate"><span class="pre">rhomolar_reducing</span></code></p></td>
+<td><p>mol/m^3</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Molar density at reducing point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SMASS_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Smass_idealgas</span></code></p></td>
+<td><p>J/kg/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas specific entropy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SMOLAR_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Smolar_idealgas</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas molar entropy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SMOLAR_RESIDUAL</span></code>, <code class="docutils literal notranslate"><span class="pre">Smolar_residual</span></code></p></td>
+<td><p>J/mol/K</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Residual molar entropy (sr/R = s(T,rho) - s^0(T,rho))</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TCRIT</span></code>, <code class="docutils literal notranslate"><span class="pre">T_CRITICAL</span></code>, <code class="docutils literal notranslate"><span class="pre">T_critical</span></code>, <code class="docutils literal notranslate"><span class="pre">Tcrit</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Temperature at the critical point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TMAX</span></code>, <code class="docutils literal notranslate"><span class="pre">T_MAX</span></code>, <code class="docutils literal notranslate"><span class="pre">T_max</span></code>, <code class="docutils literal notranslate"><span class="pre">Tmax</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Maximum temperature limit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TMIN</span></code>, <code class="docutils literal notranslate"><span class="pre">T_MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">T_min</span></code>, <code class="docutils literal notranslate"><span class="pre">Tmin</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Minimum temperature limit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">TTRIPLE</span></code>, <code class="docutils literal notranslate"><span class="pre">T_TRIPLE</span></code>, <code class="docutils literal notranslate"><span class="pre">T_triple</span></code>, <code class="docutils literal notranslate"><span class="pre">Ttriple</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Temperature at the triple point</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T_FREEZE</span></code>, <code class="docutils literal notranslate"><span class="pre">T_freeze</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Freezing temperature for incompressible solutions</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T_REDUCING</span></code>, <code class="docutils literal notranslate"><span class="pre">T_reducing</span></code></p></td>
+<td><p>K</p></td>
+<td><p>O</p></td>
+<td><p>True</p></td>
+<td><p>Temperature at the reducing point</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UMASS_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Umass_idealgas</span></code></p></td>
+<td><p>J/kg</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas specific internal energy</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UMOLAR_IDEALGAS</span></code>, <code class="docutils literal notranslate"><span class="pre">Umolar_idealgas</span></code></p></td>
+<td><p>J/mol</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Ideal gas molar internal energy</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">V</span></code>, <code class="docutils literal notranslate"><span class="pre">VISCOSITY</span></code>, <code class="docutils literal notranslate"><span class="pre">viscosity</span></code></p></td>
+<td><p>Pa s</p></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Viscosity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Z</span></code></p></td>
+<td></td>
+<td><p>O</p></td>
+<td><p>False</p></td>
+<td><p>Compressibility factor</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="wrappers/MSYS2/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">MSYS2 Setup</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="LowLevelAPI.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Low Level Interface</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versions">Versions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propssi-function">PropsSI function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vapor-liquid-and-saturation-states">Vapor, Liquid, and Saturation States</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imposing-the-phase-optional">Imposing the Phase (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluid-information">Fluid information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trivial-inputs">Trivial inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phasesi-function">PhaseSI function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-derivatives">Partial Derivatives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-partial-derivatives-for-single-phase-states">First Partial Derivatives for Single-phase States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-partial-derivatives-for-single-phase-states">Second Partial Derivatives for Single-Phase States</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-saturation-derivatives">First Saturation Derivatives</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predefined-mixtures">Predefined Mixtures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-mixtures">User-Defined Mixtures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-states">Reference States</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-refprop">Calling REFPROP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-fluids">Adding Fluids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-sample-code">C++ Sample Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-sample-code-output">C++ Sample Code Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-code">Sample Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-string-inputs-to-propssi-function">Table of string inputs to PropsSI function</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/coolprop/HighLevelAPI.rst.txt"
+           rel="nofollow">Show Source</a></li>
+    <li><a href="https://github.com/CoolProp/CoolProp/blob/master/Web/coolprop/HighLevelAPI.rst"
+           rel="nofollow">Show on GitHub</a></li>
+    <li><a href="https://github.com/CoolProp/CoolProp/edit/master/Web/coolprop/HighLevelAPI.rst"
+           rel="nofollow">Edit on GitHub</a></li>
+  </ul></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2010-2026, Ian H. Bell and the CoolProp Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
