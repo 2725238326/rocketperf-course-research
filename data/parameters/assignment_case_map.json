@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "dataset_id": "assignment-case-map-v1",
+  "updated_at": "2026-10-05",
+  "source_cutoff": "2026-10-03",
+  "status": "evidence_and_method_map_not_engine_solver_inputs",
+  "unit_system": "SI",
+  "records": [
+    {
+      "id": "zq3_y1_stage1",
+      "object": "ZQ-3",
+      "variant": "遥一",
+      "stage": "一级",
+      "parameter": "configuration_and_calculation_scope",
+      "value": "9xTQ-12A; LOX/methane",
+      "unit": "configuration",
+      "data_role": "fact",
+      "operating_boundary": "2025-12-03 flight configuration; no per-engine performance card",
+      "source_refs": ["V09_zq3_y1"],
+      "baseline_record_refs": ["zq3_y1_stage1_configuration", "zq3_y1_stage1_engine", "zq3_y1_liftoff_thrust"],
+      "derived_record_refs": ["zq3_tq12a_sea_level_thrust"],
+      "assumption_record_refs": ["zq3_stage1_pressure_area_scenario"],
+      "model_use": "configuration_context_and_explicit_method_studies_only",
+      "notes": "7542 kN is vehicle liftoff thrust. V08's TQ-12A product scale is not this flight operating point; TQ-12B is a separate product version.",
+      "unknown_fields": [
+        "chamber_pressure_pa", "throat_area_m2", "area_ratio", "main_chamber_O_F",
+        "inlet_temperature_pressure", "cycle_flow_split_and_shaft_power",
+        "engine_Isp_with_operating_condition", "recovery_mass_and_throttle_history"
+      ],
+      "can_calculate": [
+        "Pure CH4/O2 assumed single-liquid states -> nine-gas HP -> fixed-area frozen nozzle; only inside the pinned table and solver domains.",
+        "Nozzle area/back-pressure and external-branch bookkeeping under explicitly synthetic common conditions."
+      ],
+      "cannot_calculate": [
+        "Actual TQ-12A chamber temperature, single-engine thrust or engine Isp: batch Pc/geometry/O-F/inlet and cycle boundary are missing.",
+        "Multiply the synthetic nozzle by nine to claim vehicle thrust; the total public thrust does not identify nine operating points.",
+        "Recovery propellant consumption or reuse life without time histories and hardware data."
+      ],
+      "case_refs": ["continuous_liquid_hp", "synthetic_cycle_trade"],
+      "excluded_version_refs": ["V08_landspace_product", "V10_zq3_y2"]
+    },
+    {
+      "id": "zq3_y1_stage2",
+      "object": "ZQ-3",
+      "variant": "遥一",
+      "stage": "二级",
+      "parameter": "configuration_and_calculation_scope",
+      "value": "1xTQ-15A vacuum engine; LOX/methane",
+      "unit": "configuration",
+      "data_role": "fact",
+      "operating_boundary": "2025-12-03 flight configuration",
+      "source_refs": ["V09_zq3_y1", "V11_tq15a"],
+      "baseline_record_refs": ["zq3_y1_stage2_configuration"],
+      "derived_record_refs": [],
+      "assumption_record_refs": [],
+      "model_use": "configuration_context_and_explicit_method_studies_only",
+      "notes": "V11 is a 2022 ZQ-2 second-batch application article: 836 kN and 60%-110% are historical family references, not a ZQ-3 Y1 performance card. Exhaust entering the nozzle extension is not proof of main-chamber return.",
+      "unknown_fields": [
+        "chamber_pressure_pa", "throat_area_m2", "area_ratio", "main_chamber_O_F",
+        "inlet_temperature_pressure", "turbine_exhaust_mixing_and_nozzle_boundary",
+        "engine_Isp_with_operating_condition", "restart_operating_history"
+      ],
+      "can_calculate": [
+        "Pure CH4/O2 assumed inlet HP and vacuum frozen-nozzle geometry response, not calibrated TQ-15A performance.",
+        "External-branch thrust accounting as a teaching control-volume example; the existing two-separate-nozzle model does not reproduce exhaust mixing inside an extension."
+      ],
+      "cannot_calculate": [
+        "Actual TQ-15A vacuum thrust/Isp without this batch's inlet/Pc/geometry/O-F and turbine-exhaust conditions.",
+        "Nozzle-extension mixing, restart transient or repeated-use life with the existing steady frozen model."
+      ],
+      "case_refs": ["continuous_liquid_hp", "synthetic_cycle_trade"],
+      "excluded_version_refs": ["V08_landspace_product", "V10_zq3_y2"]
+    },
+    {
+      "id": "cz10b_first_stage1",
+      "object": "CZ-10B",
+      "variant": "首飞",
+      "stage": "一级",
+      "parameter": "configuration_and_calculation_scope",
+      "value": "7x液发100系列; LOX/kerosene; 5 gimbaled/restart-capable and 2 fixed",
+      "unit": "configuration",
+      "data_role": "fact",
+      "operating_boundary": "2026-07-10 first-flight/interview and 2026-07-15 developer article",
+      "source_refs": ["V01_calt_cz10b", "V02_calt_news", "V06_casc_engines", "V07_cctv_interview"],
+      "baseline_record_refs": ["cz10b_stage1_engine_family", "cz10b_stage1_propellant"],
+      "derived_record_refs": [],
+      "assumption_record_refs": ["cz10b_stage1_pressure_area_scenario"],
+      "model_use": "configuration_context_and_fuel_independent_formula_demonstration_only",
+      "notes": "130-ton-class and approx. 890/900 tf are scales, not exact single-engine operating points. Existing methane models cannot substitute for kerosene; RP-1 or n-dodecane is not confirmed Chinese fuel.",
+      "unknown_fields": [
+        "flight_engine_suffix", "kerosene_composition_and_enthalpy_basis",
+        "chamber_pressure_pa", "throat_area_m2", "area_ratio", "main_chamber_O_F",
+        "inlet_temperature_pressure", "cycle_architecture_and_return_composition",
+        "engine_Isp_with_operating_condition", "recovery_mass_and_throttle_history"
+      ],
+      "can_calculate": [
+        "Constant-gamma ideal-nozzle formula benchmark with explicitly supplied gas properties; it does not predict kerosene combustion.",
+        "Discuss pressure-thrust/geometry and control-volume bookkeeping using a synthetic methane reference, with no fuel-performance transfer."
+      ],
+      "cannot_calculate": [
+        "Kerosene HP/combustion/nozzle absolute performance: fuel composition, chemical h, product-set/phase coverage and batch inputs are missing.",
+        "Real closed-cycle performance: the prototype rejects nonzero return and does not mix return composition.",
+        "Actual seven-engine thrust, recovery consumption or life from the methane example or approximate thrust class."
+      ],
+      "case_refs": ["ideal_formula", "synthetic_cycle_trade"],
+      "excluded_version_refs": []
+    },
+    {
+      "id": "cz10b_first_stage2",
+      "object": "CZ-10B",
+      "variant": "首飞",
+      "stage": "二级",
+      "parameter": "configuration_and_calculation_scope",
+      "value": "LOX/methane; 140-ton-class engine description",
+      "unit": "configuration",
+      "data_role": "fact",
+      "operating_boundary": "2026-07-10 first-flight description and 2026-07-15 developer article",
+      "source_refs": ["V01_calt_cz10b", "V02_calt_news", "V06_casc_engines"],
+      "baseline_record_refs": ["cz10b_stage2_propellant", "cz10b_stage2_engine_scale"],
+      "derived_record_refs": [],
+      "assumption_record_refs": [],
+      "model_use": "propellant_family_context_and_explicit_method_studies_only",
+      "notes": "Engine model/count/cycle are unknown; do not infer YF-219 or exact vacuum thrust from the thrust class.",
+      "unknown_fields": [
+        "engine_model_and_count", "cycle_architecture",
+        "chamber_pressure_pa", "throat_area_m2", "area_ratio", "main_chamber_O_F",
+        "inlet_temperature_pressure", "engine_Isp_with_operating_condition",
+        "stage_mass_and_operating_history"
+      ],
+      "can_calculate": [
+        "Pure CH4/O2 assumed inlet HP and vacuum frozen-nozzle geometry response inside the validated method domain.",
+        "Explain common-input performance tradeoffs; shared propellant labels do not establish shared actual inlet/Pc/O-F/geometry."
+      ],
+      "cannot_calculate": [
+        "Actual single-engine or stage thrust/Isp without engine identity/count and batch inlet/Pc/geometry/O-F/cycle inputs.",
+        "A numerical ranking against TQ-15A by assigning identical hypothetical parameters to both.",
+        "Payload or stage delta-v without stage masses, consumption and flight operating history."
+      ],
+      "case_refs": ["continuous_liquid_hp", "synthetic_cycle_trade"],
+      "excluded_version_refs": []
+    }
+  ],
+  "research_cases": [
+    {
+      "id": "continuous_liquid_hp",
+      "model_id": "ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1",
+      "input_role": "research_assumption",
+      "use_scope": "method_not_vehicle_prediction",
+      "artifact_refs": ["results/validation/liquid_combustion_v1/manifest.json", "results/validation/liquid_combustion_v1/base_A10-stdout.txt", "docs/liquid-combustion-validation.md"],
+      "sample_report_ref": "results/validation/liquid_combustion_v1/base_A10-stdout.txt",
+      "requirements": ["REQ-02", "REQ-03", "REQ-04", "REQ-05"],
+      "limitations": "Single-phase table -> nine neutral ideal-gas species -> chamber-frozen nozzle; no kerosene, pumps, injector feasibility, cycle closure, condensed carbon or experimental validation."
+    },
+    {
+      "id": "synthetic_cycle_trade",
+      "model_id": "prescribed_thermal_cycle_v1",
+      "input_role": "research_assumption",
+      "use_scope": "method_not_vehicle_prediction",
+      "artifact_refs": ["cases/benchmarks/prescribed_cycle.ini", "docs/improvement-analysis.md", "results/research/README.md", "results/research/reference-coverage/frozen_v1/manifest.json", "results/validation/prescribed_cycle_v2_20261004_qa001/result.json"],
+      "sample_report_ref": "results/validation/prescribed_cycle_v2_20261004_qa001/result.json",
+      "requirements": ["REQ-02", "REQ-03", "REQ-05"],
+      "limitations": "Given thermal states and synthetic methane feeds; geometry/back-pressure and axial branch bookkeeping only. No kerosene or closed-cycle prediction, exhaust-extension mixing, cooling/side-load/life model."
+    },
+    {
+      "id": "ideal_formula",
+      "model_id": "ideal_constant_gamma_v1",
+      "input_role": "synthetic_benchmark",
+      "use_scope": "method_not_vehicle_prediction",
+      "artifact_refs": ["cases/benchmarks/air_mach2_vacuum.ini", "tests/reference/air_mach2.json", "docs/benchmarks.md"],
+      "requirements": ["REQ-02", "REQ-05"],
+      "limitations": "Constant-gamma ideal air formula/software benchmark, not methane or kerosene combustion performance."
+    }
+  ],
+  "missing_real_engine_fields": ["batch_Pc_At_area_ratio_O_F_inlet", "cycle_boundary_and_branch_conditions", "kerosene_chemical_properties", "CZ10B_stage2_engine_identity_count", "flight_mass_and_operating_history"],
+  "missing_value_policy": "Missing fields never become numeric solver inputs. This file maps evidence and existing method studies only; it is not a vehicle case file or flight-engine performance dataset."
+}

@@ -23,7 +23,7 @@ class DataContractTests(unittest.TestCase):
 
     def test_project_datasets_pass(self):
         source_index = ROOT / "调研/原始来源/来源文件索引.json"
-        for name in ("baseline.json", "assumptions.json", "feed_property_candidates.json"):
+        for name in ("baseline.json", "assumptions.json", "feed_property_candidates.json", "assignment_case_map.json"):
             with self.subTest(name=name):
                 self.assertEqual(check_data.validate_dataset(ROOT / "data/parameters" / name, source_index), [])
 
@@ -160,6 +160,60 @@ class DataContractTests(unittest.TestCase):
             self.assertAlmostEqual(sum(record["value"].values()), 1.0)
             self.assertIsNone(record["chemical_enthalpy_basis"])
             self.assertFalse(record["production_dependency"])
+
+    def test_assignment_associations_reject_missing_or_misleading_data(self):
+        dataset = json.loads((ROOT / "data/parameters/assignment_case_map.json").read_text(encoding="utf-8"))
+        mutations = (
+            lambda d: d["records"].pop(),
+            lambda d: d["records"].append(copy.deepcopy(d["records"][0])),
+            lambda d: d["records"][0].update(variant="遥二"),
+            lambda d: d["records"][0].update(source_refs=["V09"]),
+            lambda d: d["records"][0].update(cannot_calculate=[]),
+            lambda d: d["records"][0].update(unknown_fields=[None]),
+            lambda d: d["records"][0].update(baseline_record_refs=["synthetic_mach2"]),
+            lambda d: d["records"][0].update(baseline_record_refs=["zq3_y1_stage2_configuration"]),
+            lambda d: d["records"][0].update(baseline_record_refs=["zq3_product_current_configuration"]),
+            lambda d: d["records"][1].update(derived_record_refs=["zq3_tq12a_sea_level_thrust"]),
+            lambda d: d["records"][1].update(assumption_record_refs=["zq3_stage1_pressure_area_scenario"]),
+            lambda d: d["records"][0].update(assumption_record_refs=["cz10b_stage1_pressure_area_scenario"]),
+            lambda d: d["records"][2]["case_refs"].append("continuous_liquid_hp"),
+            lambda d: d["research_cases"][0].update(use_scope="vehicle_prediction"),
+            lambda d: d["research_cases"][0].update(model_id="invented-model"),
+            lambda d: d["research_cases"][0].update(id=[]),
+            lambda d: d["research_cases"][0].update(id={}),
+            lambda d: d["research_cases"][0].update(artifact_refs=["docs/no-such-artifact.md"]),
+            lambda d: d["research_cases"][0].update(sample_report_ref="../../outside.json"),
+            lambda d: d["research_cases"][0].update(requirements=["REQ-99"]),
+            lambda d: d["research_cases"].append(copy.deepcopy(d["research_cases"][0])),
+            lambda d: d.update(research_cases=[None]),
+            lambda d: d.update(records=False),
+            lambda d: d.update(status="real_engine_inputs"),
+            lambda d: d.update(dataset_id="invented-map"),
+            lambda d: d.pop("dataset_id"),
+        )
+        for mutate in mutations:
+            with self.subTest(mutation=mutate.__code__.co_firstlineno):
+                candidate = copy.deepcopy(dataset)
+                mutate(candidate)
+                self.assertTrue(self.check_candidate(candidate))
+
+    def test_assignment_identity_cannot_disable_checks_at_canonical_filename(self):
+        dataset = json.loads((ROOT / "data/parameters/assignment_case_map.json").read_text(encoding="utf-8"))
+        dataset.pop("dataset_id")
+        dataset.pop("research_cases")
+        with tempfile.TemporaryDirectory(dir=ROOT / "build/test-tmp") as folder:
+            candidate = Path(folder) / "assignment_case_map.json"
+            candidate.write_text(json.dumps(dataset, ensure_ascii=False), encoding="utf-8")
+            problems = check_data.validate_dataset(candidate, ROOT / "调研/原始来源/来源文件索引.json")
+        self.assertTrue(any("pinned dataset_id" in item for item in problems))
+        self.assertTrue(any("research_cases" in item for item in problems))
+
+    def test_assignment_artifacts_are_part_of_test_identity(self):
+        import pipeline
+        tracked = {entry["path"] for entry in pipeline.test_records(ROOT)}
+        dataset = json.loads((ROOT / "data/parameters/assignment_case_map.json").read_text(encoding="utf-8"))
+        for case in dataset["research_cases"]:
+            self.assertTrue(set(case["artifact_refs"]).issubset(tracked))
 
 
 if __name__ == "__main__":

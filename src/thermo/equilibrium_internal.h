@@ -4,7 +4,9 @@
 #include "rocketperf/combustion.h"
 
 /* Internal adapter, not an unrestricted user-supplied thermodynamic model.
- * Feed builders supply positive CEA-basis elemental amounts and total h.
+ * Feed builders supply positive CEA-basis elemental amounts per kg and total h.
+ * Elemental mass must sum to one kg (absolute tolerance 1e-10 kg/kg);
+ * common scaling of the inventory is not silently normalized away.
  * All public gas and fixed-anchor APIs retain their separate inlet guards. */
 RpStatus rp_cho_equilibrium_hp_inventory(
     double pressure_pa,

@@ -230,6 +230,16 @@ def test_records(root):
                     if not isinstance(entry,dict) or not isinstance(entry.get('path'),str):
                         raise ValueError('Feed property source identity requires a path')
                     files.append(entry['path'])
+        if payload.get('dataset_id') == 'assignment-case-map-v1':
+            cases = payload.get('research_cases')
+            if not isinstance(cases, list):
+                raise ValueError('Assignment research cases must be an array')
+            for case in cases:
+                if not isinstance(case, dict) or not isinstance(case.get('artifact_refs'), list):
+                    raise ValueError('Assignment method requires artifact references')
+                if any(not isinstance(ref, str) for ref in case['artifact_refs']):
+                    raise ValueError('Assignment artifact reference must be a path')
+                files += case['artifact_refs']
     return file_records(root,files)
 
 

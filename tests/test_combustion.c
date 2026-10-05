@@ -747,6 +747,30 @@ static void test_continuous_liquid_failures(void)
         CHECK(rp_cho_equilibrium_hp_inventory(1e7, inventory, -1e6, NULL, &result, NULL) == RP_NUMERIC_ERROR);
         CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
     }
+    {
+        RpContinuousLiquidInlet checked_inlet;
+        double inventory[RP_CHO_ELEMENT_COUNT];
+        RpCombustionResult result, sentinel;
+        CHECK(rp_ch4_o2_continuous_liquid_inlet(&good, &checked_inlet, NULL) == RP_OK);
+        memset(&sentinel, 0x5a, sizeof(sentinel));
+        const double scales[] = {0.5, 2.0};
+        for (unsigned int s = 0U; s < sizeof(scales) / sizeof(scales[0]); ++s) {
+            for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+                inventory[e] = scales[s] * checked_inlet.element_inventory_kmol_per_kg[e];
+            }
+            result = sentinel;
+            CHECK(rp_cho_equilibrium_hp_inventory(
+                good.product_pressure_pa, inventory, checked_inlet.mixture_h_j_per_kg,
+                NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+            CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        }
+        for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) { inventory[e] = DBL_MAX; }
+        result = sentinel;
+        CHECK(rp_cho_equilibrium_hp_inventory(
+            good.product_pressure_pa, inventory, checked_inlet.mixture_h_j_per_kg,
+            NULL, &result, NULL) == RP_NUMERIC_ERROR);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    }
 }
 int main(void)
 {

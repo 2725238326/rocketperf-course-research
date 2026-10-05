@@ -4,6 +4,7 @@
 
 ## 现在有什么
 
+- 两型研究：[四级段汇合入口](docs/two-vehicle-study.md)对应遥一/首飞一二级、原文定位、已有计算、假设及未知字段；[映射](data/parameters/assignment_case_map.json)拒绝错角色/版本/级段和煤油挂甲烷HP。它不是型号性能输入，机械关联检查不证明原文科学语义。
 - C17：定比热教学喷管、十物种NASA9、九种中性C/H/O气体TP/HP（气态温度/显式焓或固定液态反应物锚点）、冻结/固定面积喷管、给定热状态外排循环及单输入扫描。入口扩展只闭合燃烧室和单喷管，不改循环。
 - 固定参考：NASA9/Cantera软件对照、四个CEA受限气相方法工况、合成循环实际六状态CEA TP、五状态主室冻结喷管与11个固定面积C点、泵/涡轮解析极限。没有完整发动机独立实验或整机循环同条件外部参考。
 - 新气态研究：12组入口温度/O-F条件的HP和固定喷管响应，每组新跑CEA；见[结果与SVG](docs/adiabatic-inlet-study.md)。它不是液态预热或两型实装设计。
@@ -54,3 +55,5 @@ python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
 固定液态锚点的代码、运行、真实失败与Windows检查见[计算快照](taskshot/2026-10-05_032-liquid-anchor.md)，干净源码复验见[接收记录](taskshot/2026-10-05_033-liquid-anchor-receipt.md)，包内接续任务修正见[修正记录](taskshot/2026-10-05_034-handoff-routing.md)。固定几何入口响应见[前序计算](taskshot/2026-10-05_029-inlet-response.md)和[固定提交接收](taskshot/2026-10-05_030-inlet-response-receipt.md)；入口候选见[研究快照](taskshot/2026-10-05_031-feed-properties.md)。原始来源、旧快照、参考输出和旧构建未删除或改写。每个实质批次落地本地提交，不自动推送。
 
 ANA-010 的连续液体入口 HP、固定面积喷管、C/CEA 归档与当前质量/静态分析证据见[本轮快照](taskshot/2026-10-05_038-liquid-combustion.md)和[核验说明](docs/liquid-combustion-validation.md)。接手时不要把连续表温压当成两型真实入口；不要把软件对照当成实验；先以任务板和最新质量报告核对提交身份，再领取后续泵后边界、煤油或循环任务。
+
+ANA-011 的四级段整合和每kg元素库存契约补强见[执行记录](taskshot/2026-10-05_039-two-vehicle-study.md)。内部HP现在拒绝库存整体缩放或质量上溢，失败保持输出；原公开入口本已生成正确库存，不把内部护栏缺口写成旧基线数值错误。接续以生成工作面为准，不回到已完成的温变物性或入口诊断任务。

@@ -4,6 +4,8 @@
 
 [打开作业对接与架构图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
+先看[两型四级段：证据与计算落点](docs/two-vehicle-study.md)：公开工作方案、已有C结果和不可计算项分别列出。其[数据映射](data/parameters/assignment_case_map.json)可检查角色、版本/级段和方法引用，不是型号求解输入，也不证明原文科学语义。
+
 交给其他同学时先看[阶段交接与接收验收](docs/receiving.md)。干净提交和完整质量通过后，`python tools/handoff.py create --destination build/handoff-NEW-ID`生成本地运行包与离线源码bundle；不依赖远端已推送，不等同于最终课程发布。
 
 技术路线已确定：[C17核心、零维/准一维/稳态模型、CLI与离线报告](docs/technology-stack.md)。该决定明确工具职责，不代表高级模型已实现。
@@ -77,7 +79,7 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 | 领取、交接、验收任务 | [worknow](worknow.md)、[handoff](handoff.md)、[治理命令](docs/governance.md) |
 | 理解作业、业务与模块边界 | [作业对接与三视图](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
 | 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
-| 查文献与参数证据 | [调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
+| 查两型工作方案、参数与计算关系 | [四级段研究入口](docs/two-vehicle-study.md)、[调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
 | 写研究专题和结论 | [写作约定](docs/research-writing.md)、[研究议题](docs/research-agenda.md) |
 | 管目录、构建和Git | [目录地图](docs/project-map.md)、[环境说明](docs/environment.md)、[治理规范](docs/governance.md) |
 

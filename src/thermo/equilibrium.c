@@ -309,6 +309,7 @@ RpStatus rp_cho_equilibrium_hp_inventory(
     RpCombustionResult *output, RpError *error)
 {
     const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
+    double inventory_mass;
     if (output == NULL || element_inventory_kmol_per_kg == NULL || !valid_options(&policy) ||
         !rp_isfinite(pressure_pa) || pressure_pa <= 0.0 ||
         !rp_isfinite(feed_enthalpy_j_per_kg)) {
@@ -329,6 +330,22 @@ RpStatus rp_cho_equilibrium_hp_inventory(
         if (!rp_isfinite(ratio) || ratio <= 0.0) {
             return rp_error_set(error, RP_NUMERIC_ERROR, "CHO HP inventory normalization overflow or underflow.");
         }
+    }
+    /* Normalizing C/H/O ratios must not discard the declared per-kg basis.
+     * Atomic masses come from the same pinned database as product species. */
+    inventory_mass =
+        element_inventory_kmol_per_kg[0] *
+            (rp_thermo_find_species("CO")->molar_mass_kg_per_kmol -
+             rp_thermo_find_species("O")->molar_mass_kg_per_kmol) +
+        element_inventory_kmol_per_kg[1] *
+            rp_thermo_find_species("H")->molar_mass_kg_per_kmol +
+        element_inventory_kmol_per_kg[2] *
+            rp_thermo_find_species("O")->molar_mass_kg_per_kmol;
+    if (!rp_isfinite(inventory_mass)) {
+        return rp_error_set(error, RP_NUMERIC_ERROR, "CHO HP elemental mass overflow.");
+    }
+    if (fabs(inventory_mass - 1.0) > 1e-10) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "CHO HP inventory must describe one kg on the pinned chemical mass basis.");
     }
     return equilibrium_hp(pressure_pa, element_inventory_kmol_per_kg,
                           feed_enthalpy_j_per_kg, &policy, output, error);

@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 217,
+  "revision": 223,
   "context": {
-    "phase": "C17连续液体入口HP与固定面积喷管已实现并归档复核；接续两型四级段证据与计算整合",
+    "phase": "两型四级段证据与已有C方法整合；接续煤油参考边界",
     "evidence_cutoff": "2026-10-05",
     "next_tasks": [
-      "ANA-011"
+      "RES-008"
     ],
     "facts": [
-      "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
-      "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1",
-      "下一研究项对应两型一二级的证据、已验证C能力和必要输入缺口；PPT和最终报告继续后置"
+      "两型直接网页证据截止2026-10-03；其他物性来源分别固定日期，本地整理不刷新线上事实",
+      "连续单相液体入口HP/固定面积喷管已验证；每kg元素库存内部契约补强，不包含泵后供给或整机闭合",
+      "四级段构型、方法算例和未知输入分别关联；煤油一级尚无燃烧性能模型，真实型号绝对性能不能由假设算例代替",
+      "下一项补具名煤油固定反应物、产物/凝聚相和同条件参考；PPT及最终报告后置"
     ]
   },
   "tasks": [
@@ -977,7 +978,7 @@
     {
       "id": "ANA-011",
       "title": "两型四级段证据与计算落点整合",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-010"
@@ -990,6 +991,31 @@
         "逐项对应朱雀三号和长征十号乙的一二级、构型/批次、已有来源与字段；事实/派生/假设/未知分开，不把产品页或其他版本参数拼成飞行构型",
         "为每个对象说明现有C模型能算什么、必要输入缺什么及对应已验证算例；缺输入明确不可算，不用液氧甲烷假设模型冒充煤油或真实整机",
         "整理至少一项已有同条件改进计算与收益/代价/适用域，明确它与两型研究的关系而非真实改装承诺；PPT和最终报告后置"
+      ],
+      "owner": "root",
+      "note": "研究文档与四对象机器映射满足三项契约；新鲜完整质量、独立Windows CMake 6/6和21源严格静态分析通过。真实煤油/泵后供给/整机与实验未闭合；RES-008接续参考边界，PPT报告后置。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-011_391d2047ad87.json",
+        "sha256": "c3f0b4ba2f8f0c08185cd52c450b781392131d422ca9ccbd3c762f4236d47ccd"
+      }
+    },
+    {
+      "id": "RES-008",
+      "title": "煤油固定反应物方法与参考边界",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-011"
+      ],
+      "required_artifacts": [
+        "调研/专题/RES-008_煤油计算边界.md",
+        "data/parameters/kerosene_method_contract.json"
+      ],
+      "acceptance": [
+        "逐项核对固定CEA RP-1元素式/化学焓/质量口径与NIST surrogate范围，采用具名方法而非国产煤油真实输入",
+        "保存受限气相与扩展产物/凝聚相的同条件参考和真实失败，说明九气相产物是否足够；不以同源软件差值称实验误差",
+        "给出C17入口、库存/焓基准、失败语义与验证契约，明确能实现和暂不支持范围；参考不足时保留缺口，不直接填型号性能"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -5549,6 +5575,105 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "6066f376d8a155e31a33b6017385db474d54a7f860a2e663cec4a6bf9f68394d",
       "hash": "d8267ecfc7f1ae9a911f792cbf2c88a4ac53f3c60bf8ab5ed1ae799a15542cdf"
+    },
+    {
+      "seq": 235,
+      "at": "2026-10-05T14:57:51+00:00",
+      "task": "ANA-011",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "核对已保存两型原文与参数记录，形成四级段的可计算项/缺口/已有研究结果对应，并加入数据关联回归检查。",
+      "previous_hash": "d8267ecfc7f1ae9a911f792cbf2c88a4ac53f3c60bf8ab5ed1ae799a15542cdf",
+      "hash": "8d6817b83b86e4d18d049b9101ce97c1a5a969633b0e5ccf74fd2772a593323a"
+    },
+    {
+      "seq": 236,
+      "at": "2026-10-05T15:55:29+00:00",
+      "task": "RES-008",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "8d6817b83b86e4d18d049b9101ce97c1a5a969633b0e5ccf74fd2772a593323a",
+      "hash": "cd465872784df372cc9f2f6e8f0aeb3b9dd21122b02cd7612980d341ab167361"
+    },
+    {
+      "seq": 237,
+      "at": "2026-10-05T15:55:29+00:00",
+      "task": "ANA-011",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "四级段研究已整合，接续煤油计算实质缺口；两型直接原文复读不刷新线上截止",
+      "previous_hash": "cd465872784df372cc9f2f6e8f0aeb3b9dd21122b02cd7612980d341ab167361",
+      "details": {
+        "context_before": {
+          "phase": "C17连续液体入口HP与固定面积喷管已实现并归档复核；接续两型四级段证据与计算整合",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "ANA-011"
+          ],
+          "facts": [
+            "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
+            "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1",
+            "下一研究项对应两型一二级的证据、已验证C能力和必要输入缺口；PPT和最终报告继续后置"
+          ]
+        },
+        "context_after": {
+          "phase": "两型四级段证据与已有C方法整合；接续煤油参考边界",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-008"
+          ],
+          "facts": [
+            "两型直接网页证据截止2026-10-03；其他物性来源分别固定日期，本地整理不刷新线上事实",
+            "连续单相液体入口HP/固定面积喷管已验证；每kg元素库存内部契约补强，不包含泵后供给或整机闭合",
+            "四级段构型、方法算例和未知输入分别关联；煤油一级尚无燃烧性能模型，真实型号绝对性能不能由假设算例代替",
+            "下一项补具名煤油固定反应物、产物/凝聚相和同条件参考；PPT及最终报告后置"
+          ]
+        }
+      },
+      "hash": "27da043fa5020f73e3411d8a3ac20772f55a015349da56905eb878f8cc355f19"
+    },
+    {
+      "seq": 238,
+      "at": "2026-10-05T16:14:19+00:00",
+      "task": "ANA-011",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "四级段逐对象关联原文/事实/派生/假设/未知；两型研究入口说明可用C方法与必要输入，煤油不挂甲烷HP；汇合三项同条件收益/代价并保留适用域。库存质量及数据身份反例修复后完整质量六组PASS。负责人逐项语义复核，不声称独立科学审查。",
+      "previous_hash": "27da043fa5020f73e3411d8a3ac20772f55a015349da56905eb878f8cc355f19",
+      "hash": "e0de32d639921f85e1cfbd553bcaab090c5f702c8a2d81a764ca266594b6a7f7"
+    },
+    {
+      "seq": 239,
+      "at": "2026-10-05T16:14:20+00:00",
+      "task": "ANA-011",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "研究文档与四对象机器映射满足三项契约；新鲜完整质量、独立Windows CMake 6/6和21源严格静态分析通过。真实煤油/泵后供给/整机与实验未闭合；RES-008接续参考边界，PPT报告后置。",
+      "previous_hash": "e0de32d639921f85e1cfbd553bcaab090c5f702c8a2d81a764ca266594b6a7f7",
+      "hash": "090c823f880f95da49fe5fc364b8b9689dadd929cd6d86133efb1c1e812631e6"
+    },
+    {
+      "seq": 240,
+      "at": "2026-10-05T16:14:20+00:00",
+      "task": "RES-008",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "090c823f880f95da49fe5fc364b8b9689dadd929cd6d86133efb1c1e812631e6",
+      "hash": "38ec308035cdd44c42122aac5b40b68b9356379f82cac8419d3f89ada91c01fc"
     }
   ]
 }

@@ -8,7 +8,7 @@
 | projectlib.py | 路径边界、原子写入、OS锁、指纹和Git只读调用 |
 | pipeline.py | 不可变构建、测试报告、运行生命周期和输出协议校验 |
 | quality.py | 统一质量入口及完整PASS/FAIL证据 |
-| check_data.py | 字段级来源、数据角色、单位/范围及假设检查 |
+| check_data.py | 字段级来源、数据角色、单位/范围及假设检查；四级段映射的身份、版本/级段、模型与产物关联 |
 | thermo_data.py / cea_reference.py | 固定物性与CEA原始数据/参考完整性；Cantera仅参考生成路径 |
 | gas_checks.py / cycle_validation.py | 对保存状态和计账关系独立复算；不作生产平衡/循环求解 |
 | cycle_study.py | 校核C扫描的逐点状态、比较量和有限步响应，归档与复验研究版本 |
@@ -21,6 +21,7 @@
 | liquid_anchor.py | 编排固定液态锚点HP/冻结喷管的21次C和6次新CEA运行，核对入口/元素/几何与拒绝点，保留失败并离线复验 |
 | liquid_feed.py / liquid_eos.py | 固定HEOS离线生成、独立系数复核、摩尔化学焓对齐及插值/拒绝检查；复核不需CoolProp，重新生成需要固定Windows参考wheel |
 | liquid_table.py | 从固定参考生成C表/原输出测试常量，检查纯C的实际CLI密度/焓与拒绝协议，归档并离线复验 |
+| liquid_combustion.py | 连续液体入口HP/固定面积喷管的C与显式焓CEA运行、守恒/身份和预期拒绝核验；不求生产物理 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |
