@@ -43,7 +43,15 @@ python tools/combustion_reference.py
 ./build/release/rocketperf.exe liquid-feed coolprop710-cea334-liquid-molar-v1 Oxygen liquid 100 10000000
 ```
 
-两种质量约定和适用域在JSON中显式返回。查表未接入连续液态HP或泵/循环；气态、固定液态锚点与连续物性功能按各自边界使用。
+两种质量约定和适用域在JSON中显式返回。连续表已经可作为假设液体入口接入九气相HP和固定面积冻结喷管；仍不包含泵升压、喷注、分流轴功或完整循环。气态、固定液态锚点与连续入口模型按各自ID和边界使用。
+
+连续液体入口的运行与CEA显式焓对照见[液体入口HP核验](docs/liquid-combustion-validation.md)：
+
+```powershell
+./build/release/rocketperf.exe combustion hp-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 10000000 100 10000000 10000000 3.4
+./build/release/rocketperf.exe combustion frozen-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 10000000 100 10000000 10000000 3.4 10 0 0.01
+python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
+```
 
 循环合成算例可直接运行并归档：
 

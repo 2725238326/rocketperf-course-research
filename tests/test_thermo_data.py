@@ -18,10 +18,135 @@ import adiabatic_study
 import liquid_anchor
 import liquid_feed
 import liquid_table
+import liquid_combustion
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_continuous_liquid_archive_and_explicit_enthalpy_cards(self):
+        self.assertEqual(len(liquid_combustion.recipes()),47)
+        self.assertEqual(len(liquid_combustion.cea_recipes()),18)
+        inlet = liquid_combustion.explicit_inlets()
+        card = liquid_combustion.case_card("base_hp",liquid_combustion.CONDITIONS[0],"hp",inlet)
+        self.assertIn("h,j/mole=",card)
+        self.assertIn("fuel=FEED_CH4 C 1 H 4",card)
+        self.assertNotIn("CH4(L)",card)
+        source = ROOT/"results/validation/liquid_combustion_v1"
+        if source.exists():
+            self.assertEqual(liquid_combustion.verify(source),(47,18))
+            with self.assertRaises(FileExistsError):
+                liquid_combustion.archive("results/validation/liquid_combustion_v1")
+
+    def test_continuous_liquid_semantic_tampering(self):
+        import copy
+        source = ROOT/"results/validation/liquid_combustion_v1"
+        if not source.exists():
+            return  # First build still exercises the C/CLI and card contracts.
+        for defect in ("scope","run_bool","arguments","timestamp","inventory","reference","binary",
+                       "enthalpy","mass","element","heat","phase","basis","chamber","geometry",
+                       "card","cea_stream","failure_stdout","source","response","duplicate_manifest",
+                       "duplicate_output"):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(prefix="liquid-hp-",dir=ROOT/"build") as temp:
+                folder = Path(temp)/"archive"
+                shutil.copytree(source,folder)
+                manifest = read_json(folder/"manifest.json")
+                filename = None
+                if defect == "scope": manifest["scope"] = "Verified engine performance"
+                elif defect == "run_bool": manifest["runs"][0]["exit_code"] = False
+                elif defect == "arguments": manifest["runs"][0]["arguments"][3] = "arbitrary-zero"
+                elif defect == "timestamp": manifest["finished_at"] = False
+                elif defect == "inventory": (folder/"extra").mkdir()
+                elif defect == "reference": manifest["liquid_reference_sha256"] = "0"*64
+                elif defect == "binary": manifest["c_binary_sha256"] = "0"*64
+                elif defect == "response": manifest["responses"][0]["specific_impulse_s"] += 1
+                elif defect == "duplicate_manifest":
+                    path = folder/"manifest.json"
+                    path.write_text(path.read_text(encoding="utf-8").replace("{",'{"schema_version":1,',1),encoding="utf-8")
+                elif defect in ("card","cea_stream","failure_stdout","source"):
+                    filename = dict(card="base_hp.inp",cea_stream="base_hp-cea-stdout.txt",
+                                    failure_stdout="reject_basis-stdout.txt",source=next(iter(liquid_combustion.SOURCE_HASHES)))[defect]
+                    path = folder/filename
+                    if defect == "card":
+                        path.write_text(path.read_text(encoding="utf-8").replace("h,j/mole=","h,cal/mole="),encoding="utf-8")
+                    else:
+                        path.write_text("ERROR fabricated\n",encoding="utf-8")
+                else:
+                    filename = "base_A10-stdout.txt"
+                    report = copy.deepcopy(read_json(folder/filename))
+                    if defect == "enthalpy": report["boundary"]["fuel"]["h_j_per_mol"] += 100
+                    elif defect == "mass": report["boundary"]["fuel"]["chemical_molar_mass_kg_per_mol"] = 0.0160428
+                    elif defect == "element": report["boundary"]["element_inventory_kmol_per_kg"][0] *= 1.01
+                    elif defect == "heat": report["boundary"]["heat_transfer_j_per_kg"] = 1
+                    elif defect == "phase": report["inputs"]["feed_phase"] = "gas"
+                    elif defect == "basis": report["inputs"]["enthalpy_basis"] = "default-HEOS"
+                    elif defect == "chamber": report["chamber"]["temperature_k"] += 0.5
+                    elif defect == "geometry": report["geometry"]["mass_flow_kg_per_s"] *= 1.01
+                    atomic_json(folder/filename,report)
+                    if defect == "duplicate_output":
+                        path = folder/filename
+                        path.write_text(path.read_text(encoding="utf-8").replace("{",'{"schema_version":1,',1),encoding="utf-8")
+                if filename:
+                    next(f for f in manifest["files"] if f["path"]==filename)["sha256"] = digest(folder/filename)
+                if defect != "duplicate_manifest":
+                    atomic_json(folder/"manifest.json",manifest)
+                with self.assertRaises(ValueError):
+                    liquid_combustion.verify(folder)
+
+    def test_continuous_liquid_preparation_failure_is_retained(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory(prefix="liquid-hp-fail-",dir=ROOT/"build") as temp:
+            root = Path(temp)
+            with patch.object(liquid_combustion,"ROOT",root), \
+                 patch.object(liquid_combustion,"explicit_inlets",return_value={}), \
+                 patch.object(liquid_combustion,"verified_build",side_effect=ValueError("stale test evidence")), \
+                 self.assertRaisesRegex(ValueError,"stale test evidence"):
+                liquid_combustion.archive("results/validation/new")
+            attempts = list((root/"build/liquid-combustion").glob("*/manifest.json"))
+            self.assertEqual(len(attempts),1)
+            record = read_json(attempts[0])
+            self.assertEqual(record["status"],"FAIL")
+            self.assertEqual(record["error"],"stale test evidence")
+            self.assertFalse((root/"results/validation/new").exists())
+
+    def test_continuous_liquid_final_validation_failure_is_retained(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory(prefix="liquid-final-fail-",dir=ROOT/"build") as temp:
+            root = Path(temp)
+            paths = ("build/fixture/program.exe","build/reference/cea-v3.3.4/data/thermo.inp",
+                     "build/reference/cea-build-v3.3.4/source/cea.exe",
+                     "build/reference/cea-build-v3.3.4/thermo.lib",
+                     "build/reference/cea-build-v3.3.4/trans.lib")
+            for name in paths:
+                path = root/name
+                path.parent.mkdir(parents=True,exist_ok=True)
+                path.write_bytes(b"fixture, not an executable or scientific reference")
+            build = root/"build/fixture/build-manifest.json"
+            atomic_json(build,dict(application=dict(path=paths[0])))
+            atomic_json(build.parent/"test-report.json",{"fixture":True})
+            atomic_json(root/"tests/reference/cea/manifest.json",{"fixture":True})
+            fixed = dict(executable_sha256=digest(root/paths[2]),
+                         compiled_database_hashes={n:digest(root/"build/reference/cea-build-v3.3.4"/n)
+                                                   for n in ("thermo.lib","trans.lib")})
+            with patch.object(liquid_combustion,"ROOT",root), \
+                 patch.object(liquid_combustion,"explicit_inlets",return_value={}), \
+                 patch.object(liquid_combustion,"verified_build",return_value=build), \
+                 patch.object(liquid_combustion,"check_reference",return_value=fixed), \
+                 patch.object(liquid_combustion,"SOURCE_HASHES",{}), \
+                 patch.object(liquid_combustion,"THERMO_SHA",digest(root/paths[1])), \
+                 patch.object(liquid_combustion,"git",side_effect=lambda path,*args,**kw:
+                              SimpleNamespace(stdout="" if args[0]=="status" else liquid_combustion.COMMIT+"\n")), \
+                 patch.object(liquid_combustion,"recipes",return_value=[]), \
+                 patch.object(liquid_combustion,"cea_recipes",return_value=[]), \
+                 patch.object(liquid_combustion,"evaluate",return_value=({},[])), \
+                 patch.object(liquid_combustion,"verify",side_effect=ValueError("final semantic rejection")), \
+                 self.assertRaisesRegex(ValueError,"final semantic rejection"):
+                liquid_combustion.archive("results/validation/new")
+            attempts = list((root/"build/liquid-combustion").glob("*/manifest.json"))
+            self.assertEqual(len(attempts),1)
+            self.assertEqual(read_json(attempts[0])["status"],"FAIL")
+            self.assertFalse((root/"results/validation/new").exists())
+
     def test_liquid_table_data_and_archives(self):
         self.assertEqual(liquid_table.check_generated(),2)
         self.assertEqual(len(liquid_table.recipes()),22)
@@ -241,6 +366,8 @@ class ThermoDataTests(unittest.TestCase):
                     self.assertEqual(liquid_anchor.verify(manifest.parent),(21,6))
                 elif kind=='liquid-table-validation':
                     self.assertEqual(liquid_table.verify(manifest.parent),22)
+                elif kind=='liquid-combustion-validation':
+                    self.assertEqual(liquid_combustion.verify(manifest.parent),(47,18))
                 else: self.fail(f'Unknown validation archive type: {kind}')
         self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
 

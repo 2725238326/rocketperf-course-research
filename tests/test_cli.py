@@ -15,6 +15,7 @@ from cycle_validation import validate_cycle
 from cycle_study import validate_study as validate_cycle_study
 import liquid_anchor
 import liquid_table
+import liquid_combustion
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -66,6 +67,27 @@ class CliTests(unittest.TestCase):
                     self.assertTrue(run.stderr.startswith("Usage" if code == 2 else
                                                          "invalid_argument:" if name in ("reject_negative","reject_zero")
                                                          else "out_of_domain:"))
+
+    def test_continuous_liquid_hp_nozzle_and_rejections(self):
+        for name,args,code in liquid_combustion.recipes():
+            with self.subTest(name=name):
+                run = self.run_app(*args)
+                self.assertEqual(run.returncode,code,run.stderr)
+                if code == 0:
+                    self.assertEqual(run.stderr,"")
+                    report = json.loads(run.stdout)
+                    fields = ["fuel_temperature_k","fuel_pressure_pa","oxidizer_temperature_k",
+                              "oxidizer_pressure_pa","pressure_pa","oxidizer_fuel_mass_ratio"]
+                    if args[1] == "frozen-liquid-state":
+                        fields += ["area_ratio","ambient_pressure_pa","throat_area_m2"]
+                    declared = dict(feed_phase=args[4],enthalpy_basis=args[3],
+                                    **dict(zip(fields,map(float,args[5:]))))
+                    liquid_combustion.check_report(report,declared,args[1],declared.get("area_ratio"))
+                    self.assertEqual(self.run_app(*args).stdout,run.stdout)
+                else:
+                    self.assertEqual(run.stdout,"")
+                    self.assertTrue(run.stderr.startswith("Usage" if code == 2 else
+                        "invalid_argument:" if name in ("reject_zero","reject_throat") else "out_of_domain:"))
 
     def test_analytic_reference_and_unicode_path(self):
         result = self.run_app("run", self.case(self.base))

@@ -6,6 +6,7 @@
 #include "rocketperf/combustion.h"
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/liquid_feed.h"
+#include "rocketperf/liquid_nozzle.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -258,6 +259,127 @@ static int write_station(const RpFrozenFlowStation *station)
                station->energy_residual_j_per_kg, station->entropy_residual_j_per_kg_k) >= 0;
 }
 
+static int write_diagnostics(const RpCombustionResult *result)
+{
+    return printf(",\"diagnostics\":{\"element_relative_residual\":[%.17g,%.17g,%.17g],\"equilibrium_residual\":%.17g,"
+                  "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u}",
+                  result->element_relative_residual[0], result->element_relative_residual[1],
+                  result->element_relative_residual[2], result->equilibrium_residual,
+                  result->enthalpy_residual_j_per_kg, result->equilibrium_iterations,
+                  result->hp_iterations) >= 0;
+}
+
+static int write_frozen_report(const RpFrozenNozzleResult *nozzle)
+{
+    return fputs(",\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":", stdout) >= 0 &&
+        write_station(&nozzle->throat) && fputs(",\"exit\":", stdout) >= 0 &&
+        write_station(&nozzle->exit) &&
+        printf(",\"cstar_m_per_s\":%.17g,\"vacuum_effective_velocity_m_per_s\":%.17g,"
+               "\"effective_velocity_m_per_s\":%.17g,\"thrust_coefficient\":%.17g,"
+               "\"continuity_relative_residual\":%.17g,\"sonic_relative_residual\":%.17g}",
+               nozzle->cstar_m_per_s, nozzle->vacuum_effective_velocity_m_per_s,
+               nozzle->effective_velocity_m_per_s, nozzle->thrust_coefficient,
+               nozzle->continuity_relative_residual, nozzle->sonic_relative_residual) >= 0;
+}
+
+static int write_fixed_geometry(const RpFrozenNozzleFixedResult *geometry)
+{
+    return printf(",\"geometry\":{\"throat_area_m2\":%.17g,\"exit_area_m2\":%.17g,"
+                  "\"mass_flow_kg_per_s\":%.17g,\"thrust_n\":%.17g,\"specific_impulse_s\":%.17g}",
+                  geometry->throat_area_m2, geometry->exit_area_m2, geometry->mass_flow_kg_per_s,
+                  geometry->thrust_n, geometry->specific_impulse_s) >= 0;
+}
+
+static int write_liquid_state(const RpLiquidFeedState *state)
+{
+    return printf("{\"density_kg_per_m3\":%.17g,\"h_j_per_mol\":%.17g,\"h_j_per_kg\":%.17g,"
+                  "\"eos_molar_mass_kg_per_mol\":%.17g,\"chemical_molar_mass_kg_per_mol\":%.17g}",
+                  state->density_kg_per_m3, state->h_j_per_mol, state->h_j_per_kg,
+                  state->eos_molar_mass_kg_per_mol, state->chemical_molar_mass_kg_per_mol) >= 0;
+}
+
+static int continuous_liquid_main(int count, char **args)
+{
+    const int fixed = count > 0 && strcmp(args[0], "frozen-liquid-state") == 0;
+    double values[9] = {0};
+    RpContinuousLiquidFeed feed = {0};
+    RpContinuousLiquidHpResult hp = {0};
+    RpContinuousLiquidFixedResult geometry = {0};
+    RpError error = {0};
+    RpStatus status;
+    int written;
+    if (count != (fixed ? 13 : 10)) { goto usage; }
+    for (int i = 4; i < count; ++i) {
+        const char *next;
+        if (!parse_decimal_token(args[i], &next, &values[i - 4]) || *next != '\0') { goto usage; }
+    }
+    feed.dataset_id = args[1];
+    feed.enthalpy_basis_id = args[2];
+    feed.fuel_phase = strcmp(args[3], "liquid") == 0 ? RP_LIQUID_SINGLE_PHASE :
+        strcmp(args[3], "two-phase") == 0 ? RP_LIQUID_TWO_PHASE : RP_LIQUID_GAS;
+    feed.oxidizer_phase = feed.fuel_phase;
+    feed.fuel_temperature_k = values[0]; feed.fuel_pressure_pa = values[1];
+    feed.oxidizer_temperature_k = values[2]; feed.oxidizer_pressure_pa = values[3];
+    feed.product_pressure_pa = values[4]; feed.oxidizer_fuel_mass_ratio = values[5];
+    if (fixed) {
+        status = rp_ch4_o2_continuous_liquid_hp_fixed_area(
+            &feed, values[6], values[7], values[8], NULL, NULL, &geometry, &error);
+        if (status == RP_OK) { hp = geometry.hp; }
+    } else { status = rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, &error); }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return 4;
+    }
+    written = printf(
+        "{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\",\"liquid_dataset_id\":\"%s\","
+        "\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"%s\",\"fuel_temperature_k\":%.17g,"
+        "\"fuel_pressure_pa\":%.17g,\"oxidizer_temperature_k\":%.17g,\"oxidizer_pressure_pa\":%.17g,"
+        "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g",
+        fixed ? "ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1" : "ch4_o2_continuous_liquid_hp_v1",
+        args[0], rp_thermo_dataset_id(), rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
+        values[0], values[1], values[2], values[3], values[4], values[5]) >= 0;
+    if (written && fixed) {
+        written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g,\"throat_area_m2\":%.17g",
+                         values[6], values[7], values[8]) >= 0;
+    }
+    written = written && fputs("},\"boundary\":{\"fuel\":", stdout) >= 0 &&
+        write_liquid_state(&hp.inlet.fuel) && fputs(",\"oxidizer\":", stdout) >= 0 &&
+        write_liquid_state(&hp.inlet.oxidizer) &&
+        printf(",\"fuel_mass_fraction\":%.17g,\"oxidizer_mass_fraction\":%.17g,\"inlet_mixture_h_j_per_kg\":%.17g,"
+               "\"element_inventory_kmol_per_kg\":[%.17g,%.17g,%.17g],\"heat_transfer_j_per_kg\":0,"
+               "\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0}",
+               hp.inlet.fuel_mass_fraction, hp.inlet.oxidizer_mass_fraction, hp.inlet.mixture_h_j_per_kg,
+               hp.inlet.element_inventory_kmol_per_kg[0], hp.inlet.element_inventory_kmol_per_kg[1],
+               hp.inlet.element_inventory_kmol_per_kg[2]) >= 0 &&
+        fputs(",\"chamber\":", stdout) >= 0 && write_mixture(&hp.chamber.gas) &&
+        write_diagnostics(&hp.chamber);
+    if (written && fixed) {
+        written = write_frozen_report(&geometry.nozzle.nozzle) && write_fixed_geometry(&geometry.nozzle);
+    }
+    written = written && printf(
+        ",\"provenance\":{\"reference_manifest_sha256\":\"%s\",\"input_role\":\"assumed_research\","
+        "\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},"
+        "\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\","
+        "\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\","
+        "\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\","
+        "\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\","
+        "\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\"",
+        rp_liquid_feed_reference_sha256()) >= 0;
+    if (written && fixed) {
+        written = fputs(",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"", stdout) >= 0;
+    }
+    written = written && fputs("]}\n", stdout) >= 0;
+    if (!written || fflush(stdout) != 0) {
+        (void)fputs("io_error: Cannot write continuous liquid combustion report.\n", stderr);
+        return 3;
+    }
+    return 0;
+usage:
+    (void)fputs("Usage: rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF\n"
+               "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
+    return 2;
+}
+
 static int combustion_main(int count, char **arguments)
 {
     double values[8] = {0};
@@ -285,6 +407,9 @@ static int combustion_main(int count, char **arguments)
     RpError error;
     RpStatus status;
     int written;
+    if (strcmp(mode, "hp-liquid-state") == 0 || strcmp(mode, "frozen-liquid-state") == 0) {
+        return continuous_liquid_main(count, arguments);
+    }
     if ((!tp && !hp && !frozen && !fixed && !hp_h && !hp_anchor) ||
         count != (tp ? 6 : hp ? 5 : fixed_tp ? 9 : hp_h ? 7 : fixed_h ? 10 : hp_anchor ? 9 : fixed_anchor ? 12 : 7)) { goto usage; }
     for (int i = anchor ? 5 : explicit_h ? 3 : 1; i < count; ++i) {
@@ -377,27 +502,12 @@ static int combustion_main(int count, char **arguments)
                          anchor_inlet.mixture_h_j_per_kg, anchor_inlet.element_inventory_kmol_per_kg[0],
                          anchor_inlet.element_inventory_kmol_per_kg[1], anchor_inlet.element_inventory_kmol_per_kg[2]) >= 0;
     }
-    written = written && fputs(",\"chamber\":", stdout) >= 0 && write_mixture(&result.gas) &&
-        printf(",\"diagnostics\":{\"element_relative_residual\":[%.17g,%.17g,%.17g],\"equilibrium_residual\":%.17g,"
-               "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u}",
-               result.element_relative_residual[0], result.element_relative_residual[1], result.element_relative_residual[2],
-               result.equilibrium_residual, result.enthalpy_residual_j_per_kg,
-               result.equilibrium_iterations, result.hp_iterations) >= 0;
+    written = written && fputs(",\"chamber\":", stdout) >= 0 && write_mixture(&result.gas) && write_diagnostics(&result);
     if (written && (frozen || fixed)) {
-        written = fputs(",\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":", stdout) >= 0 &&
-            write_station(&nozzle.throat) && fputs(",\"exit\":", stdout) >= 0 && write_station(&nozzle.exit) &&
-            printf(",\"cstar_m_per_s\":%.17g,\"vacuum_effective_velocity_m_per_s\":%.17g,"
-                   "\"effective_velocity_m_per_s\":%.17g,\"thrust_coefficient\":%.17g,"
-                   "\"continuity_relative_residual\":%.17g,\"sonic_relative_residual\":%.17g}",
-                   nozzle.cstar_m_per_s, nozzle.vacuum_effective_velocity_m_per_s,
-                   nozzle.effective_velocity_m_per_s, nozzle.thrust_coefficient,
-                   nozzle.continuity_relative_residual, nozzle.sonic_relative_residual) >= 0;
+        written = write_frozen_report(&nozzle);
     }
     if (written && fixed) {
-        written = printf(",\"geometry\":{\"throat_area_m2\":%.17g,\"exit_area_m2\":%.17g,"
-                         "\"mass_flow_kg_per_s\":%.17g,\"thrust_n\":%.17g,\"specific_impulse_s\":%.17g}",
-                         geometry.throat_area_m2, geometry.exit_area_m2, geometry.mass_flow_kg_per_s,
-                         geometry.thrust_n, geometry.specific_impulse_s) >= 0;
+        written = write_fixed_geometry(&geometry);
     }
     written = written && fputs(",\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",", stdout) >= 0;
     if (written) {
@@ -454,6 +564,8 @@ static int cli_main(int argc, char **argv)
         (void)puts("       rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2");
         (void)puts("       rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170");
         (void)puts("       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
+        (void)puts("       rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF");
+        (void)puts("       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2");
         (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
         (void)puts("       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)");
         (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");

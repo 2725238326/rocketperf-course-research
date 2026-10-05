@@ -89,3 +89,14 @@ rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Oxygen liquid 100 1000
 T以K、P以Pa输入，固定dataset和 `liquid` 相态声明必须显式给出。接口返回 `single_phase_liquid_table_v1`、输入、EOS密度、化学摩尔/质量焓、两个质量约定和参考哈希；温压域与焓对齐见[契约](liquid-feed-contract.md)。未知流体/基准/相态、两相和域外输入均拒绝；没有闪蒸或自动回退。成功stdout为JSON，失败stdout为空且stderr带状态；不接受焓覆盖或额外参数。
 
 正式成功/拒绝存档由 `tools/liquid_table.py`核对新鲜已测构建、实际CLI结果与固定参考；现有通用L0运行入口不支持这个结果schema。直接查询与已归档22次运行的复核见[验证说明](liquid-feed-validation.md)。
+
+## 连续液体入口HP与固定面积喷管
+
+```powershell
+rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF
+rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2
+```
+
+DATASET/BASIS必须分别为`coolprop710-cea334-liquid-molar-v1`和`heos710-cea334-ideal-zero-298.15-v1`。两路温压为液体查表状态，PC另为产品室压，不代表压升路径已求解。模型ID分别为`ch4_o2_continuous_liquid_hp_v1`、`ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1`。输出增加`liquid_dataset_id`、两路物性/两个分子量、质量分数、元素库存、Q/动能/轴功零边界和固定来源；喷管模式复用既有`nozzle/geometry`。完整范围见[验证说明](liquid-combustion-validation.md)。
+
+严格十进制语法与失败协议不变；未知基准/相态、超域和多余焓覆盖参数拒绝。不可变正式归档由`tools/liquid_combustion.py archive NEW_DIRECTORY`生成，verify只复核保存数据；通用L0运行管理尚不支持该schema，不套用旧manifest冒充已归档。

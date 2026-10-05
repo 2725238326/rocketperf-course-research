@@ -26,10 +26,12 @@ class GovernanceTests(unittest.TestCase):
         for requirement in ("REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-11"):
             self.assertIn(requirement, text)
         for required in ("朱雀三号", "长征十号乙", "给定热状态",
-                         "HP用固定液态锚点", "固定锚点", "CH4/O2液体密度/焓表",
-                         "连续查表尚未接HP/循环", "液体表未接HP/泵",
-                         "不是绝热整机闭合", "软件PASS", "程序源代码", "程序发布版", "展示PPT", "研究报告"):
+                         "固定锚点", "单相液体表 → h / 元素库存",
+                         "连续液体已接HP；不含泵/循环", "泵、分流、循环仍未闭合",
+                         "软件PASS", "程序源代码", "程序发布版", "展示PPT", "研究报告"):
             self.assertIn(required, text)
+        for obsolete in ("连续查表尚未接HP", "液体表未接HP", "HP用固定液态锚点"):
+            self.assertNotIn(obsolete, text)
         namespace = {"s": "http://www.w3.org/2000/svg"}
         self.assertFalse(svg.findall(".//s:script", namespace))
         self.assertFalse(svg.findall(".//s:image", namespace))

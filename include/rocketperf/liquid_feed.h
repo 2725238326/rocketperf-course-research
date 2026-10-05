@@ -34,6 +34,7 @@ typedef struct {
  * No phase flash, pump, combustion or cycle closure. Every failure preserves
  * output. Repeated calls require no I/O, allocation or mutable global state. */
 const char *rp_liquid_feed_dataset_id(void);
+const char *rp_liquid_feed_enthalpy_basis_id(void);
 const char *rp_liquid_feed_reference_sha256(void);
 RpStatus rp_liquid_feed_evaluate(const RpLiquidFeedQuery *query,
                                   RpLiquidFeedState *output, RpError *error);

@@ -25,7 +25,7 @@ NASA9、受限气相平衡和冻结喷管已有；稳态循环仅有给定热状
 
 两项在同一合成循环输入上计算，见[改进研究](improvement-analysis.md)。它们不是两型实际改装建议。实际主室/发生器六状态TP、五组主室冻结参考与11个固定面积单喷管点已保存，见[覆盖说明](research-reference-coverage.md)。[七点入口诊断](research-thermal-boundary.md)已核对焓/密度传播和热交换符号；[显式气态HP](adiabatic-inlet-validation.md)和[12组固定喷管响应](adiabatic-inlet-study.md)已有真实计算及新CEA对照。接续有温压/相态/形成焓基准的液态与煤油候选证据；未验证前不宣称液态或真实循环已实现。固定面积喷管不是完整硬件循环，预热收益不含设备代价，所需排热不是冷却负荷；完整循环参考缺口不能用守恒自证抹平。
 
-液态/煤油输入证据已见[RES-006](../调研/专题/RES-006_液态与煤油入口.md)与[候选数据](../data/parameters/feed_property_candidates.json)。[固定液态锚点HP](liquid-anchor-validation.md)已接入独立C17接口，保存21次C/6次新CEA运行，不先整库C移植。仅使用固定CH₄(L)/O₂(L)焓/元素库存；下游RES-007先核对连续单相温压/密度离线参考与摩尔焓基准，建立插值域及两相/临界邻域拒绝契约，未验收前不接生产EOS。NIST多组分surrogate与国产煤油不能混称；煤油候选未接入，不能称连续液体或完整循环已完成。
+液态/煤油输入证据见[RES-006](../调研/专题/RES-006_液态与煤油入口.md)与[候选数据](../data/parameters/feed_property_candidates.json)。固定锚点HP、RES-007连续参考、纯C单相表及[连续入口HP/固定喷管](liquid-combustion-validation.md)已分别核验；不先整库C移植。下一问题是泵后入口焓、轴功/分流和两型缺口如何限制可用结论，而不是继续无限扩展甲烷气相扫描。NIST多组分surrogate与国产煤油不能混称；煤油候选未接入，完整循环未闭合。
 
 ## 研究记录怎么收尾
 

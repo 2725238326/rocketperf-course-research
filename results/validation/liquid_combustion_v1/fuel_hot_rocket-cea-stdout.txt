@@ -1,0 +1,25 @@
+INFO: Reading input_file from first positional argument
+INFO: CEA Version: 3.3.4
+INFO: Input File:  fuel_hot_rocket
+INFO: Thermo File: thermo.lib
+INFO: Reading transport database file: trans.lib
+INFO: Parsing input file: fuel_hot_rocket.inp
+INFO: Parsing problem specification 1
+INFO: Parsed 1 problems from fuel_hot_rocket.inp
+INFO: Reading thermo database file: thermo.lib
+INFO: Reading 1269 gaseous products
+INFO: Reading 991 condensed products
+INFO: Reading 83 reactants
+INFO: Building list of unique species
+INFO: Found 2019 unique species
+INFO: Building list of unique species
+INFO: Found 80 unique species
+INFO: Building list of unique elements
+INFO: Found 59 unique elements
+INFO: Executing problem 1: name=fuel_hot_rocket, type=rkt
+INFO: Solving rocket problem:
+INFO: Building list of unique elements
+INFO: Found 3 unique elements
+INFO: Building list of unique elements
+INFO: Found 3 unique elements
+INFO: Starting rocket solve

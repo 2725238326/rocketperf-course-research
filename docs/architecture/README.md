@@ -18,7 +18,7 @@
 
 ![模块边界](components.svg)
 
-实线表示主要编排/调用，虚线表示公共接口依赖。图中可见NASA9→九气相产物TP/HP（气态温度/焓或固定液态反应物锚点）、冻结喷管及外排循环的连接；灰色框为给定热状态的循环原型，不支持回流混合。[连续液体表](../liquid-feed-validation.md)独立提供CH4/O2密度/化学焓，尚未接入HP/泵/循环。[气态显式焓](../adiabatic-inlet-validation.md)与[固定液态锚点](../liquid-anchor-validation.md)仍保留各自燃烧室/单喷管边界。为避免连线遮挡，少量公共依赖用脚注说明，完整依赖图见[Mermaid源](components.mmd)。
+实线表示主要编排/调用，虚线表示公共接口依赖。图中可见NASA9→九气相产物TP/HP、连续单相表→入口焓/元素库存→HP、冻结喷管及外排循环的连接；灰色框为给定热状态的循环原型，不支持回流混合。[连续液体验证](../liquid-combustion-validation.md)已经接入独立HP与固定喉面积喷管，但不含泵升压、分流轴功或完整循环。[气态显式焓](../adiabatic-inlet-validation.md)与[固定液态锚点](../liquid-anchor-validation.md)仍保留各自接口和归档。为避免连线遮挡，少量公共依赖用脚注说明，完整依赖图见[Mermaid源](components.mmd)。
 
 ## 任务流程
 

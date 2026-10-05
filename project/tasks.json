@@ -1,19 +1,16 @@
 {
   "schema_version": 1,
-  "revision": 210,
+  "revision": 217,
   "context": {
-    "phase": "C17连续单相查表与实际运行核验已落实；下一项接连续入口HP/固定几何喷管",
+    "phase": "C17连续液体入口HP与固定面积喷管已实现并归档复核；接续两型四级段证据与计算整合",
     "evidence_cutoff": "2026-10-05",
     "next_tasks": [
-      "ANA-010"
+      "ANA-011"
     ],
     "facts": [
-      "C17已有气相TP/HP、显式气态焓、固定液态锚点HP/单喷管与独立连续液体查表；连续温压尚未接入HP或循环。",
-      "连续单相参考含407节点、700内部点、107饱和对和14理想点；CH4/O2温压均为假设。",
-      "摩尔化学焓按298.15K理想零点对齐，保留残余/理想cp差异；内部样本误差不代表全域上界。",
-      "真实型号入口温压/批次、煤油物性、泵过程/完整循环热闭合未完成。",
-      "两型原文核验截至2026-10-03，入口来源截至2026-10-05；本地软件复验不是实验或独立科学审查。",
-      "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+      "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
+      "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1",
+      "下一研究项对应两型一二级的证据、已验证C能力和必要输入缺口；PPT和最终报告继续后置"
     ]
   },
   "tasks": [
@@ -953,7 +950,7 @@
     {
       "id": "ANA-010",
       "title": "连续液态入口到HP与固定几何喷管耦合",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-009"
@@ -968,6 +965,31 @@
         "连续液体温压经已验收查表得到化学焓，再以CEA质量与元素库存闭合九气相绝热HP和固定喉部冻结喷管；核心仍为C17且与旧固定锚点接口分离",
         "核验两个入口温压质量/摩尔焓换算、元素守恒与Q=0能量残差；同条件新CEA显式焓参考分开记录，不把同源软件对照说成实验",
         "提供成功与超域/相态/错误焓基准拒绝的CLI和不可覆盖运行证据，明确不包含泵升压过程、分流轴功或完整循环"
+      ],
+      "owner": "root",
+      "note": "按三项契约完成C17连续入口HP/固定面积喷管、化学质量与元素/能量核验及成功拒绝归档；当前质量证据新鲜。本人语义审阅不冒称独立科学验收；真实两型入口、煤油、泵/分流/循环仍缺，接续ANA-011两型四级段整合，不启动PPT报告。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-010_651a74f4cc72.json",
+        "sha256": "ed63563244b4aacc84a02860d4bab0f0e31cb39ce3ecab303c692c407e045d7c"
+      }
+    },
+    {
+      "id": "ANA-011",
+      "title": "两型四级段证据与计算落点整合",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-010"
+      ],
+      "required_artifacts": [
+        "docs/two-vehicle-study.md",
+        "data/parameters/assignment_case_map.json"
+      ],
+      "acceptance": [
+        "逐项对应朱雀三号和长征十号乙的一二级、构型/批次、已有来源与字段；事实/派生/假设/未知分开，不把产品页或其他版本参数拼成飞行构型",
+        "为每个对象说明现有C模型能算什么、必要输入缺什么及对应已验证算例；缺输入明确不可算，不用液氧甲烷假设模型冒充煤油或真实整机",
+        "整理至少一项已有同条件改进计算与收益/代价/适用域，明确它与两型研究的关系而非真实改装承诺；PPT和最终报告后置"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -5390,6 +5412,143 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "9288704c6c7784fd5edd4e4df4dd72e836fbbe224edd3e5e9447a583523a4b78",
       "hash": "ae4f4dd0d99a932eef33fc0cd6f12aa3789117aa0f725640db72d4a0d2a13643"
+    },
+    {
+      "seq": 228,
+      "at": "2026-10-05T12:44:05+00:00",
+      "task": "ANA-010",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实现连续液态入口HP/固定几何喷管，审查边界与活跃文档，保存实际C/CEA运行和研究响应后验收提交",
+      "previous_hash": "ae4f4dd0d99a932eef33fc0cd6f12aa3789117aa0f725640db72d4a0d2a13643",
+      "hash": "f833d1777fb5a9f801fba99d371d3b4423656a20015657965c9643a3bf374e8f"
+    },
+    {
+      "seq": 229,
+      "at": "2026-10-05T13:48:26+00:00",
+      "task": "ANA-010",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "本轮实现与审查已进入验收准备；下一步运行完整Windows质量入口后提交任务并做本地Git检查点",
+      "previous_hash": "f833d1777fb5a9f801fba99d371d3b4423656a20015657965c9643a3bf374e8f",
+      "details": {
+        "context_before": {
+          "phase": "C17连续单相查表与实际运行核验已落实；下一项接连续入口HP/固定几何喷管",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "ANA-010"
+          ],
+          "facts": [
+            "C17已有气相TP/HP、显式气态焓、固定液态锚点HP/单喷管与独立连续液体查表；连续温压尚未接入HP或循环。",
+            "连续单相参考含407节点、700内部点、107饱和对和14理想点；CH4/O2温压均为假设。",
+            "摩尔化学焓按298.15K理想零点对齐，保留残余/理想cp差异；内部样本误差不代表全域上界。",
+            "真实型号入口温压/批次、煤油物性、泵过程/完整循环热闭合未完成。",
+            "两型原文核验截至2026-10-03，入口来源截至2026-10-05；本地软件复验不是实验或独立科学审查。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "C17连续液体入口HP与固定面积喷管已实现并完成归档复核",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "DOC-001"
+          ],
+          "facts": [
+            "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
+            "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1"
+          ]
+        }
+      },
+      "hash": "122f68d306822bef2fc9e1e071078b7f252f10019cbb6cbe257983b2e484ff14"
+    },
+    {
+      "seq": 230,
+      "at": "2026-10-05T14:45:23+00:00",
+      "task": "ANA-011",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "122f68d306822bef2fc9e1e071078b7f252f10019cbb6cbe257983b2e484ff14",
+      "hash": "7f54fc2c251d4fcfab79825c2e850a09ad44275df05d2ccd22d0988f34ef1693"
+    },
+    {
+      "seq": 231,
+      "at": "2026-10-05T14:45:23+00:00",
+      "task": "ANA-010",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "连续液体方法验收后优先回到两型四级段研究落点，不直接启动PPT或最终报告",
+      "previous_hash": "7f54fc2c251d4fcfab79825c2e850a09ad44275df05d2ccd22d0988f34ef1693",
+      "details": {
+        "context_before": {
+          "phase": "C17连续液体入口HP与固定面积喷管已实现并完成归档复核",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "DOC-001"
+          ],
+          "facts": [
+            "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
+            "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1"
+          ]
+        },
+        "context_after": {
+          "phase": "C17连续液体入口HP与固定面积喷管已实现并归档复核；接续两型四级段证据与计算整合",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "ANA-011"
+          ],
+          "facts": [
+            "已实现查表化学焓/C-H-O库存→九气相绝热HP→固定面积冻结喷管；泵升压、喷注、分流轴功和完整循环仍未闭合",
+            "已保存47次C运行（含18次拒绝）与18次CEA显式焓对照，归档results/validation/liquid_combustion_v1",
+            "下一研究项对应两型一二级的证据、已验证C能力和必要输入缺口；PPT和最终报告继续后置"
+          ]
+        }
+      },
+      "hash": "7312c9a00b0f90ab7fad66087ad50e2715a1954df7b99c7715f11fb45db04911"
+    },
+    {
+      "seq": 232,
+      "at": "2026-10-05T14:52:15+00:00",
+      "task": "ANA-010",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "连续液体入口焓与C/H/O库存已接入九气相HP和固定面积冻结喷管；47次C运行、18次显式焓CEA对照、Windows CMake 6/6、统一质量6/6及21份生产源fanalyzer证据均已归档，边界与非实验性质已记录。",
+      "previous_hash": "7312c9a00b0f90ab7fad66087ad50e2715a1954df7b99c7715f11fb45db04911",
+      "hash": "e0b24026172caae5c70a5d14dbcb30fc58553cee2ccdb3492b7cfb945c04130a"
+    },
+    {
+      "seq": 233,
+      "at": "2026-10-05T14:53:16+00:00",
+      "task": "ANA-010",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按三项契约完成C17连续入口HP/固定面积喷管、化学质量与元素/能量核验及成功拒绝归档；当前质量证据新鲜。本人语义审阅不冒称独立科学验收；真实两型入口、煤油、泵/分流/循环仍缺，接续ANA-011两型四级段整合，不启动PPT报告。",
+      "previous_hash": "e0b24026172caae5c70a5d14dbcb30fc58553cee2ccdb3492b7cfb945c04130a",
+      "hash": "6066f376d8a155e31a33b6017385db474d54a7f860a2e663cec4a6bf9f68394d"
+    },
+    {
+      "seq": 234,
+      "at": "2026-10-05T14:53:16+00:00",
+      "task": "ANA-011",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "6066f376d8a155e31a33b6017385db474d54a7f860a2e663cec4a6bf9f68394d",
+      "hash": "d8267ecfc7f1ae9a911f792cbf2c88a4ac53f3c60bf8ab5ed1ae799a15542cdf"
     }
   ]
 }

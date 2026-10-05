@@ -1,0 +1,1 @@
+out_of_domain: Continuous liquid HP requires the pinned HEOS/CEA chemical enthalpy basis.

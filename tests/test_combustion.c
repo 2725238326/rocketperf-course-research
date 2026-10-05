@@ -1,6 +1,8 @@
 #include "rocketperf/combustion.h"
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/numeric.h"
+#include "rocketperf/liquid_nozzle.h"
+#include "../src/thermo/equilibrium_internal.h"
 
 #include <math.h>
 #include <float.h>
@@ -575,6 +577,177 @@ static void test_liquid_anchor_failures(void)
         CHECK(h == 123.0);
     }
 }
+static RpContinuousLiquidFeed continuous_feed(void)
+{
+    const RpContinuousLiquidFeed feed = {
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        RP_LIQUID_SINGLE_PHASE, RP_LIQUID_SINGLE_PHASE,
+        120.0, 1e7, 100.0, 1e7, 1e7, 3.4
+    };
+    return feed;
+}
+
+static void test_continuous_liquid(void)
+{
+    const double states[][4] = {
+        {120.0, 1e7, 100.0, 1e7}, {121.0, 11e6, 101.0, 11e6},
+        {100.0, 1e6, 80.0, 1e6}, {140.0, 20e6, 110.0, 20e6}
+    };
+    for (unsigned int i = 0U; i < 4U; ++i) {
+        RpContinuousLiquidFeed feed = continuous_feed();
+        RpContinuousLiquidHpResult hp;
+        RpContinuousLiquidFixedResult fixed, doubled, ambient;
+        RpContinuousLiquidInlet inlet;
+        RpCh4O2Feed elements = reference_feed();
+        feed.fuel_temperature_k = states[i][0]; feed.fuel_pressure_pa = states[i][1];
+        feed.oxidizer_temperature_k = states[i][2]; feed.oxidizer_pressure_pa = states[i][3];
+        CHECK(rp_ch4_o2_continuous_liquid_inlet(&feed, &inlet, NULL) == RP_OK);
+        CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, NULL) == RP_OK);
+        CHECK(near(inlet.fuel.h_j_per_kg,
+                   inlet.fuel.h_j_per_mol / inlet.fuel.chemical_molar_mass_kg_per_mol, 1e-8));
+        CHECK(near(inlet.oxidizer.h_j_per_kg,
+                   inlet.oxidizer.h_j_per_mol / inlet.oxidizer.chemical_molar_mass_kg_per_mol, 1e-8));
+        CHECK(inlet.fuel.eos_molar_mass_kg_per_mol != inlet.fuel.chemical_molar_mass_kg_per_mol);
+        CHECK(near(inlet.mixture_h_j_per_kg,
+                   (inlet.fuel.h_j_per_kg + 3.4 * inlet.oxidizer.h_j_per_kg) / 4.4, 1e-8));
+        CHECK(near(inlet.element_inventory_kmol_per_kg[0], 1.0 / (16.04246 * 4.4), 1e-16));
+        CHECK(near(inlet.element_inventory_kmol_per_kg[1], 4.0 / (16.04246 * 4.4), 1e-16));
+        CHECK(near(inlet.element_inventory_kmol_per_kg[2], 6.8 / (31.9988 * 4.4), 1e-16));
+        CHECK(near(hp.chamber.gas.h_j_per_kg, inlet.mixture_h_j_per_kg, 0.01));
+        CHECK(fabs(hp.chamber.enthalpy_residual_j_per_kg) <= 0.01);
+        check_elements(&hp.chamber, &elements);
+        for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+            double amount = 0.0;
+            for (unsigned int s = 0U; s < RP_CHO_SPECIES_COUNT; ++s) {
+                amount += hp.chamber.gas.mole_fractions[s] * (double)rp_cho_element_count(s, e);
+            }
+            CHECK(near(amount / hp.chamber.gas.molar_mass_kg_per_kmol,
+                       inlet.element_inventory_kmol_per_kg[e], 1e-11));
+        }
+        CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&feed, 10.0, 0.0, 0.01, NULL, NULL, &fixed, NULL) == RP_OK);
+        CHECK(fixed.hp.chamber.gas.temperature_k == hp.chamber.gas.temperature_k);
+        CHECK(memcmp(fixed.hp.chamber.gas.mole_fractions, hp.chamber.gas.mole_fractions,
+                     sizeof(hp.chamber.gas.mole_fractions)) == 0);
+        CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&feed, 10.0, 0.0, 0.02, NULL, NULL, &doubled, NULL) == RP_OK);
+        CHECK(near(doubled.nozzle.thrust_n, 2.0 * fixed.nozzle.thrust_n, 1e-7));
+        CHECK(near(doubled.nozzle.mass_flow_kg_per_s, 2.0 * fixed.nozzle.mass_flow_kg_per_s, 1e-10));
+        CHECK(doubled.nozzle.specific_impulse_s == fixed.nozzle.specific_impulse_s);
+        CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&feed, 10.0, 5000.0, 0.01, NULL, NULL, &ambient, NULL) == RP_OK);
+        CHECK(near(fixed.nozzle.thrust_n - ambient.nozzle.thrust_n, 5000.0 * fixed.nozzle.exit_area_m2, 1e-7));
+        CHECK(fixed.nozzle.mass_flow_kg_per_s == ambient.nozzle.mass_flow_kg_per_s);
+        if (i == 0U) {
+            RpContinuousLiquidHpResult shifted;
+            RpCombustionOptions options = rp_combustion_default_options();
+            feed.fuel_temperature_k = 122.0;
+            CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &shifted, NULL) == RP_OK);
+            CHECK(shifted.chamber.gas.temperature_k > hp.chamber.gas.temperature_k);
+            feed = continuous_feed(); feed.product_pressure_pa = 8e6;
+            CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &shifted, NULL) == RP_OK);
+            CHECK(shifted.inlet.mixture_h_j_per_kg == hp.inlet.mixture_h_j_per_kg);
+            options.hp_lower_temperature_k = hp.chamber.gas.temperature_k;
+            feed = continuous_feed();
+            CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, &options, &shifted, NULL) == RP_OK);
+            CHECK(shifted.chamber.hp_iterations == 0U);
+            options = rp_combustion_default_options(); options.hp_upper_temperature_k = hp.chamber.gas.temperature_k;
+            CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, &options, &shifted, NULL) == RP_OK);
+            CHECK(shifted.chamber.hp_iterations == 0U);
+        }
+    }
+}
+
+static void test_continuous_liquid_failures(void)
+{
+    const RpContinuousLiquidFeed good = continuous_feed();
+    RpContinuousLiquidFeed feed;
+    RpContinuousLiquidInlet inlet, inlet_sentinel;
+    RpContinuousLiquidHpResult hp, hp_sentinel;
+    RpContinuousLiquidFixedResult fixed, fixed_sentinel;
+    RpCombustionOptions policy;
+    RpRootOptions roots = rp_root_default_options();
+    memset(&inlet_sentinel, 0x5a, sizeof(inlet_sentinel));
+    memset(&hp_sentinel, 0x5a, sizeof(hp_sentinel));
+    memset(&fixed_sentinel, 0x5a, sizeof(fixed_sentinel));
+    for (unsigned int i = 0U; i < 28U; ++i) {
+        RpStatus expected = RP_OUT_OF_DOMAIN;
+        feed = good; inlet = inlet_sentinel; hp = hp_sentinel; fixed = fixed_sentinel;
+        switch (i) {
+            case 0U: feed.dataset_id = NULL; expected = RP_INVALID_ARGUMENT; break;
+            case 1U: feed.enthalpy_basis_id = NULL; expected = RP_INVALID_ARGUMENT; break;
+            case 2U: feed.dataset_id = "arbitrary-zero"; break;
+            case 3U: feed.enthalpy_basis_id = "nasa9-cea-v3.3.4"; break;
+            case 4U: feed.fuel_phase = RP_LIQUID_GAS; break;
+            case 5U: feed.oxidizer_phase = RP_LIQUID_TWO_PHASE; break;
+            case 6U: feed.fuel_phase = (RpLiquidFeedPhase)9; break;
+            case 7U: feed.fuel_temperature_k = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 8U: feed.fuel_pressure_pa = INFINITY; expected = RP_INVALID_ARGUMENT; break;
+            case 9U: feed.oxidizer_temperature_k = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 10U: feed.oxidizer_pressure_pa = INFINITY; expected = RP_INVALID_ARGUMENT; break;
+            case 11U: feed.product_pressure_pa = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 12U: feed.oxidizer_fuel_mass_ratio = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 13U: feed.fuel_temperature_k = 0.0; expected = RP_INVALID_ARGUMENT; break;
+            case 14U: feed.oxidizer_pressure_pa = -1.0; expected = RP_INVALID_ARGUMENT; break;
+            case 15U: feed.product_pressure_pa = 0.0; expected = RP_INVALID_ARGUMENT; break;
+            case 16U: feed.oxidizer_fuel_mass_ratio = -1.0; expected = RP_INVALID_ARGUMENT; break;
+            case 17U: feed.fuel_temperature_k = nextafter(100.0, 0.0); break;
+            case 18U: feed.fuel_temperature_k = nextafter(140.0, INFINITY); break;
+            case 19U: feed.oxidizer_temperature_k = nextafter(80.0, 0.0); break;
+            case 20U: feed.oxidizer_temperature_k = nextafter(110.0, INFINITY); break;
+            case 21U: feed.fuel_pressure_pa = nextafter(1e6, 0.0); break;
+            case 22U: feed.oxidizer_pressure_pa = nextafter(20e6, INFINITY); break;
+            case 23U: feed.product_pressure_pa = 99.0; break;
+            case 24U: feed.product_pressure_pa = 1e9 + 1.0; break;
+            case 25U: feed.oxidizer_fuel_mass_ratio = 0.09; break;
+            case 26U: feed.oxidizer_fuel_mass_ratio = 20.01; break;
+            default: feed.fuel_pressure_pa = 191430.0; break;
+        }
+        CHECK(rp_ch4_o2_continuous_liquid_inlet(&feed, &inlet, NULL) == expected);
+        CHECK(rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, NULL) == expected);
+        CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&feed, 10.0, 0.0, 0.01, NULL, NULL, &fixed, NULL) == expected);
+        CHECK(memcmp(&inlet, &inlet_sentinel, sizeof(inlet)) == 0);
+        CHECK(memcmp(&hp, &hp_sentinel, sizeof(hp)) == 0);
+        CHECK(memcmp(&fixed, &fixed_sentinel, sizeof(fixed)) == 0);
+    }
+    hp = hp_sentinel; fixed = fixed_sentinel;
+    CHECK(rp_ch4_o2_continuous_liquid_inlet(NULL, &inlet, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_continuous_liquid_inlet(&good, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_continuous_liquid_hp(NULL, NULL, &hp, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_continuous_liquid_hp(&good, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    policy = rp_combustion_default_options(); policy.equilibrium_tolerance = NAN;
+    CHECK(rp_ch4_o2_continuous_liquid_hp(&good, &policy, &hp, NULL) == RP_INVALID_ARGUMENT);
+    policy = rp_combustion_default_options(); policy.hp_lower_temperature_k = 5000.0;
+    CHECK(rp_ch4_o2_continuous_liquid_hp(&good, &policy, &hp, NULL) == RP_NOT_BRACKETED);
+    policy = rp_combustion_default_options(); policy.max_hp_iterations = 1U;
+    CHECK(rp_ch4_o2_continuous_liquid_hp(&good, &policy, &hp, NULL) == RP_NO_CONVERGENCE);
+    policy = rp_combustion_default_options(); policy.max_equilibrium_iterations = 1U;
+    CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&good, 10.0, 0.0, 0.01, &policy, NULL, &fixed, NULL) == RP_NO_CONVERGENCE);
+    CHECK(memcmp(&hp, &hp_sentinel, sizeof(hp)) == 0);
+    for (unsigned int i = 0U; i < 7U; ++i) {
+        const double areas[] = {NAN, 0.5, 10.0, 10.0, 10.0, 10.0, 10.0};
+        const double ambient[] = {0.0, 0.0, NAN, -1.0, 1e7, 0.0, 0.0};
+        const double throats[] = {0.01, 0.01, 0.01, 0.01, 0.01, 0.0, DBL_MAX};
+        const RpStatus expected = i == 4U ? RP_OUT_OF_DOMAIN : i == 6U ? RP_NUMERIC_ERROR : RP_INVALID_ARGUMENT;
+        CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&good, areas[i], ambient[i], throats[i], NULL, NULL, &fixed, NULL) == expected);
+        CHECK(memcmp(&fixed, &fixed_sentinel, sizeof(fixed)) == 0);
+    }
+    roots.max_iterations = 1U;
+    CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&good, 10.0, 0.0, 0.01, NULL, &roots, &fixed, NULL) == RP_NO_CONVERGENCE);
+    CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&good, 10.0, 0.0, 0.01, NULL, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&fixed, &fixed_sentinel, sizeof(fixed)) == 0);
+    {
+        double inventory[3] = {0.01, 0.04, 0.05};
+        RpCombustionResult result, sentinel;
+        memset(&sentinel, 0x5a, sizeof(sentinel)); result = sentinel;
+        CHECK(rp_cho_equilibrium_hp_inventory(1e7, NULL, -1e6, NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+        inventory[1] = 0.0;
+        CHECK(rp_cho_equilibrium_hp_inventory(1e7, inventory, -1e6, NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+        inventory[0] = DBL_TRUE_MIN; inventory[1] = DBL_MAX;
+        CHECK(rp_cho_equilibrium_hp_inventory(1e7, inventory, -1e6, NULL, &result, NULL) == RP_NUMERIC_ERROR);
+        inventory[0] = DBL_MAX; inventory[1] = DBL_TRUE_MIN;
+        CHECK(rp_cho_equilibrium_hp_inventory(1e7, inventory, -1e6, NULL, &result, NULL) == RP_NUMERIC_ERROR);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    }
+}
 int main(void)
 {
     test_tp_hp_reference();
@@ -587,6 +760,8 @@ int main(void)
     test_explicit_enthalpy_failures();
     test_liquid_anchor();
     test_liquid_anchor_failures();
+    test_continuous_liquid();
+    test_continuous_liquid_failures();
     (void)printf("combustion: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

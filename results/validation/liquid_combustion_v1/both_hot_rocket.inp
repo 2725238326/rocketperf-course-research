@@ -1,0 +1,9 @@
+! Custom formulas with explicit total chemical h in J/mol; not CEA liquid anchors.
+! t,k=298.15 labels the assigned-h record, not a liquid table temperature.
+problem case=both_hot_rocket rocket frozen nfz=1 p,bar=100 o/f=3.3999999999999999 supar=10,40
+reactants
+ fuel=FEED_CH4 C 1 H 4 wt%=100 t,k=298.15 h,j/mole=-87404.511854646524
+ oxid=FEED_O2 O 2 wt%=100 t,k=298.15 h,j/mole=-11712.92412839747
+only H2 O2 H2O CO CO2 CH4 H O OH
+output siunits trace=1.e-7
+end

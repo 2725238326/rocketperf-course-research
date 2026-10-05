@@ -1,5 +1,6 @@
 #include "rocketperf/combustion.h"
 #include "rocketperf/numeric.h"
+#include "equilibrium_internal.h"
 
 #include <float.h>
 #include <math.h>
@@ -298,6 +299,39 @@ static RpStatus equilibrium_hp(double pressure_pa, const double inventory[RP_CHO
         } else { upper = middle; }
     }
     return rp_error_set(error, RP_NO_CONVERGENCE, "HP iteration budget exhausted.");
+}
+
+RpStatus rp_cho_equilibrium_hp_inventory(
+    double pressure_pa,
+    const double element_inventory_kmol_per_kg[RP_CHO_ELEMENT_COUNT],
+    double feed_enthalpy_j_per_kg,
+    const RpCombustionOptions *options,
+    RpCombustionResult *output, RpError *error)
+{
+    const RpCombustionOptions policy = options != NULL ? *options : rp_combustion_default_options();
+    if (output == NULL || element_inventory_kmol_per_kg == NULL || !valid_options(&policy) ||
+        !rp_isfinite(pressure_pa) || pressure_pa <= 0.0 ||
+        !rp_isfinite(feed_enthalpy_j_per_kg)) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid CHO HP inventory, pressure, enthalpy, options or output.");
+    }
+    if (pressure_pa < 100.0 || pressure_pa > 1e9) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "CHO HP product p=100..1e9 Pa.");
+    }
+    for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+        if (!rp_isfinite(element_inventory_kmol_per_kg[e]) ||
+            element_inventory_kmol_per_kg[e] <= 0.0) {
+            return rp_error_set(error, RP_INVALID_ARGUMENT, "CHO HP inventory must be finite and positive.");
+        }
+    }
+    for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+        const double ratio = element_inventory_kmol_per_kg[e] /
+                             element_inventory_kmol_per_kg[0];
+        if (!rp_isfinite(ratio) || ratio <= 0.0) {
+            return rp_error_set(error, RP_NUMERIC_ERROR, "CHO HP inventory normalization overflow or underflow.");
+        }
+    }
+    return equilibrium_hp(pressure_pa, element_inventory_kmol_per_kg,
+                          feed_enthalpy_j_per_kg, &policy, output, error);
 }
 
 RpStatus rp_ch4_o2_equilibrium_hp(const RpCh4O2Feed *feed,

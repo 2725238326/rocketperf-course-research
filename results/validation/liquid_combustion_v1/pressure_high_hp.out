@@ -1,0 +1,59 @@
+
+ ! Custom formulas with explicit total chemical h in J/mol; not CEA liquid anchors.
+ ! t,k=298.15 labels the assigned-h record, not a liquid table temperature.
+ problem case=pressure_high_hp hp p,bar=100 o/f=3.3999999999999999
+ reactants
+  fuel=FEED_CH4 C 1 H 4 wt%=100 t,k=298.15 h,j/mole=-88282.110227803088
+  oxid=FEED_O2 O 2 wt%=100 t,k=298.15 h,j/mole=-12082.457457929064
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = pressure_high_hp
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     FEED_CH4          100.000  -88282.110    298.15
+     FEED_O2           100.000  -12082.457    298.15
+O/F =    3.40000    % Fuel =  22.72727    r, Eq. Ratio =  1.17331    phi, Eq. Ratio =  1.17331
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               100.00000
+ T, K                   3603.87
+ Density, kg/m^3      0.7258E+1
+ H, kJ/kg             -1542.463
+ U, kJ/kg             -2920.272
+ G, kJ/kg            -44968.255
+ S, kJ/kg-K             12.0498
+ 
+ M, (1/n)              21.74786
+ (dln(V)/dln(P))t      -1.03696
+ (dln(V)/dln(T))p       1.65155
+ Cp, kJ/kg-K            6.76128
+ Gamma_s                1.13285
+ Son. Vel., m/s        1249.338
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.080350
+ O2                    0.022164
+ H2O                   0.491781
+ CO                    0.178483
+ CO2                   0.129618
+ H                     0.021070
+ O                     0.009463
+ OH                    0.067071
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

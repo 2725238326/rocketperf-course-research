@@ -27,6 +27,11 @@ const char *rp_liquid_feed_reference_sha256(void)
     return RP_LIQUID_REFERENCE_SHA256;
 }
 
+const char *rp_liquid_feed_enthalpy_basis_id(void)
+{
+    return "heos710-cea334-ideal-zero-298.15-v1";
+}
+
 static size_t interval(const double *axis, size_t count, double value)
 {
     /* Domain is checked first; last endpoint belongs to the last cell. */
