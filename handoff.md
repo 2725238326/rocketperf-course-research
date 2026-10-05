@@ -44,6 +44,6 @@ python tools/liquid_anchor.py verify results/validation/liquid_anchor_v1
 
 ## 交给别人
 
-按[接收与讲解说明](docs/receiving.md)固定Git提交、生成离线源码/运行包，再由接收者具名复跑成功与失败案例。旧`build/handoff-20261004`和`build/handoff-b2c66e2`各自固定旧提交，不自动包含新增研究；只有干净提交和新鲜完整质量证据可生成新包。软件复验不是独立科学审查。
+按[接收与讲解说明](docs/receiving.md)固定Git提交、生成离线源码/运行包，再由接收者具名复跑成功与失败案例。旧包各自固定旧提交，不自动包含新增研究；只有干净提交和新鲜完整质量证据可生成新包。新v2包从任务快照按工作面接续顺序推荐，并核对对应关系，旧v1推荐不作为当前推进指令。软件复验不是独立科学审查。
 
-固定液态锚点的代码、运行、真实失败与Windows检查见[本轮快照](taskshot/2026-10-05_032-liquid-anchor.md)。固定几何入口响应见[计算快照](taskshot/2026-10-05_029-inlet-response.md)和[固定提交接收记录](taskshot/2026-10-05_030-inlet-response-receipt.md)；入口候选见[研究快照](taskshot/2026-10-05_031-feed-properties.md)。显式入口焓见[前序快照](taskshot/2026-10-05_028-adiabatic-inlet.md)。原始来源、旧快照、参考输出和旧构建未删除或改写。每个实质批次落地本地提交，不自动推送。
+固定液态锚点的代码、运行、真实失败与Windows检查见[计算快照](taskshot/2026-10-05_032-liquid-anchor.md)，干净源码复验见[接收记录](taskshot/2026-10-05_033-liquid-anchor-receipt.md)，包内接续任务修正见[修正记录](taskshot/2026-10-05_034-handoff-routing.md)。固定几何入口响应见[前序计算](taskshot/2026-10-05_029-inlet-response.md)和[固定提交接收](taskshot/2026-10-05_030-inlet-response-receipt.md)；入口候选见[研究快照](taskshot/2026-10-05_031-feed-properties.md)。原始来源、旧快照、参考输出和旧构建未删除或改写。每个实质批次落地本地提交，不自动推送。

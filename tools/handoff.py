@@ -12,11 +12,39 @@ import sys
 import uuid
 
 from pipeline import test_records, verify_test_report, verified_build
-from projectlib import QUALITY_CHECKS, ROOT, atomic_json, atomic_text, digest, git, local_path, now, read_json, subprocess_env
+from projectlib import QUALITY_CHECKS, ROOT, atomic_json, atomic_text, canonical, digest, git, local_path, now, read_json, subprocess_env
 
-HANDOFF_VERSION = 1
-FILES = ('README.md', 'AGENTS.md', 'rules.md', 'handoff.md', 'worknow.md',
-         'docs/governance.md', 'docs/receiving.md', 'docs/cycle-validation.md')
+HANDOFF_VERSION = 2
+BASE_FILES = ('README.md', 'AGENTS.md', 'rules.md', 'handoff.md', 'worknow.md',
+              'docs/governance.md', 'docs/receiving.md', 'docs/cycle-validation.md')
+FILES = BASE_FILES + ('project/tasks.json',)
+
+
+def select_next_task(state):
+    """Follow the saved work context; never replace a blocked plan with a report."""
+    if (not isinstance(state, dict) or not isinstance(state.get('tasks'), list)
+        or not isinstance(state.get('context'), dict)
+        or not isinstance(state['context'].get('next_tasks'), list)):
+        raise ValueError('Invalid task selection snapshot')
+    mapping = {}
+    for task in state['tasks']:
+        if (not isinstance(task, dict) or not isinstance(task.get('id'), str)
+            or not task['id'] or task['id'] in mapping
+            or not isinstance(task.get('status'), str)
+            or task['status'] not in {'PLANNED','READY','ACTIVE','REVIEW','BLOCKED','DONE','CANCELLED'}
+            or type(task.get('priority')) is not int or task['priority'] < 0):
+            raise ValueError('Invalid task selection record')
+        mapping[task['id']] = task
+    preferred = state['context']['next_tasks']
+    if (any(not isinstance(tid, str) or tid not in mapping for tid in preferred)
+        or len(preferred) != len(set(preferred))):
+        raise ValueError('Invalid preferred task references')
+    for tid in preferred:
+        if mapping[tid]['status'] not in {'DONE','CANCELLED'}:
+            return mapping[tid]
+    ready = sorted((task for task in state['tasks'] if task['status'] == 'READY'),
+                   key=lambda task: (task['priority'], task['id']))
+    return ready[0] if ready else None
 
 
 def create(root=ROOT, destination=None, configuration='Release', fixture=False):
@@ -121,7 +149,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         'test_report_sha256': digest(build_path.parent / 'test-report.json'),
         'binary': {'path': source_binary.name, 'sha256': digest(source_binary)},
         'tracked_inputs': test_records(root),
-        'next_task': next((task for task in read_json(root/'project/tasks.json')['tasks'] if task['status']=='READY'), None),
+        'next_task': select_next_task(read_json(destination/'project/tasks.json')),
         'source_bundle':source_bundle,'source_fingerprint':quality['input_fingerprint'] if quality else None,
         'test_fixture':fixture,'windows_imports':imports,'smoke_tests':smoke,
         'scope': 'Windows handoff for code, tests, and the prescribed thermal cycle boundary; not a flight-engine claim.',
@@ -152,7 +180,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
 def verify(package):
     package = Path(package).resolve()
     record = read_json(package / 'handoff-manifest.json')
-    if (not isinstance(record,dict) or type(record.get('schema_version')) is not int or record['schema_version'] != HANDOFF_VERSION
+    if (not isinstance(record,dict) or type(record.get('schema_version')) is not int or record['schema_version'] not in {1, HANDOFF_VERSION}
         or type(record.get('test_fixture')) is not bool or record.get('kind') != 'windows-project-handoff' or record.get('status') != 'PASS'):
         raise ValueError('Invalid handoff manifest')
     binary=record.get('binary')
@@ -170,7 +198,7 @@ def verify(package):
         or len({f['path'] for f in files}) != len(files)):
         raise ValueError('Invalid handoff files')
     declared={f['path'] for f in files}
-    required=set(FILES)|{'START-HERE.md','VERIFY.txt','tools/handoff.py','tools/pipeline.py','tools/projectlib.py',
+    required=set(FILES if record['schema_version'] == HANDOFF_VERSION else BASE_FILES)|{'START-HERE.md','VERIFY.txt','tools/handoff.py','tools/pipeline.py','tools/projectlib.py',
                          'tools/cycle_validation.py','tools/gas_checks.py','data/thermo/manifest.json',
                          'build-manifest.json','test-report.json','cases/benchmarks/prescribed_cycle.ini',
                          'tests/fixtures/overexpanded.ini','cases/benchmarks/air_mach2_vacuum.ini',binary['path'],
@@ -183,6 +211,10 @@ def verify(package):
     if actual != declared: raise ValueError('Handoff has undeclared or missing files')
     for item in files:
         if digest(local_path(package,item['path'])) != item['sha256']: raise ValueError('Handoff file hash mismatch: '+item['path'])
+    if record['schema_version'] == HANDOFF_VERSION:
+        expected_next = select_next_task(read_json(package/'project/tasks.json'))
+        if 'next_task' not in record or canonical(record['next_task']) != canonical(expected_next):
+            raise ValueError('Handoff next task differs from the saved work context')
     build = read_json(package / 'build-manifest.json')
     tests = read_json(package / 'test-report.json')
     if (not isinstance(build,dict) or build.get('kind') != 'build' or build.get('status') != 'PASS'
