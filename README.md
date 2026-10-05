@@ -1,6 +1,6 @@
 # 火箭发动机原理 · Rocketperf
 
-研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九物种气态CH4/O2的TP/HP平衡、燃烧室冻结温变喷管和给定热状态的稳态外排循环边界。真实型号输入仍有缺口；方法基准和循环合成算例不能当作飞行发动机性能。
+研究朱雀三号与长征十号乙的动力系统，用C程序完成性能分析与改进研究。当前C核心包含定比热教学喷管、固定NASA9物性、九气相CH4/O2的TP/HP、固定液态锚点HP、连续单相液体密度/化学焓查表、冻结喷管和给定热状态外排循环边界。真实型号输入仍有缺口；方法基准和循环合成算例不能当作飞行发动机性能。
 
 [打开作业对接与架构图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
@@ -35,6 +35,15 @@ python tools/combustion_reference.py
 第一条算燃烧室温度和组分；第二条继续算冻结喷管；第三条从已测具体构建复跑四个固定工况、与CEA自动比对并保留记录。`build/release`中的exe是便捷别名，追溯以manifest指向的实际构建为准。条件与验证见[热化学与喷管](docs/thermo-nozzle-validation.md)。
 
 新增[显式入口焓HP](docs/adiabatic-inlet-validation.md)：直接给出同NASA9形成焓基准的气态CH4/O2入口焓，求绝热气相温度并接固定面积喷管；不改变循环、不是液态模型。`python tools/adiabatic_inlet.py verify results/validation/adiabatic_inlet_v1`可离线复核15次保存运行、固定CEA对照及预期失败。
+
+[连续单相液体查表](docs/liquid-feed-validation.md)可直接查询假设温压下的密度和化学焓，C运行无需CoolProp：
+
+```powershell
+./build/release/rocketperf.exe liquid-feed coolprop710-cea334-liquid-molar-v1 Methane liquid 120 10000000
+./build/release/rocketperf.exe liquid-feed coolprop710-cea334-liquid-molar-v1 Oxygen liquid 100 10000000
+```
+
+两种质量约定和适用域在JSON中显式返回。查表未接入连续液态HP或泵/循环；气态、固定液态锚点与连续物性功能按各自边界使用。
 
 循环合成算例可直接运行并归档：
 

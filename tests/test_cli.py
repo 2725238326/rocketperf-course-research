@@ -14,6 +14,7 @@ from combustion_reference import compare_report
 from cycle_validation import validate_cycle
 from cycle_study import validate_study as validate_cycle_study
 import liquid_anchor
+import liquid_table
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
@@ -49,6 +50,22 @@ class CliTests(unittest.TestCase):
         self.assertEqual(result.returncode, exit_code, result.stderr)
         self.assertEqual(result.stdout, "")
         self.assertTrue(result.stderr.strip())
+
+    def test_liquid_table_success_and_rejections(self):
+        tables,_ = liquid_table.reference()
+        for name,args,code in liquid_table.recipes():
+            with self.subTest(name=name):
+                run = self.run_app(*args)
+                self.assertEqual(run.returncode,code,run.stderr)
+                if code == 0:
+                    self.assertEqual(run.stderr,"")
+                    liquid_table.validate_report(json.loads(run.stdout),args[2],float(args[4]),float(args[5]),tables)
+                    self.assertEqual(self.run_app(*args).stdout,run.stdout)
+                else:
+                    self.assertEqual(run.stdout,"")
+                    self.assertTrue(run.stderr.startswith("Usage" if code == 2 else
+                                                         "invalid_argument:" if name in ("reject_negative","reject_zero")
+                                                         else "out_of_domain:"))
 
     def test_analytic_reference_and_unicode_path(self):
         result = self.run_app("run", self.case(self.base))

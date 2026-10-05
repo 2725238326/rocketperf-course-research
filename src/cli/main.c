@@ -5,6 +5,7 @@
 #include "rocketperf/thermo.h"
 #include "rocketperf/combustion.h"
 #include "rocketperf/frozen_nozzle.h"
+#include "rocketperf/liquid_feed.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -161,6 +162,49 @@ static int thermo_main(const char *id, const char *temperature_text)
                species->molar_mass_kg_per_kmol, state.cp_j_per_kg_k,
                state.h_j_per_kg, state.s_j_per_kg_k) < 0 || fflush(stdout) != 0) {
         (void)fputs("io_error: Cannot write thermo JSON report.\n", stderr);
+        return 3;
+    }
+    return 0;
+}
+
+static int liquid_feed_main(int count, char **args)
+{
+    RpLiquidFeedQuery query;
+    RpLiquidFeedState state;
+    RpError error = {0};
+    RpStatus status;
+    const char *next;
+    if (count != 5 ||
+        !parse_decimal_token(args[3], &next, &query.temperature_k) || *next != '\0' ||
+        !parse_decimal_token(args[4], &next, &query.pressure_pa) || *next != '\0') {
+        (void)fputs("Usage: rocketperf liquid-feed DATASET Methane|Oxygen liquid T_K P_PA\n", stderr);
+        return 2;
+    }
+    query.dataset_id = args[0];
+    query.fluid_id = args[1];
+    query.phase = strcmp(args[2], "liquid") == 0 ? RP_LIQUID_SINGLE_PHASE :
+        strcmp(args[2], "two-phase") == 0 ? RP_LIQUID_TWO_PHASE : RP_LIQUID_GAS;
+    status = rp_liquid_feed_evaluate(&query, &state, &error);
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return 4;
+    }
+    if (printf(
+        "{\"schema_version\":1,\"model\":\"single_phase_liquid_table_v1\",\"dataset_id\":\"%s\",\"status\":\"ok\","
+        "\"inputs\":{\"fluid\":\"%s\",\"phase\":\"liquid\",\"temperature_k\":%.17g,\"pressure_pa\":%.17g},"
+        "\"results\":{\"density_kg_per_m3\":%.17g,\"h_j_per_mol\":%.17g,\"h_j_per_kg\":%.17g,"
+        "\"eos_molar_mass_kg_per_mol\":%.17g,\"chemical_molar_mass_kg_per_mol\":%.17g},"
+        "\"provenance\":{\"reference_manifest_sha256\":\"%s\",\"enthalpy_basis\":\"heos710-cea334-ideal-zero-298.15-v1\","
+        "\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"input_role\":\"assumed_research\"},"
+        "\"limitations\":[\"Assumed pure CH4/O2 single-phase liquid reference, not measured engine inlet data.\","
+        "\"Bilinear interpolation within the pinned rectangle; no flash, extrapolation, pump or cycle solve.\","
+        "\"EOS density mass and CEA chemical enthalpy mass conventions are returned separately.\","
+        "\"HEOS ideal cp differs from NASA9 after the single ideal-zero alignment.\"]}\n",
+        rp_liquid_feed_dataset_id(), query.fluid_id, query.temperature_k, query.pressure_pa,
+        state.density_kg_per_m3, state.h_j_per_mol, state.h_j_per_kg,
+        state.eos_molar_mass_kg_per_mol, state.chemical_molar_mass_kg_per_mol,
+        rp_liquid_feed_reference_sha256()) < 0 || fflush(stdout) != 0) {
+        (void)fputs("io_error: Cannot write liquid feed JSON report.\n", stderr);
         return 3;
     }
     return 0;
@@ -411,12 +455,16 @@ static int cli_main(int argc, char **argv)
         (void)puts("       rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170");
         (void)puts("       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
         (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
+        (void)puts("       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)");
         (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
     }
     if (argc == 4 && strcmp(argv[1], "thermo") == 0) {
         return thermo_main(argv[2], argv[3]);
+    }
+    if (argc >= 2 && strcmp(argv[1], "liquid-feed") == 0) {
+        return liquid_feed_main(argc - 2, &argv[2]);
     }
     if (argc >= 2 && strcmp(argv[1], "combustion") == 0) {
         return combustion_main(argc - 2, &argv[2]);

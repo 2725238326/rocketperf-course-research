@@ -193,6 +193,7 @@ def source_records(root):
     modules=read_json(root/"project/modules.json")["modules"]
     sources=[s for m in modules for s in m["sources"]]
     sources += [p.relative_to(root).as_posix() for folder in ("include","src") for p in (root/folder).rglob('*.h')]
+    sources += [p.relative_to(root).as_posix() for p in (root/'tests').rglob('*.h')]
     sources += ["tests/test_core.c","tests/test_adapters.c","tests/test_thermo.c","tests/test_combustion.c","tests/test_cycle.c","tests/reference/nasa9_cantera.h","tests/fixtures/sanitizer_probe.c","tools/pipeline.py","tools/projectlib.py","project/modules.json","scripts/build.ps1","CMakeLists.txt"]
     return file_records(root,sources)
 
@@ -206,7 +207,7 @@ def test_records(root):
               'tools/cycle_validation.py','tools/gas_checks.py','tools/check_data.py','tools/handoff.py','tools/cycle_study.py','tools/research_tp_reference.py','tools/research_frozen_reference.py','tools/thermal_boundary.py','tools/adiabatic_inlet.py','tools/adiabatic_study.py',
               '调研/原始来源/来源文件索引.json','docs/adiabatic-inlet-response.svg',
               'tools/feed_candidates.py','tools/liquid_anchor.py','tools/liquid_feed.py',
-              'tools/liquid_eos.py','调研/feed_sources.json']
+              'tools/liquid_eos.py','tools/liquid_table.py','调研/feed_sources.json']
     # Parameter checks resolve source IDs and local references; those inputs must
     # invalidate a previous data PASS too. Task states are intentionally dynamic.
     for dataset in (root/'data/parameters').glob('*.json'):

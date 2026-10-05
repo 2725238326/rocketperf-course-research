@@ -17,10 +17,106 @@ import adiabatic_inlet
 import adiabatic_study
 import liquid_anchor
 import liquid_feed
+import liquid_table
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_liquid_table_data_and_archives(self):
+        self.assertEqual(liquid_table.check_generated(),2)
+        self.assertEqual(len(liquid_table.recipes()),22)
+        source = ROOT/'results/validation/liquid_table_v1'
+        if source.exists():
+            self.assertEqual(liquid_table.verify(source),22)
+            with self.assertRaises(FileExistsError):
+                liquid_table.archive('results/validation/liquid_table_v1')
+
+    def test_liquid_table_report_and_archival_tampering(self):
+        import copy
+        tables,_ = liquid_table.reference()
+        expected = liquid_table.expected_report('Methane',121,11e6,tables)
+        for field in ('density_kg_per_m3','h_j_per_mol','h_j_per_kg',
+                      'eos_molar_mass_kg_per_mol','chemical_molar_mass_kg_per_mol'):
+            altered = copy.deepcopy(expected)
+            altered['results'][field] *= 1.001
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                liquid_table.validate_report(altered,'Methane',121,11e6,tables)
+        source = ROOT/'results/validation/liquid_table_v1'
+        if not source.exists():
+            return  # Initial build before publishing the required archive.
+        for defect in ('scope','run_bool','run_arguments','timestamp','inventory','reference',
+                       'binary','phase','density','enthalpy','mass','basis','failure_stdout',
+                       'duplicate_manifest_key','duplicate_build_key','duplicate_test_key'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(prefix='table-',dir=ROOT/'build') as temp:
+                folder = Path(temp)/'archive'
+                shutil.copytree(source,folder)
+                manifest = read_json(folder/'manifest.json')
+                filename = None
+                if defect == 'scope': manifest['scope'] = 'Flight engine performance'
+                elif defect == 'run_bool': manifest['runs'][0]['exit_code'] = False
+                elif defect == 'run_arguments': manifest['runs'][0]['arguments'][3] = 'gas'
+                elif defect == 'timestamp': manifest['finished_at'] = False
+                elif defect == 'inventory': (folder/'unexpected').mkdir()
+                elif defect == 'reference': manifest['reference_sha256'] = '0'*64
+                elif defect == 'binary': manifest['binary_sha256'] = '0'*64
+                elif defect == 'failure_stdout':
+                    filename = 'reject_two_phase-stdout.txt'
+                    (folder/filename).write_text('{}',encoding='utf-8')
+                elif defect.startswith('duplicate_'):
+                    filename = {'duplicate_build_key':'build-manifest.json',
+                                'duplicate_test_key':'test-report.json'}.get(defect)
+                    path = folder/(filename or 'manifest.json')
+                    content = path.read_text(encoding='utf-8')
+                    path.write_text(content.replace('{','{"schema_version": 1,',1),encoding='utf-8')
+                else:
+                    filename = 'methane_node-stdout.txt'
+                    report = read_json(folder/filename)
+                    if defect == 'phase': report['inputs']['phase'] = 'gas'
+                    if defect == 'density': report['results']['density_kg_per_m3'] *= 1.01
+                    if defect == 'enthalpy': report['results']['h_j_per_mol'] += 100
+                    if defect == 'mass': report['results']['chemical_molar_mass_kg_per_mol'] = 0.0160428
+                    if defect == 'basis': report['provenance']['enthalpy_basis'] = 'default-HEOS'
+                    atomic_json(folder/filename,report)
+                if filename:
+                    next(f for f in manifest['files'] if f['path']==filename)['sha256'] = digest(folder/filename)
+                if defect != 'duplicate_manifest_key':
+                    atomic_json(folder/'manifest.json',manifest)
+                rejection = (self.assertRaisesRegex(ValueError, 'Duplicate JSON key')
+                             if defect.startswith('duplicate_') else self.assertRaises(ValueError))
+                with rejection:
+                    liquid_table.verify(folder)
+
+    def test_liquid_table_failures_keep_truthful_attempt(self):
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        for stage in ('preparation', 'semantic'):
+            with self.subTest(stage=stage), tempfile.TemporaryDirectory(prefix='table-fail-',dir=ROOT/'build') as temp:
+                root = Path(temp)
+                build = root/'build/fixture/build-manifest.json'
+                atomic_json(build, {'application': {'path': 'build/fixture/program.exe'}})
+                atomic_json(build.parent/'test-report.json', {'fixture': True})
+                (build.parent/'program.exe').write_bytes(b'fixture, not executable')
+                failure = ValueError(stage+' rejected')
+                with patch.object(liquid_table, 'ROOT', root), \
+                     patch.object(liquid_table, 'check_generated', return_value=2), \
+                     patch.object(liquid_table, 'verified_build', **(
+                         {'side_effect': failure} if stage == 'preparation' else {'return_value': build})), \
+                     patch.object(liquid_table, 'git', return_value=SimpleNamespace(stdout='a'*40+'\n')), \
+                     patch.object(liquid_table, 'recipes', return_value=[('query', ['fixture'], 0)]), \
+                     patch.object(liquid_table.subprocess, 'run',
+                                  return_value=SimpleNamespace(stdout=b'{}', stderr=b'', returncode=0)), \
+                     patch.object(liquid_table, 'verify', side_effect=failure), \
+                     self.assertRaisesRegex(ValueError, stage+' rejected'):
+                    liquid_table.archive('results/validation/new')
+                attempts = list((root/'build/liquid-table').glob('*/manifest.json'))
+                self.assertEqual(len(attempts), 1)
+                record = read_json(attempts[0])
+                self.assertEqual(record['status'], 'FAIL')
+                self.assertEqual(record['error'], stage+' rejected')
+                self.assertFalse((root/'results/validation/new').exists())
+                if stage == 'semantic':
+                    self.assertEqual((attempts[0].parent/'query-stdout.txt').read_bytes(), b'{}')
+
     def test_liquid_feed_archive_recomputes_without_coolprop(self):
         self.assertEqual(liquid_feed.verify(ROOT/'results/research/liquid_feed_reference_v1'),
                          dict(nodes=407,interior=700,saturation=107,ideal=14,queries=24))
@@ -143,6 +239,8 @@ class ThermoDataTests(unittest.TestCase):
                     self.assertEqual(adiabatic_inlet.verify(manifest.parent),15)
                 elif kind=='liquid-anchor-validation':
                     self.assertEqual(liquid_anchor.verify(manifest.parent),(21,6))
+                elif kind=='liquid-table-validation':
+                    self.assertEqual(liquid_table.verify(manifest.parent),22)
                 else: self.fail(f'Unknown validation archive type: {kind}')
         self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
 

@@ -1,6 +1,8 @@
 #include "rocketperf/thermo.h"
 #include "rocketperf/numeric.h"
 #include "reference/nasa9_cantera.h"
+#include "rocketperf/liquid_feed.h"
+#include "reference/liquid_feed.h"
 
 #include <float.h>
 #include <math.h>
@@ -171,6 +173,90 @@ static void test_failures(void)
     CHECK(rp_thermo_reference_pressure_pa() == 100000.0);
 }
 
+static void test_liquid_reference(void)
+{
+    for (size_t i = 0U; i < sizeof(rp_liquid_references) / sizeof(rp_liquid_references[0]); ++i) {
+        const RpLiquidReference *r = &rp_liquid_references[i];
+        const RpLiquidFeedQuery query = {rp_liquid_feed_dataset_id(), r->fluid,
+                                         RP_LIQUID_SINGLE_PHASE, r->temperature, r->pressure};
+        RpLiquidFeedState result;
+        RpError error = {RP_IO_ERROR, "old error"};
+        /* Reproduce the pinned CEA kg/kmol -> kg/mol conversion, not a separately
+         * rounded decimal literal (the methane quotient differs by one ULP). */
+        const double mass = (strcmp(r->fluid, "Methane") == 0 ? 16.04246 : 31.9988) / 1000.0;
+        const double eos_mass = strcmp(r->fluid, "Methane") == 0 ? 0.0160428 : 0.0319988;
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OK);
+        CHECK(error.code == RP_OK && error.message[0] == '\0');
+        CHECK(near(result.density_kg_per_m3, r->density, r->node ? 2e-13 : 0.0005, 1e-9));
+        CHECK(near(result.h_j_per_mol, r->h_molar, 0.0, r->node ? 1e-8 : 5.0));
+        CHECK(result.eos_molar_mass_kg_per_mol == eos_mass);
+        CHECK(result.chemical_molar_mass_kg_per_mol == mass);
+        CHECK(near(result.h_j_per_kg * mass, result.h_j_per_mol, 2e-13, 1e-9));
+    }
+}
+
+static void test_liquid_rejections(void)
+{
+    RpLiquidFeedQuery query = {rp_liquid_feed_dataset_id(), "Methane",
+                               RP_LIQUID_SINGLE_PHASE, 120.0, 1e7};
+    const RpLiquidFeedState sentinel = {1.0, 2.0, 3.0, 4.0, 5.0};
+    RpLiquidFeedState result = sentinel;
+    RpError error = {0};
+    const double invalid[] = {0.0, -1.0, NAN, INFINITY, -INFINITY};
+    CHECK(rp_liquid_feed_evaluate(NULL, &result, &error) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    CHECK(rp_liquid_feed_evaluate(&query, NULL, NULL) == RP_INVALID_ARGUMENT);
+    for (size_t i = 0U; i < sizeof(invalid) / sizeof(invalid[0]); ++i) {
+        query.temperature_k = invalid[i];
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_INVALID_ARGUMENT);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        query.temperature_k = 120.0;
+        query.pressure_pa = invalid[i];
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_INVALID_ARGUMENT);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        query.pressure_pa = 1e7;
+    }
+    query.dataset_id = NULL;
+    CHECK(rp_liquid_feed_evaluate(&query, &result, NULL) == RP_INVALID_ARGUMENT);
+    query.dataset_id = "arbitrary-enthalpy-zero";
+    CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    query.dataset_id = rp_liquid_feed_dataset_id();
+    query.fluid_id = NULL;
+    CHECK(rp_liquid_feed_evaluate(&query, &result, NULL) == RP_INVALID_ARGUMENT);
+    query.fluid_id = "RP-1";
+    CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    query.fluid_id = "Methane";
+    for (int phase = -1; phase <= 3; ++phase) {
+        if (phase == RP_LIQUID_SINGLE_PHASE) { continue; }
+        query.phase = (RpLiquidFeedPhase)phase;
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    }
+    query.phase = RP_LIQUID_SINGLE_PHASE;
+    for (size_t f = 0U; f < 2U; ++f) {
+        const double lower = f == 0U ? 100.0 : 80.0;
+        const double upper = f == 0U ? 140.0 : 110.0;
+        const double outside[] = {nextafter(lower, 0.0), nextafter(upper, INFINITY)};
+        query.fluid_id = f == 0U ? "Methane" : "Oxygen";
+        for (size_t i = 0U; i < 2U; ++i) {
+            query.temperature_k = outside[i];
+            CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+            CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        }
+        query.temperature_k = lower;
+        query.pressure_pa = nextafter(1e6, 0.0);
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        query.pressure_pa = nextafter(20e6, INFINITY);
+        CHECK(rp_liquid_feed_evaluate(&query, &result, &error) == RP_OUT_OF_DOMAIN);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+        query.pressure_pa = 1e7;
+    }
+    CHECK(strlen(rp_liquid_feed_reference_sha256()) == 64U);
+}
+
 int main(void)
 {
     test_reference();
@@ -178,6 +264,8 @@ int main(void)
     test_formula_and_reference_basis();
     test_real_formation_enthalpy();
     test_failures();
+    test_liquid_reference();
+    test_liquid_rejections();
     (void)printf("thermo: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

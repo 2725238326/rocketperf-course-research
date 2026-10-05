@@ -78,3 +78,14 @@ rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_R
 输出包含`boundary/case/inputs/flows/pumps/turbine/main_nozzle/branch_nozzle/performance/energy/diagnostics/limitations`；零支路的`branch_nozzle`为null，不输出伪造零温度状态。推力单位N、有效速度m/s、比冲s、功率与热交換W；入口h为J/kg且与NASA9形成焓同基准。`generator_required_heat_w`、`chamber_required_heat_w`是保持给定温度所需交换，不是燃烧预测。
 
 `python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini`共用正式运行生命周期；从当前已测具体构建启动，重算86条方程后才保存成功结果。退出码2/3/4沿用既有含义。加载/求解失败stdout为空，外排和回流边界见[模型说明](cycle-validation.md)。
+
+## 连续单相液体查询
+
+```powershell
+rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane liquid 120 10000000
+rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Oxygen liquid 100 10000000
+```
+
+T以K、P以Pa输入，固定dataset和 `liquid` 相态声明必须显式给出。接口返回 `single_phase_liquid_table_v1`、输入、EOS密度、化学摩尔/质量焓、两个质量约定和参考哈希；温压域与焓对齐见[契约](liquid-feed-contract.md)。未知流体/基准/相态、两相和域外输入均拒绝；没有闪蒸或自动回退。成功stdout为JSON，失败stdout为空且stderr带状态；不接受焓覆盖或额外参数。
+
+正式成功/拒绝存档由 `tools/liquid_table.py`核对新鲜已测构建、实际CLI结果与固定参考；现有通用L0运行入口不支持这个结果schema。直接查询与已归档22次运行的复核见[验证说明](liquid-feed-validation.md)。

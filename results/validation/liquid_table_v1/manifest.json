@@ -1,0 +1,467 @@
+{
+  "schema_version": 1,
+  "kind": "liquid-table-validation",
+  "status": "PASS",
+  "scope": "C17 single-phase liquid table queries and rejection protocol; no combustion, pump or cycle closure.",
+  "started_at": "2026-10-05T12:15:32+00:00",
+  "reference_sha256": "b1118927139793f0ef418872fb2074b37915c624d43bfca9ad519caba2b5a651",
+  "runs": [
+    {
+      "id": "methane_node",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "oxygen_node",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Oxygen",
+        "liquid",
+        "100",
+        "10000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "methane_interior",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "121",
+        "11000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "oxygen_interior",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Oxygen",
+        "liquid",
+        "101",
+        "11000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "methane_lower",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "100",
+        "1000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "oxygen_upper",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Oxygen",
+        "liquid",
+        "110",
+        "20000000"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "reject_dataset",
+      "arguments": [
+        "liquid-feed",
+        "unknown-zero",
+        "Methane",
+        "liquid",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_fluid",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "RP-1",
+        "liquid",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_gas",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "gas",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_two_phase",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "two-phase",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_phase",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "auto",
+        "120",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_lower_temperature",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "99.99",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_upper_temperature",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "140.01",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_lower_pressure",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "999999"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_upper_pressure",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "20000001"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_critical",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "185",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_saturation",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "191430"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_nan",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "nan",
+        "10000000"
+      ],
+      "exit_code": 2
+    },
+    {
+      "id": "reject_hex",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "0x1p7",
+        "10000000"
+      ],
+      "exit_code": 2
+    },
+    {
+      "id": "reject_negative",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "-1",
+        "10000000"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_zero",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "0"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_override",
+      "arguments": [
+        "liquid-feed",
+        "coolprop710-cea334-liquid-molar-v1",
+        "Methane",
+        "liquid",
+        "120",
+        "10000000",
+        "h=0"
+      ],
+      "exit_code": 2
+    }
+  ],
+  "source_head": "cd74ea9d465a07e6390696f82a327bbce9cab4c6",
+  "source_dirty": true,
+  "build_manifest_sha256": "fa7d189c89ffebfb5a0b7054cf84e5d377d8d3ac1f8fdcb453922b73627098b7",
+  "test_report_sha256": "a54548d53fd87ed5839df0915f8e5f799a5a9f1f2a35fb8eb25028e88bfe19a5",
+  "binary_sha256": "0c0e01c197f47600d890a956a8e8d056bb3ff70e368f9d3afa655a42d19e6749",
+  "files": [
+    {
+      "path": "build-manifest.json",
+      "sha256": "fa7d189c89ffebfb5a0b7054cf84e5d377d8d3ac1f8fdcb453922b73627098b7"
+    },
+    {
+      "path": "methane_interior-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "methane_interior-stdout.txt",
+      "sha256": "8bdcb29c5402654948d7dd1fc1141ba685d8395752f28b0a969f402b04accbe0"
+    },
+    {
+      "path": "methane_lower-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "methane_lower-stdout.txt",
+      "sha256": "ec79d0b32281831f8cf76ccd6f30de50a9c9d630cae3d78063f4c62eb0b49857"
+    },
+    {
+      "path": "methane_node-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "methane_node-stdout.txt",
+      "sha256": "5b1f3863505ed0d892a1923a2f42857407a593b0032406875e8ce97922d26874"
+    },
+    {
+      "path": "oxygen_interior-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxygen_interior-stdout.txt",
+      "sha256": "b6721698e83f42ae115d83599827c2d26267b07bce2565d81426439a3e792a39"
+    },
+    {
+      "path": "oxygen_node-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxygen_node-stdout.txt",
+      "sha256": "7a4f3a317b54c7ad0713ccb5a216f364e31f6b9696cbc1de8e3611e86eae0de1"
+    },
+    {
+      "path": "oxygen_upper-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxygen_upper-stdout.txt",
+      "sha256": "c632bdedde5678c0179c806e7aaad9bbeb72da4c8faf2ae65976370549a40863"
+    },
+    {
+      "path": "reject_critical-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_critical-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_dataset-stderr.txt",
+      "sha256": "d980989b04a2ee11ea3f643643a8ed76224dec2c8a2243928107065184ab46da"
+    },
+    {
+      "path": "reject_dataset-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_fluid-stderr.txt",
+      "sha256": "fc5fc501bc743d6f0ad8e42a015dac2db7ae0f745421afdb5e38a694ef6aacc3"
+    },
+    {
+      "path": "reject_fluid-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_gas-stderr.txt",
+      "sha256": "d980989b04a2ee11ea3f643643a8ed76224dec2c8a2243928107065184ab46da"
+    },
+    {
+      "path": "reject_gas-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_hex-stderr.txt",
+      "sha256": "b595099c51e298a7bc90bff50ef956ac4114e837bc1f86e311f1e2020c91af5e"
+    },
+    {
+      "path": "reject_hex-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_lower_pressure-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_lower_pressure-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_lower_temperature-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_lower_temperature-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_nan-stderr.txt",
+      "sha256": "b595099c51e298a7bc90bff50ef956ac4114e837bc1f86e311f1e2020c91af5e"
+    },
+    {
+      "path": "reject_nan-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_negative-stderr.txt",
+      "sha256": "1d3b565f8e776db67df5e18dcae308bf7acb2d695f98a2a7573fe837eeaa0140"
+    },
+    {
+      "path": "reject_negative-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_override-stderr.txt",
+      "sha256": "b595099c51e298a7bc90bff50ef956ac4114e837bc1f86e311f1e2020c91af5e"
+    },
+    {
+      "path": "reject_override-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_phase-stderr.txt",
+      "sha256": "d980989b04a2ee11ea3f643643a8ed76224dec2c8a2243928107065184ab46da"
+    },
+    {
+      "path": "reject_phase-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_saturation-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_saturation-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_two_phase-stderr.txt",
+      "sha256": "d980989b04a2ee11ea3f643643a8ed76224dec2c8a2243928107065184ab46da"
+    },
+    {
+      "path": "reject_two_phase-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_upper_pressure-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_upper_pressure-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_upper_temperature-stderr.txt",
+      "sha256": "82822db6ab14cf4f16a5e9943e289e3ce141e921c55efd1a0e184a68381a72e0"
+    },
+    {
+      "path": "reject_upper_temperature-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_zero-stderr.txt",
+      "sha256": "1d3b565f8e776db67df5e18dcae308bf7acb2d695f98a2a7573fe837eeaa0140"
+    },
+    {
+      "path": "reject_zero-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-report.json",
+      "sha256": "a54548d53fd87ed5839df0915f8e5f799a5a9f1f2a35fb8eb25028e88bfe19a5"
+    }
+  ],
+  "finished_at": "2026-10-05T12:15:36+00:00"
+}

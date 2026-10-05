@@ -8,7 +8,7 @@
 - 固定参考：NASA9/Cantera软件对照、四个CEA受限气相方法工况、合成循环实际六状态CEA TP、五状态主室冻结喷管与11个固定面积C点、泵/涡轮解析极限。没有完整发动机独立实验或整机循环同条件外部参考。
 - 新气态研究：12组入口温度/O-F条件的HP和固定喷管响应，每组新跑CEA；见[结果与SVG](docs/adiabatic-inlet-study.md)。它不是液态预热或两型实装设计。
 - 入口候选：[RES-006](调研/专题/RES-006_液态与煤油入口.md)锁定三份CEA单温度反应物锚点、CoolProp 7.1.0 EOS身份和NIST surrogate原文/摩尔分数；[数据](data/parameters/feed_property_candidates.json)含11条事实/未知记录。仅CH₄(L)/O₂(L)两条固定记录已提取为C常量，见[21次C/6次CEA方法验证](docs/liquid-anchor-validation.md)；候选JSON、EOS、RP-1/surrogate不作生产运行时输入。
-- 连续液体：[RES-007](调研/专题/RES-007_连续液体基准.md)已生成407节点/700内部点及饱和、理想项参考；[契约](docs/liquid-feed-contract.md)固定假设温压域和摩尔化学焓对齐。复核无需CoolProp，C查表接口按后续任务推进；未闭合泵或循环。
+- 连续液体：[RES-007](调研/专题/RES-007_连续液体基准.md)固定407节点/700内部点及饱和、理想项参考；[C17查表](docs/liquid-feed-validation.md)独立返回CH4/O2密度与化学焓，覆盖全部节点与内部参考，归档6次成功和16次拒绝。运行时不依赖CoolProp，尚未接HP、泵或循环；温压仍为假设。
 - 工程：模块依赖、严格输入、不可变构建、失败运行记录、统一验收和固定提交交接。成功结果还要通过关系复算，不能只凭JSON可解析或数值为正。
 
 先看[作业对接总览与三视图](docs/architecture/README.md)。模型限制看[热化学/喷管](docs/thermo-nozzle-validation.md)与[循环](docs/cycle-validation.md)。研究结果看[改进与代价](docs/improvement-analysis.md)、[实际状态参考](docs/research-reference-coverage.md)和[入口焓/热边界](docs/research-thermal-boundary.md)，保存文件从[研究归档](results/research/README.md)进入。
@@ -29,6 +29,8 @@ python tools/feed_candidates.py check
 python tools/feed_candidates.py check-header
 python tools/liquid_anchor.py verify results/validation/liquid_anchor_v1
 python tools/liquid_feed.py verify results/research/liquid_feed_reference_v1
+python tools/liquid_table.py check
+python tools/liquid_table.py verify results/validation/liquid_table_v1
 ```
 
 正式运行从manifest指向的新鲜已测构建开始。`build/release/rocketperf.exe`仅是便捷别名。新RunId不得覆盖旧记录；正式研究归档新增版本，保留成功、拒绝点、stdout/stderr和输入/构建/测试哈希。
@@ -36,7 +38,7 @@ python tools/liquid_feed.py verify results/research/liquid_feed_reference_v1
 ## 接续方向与不可混用的边界
 
 1. 当前优先完成两型工作方案、计算研究和证据复核；PPT、最终报告与发布任务后置，是否开工看worknow而不是旧日期计划。
-   连续单相离线参考已保存并核对摩尔焓和插值拒绝域；接续C17查表实现见工作面。表格温压不是型号事实，生产接入后仍需明确能量/质量边界。
+   连续单相参考与C17受限查表已有；接续温压到HP/固定几何喷管的耦合见工作面。表格温压不是型号事实，耦合前须明确化学质量、元素库存与能量边界。
 2. 型号缺口仍见[RES-001](调研/专题/RES-001_型号版本与参数缺口.md)和参数台账。两型直接原文核验截至2026-10-03；本地整理不刷新在线事实。子型室压、面积比、O/F和工况比冲不能用同系列或制造背景拼接。
 3. 循环热状态、密度、入口焓是给定条件。七点诊断已证实：入口焓变化只平移所需热量，密度变化经泵功/分流影响性能。约302 s是合成算例；约193.65 MW主室热排出不是冷却设计负荷，也不组成绝热真实循环。非零回流字段拒绝；液态温压/焓基准和煤油物性未知保留。
 4. 越域不等于流动已分离。出口尺寸只是几何代价，不是喷管质量、侧载、冷却裕度或寿命。局部扰动不是有概率依据的置信区间。

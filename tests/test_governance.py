@@ -26,7 +26,8 @@ class GovernanceTests(unittest.TestCase):
         for requirement in ("REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-11"):
             self.assertIn(requirement, text)
         for required in ("朱雀三号", "长征十号乙", "给定热状态",
-                         "固定液态焓HP", "固定锚点", "非液体EOS",
+                         "HP用固定液态锚点", "固定锚点", "CH4/O2液体密度/焓表",
+                         "连续查表尚未接HP/循环", "液体表未接HP/泵",
                          "不是绝热整机闭合", "软件PASS", "程序源代码", "程序发布版", "展示PPT", "研究报告"):
             self.assertIn(required, text)
         namespace = {"s": "http://www.w3.org/2000/svg"}

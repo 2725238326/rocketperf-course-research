@@ -1,0 +1,1 @@
+out_of_domain: Outside the fixed single-phase liquid rectangle; no extrapolation.
