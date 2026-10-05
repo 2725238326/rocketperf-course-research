@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "kind": "liquid-feed-reference",
+  "dataset_id": "coolprop710-cea334-liquid-molar-v1",
+  "status": "PASS",
+  "scope": "Assumed pure CH4/O2 single-phase liquid-like HEOS states and offline bilinear reference. Molar enthalpy aligned to CEA/NASA9 ideal gas at 298.15 K; residual enthalpy retained. No flight inlet identification, full EOS port, pump, combustion or cycle closure.",
+  "started_at": "2026-10-05T11:36:23+00:00",
+  "source_head": "dce90832f5eb5151809b9d578c834f1f7cf6fd49",
+  "source_dirty": true,
+  "package": {
+    "name": "CoolProp",
+    "version": "7.1.0",
+    "gitrevision": "2a1c5d7231011ed1c20067b8528150398d12c841",
+    "wheel": "coolprop-7.1.0-cp313-cp313-win_amd64.whl",
+    "wheel_sha256": "9846aabfcc7c72d8fb8f1bd02f6c58125640b6e8e4321487c4746ede7a4590da",
+    "extension_sha256": "9ee9ceaa56fb330712149cb7179ad7e7cb9bec9caf602d1b89054b548d831932",
+    "license": "MIT",
+    "index_url": "https://pypi.org/pypi/CoolProp/7.1.0/json"
+  },
+  "source_files": [
+    {
+      "path": "调研/原始来源/F02_coolprop_methane_7_1_0.txt",
+      "sha256": "5cb01cbafb6da28da358f3fd1c0985be39c99cb9aef8b872ff2b5807a6a79dff",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Methane.json",
+      "id": "F02_coolprop_methane_7_1_0"
+    },
+    {
+      "path": "调研/原始来源/F03_coolprop_oxygen_7_1_0.txt",
+      "sha256": "7ed571aa8753b7ed8a421f625fb4c896e17d17ec506bcd264642e5d88f34eadc",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/dev/fluids/Oxygen.json",
+      "id": "F03_coolprop_oxygen_7_1_0"
+    },
+    {
+      "path": "调研/原始来源/F04_coolprop_license_7_1_0.txt",
+      "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/LICENSE",
+      "id": "F04_coolprop_license_7_1_0"
+    },
+    {
+      "path": "调研/原始来源/F07_coolprop_bibliography_7_1_0.txt",
+      "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6",
+      "url": "https://raw.githubusercontent.com/CoolProp/CoolProp/v7.1.0/CoolPropBibTeXLibrary.bib",
+      "id": "F07_coolprop_bibliography_7_1_0"
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+      "sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363",
+      "id": "CEA-thermo.inp",
+      "url": "https://github.com/nasa/cea/tree/v3.3.4/data"
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/LICENSE.txt",
+      "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed",
+      "id": "CEA-LICENSE.txt",
+      "url": "https://github.com/nasa/cea/tree/v3.3.4/data"
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/NOTICE.txt",
+      "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e",
+      "id": "CEA-NOTICE.txt",
+      "url": "https://github.com/nasa/cea/tree/v3.3.4/data"
+    }
+  ],
+  "run": {
+    "command": [
+      "python",
+      "tools/liquid_feed.py",
+      "_worker",
+      "input.json"
+    ],
+    "exit_code": 0
+  },
+  "summary": {
+    "Methane": {
+      "node_count": 231,
+      "interior_count": 400,
+      "saturation_count": 61,
+      "max_density_relative_error": 0.00010134742752376802,
+      "max_enthalpy_error_j_per_mol": 0.4594143107387936,
+      "max_cp0_difference_j_per_mol_k": 0.19883853724874712,
+      "max_aligned_ideal_h_difference_j_per_mol": 16.8109855906514,
+      "reference_eos_h0_j_per_mol": 14614.055145143924,
+      "reference_nasa9_h_j_per_mol": -74599.99998613217,
+      "aligned_offset_j_per_mol": -89214.0551312761,
+      "eos_gas_constant_j_per_mol_k": 8.31451,
+      "nasa9_gas_constant_j_per_mol_k": 8.31451,
+      "molar_mass_relative_difference": 2.119375706732818e-05,
+      "finite_pressure_anchor_bias_j_per_mol": -15.660996398377208,
+      "minimum_pressure_saturation_ratio": 1.5596209606922053
+    },
+    "Oxygen": {
+      "node_count": 176,
+      "interior_count": 300,
+      "saturation_count": 46,
+      "max_density_relative_error": 7.530014520296113e-05,
+      "max_enthalpy_error_j_per_mol": 0.2866404150863673,
+      "max_cp0_difference_j_per_mol_k": 0.008060347644047283,
+      "max_aligned_ideal_h_difference_j_per_mol": 1.014824444982878,
+      "reference_eos_h0_j_per_mol": 8679.9999999733,
+      "reference_nasa9_h_j_per_mol": -1.2807283943052426e-05,
+      "aligned_offset_j_per_mol": -8680.000012780585,
+      "eos_gas_constant_j_per_mol_k": 8.31434,
+      "nasa9_gas_constant_j_per_mol_k": 8.31451,
+      "molar_mass_relative_difference": 0.0,
+      "finite_pressure_anchor_bias_j_per_mol": -7.902321438230657,
+      "minimum_pressure_saturation_ratio": 1.8402650635216533
+    }
+  },
+  "counts": {
+    "nodes": 407,
+    "interior": 700,
+    "saturation": 107,
+    "ideal": 14,
+    "queries": 24
+  },
+  "files": [
+    {
+      "path": "input.json",
+      "sha256": "cbd2f3a47d7b379137dd8d7d8df96f04f071ff20904197733a81fd40a6f1b324"
+    },
+    {
+      "path": "raw-output.json",
+      "sha256": "13816146f1a0a8172be6515fde7159a0bf17d4906feb527e2253e34d992e60b8"
+    },
+    {
+      "path": "stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tables.json",
+      "sha256": "caf7291460547556a371c238eb2418a0b93e2bd5130a034779ee32487b81f52b"
+    }
+  ],
+  "finished_at": "2026-10-05T11:36:26+00:00"
+}

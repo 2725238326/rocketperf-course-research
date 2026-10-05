@@ -19,6 +19,7 @@
 | adiabatic_study.py | 固定Pc/喉出口几何的气相入口焓/O-F研究，保存51次C/12次CEA运行，复验并生成响应SVG |
 | feed_candidates.py | 固定CEA液态反应物、CoolProp身份和NIST surrogate候选；提取两条C固定锚点常量，不求液体物性或生产平衡 |
 | liquid_anchor.py | 编排固定液态锚点HP/冻结喷管的21次C和6次新CEA运行，核对入口/元素/几何与拒绝点，保留失败并离线复验 |
+| liquid_feed.py / liquid_eos.py | 固定HEOS离线生成、独立系数复核、摩尔化学焓对齐及插值/拒绝检查；复核不需CoolProp，重新生成需要固定Windows参考wheel |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |

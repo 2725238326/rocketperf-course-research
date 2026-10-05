@@ -1,19 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 190,
+  "revision": 196,
   "context": {
-    "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
+    "phase": "连续液体离线参考已生成并复核；接续C17受限查表",
     "evidence_cutoff": "2026-10-05",
     "next_tasks": [
-      "RES-007"
+      "ANA-009"
     ],
     "facts": [
-      "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
-      "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
-      "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
-      "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
-      "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
-      "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
+      "C17已有气相TP/HP、显式气态焓与固定液态锚点HP/单喷管；连续查表接口待接续。",
+      "连续单相参考保存407节点、700内部点、107饱和状态对、14理想项点；温压均为假设。",
+      "摩尔化学焓按298.15K理想零点对齐并保留残余/理想cp差异；内部样本误差不是全域误差上界。",
+      "真实型号入口温压/批次、煤油物性、泵/完整循环热闭合仍未完成。",
+      "两型原文截至2026-10-03，入口来源截至2026-10-05；软件复验不是实验或独立科学审查。",
       "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
     ]
   },
@@ -875,7 +874,7 @@
     {
       "id": "RES-007",
       "title": "连续单相CH4/O2离线参考与摩尔焓基准对齐",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-008"
@@ -890,9 +889,13 @@
         "按摩尔量区分理想与残余焓并对齐固定CEA/NASA9化学焓；核验气体常数/分子量/理想cp差异，保留不能由单零点匹配消除的偏差，不用无来源压力校准CEA液态锚点",
         "独立核对相态/饱和边界和密度/焓参考，建立插值域与超域/两相/临界邻域拒绝契约和篡改反例；未验收前不接生产EOS，不移植整库，不连带声明泵或循环已闭合"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "root",
+      "note": "产物与验收契约逐项一致；摩尔基准/相态边界和内部误差可复验，同源模型复算不是独立实验审查。解锁ANA-009直接落地C查表。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-007_f3a15a590337.json",
+        "sha256": "0e3b47ec43ba5165461299b7852122a5657c300198d91277625294f2ec9a7182"
+      }
     },
     {
       "id": "GOV-002",
@@ -919,6 +922,28 @@
         "path": "project/evidence/GOV-002_ebf5fbd11dc1.json",
         "sha256": "e6eb94f2c78b46547bf31b852303a068534a140b8d69a1dad4ec312486246e1c"
       }
+    },
+    {
+      "id": "ANA-009",
+      "title": "C17连续单相液体查表接口与独立参考核验",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "RES-007"
+      ],
+      "required_artifacts": [
+        "include/rocketperf/liquid_feed.h",
+        "src/thermo/liquid_feed.c",
+        "docs/liquid-feed-validation.md"
+      ],
+      "acceptance": [
+        "从已验收固定参考确定生成C表格，运行时无CoolProp/Python或网络依赖，保留EOS密度质量与CEA化学焓质量约定",
+        "覆盖全部407节点与700内部参考，显式拒绝超域/两相/未知流体/非有限输入并保持失败输出，证明Debug和Release一致",
+        "提供可直接复跑的CLI成功/拒绝实例与运行存档，核对模块依赖和架构实况；仅查表物性，不宣称泵/循环或真实型号闭合"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
     }
   ],
   "events": [
@@ -4951,6 +4976,111 @@
       "note": "10组交接与完整6/6质量通过；a448b60正式v2包推荐RES-007，包内21案例复跑通过，离线bundle克隆再次完整6/6。验收事实/哈希见taskshot/2026-10-05_035-handoff-receipt.md，旧包/历史不回写；同机同agent复验，不冒称独立人员科学审查。",
       "previous_hash": "56cd14db2d890c101b0130804e624384eabecc2dccc5d3415889e91437aed1cc",
       "hash": "da9e7382317d0ae7cc53b29dac2789ca1409c585caee35577cc0091d204ed8ba"
+    },
+    {
+      "seq": 208,
+      "at": "2026-10-05T10:37:35+00:00",
+      "task": "RES-007",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "直接推进连续单相CH4/O2离线参考、摩尔焓对齐与验收，不停在规划",
+      "previous_hash": "da9e7382317d0ae7cc53b29dac2789ca1409c585caee35577cc0091d204ed8ba",
+      "hash": "87ff9ac1aad1b8a6fd9433a21e94053c0a1693cb4c5a2aa9db09fd96ee1ff0c3"
+    },
+    {
+      "seq": 209,
+      "at": "2026-10-05T11:40:04+00:00",
+      "task": "ANA-009",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "87ff9ac1aad1b8a6fd9433a21e94053c0a1693cb4c5a2aa9db09fd96ee1ff0c3",
+      "hash": "3c161f19a71f55e0dcbdccfcd3bc757fe8e5adbfa53feb9e8e9a455fe91e0878"
+    },
+    {
+      "seq": 210,
+      "at": "2026-10-05T11:46:29+00:00",
+      "task": "RES-007",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "连续单相参考和焓对齐已有真实归档，接续C查表实现",
+      "previous_hash": "3c161f19a71f55e0dcbdccfcd3bc757fe8e5adbfa53feb9e8e9a455fe91e0878",
+      "details": {
+        "context_before": {
+          "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-007"
+          ],
+          "facts": [
+            "C17有气态TP/HP、显式气态焓及固定CH4(L)/O2(L)锚点HP、冻结/固定面积喷管；并非真实发动机模型。",
+            "新固定液态锚点档案保存21次C与6次CEA，三组O/F在Pc=10MPa下对照；只闭合绝热燃烧室和单喷管。",
+            "入口候选锁定CEA单温度化学焓、CoolProp7.1.0与NIST surrogate来源；只提取两条固定CH4(L)/O2(L)记录为C常量。",
+            "RES-007接续连续单相温压/密度/摩尔焓对齐；液体EOS、泵入口、煤油批次与真实型号温压仍未闭合。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型原文截至2026-10-03，入口來源截至2026-10-05；软件对照不等于真实型号或实验验证。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "连续液体离线参考已生成并复核；接续C17受限查表",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "ANA-009"
+          ],
+          "facts": [
+            "C17已有气相TP/HP、显式气态焓与固定液态锚点HP/单喷管；连续查表接口待接续。",
+            "连续单相参考保存407节点、700内部点、107饱和状态对、14理想项点；温压均为假设。",
+            "摩尔化学焓按298.15K理想零点对齐并保留残余/理想cp差异；内部样本误差不是全域误差上界。",
+            "真实型号入口温压/批次、煤油物性、泵/完整循环热闭合仍未完成。",
+            "两型原文截至2026-10-03，入口来源截至2026-10-05；软件复验不是实验或独立科学审查。",
+            "仅Windows，不调用WSL/浏览器UI/子agent；PPT报告后置，本地提交不推送。"
+          ]
+        }
+      },
+      "hash": "cd28e299509c337fdc46ffe889ef43614a0a5bede38c25849a70ee54865e5ae5"
+    },
+    {
+      "seq": 211,
+      "at": "2026-10-05T11:52:01+00:00",
+      "task": "RES-007",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定CoolProp7.1.0 wheel/二进制/原流体JSON/许可证；407节点700内部点107饱和对和14理想点归档。独立系数复算相态/密度/理想及残余焓、Gibbs共存条件，零点对齐保留cp/M/R差异，22种重算哈希篡改拒绝；完整Windows6/6通过。温压为假设，未接生产EOS/泵/循环。",
+      "previous_hash": "cd28e299509c337fdc46ffe889ef43614a0a5bede38c25849a70ee54865e5ae5",
+      "hash": "11b6fd425cea067f937b288e78247f4bea34ed7b3b6697b0b4219daf57c654ce"
+    },
+    {
+      "seq": 212,
+      "at": "2026-10-05T11:52:02+00:00",
+      "task": "RES-007",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "产物与验收契约逐项一致；摩尔基准/相态边界和内部误差可复验，同源模型复算不是独立实验审查。解锁ANA-009直接落地C查表。",
+      "previous_hash": "11b6fd425cea067f937b288e78247f4bea34ed7b3b6697b0b4219daf57c654ce",
+      "hash": "2899d8494663b7e8e83555084ae34de444193f7e67b77f417df69707129ad663"
+    },
+    {
+      "seq": 213,
+      "at": "2026-10-05T11:52:02+00:00",
+      "task": "ANA-009",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "2899d8494663b7e8e83555084ae34de444193f7e67b77f417df69707129ad663",
+      "hash": "1572f0cb6466372864e67fc5d611e486eeec067823e2af48a071625bc28a42dd"
     }
   ]
 }

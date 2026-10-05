@@ -41,3 +41,13 @@ python tools/adiabatic_study.py plot results/research/adiabatic_inlet_response_v
 ```
 
 [分析与SVG](../../docs/adiabatic-inlet-study.md)显示升比冲不等于升推力，O/F轴也未证明连续最优值。Python只编排、归档、复算保存状态和呈现，C17完成物性/HP/喷管求解。原卡、原输出、运行流、上游/构建/测试身份完整保存，运行dirty状态不倒改；归档前的测试清单不替代归档后的完整验收。新版本另取未用目录，旧档案保持字节。
+
+## 2026-10-05 连续单相液体参考
+
+[liquid_feed_reference_v1](liquid_feed_reference_v1/manifest.json)保存固定 CoolProp 7.1.0 HEOS 的407节点、700内部点、107饱和状态对、14理想项温度点和24查询。假设矩形为 CH₄ 100–140 K、O₂ 80–110 K、P=1–20 MPa；不作为型号参数。摩尔化学焓按 CEA/NASA9 在298.15 K的理想零点对齐，保留残余焓和温区cp差异。
+
+```powershell
+python tools/liquid_feed.py verify results/research/liquid_feed_reference_v1
+```
+
+复核使用保存的原文和标准库解析系数计算，不需要安装 CoolProp。实际插值误差与质量口径见[契约](../../docs/liquid-feed-contract.md)及[专题](../../调研/专题/RES-007_连续液体基准.md)。原软件输出保留，软件对照/同源系数复算不能替代实验。

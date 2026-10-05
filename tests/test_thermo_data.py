@@ -16,10 +16,89 @@ import cycle_validation
 import adiabatic_inlet
 import adiabatic_study
 import liquid_anchor
+import liquid_feed
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_liquid_feed_archive_recomputes_without_coolprop(self):
+        self.assertEqual(liquid_feed.verify(ROOT/'results/research/liquid_feed_reference_v1'),
+                         dict(nodes=407,interior=700,saturation=107,ideal=14,queries=24))
+        with self.assertRaises(FileExistsError):
+            liquid_feed.archive('results/research/liquid_feed_reference_v1')
+
+    def test_liquid_feed_semantic_tampering_with_rehashed_files(self):
+        source = ROOT/'results/research/liquid_feed_reference_v1'
+        for defect in ('scope','package','run_bool','timestamp','counts_bool','inventory',
+                       'density','residual','chemical_zero','saturation','phase','ideal_cp',
+                       'finite_pressure_common_mode','coefficient','offgrid','mass','extra',
+                       'query','summary','duplicate_key','node_bool','gas_branch'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(prefix='feed-',dir=ROOT/'build') as temp:
+                folder = Path(temp)/'archive'
+                shutil.copytree(source,folder)
+                manifest = read_json(folder/'manifest.json')
+                filename = None
+                if defect == 'scope': manifest['scope'] = 'Flight engine validated'
+                elif defect == 'package': manifest['package']['version'] = 'latest'
+                elif defect == 'run_bool': manifest['run']['exit_code'] = False
+                elif defect == 'timestamp': manifest['finished_at'] = True
+                elif defect == 'counts_bool': manifest['counts']['ideal'] = True
+                elif defect == 'inventory': (folder/'extra').mkdir()
+                elif defect == 'summary': manifest['summary']['Methane']['max_enthalpy_error_j_per_mol'] = 0
+                elif defect in ('chemical_zero','mass','offgrid','query'):
+                    filename = 'tables.json'
+                    table = read_json(folder/filename)
+                    if defect == 'chemical_zero': table['Methane']['nodes'][0]['aligned_h_j_per_mol'] += 100
+                    if defect == 'mass': table['Methane']['nodes'][0]['aligned_h_j_per_kg'] *= 1.01
+                    if defect == 'offgrid': table['Methane']['interpolation_errors'][0]['density_relative_error'] = 0
+                    if defect == 'query': table['Oxygen']['queries'][6]['output'] = {'status':'ok'}
+                    atomic_json(folder/filename,table)
+                else:
+                    filename = 'raw-output.json'
+                    raw = read_json(folder/filename)
+                    fluid = raw['fluids']['Methane']
+                    if defect == 'density': fluid['nodes'][0]['rhomolar'] *= 1.001
+                    if defect == 'residual': fluid['nodes'][0]['h_residual_j_per_mol'] = 0
+                    if defect == 'saturation': fluid['boundary']['saturation'][0]['pressure_pa'] *= 1.001
+                    if defect == 'phase':
+                        fluid['nodes'][0]['phase_code'] = 3
+                        fluid['nodes'][0]['phase_name'] = 'supercritical_liquid'
+                    if defect == 'ideal_cp': fluid['ideals'][0]['cp0_j_per_mol_k'] += 1
+                    if defect == 'finite_pressure_common_mode':
+                        fluid['ideals'][2]['finite_pressure_h_j_per_mol'] += 10
+                        fluid['ideals'][2]['finite_pressure_h_residual_j_per_mol'] += 10
+                    if defect == 'coefficient': fluid['exported_json'] = fluid['exported_json'].replace('9.91243972','9.91243973')
+                    if defect == 'extra': fluid['nodes'][0]['pump_power_w'] = 1
+                    if defect == 'node_bool': fluid['nodes'][0]['phase_code'] = False
+                    if defect == 'gas_branch': fluid['nodes'][0]['rhomolar'] = 10
+                    atomic_json(folder/filename,raw)
+                    if defect == 'duplicate_key':
+                        content = (folder/filename).read_text(encoding='utf-8')
+                        (folder/filename).write_text(content.replace('"version": "7.1.0"', '"version": "7.1.0", "version": "7.1.0"',1),encoding='utf-8')
+                if filename:
+                    next(f for f in manifest['files'] if f['path']==filename)['sha256'] = digest(folder/filename)
+                atomic_json(folder/'manifest.json',manifest)
+                with self.assertRaises(ValueError):
+                    liquid_feed.verify(folder)
+
+    def test_liquid_feed_query_and_failure_record(self):
+        from unittest import mock
+        fluid = read_json(ROOT/'results/research/liquid_feed_reference_v1/tables.json')['Methane']
+        nodes = fluid['nodes']
+        for t in (float('nan'),float('inf'),True,0):
+            with self.subTest(t=t), self.assertRaises(ValueError):
+                liquid_feed.interpolation(nodes,'Methane',dict(fluid='Methane',temperature_k=t,pressure_pa=1e6))
+        with tempfile.TemporaryDirectory(prefix='feed-fail-',dir=ROOT/'build') as temp:
+            root = Path(temp)
+            with mock.patch.object(liquid_feed,'ROOT',root), \
+                 mock.patch.object(liquid_feed,'sources',side_effect=ValueError('source identity changed')), \
+                 self.assertRaisesRegex(ValueError,'source identity changed'):
+                liquid_feed.archive('results/research/fixture')
+            manifests = list((root/'build/liquid-feed').glob('*/manifest.json'))
+            self.assertEqual(len(manifests),1)
+            self.assertEqual(read_json(manifests[0])['status'],'FAIL')
+            self.assertFalse((root/'results/research/fixture').exists())
+
     def test_generated_database_and_reference(self):
         self.assertEqual(thermo_data.check_generated(), 3)
         self.assertEqual(len(cea_reference.check_reference()['cases']), 4)

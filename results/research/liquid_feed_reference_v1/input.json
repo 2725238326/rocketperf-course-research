@@ -1,0 +1,81 @@
+{
+  "dataset_id": "coolprop710-cea334-liquid-molar-v1",
+  "input_role": "assumed_research_not_engine_fact",
+  "backend": "HEOS",
+  "temperatures_k": {
+    "Methane": [
+      100,
+      102,
+      104,
+      106,
+      108,
+      110,
+      112,
+      114,
+      116,
+      118,
+      120,
+      122,
+      124,
+      126,
+      128,
+      130,
+      132,
+      134,
+      136,
+      138,
+      140
+    ],
+    "Oxygen": [
+      80,
+      82,
+      84,
+      86,
+      88,
+      90,
+      92,
+      94,
+      96,
+      98,
+      100,
+      102,
+      104,
+      106,
+      108,
+      110
+    ]
+  },
+  "pressures_pa": [
+    1000000.0,
+    2000000.0,
+    4000000.0,
+    6000000.0,
+    8000000.0,
+    10000000.0,
+    12000000.0,
+    14000000.0,
+    16000000.0,
+    18000000.0,
+    20000000.0
+  ],
+  "ideal_temperatures_k": [
+    200.0,
+    250.0,
+    298.15,
+    350.0,
+    400.0,
+    500.0,
+    600.0
+  ],
+  "reference_temperature_k": 298.15,
+  "limits": {
+    "critical_temperature_fraction": 0.9,
+    "saturation_pressure_factor": 1.2,
+    "saturation_pressure_margin_pa": 50000.0,
+    "max_density_relative_error": 0.0005,
+    "max_molar_enthalpy_error_j_per_mol": 5.0
+  },
+  "interpolation": "bilinear_T_P",
+  "cea_commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+  "mass_conversion": "CEA species molar mass; EOS density keeps EOS mass convention"
+}
