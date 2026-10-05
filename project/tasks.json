@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "revision": 164,
+  "revision": 172,
   "context": {
-    "phase": "显式同基准气态入口焓HP与固定面积验证已形成，接续固定几何响应及参考域扩展",
+    "phase": "固定几何气态入口焓与O/F响应已形成；接续液态与煤油输入证据及C路线",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-007"
+      "RES-006"
     ],
     "facts": [
       "C17已有温度/显式同基准气态焓HP、NASA9、冻结/固定面积喷管和给定热状态外排；不是型号真实性能求解。",
-      "显式焓验证保存15次实际运行，新旧入口、固定CEA参考、面积/背压关系和预期失败；同源软件对照不是实验验证。",
-      "合成循环10份39点及六状态TP、五组冻结/11点参考、七份入口诊断保留；旧档案未覆盖。",
-      "气态HP以Q=0求温度；现循环仍给定TP，约193.65MW所需排热不是冷却负荷。",
-      "液态温压/形成焓基准转换、煤油、全循环固定硬件和整机独立参考仍缺，不填假数。",
-      "接续固定几何入口焓响应与新气态参考，明确未知型号字段；PPT/报告后置。",
-      "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，不推送。"
+      "入口响应v1保存51次C与12次固定CEA新运行、24个固定喷管点；预热升比冲不自动升推力，未证明连续最优O/F。",
+      "15次显式焓方法验证、合成循环39点、六状态TP、五组冻结/11点参考及七份入口诊断保持原档案。",
+      "气态HP只闭合Q=0燃烧室；给定TP循环约193.65MW所需排热不是冷却负荷，预热代价未建模。",
+      "下一项核验液态CH4/O2及煤油温压/相态/形成焓基准、密度和许可；真实型号字段未知保留，不填假数。",
+      "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+      "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，PPT报告后置，不推送。"
     ]
   },
   "tasks": [
@@ -360,7 +360,8 @@
         "ANA-004",
         "ANA-005",
         "ANA-006",
-        "ANA-007"
+        "ANA-007",
+        "RES-006"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -371,7 +372,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
+      "note": "修正接续任务编号为新增RES-006，保留已完成RES-005的复用研究契约；液态与煤油输入证据优先于报告展示",
       "verification": null
     },
     {
@@ -798,7 +799,7 @@
     {
       "id": "ANA-007",
       "title": "固定几何气态入口焓响应与参考域扩展",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-006"
@@ -811,6 +812,32 @@
         "以同NASA9气态入口焓和固定喉/出口面积进行独立C17计算，分别改变入口温度对应焓与O/F，保存全部成功/拒绝点和物性基准，不标真实型号或液态入口",
         "使用新工况固定CEA HP/燃烧室冻结对照并保留原卡、原输出、运行身份；分析温度、组分、阻塞流量、推力/比冲响应，区分固定几何与固定流量重新定尺寸",
         "新增归档数值/协议/范围反例及Windows完整质量证据；说明气相模型敏感性不等于液态物性不确定度或整机闭合，PPT报告继续后置"
+      ],
+      "owner": "root",
+      "note": "验收完成：固定Pc与At/Ae的气态HP响应已可复验；不证明最佳O/F、液态预热净收益或整机真实性能，接续RES-006",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-007_3d2cf3b0c337.json",
+        "sha256": "6219229853723bc6daa4051cd1aa73d87b50257da8d9ac3b69eca3eafcceeef0"
+      }
+    },
+    {
+      "id": "RES-006",
+      "title": "液态甲烷液氧与煤油入口证据及计算路线",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-007",
+        "RES-004"
+      ],
+      "required_artifacts": [
+        "调研/专题/RES-006_液态与煤油入口.md",
+        "data/parameters/feed_property_candidates.json"
+      ],
+      "acceptance": [
+        "经指定Grok接口检索并HTTP核验可定位原文；记录物性软件与数据版本/许可、相态/温压/单位/参考零点，事实派生假设未知分离，不采信摘要补数",
+        "对液态CH4/O2形成焓锚点与煤油候选组分建立来源/适用域/缺口表，说明密度及相变如何进入C模型；未知字段留空，不让外部C++或Python成为隐藏核心",
+        "给出可执行C17扩展或有证据的停止条件、独立参考与失败契约；更新研究路径与交接，Windows完整质量通过，不推进PPT报告"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -4288,6 +4315,247 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "bbb7e95f44e93f059dd4284253ac458298605b62c462944148b5fbde9af33e64",
       "hash": "c8145b83b6c45f1028da96b1ad51756abe9562c5f08acdb3b0d7bca141067890"
+    },
+    {
+      "seq": 182,
+      "at": "2026-10-05T06:24:33+00:00",
+      "task": "ANA-007",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定Pc与喉/出口面积，分别扫描气态入口温度对应焓和O/F，新增CEA HP冻结参考和完整归档检查",
+      "previous_hash": "c8145b83b6c45f1028da96b1ad51756abe9562c5f08acdb3b0d7bca141067890",
+      "hash": "27a6fd1f01788ac4d99adc48a7019132a1b9ee6b492ecda1feaf652caa50aa97"
+    },
+    {
+      "seq": 183,
+      "at": "2026-10-05T06:56:43+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "两型所需液态与煤油输入证据优先于最终报告展示，禁止以甲烷气相结果替代一级煤油模型",
+      "previous_hash": "27a6fd1f01788ac4d99adc48a7019132a1b9ee6b492ecda1feaf652caa50aa97",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007",
+            "RES-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "两型所需液态与煤油输入证据优先于最终报告展示，禁止以甲烷气相结果替代一级煤油模型",
+          "verification": null
+        }
+      },
+      "hash": "15916fa3d55201a0f3cb02d1a1b5aa310e5c2fb41a6f1c1d4a6e41d4f575b145"
+    },
+    {
+      "seq": 184,
+      "at": "2026-10-05T06:58:16+00:00",
+      "task": "RES-006",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "15916fa3d55201a0f3cb02d1a1b5aa310e5c2fb41a6f1c1d4a6e41d4f575b145",
+      "hash": "0e58fcb467ed01922ba3a6009f9cdc860c95d7f2467a2db050499b40eef80f5f"
+    },
+    {
+      "seq": 185,
+      "at": "2026-10-05T06:58:16+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "修正接续任务编号为新增RES-006，保留已完成RES-005的复用研究契约；液态与煤油输入证据优先于报告展示",
+      "previous_hash": "0e58fcb467ed01922ba3a6009f9cdc860c95d7f2467a2db050499b40eef80f5f",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007",
+            "RES-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "两型所需液态与煤油输入证据优先于最终报告展示，禁止以甲烷气相结果替代一级煤油模型",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007",
+            "RES-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "修正接续任务编号为新增RES-006，保留已完成RES-005的复用研究契约；液态与煤油输入证据优先于报告展示",
+          "verification": null
+        }
+      },
+      "hash": "218bb26d9304e63d2a02f4e7df0c3ea98cd6f67907e9b387016b910f50a05e75"
+    },
+    {
+      "seq": 186,
+      "at": "2026-10-05T06:58:16+00:00",
+      "task": "ANA-007",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "12组入口条件和51次C/12次CEA已归档；接续两型液态与煤油输入证据，不扩展无依据的气相扫描",
+      "previous_hash": "218bb26d9304e63d2a02f4e7df0c3ea98cd6f67907e9b387016b910f50a05e75",
+      "details": {
+        "context_before": {
+          "phase": "显式同基准气态入口焓HP与固定面积验证已形成，接续固定几何响应及参考域扩展",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-007"
+          ],
+          "facts": [
+            "C17已有温度/显式同基准气态焓HP、NASA9、冻结/固定面积喷管和给定热状态外排；不是型号真实性能求解。",
+            "显式焓验证保存15次实际运行，新旧入口、固定CEA参考、面积/背压关系和预期失败；同源软件对照不是实验验证。",
+            "合成循环10份39点及六状态TP、五组冻结/11点参考、七份入口诊断保留；旧档案未覆盖。",
+            "气态HP以Q=0求温度；现循环仍给定TP，约193.65MW所需排热不是冷却负荷。",
+            "液态温压/形成焓基准转换、煤油、全循环固定硬件和整机独立参考仍缺，不填假数。",
+            "接续固定几何入口焓响应与新气态参考，明确未知型号字段；PPT/报告后置。",
+            "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "固定几何气态入口焓与O/F响应已形成；接续液态与煤油输入证据及C路线",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "RES-006"
+          ],
+          "facts": [
+            "C17已有温度/显式同基准气态焓HP、NASA9、冻结/固定面积喷管和给定热状态外排；不是型号真实性能求解。",
+            "入口响应v1保存51次C与12次固定CEA新运行、24个固定喷管点；预热升比冲不自动升推力，未证明连续最优O/F。",
+            "15次显式焓方法验证、合成循环39点、六状态TP、五组冻结/11点参考及七份入口诊断保持原档案。",
+            "气态HP只闭合Q=0燃烧室；给定TP循环约193.65MW所需排热不是冷却负荷，预热代价未建模。",
+            "下一项核验液态CH4/O2及煤油温压/相态/形成焓基准、密度和许可；真实型号字段未知保留，不填假数。",
+            "完整循环固定硬件、轴功分流热闭合、整机独立参考、冷却分离寿命仍未覆盖。",
+            "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，PPT报告后置，不推送。"
+          ]
+        }
+      },
+      "hash": "20f1d6bbbc152766c66209cb4643fa8c25ccff3f662f2d0dc50e3ee8372e82c5"
+    },
+    {
+      "seq": 187,
+      "at": "2026-10-05T07:03:17+00:00",
+      "task": "ANA-007",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "51次C/12次CEA/24固定几何点归档和18种语义反例通过；SVG视觉/漂移/测试指纹通过，修正后完整质量6/6及CMake6/6，比较与范围逐项说明",
+      "previous_hash": "20f1d6bbbc152766c66209cb4643fa8c25ccff3f662f2d0dc50e3ee8372e82c5",
+      "hash": "c1bfacae6ab83f4a401d4e09a53831e94b101916e0e09e05730765093163588e"
+    },
+    {
+      "seq": 188,
+      "at": "2026-10-05T07:03:18+00:00",
+      "task": "ANA-007",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：固定Pc与At/Ae的气态HP响应已可复验；不证明最佳O/F、液态预热净收益或整机真实性能，接续RES-006",
+      "previous_hash": "c1bfacae6ab83f4a401d4e09a53831e94b101916e0e09e05730765093163588e",
+      "hash": "7de1df064a867596eae085f6f21036a43077442240337143a2f6468ce3e052e5"
+    },
+    {
+      "seq": 189,
+      "at": "2026-10-05T07:03:18+00:00",
+      "task": "RES-006",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "7de1df064a867596eae085f6f21036a43077442240337143a2f6468ce3e052e5",
+      "hash": "0a1112d3f106c0dc2a0aaf339ea72b30973593b899fa87c4489d0c9410da6792"
     }
   ]
 }

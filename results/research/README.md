@@ -30,3 +30,14 @@ python tools/thermal_boundary.py verify results/research/thermal_boundary_v1
 ```
 
 步长只是诊断情景，不是有依据的液体物性范围。焓变化在给定温度模型中不改变推力，密度变化影响泵功和分流；结果和新的模型契约见[热边界审阅](../../docs/research-thermal-boundary.md)。`source_dirty=true`和此前HEAD保持历史原样，实际C源码由构建输入哈希固定。重建使用已测Release与新目录，不能覆盖旧版本。
+
+## 2026-10-05 固定几何气态入口焓与混合比
+
+[adiabatic_inlet_response_v1](adiabatic_inlet_response_v1/manifest.json)保存12种入口条件、两套分别固定几何的真空喷管：51次C运行（含5次预期拒绝）、12次固定CEA新运行和24个几何点。Pc=10 MPa、At=0.01 m²，A10/A40各自固定Ae；气态入口温度对应同NASA9形成焓，不是液态输入。
+
+```powershell
+python tools/adiabatic_study.py verify results/research/adiabatic_inlet_response_v1
+python tools/adiabatic_study.py plot results/research/adiabatic_inlet_response_v1
+```
+
+[分析与SVG](../../docs/adiabatic-inlet-study.md)显示升比冲不等于升推力，O/F轴也未证明连续最优值。Python只编排、归档、复算保存状态和呈现，C17完成物性/HP/喷管求解。原卡、原输出、运行流、上游/构建/测试身份完整保存，运行dirty状态不倒改；归档前的测试清单不替代归档后的完整验收。新版本另取未用目录，旧档案保持字节。

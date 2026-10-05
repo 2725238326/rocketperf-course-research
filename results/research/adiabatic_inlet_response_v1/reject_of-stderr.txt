@@ -1,0 +1,1 @@
+out_of_domain: Explicit inlet: p=100..1e9 Pa, O/F=0.1..20.

@@ -68,7 +68,7 @@ def relation(actual, expected, label, absolute=1e-7):
         raise ValueError("Adiabatic archive relation failed: " + label)
 
 
-def inlet_value(folder, name, species):
+def inlet_value(folder, name, species, temperature=298.15):
     report = read_output(folder, name)
     keys = {"schema_version", "model", "dataset_id", "species", "temperature_k",
             "reference_pressure_pa", "molar_mass_kg_per_kmol", "cp_j_per_kg_k",
@@ -78,12 +78,12 @@ def inlet_value(folder, name, species):
         or type(report["schema_version"]) is not int or report["schema_version"] != 1
         or report["model"] != "nasa9_species_v1" or report["dataset_id"] != fits["dataset_id"]
         or report["species"] != species or type(report["temperature_k"]) not in (int, float)
-        or report["temperature_k"] != 298.15
+        or report["temperature_k"] != temperature
         or report["reference_pressure_pa"] != fits["reference_pressure_pa"]
         or not isinstance(report["limitations"], list) or not report["limitations"]
         or any(not isinstance(s, str) or not s.strip() for s in report["limitations"])):
         raise ValueError("Inlet property query identity mismatch")
-    expected = mixture({species: 1.0}, 298.15, fits["reference_pressure_pa"], fits)
+    expected = mixture({species: 1.0}, temperature, fits["reference_pressure_pa"], fits)
     for key in ("cp_j_per_kg_k", "h_j_per_kg", "s_j_per_kg_k"):
         target_key = "cp_frozen_j_per_kg_k" if key == "cp_j_per_kg_k" else key
         relation(report[key], expected[target_key], name + "." + key)

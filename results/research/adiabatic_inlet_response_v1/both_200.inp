@@ -1,0 +1,8 @@
+! Gas-feed HP, infinite-area chamber, chamber-frozen nfz=1; not liquid feed.
+problem case=both_200 rocket frozen nfz=1 p,bar=100 o/f=3.3999999999999999 supar=10,40
+reactants
+ fuel=CH4 wt%=100 t,k=200
+ oxid=O2 wt%=100 t,k=200
+only H2 O2 H2O CO CO2 CH4 H O OH
+output siunits trace=1.e-8
+end

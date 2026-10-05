@@ -59,6 +59,7 @@ python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
    新`hp-h`/`frozen-h`需说明相态与形成焓基准，用[保存版本](../results/validation/adiabatic_inlet_v1/manifest.json)演示，不把气态零热交换燃烧室说成液态/整机闭合。
 3. 演示一个成功算例和一个失败边界，展示 stdout、stderr、run-manifest 和残差。
 4. 展示独立参考与数据来源的定位，说明它们是同条件方法核验，不是飞行性能验证。
+   用[固定喷管入口响应](adiabatic-inlet-study.md)讲解为什么比冲升高时推力可以略降；从清单定位原C/CEA输出，不只展示曲线截图。
 5. 最后说明下一任务、未完成项和不能外推的结论。
 
 ## 不能省略的边界

@@ -1,0 +1,1 @@
+out_of_domain: Explicit inlet requires gas phase and pinned NASA9 CEA v3.3.4 formation-enthalpy basis.

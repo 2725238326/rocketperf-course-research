@@ -1,0 +1,288 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1340" viewBox="0 0 1520 1340" role="img" aria-labelledby="title desc">
+<title id="title">固定几何气态入口焓与混合比响应</title>
+<desc id="desc">八个面板分别展示入口温度与混合比对温度、流量、比冲、推力的影响；每个值来自已验证的C17离散计算。</desc>
+<rect width="1520" height="1340" fill="#f7f9fc"/>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#203248} .tick{font-size:15px;fill:#52657a} .label{font-size:17px} .panel{font-size:20px;font-weight:600}</style>
+<text x="46" y="48" font-size="30" font-weight="700">固定尺寸之后，升温与推力并不一起增长</text>
+<text x="46" y="83" font-size="19" >CH₄/O₂ 受限气相 HP · 燃烧室 Q = 0 · Pc = 10 MPa · At = 0.01 m² · 真空</text>
+<text x="46" y="113" font-size="17" >变化基准：两种入口均为 298.15 K、O/F = 3.4；A10 与 A40 分别保留各自出口面积。</text>
+<text x="118" y="162" font-size="22" font-weight="600">同时改变两种气态入口温度（O/F 固定）</text>
+<text x="858" y="162" font-size="22" font-weight="600">改变 O/F（两种气态入口温度固定）</text>
+<rect x="36" y="183" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="56" y="211" font-size="20" font-weight="600">燃烧室温度变化 (%)</text>
+<line x1="118" y1="372.00" x2="710" y2="372.00" stroke="#e1e7ef"/>
+<text x="106" y="377.0" font-size="15" text-anchor="end" class="tick">-8</text>
+<line x1="118" y1="325.33" x2="710" y2="325.33" stroke="#e1e7ef"/>
+<text x="106" y="330.33" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="118" y1="278.67" x2="710" y2="278.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="106" y="283.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="118" y1="232.00" x2="710" y2="232.00" stroke="#e1e7ef"/>
+<text x="106" y="237.0" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="118.00" y1="372" x2="118.00" y2="377" stroke="#7b8ca0"/>
+<text x="118.0" y="396" font-size="15" text-anchor="middle" class="tick">200</text>
+<line x1="201.01" y1="372" x2="201.01" y2="377" stroke="#7b8ca0"/>
+<text x="201.01" y="396" font-size="15" text-anchor="middle" class="tick">298.15</text>
+<line x1="329.43" y1="372" x2="329.43" y2="377" stroke="#7b8ca0"/>
+<text x="329.43" y="396" font-size="15" text-anchor="middle" class="tick">450</text>
+<line x1="456.29" y1="372" x2="456.29" y2="377" stroke="#7b8ca0"/>
+<text x="456.29" y="396" font-size="15" text-anchor="middle" class="tick">600</text>
+<line x1="710.00" y1="372" x2="710.00" y2="377" stroke="#7b8ca0"/>
+<text x="710.0" y="396" font-size="15" text-anchor="middle" class="tick">900</text>
+<text x="414.0" y="412" font-size="16" text-anchor="middle">气态入口温度 (K)</text>
+<path d="M118.00,283.89 L201.01,278.67 L329.43,270.14 L456.29,260.88 L710.00,240.10" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="118.00" cy="283.89" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="278.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="270.14" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="260.88" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="240.10" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<text x="536" y="211" font-size="16" >A10 / A40 相同</text>
+<rect x="782" y="183" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="802" y="211" font-size="20" font-weight="600">燃烧室温度变化 (%)</text>
+<line x1="864" y1="372.00" x2="1456" y2="372.00" stroke="#e1e7ef"/>
+<text x="852" y="377.0" font-size="15" text-anchor="end" class="tick">-8</text>
+<line x1="864" y1="325.33" x2="1456" y2="325.33" stroke="#e1e7ef"/>
+<text x="852" y="330.33" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="864" y1="278.67" x2="1456" y2="278.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="852" y="283.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="864" y1="232.00" x2="1456" y2="232.00" stroke="#e1e7ef"/>
+<text x="852" y="237.0" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="864.00" y1="372" x2="864.00" y2="377" stroke="#7b8ca0"/>
+<text x="864.0" y="396" font-size="15" text-anchor="middle" class="tick">2.6</text>
+<line x1="962.67" y1="372" x2="962.67" y2="377" stroke="#7b8ca0"/>
+<text x="962.67" y="396" font-size="15" text-anchor="middle" class="tick">3</text>
+<line x1="1061.33" y1="372" x2="1061.33" y2="377" stroke="#7b8ca0"/>
+<text x="1061.33" y="396" font-size="15" text-anchor="middle" class="tick">3.4</text>
+<line x1="1160.00" y1="372" x2="1160.00" y2="377" stroke="#7b8ca0"/>
+<text x="1160.0" y="396" font-size="15" text-anchor="middle" class="tick">3.8</text>
+<line x1="1258.67" y1="372" x2="1258.67" y2="377" stroke="#7b8ca0"/>
+<text x="1258.67" y="396" font-size="15" text-anchor="middle" class="tick">4.2</text>
+<line x1="1456.00" y1="372" x2="1456.00" y2="377" stroke="#7b8ca0"/>
+<text x="1456.0" y="396" font-size="15" text-anchor="middle" class="tick">5</text>
+<text x="1160.0" y="412" font-size="16" text-anchor="middle">氧 / 燃质量比 O/F</text>
+<path d="M864.00,364.96 L962.67,302.02 L1061.33,278.67 L1160.00,274.81 L1258.67,279.80 L1456.00,300.42" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="864.00" cy="364.96" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="302.02" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="278.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="274.81" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="279.80" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="300.42" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<text x="1282" y="211" font-size="16" >A10 / A40 相同</text>
+<rect x="36" y="445" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="56" y="473" font-size="20" font-weight="600">阻塞质量流量变化 (%)</text>
+<line x1="118" y1="634.00" x2="710" y2="634.00" stroke="#e1e7ef"/>
+<text x="106" y="639.0" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="118" y1="587.33" x2="710" y2="587.33" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="106" y="592.33" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="118" y1="540.67" x2="710" y2="540.67" stroke="#e1e7ef"/>
+<text x="106" y="545.67" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="118" y1="494.00" x2="710" y2="494.00" stroke="#e1e7ef"/>
+<text x="106" y="499.0" font-size="15" text-anchor="end" class="tick">8</text>
+<line x1="118.00" y1="634" x2="118.00" y2="639" stroke="#7b8ca0"/>
+<text x="118.0" y="658" font-size="15" text-anchor="middle" class="tick">200</text>
+<line x1="201.01" y1="634" x2="201.01" y2="639" stroke="#7b8ca0"/>
+<text x="201.01" y="658" font-size="15" text-anchor="middle" class="tick">298.15</text>
+<line x1="329.43" y1="634" x2="329.43" y2="639" stroke="#7b8ca0"/>
+<text x="329.43" y="658" font-size="15" text-anchor="middle" class="tick">450</text>
+<line x1="456.29" y1="634" x2="456.29" y2="639" stroke="#7b8ca0"/>
+<text x="456.29" y="658" font-size="15" text-anchor="middle" class="tick">600</text>
+<line x1="710.00" y1="634" x2="710.00" y2="639" stroke="#7b8ca0"/>
+<text x="710.0" y="658" font-size="15" text-anchor="middle" class="tick">900</text>
+<text x="414.0" y="674" font-size="16" text-anchor="middle">气态入口温度 (K)</text>
+<path d="M118.00,583.09 L201.01,587.33 L329.43,594.26 L456.29,601.78 L710.00,618.62" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="118.00" cy="583.09" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="587.33" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="594.26" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="601.78" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="618.62" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<text x="536" y="473" font-size="16" >A10 / A40 相同</text>
+<rect x="782" y="445" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="802" y="473" font-size="20" font-weight="600">阻塞质量流量变化 (%)</text>
+<line x1="864" y1="634.00" x2="1456" y2="634.00" stroke="#e1e7ef"/>
+<text x="852" y="639.0" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="864" y1="587.33" x2="1456" y2="587.33" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="852" y="592.33" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="864" y1="540.67" x2="1456" y2="540.67" stroke="#e1e7ef"/>
+<text x="852" y="545.67" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="864" y1="494.00" x2="1456" y2="494.00" stroke="#e1e7ef"/>
+<text x="852" y="499.0" font-size="15" text-anchor="end" class="tick">8</text>
+<line x1="864.00" y1="634" x2="864.00" y2="639" stroke="#7b8ca0"/>
+<text x="864.0" y="658" font-size="15" text-anchor="middle" class="tick">2.6</text>
+<line x1="962.67" y1="634" x2="962.67" y2="639" stroke="#7b8ca0"/>
+<text x="962.67" y="658" font-size="15" text-anchor="middle" class="tick">3</text>
+<line x1="1061.33" y1="634" x2="1061.33" y2="639" stroke="#7b8ca0"/>
+<text x="1061.33" y="658" font-size="15" text-anchor="middle" class="tick">3.4</text>
+<line x1="1160.00" y1="634" x2="1160.00" y2="639" stroke="#7b8ca0"/>
+<text x="1160.0" y="658" font-size="15" text-anchor="middle" class="tick">3.8</text>
+<line x1="1258.67" y1="634" x2="1258.67" y2="639" stroke="#7b8ca0"/>
+<text x="1258.67" y="658" font-size="15" text-anchor="middle" class="tick">4.2</text>
+<line x1="1456.00" y1="634" x2="1456.00" y2="639" stroke="#7b8ca0"/>
+<text x="1456.0" y="658" font-size="15" text-anchor="middle" class="tick">5</text>
+<text x="1160.0" y="674" font-size="16" text-anchor="middle">氧 / 燃质量比 O/F</text>
+<path d="M864.00,615.03 L962.67,606.93 L1061.33,587.33 L1160.00,564.00 L1258.67,540.16 L1456.00,494.55" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="864.00" cy="615.03" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="606.93" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="587.33" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="564.00" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="540.16" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="494.55" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<text x="1282" y="473" font-size="16" >A10 / A40 相同</text>
+<rect x="36" y="707" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="56" y="735" font-size="20" font-weight="600">单喷管真空比冲变化 (%)</text>
+<line x1="118" y1="896.00" x2="710" y2="896.00" stroke="#e1e7ef"/>
+<text x="106" y="901.0" font-size="15" text-anchor="end" class="tick">-8</text>
+<line x1="118" y1="849.33" x2="710" y2="849.33" stroke="#e1e7ef"/>
+<text x="106" y="854.33" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="118" y1="802.67" x2="710" y2="802.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="106" y="807.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="118" y1="756.00" x2="710" y2="756.00" stroke="#e1e7ef"/>
+<text x="106" y="761.0" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="118.00" y1="896" x2="118.00" y2="901" stroke="#7b8ca0"/>
+<text x="118.0" y="920" font-size="15" text-anchor="middle" class="tick">200</text>
+<line x1="201.01" y1="896" x2="201.01" y2="901" stroke="#7b8ca0"/>
+<text x="201.01" y="920" font-size="15" text-anchor="middle" class="tick">298.15</text>
+<line x1="329.43" y1="896" x2="329.43" y2="901" stroke="#7b8ca0"/>
+<text x="329.43" y="920" font-size="15" text-anchor="middle" class="tick">450</text>
+<line x1="456.29" y1="896" x2="456.29" y2="901" stroke="#7b8ca0"/>
+<text x="456.29" y="920" font-size="15" text-anchor="middle" class="tick">600</text>
+<line x1="710.00" y1="896" x2="710.00" y2="901" stroke="#7b8ca0"/>
+<text x="710.0" y="920" font-size="15" text-anchor="middle" class="tick">900</text>
+<text x="414.0" y="936" font-size="16" text-anchor="middle">气态入口温度 (K)</text>
+<path d="M118.00,806.62 L201.01,802.67 L329.43,796.17 L456.29,789.05 L710.00,772.85" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="118.00" cy="806.62" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="802.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="796.17" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="789.05" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="772.85" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<path d="M118.00,806.44 L201.01,802.67 L329.43,796.48 L456.29,789.71 L710.00,774.37" fill="none" stroke="#b45c28" stroke-width="2.5"/>
+<circle cx="118.00" cy="806.44" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="802.67" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="796.48" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="789.71" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="774.37" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<line x1="511" y1="729" x2="532" y2="729" stroke="#166d9b" stroke-width="3"/>
+<text x="539" y="735" font-size="16" >A10</text>
+<line x1="617" y1="729" x2="638" y2="729" stroke="#b45c28" stroke-width="3"/>
+<text x="645" y="735" font-size="16" >A40</text>
+<rect x="782" y="707" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="802" y="735" font-size="20" font-weight="600">单喷管真空比冲变化 (%)</text>
+<line x1="864" y1="896.00" x2="1456" y2="896.00" stroke="#e1e7ef"/>
+<text x="852" y="901.0" font-size="15" text-anchor="end" class="tick">-8</text>
+<line x1="864" y1="849.33" x2="1456" y2="849.33" stroke="#e1e7ef"/>
+<text x="852" y="854.33" font-size="15" text-anchor="end" class="tick">-4</text>
+<line x1="864" y1="802.67" x2="1456" y2="802.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="852" y="807.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="864" y1="756.00" x2="1456" y2="756.00" stroke="#e1e7ef"/>
+<text x="852" y="761.0" font-size="15" text-anchor="end" class="tick">4</text>
+<line x1="864.00" y1="896" x2="864.00" y2="901" stroke="#7b8ca0"/>
+<text x="864.0" y="920" font-size="15" text-anchor="middle" class="tick">2.6</text>
+<line x1="962.67" y1="896" x2="962.67" y2="901" stroke="#7b8ca0"/>
+<text x="962.67" y="920" font-size="15" text-anchor="middle" class="tick">3</text>
+<line x1="1061.33" y1="896" x2="1061.33" y2="901" stroke="#7b8ca0"/>
+<text x="1061.33" y="920" font-size="15" text-anchor="middle" class="tick">3.4</text>
+<line x1="1160.00" y1="896" x2="1160.00" y2="901" stroke="#7b8ca0"/>
+<text x="1160.0" y="920" font-size="15" text-anchor="middle" class="tick">3.8</text>
+<line x1="1258.67" y1="896" x2="1258.67" y2="901" stroke="#7b8ca0"/>
+<text x="1258.67" y="920" font-size="15" text-anchor="middle" class="tick">4.2</text>
+<line x1="1456.00" y1="896" x2="1456.00" y2="901" stroke="#7b8ca0"/>
+<text x="1456.0" y="920" font-size="15" text-anchor="middle" class="tick">5</text>
+<text x="1160.0" y="936" font-size="16" text-anchor="middle">氧 / 燃质量比 O/F</text>
+<path d="M864.00,780.59 L962.67,784.74 L1061.33,802.67 L1160.00,824.69 L1258.67,846.86 L1456.00,887.62" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="864.00" cy="780.59" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="784.74" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="802.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="824.69" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="846.86" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="887.62" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<path d="M864.00,785.25 L962.67,786.24 L1061.33,802.67 L1160.00,824.04 L1258.67,845.97 L1456.00,886.81" fill="none" stroke="#b45c28" stroke-width="2.5"/>
+<circle cx="864.00" cy="785.25" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="786.24" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="802.67" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="824.04" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="845.97" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="886.81" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<line x1="1257" y1="729" x2="1278" y2="729" stroke="#166d9b" stroke-width="3"/>
+<text x="1285" y="735" font-size="16" >A10</text>
+<line x1="1363" y1="729" x2="1384" y2="729" stroke="#b45c28" stroke-width="3"/>
+<text x="1391" y="735" font-size="16" >A40</text>
+<rect x="36" y="969" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="56" y="997" font-size="20" font-weight="600">单喷管真空推力变化 (%)</text>
+<line x1="118" y1="1158.00" x2="710" y2="1158.00" stroke="#e1e7ef"/>
+<text x="106" y="1163.0" font-size="15" text-anchor="end" class="tick">-1</text>
+<line x1="118" y1="1111.33" x2="710" y2="1111.33" stroke="#e1e7ef"/>
+<text x="106" y="1116.33" font-size="15" text-anchor="end" class="tick">-0.5</text>
+<line x1="118" y1="1064.67" x2="710" y2="1064.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="106" y="1069.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="118" y1="1018.00" x2="710" y2="1018.00" stroke="#e1e7ef"/>
+<text x="106" y="1023.0" font-size="15" text-anchor="end" class="tick">0.5</text>
+<line x1="118.00" y1="1158" x2="118.00" y2="1163" stroke="#7b8ca0"/>
+<text x="118.0" y="1182" font-size="15" text-anchor="middle" class="tick">200</text>
+<line x1="201.01" y1="1158" x2="201.01" y2="1163" stroke="#7b8ca0"/>
+<text x="201.01" y="1182" font-size="15" text-anchor="middle" class="tick">298.15</text>
+<line x1="329.43" y1="1158" x2="329.43" y2="1163" stroke="#7b8ca0"/>
+<text x="329.43" y="1182" font-size="15" text-anchor="middle" class="tick">450</text>
+<line x1="456.29" y1="1158" x2="456.29" y2="1163" stroke="#7b8ca0"/>
+<text x="456.29" y="1182" font-size="15" text-anchor="middle" class="tick">600</text>
+<line x1="710.00" y1="1158" x2="710.00" y2="1163" stroke="#7b8ca0"/>
+<text x="710.0" y="1182" font-size="15" text-anchor="middle" class="tick">900</text>
+<text x="414.0" y="1198" font-size="16" text-anchor="middle">气态入口温度 (K)</text>
+<path d="M118.00,1062.44 L201.01,1064.67 L329.43,1068.42 L456.29,1072.68 L710.00,1082.84" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="118.00" cy="1062.44" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="1064.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="1068.42" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="1072.68" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="1082.84" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<path d="M118.00,1060.99 L201.01,1064.67 L329.43,1070.87 L456.29,1077.90 L710.00,1094.69" fill="none" stroke="#b45c28" stroke-width="2.5"/>
+<circle cx="118.00" cy="1060.99" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="201.01" cy="1064.67" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="329.43" cy="1070.87" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="456.29" cy="1077.90" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="710.00" cy="1094.69" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<line x1="511" y1="991" x2="532" y2="991" stroke="#166d9b" stroke-width="3"/>
+<text x="539" y="997" font-size="16" >A10</text>
+<line x1="617" y1="991" x2="638" y2="991" stroke="#b45c28" stroke-width="3"/>
+<text x="645" y="997" font-size="16" >A40</text>
+<rect x="782" y="969" width="712" height="244" rx="12" fill="#fff" stroke="#d7e1ec"/>
+<text x="802" y="997" font-size="20" font-weight="600">单喷管真空推力变化 (%)</text>
+<line x1="864" y1="1158.00" x2="1456" y2="1158.00" stroke="#e1e7ef"/>
+<text x="852" y="1163.0" font-size="15" text-anchor="end" class="tick">-1</text>
+<line x1="864" y1="1111.33" x2="1456" y2="1111.33" stroke="#e1e7ef"/>
+<text x="852" y="1116.33" font-size="15" text-anchor="end" class="tick">-0.5</text>
+<line x1="864" y1="1064.67" x2="1456" y2="1064.67" stroke="#708297" stroke-dasharray="5 5"/>
+<text x="852" y="1069.67" font-size="15" text-anchor="end" class="tick">0</text>
+<line x1="864" y1="1018.00" x2="1456" y2="1018.00" stroke="#e1e7ef"/>
+<text x="852" y="1023.0" font-size="15" text-anchor="end" class="tick">0.5</text>
+<line x1="864.00" y1="1158" x2="864.00" y2="1163" stroke="#7b8ca0"/>
+<text x="864.0" y="1182" font-size="15" text-anchor="middle" class="tick">2.6</text>
+<line x1="962.67" y1="1158" x2="962.67" y2="1163" stroke="#7b8ca0"/>
+<text x="962.67" y="1182" font-size="15" text-anchor="middle" class="tick">3</text>
+<line x1="1061.33" y1="1158" x2="1061.33" y2="1163" stroke="#7b8ca0"/>
+<text x="1061.33" y="1182" font-size="15" text-anchor="middle" class="tick">3.4</text>
+<line x1="1160.00" y1="1158" x2="1160.00" y2="1163" stroke="#7b8ca0"/>
+<text x="1160.0" y="1182" font-size="15" text-anchor="middle" class="tick">3.8</text>
+<line x1="1258.67" y1="1158" x2="1258.67" y2="1163" stroke="#7b8ca0"/>
+<text x="1258.67" y="1182" font-size="15" text-anchor="middle" class="tick">4.2</text>
+<line x1="1456.00" y1="1158" x2="1456.00" y2="1163" stroke="#7b8ca0"/>
+<text x="1456.0" y="1182" font-size="15" text-anchor="middle" class="tick">5</text>
+<text x="1160.0" y="1198" font-size="16" text-anchor="middle">氧 / 燃质量比 O/F</text>
+<path d="M864.00,1113.76 L962.67,1080.44 L1061.33,1064.67 L1160.00,1057.72 L1258.67,1055.12 L1456.00,1056.05" fill="none" stroke="#166d9b" stroke-width="2.5"/>
+<circle cx="864.00" cy="1113.76" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="1080.44" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="1064.67" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="1057.72" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="1055.12" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="1056.05" r="4.5" fill="#166d9b" stroke="#fff" stroke-width="1.4"/>
+<path d="M864.00,1150.16 L962.67,1092.29 L1061.33,1064.67 L1160.00,1052.41 L1258.67,1047.73 L1456.00,1049.04" fill="none" stroke="#b45c28" stroke-width="2.5"/>
+<circle cx="864.00" cy="1150.16" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="962.67" cy="1092.29" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1061.33" cy="1064.67" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1160.00" cy="1052.41" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1258.67" cy="1047.73" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<circle cx="1456.00" cy="1049.04" r="4.5" fill="#b45c28" stroke="#fff" stroke-width="1.4"/>
+<line x1="1257" y1="991" x2="1278" y2="991" stroke="#166d9b" stroke-width="3"/>
+<text x="1285" y="997" font-size="16" >A10</text>
+<line x1="1363" y1="991" x2="1384" y2="991" stroke="#b45c28" stroke-width="3"/>
+<text x="1391" y="997" font-size="16" >A40</text>
+<text x="46" y="1269" font-size="17" >离散情景，不是连续最优解；连线只作导读。各行纵轴尺度不同，零线为各自固定几何基准。</text>
+<text x="46" y="1302" font-size="17" >NASA9 CEA v3.3.4 同源物性对照；不包含预热装置代价、液态物性、整机循环、冷却或分离。</text>
+<text x="46" y="1328" font-size="14" >C17 研究记录：adiabatic_inlet_response_v1 · manifest SHA256 2d27c4ef8a9e76fa</text>
+</svg>

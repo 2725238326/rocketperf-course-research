@@ -195,19 +195,26 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             before=pipeline.test_records(root)
             path.write_text('damaged',encoding='utf-8')
             self.assertNotEqual(before,pipeline.test_records(root))
             self.assertIn(path.relative_to(root).as_posix(),{r['path'] for r in before})
+            before_svg=pipeline.test_records(root)
+            atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':'changed'})
+            self.assertNotEqual(before_svg,pipeline.test_records(root))
+            (root/'docs/adiabatic-inlet-response.svg').unlink()
+            with self.assertRaises(OSError): pipeline.test_records(root)
 
     def test_research_navigation_readme_is_not_numeric_test_identity(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             navigation=root/'results/research/example/README.md'
             navigation.parent.mkdir(parents=True);navigation.write_text('navigation only',encoding='utf-8')
@@ -220,8 +227,9 @@ class LifecycleTests(unittest.TestCase):
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             index=root/'调研/原始来源/来源文件索引.json'
             atomic_json(index,[])
             atomic_json(root/'data/parameters/fixture.json',{'records':[{'source_refs':['docs/source.md']}]})
@@ -258,8 +266,9 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
+            atomic_json(root/'docs/adiabatic-inlet-response.svg',{'fixture':True})
             atomic_json(root/'调研/原始来源/来源文件索引.json',[])
             with mock.patch.object(pipeline,'build',return_value=path),mock.patch.object(pipeline,'execute',side_effect=ValueError('test failed')),self.assertRaisesRegex(ValueError,'test failed'):
                 pipeline.test(root)
