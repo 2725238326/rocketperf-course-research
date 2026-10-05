@@ -56,6 +56,7 @@ python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
 
 1. 先说课程研究问题和资料缺口，不把公开构型资料补成发动机性能卡。
 2. 再说明输入、控制体和模型 ID：NASA9、九物种气相 TP/HP、冻结喷管、给定热状态外排循环。
+   新`hp-h`/`frozen-h`需说明相态与形成焓基准，用[保存版本](../results/validation/adiabatic_inlet_v1/manifest.json)演示，不把气态零热交换燃烧室说成液态/整机闭合。
 3. 演示一个成功算例和一个失败边界，展示 stdout、stderr、run-manifest 和残差。
 4. 展示独立参考与数据来源的定位，说明它们是同条件方法核验，不是飞行性能验证。
 5. 最后说明下一任务、未完成项和不能外推的结论。

@@ -325,6 +325,143 @@ static void test_fixed_geometry(void)
     CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, &roots, &result, NULL) == RP_NO_CONVERGENCE);
     CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
 }
+static RpCh4O2EnthalpyFeed enthalpy_feed(const RpCh4O2Feed *feed)
+{
+    RpThermoState fuel, oxidizer;
+    RpCh4O2EnthalpyFeed inlet = {0};
+    CHECK(rp_nasa9_evaluate(rp_thermo_find_species("CH4"), feed->fuel_temperature_k, &fuel, NULL) == RP_OK);
+    CHECK(rp_nasa9_evaluate(rp_thermo_find_species("O2"), feed->oxidizer_temperature_k, &oxidizer, NULL) == RP_OK);
+    inlet.pressure_pa = feed->pressure_pa;
+    inlet.oxidizer_fuel_mass_ratio = feed->oxidizer_fuel_mass_ratio;
+    inlet.fuel_h_j_per_kg = fuel.h_j_per_kg;
+    inlet.oxidizer_h_j_per_kg = oxidizer.h_j_per_kg;
+    inlet.phase = RP_FEED_GAS;
+    inlet.basis = RP_ENTHALPY_NASA9_CEA_V334;
+    return inlet;
+}
+static void test_explicit_enthalpy(void)
+{
+    const double temperatures[][2] = {{298.15,298.15},{200.0,200.0},{450.0,900.0},{1000.0,500.0}};
+    for (unsigned int i = 0U; i < 4U; ++i) {
+        RpCh4O2Feed feed = reference_feed();
+        RpCh4O2EnthalpyFeed inlet;
+        RpCombustionResult old, result;
+        double old_h, new_h;
+        feed.fuel_temperature_k = temperatures[i][0]; feed.oxidizer_temperature_k = temperatures[i][1];
+        inlet = enthalpy_feed(&feed);
+        CHECK(rp_ch4_o2_feed_enthalpy(&feed, &old_h, NULL) == RP_OK);
+        CHECK(rp_ch4_o2_inlet_enthalpy(&inlet, &new_h, NULL) == RP_OK);
+        CHECK(old_h == new_h);
+        CHECK(near(new_h, (inlet.fuel_h_j_per_kg + 3.4 * inlet.oxidizer_h_j_per_kg) / 4.4, 1e-8));
+        CHECK(rp_ch4_o2_equilibrium_hp(&feed, NULL, &old, NULL) == RP_OK);
+        CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, NULL, &result, NULL) == RP_OK);
+        CHECK(old.gas.temperature_k == result.gas.temperature_k);
+        CHECK(old.gas.h_j_per_kg == result.gas.h_j_per_kg);
+        CHECK(old.enthalpy_residual_j_per_kg == result.enthalpy_residual_j_per_kg);
+        CHECK(old.hp_iterations == result.hp_iterations);
+        CHECK(memcmp(old.gas.mole_fractions, result.gas.mole_fractions, sizeof(old.gas.mole_fractions)) == 0);
+        CHECK(fabs(result.enthalpy_residual_j_per_kg) <= 0.01);
+        check_elements(&result, &feed);
+        if (i == 0U) {
+            RpCombustionOptions policy = rp_combustion_default_options();
+            RpFrozenNozzleInput input = nozzle_input(&result.gas, 10.0);
+            RpFrozenNozzleFixedResult fixed;
+            const double root = result.gas.temperature_k;
+            CHECK(near(inlet.fuel_h_j_per_kg, -4650159.6379939355, 1e-7));
+            CHECK(near(inlet.oxidizer_h_j_per_kg, -0.00040024263231910033, 1e-7));
+            CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, NULL, &fixed, NULL) == RP_OK);
+            CHECK(near(fixed.mass_flow_kg_per_s, input.chamber_pressure_pa * 0.01 / fixed.nozzle.cstar_m_per_s, 1e-9));
+            CHECK(near(fixed.thrust_n, fixed.mass_flow_kg_per_s * fixed.nozzle.exit.velocity_m_per_s +
+                       fixed.nozzle.exit.gas.pressure_pa * fixed.exit_area_m2, 1e-7));
+            CHECK(fabs(fixed.nozzle.exit.energy_residual_j_per_kg) < 1e-5);
+            policy.hp_lower_temperature_k = root;
+            CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, &policy, &result, NULL) == RP_OK);
+            CHECK(result.gas.temperature_k == root && result.hp_iterations == 0U);
+            policy = rp_combustion_default_options(); policy.hp_upper_temperature_k = root;
+            CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, &policy, &result, NULL) == RP_OK);
+            CHECK(result.gas.temperature_k == root && result.hp_iterations == 0U);
+        }
+    }
+    {
+        const RpCh4O2Feed feed = reference_feed();
+        RpCh4O2EnthalpyFeed inlet = enthalpy_feed(&feed);
+        RpCombustionResult cold, hot;
+        CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, NULL, &cold, NULL) == RP_OK);
+        inlet.fuel_h_j_per_kg += 1e5;
+        CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, NULL, &hot, NULL) == RP_OK);
+        CHECK(hot.gas.temperature_k > cold.gas.temperature_k);
+        CHECK(near(hot.gas.h_j_per_kg - cold.gas.h_j_per_kg, 1e5 / 4.4, 0.02));
+    }
+    {
+        RpCh4O2Feed feed = reference_feed();
+        RpCh4O2EnthalpyFeed inlet;
+        double h = 0.0;
+        feed.fuel_temperature_k = 6000.0; feed.oxidizer_temperature_k = 6000.0;
+        inlet = enthalpy_feed(&feed);
+        CHECK(rp_ch4_o2_inlet_enthalpy(&inlet, &h, NULL) == RP_OK);
+        CHECK(near(h, (inlet.fuel_h_j_per_kg + 3.4 * inlet.oxidizer_h_j_per_kg) / 4.4, 1e-8));
+        inlet.fuel_h_j_per_kg = nextafter(inlet.fuel_h_j_per_kg, INFINITY);
+        CHECK(rp_ch4_o2_inlet_enthalpy(&inlet, &h, NULL) == RP_OUT_OF_DOMAIN);
+        feed.fuel_temperature_k = 200.0; feed.oxidizer_temperature_k = 200.0;
+        inlet = enthalpy_feed(&feed);
+        inlet.oxidizer_h_j_per_kg = nextafter(inlet.oxidizer_h_j_per_kg, -INFINITY);
+        CHECK(rp_ch4_o2_inlet_enthalpy(&inlet, &h, NULL) == RP_OUT_OF_DOMAIN);
+    }
+}
+static void test_explicit_enthalpy_failures(void)
+{
+    const RpCh4O2Feed feed = reference_feed();
+    const RpCh4O2EnthalpyFeed good = enthalpy_feed(&feed);
+    RpCh4O2EnthalpyFeed inlet;
+    RpCombustionResult result, sentinel;
+    RpCombustionOptions policy;
+    double h = 123.0;
+    memset(&sentinel, 0x5a, sizeof(sentinel));
+    for (unsigned int i = 0U; i < 18U; ++i) {
+        RpStatus expected = RP_OUT_OF_DOMAIN;
+        inlet = good; result = sentinel;
+        switch (i) {
+            case 0U: inlet.pressure_pa = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 1U: inlet.pressure_pa = 0.0; expected = RP_INVALID_ARGUMENT; break;
+            case 2U: inlet.oxidizer_fuel_mass_ratio = INFINITY; expected = RP_INVALID_ARGUMENT; break;
+            case 3U: inlet.fuel_h_j_per_kg = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 4U: inlet.oxidizer_h_j_per_kg = INFINITY; expected = RP_INVALID_ARGUMENT; break;
+            case 5U: inlet.phase = RP_FEED_LIQUID; break;
+            case 6U: inlet.phase = (RpFeedPhase)9; break;
+            case 7U: inlet.basis = RP_ENTHALPY_UNSPECIFIED; break;
+            case 8U: inlet.basis = (RpEnthalpyBasis)9; break;
+            case 9U: inlet.pressure_pa = 99.0; break;
+            case 10U: inlet.pressure_pa = 1e9 + 1.0; break;
+            case 11U: inlet.oxidizer_fuel_mass_ratio = 0.09; break;
+            case 12U: inlet.oxidizer_fuel_mass_ratio = 20.01; break;
+            case 13U: inlet.fuel_h_j_per_kg = -DBL_MAX; break;
+            case 14U: inlet.fuel_h_j_per_kg = DBL_MAX; break;
+            case 15U: inlet.oxidizer_h_j_per_kg = -DBL_MAX; break;
+            case 16U: inlet.oxidizer_h_j_per_kg = DBL_MAX; break;
+            default: inlet.oxidizer_fuel_mass_ratio = -1.0; expected = RP_INVALID_ARGUMENT; break;
+        }
+        CHECK(rp_ch4_o2_inlet_enthalpy(&inlet, &h, NULL) == expected);
+        CHECK(h == 123.0);
+        CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, NULL, &result, NULL) == expected);
+        CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    }
+    result = sentinel;
+    CHECK(rp_ch4_o2_inlet_enthalpy(NULL, &h, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_inlet_enthalpy(&good, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(NULL, NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    policy = rp_combustion_default_options(); policy.hp_lower_temperature_k = 999.0;
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, &policy, &result, NULL) == RP_INVALID_ARGUMENT);
+    policy = rp_combustion_default_options(); policy.hp_upper_temperature_k = 6001.0;
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, &policy, &result, NULL) == RP_INVALID_ARGUMENT);
+    policy = rp_combustion_default_options(); policy.hp_upper_temperature_k = 3500.0;
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, &policy, &result, NULL) == RP_NOT_BRACKETED);
+    policy = rp_combustion_default_options(); policy.max_equilibrium_iterations = 1U;
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, &policy, &result, NULL) == RP_NO_CONVERGENCE);
+    policy = rp_combustion_default_options(); policy.max_hp_iterations = 1U;
+    CHECK(rp_ch4_o2_equilibrium_hp_enthalpy(&good, &policy, &result, NULL) == RP_NO_CONVERGENCE);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+}
 int main(void)
 {
     test_tp_hp_reference();
@@ -333,6 +470,8 @@ int main(void)
     test_mixture_failure_contract();
     test_constant_cp_limit();
     test_fixed_geometry();
+    test_explicit_enthalpy();
+    test_explicit_enthalpy_failures();
     (void)printf("combustion: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

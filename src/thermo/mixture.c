@@ -101,3 +101,46 @@ RpStatus rp_ch4_o2_feed_enthalpy(const RpCh4O2Feed *feed, double *output, RpErro
     rp_error_clear(error);
     return RP_OK;
 }
+
+static RpStatus gas_enthalpy_bounds(const char *id, double enthalpy, RpError *error)
+{
+    const RpNasa9Species *species = rp_thermo_find_species(id);
+    RpThermoState lower, upper;
+    RpStatus status = rp_nasa9_evaluate(species, 200.0, &lower, error);
+    if (status != RP_OK) { return status; }
+    status = rp_nasa9_evaluate(species, 6000.0, &upper, error);
+    if (status != RP_OK) { return status; }
+    if (enthalpy < lower.h_j_per_kg || enthalpy > upper.h_j_per_kg) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Inlet species enthalpy outside pinned gas fit's 200..6000 K interval.");
+    }
+    return RP_OK;
+}
+
+RpStatus rp_ch4_o2_inlet_enthalpy(const RpCh4O2EnthalpyFeed *feed,
+                                  double *output, RpError *error)
+{
+    double fuel_fraction, result;
+    RpStatus status;
+    if (feed == NULL || output == NULL || !rp_isfinite(feed->pressure_pa) || feed->pressure_pa <= 0.0 ||
+        !rp_isfinite(feed->oxidizer_fuel_mass_ratio) || feed->oxidizer_fuel_mass_ratio <= 0.0 ||
+        !rp_isfinite(feed->fuel_h_j_per_kg) || !rp_isfinite(feed->oxidizer_h_j_per_kg)) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid explicit-enthalpy CH4/O2 feed.");
+    }
+    if (feed->phase != RP_FEED_GAS || feed->basis != RP_ENTHALPY_NASA9_CEA_V334) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Explicit inlet requires gas phase and pinned NASA9 CEA v3.3.4 formation-enthalpy basis.");
+    }
+    if (feed->pressure_pa < 100.0 || feed->pressure_pa > 1e9 ||
+        feed->oxidizer_fuel_mass_ratio < 0.1 || feed->oxidizer_fuel_mass_ratio > 20.0) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Explicit inlet: p=100..1e9 Pa, O/F=0.1..20.");
+    }
+    status = gas_enthalpy_bounds("CH4", feed->fuel_h_j_per_kg, error);
+    if (status != RP_OK) { return status; }
+    status = gas_enthalpy_bounds("O2", feed->oxidizer_h_j_per_kg, error);
+    if (status != RP_OK) { return status; }
+    fuel_fraction = 1.0 / (1.0 + feed->oxidizer_fuel_mass_ratio);
+    result = fuel_fraction * feed->fuel_h_j_per_kg + (1.0 - fuel_fraction) * feed->oxidizer_h_j_per_kg;
+    if (!rp_isfinite(result)) { return rp_error_set(error, RP_NUMERIC_ERROR, "Non-finite explicit inlet enthalpy."); }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
+}

@@ -1,5 +1,7 @@
 """Data conversion and evidence guard tests; reference runtime is not required."""
 from pathlib import Path
+import shutil
+import tempfile
 import sys
 import unittest
 
@@ -10,7 +12,8 @@ import pipeline
 import cea_reference
 import combustion_reference
 import cycle_validation
-from projectlib import read_json
+import adiabatic_inlet
+from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
@@ -54,8 +57,41 @@ class ThermoDataTests(unittest.TestCase):
                     combustion_count += 1
                 elif kind=='cycle-accounting-validation':
                     self.assertGreater(len(cycle_validation.check_archive(manifest.parent)),0)
+                elif kind=='adiabatic-inlet-validation':
+                    self.assertEqual(adiabatic_inlet.verify(manifest.parent),15)
                 else: self.fail(f'Unknown validation archive type: {kind}')
         self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
+
+    def test_adiabatic_archive_rejects_tampering(self):
+        self.assertEqual(len(adiabatic_inlet.recipes(0,0)),15)
+        for manifest in (ROOT/'results/validation').glob('*/manifest.json'):
+            if read_json(manifest).get('kind')!='adiabatic-inlet-validation':
+                continue
+            for defect in ('scope','exit-type','command','heat','thrust','reference','build','inventory','comparison-type'):
+                with self.subTest(defect=defect),tempfile.TemporaryDirectory(prefix='adiabatic-',dir=ROOT/'build') as temp:
+                    folder=Path(temp)/'archive'
+                    shutil.copytree(manifest.parent,folder)
+                    record=read_json(folder/'manifest.json')
+                    if defect=='scope': record['scope']='Real liquid engine validation'
+                    if defect=='exit-type': record['runs'][0]['exit_code']=False
+                    if defect=='command': record['runs'][5]['arguments'][2]='arbitrary'
+                    if defect in {'heat','thrust'}:
+                        filename='enthalpy_A10-stdout.txt';report=read_json(folder/filename)
+                        if defect=='heat': report['boundary']['heat_transfer_j_per_kg']=1
+                        else: report['geometry']['thrust_n']+=10
+                        atomic_json(folder/filename,report)
+                        next(f for f in record['files'] if f['path']==filename)['sha256']=digest(folder/filename)
+                    if defect=='reference':
+                        filename='ch4_o2_hp.out'
+                        (folder/filename).write_bytes((folder/filename).read_bytes()+b'\n')
+                        next(f for f in record['files'] if f['path']==filename)['sha256']=digest(folder/filename)
+                    if defect=='build': record['binary_sha256']='0'*64
+                    if defect=='inventory': (folder/'extra.txt').write_text('extra',encoding='utf-8')
+                    if defect=='comparison-type':
+                        row=next(c for c in record['comparisons']['enthalpy_hp'] if c['reference']==0)
+                        row['reference']=False
+                    atomic_json(folder/'manifest.json',record)
+                    with self.assertRaises(ValueError): adiabatic_inlet.verify(folder)
 
 
 if __name__ == '__main__':

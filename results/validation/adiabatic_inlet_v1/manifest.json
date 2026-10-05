@@ -1,0 +1,2603 @@
+{
+  "schema_version": 1,
+  "kind": "adiabatic-inlet-validation",
+  "status": "PASS",
+  "scope": "Explicit NASA9-basis CH4/O2 gas HP and fixed-area chamber-frozen single nozzle; not liquid properties, flight performance or full-cycle closure.",
+  "started_at": "2026-10-05T05:37:58+00:00",
+  "source_head": "7985ef04b1b385ccc6df61c04009b822e8f9e7ad",
+  "source_dirty": true,
+  "binary_sha256": "52b1d37402495ad9086d5b131e664a557a7ece255f43aff1349504a890a397f8",
+  "runs": [
+    {
+      "id": "fuel",
+      "arguments": [
+        "thermo",
+        "CH4",
+        "298.15"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "oxidizer",
+      "arguments": [
+        "thermo",
+        "O2",
+        "298.15"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "temperature_hp",
+      "arguments": [
+        "combustion",
+        "hp",
+        "10000000",
+        "3.4",
+        "298.15",
+        "298.15"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "temperature_A10",
+      "arguments": [
+        "combustion",
+        "frozen",
+        "10000000",
+        "3.4",
+        "298.15",
+        "298.15",
+        "10",
+        "0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "temperature_A40",
+      "arguments": [
+        "combustion",
+        "frozen",
+        "10000000",
+        "3.4",
+        "298.15",
+        "298.15",
+        "40",
+        "0"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "enthalpy_hp",
+      "arguments": [
+        "combustion",
+        "hp-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "enthalpy_A10",
+      "arguments": [
+        "combustion",
+        "frozen-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033",
+        "10",
+        "0",
+        "0.01"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "enthalpy_A40",
+      "arguments": [
+        "combustion",
+        "frozen-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033",
+        "40",
+        "0",
+        "0.01"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "double_area",
+      "arguments": [
+        "combustion",
+        "frozen-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033",
+        "10",
+        "0",
+        "0.02"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "ambient_5000",
+      "arguments": [
+        "combustion",
+        "frozen-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033",
+        "10",
+        "5000",
+        "0.01"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "reject_basis",
+      "arguments": [
+        "combustion",
+        "hp-h",
+        "arbitrary-zero",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_liquid",
+      "arguments": [
+        "combustion",
+        "hp-h",
+        "nasa9-cea-v3.3.4",
+        "liquid",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_h",
+      "arguments": [
+        "combustion",
+        "hp-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-1e308",
+        "-0.00040024263231910033"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_backpressure",
+      "arguments": [
+        "combustion",
+        "frozen-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "-4650159.6379939355",
+        "-0.00040024263231910033",
+        "40",
+        "100000",
+        "0.01"
+      ],
+      "exit_code": 4
+    },
+    {
+      "id": "reject_nan",
+      "arguments": [
+        "combustion",
+        "hp-h",
+        "nasa9-cea-v3.3.4",
+        "gas",
+        "10000000",
+        "3.4",
+        "nan",
+        "-0.00040024263231910033"
+      ],
+      "exit_code": 2
+    }
+  ],
+  "comparisons": {
+    "temperature_hp": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.46443,
+        "difference": 5.606414923420289e-07,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.199999999999,
+        "difference": 0.025155413683023653,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      }
+    ],
+    "temperature_A10": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1691.5578757592993,
+        "reference": 1691.56,
+        "difference": -0.002124240700595692,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 119871.32242738816,
+        "reference": 119870.00000000001,
+        "difference": 1.3224273881496629,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 2971.773402344481,
+        "reference": 2971.77,
+        "difference": 0.00340234448094634,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 3.306710541901207,
+        "reference": 3.3067,
+        "difference": 1.0541901206639892e-05,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3192.2631796013347,
+        "reference": 3192.26,
+        "difference": 0.0031796013345228857,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.7355036303079938,
+        "reference": 1.7355036303079938,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ],
+    "temperature_A40": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1173.0714388948113,
+        "reference": 1173.07,
+        "difference": 0.001438894811371938,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 18728.77432266676,
+        "reference": 18730.0,
+        "difference": -1.2256773332410376,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 3297.6096060827167,
+        "reference": 3297.61,
+        "difference": -0.00039391728341797716,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 4.357799570062633,
+        "reference": 4.3578,
+        "difference": -4.2993736748542233e-07,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 1.1641532182693481e-09,
+        "reference": 0.0,
+        "difference": 1.1641532182693481e-09,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 1.1641532182693481e-09,
+        "reference": 0.0,
+        "difference": 1.1641532182693481e-09,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3435.407477836409,
+        "reference": 3435.41,
+        "difference": -0.0025221635910384066,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": 5.778044709359165e-12,
+        "reference": 0.0,
+        "difference": 5.778044709359165e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": 5.778044709359165e-12,
+        "reference": 0.0,
+        "difference": 5.778044709359165e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3435.407477836409,
+        "reference": 3435.407477836409,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3435.407477836409,
+        "reference": 3435.407477836409,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.8676912942111807,
+        "reference": 1.8676912942111807,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ],
+    "enthalpy_hp": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.46443,
+        "difference": 5.606414923420289e-07,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.199999999999,
+        "difference": 0.025155413683023653,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      }
+    ],
+    "enthalpy_A10": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1691.5578757592993,
+        "reference": 1691.56,
+        "difference": -0.002124240700595692,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 119871.32242738816,
+        "reference": 119870.00000000001,
+        "difference": 1.3224273881496629,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 2971.773402344481,
+        "reference": 2971.77,
+        "difference": 0.00340234448094634,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 3.306710541901207,
+        "reference": 3.3067,
+        "difference": 1.0541901206639892e-05,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3192.2631796013347,
+        "reference": 3192.26,
+        "difference": 0.0031796013345228857,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.7355036303079938,
+        "reference": 1.7355036303079938,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ],
+    "enthalpy_A40": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1173.0714388948113,
+        "reference": 1173.07,
+        "difference": 0.001438894811371938,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 18728.77432266676,
+        "reference": 18730.0,
+        "difference": -1.2256773332410376,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 3297.6096060827167,
+        "reference": 3297.61,
+        "difference": -0.00039391728341797716,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 4.357799570062633,
+        "reference": 4.3578,
+        "difference": -4.2993736748542233e-07,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 1.1641532182693481e-09,
+        "reference": 0.0,
+        "difference": 1.1641532182693481e-09,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 1.1641532182693481e-09,
+        "reference": 0.0,
+        "difference": 1.1641532182693481e-09,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3435.407477836409,
+        "reference": 3435.41,
+        "difference": -0.0025221635910384066,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": 5.778044709359165e-12,
+        "reference": 0.0,
+        "difference": 5.778044709359165e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": 5.778044709359165e-12,
+        "reference": 0.0,
+        "difference": 5.778044709359165e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3435.407477836409,
+        "reference": 3435.407477836409,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3435.407477836409,
+        "reference": 3435.407477836409,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.8676912942111807,
+        "reference": 1.8676912942111807,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ],
+    "double_area": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1691.5578757592993,
+        "reference": 1691.56,
+        "difference": -0.002124240700595692,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 119871.32242738816,
+        "reference": 119870.00000000001,
+        "difference": 1.3224273881496629,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 2971.773402344481,
+        "reference": 2971.77,
+        "difference": 0.00340234448094634,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 3.306710541901207,
+        "reference": 3.3067,
+        "difference": 1.0541901206639892e-05,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3192.2631796013347,
+        "reference": 3192.26,
+        "difference": 0.0031796013345228857,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.7355036303079938,
+        "reference": 1.7355036303079938,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ],
+    "ambient_5000": [
+      {
+        "field": "chamber.temperature_k",
+        "actual": 3673.6145676113665,
+        "reference": 3673.61,
+        "difference": 0.004567611366383062,
+        "absolute_tolerance": 0.02
+      },
+      {
+        "field": "chamber.pressure_pa",
+        "actual": 10000000,
+        "reference": 10000000.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "chamber.h_j_per_kg",
+        "actual": -1056854.4676122249,
+        "reference": -1056854.0,
+        "difference": -0.46761222486384213,
+        "absolute_tolerance": 3.0
+      },
+      {
+        "field": "chamber.molar_mass_kg_per_kmol",
+        "actual": 21.464430560641492,
+        "reference": 21.4644,
+        "difference": 3.05606414912063e-05,
+        "absolute_tolerance": 5e-05
+      },
+      {
+        "field": "chamber.s_j_per_kg_k",
+        "actual": 12183.225155413682,
+        "reference": 12183.0,
+        "difference": 0.22515541368193226,
+        "absolute_tolerance": 0.5
+      },
+      {
+        "field": "chamber.mole_fractions.H2",
+        "actual": 0.08450172098635127,
+        "reference": 0.084502,
+        "difference": -2.7901364872684464e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O2",
+        "actual": 0.025566503731569507,
+        "reference": 0.025567,
+        "difference": -4.962684304922471e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.H2O",
+        "actual": 0.473454833817156,
+        "reference": 0.473455,
+        "difference": -1.6618284404135153e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO",
+        "actual": 0.1834638307526544,
+        "reference": 0.183464,
+        "difference": -1.692473455827681e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CO2",
+        "actual": 0.12062168146618701,
+        "reference": 0.120622,
+        "difference": -3.185338129790827e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.CH4",
+        "actual": 4.0716073776349947e-10,
+        "reference": 0.0,
+        "difference": 4.0716073776349947e-10,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "chamber.mole_fractions.H",
+        "actual": 0.02501315807006304,
+        "reference": 0.025013,
+        "difference": 1.5807006303880655e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.O",
+        "actual": 0.011962489574640798,
+        "reference": 0.011962,
+        "difference": 4.89574640797838e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "chamber.mole_fractions.OH",
+        "actual": 0.07541578119421713,
+        "reference": 0.075416,
+        "difference": -2.188057828672596e-07,
+        "absolute_tolerance": 2e-06
+      },
+      {
+        "field": "fraction_sum",
+        "actual": 0.9999999999999999,
+        "reference": 1.0,
+        "difference": -1.1102230246251565e-16,
+        "absolute_tolerance": 1e-12
+      },
+      {
+        "field": "element_ratio.H_C",
+        "actual": 3.9999999999866125,
+        "reference": 4.0,
+        "difference": -1.3387513320139988e-11,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "element_ratio.O_C",
+        "actual": 3.409150593139885,
+        "reference": 3.409150593147243,
+        "difference": -7.357670028795837e-12,
+        "absolute_tolerance": 2e-08
+      },
+      {
+        "field": "diagnostics.element[0]",
+        "actual": 7.604361584867547e-12,
+        "reference": 0.0,
+        "difference": 7.604361584867547e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[1]",
+        "actual": 4.25748325483255e-12,
+        "reference": 0.0,
+        "difference": 4.25748325483255e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.element[2]",
+        "actual": 5.446202878788275e-12,
+        "reference": 0.0,
+        "difference": 5.446202878788275e-12,
+        "absolute_tolerance": 2e-10
+      },
+      {
+        "field": "diagnostics.equilibrium",
+        "actual": 7.604139540262622e-12,
+        "reference": 0.0,
+        "difference": 7.604139540262622e-12,
+        "absolute_tolerance": 1e-10
+      },
+      {
+        "field": "diagnostics.enthalpy_j_per_kg",
+        "actual": -0.004122506594285369,
+        "reference": 0.0,
+        "difference": -0.004122506594285369,
+        "absolute_tolerance": 0.01
+      },
+      {
+        "field": "throat.temperature_k",
+        "actual": 3339.5379291190043,
+        "reference": 3339.54,
+        "difference": -0.00207088099568864,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.pressure_pa",
+        "actual": 5641749.866093881,
+        "reference": 5641760.0,
+        "difference": -10.133906118571758,
+        "absolute_tolerance": 30.0
+      },
+      {
+        "field": "throat.velocity_m_per_s",
+        "actual": 1246.5700245651142,
+        "reference": 1246.57,
+        "difference": 2.456511424497876e-05,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "throat.mach",
+        "actual": 1.0000000000102307,
+        "reference": 1.0,
+        "difference": 1.0230705171920818e-11,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "throat.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "throat.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "throat.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.temperature_k",
+        "actual": 1691.5578757592993,
+        "reference": 1691.56,
+        "difference": -0.002124240700595692,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.pressure_pa",
+        "actual": 119871.32242738816,
+        "reference": 119870.00000000001,
+        "difference": 1.3224273881496629,
+        "absolute_tolerance": 10.0
+      },
+      {
+        "field": "exit.velocity_m_per_s",
+        "actual": 2971.773402344481,
+        "reference": 2971.77,
+        "difference": 0.00340234448094634,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "exit.mach",
+        "actual": 3.306710541901207,
+        "reference": 3.3067,
+        "difference": 1.0541901206639892e-05,
+        "absolute_tolerance": 0.0002
+      },
+      {
+        "field": "exit.energy_residual",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "exit.entropy_residual",
+        "actual": 0,
+        "reference": 0.0,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-07
+      },
+      {
+        "field": "exit.recomputed_energy",
+        "actual": 2.3283064365386963e-10,
+        "reference": 0.0,
+        "difference": 2.3283064365386963e-10,
+        "absolute_tolerance": 1e-05
+      },
+      {
+        "field": "nozzle.cstar_m_per_s",
+        "actual": 1839.3872094838632,
+        "reference": 1839.39,
+        "difference": -0.002790516136883525,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.ivac_m_per_s",
+        "actual": 3192.2631796013347,
+        "reference": 3192.26,
+        "difference": 0.0031796013345228857,
+        "absolute_tolerance": 0.03
+      },
+      {
+        "field": "nozzle.continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_continuity",
+        "actual": -4.437894496334138e-12,
+        "reference": 0.0,
+        "difference": -4.437894496334138e-12,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.sonic",
+        "actual": 2.0461410343841635e-11,
+        "reference": 0.0,
+        "difference": 2.0461410343841635e-11,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cstar",
+        "actual": 1839.3872094838632,
+        "reference": 1839.3872094838632,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_ivac",
+        "actual": 3192.2631796013347,
+        "reference": 3192.2631796013347,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_effective_velocity",
+        "actual": 3183.0662435539157,
+        "reference": 3183.0662435539152,
+        "difference": 4.547473508864641e-13,
+        "absolute_tolerance": 1e-08
+      },
+      {
+        "field": "nozzle.recomputed_cf",
+        "actual": 1.730503630307994,
+        "reference": 1.730503630307994,
+        "difference": 0.0,
+        "absolute_tolerance": 1e-10
+      }
+    ]
+  },
+  "build_manifest_sha256": "27453d6b540af99c1c7aa19e40895d796ab75f8f7aeb16cc304c848ea1bf14a9",
+  "test_report_sha256": "800742b247ded0c8e10c0ce6c94801f339dc140a51652fdd66646987b9b229a8",
+  "cea_manifest_sha256": "24c3f88d26194d2c045fa3fcf8748dad03af6196ac06bb06c472c24d8b7a3e34",
+  "files": [
+    {
+      "path": "ambient_5000-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ambient_5000-stdout.txt",
+      "sha256": "882149feb1fe7c901244a09bee9160b7aa5aeb90c75d8f8a2952a7379baafe30"
+    },
+    {
+      "path": "build-manifest.json",
+      "sha256": "27453d6b540af99c1c7aa19e40895d796ab75f8f7aeb16cc304c848ea1bf14a9"
+    },
+    {
+      "path": "cea-manifest.json",
+      "sha256": "24c3f88d26194d2c045fa3fcf8748dad03af6196ac06bb06c472c24d8b7a3e34"
+    },
+    {
+      "path": "ch4_o2_hp.inp",
+      "sha256": "c95ef5f61938c0985ea4af6f37ab02591eb2850a758641118cfd36277a43e9e1"
+    },
+    {
+      "path": "ch4_o2_hp.log",
+      "sha256": "458e48c03a72ee065606d778d948ba04c05d85cfc259209c2b2604f400116ab4"
+    },
+    {
+      "path": "ch4_o2_hp.out",
+      "sha256": "432cd17229243d87d0faf12eb3ed82135a4cbdd376f8005498070f1cdcf93635"
+    },
+    {
+      "path": "ch4_o2_rocket_frozen_chamber.inp",
+      "sha256": "3a57af3f26a0455aa463409d0218148290da27049b52b32a5838a96376c0be49"
+    },
+    {
+      "path": "ch4_o2_rocket_frozen_chamber.log",
+      "sha256": "c578056d13c63924658caee0d3b1ba2f37e39b4a8fe29284cde91267474e0c0d"
+    },
+    {
+      "path": "ch4_o2_rocket_frozen_chamber.out",
+      "sha256": "1b3e36ddeb5488e2c4b5b42a2d049030c65ced81629bd1f5f22409e48af52854"
+    },
+    {
+      "path": "double_area-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "double_area-stdout.txt",
+      "sha256": "43d7b62eef2da231d719c82f5b724ad7f98321810d8a90cfc392beb448efef6b"
+    },
+    {
+      "path": "enthalpy_A10-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enthalpy_A10-stdout.txt",
+      "sha256": "3315470269b59af03f79076de2a437a2c7351b6be9b88d79f944e32d00a4e1d1"
+    },
+    {
+      "path": "enthalpy_A40-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enthalpy_A40-stdout.txt",
+      "sha256": "bcae2937c92e085826f6cd72998e4c356ae1a8de39e18bcd79917105730af8d5"
+    },
+    {
+      "path": "enthalpy_hp-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "enthalpy_hp-stdout.txt",
+      "sha256": "3beca28fc1ceae8698e65f99dea659a6f91f3fdd66a5b98914e78988ac3b10cc"
+    },
+    {
+      "path": "fuel-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "fuel-stdout.txt",
+      "sha256": "9293b58534ba3d89390e701eb414c7b79c9643d81c9d9ea1c9eefe73a4cdc580"
+    },
+    {
+      "path": "oxidizer-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "oxidizer-stdout.txt",
+      "sha256": "5797f99720d9515ef306f763e6d10767257369cb6ce0882cda69fb681a86ebda"
+    },
+    {
+      "path": "reject_backpressure-stderr.txt",
+      "sha256": "0fcdf824898856f01d5a8e0ab8e28ca57562394cc612b2c23a8d77b1854337d5"
+    },
+    {
+      "path": "reject_backpressure-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_basis-stderr.txt",
+      "sha256": "5cc06d5e586fc4857ef8799fb24a0f980910abe4df0f0f52e98738a247cb1001"
+    },
+    {
+      "path": "reject_basis-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_h-stderr.txt",
+      "sha256": "a31f5fa42d1ef078478e67b8112bf4926d43f86656465074f4255c0e2c1a2263"
+    },
+    {
+      "path": "reject_h-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_liquid-stderr.txt",
+      "sha256": "5cc06d5e586fc4857ef8799fb24a0f980910abe4df0f0f52e98738a247cb1001"
+    },
+    {
+      "path": "reject_liquid-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_nan-stderr.txt",
+      "sha256": "2316861522d01e6f842bccee36ef336caea8f9ec3612292653f659ee9c4d06ef"
+    },
+    {
+      "path": "reject_nan-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temperature_A10-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temperature_A10-stdout.txt",
+      "sha256": "0ec7ec570f0b35d9e2b1e370f5e1051840f15fd6de7833c30ad2b4864211a974"
+    },
+    {
+      "path": "temperature_A40-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temperature_A40-stdout.txt",
+      "sha256": "460dd24e5c18af9ec455efa8bcde2f70597cf58dd6faf4714ac1fb2df7b1e1a1"
+    },
+    {
+      "path": "temperature_hp-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "temperature_hp-stdout.txt",
+      "sha256": "b8ae2ed6155e1f5e76f1b57a8cc46d206a9aeadf06bba8e298261b7e3424516e"
+    },
+    {
+      "path": "test-report.json",
+      "sha256": "800742b247ded0c8e10c0ce6c94801f339dc140a51652fdd66646987b9b229a8"
+    }
+  ],
+  "finished_at": "2026-10-05T05:37:59+00:00"
+}

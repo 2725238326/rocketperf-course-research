@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "revision": 151,
+  "revision": 164,
   "context": {
-    "phase": "七点入口焓与密度诊断、热边界审阅与作业总览已形成；本轮验收后接续显式焓绝热气相方法",
+    "phase": "显式同基准气态入口焓HP与固定面积验证已形成，接续固定几何响应及参考域扩展",
     "evidence_cutoff": "2026-10-04",
     "next_tasks": [
-      "ANA-006"
+      "ANA-007"
     ],
     "facts": [
-      "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
-      "合成循环10份39点及六状态TP、五组主室冻结/11点参考已保存；同源物性实现对照，不是整机或实验验证。",
-      "新增七份C入口诊断，每点132条状态检查；h改变只平移所需Q，rho改变经泵功/分流传播，不是液体物性范围。",
-      "约193.65MW所需排热不是冷却负荷；液态温压/焓基准、煤油及整机独立参考仍缺。",
-      "作业总览对应三条研究主线与四项交付；已有方法、条件性结论和未覆盖项分别标明。",
-      "固定面积单喷管不等于全循环固定硬件；接续同NASA9基准的显式入口焓HP，不提前宣称真实绝热循环。",
-      "两型直接原文截至2026-10-03；Windows本地推进，PPT报告后置，不推送。"
+      "C17已有温度/显式同基准气态焓HP、NASA9、冻结/固定面积喷管和给定热状态外排；不是型号真实性能求解。",
+      "显式焓验证保存15次实际运行，新旧入口、固定CEA参考、面积/背压关系和预期失败；同源软件对照不是实验验证。",
+      "合成循环10份39点及六状态TP、五组冻结/11点参考、七份入口诊断保留；旧档案未覆盖。",
+      "气态HP以Q=0求温度；现循环仍给定TP，约193.65MW所需排热不是冷却负荷。",
+      "液态温压/形成焓基准转换、煤油、全循环固定硬件和整机独立参考仍缺，不填假数。",
+      "接续固定几何入口焓响应与新气态参考，明确未知型号字段；PPT/报告后置。",
+      "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，不推送。"
     ]
   },
   "tasks": [
@@ -359,7 +359,8 @@
         "ANA-003",
         "ANA-004",
         "ANA-005",
-        "ANA-006"
+        "ANA-006",
+        "ANA-007"
       ],
       "required_artifacts": [
         "deliverables/report.md",
@@ -370,7 +371,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": null,
-      "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
+      "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
       "verification": null
     },
     {
@@ -772,7 +773,7 @@
     {
       "id": "ANA-006",
       "title": "同基准入口焓的绝热气相方法与固定喷管验证",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-005"
@@ -785,6 +786,31 @@
         "C17提供独立显式入口焓HP接口，采用固定NASA9形成焓基准和CH4/O2气态元素库存，不静默改动旧TP/温度入口接口，不宣称液态煤油或整机循环已闭合",
         "与等价气态温度入口HP及固定CEA同条件参考比较，并验证固定喉面积喷管的质量/能量/推力关系；保留输入/构建/测试/原始参考与结果身份",
         "非有限输入、错误相态/基准、温区越界、未夹逼/未收敛明确失败，保持输出；独立API和CLI反例、Windows构建及统一质量通过，补充适用范围和缺口"
+      ],
+      "owner": "root",
+      "note": "验收完成：仅气态CH4/O2同NASA9基准的Q=0燃烧室与单喷管；不宣称液态、整机循环或独立实验验证",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-006_48665823c5dd.json",
+        "sha256": "26b60cd0cf1e4b585e1a1a0c74a6a51080b7c38e6f6e1f96115b936bcca351cf"
+      }
+    },
+    {
+      "id": "ANA-007",
+      "title": "固定几何气态入口焓响应与参考域扩展",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-006"
+      ],
+      "required_artifacts": [
+        "docs/adiabatic-inlet-study.md",
+        "results/research/adiabatic_inlet_response_v1/manifest.json"
+      ],
+      "acceptance": [
+        "以同NASA9气态入口焓和固定喉/出口面积进行独立C17计算，分别改变入口温度对应焓与O/F，保存全部成功/拒绝点和物性基准，不标真实型号或液态入口",
+        "使用新工况固定CEA HP/燃烧室冻结对照并保留原卡、原输出、运行身份；分析温度、组分、阻塞流量、推力/比冲响应，区分固定几何与固定流量重新定尺寸",
+        "新增归档数值/协议/范围反例及Windows完整质量证据；说明气相模型敏感性不等于液态物性不确定度或整机闭合，PPT报告继续后置"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -4019,6 +4045,249 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "e2d9b0d542f346d5121f4ec6963f2f8acbe876cb4576f7a9b4a162ddb021792e",
       "hash": "534788b28e3aa28fffd7b0274aeab3da2fce5a5225d8c9775fe766103248909d"
+    },
+    {
+      "seq": 169,
+      "at": "2026-10-05T05:14:18+00:00",
+      "task": "ANA-006",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实现独立显式同NASA9形成焓基准气相HP接口，保留旧API并验证固定面积喷管",
+      "previous_hash": "534788b28e3aa28fffd7b0274aeab3da2fce5a5225d8c9775fe766103248909d",
+      "hash": "687f77a6863cad4e18b2dcaf47aa52bdc5bd6ea0ee8b38a8ec415f009c49f1bd"
+    },
+    {
+      "seq": 170,
+      "at": "2026-10-05T06:00:42+00:00",
+      "task": "ANA-007",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "687f77a6863cad4e18b2dcaf47aa52bdc5bd6ea0ee8b38a8ec415f009c49f1bd",
+      "hash": "209586e472ca6e5dd20640666b7966cd54c99430bd4d6292162fe74243ab429a"
+    },
+    {
+      "seq": 171,
+      "at": "2026-10-05T06:00:42+00:00",
+      "task": "DOC-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
+      "previous_hash": "209586e472ca6e5dd20640666b7966cd54c99430bd4d6292162fe74243ab429a",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "PLANNED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": null,
+          "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
+          "verification": null
+        }
+      },
+      "hash": "408fe25b23920f76ffb8822368176a82ff1f6384b45b614a4baa9299edeaec6a"
+    },
+    {
+      "seq": 172,
+      "at": "2026-10-05T06:00:43+00:00",
+      "task": "ANA-006",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "显式焓接口与15次方法验证已产出，工作面接续固定几何气态响应，不推进报告",
+      "previous_hash": "408fe25b23920f76ffb8822368176a82ff1f6384b45b614a4baa9299edeaec6a",
+      "details": {
+        "context_before": {
+          "phase": "七点入口焓与密度诊断、热边界审阅与作业总览已形成；本轮验收后接续显式焓绝热气相方法",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-006"
+          ],
+          "facts": [
+            "C17已有NASA9、九物种TP/HP、冻结/固定面积单喷管与给定热状态外排扫描；不是型号真实性能求解。",
+            "合成循环10份39点及六状态TP、五组主室冻结/11点参考已保存；同源物性实现对照，不是整机或实验验证。",
+            "新增七份C入口诊断，每点132条状态检查；h改变只平移所需Q，rho改变经泵功/分流传播，不是液体物性范围。",
+            "约193.65MW所需排热不是冷却负荷；液态温压/焓基准、煤油及整机独立参考仍缺。",
+            "作业总览对应三条研究主线与四项交付；已有方法、条件性结论和未覆盖项分别标明。",
+            "固定面积单喷管不等于全循环固定硬件；接续同NASA9基准的显式入口焓HP，不提前宣称真实绝热循环。",
+            "两型直接原文截至2026-10-03；Windows本地推进，PPT报告后置，不推送。"
+          ]
+        },
+        "context_after": {
+          "phase": "显式同基准气态入口焓HP与固定面积验证已形成，接续固定几何响应及参考域扩展",
+          "evidence_cutoff": "2026-10-04",
+          "next_tasks": [
+            "ANA-007"
+          ],
+          "facts": [
+            "C17已有温度/显式同基准气态焓HP、NASA9、冻结/固定面积喷管和给定热状态外排；不是型号真实性能求解。",
+            "显式焓验证保存15次实际运行，新旧入口、固定CEA参考、面积/背压关系和预期失败；同源软件对照不是实验验证。",
+            "合成循环10份39点及六状态TP、五组冻结/11点参考、七份入口诊断保留；旧档案未覆盖。",
+            "气态HP以Q=0求温度；现循环仍给定TP，约193.65MW所需排热不是冷却负荷。",
+            "液态温压/形成焓基准转换、煤油、全循环固定硬件和整机独立参考仍缺，不填假数。",
+            "接续固定几何入口焓响应与新气态参考，明确未知型号字段；PPT/报告后置。",
+            "两型直接原文截至2026-10-03；Windows本地推进，不调用WSL/浏览器UI/子agent，不推送。"
+          ]
+        }
+      },
+      "hash": "c2311cc892487e0149a5413a597b557f65fa8a6f80cd720b114bb1a354aecc87"
+    },
+    {
+      "seq": 173,
+      "at": "2026-10-05T06:12:03+00:00",
+      "task": "ANA-006",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "显式焓C/API、CLI、固定面积验证、15次归档、Debug/Release/CMake/静态分析和统一质量均已通过；范围与缺口已写明",
+      "previous_hash": "c2311cc892487e0149a5413a597b557f65fa8a6f80cd720b114bb1a354aecc87",
+      "hash": "60f72f70abe1868f59daf22abe82200b3d55ca5f6deb7dd14de61a5f03ad2863"
+    },
+    {
+      "seq": 174,
+      "at": "2026-10-05T06:12:03+00:00",
+      "task": "ANA-006",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：同基准气态显式焓HP与旧温度入口等价，固定单喷管关系和失败协议已复核；不宣称液态或整机闭合",
+      "previous_hash": "60f72f70abe1868f59daf22abe82200b3d55ca5f6deb7dd14de61a5f03ad2863",
+      "hash": "b3cc1e2d2a9207167931d17af7ae027de3f2c997cfdd4f7a11dd94a0ee83bf2b"
+    },
+    {
+      "seq": 175,
+      "at": "2026-10-05T06:12:03+00:00",
+      "task": "ANA-007",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "b3cc1e2d2a9207167931d17af7ae027de3f2c997cfdd4f7a11dd94a0ee83bf2b",
+      "hash": "8b7549c363afe4bd3d994c7844372fc2105ee8a71be1686dec812a0f0cc2f538"
+    },
+    {
+      "seq": 176,
+      "at": "2026-10-05T06:13:04+00:00",
+      "task": "ANA-006",
+      "from": "DONE",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "最终视觉复核发现直接用例标签触及公共依赖虚线，微调标签位置后重新完整验收",
+      "previous_hash": "8b7549c363afe4bd3d994c7844372fc2105ee8a71be1686dec812a0f0cc2f538",
+      "hash": "f5cee39f06f2166fb4cd552cdd384e1151407121d7312da5c2f743488ea5dda2"
+    },
+    {
+      "seq": 177,
+      "at": "2026-10-05T06:13:04+00:00",
+      "task": "ANA-007",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Upstream reopened; prerequisite readiness revoked",
+      "previous_hash": "f5cee39f06f2166fb4cd552cdd384e1151407121d7312da5c2f743488ea5dda2",
+      "hash": "173426042b3985b1457a6dd092a19f23ed6379791946e4bff4b02312eb514c1a"
+    },
+    {
+      "seq": 178,
+      "at": "2026-10-05T06:15:00+00:00",
+      "task": "ANA-006",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成最终架构标签调整并重跑新鲜完整质量，随后本地提交及独立源码复验",
+      "previous_hash": "173426042b3985b1457a6dd092a19f23ed6379791946e4bff4b02312eb514c1a",
+      "hash": "d7150e9ba2049310dda320f96a9a18c8be0d1d6e11b4f77fbf80db3b5f066a27"
+    },
+    {
+      "seq": 179,
+      "at": "2026-10-05T06:24:12+00:00",
+      "task": "ANA-006",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "最终架构调整后的完整质量6/6通过；显式气态焓HP、旧API等价、CEA同条件及固定面积关系、15次运行和失败契约逐项复核",
+      "previous_hash": "d7150e9ba2049310dda320f96a9a18c8be0d1d6e11b4f77fbf80db3b5f066a27",
+      "hash": "2e1327eaed4a6a24d0fc59165b4146b423865866a78a3dbac0129c3e7c20f764"
+    },
+    {
+      "seq": 180,
+      "at": "2026-10-05T06:24:13+00:00",
+      "task": "ANA-006",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：仅气态CH4/O2同NASA9基准的Q=0燃烧室与单喷管；不宣称液态、整机循环或独立实验验证",
+      "previous_hash": "2e1327eaed4a6a24d0fc59165b4146b423865866a78a3dbac0129c3e7c20f764",
+      "hash": "bbb7e95f44e93f059dd4284253ac458298605b62c462944148b5fbde9af33e64"
+    },
+    {
+      "seq": 181,
+      "at": "2026-10-05T06:24:13+00:00",
+      "task": "ANA-007",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "bbb7e95f44e93f059dd4284253ac458298605b62c462944148b5fbde9af33e64",
+      "hash": "c8145b83b6c45f1028da96b1ad51756abe9562c5f08acdb3b0d7bca141067890"
     }
   ]
 }

@@ -34,6 +34,8 @@ python tools/combustion_reference.py
 
 第一条算燃烧室温度和组分；第二条继续算冻结喷管；第三条从已测具体构建复跑四个固定工况、与CEA自动比对并保留记录。`build/release`中的exe是便捷别名，追溯以manifest指向的实际构建为准。条件与验证见[热化学与喷管](docs/thermo-nozzle-validation.md)。
 
+新增[显式入口焓HP](docs/adiabatic-inlet-validation.md)：直接给出同NASA9形成焓基准的气态CH4/O2入口焓，求绝热气相温度并接固定面积喷管；不改变循环、不是液态模型。`python tools/adiabatic_inlet.py verify results/validation/adiabatic_inlet_v1`可离线复核15次保存运行、固定CEA对照及预期失败。
+
 循环合成算例可直接运行并归档：
 
 ```powershell

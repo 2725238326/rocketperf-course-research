@@ -15,6 +15,7 @@
 | research_tp_reference.py | 从保存合成循环取实际主室/发生器TP条件，运行固定CEA与C并保存六状态参考 |
 | research_frozen_reference.py | 指定TP的CEA主室冻结对照、C固定喉面积研究归档与离线数值复验 |
 | thermal_boundary.py | 编排七组C入口焓/密度诊断，固定输入、记录身份和跨工况解析关系；不求液态物性 |
+| adiabatic_inlet.py | 编排显式同NASA9基准气相HP与固定面积验证，保存新旧入口/拒绝点/原参考和身份，离线复算关系 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |

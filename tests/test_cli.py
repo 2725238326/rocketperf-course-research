@@ -261,6 +261,82 @@ class CliTests(unittest.TestCase):
                 self.assertEqual(run.returncode,code,run.stderr);self.assertEqual(run.stdout,'');self.assertTrue(run.stderr.strip())
         self.assertEqual(self.run_app('combustion','frozen-tp',*base[:-1]).returncode,2)
 
+    def enthalpy_arguments(self, fuel_t='298.15', oxidizer_t='298.15'):
+        values=[]
+        for species,temperature in [('CH4',fuel_t),('O2',oxidizer_t)]:
+            run=self.run_app('thermo',species,temperature)
+            self.assertEqual(run.returncode,0,run.stderr)
+            values.append(json.loads(run.stdout)['h_j_per_kg'])
+        return ['nasa9-cea-v3.3.4','gas','10000000','3.4',*map(repr,values)]
+
+    def test_explicit_enthalpy_equivalence_and_fixed_nozzle(self):
+        refs=json.loads((ROOT/'tests/reference/cea/manifest.json').read_text(encoding='utf-8'))
+        hp_ref=next(c for c in refs['cases'] if c['id']=='ch4_o2_hp')
+        nozzle_ref=next(c for c in refs['cases'] if c['id']=='ch4_o2_rocket_frozen_chamber')
+        for tf,to in [('298.15','298.15'),('450','900')]:
+            args=self.enthalpy_arguments(tf,to)
+            run=self.run_app('combustion','hp-h',*args)
+            self.assertEqual(run.returncode,0,run.stderr);self.assertEqual(run.stderr,'')
+            report=json.loads(run.stdout)
+            old=json.loads(self.run_app('combustion','hp','10000000','3.4',tf,to).stdout)
+            self.assertEqual(report['chamber'],old['chamber'])
+            self.assertEqual(report['diagnostics'],old['diagnostics'])
+            self.assertEqual(report['boundary']['heat_transfer_j_per_kg'],0)
+            self.assertNotIn('fuel_temperature_k',report['inputs'])
+            if tf=='298.15':
+                compare_report(report,hp_ref,'hp-h',expected_inputs=report['inputs'])
+                points=[]
+                for area,pa,at in [(10,0,0.01),(40,0,0.01),(10,0,0.02),(10,5000,0.01)]:
+                    run=self.run_app('combustion','frozen-h',*args,str(area),str(pa),str(at))
+                    self.assertEqual(run.returncode,0,run.stderr);self.assertEqual(run.stderr,'')
+                    point=json.loads(run.stdout);points.append(point)
+                    compare_report(point,nozzle_ref,'frozen-h',area,expected_inputs=point['inputs'])
+                base,_,double,ambient=points
+                self.assertTrue(math.isclose(double['geometry']['thrust_n'],2*base['geometry']['thrust_n'],abs_tol=1e-7))
+                self.assertEqual(ambient['geometry']['mass_flow_kg_per_s'],base['geometry']['mass_flow_kg_per_s'])
+                self.assertTrue(math.isclose(base['geometry']['thrust_n']-ambient['geometry']['thrust_n'],
+                                             5000*base['geometry']['exit_area_m2'],abs_tol=1e-7))
+
+    def test_explicit_enthalpy_rejections_and_protocol(self):
+        args=self.enthalpy_arguments()
+        for index,value,code in [(0,'arbitrary-zero',4),(1,'liquid',4),(1,'unknown',4),
+                                 (2,'99',4),(2,'nan',2),(3,'-1',4),(3,'20.1',4),
+                                 (4,'1e308',4),(4,'-1e308',4),(4,'nan',2),
+                                 (5,'-1e308',4),(5,'0x1p2',2)]:
+            bad=list(args);bad[index]=value
+            with self.subTest(index=index,value=value):
+                run=self.run_app('combustion','hp-h',*bad)
+                self.assertEqual(run.returncode,code,run.stderr);self.assertEqual(run.stdout,'')
+                self.assertTrue(run.stderr.strip())
+        for tail in [('10','1000000','0.01'),('10','0','0'),('0.5','0','0.01')]:
+            run=self.run_app('combustion','frozen-h',*args,*tail)
+            self.assertEqual(run.returncode,4);self.assertEqual(run.stdout,'')
+        for bad in [args[:-1],args+['extra']]:
+            self.assertEqual(self.run_app('combustion','hp-h',*bad).returncode,2)
+
+    def test_explicit_enthalpy_validator_rejects_false_success(self):
+        args=self.enthalpy_arguments()
+        run=self.run_app('combustion','frozen-h',*args,'10','0','0.01')
+        self.assertEqual(run.returncode,0,run.stderr)
+        report=json.loads(run.stdout);expected=copy.deepcopy(report['inputs'])
+        ref=next(c for c in json.loads((ROOT/'tests/reference/cea/manifest.json').read_text(encoding='utf-8'))['cases']
+                 if c['id']=='ch4_o2_rocket_frozen_chamber')
+        for defect in ['basis','phase','input-h','boundary-h','heat','bool-heat','temperature','thrust','flow','energy','model']:
+            bad=copy.deepcopy(report)
+            if defect=='basis': bad['inputs']['enthalpy_basis']='arbitrary'
+            if defect=='phase': bad['inputs']['feed_phase']='liquid'
+            if defect=='input-h': bad['inputs']['fuel_h_j_per_kg']+=1000
+            if defect=='boundary-h': bad['boundary']['inlet_mixture_h_j_per_kg']+=1000
+            if defect=='heat': bad['boundary']['heat_transfer_j_per_kg']=1
+            if defect=='bool-heat': bad['boundary']['heat_transfer_j_per_kg']=False
+            if defect=='temperature': bad['chamber']['temperature_k']+=1
+            if defect=='thrust': bad['geometry']['thrust_n']+=10
+            if defect=='flow': bad['geometry']['mass_flow_kg_per_s']*=2
+            if defect=='energy': bad['nozzle']['exit']['gas']['h_j_per_kg']+=1000
+            if defect=='model': bad['model']='prescribed_thermal_cycle_v1'
+            with self.subTest(defect=defect),self.assertRaises(ValueError):
+                compare_report(bad,ref,'frozen-h',10,expected_inputs=expected)
+
     def test_combustion_validator_rejects_false_success(self):
         result = self.run_app('combustion', 'frozen', '10000000', '3.4', '298.15', '298.15', '40', '0')
         self.assertEqual(result.returncode, 0, result.stderr)

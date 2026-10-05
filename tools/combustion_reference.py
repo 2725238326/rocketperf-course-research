@@ -15,16 +15,20 @@ from gas_checks import database, mixture
 
 def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     """Check provenance, conservation and print-precision-aware reference errors."""
-    nozzle_mode = mode in {'frozen','frozen-tp'}
-    fixed = mode == 'frozen-tp'
-    if mode not in {'tp','hp','frozen','frozen-tp'} or (nozzle_mode and area not in {10,40}):
+    explicit_h = mode in {'hp-h','frozen-h'}
+    nozzle_mode = mode in {'frozen','frozen-tp','frozen-h'}
+    fixed = mode in {'frozen-tp','frozen-h'}
+    if mode not in {'tp','hp','frozen','frozen-tp','hp-h','frozen-h'} or (nozzle_mode and area not in {10,40}):
         raise ValueError('Unsupported fixed reference mode/area')
     if not isinstance(report, dict):
         raise ValueError('Combustion report must be an object')
     expected_model = 'ch4_o2_tp_frozen_fixed_area_v1' if fixed else 'ch4_o2_chamber_frozen_v1' if nozzle_mode else 'ch4_o2_gas_equilibrium_v1'
+    if explicit_h:
+        expected_model = 'ch4_o2_hp_enthalpy_frozen_fixed_area_v1' if fixed else 'ch4_o2_hp_enthalpy_v1'
     required={'schema_version','model','mode','dataset_id','inputs','chamber','diagnostics','limitations'}
     if nozzle_mode: required.add('nozzle')
     if fixed: required.add('geometry')
+    if explicit_h: required.add('boundary')
     if (set(report)!=required or type(report.get('schema_version')) is not int or report['schema_version'] != 1
         or report.get('mode') != mode or report.get('model') != expected_model):
         raise ValueError('Combustion mode/model/schema mismatch')
@@ -34,6 +38,11 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         raise ValueError('Dataset or limitations missing')
     expected_input = dict(feed_phase='gas', pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
                           fuel_temperature_k=298.15, oxidizer_temperature_k=298.15)
+    if explicit_h:
+        expected_input = dict(feed_phase='gas', enthalpy_basis='nasa9-cea-v3.3.4',
+                              pressure_pa=1e7, oxidizer_fuel_mass_ratio=3.4,
+                              fuel_h_j_per_kg=0.0, oxidizer_h_j_per_kg=0.0)
+        if expected_inputs is None: raise ValueError('Explicit enthalpy requires independent declared inputs')
     if mode in {'tp','frozen-tp'}:
         expected_input['temperature_k'] = 3000.0
     if nozzle_mode:
@@ -42,17 +51,19 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         expected_input['throat_area_m2'] = 1.0
         if expected_inputs is None: raise ValueError('Fixed geometry reference requires explicit TP inputs')
     if expected_inputs is not None:
-        if (mode not in {'tp','frozen-tp'} or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
+        if (mode not in {'tp','frozen-tp','hp-h','frozen-h'} or not isinstance(expected_inputs,dict) or set(expected_inputs)!=set(expected_input)
             or expected_inputs.get('feed_phase')!='gas'
-            or any(type(x) not in (int,float) or not math.isfinite(x) or (x<0 if k=='ambient_pressure_pa' else x<=0)
-                   for k,x in expected_inputs.items() if k!='feed_phase')
+            or (explicit_h and expected_inputs.get('enthalpy_basis')!='nasa9-cea-v3.3.4')
+            or any(type(x) not in (int,float) or not math.isfinite(x)
+                   or (k not in {'fuel_h_j_per_kg','oxidizer_h_j_per_kg'} and (x<0 if k=='ambient_pressure_pa' else x<=0))
+                   for k,x in expected_inputs.items() if k not in {'feed_phase','enthalpy_basis'})
             or (fixed and expected_inputs.get('area_ratio') != area)):
             raise ValueError('Custom reference inputs require a positive numeric gas TP contract')
         expected_input=dict(expected_inputs)
     actual_input = report.get('inputs')
     if (not isinstance(actual_input, dict) or set(actual_input) != set(expected_input)
         or any(type(value) not in (int, float) or not math.isfinite(value)
-               for key, value in actual_input.items() if key != 'feed_phase')
+               for key, value in actual_input.items() if key not in {'feed_phase','enthalpy_basis'})
         or actual_input != expected_input):
         raise ValueError('Report does not correspond to the fixed method inputs')
     errors = []
@@ -119,8 +130,21 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
         or not isinstance(diagnostics['element_relative_residual'],list)
         or any(type(diagnostics[k]) is not int or not 0<=diagnostics[k]<=100000 for k in ('equilibrium_iterations','hp_iterations'))):
         raise ValueError('Invalid combustion diagnostics shape/counts')
-    fuel=mixture({'CH4':1.0},expected_input['fuel_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
-    oxidizer=mixture({'O2':1.0},expected_input['oxidizer_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
+    if explicit_h:
+        fuel=expected_input['fuel_h_j_per_kg']; oxidizer=expected_input['oxidizer_h_j_per_kg']
+        for species,value in [('CH4',fuel),('O2',oxidizer)]:
+            bounds=[mixture({species:1.0},t,expected_input['pressure_pa'],fits)['h_j_per_kg'] for t in (200,6000)]
+            if not bounds[0]-1e-7<=value<=bounds[1]+1e-7: raise ValueError('Explicit inlet h outside gas fit')
+        boundary=report['boundary']
+        if (not isinstance(boundary,dict) or set(boundary)!={'inlet_mixture_h_j_per_kg','heat_transfer_j_per_kg'}
+            or type(boundary['heat_transfer_j_per_kg']) not in (int,float) or boundary['heat_transfer_j_per_kg'] != 0):
+            raise ValueError('Explicit HP must declare zero heat transfer')
+        same(boundary['inlet_mixture_h_j_per_kg'],(fuel+of_ratio*oxidizer)/(1+of_ratio),'explicit mixed inlet h',1e-7)
+        if not 100<=expected_input['pressure_pa']<=1e9 or not 0.1<=of_ratio<=20 or not 1000<=chamber['temperature_k']<=6000:
+            raise ValueError('Explicit inlet outside equilibrium guards')
+    else:
+        fuel=mixture({'CH4':1.0},expected_input['fuel_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
+        oxidizer=mixture({'O2':1.0},expected_input['oxidizer_temperature_k'],expected_input['pressure_pa'],fits)['h_j_per_kg']
     same(diagnostics['enthalpy_residual_j_per_kg'],chamber['h_j_per_kg']-(fuel+of_ratio*oxidizer)/(1+of_ratio),'enthalpy residual identity',1e-5)
     if len(diagnostics['element_relative_residual']) != 3:
         raise ValueError('Element residual dimension mismatch')
@@ -129,7 +153,7 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     for i, residual in enumerate(diagnostics['element_relative_residual']):
         bounded(f'diagnostics.element[{i}]', residual, 0.0, 2e-10)
     bounded('diagnostics.equilibrium', diagnostics['equilibrium_residual'], 0.0, 1e-10)
-    if mode in {'hp','frozen'}:
+    if mode in {'hp','frozen','hp-h','frozen-h'}:
         bounded('diagnostics.enthalpy_j_per_kg', diagnostics['enthalpy_residual_j_per_kg'], 0.0, 0.01)
     if nozzle_mode:
         nozzle = report['nozzle']

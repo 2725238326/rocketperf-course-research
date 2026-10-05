@@ -1,0 +1,6 @@
+Usage (gas feed, SI): rocketperf combustion tp T_K P_PA OF TF_K TO_K
+                     rocketperf combustion hp P_PA OF TF_K TO_K
+                     rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA
+                     rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2
+                     rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG
+                     rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2

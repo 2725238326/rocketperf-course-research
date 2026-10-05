@@ -1,0 +1,58 @@
+
+ ! Method benchmark only: gaseous feed, not cryogenic liquid inlet enthalpy.
+ problem case=ch4_o2_hp hp p,bar=100 o/f=3.4
+ reactants
+  fuel=CH4 wt%=100 t,k=298.15
+  oxid=O2 wt%=100 t,k=298.15
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-8
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = ch4_o2_hp
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     CH4               100.000  -74600.000    298.15
+     O2                100.000      -0.000    298.15
+O/F =    3.40000    % Fuel =  22.72727    r, Eq. Ratio =  1.17331    phi, Eq. Ratio =  1.17331
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               100.00000
+ T, K                   3673.61
+ Density, kg/m^3      0.7027E+1
+ H, kJ/kg             -1056.854
+ U, kJ/kg             -2479.874
+ G, kJ/kg            -45813.328
+ S, kJ/kg-K             12.1832
+ 
+ M, (1/n)              21.46443
+ (dln(V)/dln(P))t      -1.04164
+ (dln(V)/dln(T))p       1.71728
+ Cp, kJ/kg-K            7.16242
+ Gamma_s                1.13359
+ Son. Vel., m/s        1270.088
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.084502
+ O2                    0.025567
+ H2O                   0.473455
+ CO                    0.183464
+ CO2                   0.120622
+ H                     0.025013
+ O                     0.011962
+ OH                    0.075416
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-08 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

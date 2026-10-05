@@ -14,6 +14,18 @@ typedef struct {
     double oxidizer_temperature_k;
     RpFeedPhase phase;
 } RpCh4O2Feed;
+typedef enum {
+    RP_ENTHALPY_UNSPECIFIED = 0,
+    RP_ENTHALPY_NASA9_CEA_V334 = 1
+} RpEnthalpyBasis;
+typedef struct {
+    double pressure_pa;
+    double oxidizer_fuel_mass_ratio;
+    double fuel_h_j_per_kg;
+    double oxidizer_h_j_per_kg;
+    RpFeedPhase phase;
+    RpEnthalpyBasis basis;
+} RpCh4O2EnthalpyFeed;
 typedef struct {
     double equilibrium_tolerance;
     double enthalpy_tolerance_j_per_kg;
@@ -60,5 +72,18 @@ RpStatus rp_ch4_o2_equilibrium_tp(const RpCh4O2Feed *feed, double temperature_k,
 RpStatus rp_ch4_o2_equilibrium_hp(const RpCh4O2Feed *feed,
                                   const RpCombustionOptions *options,
                                   RpCombustionResult *output, RpError *error);
+
+/* Independent explicit-enthalpy gas inlet, not a liquid-property adapter.
+ * Both pure-species enthalpies include formation enthalpy on the pinned NASA9
+ * CEA v3.3.4 basis, and must lie within each gas fit's 200..6000 K h interval.
+ * basis is a caller assertion, not proof of provenance or phase stability.
+ * Pressure/O/F guards match equilibrium above. No inlet T is invented.
+ * HP solves h_products(T,p) = (h_CH4 + O/F*h_O2)/(1+O/F); Q=0, no inlet KE.
+ * NULL options uses defaults. Every failure leaves output unchanged. */
+RpStatus rp_ch4_o2_inlet_enthalpy(const RpCh4O2EnthalpyFeed *feed,
+                                  double *output, RpError *error);
+RpStatus rp_ch4_o2_equilibrium_hp_enthalpy(const RpCh4O2EnthalpyFeed *feed,
+                                          const RpCombustionOptions *options,
+                                          RpCombustionResult *output, RpError *error);
 
 #endif

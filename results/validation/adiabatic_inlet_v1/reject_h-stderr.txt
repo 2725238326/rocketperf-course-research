@@ -1,0 +1,1 @@
+out_of_domain: Inlet species enthalpy outside pinned gas fit's 200..6000 K interval.
