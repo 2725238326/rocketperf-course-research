@@ -23,7 +23,7 @@ class DataContractTests(unittest.TestCase):
 
     def test_project_datasets_pass(self):
         source_index = ROOT / "调研/原始来源/来源文件索引.json"
-        for name in ("baseline.json", "assumptions.json", "feed_property_candidates.json", "assignment_case_map.json", "kerosene_method_contract.json"):
+        for name in ("baseline.json", "assumptions.json", "feed_property_candidates.json", "assignment_case_map.json", "kerosene_method_contract.json", "classmate_product_evidence.json"):
             with self.subTest(name=name):
                 self.assertEqual(check_data.validate_dataset(ROOT / "data/parameters" / name, source_index), [])
 

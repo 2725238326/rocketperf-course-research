@@ -8,7 +8,7 @@
 |---|---|---|
 | 两型工作方案、能力和参数缺口 | [四级段研究](docs/two-vehicle-study.md)、[要求映射](docs/requirements-map.md) | 遥一与长十乙首飞一二级分别记录；两型原文截止2026-10-03 |
 | 甲烷燃烧与喷管 | [连续液体HP核验](docs/liquid-combustion-validation.md) | C17单相入口表→九气相HP→固定面积冻结喷管；温压为研究假设 |
-| 煤油方法 | [固定RP-1边界](调研/专题/RES-008_煤油计算边界.md) | C研究驱动已有；富燃料失败/凝聚碳已记录，未开放生产燃料接口 |
+| 煤油方法 | [固定RP-1入口](docs/kerosene-validation.md)、[边界研究](调研/专题/RES-008_煤油计算边界.md) | C公共API/CLI已有；10 MPa/O-F2.2–4.0指定反应物，国产燃料批次仍未知 |
 | 改进计算 | [改进分析](docs/improvement-analysis.md)、[入口响应](docs/adiabatic-inlet-study.md) | 同条件收益、几何代价和输入响应；真实改装量或寿命仍缺证据 |
 | 循环 | [循环核验](docs/cycle-validation.md)、[热边界](docs/research-thermal-boundary.md) | 给定热状态外排原型；泵后供给、回流组成与完整循环尚未闭合 |
 | 保存输入、结果与参考 | [研究档案](results/research/README.md) | 每个版本带清单/哈希与失败记录，按其自身日期和构建身份使用 |
@@ -21,6 +21,7 @@
 python tools/quality.py
 python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
 python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
+python tools/kerosene_validation.py verify results/validation/kerosene_anchor_v1
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 ```
 
@@ -37,8 +38,10 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 公开字段缺失时继续独立方法研究，并记录其影响。具体任务顺序以worknow为准，PPT和最终报告暂缓。
 
+组员参数审阅见[RES-009](调研/专题/RES-009_组员参数审阅.md)：产品参数与试验产品保留各自身份，TQ-15B能力误归属和长十乙后缀推断不能进入输入。最终Windows计算程序直接由C运行，辅助工具单列于开发/参考附件。
+
 ## 交给其他组员
 
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 
-近期批次：[四级段整合](taskshot/2026-10-05_039-two-vehicle-study.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
+近期批次：[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。

@@ -1,0 +1,67 @@
+
+ problem case=of_2_2_rocket rocket frozen nfz=1 p,bar=100 o/f=2.2 supar=10,40
+ reactants
+  fuel=RP-1 wt%=100 t,k=298.15
+  oxid=O2(L) wt%=100 t,k=90.170
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+THEORETICAL ROCKET PERFORMANCE ASSUMING FROZEN
+COMPOSITION DURING EXPANSION FROM INFINITE AREA COMBUSTOR
+ 
+Pc = 100.00 bar
+ 
+supar =    10.0000   40.0000
+ 
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     RP-1              100.000  -24717.700    298.15
+     O2(L)             100.000  -12979.000     90.17
+ 
+O/F =    2.20000    % Fuel =  31.25000    r, Eq. Ratio =  1.54803    phi, Eq. Ratio =  1.54803
+ 
+
+                        CHAMBER       THROAT         EXIT         EXIT
+ Pinf/P                  1.0000       1.7851       88.702      586.428
+ P, bar                100.0000      56.0208       1.1274       0.1705
+ T, K                   3551.03      3198.38      1514.39      1011.29
+ Density, kg/m^3      0.7429E+1    0.4620E+1    0.1964E+0    0.4448E-1
+ H, kJ/kg              -831.531    -1572.227    -4931.794    -5826.585
+ U, kJ/kg             -2177.694    -2784.702    -5505.886    -6209.956
+ G, kJ/kg             -41713.69    -38394.38    -22366.63    -17469.33
+ S, kJ/kg-K              11.513       11.513       11.513       11.513
+ 
+ M, (1/n)               21.9328      21.9328      21.9328      21.9328
+ Cp, kJ/(kg-K)           4.1787       2.0883       1.8523       1.6953
+ Gamma_s                 1.2188       1.2218       1.2573       1.2880
+ Son. Vel., m/s         1280.89      1217.13       849.60       702.70
+ Mach                    0.0000       1.0000       3.3706       4.4980
+ 
+ PERFORMANCE PARAMETERS
+ 
+ Ae/At                                1.0000      10.0001      40.0000
+ C*, m/s                             1778.23      1778.23      1778.23
+ Cf                                   0.6845       1.6104       1.7774
+ Ivac, m/s                           2213.30      3064.13      3282.01
+ Isp, m/s                            1217.12      2863.66      3160.71
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.139108
+ O2                    0.002326
+ H2O                   0.312613
+ CO                    0.386444
+ CO2                   0.103961
+ H                     0.024720
+ O                     0.002698
+ OH                    0.028129
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+NOTE. WEIGHT FRACTION OF FUEL IN TOTAL FUELS AND OF OXIDANT IN TOTAL OXIDANTS
+

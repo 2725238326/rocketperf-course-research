@@ -1,6 +1,7 @@
 #include "rocketperf/combustion.h"
 #include "rocketperf/numeric.h"
 #include "reactants_generated.h"
+#include "equilibrium_internal.h"
 
 #include <stddef.h>
 #include <string.h>
@@ -55,4 +56,65 @@ RpStatus rp_ch4_o2_anchor_inlet(const RpCh4O2AnchorFeed *feed,
     *output = result;
     rp_error_clear(error);
     return RP_OK;
+}
+
+const char *rp_kerosene_dataset_id(void)
+{
+    return RP_KEROSENE_DATASET_ID;
+}
+
+RpStatus rp_kerosene_anchor_inlet(const RpKeroseneAnchorFeed *feed,
+                                  RpAnchorInlet *output, RpError *error)
+{
+    RpAnchorInlet result = {0};
+    const RpAssignedReactant *fuel = &rp_assigned_reactants[2];
+    const RpAssignedReactant *oxidizer = &rp_assigned_reactants[1];
+    const RpAssignedReactantFeed *input;
+    double fuel_fraction;
+    if (feed == NULL || output == NULL || feed->dataset_id == NULL) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "RP-1 feed, dataset and output are required.");
+    }
+    input = &feed->reactants;
+    if (input->fuel_anchor_id == NULL || input->oxidizer_anchor_id == NULL ||
+        !rp_isfinite(input->pressure_pa) || !rp_isfinite(input->oxidizer_fuel_mass_ratio) ||
+        !rp_isfinite(input->fuel_temperature_k) || !rp_isfinite(input->oxidizer_temperature_k) ||
+        input->pressure_pa <= 0.0 || input->oxidizer_fuel_mass_ratio <= 0.0 ||
+        input->fuel_temperature_k <= 0.0 || input->oxidizer_temperature_k <= 0.0) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid RP-1 assigned-reactant input.");
+    }
+    if (strcmp(feed->dataset_id, RP_KEROSENE_DATASET_ID) != 0 || input->phase != RP_FEED_LIQUID ||
+        strcmp(input->fuel_anchor_id, fuel->id) != 0 || strcmp(input->oxidizer_anchor_id, oxidizer->id) != 0 ||
+        input->fuel_temperature_k != fuel->temperature_k || input->oxidizer_temperature_k != oxidizer->temperature_k ||
+        input->pressure_pa != 1e7 || input->oxidizer_fuel_mass_ratio < 2.2 ||
+        input->oxidizer_fuel_mass_ratio > 4.0) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Fixed RP-1/O2(L): pinned dataset, 298.15/90.170 K, product p=10 MPa, O/F=2.2..4.0.");
+    }
+    fuel_fraction = 1.0 / (1.0 + input->oxidizer_fuel_mass_ratio);
+    result.fuel_h_j_per_kg = 1000.0 * fuel->enthalpy_j_per_mol / fuel->molar_mass_kg_per_kmol;
+    result.oxidizer_h_j_per_kg = 1000.0 * oxidizer->enthalpy_j_per_mol / oxidizer->molar_mass_kg_per_kmol;
+    result.mixture_h_j_per_kg = fuel_fraction * result.fuel_h_j_per_kg +
+        (1.0 - fuel_fraction) * result.oxidizer_h_j_per_kg;
+    for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+        result.element_inventory_kmol_per_kg[e] =
+            fuel_fraction * fuel->elements[e] / fuel->molar_mass_kg_per_kmol +
+            (1.0 - fuel_fraction) * oxidizer->elements[e] / oxidizer->molar_mass_kg_per_kmol;
+    }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
+}
+
+RpStatus rp_kerosene_equilibrium_hp_anchor(const RpKeroseneAnchorFeed *feed,
+                                          const RpCombustionOptions *options,
+                                          RpCombustionResult *output, RpError *error)
+{
+    RpAnchorInlet inlet;
+    RpStatus status;
+    if (output == NULL) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "RP-1 HP output is required.");
+    }
+    status = rp_kerosene_anchor_inlet(feed, &inlet, error);
+    if (status != RP_OK) { return status; }
+    return rp_cho_equilibrium_hp_inventory(feed->reactants.pressure_pa,
+        inlet.element_inventory_kmol_per_kg, inlet.mixture_h_j_per_kg, options, output, error);
 }

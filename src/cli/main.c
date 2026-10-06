@@ -392,13 +392,17 @@ static int combustion_main(int count, char **arguments)
     const int fixed_h = strcmp(mode, "frozen-h") == 0;
     const int hp_anchor = strcmp(mode, "hp-liquid") == 0;
     const int fixed_anchor = strcmp(mode, "frozen-liquid") == 0;
-    const int anchor = hp_anchor || fixed_anchor;
+    const int hp_rp1 = strcmp(mode, "hp-rp1") == 0;
+    const int fixed_rp1 = strcmp(mode, "frozen-rp1") == 0;
+    const int rp1 = hp_rp1 || fixed_rp1;
+    const int anchor = hp_anchor || fixed_anchor || rp1;
     const int explicit_h = hp_h || fixed_h;
-    const int fixed = fixed_tp || fixed_h || fixed_anchor;
+    const int fixed = fixed_tp || fixed_h || fixed_anchor || fixed_rp1;
     const int assigned_tp = tp || fixed_tp;
     RpCh4O2Feed feed = {0};
     RpCh4O2EnthalpyFeed inlet = {0};
     RpCh4O2AnchorFeed liquid = {0};
+    RpKeroseneAnchorFeed kerosene = {0};
     RpAnchorInlet anchor_inlet = {0};
     double inlet_enthalpy = 0.0;
     RpCombustionResult result;
@@ -410,22 +414,28 @@ static int combustion_main(int count, char **arguments)
     if (strcmp(mode, "hp-liquid-state") == 0 || strcmp(mode, "frozen-liquid-state") == 0) {
         return continuous_liquid_main(count, arguments);
     }
-    if ((!tp && !hp && !frozen && !fixed && !hp_h && !hp_anchor) ||
-        count != (tp ? 6 : hp ? 5 : fixed_tp ? 9 : hp_h ? 7 : fixed_h ? 10 : hp_anchor ? 9 : fixed_anchor ? 12 : 7)) { goto usage; }
+    if ((!tp && !hp && !frozen && !fixed && !hp_h && !hp_anchor && !hp_rp1) ||
+        count != (tp ? 6 : hp ? 5 : fixed_tp ? 9 : hp_h ? 7 : fixed_h ? 10 : (hp_anchor || hp_rp1) ? 9 : (fixed_anchor || fixed_rp1) ? 12 : 7)) { goto usage; }
     for (int i = anchor ? 5 : explicit_h ? 3 : 1; i < count; ++i) {
         const char *next;
         if (!parse_decimal_token(arguments[i], &next, &values[i - (anchor ? 5 : explicit_h ? 3 : 1)]) || *next != '\0') { goto usage; }
     }
     if (anchor) {
-        if (strcmp(arguments[1], rp_anchor_dataset_id()) != 0 || strcmp(arguments[2], "liquid") != 0) {
+        if (strcmp(arguments[1], rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id()) != 0 || strcmp(arguments[2], "liquid") != 0) {
             status = rp_error_set(&error, RP_OUT_OF_DOMAIN, "Fixed anchor requires pinned reactant dataset and liquid phase.");
         } else {
             liquid.pressure_pa = values[0]; liquid.oxidizer_fuel_mass_ratio = values[1];
             liquid.fuel_anchor_id = arguments[3]; liquid.oxidizer_anchor_id = arguments[4];
             liquid.fuel_temperature_k = values[2]; liquid.oxidizer_temperature_k = values[3];
             liquid.phase = RP_FEED_LIQUID;
-            status = rp_ch4_o2_anchor_inlet(&liquid, &anchor_inlet, &error);
-            if (status == RP_OK) { status = rp_ch4_o2_equilibrium_hp_anchor(&liquid, NULL, &result, &error); }
+            if (rp1) {
+                kerosene.dataset_id = arguments[1]; kerosene.reactants = liquid;
+                status = rp_kerosene_anchor_inlet(&kerosene, &anchor_inlet, &error);
+                if (status == RP_OK) { status = rp_kerosene_equilibrium_hp_anchor(&kerosene, NULL, &result, &error); }
+            } else {
+                status = rp_ch4_o2_anchor_inlet(&liquid, &anchor_inlet, &error);
+                if (status == RP_OK) { status = rp_ch4_o2_equilibrium_hp_anchor(&liquid, NULL, &result, &error); }
+            }
         }
     } else if (explicit_h) {
         inlet.pressure_pa = values[0]; inlet.oxidizer_fuel_mass_ratio = values[1];
@@ -463,11 +473,13 @@ static int combustion_main(int count, char **arguments)
     if (anchor) {
         written = printf("{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\","
                          "\"reactant_dataset_id\":\"%s\",\"inputs\":{\"feed_phase\":\"liquid\","
-                         "\"anchor_dataset_id\":\"%s\",\"fuel_anchor_id\":\"CH4(L)\",\"oxidizer_anchor_id\":\"O2(L)\","
+                         "\"anchor_dataset_id\":\"%s\",\"fuel_anchor_id\":\"%s\",\"oxidizer_anchor_id\":\"O2(L)\","
                          "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g,"
                          "\"fuel_temperature_k\":%.17g,\"oxidizer_temperature_k\":%.17g",
-                         fixed_anchor ? "ch4l_o2l_hp_frozen_fixed_area_v1" : "ch4l_o2l_hp_assigned_v1",
-                         mode, rp_thermo_dataset_id(), rp_anchor_dataset_id(), rp_anchor_dataset_id(),
+                         rp1 ? (fixed_rp1 ? "rp1_o2l_hp_frozen_fixed_area_v1" : "rp1_o2l_hp_assigned_v1") :
+                             (fixed_anchor ? "ch4l_o2l_hp_frozen_fixed_area_v1" : "ch4l_o2l_hp_assigned_v1"),
+                         mode, rp_thermo_dataset_id(), rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id(),
+                         rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id(), rp1 ? "RP-1" : "CH4(L)",
                          liquid.pressure_pa, liquid.oxidizer_fuel_mass_ratio,
                          liquid.fuel_temperature_k, liquid.oxidizer_temperature_k) >= 0;
     } else if (explicit_h) {
@@ -526,6 +538,10 @@ static int combustion_main(int count, char **arguments)
     if (written && anchor) {
         written = fputs(",\"Pressure denotes ideal-gas product chamber pressure; no pump, shaft work or real-engine validation.\"", stdout) >= 0;
     }
+    if (written && rp1) {
+        written = fputs(",\"Fixed CEA RP-1 pseudo-reactant; not an identified Chinese kerosene batch.\","
+                        "\"Product p=10 MPa and O/F=2.2..4.0; rich-mixture condensation is outside this method.\"", stdout) >= 0;
+    }
     written = written && fputs("]}\n", stdout) >= 0;
     if (!written || fflush(stdout) != 0) {
         (void)fputs("io_error: Cannot write combustion JSON report.\n", stderr); return 3;
@@ -539,7 +555,9 @@ usage:
                 "                     rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG\n"
                 "                     rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2\n"
                 "                     rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170\n"
-                "                     rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
+                "                     rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
+                "                     rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n"
+                "                     rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
     return 2;
 }
 

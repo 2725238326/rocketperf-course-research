@@ -22,6 +22,24 @@ BINARY = None
 
 
 class CliTests(unittest.TestCase):
+    def test_rp1_success_and_input_rejection(self):
+        data = ['cea-v3.3.4-rp1-o2l-assigned-v1', 'liquid', 'RP-1', 'O2(L)',
+                '10000000', '2.6', '298.15', '90.170']
+        run = self.run_app('combustion', 'hp-rp1', *data)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        self.assertEqual(report['model'], 'rp1_o2l_hp_assigned_v1')
+        self.assertAlmostEqual(report['chamber']['temperature_k'], 3724.01, delta=.02)
+        run = self.run_app('combustion', 'frozen-rp1', *data, '10', '0', '.01')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertAlmostEqual(json.loads(run.stdout)['geometry']['specific_impulse_s'], 310.5717305, places=5)
+        for index, value, code in ((0,'other',4),(1,'gas',4),(2,'CH4(L)',4),(3,'O2',4),
+                                  (4,'9999999',4),(5,'1',4),(6,'350',4),(7,'nan',2)):
+            changed = list(data); changed[index] = value
+            run = self.run_app('combustion', 'hp-rp1', *changed)
+            self.assertEqual(run.returncode, code, run.stderr)
+            self.assertFalse(run.stdout)
+
     @classmethod
     def setUpClass(cls):
         if BINARY is None:

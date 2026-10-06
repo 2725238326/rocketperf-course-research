@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "dataset_id": "classmate-product-evidence-v1",
+  "evidence_cutoff": "2026-10-06",
+  "status": "product_and_test_article_evidence_not_flight_inputs",
+  "records": [
+    {"id":"CL-TQ12A-PRODUCT","object":"TQ-12A","variant":"Product page read 2026-10-06","stage":"not_bound_to_flight","parameter":"sea_level_product_parameters","value":{"thrust_original_t":84.6,"isp_s":293,"mixture_ratio":2.9},"unit":"explicit original thrust t; Isp s; O/F dimensionless","data_role":"fact","source_refs":["CL01_landspace_product_20261006"],"operating_boundary":"TQ-12A product column; chamber/engine mixture-ratio boundary not disclosed","model_use":"Product comparison; not automatic HP or Y1 flight input","notes":"User-provided document source checked by teammate; independent page read confirms values. Preserve 84.6t original label; interpreting as tf gives 829.64259 kN."},
+    {"id":"CL-TQ12B-2023","object":"TQ-12B","variant":"2023-12-10 ZQ3 release","stage":"target_stage1","parameter":"sea_level_thrust","value":1000,"unit":"kN","data_role":"fact","source_refs":["CL02_landspace_50_20261006"],"operating_boundary":"2023 target configuration; Landspace republication of Beijing News","model_use":"Published target-product comparison only","notes":"No flight batch operating point, chamber pressure or flow boundary supplied."},
+    {"id":"CL-TQ15B-2023","object":"TQ-15B","variant":"2023-12-10 ZQ3 release","stage":"target_stage2","parameter":"vacuum_product_parameters","value":{"thrust_kn":1183,"effective_velocity_m_per_s":3500},"unit":"explicit kN and m/s","data_role":"fact","source_refs":["CL02_landspace_50_20261006"],"operating_boundary":"2023 target vacuum product; not CZ10B engine","model_use":"Target comparison; not Y1/Y2 flight input","notes":"3500 m/s is the source Isp velocity convention; divide by g0 for seconds. CZ10B restart/high-altitude ignition cannot be assigned to this product."},
+    {"id":"CL-CASC-140-TEST","object":"CASC sixth academy 140-ton-class methane test engine","variant":"First full-engine test 2025-04-26","stage":"not_bound_to_flight","parameter":"cycle_description","value":"open cycle","unit":"configuration","data_role":"fact","source_refs":["CL04_casc_140_20261006","CL05_cctv_140_20261006"],"operating_boundary":"Development/test product; CZ10B flight product identity not explicitly linked by these pages","model_use":"Cycle-family research background","notes":"CL04 states open cycle; CL05 confirms test date/thrust class. No formal YF219 identity, vacuum Isp, flow split or actual chamber data."}
+  ],
+  "missing_real_engine_fields":["batch chamber pressure","main-chamber O/F","throat area and nozzle area ratio","inlet temperature/pressure","CZ10B engine identity and cycle linkage"],
+  "missing_value_policy":"Product and test-article evidence cannot fill a flight performance card without an explicit identity/operating-boundary link."
+}

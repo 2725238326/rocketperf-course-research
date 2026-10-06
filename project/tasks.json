@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 235,
+  "revision": 248,
   "context": {
-    "phase": "固定RP-1产物边界与C方法研究；维护现行文档和交付检查",
+    "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "GOV-003",
-      "MOD-004"
+      "MOD-004",
+      "ANA-012"
     ],
     "facts": [
-      "两型直接原文核验截止2026-10-03；10月6日工程来源与方法计算不刷新型号事实",
-      "连续液体甲烷HP/冻结喷管与固定RP-1研究驱动已有；真实入口、公开煤油接口和完整循环仍缺",
-      "富燃料九气相存在失败与凝聚碳差异；方法结果按固定反应物和产物集解释",
-      "当前先完成计算与维护；PPT及最终报告后置"
+      "组员A/B来源为用户确认；10月6日新增产品/试验原文已核验，首飞装机和参数仍按各自对象记录",
+      "固定RP-1纯C公共接口限10 MPa、指定温度和O-F2.2..4.0；不能替代国产煤油批次",
+      "甲烷与RP-1均有方法参考和失败证据，真实泵后/循环输入仍缺",
+      "Windows最终计算程序不依赖Python/Fortran；开发与参考工具单列；PPT报告后置"
     ]
   },
   "tasks": [
@@ -1058,7 +1058,7 @@
     {
       "id": "MOD-004",
       "title": "固定RP-1公共接口与计算算例",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "RES-008",
@@ -1066,12 +1066,76 @@
       ],
       "required_artifacts": [
         "docs/kerosene-validation.md",
-        "results/validation/kerosene_anchor_v1/manifest.json"
+        "results/validation/kerosene_anchor_v1/manifest.json",
+        "include/rocketperf/combustion.h",
+        "src/thermo/reactants.c",
+        "src/thermo/reactants_generated.h",
+        "src/cli/main.c",
+        "tools/kerosene_validation.py",
+        "tests/test_cli.py",
+        "tests/test_combustion.c",
+        "taskshot/2026-10-06_042-parameters-and-rp1.md"
       ],
       "acceptance": [
         "C17具名固定RP-1入口要求数据集和精确温度，拒绝未知燃料、越域、相态和非有限值，失败保持输出",
         "用新增内部点C/CEA参考确定支持工况，纳入CLI、版本化结果和成功拒绝回归，禁止真实型号标签",
         "输出固定几何性能并解释产物/凝聚相及参考限制，运行完整Windows质量验收并本地提交"
+      ],
+      "owner": "root",
+      "note": "三项契约由C接口/CLI/参考/测试及说明支持；方法不是国产煤油批次或实际发动机，接续ANA-012同条件推进剂/喷管研究，报告PPT后置",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/MOD-004_72a330d8cf57.json",
+        "sha256": "347bcbf3169ea08cf79ded71d581fe48af5b7668f105be407b695b2b95d1bf7f"
+      }
+    },
+    {
+      "id": "RES-009",
+      "title": "组员参数汇总审阅与证据补充",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "GOV-003"
+      ],
+      "required_artifacts": [
+        "调研/专题/RES-009_组员参数审阅.md",
+        "调研/原始来源/20261006_classmate/parameters.docx",
+        "data/parameters/classmate_product_evidence.json",
+        "调研/原始来源/来源文件索引.json",
+        "docs/two-vehicle-study.md",
+        "handoff.md",
+        "taskshot/2026-10-06_042-parameters-and-rp1.md"
+      ],
+      "acceptance": [
+        "保留原文件身份与颜色标记，逐类说明可用、限定、误归属和待补字段，用户确认来源与本地核验分开",
+        "新增官网和媒体页面保存原文与哈希，不跨版本/发动机绑定参数，列出最有效的补证需求",
+        "明确纯C核心及最终Windows程序依赖边界，同步研究入口与任务并本地提交"
+      ],
+      "owner": "root",
+      "note": "完成组员资料内容及字段归属审阅；Word缺少配套渲染器未称视觉检查通过，产品/试验不能直接填首飞性能卡",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-009_c121deb0bfa7.json",
+        "sha256": "347bcbf3169ea08cf79ded71d581fe48af5b7668f105be407b695b2b95d1bf7f"
+      }
+    },
+    {
+      "id": "ANA-012",
+      "title": "甲烷与固定RP-1同条件喷管研究",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "MOD-004",
+        "RES-009"
+      ],
+      "required_artifacts": [
+        "docs/propellant-method-comparison.md",
+        "results/research/propellant_comparison_v1/manifest.json"
+      ],
+      "acceptance": [
+        "两种具名方法使用同Pc/几何/背压和各自明确入口及O-F，不把同条件方法比较当真实型号排名或连续最优",
+        "所有HP/喷管数值由C产生，保存成功拒绝、参考覆盖和物种/焓差异，计算比冲/推力及几何代价",
+        "回答课程性能与改进问题，记录输入限制和有效补证方向，完整Windows质量通过后本地提交"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -5950,6 +6014,345 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "e44bfdcd65cce939dafd8351090623110583fd89999d6535df8b9fdc3f1c17e5",
       "hash": "2c94010825f2e7b769549e57e4976f38efa61a126b7c53597af7de792101f5ba"
+    },
+    {
+      "seq": 253,
+      "at": "2026-10-06T15:13:54+00:00",
+      "task": "RES-009",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "2c94010825f2e7b769549e57e4976f38efa61a126b7c53597af7de792101f5ba",
+      "hash": "39da2c57e26f915ec5e83e85d30c61fecc6bd8aea8ef5e32711b58349e2a3051"
+    },
+    {
+      "seq": 254,
+      "at": "2026-10-06T15:13:55+00:00",
+      "task": "RES-009",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "审阅用户转交参数，核对发动机/级段/来源对应关系",
+      "previous_hash": "39da2c57e26f915ec5e83e85d30c61fecc6bd8aea8ef5e32711b58349e2a3051",
+      "hash": "edf9a7973e05f200a14c8e2d8190eed82d1da3ba27733955742a83396730265a"
+    },
+    {
+      "seq": 255,
+      "at": "2026-10-06T15:39:40+00:00",
+      "task": "ANA-012",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "edf9a7973e05f200a14c8e2d8190eed82d1da3ba27733955742a83396730265a",
+      "hash": "0286f6e8f8586ac43e3d1684f959017c09586fc25b540e87b15eedb9d1772a74"
+    },
+    {
+      "seq": 256,
+      "at": "2026-10-06T15:39:41+00:00",
+      "task": "RES-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "参数审阅与固定RP-1公共接口完成，接续同条件计算研究",
+      "previous_hash": "0286f6e8f8586ac43e3d1684f959017c09586fc25b540e87b15eedb9d1772a74",
+      "details": {
+        "context_before": {
+          "phase": "固定RP-1产物边界与C方法研究；维护现行文档和交付检查",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "GOV-003",
+            "MOD-004"
+          ],
+          "facts": [
+            "两型直接原文核验截止2026-10-03；10月6日工程来源与方法计算不刷新型号事实",
+            "连续液体甲烷HP/冻结喷管与固定RP-1研究驱动已有；真实入口、公开煤油接口和完整循环仍缺",
+            "富燃料九气相存在失败与凝聚碳差异；方法结果按固定反应物和产物集解释",
+            "当前先完成计算与维护；PPT及最终报告后置"
+          ]
+        },
+        "context_after": {
+          "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-004",
+            "ANA-012"
+          ],
+          "facts": [
+            "组员A/B来源为用户确认；10月6日新增产品/试验原文已核验，首飞装机和参数仍按各自对象记录",
+            "固定RP-1纯C公共接口限10 MPa、指定温度和O-F2.2..4.0；不能替代国产煤油批次",
+            "甲烷与RP-1均有方法参考和失败证据，真实泵后/循环输入仍缺",
+            "Windows最终计算程序不依赖Python/Fortran；开发与参考工具单列；PPT报告后置"
+          ]
+        }
+      },
+      "hash": "09d894dce1cf792d3e9abf2ba6f84cb31c4600b1dff1330ffaa737b341653b9a"
+    },
+    {
+      "seq": 257,
+      "at": "2026-10-06T15:55:46+00:00",
+      "task": "MOD-004",
+      "from": "READY",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "公共接口、纯C CLI、七点C/CEA参考与失败回归已落地",
+      "previous_hash": "09d894dce1cf792d3e9abf2ba6f84cb31c4600b1dff1330ffaa737b341653b9a",
+      "details": {
+        "contract_before": {
+          "id": "MOD-004",
+          "title": "固定RP-1公共接口与计算算例",
+          "status": "READY",
+          "priority": 1,
+          "depends_on": [
+            "RES-008",
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "docs/kerosene-validation.md",
+            "results/validation/kerosene_anchor_v1/manifest.json"
+          ],
+          "acceptance": [
+            "C17具名固定RP-1入口要求数据集和精确温度，拒绝未知燃料、越域、相态和非有限值，失败保持输出",
+            "用新增内部点C/CEA参考确定支持工况，纳入CLI、版本化结果和成功拒绝回归，禁止真实型号标签",
+            "输出固定几何性能并解释产物/凝聚相及参考限制，运行完整Windows质量验收并本地提交"
+          ],
+          "owner": null,
+          "note": "Created with an explicit acceptance contract",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-004",
+          "title": "固定RP-1公共接口与计算算例",
+          "status": "READY",
+          "priority": 1,
+          "depends_on": [
+            "RES-008",
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "docs/kerosene-validation.md",
+            "results/validation/kerosene_anchor_v1/manifest.json",
+            "include/rocketperf/combustion.h",
+            "src/thermo/reactants.c",
+            "src/thermo/reactants_generated.h",
+            "src/cli/main.c",
+            "tools/kerosene_validation.py",
+            "tests/test_cli.py",
+            "tests/test_combustion.c",
+            "taskshot/2026-10-06_042-parameters-and-rp1.md"
+          ],
+          "acceptance": [
+            "C17具名固定RP-1入口要求数据集和精确温度，拒绝未知燃料、越域、相态和非有限值，失败保持输出",
+            "用新增内部点C/CEA参考确定支持工况，纳入CLI、版本化结果和成功拒绝回归，禁止真实型号标签",
+            "输出固定几何性能并解释产物/凝聚相及参考限制，运行完整Windows质量验收并本地提交"
+          ],
+          "owner": null,
+          "note": "公共接口、纯C CLI、七点C/CEA参考与失败回归已落地",
+          "verification": null
+        }
+      },
+      "hash": "f0ca48744cccd32f1f14cc20e981e05a9b34a79638af58d56dee1e17fe97d425"
+    },
+    {
+      "seq": 258,
+      "at": "2026-10-06T15:55:46+00:00",
+      "task": "RES-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "新增产品/试验来源与独立机器数据，保留原DOCX；入口范围和纯C边界已同步",
+      "previous_hash": "f0ca48744cccd32f1f14cc20e981e05a9b34a79638af58d56dee1e17fe97d425",
+      "details": {
+        "contract_before": {
+          "id": "RES-009",
+          "title": "组员参数汇总审阅与证据补充",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "调研/专题/RES-009_组员参数审阅.md",
+            "调研/原始来源/20261006_classmate/parameters.docx"
+          ],
+          "acceptance": [
+            "保留原文件身份与颜色标记，逐类说明可用、限定、误归属和待补字段，用户确认来源与本地核验分开",
+            "新增官网和媒体页面保存原文与哈希，不跨版本/发动机绑定参数，列出最有效的补证需求",
+            "明确纯C核心及最终Windows程序依赖边界，同步研究入口与任务并本地提交"
+          ],
+          "owner": "root",
+          "note": "审阅用户转交参数，核对发动机/级段/来源对应关系",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "RES-009",
+          "title": "组员参数汇总审阅与证据补充",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "data/parameters/classmate_product_evidence.json",
+            "调研/原始来源/来源文件索引.json",
+            "docs/two-vehicle-study.md",
+            "handoff.md",
+            "taskshot/2026-10-06_042-parameters-and-rp1.md"
+          ],
+          "acceptance": [
+            "保留原文件身份与颜色标记，逐类说明可用、限定、误归属和待补字段，用户确认来源与本地核验分开",
+            "新增官网和媒体页面保存原文与哈希，不跨版本/发动机绑定参数，列出最有效的补证需求",
+            "明确纯C核心及最终Windows程序依赖边界，同步研究入口与任务并本地提交"
+          ],
+          "owner": "root",
+          "note": "新增产品/试验来源与独立机器数据，保留原DOCX；入口范围和纯C边界已同步",
+          "verification": null
+        }
+      },
+      "hash": "fbb678cfdf793c09013467e4f263c2144b5e600b1cb2d2bab7585a15e7a9ac1d"
+    },
+    {
+      "seq": 259,
+      "at": "2026-10-06T15:56:54+00:00",
+      "task": "RES-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完整列出原文、审阅、产品数据与交接产物",
+      "previous_hash": "fbb678cfdf793c09013467e4f263c2144b5e600b1cb2d2bab7585a15e7a9ac1d",
+      "details": {
+        "contract_before": {
+          "id": "RES-009",
+          "title": "组员参数汇总审阅与证据补充",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "data/parameters/classmate_product_evidence.json",
+            "调研/原始来源/来源文件索引.json",
+            "docs/two-vehicle-study.md",
+            "handoff.md",
+            "taskshot/2026-10-06_042-parameters-and-rp1.md"
+          ],
+          "acceptance": [
+            "保留原文件身份与颜色标记，逐类说明可用、限定、误归属和待补字段，用户确认来源与本地核验分开",
+            "新增官网和媒体页面保存原文与哈希，不跨版本/发动机绑定参数，列出最有效的补证需求",
+            "明确纯C核心及最终Windows程序依赖边界，同步研究入口与任务并本地提交"
+          ],
+          "owner": "root",
+          "note": "新增产品/试验来源与独立机器数据，保留原DOCX；入口范围和纯C边界已同步",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "RES-009",
+          "title": "组员参数汇总审阅与证据补充",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "GOV-003"
+          ],
+          "required_artifacts": [
+            "调研/专题/RES-009_组员参数审阅.md",
+            "调研/原始来源/20261006_classmate/parameters.docx",
+            "data/parameters/classmate_product_evidence.json",
+            "调研/原始来源/来源文件索引.json",
+            "docs/two-vehicle-study.md",
+            "handoff.md",
+            "taskshot/2026-10-06_042-parameters-and-rp1.md"
+          ],
+          "acceptance": [
+            "保留原文件身份与颜色标记，逐类说明可用、限定、误归属和待补字段，用户确认来源与本地核验分开",
+            "新增官网和媒体页面保存原文与哈希，不跨版本/发动机绑定参数，列出最有效的补证需求",
+            "明确纯C核心及最终Windows程序依赖边界，同步研究入口与任务并本地提交"
+          ],
+          "owner": "root",
+          "note": "完整列出原文、审阅、产品数据与交接产物",
+          "verification": null
+        }
+      },
+      "hash": "df55420dbb8a4b03f64965c9ccbb5028fd6e0b48a9f3251882db491f8d6f39e9"
+    },
+    {
+      "seq": 260,
+      "at": "2026-10-06T15:56:55+00:00",
+      "task": "RES-009",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "原Word保留哈希/颜色/来源清单；七份新原文和产品记录可追溯，纠正能力/装机误归属，明确灰色必要字段与纯C边界；六组质量通过",
+      "previous_hash": "df55420dbb8a4b03f64965c9ccbb5028fd6e0b48a9f3251882db491f8d6f39e9",
+      "hash": "2f2b216a872c8f4e56e4fbfb77f527a8a4f93994709bd3fa01f9ab197cc91e41"
+    },
+    {
+      "seq": 261,
+      "at": "2026-10-06T15:56:56+00:00",
+      "task": "RES-009",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "完成组员资料内容及字段归属审阅；Word缺少配套渲染器未称视觉检查通过，产品/试验不能直接填首飞性能卡",
+      "previous_hash": "2f2b216a872c8f4e56e4fbfb77f527a8a4f93994709bd3fa01f9ab197cc91e41",
+      "hash": "f203a0f9d3d0fd960829a32df40bd1910e13446f57e1af0b633136b3e6f4e48d"
+    },
+    {
+      "seq": 262,
+      "at": "2026-10-06T15:56:57+00:00",
+      "task": "MOD-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收固定RP-1公共C接口、CLI与七点保存参考",
+      "previous_hash": "f203a0f9d3d0fd960829a32df40bd1910e13446f57e1af0b633136b3e6f4e48d",
+      "hash": "4d4faf06b01a46c1e25cd48c5b000428fa955b9b2d5856b7a1373b9c58134116"
+    },
+    {
+      "seq": 263,
+      "at": "2026-10-06T15:56:58+00:00",
+      "task": "MOD-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "具名纯C入口/精确温度/域和失败保持输出已测试，33次C/21张CEA/812项比较及篡改反例归档，四图实际渲染核对，Windows系统库隔离运行通过；完整质量六组PASS",
+      "previous_hash": "4d4faf06b01a46c1e25cd48c5b000428fa955b9b2d5856b7a1373b9c58134116",
+      "hash": "05baef52aca67ec1f397494de4b1e768f6427d688aae51fbaf19e38be39477bc"
+    },
+    {
+      "seq": 264,
+      "at": "2026-10-06T15:56:59+00:00",
+      "task": "MOD-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "三项契约由C接口/CLI/参考/测试及说明支持；方法不是国产煤油批次或实际发动机，接续ANA-012同条件推进剂/喷管研究，报告PPT后置",
+      "previous_hash": "05baef52aca67ec1f397494de4b1e768f6427d688aae51fbaf19e38be39477bc",
+      "hash": "4e91c10d2a9ee1c6630c2a79ed987d67e4ae2494c91db436b7db8de067c08a25"
+    },
+    {
+      "seq": 265,
+      "at": "2026-10-06T15:56:59+00:00",
+      "task": "ANA-012",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "4e91c10d2a9ee1c6630c2a79ed987d67e4ae2494c91db436b7db8de067c08a25",
+      "hash": "cb8687d2489af012ff741042ceaf9818a610f727f06ce20315070b6e40d8bf23"
     }
   ]
 }

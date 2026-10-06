@@ -73,10 +73,11 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 
 ## 按职责找入口
 
-[固定RP-1方法研究](调研/专题/RES-008_煤油计算边界.md)保存15张CEA卡及6个C燃烧室点。10 MPa、O/F=2.6时，C燃温3724.0068 K；At=0.01 m²、面积比10的真空比冲310.571731 s。扩展产物集燃温低0.38 K；O/F=1时差26.45 K，O/F=0.5九气相C/CEA失败，扩展卡出现凝聚碳。这些结果限定方法适用条件；RP-1记录尚未绑定长十乙真实燃料，也尚未开放为生产CLI接口。
+[固定RP-1方法研究](调研/专题/RES-008_煤油计算边界.md)保留富燃料失败/凝聚碳证据。[纯C公共入口](docs/kerosene-validation.md)现支持固定10 MPa、O/F=2.2–4.0及精确反应物温度，保存33次C运行与21张新CEA卡。O/F=2.6、At=0.01 m²、面积比10真空比冲310.571731 s；该具名方法尚未绑定长十乙真实燃料。
 
 ```powershell
 python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
+./build/release/rocketperf.exe combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170
 ```
 
 | 工作 | 入口 |

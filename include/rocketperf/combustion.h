@@ -34,7 +34,12 @@ typedef struct {
     double fuel_temperature_k;
     double oxidizer_temperature_k;
     RpFeedPhase phase;
-} RpCh4O2AnchorFeed;
+} RpAssignedReactantFeed;
+typedef RpAssignedReactantFeed RpCh4O2AnchorFeed;
+typedef struct {
+    const char *dataset_id;
+    RpAssignedReactantFeed reactants;
+} RpKeroseneAnchorFeed;
 typedef struct {
     double fuel_h_j_per_kg;
     double oxidizer_h_j_per_kg;
@@ -114,5 +119,18 @@ RpStatus rp_ch4_o2_anchor_inlet(const RpCh4O2AnchorFeed *feed,
 RpStatus rp_ch4_o2_equilibrium_hp_anchor(const RpCh4O2AnchorFeed *feed,
                                          const RpCombustionOptions *options,
                                          RpCombustionResult *output, RpError *error);
+
+/* Fixed RP-1 C1H1.95 at 298.15 K with O2(L)90.170 K, Q=0.
+ * Method domain: product pressure exactly 10 MPa, O/F=2.2..4.0.
+ * This is an assigned-reactant model, not a Chinese kerosene batch or EOS.
+ * Nine neutral ideal-gas products; no condensed carbon or pressure correction.
+ * Requires pinned dataset/IDs and liquid phase. No arbitrary h override.
+ * Failure leaves output unchanged; NULL options uses the existing HP defaults. */
+const char *rp_kerosene_dataset_id(void);
+RpStatus rp_kerosene_anchor_inlet(const RpKeroseneAnchorFeed *feed,
+                                  RpAnchorInlet *output, RpError *error);
+RpStatus rp_kerosene_equilibrium_hp_anchor(const RpKeroseneAnchorFeed *feed,
+                                          const RpCombustionOptions *options,
+                                          RpCombustionResult *output, RpError *error);
 
 #endif

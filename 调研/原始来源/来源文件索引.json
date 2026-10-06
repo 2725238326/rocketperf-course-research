@@ -1,5 +1,14 @@
 [
   {
+    "id": "CL00_teammate_document_20261006",
+    "url": "user-provided:teammate-parameter-summary",
+    "available": true,
+    "file": "20261006_classmate/parameters.docx",
+    "bytes": 29323,
+    "saved_at": "2026-10-06T15:13:56+00:00",
+    "sha256": "8b51690575637c3fb8f0bbb79c10ff650c81b589cabd015893799dbc1a2e3875"
+  },
+  {
     "id": "L06_tq12a_abstract",
     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
     "available": false
@@ -733,5 +742,68 @@
     "bytes": 1174643,
     "saved_at": "2026-10-06T14:44:49.864598+00:00",
     "sha256": "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a"
+  },
+  {
+    "id": "CL01_landspace_product_20261006",
+    "url": "https://www.landspace.com/product.html?mao=2",
+    "available": true,
+    "file": "CL01_landspace_product_20261006.txt",
+    "bytes": 35164,
+    "saved_at": "2026-10-06T15:13:56.791618+00:00",
+    "sha256": "c9837b2cbb91afa3b710de267518cc08d3650a9604fd3a9d9e0acd808f9d4728"
+  },
+  {
+    "id": "CL02_landspace_50_20261006",
+    "url": "https://www.landspace.com/news-detail.html?itemid=50",
+    "available": true,
+    "file": "CL02_landspace_50_20261006.txt",
+    "bytes": 17815,
+    "saved_at": "2026-10-06T15:13:56.788905+00:00",
+    "sha256": "f3623a5524bbffbb8014b1249c1012703f54fea300afdc480b874c465a80e04c"
+  },
+  {
+    "id": "CL03_landspace_54_20261006",
+    "url": "https://www.landspace.com/news-detail.html?itemid=54",
+    "available": true,
+    "file": "CL03_landspace_54_20261006.txt",
+    "bytes": 19054,
+    "saved_at": "2026-10-06T15:13:56.788905+00:00",
+    "sha256": "c9a5ff2104e80c6a7fcd268a5e7c870e6853fd24632bfebf774ad84c4b5cbaed"
+  },
+  {
+    "id": "CL04_casc_140_20261006",
+    "url": "https://2011.spacechina.com/n25/n2014789/n2014809/c4336141/content.html",
+    "available": true,
+    "file": "CL04_casc_140_20261006.txt",
+    "bytes": 35698,
+    "saved_at": "2026-10-06T15:13:56.786163+00:00",
+    "sha256": "81faa7827a6f0f265fc2dd7f9927f10fa435550d033715b488a4dd8a154d21b3"
+  },
+  {
+    "id": "CL05_cctv_140_20261006",
+    "url": "https://news.cctv.com/2025/05/14/ARTIa0oM1GAgBjqLo1sFmeZt250514.shtml",
+    "available": true,
+    "file": "CL05_cctv_140_20261006.txt",
+    "bytes": 38981,
+    "saved_at": "2026-10-06T15:13:56.848579+00:00",
+    "sha256": "a2d318aed77cf584d86d4ce67351c2903501dc52e65ea53201de1c98061ba751"
+  },
+  {
+    "id": "CL06_seven_engines_20261006",
+    "url": "https://m.gmw.cn/2025-08/16/content_1304112327.htm",
+    "available": true,
+    "file": "CL06_seven_engines_20261006.txt",
+    "bytes": 28833,
+    "saved_at": "2026-10-06T15:13:56.786163+00:00",
+    "sha256": "db3f492c1c4fb348d20c1922cae9296abd093e25f290ea868acf49d945d0b109"
+  },
+  {
+    "id": "CL07_yf100k_20261006",
+    "url": "https://www.chinaspacenews.com.cn/n13/c2884/content.html",
+    "available": true,
+    "file": "CL07_yf100k_20261006.txt",
+    "bytes": 15534,
+    "saved_at": "2026-10-06T15:16:42.237973+00:00",
+    "sha256": "cf6707152fea8215f3ee5db961b4d7af8dc29b44ff3a0569ae919f3ac58d7009"
   }
 ]

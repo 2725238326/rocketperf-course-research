@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "dataset_id": "kerosene-fixed-rp1-method-v1",
-  "status": "research_driver_not_public_fuel_model",
+  "status": "bounded_public_fixed_reactant_method_not_batch_model",
   "evidence_cutoff": "2026-10-06",
-  "model_id": "fixed-rp1-nine-gas-research",
+  "model_id": "rp1_o2l_hp_assigned_v1",
   "records": [
     {
       "id": "KR-RP1-ASSIGNED",
@@ -16,20 +16,21 @@
       "data_role": "fact",
       "operating_boundary": "Single assigned enthalpy at 298.15 K; no continuous liquid state equation",
       "source_refs": ["调研/原始来源/20261003_cea_v3.3.4/thermo.inp"],
-      "model_use": "C research driver with pinned O2(L)90.170 K and nine neutral gas products",
+      "model_use": "C17 public fixed-RP1 adapter with O2(L)90.170 K and nine neutral gas products; not a flight input",
       "notes": "Source lines 15775-15777. C1H1.95 is an elemental bookkeeping unit, not identification of a Chinese fuel batch."
     }
   ],
   "reference_archive": "results/research/kerosene_products_v3_20261006/manifest.json",
+  "public_validation_archive": "results/validation/kerosene_anchor_v1/manifest.json",
   "reference_grid": {"pressure_pa": 10000000.0, "oxidizer_fuel_mass_ratios": [0.5, 1.0, 2.2, 2.6, 3.2, 4.0], "fuel_temperature_k": 298.15, "oxidizer_temperature_k": 90.17},
   "product_sets": {"restricted": ["H2", "O2", "H2O", "CO", "CO2", "CH4", "H", "O", "OH"], "expanded": "CEA default C/H/O neutral gas and allowed condensed products; no ions keyword"},
   "c_contract": {
-    "entry": "tools/kerosene_probe.c -> internal rp_cho_equilibrium_hp_inventory -> existing frozen nozzle",
+    "entry": "rp_kerosene_anchor_inlet -> rp_kerosene_equilibrium_hp_anchor -> internal HP; CLI reuses fixed-area frozen nozzle",
     "inventory": "b_C=f/M_RP1; b_H=1.95*f/M_RP1; b_O=2*(1-f)/M_O2; f=1/(1+O/F), kmol/kg",
     "enthalpy": "h=f*1000*(-24717.7)/13.976183 + (1-f)*1000*(-12979)/31.9988 J/kg",
     "failure": "Preserve numeric_error at O/F=0.5; never emit temperature/nozzle success fields for failed point",
-    "public_adapter": "Not implemented. New adapter must require dataset/fuel IDs, exact anchor temperatures, supported grid/range and failure-keeps-output semantics.",
-    "candidate_public_domain": "Evaluate fixed 10 MPa and O/F 2.2..4.0 using additional interior references before advertising a continuous domain. Existing samples alone do not certify that interval."
+    "public_adapter": "Pinned dataset/fuel IDs, exact 298.15/90.170 K, liquid phase, product 10 MPa and O/F=2.2..4.0. Failure keeps C output unchanged.",
+    "supported_method_domain": "Seven HP/frozen C/CEA points O/F=2.2,2.4,2.6,2.9,3.2,3.6,4.0 support bounded numerical method use; no phase-stability or whole-interval hardware certification."
   },
   "acceptance_tolerances": {"restricted_chamber_temperature_k": 0.02, "mole_fraction_absolute": 0.000002, "frozen_cstar_m_per_s": 0.03, "frozen_vacuum_velocity_m_per_s": 0.03, "hp_enthalpy_residual_j_per_kg": 0.01},
   "missing_real_engine_fields": ["Chinese kerosene batch/chemical basis", "engine operating point", "continuous liquid density/enthalpy", "pump and injector state", "cycle split and shaft power", "experimental validation"],

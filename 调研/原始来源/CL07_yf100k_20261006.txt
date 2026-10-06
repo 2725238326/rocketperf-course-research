@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+<!--start component HTML组件(new)-->
+ <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- 360极速模式浏览优先 -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- 360极速模式浏览优先 end -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- 页面等比例缩放 -->
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <!-- 页面等比例缩放 end -->
+
+
+    <meta name="keywords" content=" ">
+    <meta name="description" content=" ">
+
+    <!-- 引入页面CSS样式 -->
+    <link type="text/css" href="../../template/7/424.css" rel="stylesheet">
+    <!-- 引入页面CSS样式 end -->
+
+
+    <link href="../../template/7/428.css" rel="stylesheet" />
+    <link type="text/css" href="../../template/7/429.css" rel="stylesheet">
+
+
+    <!-- 引入JS-jQuery框架库 -->
+    <script type="text/javascript" src="../../template/7/479.js"></script>
+    <!-- 引入JS-jQuery框架库 end -->
+
+
+    <!-- wap端 -->
+    <link href="../../template/7/427.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../template/7/480.js"></script>
+    <!-- wap端 end -->
+
+
+    <!-- 低版本浏览器提示 -->
+    <link href="../../template/7/426.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../template/7/477.js"></script>
+    <!-- 低版本浏览器提示 end -->
+
+
+    <!-- 引入页面JS文件 -->
+    <script type="text/javascript" src="../../template/7/473.js"></script>
+    <!-- 引入页面JS文件 end -->
+
+
+    <!-- ie低版本提示 -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("body").iealert();
+        });
+    </script>
+    <!-- ie低版本提示 end -->
+<!--end component HTML组件(new)-->
+
+<!--start component 文档组件(title)-->
+<title>解密“长十二”发动机 - 中国航天新闻</title>
+<!--end component 文档组件(title)-->
+
+<!--start component HTML组件(style)-->
+<style>
+@media only screen and (max-width: 1024px){
+  .article_text img{width:5.8rem !important; height:auto !important;}
+ 
+}
+  @font-face {
+    font-family: 'SOURCEHANSANSSC-REGULAR';
+    src: url('../../dbsource/21/170.OTF') format('REGULAR'),
+    font-weight: normal;
+    font-style: normal;
+}
+    @font-face {
+    font-family: 'SOURCEHANSANSSC-BOLD';
+    src: url('../../dbsource/21/163.OTF')}') format('BOLD'),
+    font-weight: normal;
+    font-style: normal;
+}
+  
+  #zoom p,span,a,table,tr,td{
+     font-family: 'SOURCEHANSANSSC-REGULAR' !important;
+  }
+  
+  .article_title{
+   font-family: 'SOURCEHANSANSSC-BOLD' !important;
+   font-size: 30px !important;
+  }
+  
+</style>
+<!--end component HTML组件(style)-->
+
+</head>
+
+<body>
+<div class="bjbody">
+    
+
+<!--start component 导航条(导航条)-->
+
+<style>
+
+.header .header-left{
+    width: 209px;
+    height: 60px;
+}
+.header .header-left img{
+width: 209px;
+    height: 60px;
+}
+  .blue{height: 36px;background: #004ea2;}
+  .swiper-slide{
+    font-size:20px;
+   font-family: 'SOURCEHANSANSSC-REGULAR' !important;
+  }
+
+</style>
+
+
+
+
+
+<div class="blue"></div>
+
+<div class="center w1200">
+<!--banner 导航条-->
+    <div class="header">
+        <div class="header-left fl">
+            <a href="http://www.chinaspacenews.com.cn/" class="pc-baner"><img src="../../dbsource/3/6.png"></a>
+            <a href="http://www.chinaspacenews.com.cn/" class="mob-baner"><img src="../../dbsource/3/6.png"></a>
+          
+        </div>
+        <div class="header-rift">
+ <!-- 适配导航 -->
+        <div class="sear-warp">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  
+                  
+                    <div record="false" class="swiper-slide"><a href="../../n6/index.html">焦点</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n9/index.html">宇航</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n23/index.html">防务</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n8/index.html">产业</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n11/index.html">人物</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n12/index.html">视觉</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n13/index.html">科普</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n14/index.html">文化</a></div>
+
+                    <div record="false" class="swiper-slide"><a href="../../n15/index.html">服务</a></div>
+
+
+                  
+                  
+                  
+            
+                </div>
+            </div>
+        </div>
+<!-- 适配导航 end-->
+        </div>
+    </div>
+<!--banner 导航条 end-->
+<!--end component 导航条(导航条)-->
+
+<!--内容部分-->
+
+<!--start component HTML组件(内容页上)-->
+
+
+<div class="center-two">
+  <!-- 左侧图片列表 -->
+<div class="olist">
+    <div class="common_wrap">
+        
+<!--start component 文档组件(content)-->
+  
+
+
+<!--end component HTML组件(内容页上)-->
+
+<!--start component 文档组件(内容页)-->
+<div class="article_title">
+  <p style="font-weight:100;font-size:18px;">  </p>
+  解密“长十二”发动机
+    <p style="font-weight:100;font-size:18px;"> </p>
+</div>
+
+
+  <div class="article_attr zt">
+    来源：航天新闻网 &nbsp;&nbsp;&nbsp;&nbsp;日期：2024年12月13日&nbsp;&nbsp;&nbsp;&nbsp;字体：【<a  onclick="doZoom(20)" style="cursor:pointer">大</a>】【<a onclick="doZoom(16)" style="cursor:pointer">中</a>】【<a onclick="doZoom(12)" style="cursor:pointer">小</a>】
+  </div>
+    <div class="article_attr mobilezt">
+    来源：航天新闻网  &nbsp;&nbsp;&nbsp;&nbsp;日期：2024年12月13日
+  </div>
+
+
+
+  <div class="article_text" id="zoom">
+           <p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">近日，长征十二号一飞冲天，表现完美，备受瞩目。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">这款火箭采用了多项创新技术，其中就包括发动机部分。长征十二号火箭的一级动力源自新型高压补燃循环绿色泵后摆补燃循环液氧煤油发动机，该发动机由4台YF-100K发动机强强联合而成，每台发动机平均可以释放出130吨级的惊人推力，4台发动机协同工作，总推力轻松跃升至500吨以上。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">四机并联，就意味着需要把4台技术成熟的火箭发动机系统“组合”在一起工作，而不是简单的“捆绑”在一起，这其中就存在着很多技术挑战了。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">首先，要突破多台发动机同时点火启动的同步性问题。发令枪响，大家能不能同时“起跑”？这既考验单台发动机点火的可靠性，更考验多机并联工作的协同性。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">推进剂从箭体内的贮箱出发，通过不同的管路分到各个发动机入口处。从贮箱到各个发动机入口的连接管路各不相同，发生器入口的压力也各不相同，这就需要发动机具备可靠的宽入口压力工作能力。</p> 
+<p style="margin-top: 10px; margin-bottom: 25px; text-align: center; line-height: 32px; font-family: 宋体; font-size: 12pt;"><img alt="" style="width:850px;height:478px;" src="../../n13/c2884/part/4342.jpg" border="0"><br> </p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">对于液体火箭发动机来说，起动、关机过程堪比“生死关”，各部组件起动的先后顺序、时间间隔都需要被精准控制。因此各部组件响应时间、速度的一致性、控制的精准性，成为多机并联方案在点火启动时需要面临的难题。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">四机并联带来第二项考验是，发动机工作过程中的力热环境将变得极为复杂。一方面，液体火箭发动机在工作时会产生振动，多台同型号的发动机同时工作意味着共振的风险和强度显著提升。由于相同的频率会引起共振，多台发动机同时工作对发动机本体结构、发动机与箭体连接处结构、箭体结构都带来了严峻考验。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">另一方面，推进剂在液体火箭发动机内燃烧，会产生核心温度超过3000摄氏度的高温燃气，这些温度绝大部分都用于做功，少部分通过辐射方式向周围放热。在狭小空间内工作的多台液体火箭发动机会产生交叉热影响， 为了避免局部过热对材料造成不可逆转的破坏，多台发动机协同工作带来的的复杂热环境风险，需要谨慎识别和消除。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">四机并联带来的第三项考验是，一旦单台发动机出现问题，该如何快速识别和处理？</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">由于液体火箭发动机工作条件的恶劣，故障往往发展迅速且后果严重，从暴露隐患到发生爆炸往往在秒级甚至数十、百毫秒量级——不过是一眨眼的工夫。这就要求发动机自身具有高超的故障识别和处置能力。在极短的时间内，识别出发动机的故障或隐患，并对“问题”发动机进行可靠隔离，以确保其他发动机的正常工作。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">台上一分钟，台下十年功。液体火箭发动机强大的故障处理系统离不开科研人员建立的庞大又精准的故障库，也离不开灵敏又健壮的控制系统。</p> 
+<p align="" style="margin-top: 10px; margin-bottom: 25px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 12pt;">新一代运载火箭基于模块化、组合化、系列化发展理念，可以根据不同运力需求快速推陈出新。采取多机并联提升火箭推力是在掌握核心动力技术基础上，进入运载火箭自由王国发展新阶段的表现。</p> 
+<p align="" style="margin-top: 5px; margin-bottom: 5px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;"><span style="color: rgb(128, 128, 128); font-size: 10.5pt;">来源/《中国航天报·飞天科普周刊》，原标题《解密“长十二”发动机》</span></p> 
+<p align="" style="margin-top: 5px; margin-bottom: 5px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;"><span style="color: rgb(128, 128, 128); font-size: 10.5pt;">文/梅小娟</span></p> 
+<p align="" style="margin-top: 5px; margin-bottom: 5px; text-align: justify; line-height: 32px; font-family: 宋体; font-size: 16px;"><span style="color: rgb(128, 128, 128); font-size: 10.5pt;">编辑/戴敬宜</span></p>
+ </div>
+<style>
+  #zoom p,span,a,table,tr,td{
+     font-family: 'SOURCEHANSANSSC-REGULAR' !important;
+  }
+  </style>
+<!--end component 文档组件(内容页)-->
+
+<!--start component HTML组件(内容页下)-->
+
+<script type="text/javascript">
+ function doZoom(size){
+  document.getElementById('zoom').style.fontSize=size+'px'
+ }
+</script>
+<!--end component 文档组件(content)-->
+
+    </div>
+</div>
+
+
+</div>
+<!--end component HTML组件(内容页下)-->
+
+<!--内容部分 end-->
+<!-- 底部 -->
+
+<!--start component HTML组件(二级通用footer)-->
+<div class="footer w1200">
+<div class="footer-onemo">
+    <ul>
+        <li>
+        <img src="../../template/3/161.jpg">
+        <p>中国航天报社<br/>订阅号</p>
+        </li>
+         <li>
+        <img src="../../template/3/150.jpg">
+        <p>中国航天科技集团<br/>官方微信</p>
+        </li>
+    </ul>
+</div>
+
+        <div class="footer-two">
+          国家互联网信息办公室准许从事互联网新闻信息服务业务的网站 互联网新闻信息服务许可证编号：10120230005<br/> 
+            违法和不良信息举报电话：（010）68767239 　举报邮箱：zghtbs@sina.com<br/> 
+网站运维电话：（010）68768186　　网站维护：中国航天报社有限责任公司<br/>
+传真：（010）68372291　　地址：北京市海淀区阜成路8号科研档案楼　　邮编：100048<br/>
+     中国航天报社有限责任公司版权所有
+        </div>
+                <div class="footer-twomo">
+     中国航天报社有限责任公司版权所有
+        </div>
+    </div>
+</div>
+<!-- 底部 end-->
+
+</div>
+<style>
+    @font-face {
+    font-family: 'SOURCEHANSANSSC-REGULAR';
+    src: url('../../dbsource/21/170.OTF') format('REGULAR'),
+    font-weight: normal;
+    font-style: normal;
+}
+  
+* {
+     font-family: 'SOURCEHANSANSSC-REGULAR' !important;
+  }
+  
+</style>
+<script type="text/javascript" src="../../template/3/212.js"></script>
+<script language="javascript">
+    var swiper = new Swiper(".mySwiper", {
+        freeMode: true,
+        slidesPerView: "auto",
+        freeModeMomentumRatio: 0.5,
+        on: {
+            //当前swiper-slide点击时触发事件
+            click: function (e) {
+                let thisWidth = this.clickedSlide.offsetWidth;
+                let thisLeft = this.clickedSlide.offsetLeft;
+                let offsetX = this.width / 2 - thisLeft - thisWidth / 2;
+                //偏移量在1/2视口内时，容器不发生偏移
+                if (offsetX > 0) {
+                    offsetX = 0;
+                }
+                //offsetX小于容器最大偏移时，让偏移量等于容器最大的偏移量
+                else if (offsetX < this.maxTranslate()) {
+                    offsetX = this.maxTranslate();
+                }
+                //设置容器的过渡动画
+                this.setTransition(300);
+                this.setTranslate(offsetX);
+            }
+        }
+    });
+</script>
+<!--end component HTML组件(二级通用footer)-->
+
+
+</body>
+</html>

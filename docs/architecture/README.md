@@ -16,9 +16,11 @@
 
 ## 功能核心
 
+固定RP-1/O₂(L)公共入口复用九气相HP内核，仅支持10 MPa与O/F=2.2–4.0、精确指定温度；见[接口核验](../kerosene-validation.md)。它补充煤油类方法算例，不代表国产煤油批次或完整循环。
+
 ![模块边界](components.svg)
 
-实线表示主要编排/调用，虚线表示公共接口依赖。图中可见NASA9→九气相产物TP/HP、连续单相表→入口焓/元素库存→HP、冻结喷管及外排循环的连接；灰色框为给定热状态的循环原型，不支持回流混合。[连续液体验证](../liquid-combustion-validation.md)已经接入独立HP与固定喉面积喷管，但不含泵升压、分流轴功或完整循环。[气态显式焓](../adiabatic-inlet-validation.md)与[固定液态锚点](../liquid-anchor-validation.md)仍保留各自接口和归档。为避免连线遮挡，少量公共依赖用脚注说明，完整依赖图见[Mermaid源](components.mmd)。
+实线表示主要编排/调用，虚线表示公共接口依赖。图中可见NASA9→九气相产物TP/HP、CH4(L)/RP-1指定反应物、连续单相表→入口焓/元素库存→HP、冻结喷管及外排循环的连接；灰色框为给定热状态循环原型，不支持回流混合。[连续液体验证](../liquid-combustion-validation.md)已接HP与固定喉面积喷管，泵升压、分流轴功和完整循环仍未闭合。公共依赖的完整清单见[Mermaid源](components.mmd)。
 
 ## 任务流程
 

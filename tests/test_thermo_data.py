@@ -20,10 +20,43 @@ import liquid_feed
 import liquid_table
 import liquid_combustion
 import kerosene_reference
+import kerosene_validation
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_public_rp1_validation_and_rehashed_semantic_errors(self):
+        source = ROOT/'results/validation/kerosene_anchor_v1'
+        self.assertEqual(kerosene_validation.verify(source), (33, 21))
+        for defect in ('model', 'identity', 'temperature', 'inventory', 'mass_flow', 'scope',
+                       'failure_output', 'card', 'warning', 'timestamp'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(dir=ROOT/'build') as temp:
+                folder = Path(temp)/'archive'
+                shutil.copytree(source, folder)
+                record = read_json(folder/'manifest.json')
+                filename = None
+                if defect == 'timestamp': record['finished_at'] = False
+                elif defect == 'scope': record['scope'] = 'Real YF-100K flight result'
+                elif defect in ('card', 'warning', 'failure_output'):
+                    filename = dict(card='of_2_6_hp.inp', warning='of_2_6_hp-cea-stdout.txt',
+                                    failure_output='reject_phase-c-stdout.json')[defect]
+                    with (folder/filename).open('a', encoding='utf-8') as stream:
+                        stream.write('WARNING: invalid\n')
+                else:
+                    filename = 'of_2_6_A10-c-stdout.json'
+                    report = read_json(folder/filename)
+                    if defect == 'model': report['model'] = 'ch4l_o2l_hp_frozen_fixed_area_v1'
+                    elif defect == 'identity': report['reactant_dataset_id'] = 'other'
+                    elif defect == 'temperature': report['chamber']['temperature_k'] += 1
+                    elif defect == 'inventory': report['boundary']['element_inventory_kmol_per_kg'][1] *= 2
+                    elif defect == 'mass_flow': report['geometry']['mass_flow_kg_per_s'] *= 1.01
+                    atomic_json(folder/filename, report)
+                if filename:
+                    record['files'][filename] = digest(folder/filename)
+                atomic_json(folder/'manifest.json', record)
+                with self.assertRaises(ValueError):
+                    kerosene_validation.verify(folder)
+
     def test_kerosene_reference_records_product_boundaries_and_c_results(self):
         folder = ROOT/'results/research/kerosene_products_v3_20261006'
         self.assertEqual(kerosene_reference.verify(folder), 15)
@@ -404,6 +437,8 @@ class ThermoDataTests(unittest.TestCase):
                     self.assertEqual(liquid_table.verify(manifest.parent),22)
                 elif kind=='liquid-combustion-validation':
                     self.assertEqual(liquid_combustion.verify(manifest.parent),(47,18))
+                elif kind=='kerosene-anchor-validation':
+                    self.assertEqual(kerosene_validation.verify(manifest.parent),(33,21))
                 else: self.fail(f'Unknown validation archive type: {kind}')
         self.assertGreater(combustion_count,0,'Expected actual C/CEA result archive')
 

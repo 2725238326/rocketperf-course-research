@@ -772,6 +772,79 @@ static void test_continuous_liquid_failures(void)
         CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
     }
 }
+static void test_kerosene_anchor(void)
+{
+    const RpKeroseneAnchorFeed good = {rp_kerosene_dataset_id(),
+        {1e7, 2.6, "RP-1", "O2(L)", 298.15, 90.170, RP_FEED_LIQUID}};
+    RpAnchorInlet inlet;
+    RpCombustionResult result;
+    const double ratios[] = {2.2, 2.4, 2.6, 2.9, 3.2, 3.6, 4.0};
+    CHECK(rp_kerosene_anchor_inlet(&good, &inlet, NULL) == RP_OK);
+    CHECK(near(inlet.fuel_h_j_per_kg, -1768558.6973210066, 1e-7));
+    CHECK(near(inlet.element_inventory_kmol_per_kg[0], 1.0/(13.976183*3.6), 1e-16));
+    CHECK(near(inlet.element_inventory_kmol_per_kg[1], 1.95/(13.976183*3.6), 1e-16));
+    CHECK(rp_kerosene_equilibrium_hp_anchor(&good, NULL, &result, NULL) == RP_OK);
+    CHECK(near(result.gas.temperature_k, 3724.01, .02));
+    for (unsigned int j = 0U; j < sizeof(ratios)/sizeof(ratios[0]); ++j) {
+        RpKeroseneAnchorFeed feed = good;
+        feed.reactants.oxidizer_fuel_mass_ratio = ratios[j];
+        CHECK(rp_kerosene_anchor_inlet(&feed, &inlet, NULL) == RP_OK);
+        CHECK(rp_kerosene_equilibrium_hp_anchor(&feed, NULL, &result, NULL) == RP_OK);
+        CHECK(fabs(result.enthalpy_residual_j_per_kg) <= .01);
+        for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
+            double amount = 0.0;
+            for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
+                amount += result.gas.mole_fractions[i] * (double)rp_cho_element_count(i, e);
+            }
+            CHECK(near(amount/result.gas.molar_mass_kg_per_kmol,
+                       inlet.element_inventory_kmol_per_kg[e], 1e-11));
+        }
+    }
+    for (unsigned int j = 0U; j < 16U; ++j) {
+        RpKeroseneAnchorFeed feed = good;
+        RpAnchorInlet saved_inlet;
+        RpCombustionResult saved_result;
+        RpStatus expected = RP_OUT_OF_DOMAIN;
+        switch (j) {
+            case 0U: feed.dataset_id = NULL; expected = RP_INVALID_ARGUMENT; break;
+            case 1U: feed.dataset_id = "other"; break;
+            case 2U: feed.reactants.fuel_anchor_id = NULL; expected = RP_INVALID_ARGUMENT; break;
+            case 3U: feed.reactants.fuel_anchor_id = "CH4(L)"; break;
+            case 4U: feed.reactants.oxidizer_anchor_id = "O2"; break;
+            case 5U: feed.reactants.phase = RP_FEED_GAS; break;
+            case 6U: feed.reactants.fuel_temperature_k = nextafter(298.15, INFINITY); break;
+            case 7U: feed.reactants.oxidizer_temperature_k = nextafter(90.170, 0.0); break;
+            case 8U: feed.reactants.pressure_pa = nextafter(1e7, INFINITY); break;
+            case 9U: feed.reactants.oxidizer_fuel_mass_ratio = nextafter(2.2, 0.0); break;
+            case 10U: feed.reactants.oxidizer_fuel_mass_ratio = nextafter(4.0, INFINITY); break;
+            case 11U: feed.reactants.pressure_pa = NAN; expected = RP_INVALID_ARGUMENT; break;
+            case 12U: feed.reactants.oxidizer_fuel_mass_ratio = INFINITY; expected = RP_INVALID_ARGUMENT; break;
+            case 13U: feed.reactants.fuel_temperature_k = -1.0; expected = RP_INVALID_ARGUMENT; break;
+            case 14U: feed.reactants.oxidizer_temperature_k = NAN; expected = RP_INVALID_ARGUMENT; break;
+            default: feed.reactants.oxidizer_anchor_id = NULL; expected = RP_INVALID_ARGUMENT; break;
+        }
+        memset(&saved_inlet, 0x5a, sizeof(saved_inlet)); inlet = saved_inlet;
+        memset(&saved_result, 0x5a, sizeof(saved_result)); result = saved_result;
+        CHECK(rp_kerosene_anchor_inlet(&feed, &inlet, NULL) == expected);
+        CHECK(memcmp(&inlet, &saved_inlet, sizeof(inlet)) == 0);
+        CHECK(rp_kerosene_equilibrium_hp_anchor(&feed, NULL, &result, NULL) == expected);
+        CHECK(memcmp(&result, &saved_result, sizeof(result)) == 0);
+    }
+    CHECK(rp_kerosene_anchor_inlet(NULL, &inlet, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_kerosene_anchor_inlet(&good, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_kerosene_equilibrium_hp_anchor(&good, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    {
+        RpCombustionOptions policy = rp_combustion_default_options();
+        RpCombustionResult saved;
+        memset(&saved, 0x5a, sizeof(saved)); result = saved;
+        policy.max_hp_iterations = 1U;
+        CHECK(rp_kerosene_equilibrium_hp_anchor(&good, &policy, &result, NULL) == RP_NO_CONVERGENCE);
+        CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
+        policy = rp_combustion_default_options(); policy.hp_lower_temperature_k = 5000;
+        CHECK(rp_kerosene_equilibrium_hp_anchor(&good, &policy, &result, NULL) == RP_NOT_BRACKETED);
+        CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
+    }
+}
 int main(void)
 {
     test_tp_hp_reference();
@@ -786,6 +859,7 @@ int main(void)
     test_liquid_anchor_failures();
     test_continuous_liquid();
     test_continuous_liquid_failures();
+    test_kerosene_anchor();
     (void)printf("combustion: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

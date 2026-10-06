@@ -1,0 +1,57 @@
+
+ problem case=of_4_0_hp hp p,bar=100 o/f=4.0
+ reactants
+  fuel=RP-1 wt%=100 t,k=298.15
+  oxid=O2(L) wt%=100 t,k=90.170
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = of_4_0_hp
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     RP-1              100.000  -24717.700    298.15
+     O2(L)             100.000  -12979.000     90.17
+O/F =    4.00000    % Fuel =  20.00000    r, Eq. Ratio =  0.85142    phi, Eq. Ratio =  0.85142
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               100.00000
+ T, K                   3683.41
+ Density, kg/m^3      0.8830E+1
+ H, kJ/kg              -678.199
+ U, kJ/kg             -1810.701
+ G, kJ/kg            -37912.610
+ S, kJ/kg-K             10.1087
+ 
+ M, (1/n)              27.04252
+ (dln(V)/dln(P))t      -1.04778
+ (dln(V)/dln(T))p       1.83240
+ Cp, kJ/kg-K            6.33034
+ Gamma_s                1.13033
+ Son. Vel., m/s        1131.417
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.022513
+ O2                    0.151767
+ H2O                   0.300651
+ CO                    0.150885
+ CO2                   0.236095
+ H                     0.013173
+ O                     0.029806
+ OH                    0.095110
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

@@ -110,7 +110,7 @@ def anchor_header(root=ROOT):
     path = root / RAW / "thermo.inp"
     if digest(path) != SOURCE_HASHES["thermo.inp"]:
         raise ValueError("Pinned CEA reactant source differs")
-    anchors = parse_anchors(path.read_text(encoding="ascii"))[:2]
+    anchors = parse_anchors(path.read_text(encoding="ascii"))
     rows = []
     for a in anchors:
         elements = ", ".join(format(a["elements"].get(e, 0), ".17g") for e in ("C", "H", "O"))
@@ -121,9 +121,10 @@ def anchor_header(root=ROOT):
         "/* GENERATED from pinned NASA CEA v3.3.4 thermo.inp; do not hand-edit. */\n"
         "#ifndef RP_REACTANTS_GENERATED_H\n#define RP_REACTANTS_GENERATED_H\n"
         '#define RP_ANCHOR_DATASET_ID "cea-v3.3.4-ch4l-o2l-assigned-v1"\n'
+        '#define RP_KEROSENE_DATASET_ID "cea-v3.3.4-rp1-o2l-assigned-v1"\n'
         "typedef struct {\n    const char *id;\n    double molar_mass_kg_per_kmol;\n"
         "    double temperature_k;\n    double enthalpy_j_per_mol;\n    double elements[3];\n"
-        "} RpAssignedReactant;\nstatic const RpAssignedReactant rp_assigned_reactants[2] = {\n"
+        "} RpAssignedReactant;\nstatic const RpAssignedReactant rp_assigned_reactants[3] = {\n"
         + ",\n".join(rows) + "\n};\n#endif\n"
     )
 
@@ -275,7 +276,7 @@ def main():
         print(f"Generated {OUTPUT}; no production physics computed")
     elif args.command == "generate-header":
         atomic_text(ROOT / HEADER, anchor_header())
-        print(f"Generated {HEADER}; two fixed reactant records, not a liquid EOS")
+        print(f"Generated {HEADER}; three assigned-reactant records")
     elif args.command == "check-header":
         if (ROOT / HEADER).read_text(encoding="utf-8") != anchor_header():
             raise ValueError("Fixed reactant C header differs from pinned source")
