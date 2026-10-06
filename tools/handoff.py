@@ -107,9 +107,11 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         if any(name.lower() not in {'kernel32.dll','msvcrt.dll','ucrtbase.dll'} and not name.lower().startswith('api-ms-win-') for name in imports):
             raise ValueError('External runtime DLLs require explicit packaging and license review')
     source_bundle=None
+    branch = git(root,'branch','--show-current',check=True).stdout.strip() or 'HEAD'
     if not fixture:
         source_bundle='source.bundle'
-        subprocess.run(['git','bundle','create',str(destination/source_bundle),'HEAD',git(root,'branch','--show-current').stdout.strip()],
+        references = ['HEAD'] + ([branch] if branch != 'HEAD' else [])
+        subprocess.run(['git','bundle','create',str(destination/source_bundle),*references],
                        cwd=root,capture_output=True,encoding='utf-8',errors='replace',timeout=120,check=True)
     checks=[]
     for label,arguments,expected_exit in (
@@ -144,7 +146,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
     record = {
         'schema_version': HANDOFF_VERSION, 'kind': 'windows-project-handoff', 'status': 'PASS',
         'created_at': now(), 'project_head': git(root, 'rev-parse', 'HEAD').stdout.strip(),
-        'branch': git(root, 'branch', '--show-current').stdout.strip(),
+        'branch': branch,
         'configuration': configuration, 'build_manifest_sha256': digest(build_path),
         'test_report_sha256': digest(build_path.parent / 'test-report.json'),
         'binary': {'path': source_binary.name, 'sha256': digest(source_binary)},
@@ -245,7 +247,8 @@ def verify(package):
         heads=subprocess.run(['git','bundle','list-heads',str(package/'source.bundle')],cwd=package,
                              capture_output=True,encoding='utf-8',errors='strict',timeout=30,check=True).stdout.splitlines()
         identities=dict(line.split(' ',1)[::-1] for line in heads)
-        if identities.get('HEAD') != record['project_head'] or identities.get('refs/heads/'+record['branch']) != record['project_head']:
+        if (identities.get('HEAD') != record['project_head'] or
+            (record['branch'] != 'HEAD' and identities.get('refs/heads/'+record['branch']) != record['project_head'])):
             raise ValueError('Source bundle does not match handoff commit/branch')
     field = 'checks' if record['schema_version'] == HANDOFF_VERSION else 'smoke_tests'
     if ('checks' in record) == ('smoke_tests' in record):

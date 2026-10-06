@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 254,
+  "revision": 258,
   "context": {
     "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
     "evidence_cutoff": "2026-10-06",
@@ -1169,6 +1169,31 @@
         "kind": "quality",
         "path": "project/evidence/REL-002_ed2f39f4b6d7.json",
         "sha256": "b1a8f6712b424d36d3b1eb4e85ae885d07062ecd5cfad29581f918877cf87733"
+      }
+    },
+    {
+      "id": "GOV-004",
+      "title": "标签检出下交接身份兼容",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "REL-002"
+      ],
+      "required_artifacts": [
+        "tools/handoff.py",
+        "tests/test_handoff.py",
+        "taskshot/2026-10-07_044-detached-handoff.md"
+      ],
+      "acceptance": [
+        "detached HEAD以HEAD记录来源，bundle与身份核验不要求不存在的本地分支，普通分支与旧包行为保留",
+        "标签检出行为回归与完整质量通过，私有main同步并核对远端WindowsCI结果"
+      ],
+      "owner": "root",
+      "note": "detached HEAD接收身份已修正；阶段ZIP不变，维护提交同步main，远端CI结果单独核对",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/GOV-004_4904498cf090.json",
+        "sha256": "7628d68b8eabf55b3bafddcee5c58698459774b32ac2a2df9c253e05c847e2fc"
       }
     }
   ],
@@ -6537,6 +6562,54 @@
       "note": "阶段交付和语义说明已验收，公开许可证/最终课程报告/PPT及真实型号性能未冒称完成。Release固定18e351b，后续登记提交单独维护；接续ANA-012",
       "previous_hash": "7a268c2e0625de93ac704bc4fc0ce8e3ce7dbcd14e5eb2c6b2d8bfb9f0d6e47c",
       "hash": "c96b01238a851f637135a810f993f9323523e433b638aa99ed1ef3e63eb0c8cd"
+    },
+    {
+      "seq": 272,
+      "at": "2026-10-06T17:02:22+00:00",
+      "task": "GOV-004",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "c96b01238a851f637135a810f993f9323523e433b638aa99ed1ef3e63eb0c8cd",
+      "hash": "1935be09e69c3f8778d96b0b64726e1c0e539aa8f4e962e31234537c5c832775"
+    },
+    {
+      "seq": 273,
+      "at": "2026-10-06T17:02:23+00:00",
+      "task": "GOV-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "tag阶段CI检出detached HEAD，交接包空分支身份失败，修正可交付维护兼容",
+      "previous_hash": "1935be09e69c3f8778d96b0b64726e1c0e539aa8f4e962e31234537c5c832775",
+      "hash": "aa3253b7dee5522e9c06199cc198e90d32114fadf9a2b3348f04ef59dec19663"
+    },
+    {
+      "seq": 274,
+      "at": "2026-10-06T17:08:36+00:00",
+      "task": "GOV-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "HEAD身份/bundle引用兼容和空分支回归通过，完整本地质量6组PASS，main前序远端WindowsCI通过；修正提交即同步复核",
+      "previous_hash": "aa3253b7dee5522e9c06199cc198e90d32114fadf9a2b3348f04ef59dec19663",
+      "hash": "3f4979c9cdbe24e95de16be61c88a366774c2ef3fc2c7dbc9f68f475c0bcba8e"
+    },
+    {
+      "seq": 275,
+      "at": "2026-10-06T17:08:38+00:00",
+      "task": "GOV-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "detached HEAD接收身份已修正；阶段ZIP不变，维护提交同步main，远端CI结果单独核对",
+      "previous_hash": "3f4979c9cdbe24e95de16be61c88a366774c2ef3fc2c7dbc9f68f475c0bcba8e",
+      "hash": "234afa33e2be50fc2a58864893c4afee05411bae43856263287e35299f683c96"
     }
   ]
 }

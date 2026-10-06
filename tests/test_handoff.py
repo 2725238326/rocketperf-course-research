@@ -12,6 +12,17 @@ import zipfile
 
 
 class HandoffTests(unittest.TestCase):
+    def test_detached_head_receiving_identity(self):
+        original = handoff.git
+        def detached(root, *args, **kwargs):
+            if args == ('branch', '--show-current'):
+                return mock.Mock(stdout='')
+            return original(root, *args, **kwargs)
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+            with mock.patch.object(handoff, 'git', side_effect=detached):
+                package = handoff.create(ROOT, Path(folder)/'package', 'Release', fixture=True)
+            self.assertEqual(handoff.verify(package)['branch'], 'HEAD')
+
     def test_delivery_zip_hash_scope_and_unsafe_members(self):
         required = {'README.md', 'docs/project-guide.md', 'third_party/cea/LICENSE.txt',
                     'third_party/cea/NOTICE.txt', 'third_party/coolprop/LICENSE.txt',
