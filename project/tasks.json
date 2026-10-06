@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 258,
+  "revision": 265,
   "context": {
-    "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
+    "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "ANA-012"
+      "IMP-002"
     ],
     "facts": [
-      "私有GitHub main已同步；stage-20261007固定18e351b，纯C源码/Windows包已重建和隔离运行",
-      "两型参数仍按对象/批次；固定RP-1不替代国产煤油批次，泵后和完整循环输入仍缺",
-      "Windows程序仅系统运行库；CMake可禁用Python测试；开发/参考工具留完整仓库",
-      "阶段Release不代表最终报告/PPT和所有课程研究已完成"
+      "甲烷与固定RP-1在同Pc/At/面积比/背压下由C成对求解，57次C/8张新CEA参考已归档",
+      "共同O-F2.6的高比冲可同时低推力；差值只适用于具名入口方法，不作型号或最优排名",
+      "Windows计算核心纯C；项目解读说明算法/运行/维护，进度从任务工作面读取",
+      "型号参数/真实循环与方法结果分别解释，不填国产煤油批次或未知工况"
     ]
   },
   "tasks": [
@@ -1121,7 +1121,7 @@
     {
       "id": "ANA-012",
       "title": "甲烷与固定RP-1同条件喷管研究",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "MOD-004",
@@ -1129,16 +1129,26 @@
       ],
       "required_artifacts": [
         "docs/propellant-method-comparison.md",
-        "results/research/propellant_comparison_v1/manifest.json"
+        "results/research/propellant_comparison_v1/manifest.json",
+        "include/rocketperf/propellant_study.h",
+        "src/nozzle/propellant_study.c",
+        "src/cli/main.c",
+        "tools/propellant_comparison.py",
+        "docs/propellant-comparison.svg",
+        "taskshot/2026-10-07_045-propellant-comparison.md"
       ],
       "acceptance": [
         "两种具名方法使用同Pc/几何/背压和各自明确入口及O-F，不把同条件方法比较当真实型号排名或连续最优",
         "所有HP/喷管数值由C产生，保存成功拒绝、参考覆盖和物种/焓差异，计算比冲/推力及几何代价",
         "回答课程性能与改进问题，记录输入限制和有效补证方向，完整Windows质量通过后本地提交"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "root",
+      "note": "三项契约由成对C接口、输入身份、成功拒绝、原参考/图及结论支持；共同2.6时高比冲但低推力，面积/背压代价已解释，不称型号排名/最优；接续IMP-002",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/ANA-012_424ac1a36a98.json",
+        "sha256": "37b47476b51c2095825bbc220913fa9792b21e7a7f1896f4a111f9ca74734720"
+      }
     },
     {
       "id": "REL-002",
@@ -1195,6 +1205,28 @@
         "path": "project/evidence/GOV-004_4904498cf090.json",
         "sha256": "7628d68b8eabf55b3bafddcee5c58698459774b32ac2a2df9c253e05c847e2fc"
       }
+    },
+    {
+      "id": "IMP-002",
+      "title": "成对研究算例文件与结果协议整合",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "ANA-012"
+      ],
+      "required_artifacts": [
+        "docs/propellant-case-format.md",
+        "cases/research/propellant_comparison.ini",
+        "tests/test_cli.py"
+      ],
+      "acceptance": [
+        "C严格算例文件支持显式共同几何与两种入口/混合比，缺项重复项未知字段和非法身份均拒绝",
+        "算例与参数CLI结果数值一致，元数据/输入/失败协议可追溯；维护成对接口的输出保持",
+        "Windows源码/运行交付含算例，完整质量与参考复核通过，结果说明不含进度口号"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
     }
   ],
   "events": [
@@ -6610,6 +6642,170 @@
       "note": "detached HEAD接收身份已修正；阶段ZIP不变，维护提交同步main，远端CI结果单独核对",
       "previous_hash": "3f4979c9cdbe24e95de16be61c88a366774c2ef3fc2c7dbc9f68f475c0bcba8e",
       "hash": "234afa33e2be50fc2a58864893c4afee05411bae43856263287e35299f683c96"
+    },
+    {
+      "seq": 276,
+      "at": "2026-10-06T21:26:24+00:00",
+      "task": "ANA-012",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用C CLI完成甲烷连续入口与固定RP-1同几何/压力/背压对照，归档成功拒绝与方法差异",
+      "previous_hash": "234afa33e2be50fc2a58864893c4afee05411bae43856263287e35299f683c96",
+      "hash": "9860a48752f0c6777ff2084501bc0ebea3c857c94dbaa2d2bb487c5ae14485c3"
+    },
+    {
+      "seq": 277,
+      "at": "2026-10-06T21:41:26+00:00",
+      "task": "ANA-012",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "新增纯C成对接口、研究工具/图及失败回归；所有数值/差值由C产生",
+      "previous_hash": "9860a48752f0c6777ff2084501bc0ebea3c857c94dbaa2d2bb487c5ae14485c3",
+      "details": {
+        "contract_before": {
+          "id": "ANA-012",
+          "title": "甲烷与固定RP-1同条件喷管研究",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-004",
+            "RES-009"
+          ],
+          "required_artifacts": [
+            "docs/propellant-method-comparison.md",
+            "results/research/propellant_comparison_v1/manifest.json"
+          ],
+          "acceptance": [
+            "两种具名方法使用同Pc/几何/背压和各自明确入口及O-F，不把同条件方法比较当真实型号排名或连续最优",
+            "所有HP/喷管数值由C产生，保存成功拒绝、参考覆盖和物种/焓差异，计算比冲/推力及几何代价",
+            "回答课程性能与改进问题，记录输入限制和有效补证方向，完整Windows质量通过后本地提交"
+          ],
+          "owner": "root",
+          "note": "用C CLI完成甲烷连续入口与固定RP-1同几何/压力/背压对照，归档成功拒绝与方法差异",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "ANA-012",
+          "title": "甲烷与固定RP-1同条件喷管研究",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-004",
+            "RES-009"
+          ],
+          "required_artifacts": [
+            "docs/propellant-method-comparison.md",
+            "results/research/propellant_comparison_v1/manifest.json",
+            "include/rocketperf/propellant_study.h",
+            "src/nozzle/propellant_study.c",
+            "src/cli/main.c",
+            "tools/propellant_comparison.py",
+            "docs/propellant-comparison.svg",
+            "taskshot/2026-10-07_045-propellant-comparison.md"
+          ],
+          "acceptance": [
+            "两种具名方法使用同Pc/几何/背压和各自明确入口及O-F，不把同条件方法比较当真实型号排名或连续最优",
+            "所有HP/喷管数值由C产生，保存成功拒绝、参考覆盖和物种/焓差异，计算比冲/推力及几何代价",
+            "回答课程性能与改进问题，记录输入限制和有效补证方向，完整Windows质量通过后本地提交"
+          ],
+          "owner": "root",
+          "note": "新增纯C成对接口、研究工具/图及失败回归；所有数值/差值由C产生",
+          "verification": null
+        }
+      },
+      "hash": "865bf362d371e3dcdfd839e44b64416ef71be0927fd684a27a56c37754ad74fe"
+    },
+    {
+      "seq": 278,
+      "at": "2026-10-06T21:41:27+00:00",
+      "task": "IMP-002",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "865bf362d371e3dcdfd839e44b64416ef71be0927fd684a27a56c37754ad74fe",
+      "hash": "064c2bab2fd80a1afa3e5938069e4185ca195f39a2e8f39b1ccbe0ffe0494193"
+    },
+    {
+      "seq": 279,
+      "at": "2026-10-06T21:41:27+00:00",
+      "task": "ANA-012",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "同条件C研究完成，后续统一算例入口",
+      "previous_hash": "064c2bab2fd80a1afa3e5938069e4185ca195f39a2e8f39b1ccbe0ffe0494193",
+      "details": {
+        "context_before": {
+          "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "ANA-012"
+          ],
+          "facts": [
+            "私有GitHub main已同步；stage-20261007固定18e351b，纯C源码/Windows包已重建和隔离运行",
+            "两型参数仍按对象/批次；固定RP-1不替代国产煤油批次，泵后和完整循环输入仍缺",
+            "Windows程序仅系统运行库；CMake可禁用Python测试；开发/参考工具留完整仓库",
+            "阶段Release不代表最终报告/PPT和所有课程研究已完成"
+          ]
+        },
+        "context_after": {
+          "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "IMP-002"
+          ],
+          "facts": [
+            "甲烷与固定RP-1在同Pc/At/面积比/背压下由C成对求解，57次C/8张新CEA参考已归档",
+            "共同O-F2.6的高比冲可同时低推力；差值只适用于具名入口方法，不作型号或最优排名",
+            "Windows计算核心纯C；项目解读说明算法/运行/维护，进度从任务工作面读取",
+            "型号参数/真实循环与方法结果分别解释，不填国产煤油批次或未知工况"
+          ]
+        }
+      },
+      "hash": "aac867a24abd20d3949d1508a51c9c550bb5f20c9b00a330b0cd13a5792d9fdd"
+    },
+    {
+      "seq": 280,
+      "at": "2026-10-06T21:50:38+00:00",
+      "task": "ANA-012",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "纯C成对API/CLI/差值与整份失败保持输出完成；三组O-F同Pc/At/几何/背压57次C/8张新CEA/1410项参考归档；图与代码登记已更新实际视觉核对；项目解读去除报告PPT进度措辞；22源静态分析及完整Windows质量6组通过",
+      "previous_hash": "aac867a24abd20d3949d1508a51c9c550bb5f20c9b00a330b0cd13a5792d9fdd",
+      "hash": "f8ca0f4d7ea4a3b36229ee55d393f7d2de09c906725a1bb26e32e09420ddba65"
+    },
+    {
+      "seq": 281,
+      "at": "2026-10-06T21:50:39+00:00",
+      "task": "ANA-012",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "三项契约由成对C接口、输入身份、成功拒绝、原参考/图及结论支持；共同2.6时高比冲但低推力，面积/背压代价已解释，不称型号排名/最优；接续IMP-002",
+      "previous_hash": "f8ca0f4d7ea4a3b36229ee55d393f7d2de09c906725a1bb26e32e09420ddba65",
+      "hash": "a0855b01f2445dfac0cfe1c586ebf19cfabe0e274effe2905218d902018acdd3"
+    },
+    {
+      "seq": 282,
+      "at": "2026-10-06T21:50:39+00:00",
+      "task": "IMP-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "a0855b01f2445dfac0cfe1c586ebf19cfabe0e274effe2905218d902018acdd3",
+      "hash": "6a74f7ca766717e7e27fff68fe324770c7ce7d0c442b623e1e6400de4bd0d3a4"
     }
   ]
 }

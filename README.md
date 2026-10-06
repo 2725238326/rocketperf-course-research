@@ -75,6 +75,8 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 
 ## 按职责找入口
 
+同条件方法比较直接使用C命令：`./build/release/rocketperf.exe study propellants 2.6 2.6 10 0`。两个入口/共同几何/差值一次返回，失败不输出半套结果；结果、图和原参考见[甲烷与RP-1研究](docs/propellant-method-comparison.md)。
+
 [固定RP-1方法研究](调研/专题/RES-008_煤油计算边界.md)保留富燃料失败/凝聚碳证据。[纯C公共入口](docs/kerosene-validation.md)现支持固定10 MPa、O/F=2.2–4.0及精确反应物温度，保存33次C运行与21张新CEA卡。O/F=2.6、At=0.01 m²、面积比10真空比冲310.571731 s；该具名方法尚未绑定长十乙真实燃料。
 
 ```powershell

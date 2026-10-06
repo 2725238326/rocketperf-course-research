@@ -208,7 +208,7 @@ def test_records(root):
               '调研/原始来源/来源文件索引.json','docs/adiabatic-inlet-response.svg',
               'tools/feed_candidates.py','tools/liquid_anchor.py','tools/liquid_feed.py',
               'tools/liquid_eos.py','tools/liquid_table.py','tools/liquid_combustion.py',
-              'tools/kerosene_reference.py','tools/kerosene_validation.py','tools/kerosene_probe.c','调研/feed_sources.json']
+              'tools/kerosene_reference.py','tools/kerosene_validation.py','tools/kerosene_probe.c','tools/propellant_comparison.py','调研/feed_sources.json']
     # Parameter checks resolve source IDs and local references; those inputs must
     # invalidate a previous data PASS too. Task states are intentionally dynamic.
     for dataset in (root/'data/parameters').glob('*.json'):

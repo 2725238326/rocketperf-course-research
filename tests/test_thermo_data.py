@@ -21,10 +21,34 @@ import liquid_table
 import liquid_combustion
 import kerosene_reference
 import kerosene_validation
+import propellant_comparison
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_paired_propellant_archive_and_rehashed_errors(self):
+        source=ROOT/'results/research/propellant_comparison_v1'
+        self.assertEqual(propellant_comparison.verify(source),(57,8))
+        for defect in ('inlet','difference','pressure','thrust','scope','recipe','failure'):
+            with self.subTest(defect=defect),tempfile.TemporaryDirectory(dir=ROOT/'build') as temp:
+                folder=Path(temp)/'archive';shutil.copytree(source,folder)
+                record=read_json(folder/'manifest.json'); filename=None
+                if defect=='scope': record['scope']='Flight engine ranking'
+                elif defect=='recipe': record['recipes'][0]['exit_code']=False
+                elif defect=='failure':
+                    filename='representative_A40_p100000_pair-stdout.json'
+                    (folder/filename).write_text('{}',encoding='utf-8')
+                else:
+                    filename='representative_A10_p0_pair-stdout.json'; report=read_json(folder/filename)
+                    if defect=='inlet': report['inlets']['methane']['fuel_temperature_k']=140
+                    elif defect=='difference': report['methane_minus_kerosene']['isp_s']+=1
+                    elif defect=='pressure': report['inputs']['pressure_pa']=5e6
+                    elif defect=='thrust': report['kerosene']['geometry']['thrust_n']+=1
+                    atomic_json(folder/filename,report)
+                if filename: record['files'][filename]=digest(folder/filename)
+                atomic_json(folder/'manifest.json',record)
+                with self.assertRaises(ValueError): propellant_comparison.verify(folder)
+
     def test_public_rp1_validation_and_rehashed_semantic_errors(self):
         source = ROOT/'results/validation/kerosene_anchor_v1'
         self.assertEqual(kerosene_validation.verify(source), (33, 21))

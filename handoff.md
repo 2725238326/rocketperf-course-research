@@ -10,6 +10,7 @@
 | 甲烷燃烧与喷管 | [连续液体HP核验](docs/liquid-combustion-validation.md) | C17单相入口表→九气相HP→固定面积冻结喷管；温压为研究假设 |
 | 煤油方法 | [固定RP-1入口](docs/kerosene-validation.md)、[边界研究](调研/专题/RES-008_煤油计算边界.md) | C公共API/CLI已有；10 MPa/O-F2.2–4.0指定反应物，国产燃料批次仍未知 |
 | 改进计算 | [改进分析](docs/improvement-analysis.md)、[入口响应](docs/adiabatic-inlet-study.md) | 同条件收益、几何代价和输入响应；真实改装量或寿命仍缺证据 |
+| 方法比较 | [甲烷/RP-1成对研究](docs/propellant-method-comparison.md) | 同Pc/At/几何/背压，差值由C返回，保留各自入口/O-F身份 |
 | 循环 | [循环核验](docs/cycle-validation.md)、[热边界](docs/research-thermal-boundary.md) | 给定热状态外排原型；泵后供给、回流组成与完整循环尚未闭合 |
 | 保存输入、结果与参考 | [研究档案](results/research/README.md) | 每个版本带清单/哈希与失败记录，按其自身日期和构建身份使用 |
 
@@ -22,6 +23,7 @@ python tools/quality.py
 python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
 python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
 python tools/kerosene_validation.py verify results/validation/kerosene_anchor_v1
+python tools/propellant_comparison.py verify results/research/propellant_comparison_v1
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 ```
 

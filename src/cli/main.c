@@ -7,6 +7,7 @@
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/liquid_feed.h"
 #include "rocketperf/liquid_nozzle.h"
+#include "rocketperf/propellant_study.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -298,6 +299,60 @@ static int write_liquid_state(const RpLiquidFeedState *state)
                   state->eos_molar_mass_kg_per_mol, state->chemical_molar_mass_kg_per_mol) >= 0;
 }
 
+static int propellant_study_main(int count, char **args)
+{
+    double values[4] = {0};
+    RpPropellantComparisonInput input = {0};
+    RpPropellantComparisonResult result;
+    RpError error = {0};
+    RpStatus status;
+    int written;
+    if (count != 4) { goto usage; }
+    for (int i = 0; i < count; ++i) {
+        const char *next;
+        if (!parse_decimal_token(args[i], &next, &values[i]) || *next != '\0') { goto usage; }
+    }
+    input.methane = (RpContinuousLiquidFeed){rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
+        RP_LIQUID_SINGLE_PHASE, RP_LIQUID_SINGLE_PHASE, 120.0, 1e7, 100.0, 1e7, 1e7, values[0]};
+    input.kerosene = (RpKeroseneAnchorFeed){rp_kerosene_dataset_id(),
+        {1e7, values[1], "RP-1", "O2(L)", 298.15, 90.170, RP_FEED_LIQUID}};
+    input.area_ratio = values[2]; input.ambient_pressure_pa = values[3]; input.throat_area_m2 = 0.01;
+    status = rp_propellant_compare_fixed(&input, NULL, NULL, &result, &error);
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return 4;
+    }
+    written = printf("{\"schema_version\":1,\"study\":\"propellant_fixed_geometry_v1\","
+        "\"inputs\":{\"pressure_pa\":10000000,\"throat_area_m2\":0.01,\"area_ratio\":%.17g,"
+        "\"ambient_pressure_pa\":%.17g,\"methane_of\":%.17g,\"kerosene_of\":%.17g},"
+        "\"inlets\":{\"methane\":{\"dataset\":\"%s\",\"basis\":\"%s\",\"fuel_temperature_k\":120,"
+        "\"oxidizer_temperature_k\":100,\"fuel_pressure_pa\":10000000,\"oxidizer_pressure_pa\":10000000},"
+        "\"kerosene\":{\"dataset\":\"%s\",\"fuel\":\"RP-1\",\"oxidizer\":\"O2(L)\","
+        "\"fuel_temperature_k\":298.15,\"oxidizer_temperature_k\":90.170}},\"methane\":{\"chamber\":",
+        values[2], values[3], values[0], values[1], rp_liquid_feed_dataset_id(),
+        rp_liquid_feed_enthalpy_basis_id(), rp_kerosene_dataset_id()) >= 0 &&
+        write_mixture(&result.methane.hp.chamber.gas) && write_diagnostics(&result.methane.hp.chamber) &&
+        printf(",\"inlet_mixture_h_j_per_kg\":%.17g", result.methane.hp.inlet.mixture_h_j_per_kg) >= 0 &&
+        write_frozen_report(&result.methane.nozzle.nozzle) && write_fixed_geometry(&result.methane.nozzle) &&
+        fputs("},\"kerosene\":{\"chamber\":", stdout) >= 0 &&
+        write_mixture(&result.kerosene.chamber.gas) && write_diagnostics(&result.kerosene.chamber) &&
+        printf(",\"inlet_mixture_h_j_per_kg\":%.17g", result.kerosene.inlet.mixture_h_j_per_kg) >= 0 &&
+        write_frozen_report(&result.kerosene.nozzle.nozzle) && write_fixed_geometry(&result.kerosene.nozzle) &&
+        printf("},\"methane_minus_kerosene\":{\"thrust_n\":%.17g,\"isp_s\":%.17g,"
+               "\"mass_flow_kg_per_s\":%.17g,\"cstar_m_per_s\":%.17g},"
+               "\"limitations\":[\"Declared inlet states and O/F; not flight engine performance or optimum mixtures.\","
+               "\"Nine neutral gas HP and chamber-frozen nozzle; no carbon, pump, cycle or hardware losses.\"]}\n",
+               result.methane_minus_kerosene_thrust_n, result.methane_minus_kerosene_isp_s,
+               result.methane_minus_kerosene_mass_flow_kg_per_s, result.methane_minus_kerosene_cstar_m_per_s) >= 0;
+    if (!written || fflush(stdout) != 0) {
+        (void)fputs("io_error: Cannot write propellant comparison.\n", stderr); return 3;
+    }
+    return 0;
+usage:
+    (void)fputs("Usage: rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA\n", stderr);
+    return 2;
+}
+
 static int continuous_liquid_main(int count, char **args)
 {
     const int fixed = count > 0 && strcmp(args[0], "frozen-liquid-state") == 0;
@@ -587,6 +642,9 @@ static int cli_main(int argc, char **argv)
         (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
         (void)puts("       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)");
         (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");
+        (void)puts("       rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA (Pc=10MPa, At=0.01m2, fixed declared inlets)");
+        (void)puts("       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170");
+        (void)puts("       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
         return 0;
     }
@@ -613,6 +671,9 @@ static int cli_main(int argc, char **argv)
     }
     if (argc >= 4 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "area-ratio-ambient") == 0) {
         return study_main(argv[3], argc - 4, &argv[4]);
+    }
+    if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "propellants") == 0) {
+        return propellant_study_main(argc - 3, &argv[3]);
     }
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "prescribed-cycle") == 0) {
         if (argc != 6) { (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV\n", stderr); return 2; }

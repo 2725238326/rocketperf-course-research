@@ -22,6 +22,26 @@ BINARY = None
 
 
 class CliTests(unittest.TestCase):
+    def test_propellant_comparison_same_geometry_and_failures(self):
+        run = self.run_app('study', 'propellants', '3.4', '2.6', '10', '0')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        self.assertEqual(report['study'], 'propellant_fixed_geometry_v1')
+        for field, key in (('thrust_n', 'thrust_n'), ('isp_s', 'specific_impulse_s'),
+                           ('mass_flow_kg_per_s','mass_flow_kg_per_s')):
+            self.assertAlmostEqual(report['methane_minus_kerosene'][field],
+                report['methane']['geometry'][key] - report['kerosene']['geometry'][key], places=8)
+        self.assertEqual(report['methane']['geometry']['throat_area_m2'], .01)
+        self.assertEqual(report['kerosene']['geometry']['exit_area_m2'], .1)
+        for args, code in ((('3.4','1','10','0'),4),(('3.4','2.6','40','100000'),4),
+                           (('nan','2.6','10','0'),2),(('3.4','2.6','10'),2)):
+            run = self.run_app('study', 'propellants', *args)
+            self.assertEqual(run.returncode, code, run.stderr)
+            self.assertFalse(run.stdout)
+        run = self.run_app('--help')
+        self.assertIn('study propellants', run.stdout)
+        self.assertIn('hp-rp1', run.stdout)
+
     def test_rp1_success_and_input_rejection(self):
         data = ['cea-v3.3.4-rp1-o2l-assigned-v1', 'liquid', 'RP-1', 'O2(L)',
                 '10000000', '2.6', '298.15', '90.170']

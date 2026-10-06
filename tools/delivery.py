@@ -136,6 +136,9 @@ def diagram(data):
 
 def common_files(root, head):
     files = {"docs/project-guide.md": read_commit(root, head, "docs/project-guide.md")}
+    if git(root, 'cat-file', '-e', head+':docs/propellant-method-comparison.md').returncode == 0:
+        for path in ('docs/propellant-method-comparison.md', 'docs/propellant-comparison.svg'):
+            files[path] = read_commit(root, head, path)
     for name in ("assignment", "business", "components", "workflow"):
         files["docs/architecture/" + name + ".svg"] = diagram(read_commit(root, head, "docs/architecture/" + name + ".svg"))
     for name, original in LICENSES.items():

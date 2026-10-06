@@ -26,6 +26,7 @@
 | delivery.py | 固定提交生成纯C源码/Windows ZIP，五个C测试重建、隔离运行与逐文件/ZIP核验；GitHub上传由gh显式执行 |
 | kerosene_reference.py / kerosene_probe.c | 固定RP-1产物集合比较、C研究驱动和保存结果复核；不提供国产煤油CLI接口 |
 | kerosene_validation.py | 固定RP-1公共C API/CLI的33次运行、21张CEA卡和812项参考/关系复核 |
+| propellant_comparison.py | 成对C方法研究的57次运行/8张新CEA参考、输入/状态/差值和拒绝复核；读取保存C结果作图 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |
 | migrate_governance.py | 一次性迁移旧手工任务板；已有任务登记时拒绝再次运行 |

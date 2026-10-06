@@ -1,5 +1,9 @@
 # 研究计算档案
 
+## 2026-10-07 甲烷与固定RP-1成对方法
+
+[propellant_comparison_v1](propellant_comparison_v1/manifest.json)保存57次C运行和8张新CEA卡：三个O/F情景、A10/A40与0/5/100 kPa背压共18个成对点，并逐点单独复跑两方法。15对成功、3对越域；共同几何/差值由C接口返回，1410项参考/关系比较。分析和SVG见[研究说明](../../docs/propellant-method-comparison.md)。复核：`python tools/propellant_comparison.py verify results/research/propellant_comparison_v1`。
+
 ## 2026-10-06 固定RP-1产物比较
 
 [kerosene_products_v3_20261006](kerosene_products_v3_20261006/manifest.json)保存15张新CEA输入/输出及日志，6个C燃烧室点（5成功、1数值失败）和O/F=2.6的两套固定面积喷管。固定10 MPa，RP-1/O₂(L)指定焓；比较九气相与扩展中性产物，保留富燃料凝聚碳和温度探查行为。方法边界见[RES-008](../../调研/专题/RES-008_煤油计算边界.md)。

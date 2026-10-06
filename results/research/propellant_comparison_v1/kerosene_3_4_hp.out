@@ -1,0 +1,57 @@
+
+ problem case=kerosene_3_4_hp hp p,bar=100 o/f=3.4
+ reactants
+  fuel=RP-1 wt%=100 t,k=298.15
+  oxid=O2(L) wt%=100 t,k=90.170
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = kerosene_3_4_hp
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     RP-1              100.000  -24717.700    298.15
+     O2(L)             100.000  -12979.000     90.17
+O/F =    3.40000    % Fuel =  22.72727    r, Eq. Ratio =  1.00167    phi, Eq. Ratio =  1.00167
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               100.00000
+ T, K                   3742.13
+ Density, kg/m^3      0.8307E+1
+ H, kJ/kg              -715.370
+ U, kJ/kg             -1919.183
+ G, kJ/kg            -39955.394
+ S, kJ/kg-K             10.4860
+ 
+ M, (1/n)              25.84617
+ (dln(V)/dln(P))t      -1.05228
+ (dln(V)/dln(T))p       1.89141
+ Cp, kJ/kg-K            6.83606
+ Gamma_s                1.13131
+ Son. Vel., m/s        1167.000
+ 
+MOLE FRACTIONS
+ 
+ H2                    0.035583
+ O2                    0.088292
+ H2O                   0.318517
+ CO                    0.206062
+ CO2                   0.214233
+ H                     0.018643
+ O                     0.025936
+ OH                    0.092733
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ CH4            
+
+

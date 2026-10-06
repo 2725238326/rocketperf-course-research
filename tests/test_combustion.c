@@ -2,6 +2,7 @@
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/numeric.h"
 #include "rocketperf/liquid_nozzle.h"
+#include "rocketperf/propellant_study.h"
 #include "../src/thermo/equilibrium_internal.h"
 
 #include <math.h>
@@ -845,6 +846,59 @@ static void test_kerosene_anchor(void)
         CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
     }
 }
+static void test_propellant_comparison(void)
+{
+    RpPropellantComparisonInput good = {0};
+    RpPropellantComparisonResult result, saved;
+    RpContinuousLiquidFixedResult methane;
+    RpCombustionResult kerosene;
+    good.methane = (RpContinuousLiquidFeed){rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
+        RP_LIQUID_SINGLE_PHASE, RP_LIQUID_SINGLE_PHASE, 120, 1e7, 100, 1e7, 1e7, 3.4};
+    good.kerosene = (RpKeroseneAnchorFeed){rp_kerosene_dataset_id(),
+        {1e7, 2.6, "RP-1", "O2(L)", 298.15, 90.170, RP_FEED_LIQUID}};
+    good.area_ratio = 10; good.throat_area_m2 = .01;
+    CHECK(rp_propellant_compare_fixed(&good, NULL, NULL, &result, NULL) == RP_OK);
+    CHECK(rp_ch4_o2_continuous_liquid_hp_fixed_area(&good.methane, 10, 0, .01, NULL, NULL, &methane, NULL) == RP_OK);
+    CHECK(rp_kerosene_equilibrium_hp_anchor(&good.kerosene, NULL, &kerosene, NULL) == RP_OK);
+    CHECK(memcmp(&result.methane, &methane, sizeof(methane)) == 0);
+    CHECK(memcmp(&result.kerosene.chamber, &kerosene, sizeof(kerosene)) == 0);
+    CHECK(near(result.methane_minus_kerosene_thrust_n,
+               result.methane.nozzle.thrust_n - result.kerosene.nozzle.thrust_n, 1e-10));
+    CHECK(near(result.methane_minus_kerosene_isp_s,
+               result.methane.nozzle.specific_impulse_s - result.kerosene.nozzle.specific_impulse_s, 1e-12));
+    CHECK(near(result.methane_minus_kerosene_mass_flow_kg_per_s,
+               result.methane.nozzle.mass_flow_kg_per_s - result.kerosene.nozzle.mass_flow_kg_per_s, 1e-12));
+    CHECK(near(result.methane_minus_kerosene_cstar_m_per_s,
+               result.methane.nozzle.nozzle.cstar_m_per_s - result.kerosene.nozzle.nozzle.cstar_m_per_s, 1e-12));
+    for (unsigned int i = 0U; i < 10U; ++i) {
+        RpPropellantComparisonInput input = good;
+        RpStatus expected = RP_INVALID_ARGUMENT;
+        switch (i) {
+            case 0U: input.methane.product_pressure_pa = 5e6; break;
+            case 1U: input.area_ratio = NAN; break;
+            case 2U: input.throat_area_m2 = 0; break;
+            case 3U: input.ambient_pressure_pa = -1; break;
+            case 4U: input.methane.fuel_temperature_k = 99; expected = RP_OUT_OF_DOMAIN; break;
+            case 5U: input.kerosene.reactants.fuel_temperature_k = 350; expected = RP_OUT_OF_DOMAIN; break;
+            case 6U: input.kerosene.dataset_id = "other"; expected = RP_OUT_OF_DOMAIN; break;
+            case 7U: input.kerosene.reactants.oxidizer_fuel_mass_ratio = 1; expected = RP_OUT_OF_DOMAIN; break;
+            case 8U: input.ambient_pressure_pa = 1e5; input.area_ratio = 40; expected = RP_OUT_OF_DOMAIN; break;
+            default: input.throat_area_m2 = DBL_MAX; expected = RP_NUMERIC_ERROR; break;
+        }
+        memset(&saved, 0x5a, sizeof(saved)); result = saved;
+        CHECK(rp_propellant_compare_fixed(&input, NULL, NULL, &result, NULL) == expected);
+        CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
+    }
+    CHECK(rp_propellant_compare_fixed(NULL, NULL, NULL, &result, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_propellant_compare_fixed(&good, NULL, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    {
+        RpCombustionOptions policy = rp_combustion_default_options();
+        policy.max_hp_iterations = 1;
+        memset(&saved, 0x5a, sizeof(saved)); result = saved;
+        CHECK(rp_propellant_compare_fixed(&good, &policy, NULL, &result, NULL) == RP_NO_CONVERGENCE);
+        CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
+    }
+}
 int main(void)
 {
     test_tp_hp_reference();
@@ -860,6 +914,7 @@ int main(void)
     test_continuous_liquid();
     test_continuous_liquid_failures();
     test_kerosene_anchor();
+    test_propellant_comparison();
     (void)printf("combustion: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }
