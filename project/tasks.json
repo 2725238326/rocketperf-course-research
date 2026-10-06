@@ -1,18 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 250,
+  "revision": 254,
   "context": {
-    "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
+    "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "MOD-004",
       "ANA-012"
     ],
     "facts": [
-      "组员A/B来源为用户确认；10月6日新增产品/试验原文已核验，首飞装机和参数仍按各自对象记录",
-      "固定RP-1纯C公共接口限10 MPa、指定温度和O-F2.2..4.0；不能替代国产煤油批次",
-      "甲烷与RP-1均有方法参考和失败证据，真实泵后/循环输入仍缺",
-      "Windows最终计算程序不依赖Python/Fortran；开发与参考工具单列；PPT报告后置"
+      "私有GitHub main已同步；stage-20261007固定18e351b，纯C源码/Windows包已重建和隔离运行",
+      "两型参数仍按对象/批次；固定RP-1不替代国产煤油批次，泵后和完整循环输入仍缺",
+      "Windows程序仅系统运行库；CMake可禁用Python测试；开发/参考工具留完整仓库",
+      "阶段Release不代表最终报告/PPT和所有课程研究已完成"
     ]
   },
   "tasks": [
@@ -1144,7 +1143,7 @@
     {
       "id": "REL-002",
       "title": "私有GitHub阶段交付与纯C打包",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "MOD-004",
@@ -1154,6 +1153,9 @@
         "docs/project-guide.md",
         "docs/delivery.md",
         "tools/delivery.py",
+        "deliverables/README.md",
+        "docs/release-notes-20261007.md",
+        "project/evidence/REL-002_delivery_18e351b.json",
         "taskshot/2026-10-07_043-delivery.md"
       ],
       "acceptance": [
@@ -1162,8 +1164,12 @@
         "项目解读解释作业对应、模块算法、输入单位、结果验证、参数限制和接手修改路径，GitHub私有默认分支与阶段Release对应当前固定提交"
       ],
       "owner": "root",
-      "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
-      "verification": null
+      "note": "阶段交付和语义说明已验收，公开许可证/最终课程报告/PPT及真实型号性能未冒称完成。Release固定18e351b，后续登记提交单独维护；接续ANA-012",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/REL-002_ed2f39f4b6d7.json",
+        "sha256": "b1a8f6712b424d36d3b1eb4e85ae885d07062ecd5cfad29581f918877cf87733"
+      }
     }
   ],
   "events": [
@@ -6401,6 +6407,136 @@
       "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
       "previous_hash": "07041f08c79ad2866f9415dab46d48fb25aa39ffecc64e80e49783ac11ef9476",
       "hash": "b1edfd154fbcf60c7177ae96699dfccb32dc090336397e2d0afa772f21b97040"
+    },
+    {
+      "seq": 268,
+      "at": "2026-10-06T16:54:58+00:00",
+      "task": "REL-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "实际两包纯C重建/隔离运行与GitHub五附件回下载一致证据已固定",
+      "previous_hash": "b1edfd154fbcf60c7177ae96699dfccb32dc090336397e2d0afa772f21b97040",
+      "details": {
+        "contract_before": {
+          "id": "REL-002",
+          "title": "私有GitHub阶段交付与纯C打包",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-004",
+            "RES-009"
+          ],
+          "required_artifacts": [
+            "docs/project-guide.md",
+            "docs/delivery.md",
+            "tools/delivery.py",
+            "taskshot/2026-10-07_043-delivery.md"
+          ],
+          "acceptance": [
+            "纯C源码包可独立CMake编译并运行五个C测试，不依赖Python/Fortran物理运行链，第三方数据许可和固定来源随包",
+            "Windows运行包固定已测二进制、成功拒绝演示、SHA256和提交身份，压缩包与重建结果验证留存",
+            "项目解读解释作业对应、模块算法、输入单位、结果验证、参数限制和接手修改路径，GitHub私有默认分支与阶段Release对应当前固定提交"
+          ],
+          "owner": "root",
+          "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "REL-002",
+          "title": "私有GitHub阶段交付与纯C打包",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "MOD-004",
+            "RES-009"
+          ],
+          "required_artifacts": [
+            "docs/project-guide.md",
+            "docs/delivery.md",
+            "tools/delivery.py",
+            "deliverables/README.md",
+            "docs/release-notes-20261007.md",
+            "project/evidence/REL-002_delivery_18e351b.json",
+            "taskshot/2026-10-07_043-delivery.md"
+          ],
+          "acceptance": [
+            "纯C源码包可独立CMake编译并运行五个C测试，不依赖Python/Fortran物理运行链，第三方数据许可和固定来源随包",
+            "Windows运行包固定已测二进制、成功拒绝演示、SHA256和提交身份，压缩包与重建结果验证留存",
+            "项目解读解释作业对应、模块算法、输入单位、结果验证、参数限制和接手修改路径，GitHub私有默认分支与阶段Release对应当前固定提交"
+          ],
+          "owner": "root",
+          "note": "实际两包纯C重建/隔离运行与GitHub五附件回下载一致证据已固定",
+          "verification": null
+        }
+      },
+      "hash": "98eb785bd03e18588ce54bd2040f38c6fdf87992b47280fa050e98e2b6a33f0c"
+    },
+    {
+      "seq": 269,
+      "at": "2026-10-06T16:54:58+00:00",
+      "task": "REL-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "私有阶段Release已发布，回下载哈希一致，继续研究而非报告PPT",
+      "previous_hash": "98eb785bd03e18588ce54bd2040f38c6fdf87992b47280fa050e98e2b6a33f0c",
+      "details": {
+        "context_before": {
+          "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-004",
+            "ANA-012"
+          ],
+          "facts": [
+            "组员A/B来源为用户确认；10月6日新增产品/试验原文已核验，首飞装机和参数仍按各自对象记录",
+            "固定RP-1纯C公共接口限10 MPa、指定温度和O-F2.2..4.0；不能替代国产煤油批次",
+            "甲烷与RP-1均有方法参考和失败证据，真实泵后/循环输入仍缺",
+            "Windows最终计算程序不依赖Python/Fortran；开发与参考工具单列；PPT报告后置"
+          ]
+        },
+        "context_after": {
+          "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "ANA-012"
+          ],
+          "facts": [
+            "私有GitHub main已同步；stage-20261007固定18e351b，纯C源码/Windows包已重建和隔离运行",
+            "两型参数仍按对象/批次；固定RP-1不替代国产煤油批次，泵后和完整循环输入仍缺",
+            "Windows程序仅系统运行库；CMake可禁用Python测试；开发/参考工具留完整仓库",
+            "阶段Release不代表最终报告/PPT和所有课程研究已完成"
+          ]
+        }
+      },
+      "hash": "6271465a6f31b95c59e6d520d05f0828d84f6c6547b31147132b3693897334b7"
+    },
+    {
+      "seq": 270,
+      "at": "2026-10-06T16:55:01+00:00",
+      "task": "REL-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "两包固定18e351b：纯C解压构建/CTest5项和8次隔离演示通过；五GitHub附件回下载SHA256一致、私有main及tag确认；详细解读覆盖课程/算法/数据/验证/维护；完整本地质量6组PASS",
+      "previous_hash": "6271465a6f31b95c59e6d520d05f0828d84f6c6547b31147132b3693897334b7",
+      "hash": "7a268c2e0625de93ac704bc4fc0ce8e3ce7dbcd14e5eb2c6b2d8bfb9f0d6e47c"
+    },
+    {
+      "seq": 271,
+      "at": "2026-10-06T16:55:02+00:00",
+      "task": "REL-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "阶段交付和语义说明已验收，公开许可证/最终课程报告/PPT及真实型号性能未冒称完成。Release固定18e351b，后续登记提交单独维护；接续ANA-012",
+      "previous_hash": "7a268c2e0625de93ac704bc4fc0ce8e3ce7dbcd14e5eb2c6b2d8bfb9f0d6e47c",
+      "hash": "c96b01238a851f637135a810f993f9323523e433b638aa99ed1ef3e63eb0c8cd"
     }
   ]
 }

@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "kind": "windows-course-delivery",
+  "status": "PASS",
+  "started_at": "2026-10-06T16:46:48+00:00",
+  "source_head": "18e351b95b071a484ddf52e562459d21882eb275",
+  "repository": "https://github.com/2725238326/rocketperf-course-research",
+  "quality_fingerprint": "704f00e2337e84b9e820660eeee7aa7c6285b5531d779c28dca60ee81903ba60",
+  "binary_sha256": "0ccdf316fea15a4dfcf7a4cdd63aa4b72292940ed3112f1d1a31b98f0737c1ff",
+  "windows_imports": [
+    "KERNEL32.dll",
+    "api-ms-win-crt-convert-l1-1-0.dll",
+    "api-ms-win-crt-environment-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "api-ms-win-crt-locale-l1-1-0.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-private-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll",
+    "api-ms-win-crt-time-l1-1-0.dll"
+  ],
+  "archives": {
+    "c-source": {
+      "path": "rocketperf-c-source.zip",
+      "sha256": "70cbe1b2142f87a256f9e3767eb93b20f4dafb1ad2f204dbb81e0090b7dc82f8",
+      "bytes": 176733,
+      "files": 65
+    },
+    "windows-x64": {
+      "path": "rocketperf-windows-x64.zip",
+      "sha256": "9c674914a50418c5f4a55e8d7c5884b8ac85f71f16e2f74989bc34b0791e9fdd",
+      "bytes": 180018,
+      "files": 41
+    }
+  },
+  "source_build": {
+    "status": "PASS",
+    "tests": 5,
+    "commands": [
+      [
+        "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\cmake.exe",
+        "-S",
+        "E:\\Work\\火发原理\\build\\delivery-20261007-v2\\c-source",
+        "-B",
+        "E:\\Work\\火发原理\\build\\delivery-20261007-v2\\c-source\\build",
+        "-G",
+        "Ninja",
+        "-DCMAKE_MAKE_PROGRAM=E:\\Work\\火发原理\\build\\tooling\\bin\\ninja.exe",
+        "-DCMAKE_C_COMPILER=D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_TESTING=ON",
+        "-DROCKETPERF_ENABLE_PYTHON_TESTS=OFF"
+      ],
+      [
+        "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\cmake.exe",
+        "--build",
+        "E:\\Work\\火发原理\\build\\delivery-20261007-v2\\c-source\\build"
+      ],
+      [
+        "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\ctest.exe",
+        "--test-dir",
+        "E:\\Work\\火发原理\\build\\delivery-20261007-v2\\c-source\\build",
+        "--output-on-failure"
+      ]
+    ],
+    "demonstrations": [
+      {
+        "id": "ideal",
+        "arguments": [
+          "run",
+          "cases/benchmarks/air_mach2_vacuum.ini"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "cycle",
+        "arguments": [
+          "cycle",
+          "prescribed",
+          "cases/benchmarks/prescribed_cycle.ini"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "rp1",
+        "arguments": [
+          "combustion",
+          "frozen-rp1",
+          "cea-v3.3.4-rp1-o2l-assigned-v1",
+          "liquid",
+          "RP-1",
+          "O2(L)",
+          "10000000",
+          "2.6",
+          "298.15",
+          "90.170",
+          "10",
+          "0",
+          "0.01"
+        ],
+        "exit_code": 0
+      },
+      {
+        "id": "rejection",
+        "arguments": [
+          "run",
+          "tests/fixtures/overexpanded.ini"
+        ],
+        "exit_code": 4
+      }
+    ]
+  },
+  "runtime_demonstrations": [
+    {
+      "id": "ideal",
+      "arguments": [
+        "run",
+        "cases/benchmarks/air_mach2_vacuum.ini"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "cycle",
+      "arguments": [
+        "cycle",
+        "prescribed",
+        "cases/benchmarks/prescribed_cycle.ini"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "rp1",
+      "arguments": [
+        "combustion",
+        "frozen-rp1",
+        "cea-v3.3.4-rp1-o2l-assigned-v1",
+        "liquid",
+        "RP-1",
+        "O2(L)",
+        "10000000",
+        "2.6",
+        "298.15",
+        "90.170",
+        "10",
+        "0",
+        "0.01"
+      ],
+      "exit_code": 0
+    },
+    {
+      "id": "rejection",
+      "arguments": [
+        "run",
+        "tests/fixtures/overexpanded.ini"
+      ],
+      "exit_code": 4
+    }
+  ],
+  "verification_files": {
+    "verification/build-manifest.json": "c2d3e2be725630eadce91a34a73993024e170ce15555a60fb7ca4105eef25a24",
+    "verification/quality-report.json": "b1a8f6712b424d36d3b1eb4e85ae885d07062ecd5cfad29581f918877cf87733",
+    "verification/runtime-cycle-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/runtime-cycle-stdout.json": "744e80f3da24b18880fc1ab6652cba7dd6efcc39a9d6eeccd8b0bb8ad6d580a4",
+    "verification/runtime-ideal-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/runtime-ideal-stdout.json": "ce3426b7e4a50dd173f9ab301cd364f08a56ebf0d9a588b4ec8615baab3dc382",
+    "verification/runtime-rejection-stderr.txt": "8a8da3fa1a6c3de8a6279d0ffb7da80fe385c490272570090dd84c7c2aba789d",
+    "verification/runtime-rejection-stdout.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/runtime-rp1-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/runtime-rp1-stdout.json": "af6e13c71f68b68c254b4e689530743c484f010669a68cbd005e3a26abf3e622",
+    "verification/source-0-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-0-stdout.txt": "c1d21ecd26f956e0814c85416b8395b6b2a733bd654daaaa4fb0fbb0c63ad549",
+    "verification/source-1-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-1-stdout.txt": "e8e393fe05ae26e6dab819ccf2b128b72a19f83eec625b16f16b2b2c87ba7b55",
+    "verification/source-2-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-2-stdout.txt": "8a51a8514540a234b1fae3d84515e18fef5695826b6d4a5f8989541b4e34e48a",
+    "verification/source-cycle-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-cycle-stdout.json": "744e80f3da24b18880fc1ab6652cba7dd6efcc39a9d6eeccd8b0bb8ad6d580a4",
+    "verification/source-ideal-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-ideal-stdout.json": "ce3426b7e4a50dd173f9ab301cd364f08a56ebf0d9a588b4ec8615baab3dc382",
+    "verification/source-rejection-stderr.txt": "8a8da3fa1a6c3de8a6279d0ffb7da80fe385c490272570090dd84c7c2aba789d",
+    "verification/source-rejection-stdout.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-rp1-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "verification/source-rp1-stdout.json": "af6e13c71f68b68c254b4e689530743c484f010669a68cbd005e3a26abf3e622",
+    "verification/test-report.json": "a0cddf2c6c3b9a1081e905efd34c595135411bed096926912de2232604723f33",
+    "verification/windows-imports.txt": "e9a0d968e772b75ca3be715bb5d9152e1abbd751f6f87c53f847e549547e64b7"
+  },
+  "finished_at": "2026-10-06T16:47:29+00:00"
+}
