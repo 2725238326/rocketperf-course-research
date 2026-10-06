@@ -238,7 +238,7 @@ def create(destination, cmake=None, ninja=None):
         executable = local_path(ROOT, build["application"]["path"])
         objdump = Path(build["compiler"]).with_name("objdump.exe")
         imports = subprocess.run([str(objdump), "-p", str(executable)], capture_output=True,
-                                 text=True, encoding="utf-8", check=True, timeout=30).stdout
+                                 text=True, encoding="utf-8", errors="replace", check=True, timeout=30).stdout
         dependencies = re.findall(r"DLL Name:\s+(\S+)", imports)
         if not dependencies or any(name.lower() not in {"kernel32.dll", "msvcrt.dll", "ucrtbase.dll"}
                                    and not name.lower().startswith("api-ms-win-") for name in dependencies):
