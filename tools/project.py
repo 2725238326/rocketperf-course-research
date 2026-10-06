@@ -16,7 +16,7 @@ from projectlib import (ROOT, QUALITY_CHECKS, atomic_json, atomic_text, canonica
 
 STATES = {"PLANNED", "READY", "ACTIVE", "REVIEW", "BLOCKED", "DONE", "CANCELLED"}
 TASK_FIELDS = {"id","title","status","priority","depends_on","required_artifacts","acceptance","owner","note","verification"}
-SECRET = re.compile(r"(?:sk-|xai-)[A-Za-z0-9_-]{24,}|gh[pousr]_[A-Za-z0-9]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")
+SECRET = re.compile(r"(?<![A-Za-z0-9_-])(?:sk-|xai-)[A-Za-z0-9_-]{24,}|(?<![A-Za-z0-9_])gh[pousr]_[A-Za-z0-9]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")
 
 
 def validate_registry(root: Path, state: dict, check_files=True) -> list[str]:

@@ -1,0 +1,6 @@
+problem case=probe_anchor_temperature hp p,bar=100 o/f=2.6
+reactants
+ fuel=RP-1 wt%=100 t,k=350.0
+ oxid=O2(L) wt%=100 t,k=90.170
+output siunits trace=1.e-7
+end

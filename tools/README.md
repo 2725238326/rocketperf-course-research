@@ -23,6 +23,7 @@
 | liquid_table.py | 从固定参考生成C表/原输出测试常量，检查纯C的实际CLI密度/焓与拒绝协议，归档并离线复验 |
 | liquid_combustion.py | 连续液体入口HP/固定面积喷管的C与显式焓CEA运行、守恒/身份和预期拒绝核验；不求生产物理 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
+| kerosene_reference.py / kerosene_probe.c | 固定RP-1产物集合比较、C研究驱动和保存结果复核；不提供国产煤油CLI接口 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |
 | migrate_governance.py | 一次性迁移旧手工任务板；已有任务登记时拒绝再次运行 |

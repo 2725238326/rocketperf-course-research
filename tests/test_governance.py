@@ -225,6 +225,9 @@ class GovernanceTests(unittest.TestCase):
         secret='sk-'+'a'*32
         self.assertTrue(project.SECRET.search(secret))
         self.assertFalse(project.SECRET.search('Bearer ' + '<runtime credential>'))
+        self.assertFalse(project.SECRET.search('https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence'))
+        self.assertTrue(project.SECRET.search('Authorization: Bearer ' + secret))
+        self.assertTrue(project.SECRET.search('key="' + secret + '"'))
 
 
 if __name__=='__main__': unittest.main(verbosity=2)

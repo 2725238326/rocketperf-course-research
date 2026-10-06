@@ -1,17 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 223,
+  "revision": 235,
   "context": {
-    "phase": "两型四级段证据与已有C方法整合；接续煤油参考边界",
-    "evidence_cutoff": "2026-10-05",
+    "phase": "固定RP-1产物边界与C方法研究；维护现行文档和交付检查",
+    "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "RES-008"
+      "GOV-003",
+      "MOD-004"
     ],
     "facts": [
-      "两型直接网页证据截止2026-10-03；其他物性来源分别固定日期，本地整理不刷新线上事实",
-      "连续单相液体入口HP/固定面积喷管已验证；每kg元素库存内部契约补强，不包含泵后供给或整机闭合",
-      "四级段构型、方法算例和未知输入分别关联；煤油一级尚无燃烧性能模型，真实型号绝对性能不能由假设算例代替",
-      "下一项补具名煤油固定反应物、产物/凝聚相和同条件参考；PPT及最终报告后置"
+      "两型直接原文核验截止2026-10-03；10月6日工程来源与方法计算不刷新型号事实",
+      "连续液体甲烷HP/冻结喷管与固定RP-1研究驱动已有；真实入口、公开煤油接口和完整循环仍缺",
+      "富燃料九气相存在失败与凝聚碳差异；方法结果按固定反应物和产物集解释",
+      "当前先完成计算与维护；PPT及最终报告后置"
     ]
   },
   "tasks": [
@@ -1003,19 +1004,74 @@
     {
       "id": "RES-008",
       "title": "煤油固定反应物方法与参考边界",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-011"
       ],
       "required_artifacts": [
         "调研/专题/RES-008_煤油计算边界.md",
-        "data/parameters/kerosene_method_contract.json"
+        "data/parameters/kerosene_method_contract.json",
+        "results/research/kerosene_products_v3_20261006/manifest.json",
+        "tools/kerosene_probe.c",
+        "taskshot/2026-10-06_040-kerosene.md"
       ],
       "acceptance": [
         "逐项核对固定CEA RP-1元素式/化学焓/质量口径与NIST surrogate范围，采用具名方法而非国产煤油真实输入",
         "保存受限气相与扩展产物/凝聚相的同条件参考和真实失败，说明九气相产物是否足够；不以同源软件差值称实验误差",
         "给出C17入口、库存/焓基准、失败语义与验证契约，明确能实现和暂不支持范围；参考不足时保留缺口，不直接填型号性能"
+      ],
+      "owner": "root",
+      "note": "三项验收由专题、方法契约、C驱动与v3归档支持；负责人完成语义审阅，未声称独立实验或真实煤油性能",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/RES-008_cee138203eb3.json",
+        "sha256": "9760c3e27e79ef02c70980bc194d2ceb92ccacd509360c3cc0cf1abfccd64f71"
+      }
+    },
+    {
+      "id": "GOV-003",
+      "title": "现行文档与交付检查整顿",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "RES-008"
+      ],
+      "required_artifacts": [
+        "docs/maintenance-audit.md",
+        "调研/专题/工程内容审查_20261006.md",
+        "taskshot/2026-10-06_041-maintenance.md"
+      ],
+      "acceptance": [
+        "现行入口去除重复状态和随意措辞，历史档案保留，写作规则有原文支持和适用限制",
+        "交接包新版本使用明确接收检查字段，兼容旧版且拒绝错版本或重复字段，通过行为测试",
+        "README和交接能直接定位计算结果与复现命令，审查变更并本地提交，工作树干净"
+      ],
+      "owner": "root",
+      "note": "维护审计与快照对应产物；暂存区审查后本地提交，接续MOD-004固定RP-1公共接口，报告PPT后置",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/GOV-003_fc1ba69c6b22.json",
+        "sha256": "9760c3e27e79ef02c70980bc194d2ceb92ccacd509360c3cc0cf1abfccd64f71"
+      }
+    },
+    {
+      "id": "MOD-004",
+      "title": "固定RP-1公共接口与计算算例",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "RES-008",
+        "GOV-003"
+      ],
+      "required_artifacts": [
+        "docs/kerosene-validation.md",
+        "results/validation/kerosene_anchor_v1/manifest.json"
+      ],
+      "acceptance": [
+        "C17具名固定RP-1入口要求数据集和精确温度，拒绝未知燃料、越域、相态和非有限值，失败保持输出",
+        "用新增内部点C/CEA参考确定支持工况，纳入CLI、版本化结果和成功拒绝回归，禁止真实型号标签",
+        "输出固定几何性能并解释产物/凝聚相及参考限制，运行完整Windows质量验收并本地提交"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -5674,6 +5730,226 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "090c823f880f95da49fe5fc364b8b9689dadd929cd6d86133efb1c1e812631e6",
       "hash": "38ec308035cdd44c42122aac5b40b68b9356379f82cac8419d3f89ada91c01fc"
+    },
+    {
+      "seq": 241,
+      "at": "2026-10-06T07:57:44+00:00",
+      "task": "RES-008",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "核对固定RP-1元素与焓，实际运行同条件产物集合比较，明确可用条件",
+      "previous_hash": "38ec308035cdd44c42122aac5b40b68b9356379f82cac8419d3f89ada91c01fc",
+      "hash": "ac221335e8c9bc34bfa2232409ebe12e4f1122f2952115fe63ca11f0e02684cb"
+    },
+    {
+      "seq": 242,
+      "at": "2026-10-06T14:24:26+00:00",
+      "task": "GOV-003",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "ac221335e8c9bc34bfa2232409ebe12e4f1122f2952115fe63ca11f0e02684cb",
+      "hash": "d834ce8388582721985eba9719c8de604e8c133151a7692f993360f477e3132c"
+    },
+    {
+      "seq": 243,
+      "at": "2026-10-06T14:43:32+00:00",
+      "task": "RES-008",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "补充同条件C研究驱动与保存参考，工程整顿另由GOV-003验收",
+      "previous_hash": "d834ce8388582721985eba9719c8de604e8c133151a7692f993360f477e3132c",
+      "details": {
+        "contract_before": {
+          "id": "RES-008",
+          "title": "煤油固定反应物方法与参考边界",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "ANA-011"
+          ],
+          "required_artifacts": [
+            "调研/专题/RES-008_煤油计算边界.md",
+            "data/parameters/kerosene_method_contract.json"
+          ],
+          "acceptance": [
+            "逐项核对固定CEA RP-1元素式/化学焓/质量口径与NIST surrogate范围，采用具名方法而非国产煤油真实输入",
+            "保存受限气相与扩展产物/凝聚相的同条件参考和真实失败，说明九气相产物是否足够；不以同源软件差值称实验误差",
+            "给出C17入口、库存/焓基准、失败语义与验证契约，明确能实现和暂不支持范围；参考不足时保留缺口，不直接填型号性能"
+          ],
+          "owner": "root",
+          "note": "核对固定RP-1元素与焓，实际运行同条件产物集合比较，明确可用条件",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "RES-008",
+          "title": "煤油固定反应物方法与参考边界",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "ANA-011"
+          ],
+          "required_artifacts": [
+            "调研/专题/RES-008_煤油计算边界.md",
+            "data/parameters/kerosene_method_contract.json",
+            "results/research/kerosene_products_v3_20261006/manifest.json",
+            "tools/kerosene_probe.c",
+            "taskshot/2026-10-06_040-kerosene.md"
+          ],
+          "acceptance": [
+            "逐项核对固定CEA RP-1元素式/化学焓/质量口径与NIST surrogate范围，采用具名方法而非国产煤油真实输入",
+            "保存受限气相与扩展产物/凝聚相的同条件参考和真实失败，说明九气相产物是否足够；不以同源软件差值称实验误差",
+            "给出C17入口、库存/焓基准、失败语义与验证契约，明确能实现和暂不支持范围；参考不足时保留缺口，不直接填型号性能"
+          ],
+          "owner": "root",
+          "note": "补充同条件C研究驱动与保存参考，工程整顿另由GOV-003验收",
+          "verification": null
+        }
+      },
+      "hash": "4ce3d7f1353650523d876e32476664432ddbd1623f234b1e153c5d8ac1bbc05b"
+    },
+    {
+      "seq": 244,
+      "at": "2026-10-06T14:56:06+00:00",
+      "task": "MOD-004",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "4ce3d7f1353650523d876e32476664432ddbd1623f234b1e153c5d8ac1bbc05b",
+      "hash": "84cdae36cad734cc47524a8e79c883ba909c9cfa1349fc8f5caa7a3b5c997428"
+    },
+    {
+      "seq": 245,
+      "at": "2026-10-06T14:56:06+00:00",
+      "task": "RES-008",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定RP-1参考与维护整顿，接续公共接口",
+      "previous_hash": "84cdae36cad734cc47524a8e79c883ba909c9cfa1349fc8f5caa7a3b5c997428",
+      "details": {
+        "context_before": {
+          "phase": "两型四级段证据与已有C方法整合；接续煤油参考边界",
+          "evidence_cutoff": "2026-10-05",
+          "next_tasks": [
+            "RES-008"
+          ],
+          "facts": [
+            "两型直接网页证据截止2026-10-03；其他物性来源分别固定日期，本地整理不刷新线上事实",
+            "连续单相液体入口HP/固定面积喷管已验证；每kg元素库存内部契约补强，不包含泵后供给或整机闭合",
+            "四级段构型、方法算例和未知输入分别关联；煤油一级尚无燃烧性能模型，真实型号绝对性能不能由假设算例代替",
+            "下一项补具名煤油固定反应物、产物/凝聚相和同条件参考；PPT及最终报告后置"
+          ]
+        },
+        "context_after": {
+          "phase": "固定RP-1产物边界与C方法研究；维护现行文档和交付检查",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "GOV-003",
+            "MOD-004"
+          ],
+          "facts": [
+            "两型直接原文核验截止2026-10-03；10月6日工程来源与方法计算不刷新型号事实",
+            "连续液体甲烷HP/冻结喷管与固定RP-1研究驱动已有；真实入口、公开煤油接口和完整循环仍缺",
+            "富燃料九气相存在失败与凝聚碳差异；方法结果按固定反应物和产物集解释",
+            "当前先完成计算与维护；PPT及最终报告后置"
+          ]
+        }
+      },
+      "hash": "a942b2b5ec71b41fdf24dd16477627db14592879ec547094454311c3bca8550e"
+    },
+    {
+      "seq": 246,
+      "at": "2026-10-06T15:05:04+00:00",
+      "task": "RES-008",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "固定RP-1源记录/质量焓/库存与NIST范围已核对；15张CEA卡含真实失败和温度探查，6个C点/2个喷管点及打印参考复核已保存；公共接口与国产批次边界见契约，六组质量通过",
+      "previous_hash": "a942b2b5ec71b41fdf24dd16477627db14592879ec547094454311c3bca8550e",
+      "hash": "c89d2e0c22a0306be9625614d17e74a956e641f42b83bf56a0ec34d8697ad5a7"
+    },
+    {
+      "seq": 247,
+      "at": "2026-10-06T15:05:05+00:00",
+      "task": "RES-008",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "三项验收由专题、方法契约、C驱动与v3归档支持；负责人完成语义审阅，未声称独立实验或真实煤油性能",
+      "previous_hash": "c89d2e0c22a0306be9625614d17e74a956e641f42b83bf56a0ec34d8697ad5a7",
+      "hash": "5dc6393311840aba565f37a2601c2560f00744efc51bbf28c20ec4f37a0be5c9"
+    },
+    {
+      "seq": 248,
+      "at": "2026-10-06T15:05:05+00:00",
+      "task": "GOV-003",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "5dc6393311840aba565f37a2601c2560f00744efc51bbf28c20ec4f37a0be5c9",
+      "hash": "788ae32f48325b8405439fc80612a1d6b86a598bf25ad56c789fa22cbcf656fb"
+    },
+    {
+      "seq": 249,
+      "at": "2026-10-06T15:05:05+00:00",
+      "task": "GOV-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收现行文档整顿、来源核验和交接格式兼容",
+      "previous_hash": "788ae32f48325b8405439fc80612a1d6b86a598bf25ad56c789fa22cbcf656fb",
+      "hash": "23237733d6114456deed4868e7634b35af7cb651dfcdd6b182ccc68d3eb8eba5"
+    },
+    {
+      "seq": 250,
+      "at": "2026-10-06T15:05:06+00:00",
+      "task": "GOV-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "README/交接/规划与索引已整顿，NIST/GitHub原文支持审查规则，交接v3/旧版兼容及密钥网址误报有行为测试，完整质量六组通过",
+      "previous_hash": "23237733d6114456deed4868e7634b35af7cb651dfcdd6b182ccc68d3eb8eba5",
+      "hash": "97d874c1a61c74c18403267e93b2b07cb1421b274e8f1d8ccd3592757cc6411f"
+    },
+    {
+      "seq": 251,
+      "at": "2026-10-06T15:05:07+00:00",
+      "task": "GOV-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "维护审计与快照对应产物；暂存区审查后本地提交，接续MOD-004固定RP-1公共接口，报告PPT后置",
+      "previous_hash": "97d874c1a61c74c18403267e93b2b07cb1421b274e8f1d8ccd3592757cc6411f",
+      "hash": "e44bfdcd65cce939dafd8351090623110583fd89999d6535df8b9fdc3f1c17e5"
+    },
+    {
+      "seq": 252,
+      "at": "2026-10-06T15:05:07+00:00",
+      "task": "MOD-004",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "e44bfdcd65cce939dafd8351090623110583fd89999d6535df8b9fdc3f1c17e5",
+      "hash": "2c94010825f2e7b769549e57e4976f38efa61a126b7c53597af7de792101f5ba"
     }
   ]
 }

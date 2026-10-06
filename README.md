@@ -73,6 +73,12 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 
 ## 按职责找入口
 
+[固定RP-1方法研究](调研/专题/RES-008_煤油计算边界.md)保存15张CEA卡及6个C燃烧室点。10 MPa、O/F=2.6时，C燃温3724.0068 K；At=0.01 m²、面积比10的真空比冲310.571731 s。扩展产物集燃温低0.38 K；O/F=1时差26.45 K，O/F=0.5九气相C/CEA失败，扩展卡出现凝聚碳。这些结果限定方法适用条件；RP-1记录尚未绑定长十乙真实燃料，也尚未开放为生产CLI接口。
+
+```powershell
+python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
+```
+
 | 工作 | 入口 |
 |---|---|
 | 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md)、[研究结构](docs/research-structure.md) |
@@ -83,7 +89,7 @@ C扫描产生完整状态、推力/比冲变化、出口面积/直径和有限�
 | 写研究专题和结论 | [写作约定](docs/research-writing.md)、[研究议题](docs/research-agenda.md) |
 | 管目录、构建和Git | [目录地图](docs/project-map.md)、[环境说明](docs/environment.md)、[治理规范](docs/governance.md) |
 
-任务事实只维护在 `project/tasks.json`，worknow和任务板自动生成。模块与源码清单只维护在 `project/modules.json`，架构和两条构建路径共同使用。原始资料保留原路径和字节。
+任务事实只维护在 `project/tasks.json`，worknow和任务板自动生成。模块与源码清单只维护在 `project/modules.json`，架构和两条构建路径共同使用。文档维护审计见[记录](docs/maintenance-audit.md)，生成内容的审查依据见[原文核验](调研/专题/工程内容审查_20261006.md)。
 
 课程节点：2026-10-16，周五第3—5节；展示≤10分钟、提问≤5分钟。最终交源码、发布版、报告和PPT。当前工程通过不等于课程研究已经完成。
 

@@ -1,0 +1,1 @@
+请实际联网检索两条原始资料：NIST AI 600-1 Generative AI Profile 与 GitHub Responsible use of GitHub Copilot code review。只给官方URL、发布日期或未注明日期、各一条具体工程风险（编造/过度信任、漏检/错误建议）与原文位置，约400字。不扩展，不写综述。

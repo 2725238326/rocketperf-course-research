@@ -1,0 +1,1196 @@
+{
+  "schema_version": 1,
+  "scope": "Fixed CEA RP-1/O2(L), assigned enthalpies, product-set comparison; not Chinese kerosene or hardware performance.",
+  "status": "PASS",
+  "started_at": "2026-10-06T14:36:57+00:00",
+  "identity": {
+    "cea_commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+    "cea_binary_sha256": "1f6d3b30e078740291f61f85c6153480cc302bdfe7ced21527b5327c3f6dbba6",
+    "thermo_sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363",
+    "databases": {
+      "thermo.lib": "93ae62dbe49108a4d88992442c55a2d66587eb8813fb39430be3f2bdb5651116",
+      "trans.lib": "c203d9330746405e1b57008cd697354745ab991694b4ca11ed556b18cb834111"
+    },
+    "anchors": [
+      {
+        "name": "O2(L)",
+        "elements": {
+          "O": 2.0
+        },
+        "molar_mass_kg_per_kmol": 31.9988,
+        "assigned_temperature_k": 90.17,
+        "assigned_enthalpy_j_per_mol": -12979.0,
+        "source_line": 15766,
+        "source_note": "Oxygen. McBride,1996 pp85,93."
+      },
+      {
+        "name": "RP-1",
+        "elements": {
+          "C": 1.0,
+          "H": 1.95
+        },
+        "molar_mass_kg_per_kmol": 13.976183,
+        "assigned_temperature_k": 298.15,
+        "assigned_enthalpy_j_per_mol": -24717.7,
+        "source_line": 15775,
+        "source_note": "Mehta et.al. AIAA 95-2962 1995. Hcomb(high) = 19923.BTU/#"
+      }
+    ]
+  },
+  "source_head": "129533966d317faa6ed17aeffe03cc34f58a6a66",
+  "recipes": [
+    {
+      "id": "of_0_5_nine-gas",
+      "ratio": 0.5,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_0_5_expanded",
+      "ratio": 0.5,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_1_0_nine-gas",
+      "ratio": 1.0,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_1_0_expanded",
+      "ratio": 1.0,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_2_2_nine-gas",
+      "ratio": 2.2,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_2_2_expanded",
+      "ratio": 2.2,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_2_6_nine-gas",
+      "ratio": 2.6,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_2_6_expanded",
+      "ratio": 2.6,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_3_2_nine-gas",
+      "ratio": 3.2,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_3_2_expanded",
+      "ratio": 3.2,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_4_0_nine-gas",
+      "ratio": 4.0,
+      "products": "nine-gas",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "of_4_0_expanded",
+      "ratio": 4.0,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "rocket_nine-gas",
+      "ratio": 2.6,
+      "products": "nine-gas",
+      "mode": "rocket frozen nfz=1",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "rocket_expanded",
+      "ratio": 2.6,
+      "products": "expanded",
+      "mode": "rocket frozen nfz=1",
+      "fuel_temperature": 298.15
+    },
+    {
+      "id": "probe_anchor_temperature",
+      "ratio": 2.6,
+      "products": "expanded",
+      "mode": "hp",
+      "fuel_temperature": 350.0
+    }
+  ],
+  "summaries": {
+    "of_0_5_nine-gas": {
+      "status": "REJECTED",
+      "diagnostics": [
+        "No product mole fractions printed",
+        "WARNING: Singular update matrix encountered at iteration 18",
+        "WARNING: Singular update matrix encountered at iteration 13",
+        "WARNING: Singular update matrix encountered at iteration 7",
+        "WARNING: Singular update matrix encountered at iteration 1"
+      ],
+      "rows": {
+        "pressure_bar": [
+          0.0
+        ],
+        "temperature_k": [
+          298.16
+        ],
+        "h_kj_per_kg": [
+          0.0
+        ],
+        "molar_mass_kg_per_kmol": [
+          2e-05
+        ]
+      },
+      "mole_fractions": {}
+    },
+    "of_0_5_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          1320.83
+        ],
+        "h_kj_per_kg": [
+          -1314.242
+        ],
+        "molar_mass_kg_per_kmol": [
+          18.89845
+        ]
+      },
+      "mole_fractions": {
+        "C2H2,acetylene": [
+          2.594e-07
+        ],
+        "C2H4": [
+          2.719e-05
+        ],
+        "C2H6": [
+          5.345e-05
+        ],
+        "C3H6,propylene": [
+          2.322e-07
+        ],
+        "CH2CO,ketene": [
+          7.797e-07
+        ],
+        "CH3": [
+          4.78e-07
+        ],
+        "CH3CHO,ethanal": [
+          2.458e-07
+        ],
+        "CH3OH": [
+          5.234e-07
+        ],
+        "CH4": [
+          0.106959
+        ],
+        "CO": [
+          0.172066
+        ],
+        "CO2": [
+          0.017603
+        ],
+        "H2": [
+          0.324039
+        ],
+        "H2O": [
+          0.061247
+        ],
+        "HCHO,formaldehy": [
+          3.863e-06
+        ],
+        "HCOOH": [
+          9.467e-07
+        ],
+        "C(gr)": [
+          0.317999
+        ]
+      }
+    },
+    "of_1_0_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          1621.29
+        ],
+        "h_kj_per_kg": [
+          -1087.084
+        ],
+        "molar_mass_kg_per_kmol": [
+          16.45255
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.406549
+        ],
+        "H2O": [
+          0.004854
+        ],
+        "CO": [
+          0.505405
+        ],
+        "CO2": [
+          0.001951
+        ],
+        "CH4": [
+          0.081236
+        ],
+        "H": [
+          4.336e-06
+        ]
+      }
+    },
+    "of_1_0_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          1594.84
+        ],
+        "h_kj_per_kg": [
+          -1087.084
+        ],
+        "molar_mass_kg_per_kmol": [
+          16.08202
+        ]
+      },
+      "mole_fractions": {
+        "C2H2,acetylene": [
+          1.15e-05
+        ],
+        "C2H4": [
+          6.339e-05
+        ],
+        "C2H6": [
+          1.314e-05
+        ],
+        "C3H6,propylene": [
+          2.955e-07
+        ],
+        "CH2CO,ketene": [
+          4.845e-06
+        ],
+        "CH3": [
+          5.379e-06
+        ],
+        "CH3CHO,ethanal": [
+          2.113e-07
+        ],
+        "CH3OH": [
+          2.537e-07
+        ],
+        "CH4": [
+          0.034748
+        ],
+        "CO": [
+          0.441904
+        ],
+        "CO2": [
+          0.006289
+        ],
+        "H": [
+          3.316e-06
+        ],
+        "H2": [
+          0.439752
+        ],
+        "H2O": [
+          0.018673
+        ],
+        "HCHO,formaldehy": [
+          9.022e-06
+        ],
+        "HCO": [
+          1.727e-07
+        ],
+        "HCOOH": [
+          4.14e-07
+        ],
+        "C(gr)": [
+          0.058523
+        ]
+      }
+    },
+    "of_2_2_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3551.03
+        ],
+        "h_kj_per_kg": [
+          -831.531
+        ],
+        "molar_mass_kg_per_kmol": [
+          21.93279
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.139108
+        ],
+        "O2": [
+          0.002326
+        ],
+        "H2O": [
+          0.312613
+        ],
+        "CO": [
+          0.386444
+        ],
+        "CO2": [
+          0.103961
+        ],
+        "H": [
+          0.02472
+        ],
+        "O": [
+          0.002698
+        ],
+        "OH": [
+          0.028129
+        ]
+      }
+    },
+    "of_2_2_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3550.81
+        ],
+        "h_kj_per_kg": [
+          -831.53
+        ],
+        "molar_mass_kg_per_kmol": [
+          21.93392
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.386409
+        ],
+        "CO2": [
+          0.103952
+        ],
+        "COOH": [
+          1.845e-05
+        ],
+        "H": [
+          0.024708
+        ],
+        "H2": [
+          0.139107
+        ],
+        "H2O": [
+          0.3126
+        ],
+        "H2O2": [
+          5.32e-06
+        ],
+        "HCHO,formaldehy": [
+          2.271e-06
+        ],
+        "HCO": [
+          4.503e-05
+        ],
+        "HCOOH": [
+          4.682e-06
+        ],
+        "HO2": [
+          1.929e-05
+        ],
+        "O": [
+          0.002695
+        ],
+        "O2": [
+          0.002324
+        ],
+        "OH": [
+          0.028111
+        ]
+      }
+    },
+    "of_2_6_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3724.01
+        ],
+        "h_kj_per_kg": [
+          -784.206
+        ],
+        "molar_mass_kg_per_kmol": [
+          23.60076
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.079522
+        ],
+        "O2": [
+          0.017892
+        ],
+        "H2O": [
+          0.333333
+        ],
+        "CO": [
+          0.315204
+        ],
+        "CO2": [
+          0.153863
+        ],
+        "H": [
+          0.026881
+        ],
+        "O": [
+          0.011215
+        ],
+        "OH": [
+          0.06209
+        ]
+      }
+    },
+    "of_2_6_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3723.63
+        ],
+        "h_kj_per_kg": [
+          -784.206
+        ],
+        "molar_mass_kg_per_kmol": [
+          23.6029
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.315211
+        ],
+        "CO2": [
+          0.15383
+        ],
+        "COOH": [
+          2.731e-05
+        ],
+        "H": [
+          0.026863
+        ],
+        "H2": [
+          0.079535
+        ],
+        "H2O": [
+          0.333292
+        ],
+        "H2O2": [
+          1.88e-05
+        ],
+        "HCHO,formaldehy": [
+          1.069e-06
+        ],
+        "HCO": [
+          3.536e-05
+        ],
+        "HCOOH": [
+          4.126e-06
+        ],
+        "HO2": [
+          0.0001139
+        ],
+        "O": [
+          0.011193
+        ],
+        "O2": [
+          0.017853
+        ],
+        "O3": [
+          1.32e-07
+        ],
+        "OH": [
+          0.062021
+        ]
+      }
+    },
+    "of_3_2_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3753.91
+        ],
+        "h_kj_per_kg": [
+          -730.121
+        ],
+        "molar_mass_kg_per_kmol": [
+          25.37195
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.042316
+        ],
+        "O2": [
+          0.068039
+        ],
+        "H2O": [
+          0.324171
+        ],
+        "CO": [
+          0.22891
+        ],
+        "CO2": [
+          0.203321
+        ],
+        "H": [
+          0.02081
+        ],
+        "O": [
+          0.023366
+        ],
+        "OH": [
+          0.089066
+        ]
+      }
+    },
+    "of_3_2_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3753.46
+        ],
+        "h_kj_per_kg": [
+          -730.121
+        ],
+        "molar_mass_kg_per_kmol": [
+          25.37662
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.22895
+        ],
+        "CO2": [
+          0.20331
+        ],
+        "COOH": [
+          2.756e-05
+        ],
+        "H": [
+          0.020793
+        ],
+        "H2": [
+          0.042318
+        ],
+        "H2O": [
+          0.324093
+        ],
+        "H2O2": [
+          3.67e-05
+        ],
+        "HCHO,formaldehy": [
+          4.14e-07
+        ],
+        "HCO": [
+          1.949e-05
+        ],
+        "HCOOH": [
+          2.921e-06
+        ],
+        "HO2": [
+          0.0003167
+        ],
+        "O": [
+          0.023314
+        ],
+        "O2": [
+          0.06787
+        ],
+        "O3": [
+          1.029e-06
+        ],
+        "OH": [
+          0.088946
+        ]
+      }
+    },
+    "of_4_0_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3683.41
+        ],
+        "h_kj_per_kg": [
+          -678.199
+        ],
+        "molar_mass_kg_per_kmol": [
+          27.04252
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.022513
+        ],
+        "O2": [
+          0.151767
+        ],
+        "H2O": [
+          0.300651
+        ],
+        "CO": [
+          0.150885
+        ],
+        "CO2": [
+          0.236095
+        ],
+        "H": [
+          0.013173
+        ],
+        "O": [
+          0.029806
+        ],
+        "OH": [
+          0.09511
+        ]
+      }
+    },
+    "of_4_0_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3682.91
+        ],
+        "h_kj_per_kg": [
+          -678.199
+        ],
+        "molar_mass_kg_per_kmol": [
+          27.04984
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.150899
+        ],
+        "CO2": [
+          0.236155
+        ],
+        "COOH": [
+          2.093e-05
+        ],
+        "H": [
+          0.013156
+        ],
+        "H2": [
+          0.022501
+        ],
+        "H2O": [
+          0.300521
+        ],
+        "H2O2": [
+          4.741e-05
+        ],
+        "HCHO,formaldehy": [
+          1.445e-07
+        ],
+        "HCO": [
+          8.522e-06
+        ],
+        "HCOOH": [
+          1.775e-06
+        ],
+        "HO2": [
+          0.000512
+        ],
+        "O": [
+          0.029742
+        ],
+        "O2": [
+          0.151458
+        ],
+        "O3": [
+          3.043e-06
+        ],
+        "OH": [
+          0.094975
+        ]
+      }
+    },
+    "rocket_nine-gas": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0,
+          56.2164,
+          1.1679,
+          0.1809
+        ],
+        "temperature_k": [
+          3724.01,
+          3369.31,
+          1657.61,
+          1136.81
+        ],
+        "h_kj_per_kg": [
+          -784.206,
+          -1503.322,
+          -4817.141,
+          -5726.833
+        ],
+        "molar_mass_kg_per_kmol": [
+          23.6008,
+          23.6008,
+          23.6008,
+          23.6008
+        ],
+        "area_ratio": [
+          1.0,
+          10.0,
+          40.0001
+        ],
+        "cstar_m_per_s": [
+          1760.66,
+          1760.66,
+          1760.66
+        ],
+        "vacuum_velocity_m_per_s": [
+          2189.04,
+          3045.67,
+          3271.46
+        ]
+      },
+      "mole_fractions": {
+        "H2": [
+          0.079522
+        ],
+        "O2": [
+          0.017892
+        ],
+        "H2O": [
+          0.333333
+        ],
+        "CO": [
+          0.315204
+        ],
+        "CO2": [
+          0.153863
+        ],
+        "H": [
+          0.026881
+        ],
+        "O": [
+          0.011215
+        ],
+        "OH": [
+          0.06209
+        ]
+      }
+    },
+    "rocket_expanded": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0,
+          56.2168,
+          1.1679,
+          0.1809
+        ],
+        "temperature_k": [
+          3723.63,
+          3369.01,
+          1657.59,
+          1136.85
+        ],
+        "h_kj_per_kg": [
+          -784.206,
+          -1503.179,
+          -4816.452,
+          -5726.047
+        ],
+        "molar_mass_kg_per_kmol": [
+          23.6029,
+          23.6029,
+          23.6029,
+          23.6029
+        ],
+        "area_ratio": [
+          1.0,
+          10.0,
+          40.0001
+        ],
+        "cstar_m_per_s": [
+          1760.5,
+          1760.5,
+          1760.5
+        ],
+        "vacuum_velocity_m_per_s": [
+          2188.84,
+          3045.42,
+          3271.22
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.315211
+        ],
+        "CO2": [
+          0.15383
+        ],
+        "COOH": [
+          2.731e-05
+        ],
+        "H": [
+          0.026863
+        ],
+        "H2": [
+          0.079535
+        ],
+        "H2O": [
+          0.333292
+        ],
+        "H2O2": [
+          1.88e-05
+        ],
+        "HCHO,formaldehy": [
+          1.069e-06
+        ],
+        "HCO": [
+          3.536e-05
+        ],
+        "HCOOH": [
+          4.126e-06
+        ],
+        "HO2": [
+          0.0001139
+        ],
+        "O": [
+          0.011193
+        ],
+        "O2": [
+          0.017853
+        ],
+        "O3": [
+          1.32e-07
+        ],
+        "OH": [
+          0.062021
+        ]
+      }
+    },
+    "probe_anchor_temperature": {
+      "status": "COMPLETE",
+      "diagnostics": [],
+      "rows": {
+        "pressure_bar": [
+          100.0
+        ],
+        "temperature_k": [
+          3723.63
+        ],
+        "h_kj_per_kg": [
+          -784.206
+        ],
+        "molar_mass_kg_per_kmol": [
+          23.6029
+        ]
+      },
+      "mole_fractions": {
+        "CO": [
+          0.315211
+        ],
+        "CO2": [
+          0.15383
+        ],
+        "COOH": [
+          2.731e-05
+        ],
+        "H": [
+          0.026863
+        ],
+        "H2": [
+          0.079535
+        ],
+        "H2O": [
+          0.333292
+        ],
+        "H2O2": [
+          1.88e-05
+        ],
+        "HCHO,formaldehy": [
+          1.069e-06
+        ],
+        "HCO": [
+          3.536e-05
+        ],
+        "HCOOH": [
+          4.126e-06
+        ],
+        "HO2": [
+          0.0001139
+        ],
+        "O": [
+          0.011193
+        ],
+        "O2": [
+          0.017853
+        ],
+        "O3": [
+          1.32e-07
+        ],
+        "OH": [
+          0.062021
+        ]
+      }
+    }
+  },
+  "comparisons": [
+    {
+      "ratio": 1.0,
+      "restricted_temperature_k": 1621.29,
+      "expanded_temperature_k": 1594.84,
+      "delta_temperature_k": 26.450000000000045,
+      "expanded_extra_mole_fractions": {
+        "C2H2,acetylene": 1.15e-05,
+        "C2H4": 6.339e-05,
+        "C2H6": 1.314e-05,
+        "C3H6,propylene": 2.955e-07,
+        "CH2CO,ketene": 4.845e-06,
+        "CH3": 5.379e-06,
+        "CH3CHO,ethanal": 2.113e-07,
+        "CH3OH": 2.537e-07,
+        "HCHO,formaldehy": 9.022e-06,
+        "HCO": 1.727e-07,
+        "HCOOH": 4.14e-07,
+        "C(gr)": 0.058523
+      }
+    },
+    {
+      "ratio": 2.2,
+      "restricted_temperature_k": 3551.03,
+      "expanded_temperature_k": 3550.81,
+      "delta_temperature_k": 0.22000000000025466,
+      "expanded_extra_mole_fractions": {
+        "COOH": 1.845e-05,
+        "H2O2": 5.32e-06,
+        "HCHO,formaldehy": 2.271e-06,
+        "HCO": 4.503e-05,
+        "HCOOH": 4.682e-06,
+        "HO2": 1.929e-05
+      }
+    },
+    {
+      "ratio": 2.6,
+      "restricted_temperature_k": 3724.01,
+      "expanded_temperature_k": 3723.63,
+      "delta_temperature_k": 0.38000000000010914,
+      "expanded_extra_mole_fractions": {
+        "COOH": 2.731e-05,
+        "H2O2": 1.88e-05,
+        "HCHO,formaldehy": 1.069e-06,
+        "HCO": 3.536e-05,
+        "HCOOH": 4.126e-06,
+        "HO2": 0.0001139,
+        "O3": 1.32e-07
+      }
+    },
+    {
+      "ratio": 3.2,
+      "restricted_temperature_k": 3753.91,
+      "expanded_temperature_k": 3753.46,
+      "delta_temperature_k": 0.4499999999998181,
+      "expanded_extra_mole_fractions": {
+        "COOH": 2.756e-05,
+        "H2O2": 3.67e-05,
+        "HCHO,formaldehy": 4.14e-07,
+        "HCO": 1.949e-05,
+        "HCOOH": 2.921e-06,
+        "HO2": 0.0003167,
+        "O3": 1.029e-06
+      }
+    },
+    {
+      "ratio": 4.0,
+      "restricted_temperature_k": 3683.41,
+      "expanded_temperature_k": 3682.91,
+      "delta_temperature_k": 0.5,
+      "expanded_extra_mole_fractions": {
+        "COOH": 2.093e-05,
+        "H2O2": 4.741e-05,
+        "HCHO,formaldehy": 1.445e-07,
+        "HCO": 8.522e-06,
+        "HCOOH": 1.775e-06,
+        "HO2": 0.000512,
+        "O3": 3.043e-06
+      }
+    }
+  ],
+  "c_comparisons": [
+    {
+      "ratio": 0.5,
+      "status": "numeric_error"
+    },
+    {
+      "ratio": 1.0,
+      "status": "ok",
+      "temperature_delta_k": -0.0018932232260340243
+    },
+    {
+      "ratio": 2.2,
+      "status": "ok",
+      "temperature_delta_k": 0.0034316641090299527
+    },
+    {
+      "ratio": 2.6,
+      "status": "ok",
+      "temperature_delta_k": -0.0031953623893059557
+    },
+    {
+      "ratio": 3.2,
+      "status": "ok",
+      "temperature_delta_k": -0.0018966680763696786
+    },
+    {
+      "ratio": 4.0,
+      "status": "ok",
+      "temperature_delta_k": -0.003020223080966389
+    }
+  ],
+  "files": {
+    "c-build-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "c-build-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "c-build.json": "3df61426c0f94cdf6d00b155503183498f13e82960e1214a22380c9db6a58362",
+    "c-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "c-stdout.json": "782097e7fec3dabd6aada801347832940020f17145c9c762bf95670f7fd905b4",
+    "of_0_5_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_0_5_expanded-stdout.txt": "e1acd35ac880a272720b6a2b5cf02e8dfd48cca4c1f38fb2964ce4cb4f127915",
+    "of_0_5_expanded.inp": "17368cbf6cf0ec501669de35c47849b6afe164db64ef41178f0dac288b15732a",
+    "of_0_5_expanded.out": "91f250d0f47d0b9fedaf0830b54cc632a335fe48f4b5eec6a8e394ae319152a9",
+    "of_0_5_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_0_5_nine-gas-stdout.txt": "73505554b20e5c5496862301774251d070f86a84794ac8bf9847e2d2711e4839",
+    "of_0_5_nine-gas.inp": "3165f6a955e2d07d3f316c88ccb081646ca25c9382fe2bd175d1d6bcab2cb23a",
+    "of_0_5_nine-gas.out": "36bcbaab289886e2083bc29aaa60eaf561cea7f988a2a8eb58378d4c5bab76fe",
+    "of_1_0_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_1_0_expanded-stdout.txt": "fb092c656371eb6e68035ba30e7c830fe1d1f9d133c613777096250f7538ab4f",
+    "of_1_0_expanded.inp": "666795cc1b8ff9159147249d34948edb5e631c5cdc9c1e02a621cda126cf7887",
+    "of_1_0_expanded.out": "de3a65d2c46e00c4d4bdd6a539444c9b70986321031b3696bf49941468167270",
+    "of_1_0_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_1_0_nine-gas-stdout.txt": "006785b490f4b16aa610e24d482a60d8e06a1d5f20cb5173aff6d8ad59a0a22d",
+    "of_1_0_nine-gas.inp": "eca7f484f3b6f76957cee0ec4d619534d16179985de48e93c9d2ee44e2a4ab40",
+    "of_1_0_nine-gas.out": "0312c31af09e143ab5dc200417d0f69067f343e70825ac1efe4986940d2042de",
+    "of_2_2_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_2_2_expanded-stdout.txt": "9cfedab41e60442226c1813b4b11f410234abe30da3355159fe6657bd61c10bc",
+    "of_2_2_expanded.inp": "ebfa3f2099c486d4b643359271fb6b977cc556fa62e18baad888a39a3a51e3b4",
+    "of_2_2_expanded.out": "a3d8547ba039698cf26368b7a3fe60cc8502e67ae3bedc95a8b42e5a2d04f85b",
+    "of_2_2_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_2_2_nine-gas-stdout.txt": "5185bad0a012f4ba40ac955927d6f21bc63be9e40ee0ec1318b00e5dca16438a",
+    "of_2_2_nine-gas.inp": "6a1973985330ffce79d847a88106bb02c7015328d4843a8c83e0b4df6112b110",
+    "of_2_2_nine-gas.out": "661b48f84a3268f776f94f17b6794c5398a30668c2066a690ae09371ef245dcb",
+    "of_2_6_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_2_6_expanded-stdout.txt": "d635c973398a4da53d55671211757d1943f8783c3ac282bf04f93dcd00f17c62",
+    "of_2_6_expanded.inp": "dd3770febece2d762b4eb01479b62b1d35df6a379c4c26e15c87413f711ba662",
+    "of_2_6_expanded.out": "807ff8776f1d2fb1127c48aeb62e76e6abc232c547fea04b6c4c2a061d453b99",
+    "of_2_6_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_2_6_nine-gas-stdout.txt": "9b164df64c0d4ec043a32d821e91c21e25ec045ade8157a4a15db9e860960d99",
+    "of_2_6_nine-gas.inp": "d1a4895b4d88397b0fb70b05fdd35a751bdb500a0e2e372857e26b247f46db33",
+    "of_2_6_nine-gas.out": "a0ea8cc29532f2b12231822ef87b67e6cf3f0f5bfeacf1e3e46108508df63b63",
+    "of_3_2_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_3_2_expanded-stdout.txt": "90adcdf63740961966a04296d12dcea93592ae147117be84896c96135d8663d9",
+    "of_3_2_expanded.inp": "db7076e6adbbc4481ff9f0b7e03485fced13a5529528a8019ce8ee71a105921b",
+    "of_3_2_expanded.out": "a6cb091472c425e5956d1bd2aed6e4937d450a6d88745ef357c40e672f38ddb6",
+    "of_3_2_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_3_2_nine-gas-stdout.txt": "2ceb3c711af30492e803cf6d30196e2b73d6c0f44d5eb13d08eb60ec56395f9f",
+    "of_3_2_nine-gas.inp": "7deae0f1566f53542f7c3f47a8c77b2dff3b059c5f3cd3cef44742aa8e2b9eae",
+    "of_3_2_nine-gas.out": "2e575b7465fcd679f1d79788396e7a2bc747c7f08c440997cedfd16e94219126",
+    "of_4_0_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_4_0_expanded-stdout.txt": "214c0099ee087e431a1fa81d2bdb1058418831d522d497976799197213631dbc",
+    "of_4_0_expanded.inp": "248be55bf324151b3fc116ebdedef57e7a3aa715f1ddb16ba309e7941cd063e0",
+    "of_4_0_expanded.out": "4067772f4e9e8227de2f6fa45376653ddc10372f2e8ab98061f684559245ca2a",
+    "of_4_0_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "of_4_0_nine-gas-stdout.txt": "034222bb7f73af3228fc1633cc98a5bdc9b9432a071be34778e82b8cef71b848",
+    "of_4_0_nine-gas.inp": "992680b2683dca7c926754854b2aa143da612cb104cc37fdd1b8f3a01f8011db",
+    "of_4_0_nine-gas.out": "5f6160844ee35a154abc32952064304837e09ee28296c5814f0de6aeb5dfaf4a",
+    "probe_anchor_temperature-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "probe_anchor_temperature-stdout.txt": "f95c30b5ac5239ed7aabb01cbf0bd86313f10587cee383b9688bacc4381fcaa9",
+    "probe_anchor_temperature.inp": "121f09e3ecd5f5cdc7bf843cddac6262c9b1ea2fe47a1372f74702ab9bb7f147",
+    "probe_anchor_temperature.out": "2885bc77474cf2d0ddc329b64ed5c2b3fe2fae568291b0b1c85ddcd10e0256ae",
+    "rocket_expanded-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rocket_expanded-stdout.txt": "ddab1d0fba1bf0ebd2589b1d8748274ac614ce1bcb5848d3159c63982de49b06",
+    "rocket_expanded.inp": "9e984504952d7cdd4e526775596acbc5fa96177e8d77e13575d4780f1e60e77a",
+    "rocket_expanded.out": "3be751e79782183e73e2ea1e5c8c3fc1aa8623a913b995516dc2566997b47a4f",
+    "rocket_nine-gas-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "rocket_nine-gas-stdout.txt": "5e5fcba42bae046d943149df46759039d6e2242a0927df59a73f29c621716b8e",
+    "rocket_nine-gas.inp": "8506ab399c3562074d2dbb6525c3e1c69742257577260fa8c828f049bd76567a",
+    "rocket_nine-gas.out": "e432a83a9ea9031c3dc3f322fe60067b8a4c61bca9c35414006904ea3fee8cdd"
+  },
+  "finished_at": "2026-10-06T14:37:52+00:00"
+}

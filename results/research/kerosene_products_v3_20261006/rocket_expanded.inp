@@ -1,0 +1,6 @@
+problem case=rocket_expanded rocket frozen nfz=1 p,bar=100 o/f=2.6 supar=10,40
+reactants
+ fuel=RP-1 wt%=100 t,k=298.15
+ oxid=O2(L) wt%=100 t,k=90.170
+output siunits trace=1.e-7
+end

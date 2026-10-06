@@ -1,0 +1,6 @@
+problem case=of_1_0_expanded hp p,bar=100 o/f=1.0
+reactants
+ fuel=RP-1 wt%=100 t,k=298.15
+ oxid=O2(L) wt%=100 t,k=90.170
+output siunits trace=1.e-7
+end

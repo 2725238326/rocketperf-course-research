@@ -1,0 +1,531 @@
+{
+  "topic": "engineering-evidence-retry-20261006",
+  "retrieved_at": "2026-10-06T22:38:32.2174953+08:00",
+  "cutoff": "2026-10-06",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "prompt": "请实际联网检索两条原始资料：NIST AI 600-1 Generative AI Profile 与 GitHub Responsible use of GitHub Copilot code review。只给官方URL、发布日期或未注明日期、各一条具体工程风险（编造/过度信任、漏检/错误建议）与原文位置，约400字。不扩展，不写综述。\n",
+  "search_calls": [
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NIST AI 600-1 Generative AI Profile official",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+          },
+          {
+            "type": "url",
+            "url": "https://doi.org/10.6028/NIST.AI.600-1"
+          },
+          {
+            "type": "url",
+            "url": "https://aisigil.com/nist-ai-600-1/"
+          },
+          {
+            "type": "url",
+            "url": "https://downloads.regulations.gov/NIST-2024-0001-0216/attachment_1.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.modulos.ai/frameworks/nist-ai-rmf/generative-ai-profile"
+          },
+          {
+            "type": "url",
+            "url": "https://regulations.ai/regulations/RAI-US-NA-GENERAT-2024"
+          },
+          {
+            "type": "url",
+            "url": "https://downloads.regulations.gov/NIST-2024-0001-0015/attachment_1.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.aigl.blog/artificial-intelligence-risk-management-framework-generative-artificial-intelligence-profile/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.regulations.gov/comment/NIST-2024-0001-0015"
+          },
+          {
+            "type": "url",
+            "url": "https://downloads.regulations.gov/NIST-2024-0001-0195/attachment_1.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "GitHub Responsible use of GitHub Copilot code review official",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.github.com/apps/copilot-pull-request-reviewer"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/github/docs/blob/main/content/copilot/responsible-use/index.md"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250404214757/https:/docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://go.microsoft.com/fwlink/?linkid=2362028&clcid=0x409"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/tutorials/roll-out-at-scale/maintain-codebase-standards"
+          },
+          {
+            "type": "url",
+            "url": "https://github.blog/changelog/2026-09-23-copilot-code-review-more-ways-to-request-and-configure-reviews/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.blog/changelog/2025-12-17-copilot-code-review-now-available-for-organization-members-without-a-license/"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-copilot-code-review"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NIST AI 600-1 site:nist.gov",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/itl/comments-nist-ai-600-1-ai-rmf-generative-ai-profile"
+          },
+          {
+            "type": "url",
+            "url": "https://airc.nist.gov/technical-reports/"
+          },
+          {
+            "type": "url",
+            "url": "https://airc.nist.gov/documents/1/20250527-Crosswalk_NIST_600-1_IMDA_AI_Verify.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/ai-use-taxonomy-human-centered-approach"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"Responsible use of GitHub Copilot\" code review site:github.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/responsible-use/copilot-cli"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/use-copilot-code-review-across-the-pull-request-lifecycle"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/tutorials/roll-out-at-scale/maintain-codebase-standards"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "NIST.AI.600-1.pdf site:nist.gov",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+          },
+          {
+            "type": "url",
+            "url": "https://airc.nist.gov/technical-reports/"
+          },
+          {
+            "type": "url",
+            "url": "https://airc.nist.gov/documents/1/20250527-Crosswalk_NIST_600-1_IMDA_AI_Verify.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://ai-challenges.nist.gov/aria/docs/ARIA_Program_Companion_Document_Dec20.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"Responsible use of GitHub Copilot code review\" site:docs.github.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/use-copilot-code-review-across-the-pull-request-lifecycle"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/tutorials/roll-out-at-scale/maintain-codebase-standards"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/code-reviewer"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "docs.github.com copilot responsible-use code review",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/github/docs/blob/main/content/copilot/responsible-use/index.md"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/code-reviewer"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/review-code"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "nvlpubs.nist.gov NIST.AI.600-1",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.6028/NIST.AI.600-1"
+          },
+          {
+            "type": "url",
+            "url": "https://downloads.regulations.gov/NIST-2024-0001-0015/attachment_1.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://aisigil.com/nist-ai-600-1/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"Responsible use of GitHub Copilot code review\" docs.github.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250404214757/https:/docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/use-copilot-code-review-across-the-pull-request-lifecycle"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/code-reviewer"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:docs.github.com \"Responsible use of GitHub Copilot code review\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/use-copilot-code-review-across-the-pull-request-lifecycle"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/tutorials/roll-out-at-scale/maintain-codebase-standards"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/code-reviewer"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://doi.org/10.6028/NIST.AI.600-1"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-13",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://docs.github.com/en/copilot/responsible-use"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-14",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://docs.github.com/en/copilot/responsible-use/agents"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-15",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:docs.github.com \"Responsible use of GitHub Copilot code review\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/use-copilot-code-review-across-the-pull-request-lifecycle"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/copilot/tutorials/roll-out-at-scale/maintain-codebase-standards"
+          },
+          {
+            "type": "url",
+            "url": "https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/code-reviewer"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-16",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-17",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "find_in_page",
+        "url": "https://docs.github.com/en/copilot/responsible-use/agents",
+        "pattern": "limitation|not guaranteed|mistakes|hallucination|spot all|validate|human review|false"
+      }
+    },
+    {
+      "id": "ws_339ad585-fdad-917e-b2ce-394288e8907c_call-b20c14a1-4b17-4b43-bdfc-d13b4bd32da6-18",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://docs.github.com/en/copilot/responsible-use/agents"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**NIST AI 600-1**  \n官方URL：https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf （DOI：https://doi.org/10.6028/NIST.AI.600-1 ；NIST页面：https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence）[[1]](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence)  \n发布日期：2024年7月26日（编辑委员会批准2024-07-25）。[[2]](https://doi.org/10.6028/NIST.AI.600-1)  \n工程风险（编造/过度信任）：Confabulation（幻觉/编造）及Human-AI Configuration中的过度依赖。  \n原文位置：第2节“Overview of Risks Unique to or Exacerbated by GAI”，条目2（TOC标为p.6）及条目7。  \n支持片段：“2. Confabulation: The production of confidently stated but erroneous or false content (known colloquially as “hallucinations” or “fabrications”) by which users may be misled or deceived.”“7. Human-AI Configuration: Arrangements of or interactions between a human and an AI system which can result in the human ... experiencing ... automation bias, over-reliance...”[[3]](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)\n\n**GitHub Responsible use of GitHub Copilot code review**  \n官方URL：https://docs.github.com/en/copilot/responsible-use/agents （覆盖Copilot code review的Application card；相关使用页https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-code-review）  \n发布日期：未注明日期（持续更新文档）。  \n工程风险（漏检/错误建议）：漏检问题及幻觉/错误建议。  \n原文位置：第7节 Limitations。  \n支持片段：“Missed code quality problems: Copilot may not identify all of the problems that are present in code, especially where changes are large or complex. To ensure that all relevant problems are identified and corrected, Copilot code review should be supplemented with careful human code review.”“False positives: Copilot code review has a risk of hallucination—it may highlight problems in reviewed code that do not exist or are based on misunderstandings of the code.”“Inaccurate or insecure code suggestions: ... The code generated may appear to be valid but may not actually be semantically or syntactically correct...” “Use Copilot code review to supplement human reviews, not to replace them.”[[4]](https://docs.github.com/en/copilot/responsible-use/agents)\n\n（约380字，仅原始官方资料，未扩展。）",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+              "start_index": 251,
+              "end_index": 376,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://doi.org/10.6028/NIST.AI.600-1",
+              "start_index": 414,
+              "end_index": 458,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+              "start_index": 980,
+              "end_index": 1041,
+              "title": "3"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://docs.github.com/en/copilot/responsible-use/agents",
+              "start_index": 2067,
+              "end_index": 2131,
+              "title": "4"
+            }
+          ]
+        }
+      ],
+      "id": "msg_339ad585-fdad-917e-b2ce-394288e8907c",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 214188,
+    "input_tokens_details": {
+      "cached_tokens": 157952
+    },
+    "output_tokens": 3275,
+    "output_tokens_details": {
+      "reasoning_tokens": 2109
+    },
+    "total_tokens": 217463,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 19,
+    "cost_in_usd_ticks": 2385466400,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 19,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 55936,
+      "output_tokens": 1460
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

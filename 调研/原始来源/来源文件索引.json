@@ -706,5 +706,32 @@
     "bytes": 5116073,
     "saved_at": "2026-10-05T07:33:04.896766+00:00",
     "sha256": "9475a1e69c8e0703ab6dab640eff32ce3cbc276331b19b3133e7d96e64b2ba5f"
+  },
+  {
+    "id": "E01_nist_gai_profile_20261006",
+    "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+    "available": true,
+    "file": "E01_nist_gai_profile_20261006.txt",
+    "bytes": 83897,
+    "saved_at": "2026-10-06T14:40:13.574394+00:00",
+    "sha256": "daf34f853a722508903823e1b90306cf66f212de9fccdd088e518ac75b65f3f9"
+  },
+  {
+    "id": "E02_github_review_20261006",
+    "url": "https://docs.github.com/en/copilot/responsible-use/agents",
+    "available": true,
+    "file": "E02_github_review_20261006.txt",
+    "bytes": 785081,
+    "saved_at": "2026-10-06T14:40:13.928503+00:00",
+    "sha256": "8e6e85b08b6e2f28fecc8bc4e36b1a259b03a8b501f612672f8d5aa9c378e024"
+  },
+  {
+    "id": "E03_nist_gai_pdf_20261006",
+    "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+    "available": true,
+    "file": "20261006_engineering/NIST.AI.600-1.pdf",
+    "bytes": 1174643,
+    "saved_at": "2026-10-06T14:44:49.864598+00:00",
+    "sha256": "6e73620ab6b64e90ef2c04bf0e0d6246185a2f4b1b13cab0df494496cff89b6a"
   }
 ]

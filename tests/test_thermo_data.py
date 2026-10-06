@@ -19,10 +19,46 @@ import liquid_anchor
 import liquid_feed
 import liquid_table
 import liquid_combustion
+import kerosene_reference
 from projectlib import read_json, atomic_json, digest
 
 
 class ThermoDataTests(unittest.TestCase):
+    def test_kerosene_reference_records_product_boundaries_and_c_results(self):
+        folder = ROOT/'results/research/kerosene_products_v3_20261006'
+        self.assertEqual(kerosene_reference.verify(folder), 15)
+        record = read_json(folder/'manifest.json')
+        self.assertEqual(record['summaries']['of_0_5_nine-gas']['status'], 'REJECTED')
+        self.assertAlmostEqual(record['summaries']['of_1_0_expanded']['mole_fractions']['C(gr)'][0], .058523)
+        self.assertEqual(record['summaries']['probe_anchor_temperature']['rows'],
+                         record['summaries']['of_2_6_expanded']['rows'])
+
+    def test_kerosene_false_success_and_changed_reference_are_rejected(self):
+        source = ROOT/'results/research/kerosene_products_v3_20261006'
+        for defect in ('temperature', 'nozzle', 'failed_status', 'recipe', 'warning', 'schema'):
+            with self.subTest(defect=defect), tempfile.TemporaryDirectory(dir=ROOT/'build') as temp:
+                folder = Path(temp)/'archive'
+                shutil.copytree(source, folder)
+                record = read_json(folder/'manifest.json')
+                if defect in ('temperature', 'nozzle', 'failed_status'):
+                    filename = 'c-stdout.json'
+                    report = read_json(folder/filename)
+                    if defect == 'temperature': report['points'][1]['temperature_k'] += 1
+                    elif defect == 'nozzle': report['points'][3]['nozzles'] = []
+                    else: report['points'][0]['status'] = 'out_of_domain'
+                    atomic_json(folder/filename, report)
+                    record['files'][filename] = digest(folder/filename)
+                elif defect == 'recipe': record['recipes'][0]['ratio'] = True
+                elif defect == 'schema': record['schema_version'] = True
+                else:
+                    filename = 'of_2_6_expanded-stdout.txt'
+                    with (folder/filename).open('a', encoding='utf-8') as stream:
+                        stream.write('WARNING: invalid result\n')
+                    record['files'][filename] = digest(folder/filename)
+                atomic_json(folder/'manifest.json', record)
+                with self.assertRaises(ValueError):
+                    kerosene_reference.verify(folder)
+
     def test_continuous_liquid_archive_and_explicit_enthalpy_cards(self):
         self.assertEqual(len(liquid_combustion.recipes()),47)
         self.assertEqual(len(liquid_combustion.cea_recipes()),18)

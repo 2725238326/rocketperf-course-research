@@ -41,6 +41,9 @@
     {"path":"docs/liquid-combustion-validation.md","role":"连续液体入口焓/元素库存到HP与固定面积喷管的C/CEA运行、守恒与边界","owner":"thermo"},
     {"path":"调研/专题/RES-007_连续液体基准.md","role":"固定HEOS离线参考、同源系数独立复算、理想比热差和插值误差","owner":"thermo"},
     {"path":"调研/专题/RES-006_液态与煤油入口.md","role":"固定液态反应物/EOS/煤油surrogate候选、焓基准与后续C实现边界","owner":"thermo"},
+    {"path":"调研/专题/RES-008_煤油计算边界.md","role":"固定RP-1产物集合比较、C研究驱动和煤油输入边界","owner":"thermo"},
+    {"path":"调研/专题/工程内容审查_20261006.md","role":"生成内容风险的来源核验和项目修改审查规则","owner":"tooling"},
+    {"path":"docs/maintenance-audit.md","role":"文档维护职责和已修正的重复、过时与术语问题","owner":"tooling"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]
 }

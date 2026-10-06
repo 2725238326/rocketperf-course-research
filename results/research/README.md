@@ -1,5 +1,15 @@
 # 研究计算档案
 
+## 2026-10-06 固定RP-1产物比较
+
+[kerosene_products_v3_20261006](kerosene_products_v3_20261006/manifest.json)保存15张新CEA输入/输出及日志，6个C燃烧室点（5成功、1数值失败）和O/F=2.6的两套固定面积喷管。固定10 MPa，RP-1/O₂(L)指定焓；比较九气相与扩展中性产物，保留富燃料凝聚碳和温度探查行为。方法边界见[RES-008](../../调研/专题/RES-008_煤油计算边界.md)。
+
+```powershell
+python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
+```
+
+研究驱动严格编译C17，生产内核未新增燃料接口；Python只编排和复算。C构建清单记录驱动/核心输入哈希，运行时HEAD为此前提交，后续提交固定本批次源码；不能把此前HEAD单独当作驱动身份。中间失败/纯CEA尝试保存在build，不作为正式研究版本。
+
 只保存选定且可复验的研究版本；试跑在`results/local/`，构建/临时文件在`build/`。原始课件、资料与固定参考不移到这里。每个版本保留输入、stdout/stderr、结果、构建/测试/运行清单和哈希；不携带重复exe。
 
 ## 2026-10-04 给定热状态扫描

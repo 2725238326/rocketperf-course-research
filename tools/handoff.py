@@ -14,7 +14,7 @@ import uuid
 from pipeline import test_records, verify_test_report, verified_build
 from projectlib import QUALITY_CHECKS, ROOT, atomic_json, atomic_text, canonical, digest, git, local_path, now, read_json, subprocess_env
 
-HANDOFF_VERSION = 2
+HANDOFF_VERSION = 3
 BASE_FILES = ('README.md', 'AGENTS.md', 'rules.md', 'handoff.md', 'worknow.md',
               'docs/governance.md', 'docs/receiving.md', 'docs/cycle-validation.md')
 FILES = BASE_FILES + ('project/tasks.json',)
@@ -111,7 +111,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         source_bundle='source.bundle'
         subprocess.run(['git','bundle','create',str(destination/source_bundle),'HEAD',git(root,'branch','--show-current').stdout.strip()],
                        cwd=root,capture_output=True,encoding='utf-8',errors='replace',timeout=120,check=True)
-    smoke=[]
+    checks=[]
     for label,arguments,expected_exit in (
         ('cycle',['cycle','prescribed','cases/benchmarks/prescribed_cycle.ini'],0),
         ('domain-rejection',['run','tests/fixtures/overexpanded.ini'],4)):
@@ -120,7 +120,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         run=subprocess.run([str(destination/source_binary.name),*arguments],cwd=destination,
                            capture_output=True,encoding='utf-8',errors='strict',env=clean_env,timeout=15)
         if run.returncode != expected_exit or (expected_exit == 0 and run.stderr) or (expected_exit != 0 and (run.stdout or not run.stderr)):
-            raise ValueError('Handoff smoke test failed: '+label)
+            raise ValueError('Handoff receiving check failed: '+label)
         if label == 'cycle':
             from cycle_validation import validate_cycle
             from projectlib import strict_json
@@ -128,14 +128,14 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         else: count=0
         atomic_text(destination/(label+'-stdout.json'),run.stdout)
         atomic_text(destination/(label+'-stderr.txt'),run.stderr)
-        smoke.append({'id':label,'command':[source_binary.name,*arguments],'exit_code':run.returncode,'checks':count})
+        checks.append({'id':label,'command':[source_binary.name,*arguments],'exit_code':run.returncode,'checks':count})
     atomic_text(destination/'START-HERE.md', '\n'.join([
         '# Windows 阶段交接包', '',
         '这是研究方法和软件基底的阶段交接，不是最终课程交付或真实发动机性能认证。', '',
         '先在本目录核验：`python tools/handoff.py verify --package .`。',
         '演示成功：`./rocketperf.exe cycle prescribed cases/benchmarks/prescribed_cycle.ini`。',
         '演示预期失败：`./rocketperf.exe run tests/fixtures/overexpanded.ini`（退出码 4）。',
-        'smoke 输出是在隔离 PATH、包自身目录里运行并核验的结果，仍需接手者在另一台 Windows 机器复验。', '',
+        '接收检查输出是在隔离 PATH、包自身目录里运行并核验的结果，仍需接手者在另一台 Windows 机器复验。', '',
         '维护代码：`git clone source.bundle rocketperf-source`，进入源码目录后按 docs/receiving.md 重建、验收。',
         '包内 doctor/quality 等源码工作区命令，应在克隆的源码目录运行；此运行包不是源码工作区。',
         '完整源码/原始资料/历史/许可在 source.bundle；文档的外部项目内链接在克隆后使用。',
@@ -151,7 +151,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
         'tracked_inputs': test_records(root),
         'next_task': select_next_task(read_json(destination/'project/tasks.json')),
         'source_bundle':source_bundle,'source_fingerprint':quality['input_fingerprint'] if quality else None,
-        'test_fixture':fixture,'windows_imports':imports,'smoke_tests':smoke,
+        'test_fixture':fixture,'windows_imports':imports,'checks':checks,
         'scope': 'Windows handoff for code, tests, and the prescribed thermal cycle boundary; not a flight-engine claim.',
     }
     if read_json(destination/'build-manifest.json') != build or read_json(destination/'test-report.json') != tests or digest(destination/source_binary.name) != build['application']['sha256']:
@@ -180,7 +180,7 @@ def _populate(root,destination,configuration,build_path,build,tests,fixture,qual
 def verify(package):
     package = Path(package).resolve()
     record = read_json(package / 'handoff-manifest.json')
-    if (not isinstance(record,dict) or type(record.get('schema_version')) is not int or record['schema_version'] not in {1, HANDOFF_VERSION}
+    if (not isinstance(record,dict) or type(record.get('schema_version')) is not int or record['schema_version'] not in {1, 2, HANDOFF_VERSION}
         or type(record.get('test_fixture')) is not bool or record.get('kind') != 'windows-project-handoff' or record.get('status') != 'PASS'):
         raise ValueError('Invalid handoff manifest')
     binary=record.get('binary')
@@ -198,7 +198,7 @@ def verify(package):
         or len({f['path'] for f in files}) != len(files)):
         raise ValueError('Invalid handoff files')
     declared={f['path'] for f in files}
-    required=set(FILES if record['schema_version'] == HANDOFF_VERSION else BASE_FILES)|{'START-HERE.md','VERIFY.txt','tools/handoff.py','tools/pipeline.py','tools/projectlib.py',
+    required=set(FILES if record['schema_version'] in {2, HANDOFF_VERSION} else BASE_FILES)|{'START-HERE.md','VERIFY.txt','tools/handoff.py','tools/pipeline.py','tools/projectlib.py',
                          'tools/cycle_validation.py','tools/gas_checks.py','data/thermo/manifest.json',
                          'build-manifest.json','test-report.json','cases/benchmarks/prescribed_cycle.ini',
                          'tests/fixtures/overexpanded.ini','cases/benchmarks/air_mach2_vacuum.ini',binary['path'],
@@ -211,7 +211,7 @@ def verify(package):
     if actual != declared: raise ValueError('Handoff has undeclared or missing files')
     for item in files:
         if digest(local_path(package,item['path'])) != item['sha256']: raise ValueError('Handoff file hash mismatch: '+item['path'])
-    if record['schema_version'] == HANDOFF_VERSION:
+    if record['schema_version'] in {2, HANDOFF_VERSION}:
         expected_next = select_next_task(read_json(package/'project/tasks.json'))
         if 'next_task' not in record or canonical(record['next_task']) != canonical(expected_next):
             raise ValueError('Handoff next task differs from the saved work context')
@@ -247,22 +247,25 @@ def verify(package):
         identities=dict(line.split(' ',1)[::-1] for line in heads)
         if identities.get('HEAD') != record['project_head'] or identities.get('refs/heads/'+record['branch']) != record['project_head']:
             raise ValueError('Source bundle does not match handoff commit/branch')
-    smoke=record.get('smoke_tests')
-    if (not isinstance(smoke,list) or len(smoke) != 2 or any(not isinstance(s,dict) for s in smoke)
-        or {s.get('id') for s in smoke} != {'cycle','domain-rejection'}):
-        raise ValueError('Missing handoff smoke evidence')
+    field = 'checks' if record['schema_version'] == HANDOFF_VERSION else 'smoke_tests'
+    if ('checks' in record) == ('smoke_tests' in record):
+        raise ValueError('Ambiguous or missing receiving checks field')
+    checks = record.get(field)
+    if (not isinstance(checks,list) or len(checks) != 2 or any(not isinstance(s,dict) for s in checks)
+        or {s.get('id') for s in checks} != {'cycle','domain-rejection'}):
+        raise ValueError('Missing handoff receiving checks')
     cycle=read_json(package/'cycle-stdout.json')
     from cycle_validation import validate_cycle
     equations=validate_cycle(cycle,(package/'cases/benchmarks/prescribed_cycle.ini').read_text(encoding='utf-8-sig'),root=package)
     expected={'cycle':(0,len(equations)),'domain-rejection':(4,0)}
     commands={'cycle':[binary['path'],'cycle','prescribed','cases/benchmarks/prescribed_cycle.ini'],
               'domain-rejection':[binary['path'],'run','tests/fixtures/overexpanded.ini']}
-    for item in smoke:
+    for item in checks:
         if (type(item.get('exit_code')) is not int or type(item.get('checks')) is not int
             or (item['exit_code'],item['checks']) != expected[item['id']]
-            or item.get('command') != commands[item['id']]): raise ValueError('Invalid smoke result')
+            or item.get('command') != commands[item['id']]): raise ValueError('Invalid receiving check result')
     if (package/'cycle-stderr.txt').stat().st_size or (package/'domain-rejection-stdout.json').stat().st_size or not (package/'domain-rejection-stderr.txt').read_text(encoding='utf-8').strip():
-        raise ValueError('Invalid smoke output protocol')
+        raise ValueError('Invalid receiving check output protocol')
     return record
 
 

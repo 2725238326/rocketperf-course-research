@@ -17,7 +17,7 @@ class HandoffTests(unittest.TestCase):
             package = handoff.create(ROOT, Path(folder) / 'package', 'Release', fixture=True)
             record = handoff.verify(package)
             self.assertEqual(record['status'], 'PASS')
-            self.assertEqual(record['schema_version'], 2)
+            self.assertEqual(record['schema_version'], 3)
             self.assertEqual(record['next_task'], handoff.select_next_task(
                 handoff.read_json(package/'project/tasks.json')))
             self.assertTrue((package / 'VERIFY.txt').is_file())
@@ -73,10 +73,25 @@ class HandoffTests(unittest.TestCase):
             package = handoff.create(ROOT, Path(folder)/'package', 'Release', fixture=True)
             record = handoff.read_json(package/'handoff-manifest.json')
             record['schema_version'] = 1
+            record['smoke_tests'] = record.pop('checks')
             record['files'] = [item for item in record['files'] if item['path'] != 'project/tasks.json']
             (package/'project/tasks.json').unlink()
             handoff.atomic_json(package/'handoff-manifest.json', record)
             self.assertEqual(handoff.verify(package)['schema_version'], 1)
+
+    def test_legacy_v2_and_checks_field_version_are_validated(self):
+        with tempfile.TemporaryDirectory(prefix='handoff-', dir=ROOT/'build/test-tmp') as folder:
+            package = handoff.create(ROOT, Path(folder)/'package', 'Release', fixture=True)
+            original = handoff.read_json(package/'handoff-manifest.json')
+            legacy = dict(original, schema_version=2)
+            legacy['smoke_tests'] = legacy.pop('checks')
+            handoff.atomic_json(package/'handoff-manifest.json', legacy)
+            self.assertEqual(handoff.verify(package)['schema_version'], 2)
+            for bad in (dict(original, smoke_tests=original['checks']),
+                        dict(legacy, schema_version=3), dict(original, schema_version=2)):
+                handoff.atomic_json(package/'handoff-manifest.json', bad)
+                with self.assertRaises(ValueError):
+                    handoff.verify(package)
 
     def test_modified_binary_is_rejected(self):
         with tempfile.TemporaryDirectory(prefix='handoff-', dir=ROOT / 'build/test-tmp') as folder:
@@ -108,11 +123,11 @@ class HandoffTests(unittest.TestCase):
         with mock.patch.object(handoff,'git',return_value=mock.Mock(stdout=' M example.py')):
             with self.assertRaisesRegex(ValueError,'Commit reviewed'): handoff.create(ROOT)
 
-    def test_malformed_identity_and_smoke_are_rejected(self):
+    def test_malformed_identity_and_receiving_checks_are_rejected(self):
         with tempfile.TemporaryDirectory(prefix='handoff-',dir=ROOT/'build/test-tmp') as folder:
             package=handoff.create(ROOT,Path(folder)/'package','Release',fixture=True)
             record=handoff.read_json(package/'handoff-manifest.json')
-            for field,value in (('binary',None),('project_head',True),('smoke_tests',[None,None])):
+            for field,value in (('binary',None),('project_head',True),('checks',[None,None])):
                 with self.subTest(field=field):
                     changed=dict(record);changed[field]=value
                     handoff.atomic_json(package/'handoff-manifest.json',changed)
