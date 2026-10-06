@@ -1,6 +1,6 @@
 # 阶段交接与验收
 
-本文件给下一位维护者和讲解者使用。它把“程序能复跑”“证据完整”和“模型结论成立”分开，不把机械 PASS 说成科学结论。
+本文件给下一位维护者和讲解者使用。“程序能复跑”“证据完整”和“模型结论成立”分开核对，机械 PASS 不说成科学结论。
 
 当前交接的是 A、B 两部分的方法与工程基础，不是最终报告、PPT或真实发动机参数闭合。完整课程交付仍按 REL-001 的前置任务推进。
 
@@ -82,7 +82,7 @@ python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
 python tools/handoff.py receive --package . --actor 张同学 --role maintenance --output ../张同学-接收记录.json
 ```
 
-角色参数可为 `maintenance`、`research`、`presentation` 或 `acceptance`。记录包含版本、包清单哈希、姓名、职责和实际成功/失败复跑。它不自动确认论文来源或模型结论；研究负责人另写“确认内容、未确认内容、原因、下一动作”。
+角色参数可为 `maintenance`、`research`、`presentation` 或 `acceptance`。记录包含版本、包清单哈希、姓名、职责和实际成功/失败复跑；论文来源或模型结论不由记录自动确认，研究负责人另写“确认内容、未确认内容、原因、下一动作”。
 
 文件哈希用于发现传输损坏和版本混杂，不是签名或防伪认证。交出方应通过可信对接渠道提供包清单 SHA256；接收者不能只相信包内自带的哈希。测试包会标注 `test_fixture=true`，不能作为正式交付。
 

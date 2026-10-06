@@ -1,6 +1,6 @@
 # 成对推进剂算例文件
 
-文件命令：`rocketperf study propellants --case CASE.ini`。它把成对比较需要的共同压力、喉面积、面积比、背压和两种方法的混合比存成一份严格输入，交接时不必逐个传参数。
+文件命令：`rocketperf study propellants --case CASE.ini`，把成对比较需要的共同压力、喉面积、面积比、背压和两种方法的混合比存成一份严格输入，交接时不必逐个传参数。
 
 ## 字段
 

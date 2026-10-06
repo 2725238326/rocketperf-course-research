@@ -9,7 +9,7 @@ python tools/pipeline.py test --configuration Release
 ./build/release/rocketperf.exe thermo H2O 300
 ~~~
 
-查询返回质量基 cp、h、s，单位分别为 J/(kg·K)、J/kg、J/(kg·K)，并注明数据库和 100000 Pa 标准压力。它不是燃烧温度、比冲或实际压力下的混合物熵。
+查询返回质量基 cp、h、s，单位分别为 J/(kg·K)、J/kg、J/(kg·K)，并注明数据库和 100000 Pa 标准压力；返回值不是燃烧温度、比冲或实际压力下的混合物熵。
 
 - 接口：[thermo.h](../include/rocketperf/thermo.h)，失败不覆盖结果。
 - 计算：[nasa9.c](../src/thermo/nasa9.c)；只读查询：[database.c](../src/thermo/database.c)。核心无 Python、文件或网络依赖。
