@@ -42,6 +42,8 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 ## 交给其他组员
 
+此次私有GitHub阶段交付的源码包、运行包与详细解读见[交付说明](docs/delivery.md)和[项目解读](docs/project-guide.md)。用户已明确授权本次远端同步和Release；日常工作仍不默认推送。压缩包固定一个干净提交，源码重建和exe运行记录随交付保留。
+
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 
 近期批次：[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。

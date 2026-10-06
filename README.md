@@ -4,6 +4,8 @@
 
 [打开作业对接与架构图](docs/architecture/index.html) · [当前工作](worknow.md) · [任务板](docs/tasks.md) · [治理规范](docs/governance.md)
 
+接收与讲解先读[项目详细解读](docs/project-guide.md)。纯C源码和Windows运行包通过[私有GitHub阶段Releases](https://github.com/2725238326/rocketperf-course-research/releases)交付；包的范围、编译/运行和核验见[交付说明](docs/delivery.md)。源码包不含Python/Fortran程序，完整仓库保留开发工具与研究证据。
+
 先看[两型四级段：证据与计算落点](docs/two-vehicle-study.md)：公开工作方案、已有C结果和不可计算项分别列出。其[数据映射](data/parameters/assignment_case_map.json)可检查角色、版本/级段和方法引用，不是型号求解输入，也不证明原文科学语义。
 
 交给其他同学时先看[阶段交接与接收验收](docs/receiving.md)。干净提交和完整质量通过后，`python tools/handoff.py create --destination build/handoff-NEW-ID`生成本地运行包与离线源码bundle；不依赖远端已推送，不等同于最终课程发布。

@@ -7,9 +7,38 @@ from unittest import mock
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 import handoff
+import delivery
+import zipfile
 
 
 class HandoffTests(unittest.TestCase):
+    def test_delivery_zip_hash_scope_and_unsafe_members(self):
+        required = {'README.md', 'docs/project-guide.md', 'third_party/cea/LICENSE.txt',
+                    'third_party/cea/NOTICE.txt', 'third_party/coolprop/LICENSE.txt',
+                    'CMakeLists.txt', 'project/modules.json', 'src/cli/main.c'}
+        files = {name: b'fixture' for name in required}
+        head = 'a'*40
+        with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
+            path = Path(folder)/'source.zip'
+            delivery.write_zip(path, 'c-source', head, files)
+            self.assertEqual(delivery.inspect_zip(path, 'c-source', head)['source_head'], head)
+            for name in ('../escape', '/absolute', 'C:/drive', 'dir\\file', 'a//b'):
+                with self.subTest(path=name), self.assertRaises(ValueError):
+                    delivery.safe_member(name)
+            for field, value in (('kind', 'windows-x64'), ('source_head', 'b'*40)):
+                with self.subTest(field=field), self.assertRaises(ValueError):
+                    delivery.inspect_zip(path, value if field == 'kind' else 'c-source', value if field == 'source_head' else head)
+            with self.assertRaises(ValueError):
+                delivery.write_zip(Path(folder)/'bad.zip', 'c-source', head, dict(files, **{'tools/solver.py':b'fixture'}))
+            with zipfile.ZipFile(path) as original:
+                copied = {name: original.read(name) for name in original.namelist()}
+            copied['src/cli/main.c'] = b'changed'
+            broken = Path(folder)/'changed.zip'
+            with zipfile.ZipFile(broken, 'w') as archive:
+                for name, data in copied.items(): archive.writestr(name, data)
+            with self.assertRaisesRegex(ValueError, 'hash'):
+                delivery.inspect_zip(broken, 'c-source', head)
+
     def setUp(self): (ROOT/'build/test-tmp').mkdir(parents=True,exist_ok=True)
 
     def test_handoff_manifest_is_verifiable(self):

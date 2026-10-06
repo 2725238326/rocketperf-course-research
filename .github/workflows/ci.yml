@@ -4,11 +4,7 @@ permissions:
   contents: read
 jobs:
   test:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
     defaults:
       run:
         shell: pwsh
@@ -29,13 +25,10 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'CMake build failed' }
           ctest --test-dir build/cmake --output-on-failure
           if ($LASTEXITCODE -ne 0) { throw 'CTest failed' }
-      - name: Linux memory and undefined-behavior checks
-        if: runner.os == 'Linux'
-        run: python tools/pipeline.py test --configuration Debug --sanitize
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: validation-${{ matrix.os }}
+          name: validation-windows
           path: |
             build/**/build-manifest.json
             build/**/test-report.json

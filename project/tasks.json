@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 248,
+  "revision": 250,
   "context": {
     "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
     "evidence_cutoff": "2026-10-06",
@@ -1139,6 +1139,30 @@
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "REL-002",
+      "title": "私有GitHub阶段交付与纯C打包",
+      "status": "ACTIVE",
+      "priority": 1,
+      "depends_on": [
+        "MOD-004",
+        "RES-009"
+      ],
+      "required_artifacts": [
+        "docs/project-guide.md",
+        "docs/delivery.md",
+        "tools/delivery.py",
+        "taskshot/2026-10-07_043-delivery.md"
+      ],
+      "acceptance": [
+        "纯C源码包可独立CMake编译并运行五个C测试，不依赖Python/Fortran物理运行链，第三方数据许可和固定来源随包",
+        "Windows运行包固定已测二进制、成功拒绝演示、SHA256和提交身份，压缩包与重建结果验证留存",
+        "项目解读解释作业对应、模块算法、输入单位、结果验证、参数限制和接手修改路径，GitHub私有默认分支与阶段Release对应当前固定提交"
+      ],
+      "owner": "root",
+      "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
       "verification": null
     }
   ],
@@ -6353,6 +6377,30 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "4e91c10d2a9ee1c6630c2a79ed987d67e4ae2494c91db436b7db8de067c08a25",
       "hash": "cb8687d2489af012ff741042ceaf9818a610f727f06ce20315070b6e40d8bf23"
+    },
+    {
+      "seq": 266,
+      "at": "2026-10-06T16:10:50+00:00",
+      "task": "REL-002",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "cb8687d2489af012ff741042ceaf9818a610f727f06ce20315070b6e40d8bf23",
+      "hash": "07041f08c79ad2866f9415dab46d48fb25aa39ffecc64e80e49783ac11ef9476"
+    },
+    {
+      "seq": 267,
+      "at": "2026-10-06T16:10:50+00:00",
+      "task": "REL-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
+      "previous_hash": "07041f08c79ad2866f9415dab46d48fb25aa39ffecc64e80e49783ac11ef9476",
+      "hash": "b1edfd154fbcf60c7177ae96699dfccb32dc090336397e2d0afa772f21b97040"
     }
   ]
 }

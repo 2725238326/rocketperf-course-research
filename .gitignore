@@ -11,3 +11,7 @@ __pycache__/
 /build/
 /results/local/
 /project/.locks/
+# Release archives are GitHub assets; only their maintained instructions belong in Git.
+/deliverables/*.zip
+/deliverables/*.exe
+/deliverables/*.bundle

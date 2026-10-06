@@ -46,6 +46,9 @@
     {"path":"docs/maintenance-audit.md","role":"文档维护职责和已修正的重复、过时与术语问题","owner":"tooling"},
     {"path":"调研/专题/RES-009_组员参数审阅.md","role":"组员来源与参数的对象、版本、用途审阅","owner":"tooling"},
     {"path":"docs/kerosene-validation.md","role":"纯C固定RP-1公共入口、参考覆盖和适用边界","owner":"thermo"},
+    {"path":"docs/project-guide.md","role":"组员和接收者的详细研究、程序、验证与维护解读","owner":"tooling"},
+    {"path":"docs/delivery.md","role":"私有GitHub阶段发布、纯C与Windows包的生成/核验规范","owner":"tooling"},
+    {"path":"deliverables/README.md","role":"下载交付包和查看详细解读的入口","owner":"tooling"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]
 }

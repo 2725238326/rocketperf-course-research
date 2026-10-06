@@ -2,7 +2,7 @@
 
 当前C算法按热力关系独立实现，没有复制或链接NASA CEA、RocketCycles、Pyskyfire、Cantera或CoolProp求解代码。NASA9固定系数、CEA反应物记录以及HEOS离线派生查表属于数据依赖，各自保留来源/许可；不能把“无求解库链接”说成“完全没有第三方内容”。运行依赖C运行库/数学库；Python用于工程、校核和归档。
 
-ANA-008的`src/thermo/reactants_generated.h`同样是CEA v3.3.4固定数据提取，含两条指定温度反应物化学焓/分子量/元素式，不是CEA算法移植。来源SHA256与位置见[液态方法](../docs/liquid-anchor-validation.md)和RES-006；上游LICENSE/NOTICE仍保留并随源码交接，不以生成C常量免除数据许可追踪。
+`src/thermo/reactants_generated.h`同样是CEA v3.3.4固定数据提取，现含CH4(L)、O2(L)、RP-1三条指定温度反应物记录。来源见[甲烷锚点](../docs/liquid-anchor-validation.md)及[RP-1核验](../docs/kerosene-validation.md)；CEA LICENSE/NOTICE和CoolProp MIT随纯C源码/运行包保留，数据生成并不免除许可追踪。
 
 后续移植外部模块时，必须记录仓库/原文件、固定commit、许可证、保留声明、修改范围、底层依赖及验证案例。不同许可不能通过改写语言消除。
 

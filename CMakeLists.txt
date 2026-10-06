@@ -45,6 +45,7 @@ if(MINGW)
 endif()
 
 include(CTest)
+option(ROCKETPERF_ENABLE_PYTHON_TESTS "Enable optional Python CLI tests" ON)
 if(BUILD_TESTING)
     add_executable(test_core tests/test_core.c)
     target_link_libraries(test_core PRIVATE rocketperf_core)
@@ -62,11 +63,13 @@ if(BUILD_TESTING)
     target_include_directories(test_adapters PRIVATE src/adapters)
     target_link_libraries(test_adapters PRIVATE rocketperf_core)
     add_test(NAME adapters COMMAND test_adapters)
-    find_package(Python3 COMPONENTS Interpreter QUIET)
-    if(Python3_Interpreter_FOUND)
-        add_test(NAME cli COMMAND "${Python3_EXECUTABLE}"
-            "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cli.py"
-            --binary "$<TARGET_FILE:rocketperf>")
+    if(ROCKETPERF_ENABLE_PYTHON_TESTS)
+        find_package(Python3 COMPONENTS Interpreter QUIET)
+        if(Python3_Interpreter_FOUND)
+            add_test(NAME cli COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cli.py"
+                --binary "$<TARGET_FILE:rocketperf>")
+        endif()
     endif()
 endif()
 
