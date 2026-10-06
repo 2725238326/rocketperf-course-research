@@ -33,6 +33,7 @@ LICENSES = {
 DEMO_ARGS = [
     ("ideal", ["run", "cases/benchmarks/air_mach2_vacuum.ini"], 0),
     ("cycle", ["cycle", "prescribed", "cases/benchmarks/prescribed_cycle.ini"], 0),
+    ("pair", ["study", "propellants", "--case", "cases/research/propellant_comparison.ini"], 0),
     ("rp1", ["combustion", "frozen-rp1", "cea-v3.3.4-rp1-o2l-assigned-v1", "liquid", "RP-1", "O2(L)",
              "10000000", "2.6", "298.15", "90.170", "10", "0", "0.01"], 0),
     ("rejection", ["run", "tests/fixtures/overexpanded.ini"], 4),
@@ -136,6 +137,9 @@ def diagram(data):
 
 def common_files(root, head):
     files = {"docs/project-guide.md": read_commit(root, head, "docs/project-guide.md")}
+    for path in ('docs/propellant-case-format.md','docs/coding-style.md','cases/research/propellant_comparison.ini'):
+        if git(root,'cat-file','-e',head+':'+path).returncode == 0:
+            files[path] = read_commit(root,head,path)
     if git(root, 'cat-file', '-e', head+':docs/propellant-method-comparison.md').returncode == 0:
         for path in ('docs/propellant-method-comparison.md', 'docs/propellant-comparison.svg'):
             files[path] = read_commit(root, head, path)
@@ -163,6 +167,7 @@ def package_readme(kind, head):
                "-DBUILD_TESTING=ON -DROCKETPERF_ENABLE_PYTHON_TESTS=OFF\ncmake --build build/cmake\n"
                "ctest --test-dir build/cmake --output-on-failure\n" if kind == "c-source" else
                "./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini\n"
+               "./rocketperf.exe study propellants --case cases/research/propellant_comparison.ini\n"
                "./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170 10 0 0.01\n"
                "./rocketperf.exe run tests/fixtures/overexpanded.ini\n$LASTEXITCODE\n")
     return ("# Rocketperf " + ("纯C源码包" if kind == "c-source" else "Windows x64运行包") +
@@ -185,6 +190,23 @@ def check_demo(name, stdout, stderr, code):
         validate_result(report, (ROOT / "cases/benchmarks/air_mach2_vacuum.ini").read_text(encoding="utf-8"))
     elif name == "cycle":
         validate_cycle(report, (ROOT / "cases/benchmarks/prescribed_cycle.ini").read_text(encoding="utf-8"))
+    elif name == "pair":
+        from propellant_comparison import LIMITS
+        from adiabatic_study import typed_equal
+        case = (ROOT / "cases/research/propellant_comparison.ini").read_text(encoding="utf-8")
+        expected_inputs = dict(pressure_pa=1e7, throat_area_m2=.01, area_ratio=10,
+                               ambient_pressure_pa=0, methane_of=2.6, kerosene_of=2.6)
+        if set(report) != {"schema_version", "study", "case", "inputs", "inlets", "methane",
+                           "kerosene", "methane_minus_kerosene", "limitations"}:
+            raise ValueError("Pair demo schema differs")
+        typed_equal(report["study"], "propellant_fixed_geometry_v1", "pair demo study")
+        typed_equal(report["inputs"], expected_inputs, "pair demo inputs")
+        typed_equal(report["limitations"], LIMITS, "pair demo limitations")
+        typed_equal(report["case"], {"id": "ch4_rp1_common_geometry",
+                                     "source_ref": "ANA-012 declared method comparison"}, "pair demo case")
+        if (report["methane"]["geometry"]["specific_impulse_s"]
+                - report["kerosene"]["geometry"]["specific_impulse_s"]) != report["methane_minus_kerosene"]["isp_s"]:
+            raise ValueError("Pair demo difference differs")
     elif name == "rp1":
         reference = ROOT / "results/validation/kerosene_anchor_v1/of_2_6_rocket.out"
         summary = parse_output(reference.read_bytes(), True, True, 1e-7)

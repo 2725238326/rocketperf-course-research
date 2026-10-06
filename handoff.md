@@ -24,6 +24,7 @@ python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
 python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
 python tools/kerosene_validation.py verify results/validation/kerosene_anchor_v1
 python tools/propellant_comparison.py verify results/research/propellant_comparison_v1
+./build/release/rocketperf.exe study propellants --case cases/research/propellant_comparison.ini
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 ```
 

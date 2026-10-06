@@ -12,9 +12,13 @@
 │  ├─ architecture/           三视图SVG/Mermaid/离线HTML
 │  ├─ governance.md           任务/文档/Git/目录操作规范
 │  ├─ engineering.md          计算核心设计契约
+│  ├─ coding-style.md         C代码撰写规范
 │  ├─ two-vehicle-study.md    四级段事实、方法结果和可计算边界
 │  ├─ tasks.md                生成的完整任务板
 │  └─ 其他专题                研究计划、要求、基准、协议、决策
+│     验证类：verification.md（四层验证要求）、model-validation.md、
+│     thermo-validation.md（NASA9单物种）、reference-reproduction.md（CEA复现）
+│     入口类：project-brief.md（作业要交什么）、requirements-map.md、project-guide.md
 ├─ src/ + include/            C核心、适配器、CLI与公共API
 ├─ tools/                     治理、构建测试、运行记录的唯一行为实现
 ├─ scripts/                   PowerShell兼容入口和语法检查

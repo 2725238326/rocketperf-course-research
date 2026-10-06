@@ -86,12 +86,13 @@ python tools/kerosene_reference.py verify results/research/kerosene_products_v3_
 
 | 工作 | 入口 |
 |---|---|
-| 了解作业目标与完整研究方案 | [原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md)、[研究结构](docs/research-structure.md) |
+| 了解作业目标与完整研究方案 | [作业要交什么](docs/project-brief.md)、[原始要求](作业要求/大作业1_要求存档.md)、[完整规划](docs/project-plan.md)、[研究结构](docs/research-structure.md) |
 | 领取、交接、验收任务 | [worknow](worknow.md)、[handoff](handoff.md)、[治理命令](docs/governance.md) |
 | 理解作业、业务与模块边界 | [作业对接与三视图](docs/architecture/README.md)、[核心设计](docs/engineering.md) |
-| 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
+| 改C代码或算例格式 | [贡献指南](CONTRIBUTING.md)、[代码规范](docs/coding-style.md)、[输入契约](docs/case-format.md)、[解析基准](docs/benchmarks.md) |
 | 查两型工作方案、参数与计算关系 | [四级段研究入口](docs/two-vehicle-study.md)、[调研索引](调研/README.md)、[证据台账](调研/证据与参数台账.md) |
 | 写研究专题和结论 | [写作约定](docs/research-writing.md)、[研究议题](docs/research-agenda.md) |
+| 区分验证层次与证据强度 | [验证要求](docs/verification.md)、[结果核验](docs/model-validation.md) |
 | 管目录、构建和Git | [目录地图](docs/project-map.md)、[环境说明](docs/environment.md)、[治理规范](docs/governance.md) |
 
 任务事实只维护在 `project/tasks.json`，worknow和任务板自动生成。模块与源码清单只维护在 `project/modules.json`，架构和两条构建路径共同使用。文档维护审计见[记录](docs/maintenance-audit.md)，生成内容的审查依据见[原文核验](调研/专题/工程内容审查_20261006.md)。

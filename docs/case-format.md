@@ -4,6 +4,8 @@
 
 `rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA`固定Pc=10 MPa、At=0.01 m²和声明的连续CH4/固定RP-1入口，一次调用纯C求解并返回两路状态和方法差值。严格十进制语法不变；任何一路失败，stdout为空、退出4。该命令不接受实际型号标签或把入口状态静默补为飞行参数；模型契约及JSON位置见[研究说明](propellant-method-comparison.md)。
 
+交接固定输入时改用算例文件：`rocketperf study propellants --case cases/research/propellant_comparison.ini`。字段、固定入口和拒绝协议见[成对算例文件](propellant-case-format.md)。
+
 CLI：`rocketperf run CASE.ini`。成功时stdout只有UTF-8 JSON，stderr为空；失败时写stderr并返回非零，不先打印半份物理结果。
 
 ## 输入字段

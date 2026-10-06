@@ -49,6 +49,8 @@
     {"path":"docs/project-guide.md","role":"组员和接收者的详细研究、程序、验证与维护解读","owner":"tooling"},
     {"path":"docs/propellant-method-comparison.md","role":"甲烷/RP-1同条件C成对研究、参考及喷管收益/代价","owner":"nozzle"},
     {"path":"docs/delivery.md","role":"私有GitHub阶段发布、纯C与Windows包的生成/核验规范","owner":"tooling"},
+    {"path":"docs/coding-style.md","role":"C代码撰写规范：分层、命名、契约注释与警告纪律","owner":"tooling"},
+    {"path":"docs/propellant-case-format.md","role":"成对推进剂算例文件字段、固定入口与错误协议","owner":"adapters"},
     {"path":"deliverables/README.md","role":"下载交付包和查看详细解读的入口","owner":"tooling"},
     {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
   ]

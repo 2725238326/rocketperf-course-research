@@ -22,6 +22,37 @@ BINARY = None
 
 
 class CliTests(unittest.TestCase):
+    def test_propellant_case_file_matches_arguments_and_rejects_bad_fields(self):
+        text = (ROOT/'cases/research/propellant_comparison.ini').read_text(encoding='utf-8')
+        run = self.run_app('study','propellants','--case',self.case(text))
+        self.assertEqual(run.returncode,0,run.stderr)
+        report = json.loads(run.stdout)
+        direct = self.run_app('study','propellants','2.6','2.6','10','0')
+        self.assertEqual(direct.returncode,0,direct.stderr)
+        self.assertEqual(report.pop('case'),{'id':'ch4_rp1_common_geometry','source_ref':'ANA-012 declared method comparison'})
+        self.assertEqual(report,json.loads(direct.stdout))
+        quoted = text.replace('source_ref=ANA-012 declared method comparison','source_ref=source "quoted" \\ path')
+        run = self.run_app('study','propellants','--case',self.case(quoted))
+        self.assertEqual(run.returncode,0,run.stderr)
+        self.assertEqual(json.loads(run.stdout)['case']['source_ref'],'source "quoted" \\ path')
+        for bad in (text+'area_ratio=40\n',text+'unknown=1\n',
+                    text.replace('pressure_pa=10000000\n','',1),
+                    text.replace('model=propellant_fixed_geometry_v1','model=flight_engine'),
+                    text.replace('kerosene_fuel_id=RP-1','kerosene_fuel_id=CH4'),
+                    text.replace('methane_phase=liquid','methane_phase=gas'),
+                    text.replace('area_ratio=10','area_ratio=nan'),text+'bad\x00data'):
+            run = self.run_app('study','propellants','--case',self.case(bad))
+            self.assertEqual(run.returncode,3,run.stderr)
+            self.assertFalse(run.stdout)
+        for changed in (text.replace('kerosene_fuel_temperature_k=298.15','kerosene_fuel_temperature_k=350'),
+                        text.replace('ambient_pressure_pa=0','ambient_pressure_pa=100000').replace('area_ratio=10','area_ratio=40')):
+            run=self.run_app('study','propellants','--case',self.case(changed))
+            self.assertEqual(run.returncode,4,run.stderr)
+            self.assertFalse(run.stdout)
+        run=self.run_app('study','propellants','--case')
+        self.assertEqual(run.returncode,2)
+        self.assertTrue(run.stderr)
+
     def test_propellant_comparison_same_geometry_and_failures(self):
         run = self.run_app('study', 'propellants', '3.4', '2.6', '10', '0')
         self.assertEqual(run.returncode, 0, run.stderr)

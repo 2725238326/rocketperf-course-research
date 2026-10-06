@@ -1,5 +1,9 @@
+#include "arguments.h"
+#include "combustion_commands.h"
+#include "combustion_report.h"
 #include "case_file.h"
 #include "cycle_case.h"
+#include "propellant_case.h"
 #include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
 #include "rocketperf/thermo.h"
@@ -19,35 +23,6 @@
 
 #define RP_STUDY_GRID_LIMIT 32U
 
-static int parse_decimal_token(const char *start, const char **next, double *output)
-{
-    const char *cursor = start;
-    unsigned int digits = 0U;
-    char *end;
-    double value;
-    if (*cursor == '+' || *cursor == '-') { ++cursor; }
-    while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++digits; }
-    if (*cursor == '.') {
-        ++cursor;
-        while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++digits; }
-    }
-    if (digits == 0U) { return 0; }
-    if (*cursor == 'e' || *cursor == 'E') {
-        unsigned int exponent_digits = 0U;
-        ++cursor;
-        if (*cursor == '+' || *cursor == '-') { ++cursor; }
-        while (*cursor >= '0' && *cursor <= '9') { ++cursor; ++exponent_digits; }
-        if (exponent_digits == 0U) { return 0; }
-    }
-    if (*cursor != '\0' && *cursor != ',' && !isspace((unsigned char)*cursor)) { return 0; }
-    errno = 0;
-    value = strtod(start, &end);
-    if (errno == ERANGE || end != cursor || !rp_isfinite(value)) { return 0; }
-    *next = cursor;
-    *output = value;
-    return 1;
-}
-
 static int parse_grid(const char *text, double *values, size_t *count, int pressure)
 {
     const char *cursor = text;
@@ -58,7 +33,7 @@ static int parse_grid(const char *text, double *values, size_t *count, int press
         double value;
         while (isspace((unsigned char)*cursor)) { ++cursor; }
         if (*cursor == '\0' || *cursor == ',') { return 0; }
-        if (!parse_decimal_token(cursor, &end, &value)) { return 0; }
+        if (!rp_cli_parse_decimal(cursor, &end, &value)) { return 0; }
         cursor = end;
         while (isspace((unsigned char)*cursor)) { ++cursor; }
         if (pressure ? value < 0.0 : value < 1.0 || value > 1e4) { return 0; }
@@ -142,7 +117,7 @@ static int thermo_main(const char *id, const char *temperature_text)
     RpThermoState state;
     RpError error;
     RpStatus status;
-    if (!parse_decimal_token(temperature_text, &next, &temperature) || *next != '\0') {
+    if (!rp_cli_parse_decimal(temperature_text, &next, &temperature) || *next != '\0') {
         (void)fputs("Usage: rocketperf thermo SPECIES TEMPERATURE_K\n", stderr);
         return 2;
     }
@@ -177,8 +152,8 @@ static int liquid_feed_main(int count, char **args)
     RpStatus status;
     const char *next;
     if (count != 5 ||
-        !parse_decimal_token(args[3], &next, &query.temperature_k) || *next != '\0' ||
-        !parse_decimal_token(args[4], &next, &query.pressure_pa) || *next != '\0') {
+        !rp_cli_parse_decimal(args[3], &next, &query.temperature_k) || *next != '\0' ||
+        !rp_cli_parse_decimal(args[4], &next, &query.pressure_pa) || *next != '\0') {
         (void)fputs("Usage: rocketperf liquid-feed DATASET Methane|Oxygen liquid T_K P_PA\n", stderr);
         return 2;
     }
@@ -237,385 +212,6 @@ static int cycle_study_main(const char *path, const char *field_name, const char
     return 0;
 }
 
-static int write_mixture(const RpGasMixture *gas)
-{
-    if (printf("{\"temperature_k\":%.17g,\"pressure_pa\":%.17g,\"molar_mass_kg_per_kmol\":%.17g,"
-               "\"gas_constant_j_per_kg_k\":%.17g,\"cp_frozen_j_per_kg_k\":%.17g,"
-               "\"h_j_per_kg\":%.17g,\"s_j_per_kg_k\":%.17g,\"mole_fractions\":{",
-               gas->temperature_k, gas->pressure_pa, gas->molar_mass_kg_per_kmol,
-               gas->gas_constant_j_per_kg_k, gas->cp_frozen_j_per_kg_k,
-               gas->h_j_per_kg, gas->s_j_per_kg_k) < 0) { return 0; }
-    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
-        if (printf("%s\"%s\":%.17g", i == 0U ? "" : ",", rp_cho_species_id(i), gas->mole_fractions[i]) < 0) { return 0; }
-    }
-    return fputs("}}", stdout) >= 0;
-}
-
-static int write_station(const RpFrozenFlowStation *station)
-{
-    return fputs("{\"gas\":", stdout) >= 0 && write_mixture(&station->gas) &&
-        printf(",\"velocity_m_per_s\":%.17g,\"mach\":%.17g,\"mass_flux_kg_per_m2_s\":%.17g,"
-               "\"energy_residual_j_per_kg\":%.17g,\"entropy_residual_j_per_kg_k\":%.17g}",
-               station->velocity_m_per_s, station->mach, station->mass_flux_kg_per_m2_s,
-               station->energy_residual_j_per_kg, station->entropy_residual_j_per_kg_k) >= 0;
-}
-
-static int write_diagnostics(const RpCombustionResult *result)
-{
-    return printf(",\"diagnostics\":{\"element_relative_residual\":[%.17g,%.17g,%.17g],\"equilibrium_residual\":%.17g,"
-                  "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u}",
-                  result->element_relative_residual[0], result->element_relative_residual[1],
-                  result->element_relative_residual[2], result->equilibrium_residual,
-                  result->enthalpy_residual_j_per_kg, result->equilibrium_iterations,
-                  result->hp_iterations) >= 0;
-}
-
-static int write_frozen_report(const RpFrozenNozzleResult *nozzle)
-{
-    return fputs(",\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":", stdout) >= 0 &&
-        write_station(&nozzle->throat) && fputs(",\"exit\":", stdout) >= 0 &&
-        write_station(&nozzle->exit) &&
-        printf(",\"cstar_m_per_s\":%.17g,\"vacuum_effective_velocity_m_per_s\":%.17g,"
-               "\"effective_velocity_m_per_s\":%.17g,\"thrust_coefficient\":%.17g,"
-               "\"continuity_relative_residual\":%.17g,\"sonic_relative_residual\":%.17g}",
-               nozzle->cstar_m_per_s, nozzle->vacuum_effective_velocity_m_per_s,
-               nozzle->effective_velocity_m_per_s, nozzle->thrust_coefficient,
-               nozzle->continuity_relative_residual, nozzle->sonic_relative_residual) >= 0;
-}
-
-static int write_fixed_geometry(const RpFrozenNozzleFixedResult *geometry)
-{
-    return printf(",\"geometry\":{\"throat_area_m2\":%.17g,\"exit_area_m2\":%.17g,"
-                  "\"mass_flow_kg_per_s\":%.17g,\"thrust_n\":%.17g,\"specific_impulse_s\":%.17g}",
-                  geometry->throat_area_m2, geometry->exit_area_m2, geometry->mass_flow_kg_per_s,
-                  geometry->thrust_n, geometry->specific_impulse_s) >= 0;
-}
-
-static int write_liquid_state(const RpLiquidFeedState *state)
-{
-    return printf("{\"density_kg_per_m3\":%.17g,\"h_j_per_mol\":%.17g,\"h_j_per_kg\":%.17g,"
-                  "\"eos_molar_mass_kg_per_mol\":%.17g,\"chemical_molar_mass_kg_per_mol\":%.17g}",
-                  state->density_kg_per_m3, state->h_j_per_mol, state->h_j_per_kg,
-                  state->eos_molar_mass_kg_per_mol, state->chemical_molar_mass_kg_per_mol) >= 0;
-}
-
-static int propellant_study_main(int count, char **args)
-{
-    double values[4] = {0};
-    RpPropellantComparisonInput input = {0};
-    RpPropellantComparisonResult result;
-    RpError error = {0};
-    RpStatus status;
-    int written;
-    if (count != 4) { goto usage; }
-    for (int i = 0; i < count; ++i) {
-        const char *next;
-        if (!parse_decimal_token(args[i], &next, &values[i]) || *next != '\0') { goto usage; }
-    }
-    input.methane = (RpContinuousLiquidFeed){rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
-        RP_LIQUID_SINGLE_PHASE, RP_LIQUID_SINGLE_PHASE, 120.0, 1e7, 100.0, 1e7, 1e7, values[0]};
-    input.kerosene = (RpKeroseneAnchorFeed){rp_kerosene_dataset_id(),
-        {1e7, values[1], "RP-1", "O2(L)", 298.15, 90.170, RP_FEED_LIQUID}};
-    input.area_ratio = values[2]; input.ambient_pressure_pa = values[3]; input.throat_area_m2 = 0.01;
-    status = rp_propellant_compare_fixed(&input, NULL, NULL, &result, &error);
-    if (status != RP_OK) {
-        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
-        return 4;
-    }
-    written = printf("{\"schema_version\":1,\"study\":\"propellant_fixed_geometry_v1\","
-        "\"inputs\":{\"pressure_pa\":10000000,\"throat_area_m2\":0.01,\"area_ratio\":%.17g,"
-        "\"ambient_pressure_pa\":%.17g,\"methane_of\":%.17g,\"kerosene_of\":%.17g},"
-        "\"inlets\":{\"methane\":{\"dataset\":\"%s\",\"basis\":\"%s\",\"fuel_temperature_k\":120,"
-        "\"oxidizer_temperature_k\":100,\"fuel_pressure_pa\":10000000,\"oxidizer_pressure_pa\":10000000},"
-        "\"kerosene\":{\"dataset\":\"%s\",\"fuel\":\"RP-1\",\"oxidizer\":\"O2(L)\","
-        "\"fuel_temperature_k\":298.15,\"oxidizer_temperature_k\":90.170}},\"methane\":{\"chamber\":",
-        values[2], values[3], values[0], values[1], rp_liquid_feed_dataset_id(),
-        rp_liquid_feed_enthalpy_basis_id(), rp_kerosene_dataset_id()) >= 0 &&
-        write_mixture(&result.methane.hp.chamber.gas) && write_diagnostics(&result.methane.hp.chamber) &&
-        printf(",\"inlet_mixture_h_j_per_kg\":%.17g", result.methane.hp.inlet.mixture_h_j_per_kg) >= 0 &&
-        write_frozen_report(&result.methane.nozzle.nozzle) && write_fixed_geometry(&result.methane.nozzle) &&
-        fputs("},\"kerosene\":{\"chamber\":", stdout) >= 0 &&
-        write_mixture(&result.kerosene.chamber.gas) && write_diagnostics(&result.kerosene.chamber) &&
-        printf(",\"inlet_mixture_h_j_per_kg\":%.17g", result.kerosene.inlet.mixture_h_j_per_kg) >= 0 &&
-        write_frozen_report(&result.kerosene.nozzle.nozzle) && write_fixed_geometry(&result.kerosene.nozzle) &&
-        printf("},\"methane_minus_kerosene\":{\"thrust_n\":%.17g,\"isp_s\":%.17g,"
-               "\"mass_flow_kg_per_s\":%.17g,\"cstar_m_per_s\":%.17g},"
-               "\"limitations\":[\"Declared inlet states and O/F; not flight engine performance or optimum mixtures.\","
-               "\"Nine neutral gas HP and chamber-frozen nozzle; no carbon, pump, cycle or hardware losses.\"]}\n",
-               result.methane_minus_kerosene_thrust_n, result.methane_minus_kerosene_isp_s,
-               result.methane_minus_kerosene_mass_flow_kg_per_s, result.methane_minus_kerosene_cstar_m_per_s) >= 0;
-    if (!written || fflush(stdout) != 0) {
-        (void)fputs("io_error: Cannot write propellant comparison.\n", stderr); return 3;
-    }
-    return 0;
-usage:
-    (void)fputs("Usage: rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA\n", stderr);
-    return 2;
-}
-
-static int continuous_liquid_main(int count, char **args)
-{
-    const int fixed = count > 0 && strcmp(args[0], "frozen-liquid-state") == 0;
-    double values[9] = {0};
-    RpContinuousLiquidFeed feed = {0};
-    RpContinuousLiquidHpResult hp = {0};
-    RpContinuousLiquidFixedResult geometry = {0};
-    RpError error = {0};
-    RpStatus status;
-    int written;
-    if (count != (fixed ? 13 : 10)) { goto usage; }
-    for (int i = 4; i < count; ++i) {
-        const char *next;
-        if (!parse_decimal_token(args[i], &next, &values[i - 4]) || *next != '\0') { goto usage; }
-    }
-    feed.dataset_id = args[1];
-    feed.enthalpy_basis_id = args[2];
-    feed.fuel_phase = strcmp(args[3], "liquid") == 0 ? RP_LIQUID_SINGLE_PHASE :
-        strcmp(args[3], "two-phase") == 0 ? RP_LIQUID_TWO_PHASE : RP_LIQUID_GAS;
-    feed.oxidizer_phase = feed.fuel_phase;
-    feed.fuel_temperature_k = values[0]; feed.fuel_pressure_pa = values[1];
-    feed.oxidizer_temperature_k = values[2]; feed.oxidizer_pressure_pa = values[3];
-    feed.product_pressure_pa = values[4]; feed.oxidizer_fuel_mass_ratio = values[5];
-    if (fixed) {
-        status = rp_ch4_o2_continuous_liquid_hp_fixed_area(
-            &feed, values[6], values[7], values[8], NULL, NULL, &geometry, &error);
-        if (status == RP_OK) { hp = geometry.hp; }
-    } else { status = rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, &error); }
-    if (status != RP_OK) {
-        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
-        return 4;
-    }
-    written = printf(
-        "{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\",\"liquid_dataset_id\":\"%s\","
-        "\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"%s\",\"fuel_temperature_k\":%.17g,"
-        "\"fuel_pressure_pa\":%.17g,\"oxidizer_temperature_k\":%.17g,\"oxidizer_pressure_pa\":%.17g,"
-        "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g",
-        fixed ? "ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1" : "ch4_o2_continuous_liquid_hp_v1",
-        args[0], rp_thermo_dataset_id(), rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
-        values[0], values[1], values[2], values[3], values[4], values[5]) >= 0;
-    if (written && fixed) {
-        written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g,\"throat_area_m2\":%.17g",
-                         values[6], values[7], values[8]) >= 0;
-    }
-    written = written && fputs("},\"boundary\":{\"fuel\":", stdout) >= 0 &&
-        write_liquid_state(&hp.inlet.fuel) && fputs(",\"oxidizer\":", stdout) >= 0 &&
-        write_liquid_state(&hp.inlet.oxidizer) &&
-        printf(",\"fuel_mass_fraction\":%.17g,\"oxidizer_mass_fraction\":%.17g,\"inlet_mixture_h_j_per_kg\":%.17g,"
-               "\"element_inventory_kmol_per_kg\":[%.17g,%.17g,%.17g],\"heat_transfer_j_per_kg\":0,"
-               "\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0}",
-               hp.inlet.fuel_mass_fraction, hp.inlet.oxidizer_mass_fraction, hp.inlet.mixture_h_j_per_kg,
-               hp.inlet.element_inventory_kmol_per_kg[0], hp.inlet.element_inventory_kmol_per_kg[1],
-               hp.inlet.element_inventory_kmol_per_kg[2]) >= 0 &&
-        fputs(",\"chamber\":", stdout) >= 0 && write_mixture(&hp.chamber.gas) &&
-        write_diagnostics(&hp.chamber);
-    if (written && fixed) {
-        written = write_frozen_report(&geometry.nozzle.nozzle) && write_fixed_geometry(&geometry.nozzle);
-    }
-    written = written && printf(
-        ",\"provenance\":{\"reference_manifest_sha256\":\"%s\",\"input_role\":\"assumed_research\","
-        "\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},"
-        "\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\","
-        "\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\","
-        "\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\","
-        "\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\","
-        "\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\"",
-        rp_liquid_feed_reference_sha256()) >= 0;
-    if (written && fixed) {
-        written = fputs(",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"", stdout) >= 0;
-    }
-    written = written && fputs("]}\n", stdout) >= 0;
-    if (!written || fflush(stdout) != 0) {
-        (void)fputs("io_error: Cannot write continuous liquid combustion report.\n", stderr);
-        return 3;
-    }
-    return 0;
-usage:
-    (void)fputs("Usage: rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF\n"
-               "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
-    return 2;
-}
-
-static int combustion_main(int count, char **arguments)
-{
-    double values[8] = {0};
-    const char *mode = count > 0 ? arguments[0] : "";
-    const int tp = strcmp(mode, "tp") == 0;
-    const int hp = strcmp(mode, "hp") == 0;
-    const int frozen = strcmp(mode, "frozen") == 0;
-    const int fixed_tp = strcmp(mode, "frozen-tp") == 0;
-    const int hp_h = strcmp(mode, "hp-h") == 0;
-    const int fixed_h = strcmp(mode, "frozen-h") == 0;
-    const int hp_anchor = strcmp(mode, "hp-liquid") == 0;
-    const int fixed_anchor = strcmp(mode, "frozen-liquid") == 0;
-    const int hp_rp1 = strcmp(mode, "hp-rp1") == 0;
-    const int fixed_rp1 = strcmp(mode, "frozen-rp1") == 0;
-    const int rp1 = hp_rp1 || fixed_rp1;
-    const int anchor = hp_anchor || fixed_anchor || rp1;
-    const int explicit_h = hp_h || fixed_h;
-    const int fixed = fixed_tp || fixed_h || fixed_anchor || fixed_rp1;
-    const int assigned_tp = tp || fixed_tp;
-    RpCh4O2Feed feed = {0};
-    RpCh4O2EnthalpyFeed inlet = {0};
-    RpCh4O2AnchorFeed liquid = {0};
-    RpKeroseneAnchorFeed kerosene = {0};
-    RpAnchorInlet anchor_inlet = {0};
-    double inlet_enthalpy = 0.0;
-    RpCombustionResult result;
-    RpFrozenNozzleResult nozzle;
-    RpFrozenNozzleFixedResult geometry;
-    RpError error;
-    RpStatus status;
-    int written;
-    if (strcmp(mode, "hp-liquid-state") == 0 || strcmp(mode, "frozen-liquid-state") == 0) {
-        return continuous_liquid_main(count, arguments);
-    }
-    if ((!tp && !hp && !frozen && !fixed && !hp_h && !hp_anchor && !hp_rp1) ||
-        count != (tp ? 6 : hp ? 5 : fixed_tp ? 9 : hp_h ? 7 : fixed_h ? 10 : (hp_anchor || hp_rp1) ? 9 : (fixed_anchor || fixed_rp1) ? 12 : 7)) { goto usage; }
-    for (int i = anchor ? 5 : explicit_h ? 3 : 1; i < count; ++i) {
-        const char *next;
-        if (!parse_decimal_token(arguments[i], &next, &values[i - (anchor ? 5 : explicit_h ? 3 : 1)]) || *next != '\0') { goto usage; }
-    }
-    if (anchor) {
-        if (strcmp(arguments[1], rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id()) != 0 || strcmp(arguments[2], "liquid") != 0) {
-            status = rp_error_set(&error, RP_OUT_OF_DOMAIN, "Fixed anchor requires pinned reactant dataset and liquid phase.");
-        } else {
-            liquid.pressure_pa = values[0]; liquid.oxidizer_fuel_mass_ratio = values[1];
-            liquid.fuel_anchor_id = arguments[3]; liquid.oxidizer_anchor_id = arguments[4];
-            liquid.fuel_temperature_k = values[2]; liquid.oxidizer_temperature_k = values[3];
-            liquid.phase = RP_FEED_LIQUID;
-            if (rp1) {
-                kerosene.dataset_id = arguments[1]; kerosene.reactants = liquid;
-                status = rp_kerosene_anchor_inlet(&kerosene, &anchor_inlet, &error);
-                if (status == RP_OK) { status = rp_kerosene_equilibrium_hp_anchor(&kerosene, NULL, &result, &error); }
-            } else {
-                status = rp_ch4_o2_anchor_inlet(&liquid, &anchor_inlet, &error);
-                if (status == RP_OK) { status = rp_ch4_o2_equilibrium_hp_anchor(&liquid, NULL, &result, &error); }
-            }
-        }
-    } else if (explicit_h) {
-        inlet.pressure_pa = values[0]; inlet.oxidizer_fuel_mass_ratio = values[1];
-        inlet.fuel_h_j_per_kg = values[2]; inlet.oxidizer_h_j_per_kg = values[3];
-        /* Unknown phase/basis are rejected by the public C inlet contract. */
-        inlet.phase = strcmp(arguments[2], "gas") == 0 ? RP_FEED_GAS : RP_FEED_LIQUID;
-        inlet.basis = strcmp(arguments[1], "nasa9-cea-v3.3.4") == 0 ?
-            RP_ENTHALPY_NASA9_CEA_V334 : RP_ENTHALPY_UNSPECIFIED;
-        status = rp_ch4_o2_inlet_enthalpy(&inlet, &inlet_enthalpy, &error);
-        if (status == RP_OK) { status = rp_ch4_o2_equilibrium_hp_enthalpy(&inlet, NULL, &result, &error); }
-    } else {
-        feed.pressure_pa = values[assigned_tp ? 1 : 0];
-        feed.oxidizer_fuel_mass_ratio = values[assigned_tp ? 2 : 1];
-        feed.fuel_temperature_k = values[assigned_tp ? 3 : 2];
-        feed.oxidizer_temperature_k = values[assigned_tp ? 4 : 3];
-        feed.phase = RP_FEED_GAS;
-        status = assigned_tp ? rp_ch4_o2_equilibrium_tp(&feed, values[0], NULL, &result, &error) :
-                      rp_ch4_o2_equilibrium_hp(&feed, NULL, &result, &error);
-    }
-    if (status == RP_OK && (frozen || fixed)) {
-        RpFrozenNozzleInput input = {0};
-        input.chamber_temperature_k = result.gas.temperature_k;
-        input.chamber_pressure_pa = result.gas.pressure_pa;
-        memcpy(input.mole_fractions, result.gas.mole_fractions, sizeof(input.mole_fractions));
-        input.area_ratio = values[fixed_tp ? 5 : 4]; input.ambient_pressure_pa = values[fixed_tp ? 6 : 5];
-        if (fixed) {
-            status = rp_nozzle_solve_frozen_fixed_area(&input, values[fixed_tp ? 7 : 6], NULL, &geometry, &error);
-            if (status == RP_OK) { nozzle = geometry.nozzle; }
-        } else { status = rp_nozzle_solve_frozen(&input, NULL, &nozzle, &error); }
-    }
-    if (status != RP_OK) {
-        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
-        return 4;
-    }
-    if (anchor) {
-        written = printf("{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\","
-                         "\"reactant_dataset_id\":\"%s\",\"inputs\":{\"feed_phase\":\"liquid\","
-                         "\"anchor_dataset_id\":\"%s\",\"fuel_anchor_id\":\"%s\",\"oxidizer_anchor_id\":\"O2(L)\","
-                         "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g,"
-                         "\"fuel_temperature_k\":%.17g,\"oxidizer_temperature_k\":%.17g",
-                         rp1 ? (fixed_rp1 ? "rp1_o2l_hp_frozen_fixed_area_v1" : "rp1_o2l_hp_assigned_v1") :
-                             (fixed_anchor ? "ch4l_o2l_hp_frozen_fixed_area_v1" : "ch4l_o2l_hp_assigned_v1"),
-                         mode, rp_thermo_dataset_id(), rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id(),
-                         rp1 ? rp_kerosene_dataset_id() : rp_anchor_dataset_id(), rp1 ? "RP-1" : "CH4(L)",
-                         liquid.pressure_pa, liquid.oxidizer_fuel_mass_ratio,
-                         liquid.fuel_temperature_k, liquid.oxidizer_temperature_k) >= 0;
-    } else if (explicit_h) {
-        written = printf("{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\","
-                         "\"inputs\":{\"feed_phase\":\"gas\",\"enthalpy_basis\":\"nasa9-cea-v3.3.4\","
-                         "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g,"
-                         "\"fuel_h_j_per_kg\":%.17g,\"oxidizer_h_j_per_kg\":%.17g",
-                         fixed_h ? "ch4_o2_hp_enthalpy_frozen_fixed_area_v1" : "ch4_o2_hp_enthalpy_v1",
-                         mode, rp_thermo_dataset_id(), inlet.pressure_pa, inlet.oxidizer_fuel_mass_ratio,
-                         inlet.fuel_h_j_per_kg, inlet.oxidizer_h_j_per_kg) >= 0;
-    } else {
-        written = printf("{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\","
-                     "\"inputs\":{\"feed_phase\":\"gas\",\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g,"
-                     "\"fuel_temperature_k\":%.17g,\"oxidizer_temperature_k\":%.17g",
-                     fixed ? "ch4_o2_tp_frozen_fixed_area_v1" : frozen ? "ch4_o2_chamber_frozen_v1" : "ch4_o2_gas_equilibrium_v1", mode, rp_thermo_dataset_id(),
-                         feed.pressure_pa, feed.oxidizer_fuel_mass_ratio, feed.fuel_temperature_k, feed.oxidizer_temperature_k) >= 0;
-    }
-    if (written && assigned_tp) { written = printf(",\"temperature_k\":%.17g", values[0]) >= 0; }
-    if (written && frozen) { written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g", values[4], values[5]) >= 0; }
-    if (written && fixed) { written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g,\"throat_area_m2\":%.17g",
-                                            values[fixed_tp ? 5 : 4], values[fixed_tp ? 6 : 5], values[fixed_tp ? 7 : 6]) >= 0; }
-    written = written && fputs("}", stdout) >= 0;
-    if (written && explicit_h) {
-        written = printf(",\"boundary\":{\"inlet_mixture_h_j_per_kg\":%.17g,\"heat_transfer_j_per_kg\":0}",
-                         inlet_enthalpy) >= 0;
-    }
-    if (written && anchor) {
-        written = printf(",\"boundary\":{\"fuel_h_j_per_kg\":%.17g,\"oxidizer_h_j_per_kg\":%.17g,"
-                         "\"inlet_mixture_h_j_per_kg\":%.17g,\"heat_transfer_j_per_kg\":0,"
-                         "\"pressure_correction_applied\":false,\"element_inventory_kmol_per_kg\":[%.17g,%.17g,%.17g]}",
-                         anchor_inlet.fuel_h_j_per_kg, anchor_inlet.oxidizer_h_j_per_kg,
-                         anchor_inlet.mixture_h_j_per_kg, anchor_inlet.element_inventory_kmol_per_kg[0],
-                         anchor_inlet.element_inventory_kmol_per_kg[1], anchor_inlet.element_inventory_kmol_per_kg[2]) >= 0;
-    }
-    written = written && fputs(",\"chamber\":", stdout) >= 0 && write_mixture(&result.gas) && write_diagnostics(&result);
-    if (written && (frozen || fixed)) {
-        written = write_frozen_report(&nozzle);
-    }
-    if (written && fixed) {
-        written = write_fixed_geometry(&geometry);
-    }
-    written = written && fputs(",\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",", stdout) >= 0;
-    if (written) {
-        written = fputs(anchor ?
-            "\"Fixed liquid reactant enthalpies only; no liquid EOS, density, pressure correction or phase-stability solve.\"," :
-            "\"Gas-feed method calculation, not flight engine performance.\",", stdout) >= 0;
-    }
-    written = written && fputs(
-                               "\"Frozen nozzle is chamber-frozen, inviscid and without shocks or separation.\"", stdout) >= 0;
-    if (written && fixed) {
-        written = fputs(",\"Fixed-area performance is single-nozzle only, not feed-system or full-cycle closure.\"", stdout) >= 0;
-    }
-    if (written && explicit_h) {
-        written = fputs(",\"Inlet basis is caller-declared; no liquid properties, inlet kinetic energy or shaft work.\"", stdout) >= 0;
-    }
-    if (written && anchor) {
-        written = fputs(",\"Pressure denotes ideal-gas product chamber pressure; no pump, shaft work or real-engine validation.\"", stdout) >= 0;
-    }
-    if (written && rp1) {
-        written = fputs(",\"Fixed CEA RP-1 pseudo-reactant; not an identified Chinese kerosene batch.\","
-                        "\"Product p=10 MPa and O/F=2.2..4.0; rich-mixture condensation is outside this method.\"", stdout) >= 0;
-    }
-    written = written && fputs("]}\n", stdout) >= 0;
-    if (!written || fflush(stdout) != 0) {
-        (void)fputs("io_error: Cannot write combustion JSON report.\n", stderr); return 3;
-    }
-    return 0;
-usage:
-    (void)fputs("Usage (gas feed, SI): rocketperf combustion tp T_K P_PA OF TF_K TO_K\n"
-                "                     rocketperf combustion hp P_PA OF TF_K TO_K\n"
-                "                     rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA\n"
-                "                     rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2\n"
-                "                     rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG\n"
-                "                     rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2\n"
-                "                     rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170\n"
-                "                     rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
-                "                     rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n"
-                "                     rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
-    return 2;
-}
-
 static int cli_main(int argc, char **argv)
 {
     RpCase study;
@@ -643,6 +239,7 @@ static int cli_main(int argc, char **argv)
         (void)puts("       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)");
         (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");
         (void)puts("       rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA (Pc=10MPa, At=0.01m2, fixed declared inlets)");
+        (void)puts("       rocketperf study propellants --case CASE.ini");
         (void)puts("       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170");
         (void)puts("       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
         (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
@@ -655,7 +252,7 @@ static int cli_main(int argc, char **argv)
         return liquid_feed_main(argc - 2, &argv[2]);
     }
     if (argc >= 2 && strcmp(argv[1], "combustion") == 0) {
-        return combustion_main(argc - 2, &argv[2]);
+        return rp_cli_combustion(argc - 2, &argv[2]);
     }
     if (argc >= 2 && strcmp(argv[1], "cycle") == 0) {
         if (argc != 4 || strcmp(argv[2], "prescribed") != 0) {
@@ -673,7 +270,14 @@ static int cli_main(int argc, char **argv)
         return study_main(argv[3], argc - 4, &argv[4]);
     }
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "propellants") == 0) {
-        return propellant_study_main(argc - 3, &argv[3]);
+        if (argc >= 4 && strcmp(argv[3], "--case") == 0) {
+            if (argc != 5) {
+                (void)fputs("Usage: rocketperf study propellants --case CASE.ini\n", stderr);
+                return 2;
+            }
+            return rp_cli_propellant_case(argv[4]);
+        }
+        return rp_cli_propellants(argc - 3, &argv[3]);
     }
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "prescribed-cycle") == 0) {
         if (argc != 6) { (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV\n", stderr); return 2; }

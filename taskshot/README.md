@@ -4,6 +4,7 @@
 
 | 日期/记录 | 关联任务 | 内容 |
 |---|---|---|
+| [2026-10-07_046_imp002-case-and-style](2026-10-07_046-imp002-case-and-style.md) | IMP-002 | 成对算例文件、C代码规范与注释、文档群导航修复、交付pair演示 |
 | [2026-10-01_005_technology-selection](2026-10-01_005_technology-selection.md) | TECH-001 | 冻结工程/算法/开源参考/报告技术路线，区分选定与已实现 |
 | [2026-10-02_006_research-structure](2026-10-02_006_research-structure.md) | DOC-002 | 轻量研究结构、写作约定、议题和调研入口更新 |
 | [2026-10-01_004_governance-upgrade](2026-10-01_004_governance-upgrade.md) | GOV-001 | 结构化任务流、文档/模块单一来源、不可变构建、质量与Git护栏、架构三视图 |

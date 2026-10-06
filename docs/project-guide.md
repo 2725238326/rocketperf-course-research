@@ -88,6 +88,8 @@ RP-1使用固定CEA的C1H1.95元素计账、298.15 K指定焓与O2(L)90.170 K。
 
 成对研究用一条命令保持两方法共同的压力、喉面积、面积比和背压，直接返回两路状态与CH4−RP-1差值：`./rocketperf.exe study propellants 2.6 2.6 10 0`。入口CH4=120 K、O2=100 K和两路查表压力10 MPa、固定RP-1=298.15 K/O2(L)90.170 K在JSON中明确记录；该命令固定Pc=10 MPa、At=0.01 m²。任一路失败都拒绝整个成对结果。
 
+交接时可改用算例文件：`./rocketperf.exe study propellants --case cases/research/propellant_comparison.ini`。它把共同几何和两路混合比存成一份严格输入，字段核对与错误协议见[算例文件](propellant-case-format.md)；修改C代码的命名、注释和警告纪律见[代码规范](coding-style.md)。
+
 共同O/F=2.6、A10真空时甲烷方法比冲高13.8534 s，但推力低343.5653 N。固定喉面积下c*增大使流量降低，比冲不能单独决定绝对推力。[同条件研究](propellant-method-comparison.md)记录三组O/F情景、喷管几何/背压和独立软件参考。
 
 解压Windows包后进入包目录，用PowerShell执行。运行程序只需要Windows系统运行库，无需Python、CEA、Fortran、Grok或编译器。

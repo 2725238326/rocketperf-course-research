@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 265,
+  "revision": 268,
   "context": {
     "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
     "evidence_cutoff": "2026-10-06",
@@ -1209,7 +1209,7 @@
     {
       "id": "IMP-002",
       "title": "成对研究算例文件与结果协议整合",
-      "status": "READY",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [
         "ANA-012"
@@ -1224,9 +1224,13 @@
         "算例与参数CLI结果数值一致，元数据/输入/失败协议可追溯；维护成对接口的输出保持",
         "Windows源码/运行交付含算例，完整质量与参考复核通过，结果说明不含进度口号"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "root",
+      "note": "验收完成：三项契约逐项核对通过。严格算例文件拒绝路径、数值一致性、交付含算例均由测试和实际运行支撑。遗留：外部GitHub同步与Release需另行授权；DOC-001待领取",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/IMP-002_e9054ebffcd8.json",
+        "sha256": "b7ab1b30117eb7a1d4f281deed6adc39561abfe747c340888cb31fa672f93bd7"
+      }
     }
   ],
   "events": [
@@ -6806,6 +6810,42 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "a0855b01f2445dfac0cfe1c586ebf19cfabe0e274effe2905218d902018acdd3",
       "hash": "6a74f7ca766717e7e27fff68fe324770c7ce7d0c442b623e1e6400de4bd0d3a4"
+    },
+    {
+      "seq": 283,
+      "at": "2026-10-06T22:02:02+00:00",
+      "task": "IMP-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按用户要求整理C职责/注释、明确成对算例，改善代码交接与私有发布",
+      "previous_hash": "6a74f7ca766717e7e27fff68fe324770c7ce7d0c442b623e1e6400de4bd0d3a4",
+      "hash": "687accfbc7584595803ce8b52de067a1b45aff26aeb334bd07df1b567da34645"
+    },
+    {
+      "seq": 284,
+      "at": "2026-10-06T23:22:54+00:00",
+      "task": "IMP-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "C职责注释整理、成对算例文件与结果协议整合完成：CLI拆分为参数解析/燃烧命令/报告适配器，关键注释覆盖表驱动offset链、位置参数布局与身份重钉；coding-style.md提炼既有约定；propellant-case-format.md重写为可用字段表；DEMO_ARGS新增pair演示并核验差值；文档导航修复（project-brief/verification/thermo-validation接入入口）；完整质量6/6 PASS，三个研究归档复核通过（57+8/33+21/47+18）；算例与参数CLI结果数值一致已由test_cli.py断言",
+      "previous_hash": "687accfbc7584595803ce8b52de067a1b45aff26aeb334bd07df1b567da34645",
+      "hash": "35a4953a3f9b597aed7c1231ce9b1b0e9770b290a52742c34a901b972ed69721"
+    },
+    {
+      "seq": 285,
+      "at": "2026-10-06T23:23:07+00:00",
+      "task": "IMP-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：三项契约逐项核对通过。严格算例文件拒绝路径、数值一致性、交付含算例均由测试和实际运行支撑。遗留：外部GitHub同步与Release需另行授权；DOC-001待领取",
+      "previous_hash": "35a4953a3f9b597aed7c1231ce9b1b0e9770b290a52742c34a901b972ed69721",
+      "hash": "b2ff8f2cc56785dfe57a4fa7ad9735d1d2dade47c1565b3b10a8965fa7f9a16d"
     }
   ]
 }
