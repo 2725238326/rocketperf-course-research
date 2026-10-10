@@ -186,3 +186,40 @@ RpStatus rp_case_write_study_json(FILE *stream, const RpCase *study,
     rp_error_clear(error);
     return RP_OK;
 }
+
+RpStatus rp_case_write_regime_json(FILE *stream, const RpCase *study,
+                                   const RpNozzleRegimeResult *regime, RpError *error)
+{
+    if (stream == NULL || study == NULL || regime == NULL) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Regime report stream, case and result are required.");
+    }
+    if (!valid_case(study) || !valid_result(&regime->ideal)) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Regime report metadata, input or ideal result is invalid.");
+    }
+    (void)fprintf(stream, "{\n  \"schema_version\": 1,\n  \"program_version\": \"%s\",\n  \"model\": \"%s_regime_assessment_v1\",\n  \"case\": {\"id\": ", RP_VERSION, RP_IDEAL_NOZZLE_MODEL);
+    quoted(stream, study->id);
+    (void)fputs(", \"kind\": ", stream);
+    quoted(stream, study->kind);
+    (void)fputs(", \"source_ref\": ", stream);
+    quoted(stream, study->source_ref);
+    (void)fputs("},\n  \"inputs\": {\n", stream);
+    write_input_fields(stream, &study->input, 1);
+    (void)fputs("  },\n  \"ideal_attached_results\": {\n", stream);
+    write_result_fields(stream, &regime->ideal);
+    (void)fputs("  },\n  \"regime\": {\n", stream);
+    (void)fprintf(stream,
+        "    \"class\": \"%s\",\n    \"ambient_over_exit_pressure\": %.17g,\n"
+        "    \"ideal_thrust_n\": %.17g,\n"
+        "    \"separation_reference_pa\": %.17g,\n"
+        "    \"separation_area_ratio\": {\"available\": %s, \"area_ratio\": %.17g},\n"
+        "    \"matched_area_ratio\": {\"available\": %s, \"area_ratio\": %.17g},\n"
+        "    \"basis\": \"Summerfield-type exit-pressure fraction 0.4; empirical hint about model applicability, not a separation prediction\"\n  },\n",
+        rp_nozzle_regime_name(regime->regime), regime->ambient_over_exit_pressure,
+        regime->thrust_n, regime->separation_reference_pa,
+        regime->separation_area_ratio_available ? "true" : "false", regime->separation_area_ratio,
+        regime->matched_area_ratio_available ? "true" : "false", regime->matched_area_ratio);
+    (void)fputs("  \"limitations\": [\"ideal constant-gamma gas\", \"attached isentropic solve ignores ambient in expansion; thrust includes the pressure term at actual ambient\", \"separation reference and area ratios are empirical hints, not separation or side-load predictions\", \"no chemistry, losses, shocks, cycle, cooling or reuse prediction\", \"research scenario inputs are not verified engine data\"]\n}\n", stream);
+    if (ferror(stream)) { return rp_error_set(error, RP_IO_ERROR, "Cannot write regime JSON report."); }
+    rp_error_clear(error);
+    return RP_OK;
+}

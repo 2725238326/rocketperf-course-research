@@ -45,6 +45,46 @@ typedef struct {
     size_t ambient_pressure_count;
 } RpNozzleStudyGrid;
 
+/* Flow-regime classification for back pressures the attached solver rejects.
+ * OVEREXPANDED_POSSIBLE is a mild-overexpansion band below the empirical
+ * separation reference; SEPARATION_HINT means the Summerfield-type reference
+ * (exit pressure below ~0.4*ambient) is crossed. Both are diagnostics about
+ * model applicability, never a separation/flow prediction. */
+typedef enum {
+    RP_NOZZLE_REGIME_IDEAL_DOMAIN = 0,
+    RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE,
+    RP_NOZZLE_REGIME_SEPARATION_HINT
+} RpNozzleRegime;
+
+/* Summerfield-type empirical boundary: attached isentropic flow is not
+ * expected once the ideal exit pressure falls below this fraction of the
+ * ambient pressure. Diagnostic hint only; real separation is not modeled. */
+#define RP_NOZZLE_SEPARATION_FRACTION 0.4
+
+typedef struct {
+    RpNozzleRegime regime;
+    RpNozzleResult ideal;                    /* Attached isentropic solve (ambient ignored). */
+    double thrust_n;                         /* Ideal formula with actual ambient, incl. negative pressure term. */
+    double ambient_over_exit_pressure;       /* pa/pe. */
+    double separation_reference_pa;          /* 0.4*pa empirical reference wall pressure, hint only. */
+    int separation_area_ratio_available;
+    double separation_area_ratio;            /* Isentropic station area ratio where p = 0.4*pa. */
+    int matched_area_ratio_available;
+    double matched_area_ratio;               /* Ae/At that would give pe == pa. */
+} RpNozzleRegimeResult;
+
+const char *rp_nozzle_regime_name(RpNozzleRegime regime);
+
+/* Answers "what does the ideal model say beyond its attached domain": still
+ * solves the isentropic expansion (pe is ambient-independent), then reports
+ * pressure ratios, the empirical separation reference and the area ratios
+ * that would match pa or reach the separation reference. Input validation
+ * matches rp_nozzle_solve_ideal except ambient pressure may exceed pe.
+ * Output unchanged on failure; no allocation, I/O or global mutable state. */
+RpStatus rp_nozzle_assess_ideal(const RpNozzleInput *input,
+                                const RpRootOptions *options,
+                                RpNozzleRegimeResult *output, RpError *error);
+
 /* Reservoir-to-exit, calorically perfect gas, sonic throat, supersonic branch.
  * Initial validated domain: 1 < gamma <= 2; 1 <= Ae/At <= 1e4;
  * ambient pressure <= ideal exit pressure (matched/underexpanded).

@@ -2,6 +2,7 @@
 #define ROCKETPERF_FROZEN_NOZZLE_H
 
 #include "rocketperf/combustion.h"
+#include "rocketperf/nozzle.h"
 #include "rocketperf/root.h"
 
 typedef struct {
@@ -55,5 +56,32 @@ RpStatus rp_nozzle_solve_frozen_fixed_area(const RpFrozenNozzleInput *input,
                                            const RpRootOptions *options,
                                            RpFrozenNozzleFixedResult *output,
                                            RpError *error);
+
+typedef struct {
+    RpNozzleRegime regime;
+    RpFrozenNozzleResult ideal;              /* Attached frozen solve (ambient ignored). */
+    double throat_area_m2;
+    double mass_flow_kg_per_s;
+    double ideal_thrust_n;                   /* Ideal formula with actual ambient, incl. negative pressure term. */
+    double ideal_specific_impulse_s;
+    double ambient_over_exit_pressure;       /* pa/pe. */
+    double separation_reference_pa;          /* 0.4*pa empirical reference wall pressure, hint only. */
+    int separation_area_ratio_available;
+    double separation_area_ratio;            /* Isentropic station area ratio where p = 0.4*pa. */
+    int matched_area_ratio_available;
+    double matched_area_ratio;               /* Ae/At that would give pe == pa. */
+} RpFrozenNozzleRegimeResult;
+
+/* Regime counterpart of the frozen fixed-area solve for back pressures the
+ * attached model rejects. The isentropic expansion is still solved (pe is
+ * ambient-independent); reported area ratios and the 0.4*pa reference are
+ * empirical hints about model applicability, not separation predictions.
+ * Requires a finite positive throat area for mass-flow/thrust reporting.
+ * Output unchanged on failure; no allocation, I/O or global mutable state. */
+RpStatus rp_nozzle_assess_frozen(const RpFrozenNozzleInput *input,
+                                 double throat_area_m2,
+                                 const RpRootOptions *options,
+                                 RpFrozenNozzleRegimeResult *output,
+                                 RpError *error);
 
 #endif

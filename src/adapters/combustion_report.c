@@ -64,6 +64,26 @@ int rp_report_write_fixed_geometry(FILE *stream, const RpFrozenNozzleFixedResult
                   geometry->thrust_n, geometry->specific_impulse_s) >= 0;
 }
 
+int rp_report_write_frozen_regime(FILE *stream, const RpFrozenNozzleRegimeResult *regime)
+{
+    return fprintf(stream, ",\"regime\":{\"class\":\"%s\",\"ambient_over_exit_pressure\":%.17g,"
+                   "\"separation_reference_pa\":%.17g,"
+                   "\"separation_area_ratio\":{\"available\":%s,\"area_ratio\":%.17g},"
+                   "\"matched_area_ratio\":{\"available\":%s,\"area_ratio\":%.17g},"
+                   "\"ideal_attached\":{\"throat_area_m2\":%.17g,\"mass_flow_kg_per_s\":%.17g,"
+                   "\"thrust_n\":%.17g,\"specific_impulse_s\":%.17g},"
+                   "\"basis\":\"Summerfield-type exit-pressure fraction 0.4; empirical hint about "
+                   "model applicability, not a separation prediction\"}",
+                   rp_nozzle_regime_name(regime->regime), regime->ambient_over_exit_pressure,
+                   regime->separation_reference_pa,
+                   regime->separation_area_ratio_available ? "true" : "false",
+                   regime->separation_area_ratio,
+                   regime->matched_area_ratio_available ? "true" : "false",
+                   regime->matched_area_ratio,
+                   regime->throat_area_m2, regime->mass_flow_kg_per_s,
+                   regime->ideal_thrust_n, regime->ideal_specific_impulse_s) >= 0;
+}
+
 int rp_report_write_liquid_state(FILE *stream, const RpLiquidFeedState *state)
 {
     return fprintf(stream, "{\"density_kg_per_m3\":%.17g,\"h_j_per_mol\":%.17g,\"h_j_per_kg\":%.17g,"

@@ -266,6 +266,68 @@ class CliTests(unittest.TestCase):
         self.assertIn("算例", case_run.stdout)
         self.assertEqual(self.run_app("study", "propellants", "--case").returncode, 2)
 
+    def test_nozzle_regime_assessment_json_and_text(self):
+        # The run-rejected overexpanded fixture is answered by `nozzle regime`.
+        fixture = (ROOT/'tests/fixtures/overexpanded.ini').read_text(encoding='utf-8')
+        run = self.run_app('nozzle', 'regime', self.case(fixture))
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        self.assertEqual(report['model'], 'ideal_constant_gamma_v1_regime_assessment_v1')
+        self.assertEqual(report['regime']['class'], 'overexpanded_possible')
+        self.assertAlmostEqual(report['regime']['ambient_over_exit_pressure'],
+                               200000 / report['ideal_attached_results']['exit_pressure_pa'],
+                               places=12)
+        self.assertTrue(report['regime']['matched_area_ratio']['available'])
+        self.assertLess(report['regime']['matched_area_ratio']['area_ratio'],
+                        report['inputs']['area_ratio'])
+        self.assertIn('not a separation prediction', report['regime']['basis'])
+        self.assertIn('empirical hints', ' '.join(report['limitations']))
+        # Deep sea-level overexpansion crosses the empirical hint boundary.
+        run = self.run_app('nozzle', 'regime', 'cases/research/s3_sealevel_regime.ini')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        self.assertEqual(report['regime']['class'], 'separation_hint')
+        self.assertTrue(report['regime']['separation_area_ratio']['available'])
+        # Vacuum case stays in the attached ideal domain.
+        run = self.run_app('nozzle', 'regime', self.case(self.base))
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertEqual(json.loads(run.stdout)['regime']['class'], 'ideal_domain')
+        # Text mode is human-readable; malformed usage still exits 2.
+        run = self.run_app('nozzle', 'regime', self.case(fixture), '--text')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn('域评估', run.stdout)
+        self.assertIn('经验分离参考', run.stdout)
+        self.assertFalse(run.stdout.lstrip().startswith('{'))
+        self.assertEqual(self.run_app('nozzle', 'regime').returncode, 2)
+        self.assertEqual(self.run_app('nozzle', 'bogus', self.case(fixture)).returncode, 2)
+
+    def test_regime_liquid_state_json_and_text(self):
+        args = ('combustion', 'regime-liquid-state', 'coolprop710-cea334-liquid-molar-v1',
+                'heos710-cea334-ideal-zero-298.15-v1', 'liquid', '120', '1e7', '100', '1e7',
+                '1e7', '3.4', '40', '101325', '0.01')
+        run = self.run_app(*args)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        self.assertEqual(report['model'], 'ch4_o2_continuous_liquid_hp_regime_v1')
+        self.assertEqual(report['regime']['class'], 'separation_hint')
+        self.assertTrue(report['regime']['matched_area_ratio']['available'])
+        self.assertGreater(report['regime']['ambient_over_exit_pressure'], 1.0)
+        self.assertIn('chamber', report)
+        run = self.run_app(*args, '--text')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn('域评估', run.stdout)
+        self.assertIn('分离', run.stdout)
+        self.assertFalse(run.stdout.lstrip().startswith('{'))
+        # Attached domain input is still answered by the regime command.
+        attached = list(args); attached[12] = '0'
+        run = self.run_app(*attached)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertEqual(json.loads(run.stdout)['regime']['class'], 'ideal_domain')
+        # Strict solver still rejects the same overexpanded input.
+        run = self.run_app('combustion', 'frozen-liquid-state', *args[2:14])
+        self.assertEqual(run.returncode, 4, run.stderr)
+        self.assertFalse(run.stdout)
+
     def test_interactive_menu_flows_and_limits(self):
         # Menu -> cases list -> exit; all output human-readable UTF-8.
         run = self.run_app("interactive", stdin_text="7\n0\n")
@@ -308,6 +370,18 @@ class CliTests(unittest.TestCase):
         run = self.run_app("interactive", stdin_text="x\n9\n0\n")
         self.assertEqual(run.returncode, 0)
         self.assertIn("无效选择", run.stdout)
+
+    def test_interactive_overexpanded_regime_assessment(self):
+        # Menu 6 L0 with pa above pe: domain assessment instead of bare reject.
+        run = self.run_app("interactive", stdin_text="6\n\n\n\n\n\n\n200\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("域评估", run.stdout)
+        self.assertIn("过膨胀", run.stdout)
+        # Menu 1 chamber path (gas feed) with sea-level-plus back pressure.
+        run = self.run_app("interactive", stdin_text="1\n4\n\n\n\n\n\n500\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("域评估", run.stdout)
+        self.assertIn("分离", run.stdout)
 
     def test_fixed_liquid_anchor_success_and_geometry(self):
         baseline = None

@@ -135,6 +135,19 @@ static int write_chamber_and_nozzle(const RpCombustionResult *chamber,
     nozzle.area_ratio = area_ratio;
     nozzle.ambient_pressure_pa = ambient_pa;
     status = rp_nozzle_solve_frozen_fixed_area(&nozzle, throat_m2, NULL, &geometry, &error);
+    if (status == RP_OUT_OF_DOMAIN) {
+        /* Back pressure outside the attached domain: answer with the regime
+         * assessment instead of a bare rejection. */
+        RpFrozenNozzleRegimeResult domain;
+        RpError regime_error = {0};
+        if (rp_nozzle_assess_frozen(&nozzle, throat_m2, NULL, &domain, &regime_error) != RP_OK) {
+            print_failure(status, &error);
+            return 0;
+        }
+        if (!rp_text_frozen_regime(stdout, &nozzle, &domain) ||
+            !rp_text_note(stdout, limit)) { return -1; }
+        return 0;
+    }
     if (status != RP_OK) { print_failure(status, &error); return 0; }
     if (!rp_text_frozen_nozzle(stdout, &geometry.nozzle) ||
         !rp_text_fixed_geometry(stdout, &geometry) ||
@@ -427,6 +440,16 @@ static RpPromptStatus flow_ideal_nozzle(void)
 #undef P
     input.stagnation_pressure_pa *= 1e6; input.ambient_pressure_pa *= 1e3;
     status = rp_nozzle_solve_ideal(&input, NULL, &result, &error);
+    if (status == RP_OUT_OF_DOMAIN) {
+        RpNozzleRegimeResult domain;
+        RpError regime_error = {0};
+        if (rp_nozzle_assess_ideal(&input, NULL, &domain, &regime_error) != RP_OK) {
+            print_failure(status, &error);
+            return RP_PROMPT_VALUE;
+        }
+        if (!rp_text_ideal_regime(stdout, &input, &domain)) { return RP_PROMPT_EOF; }
+        return RP_PROMPT_VALUE;
+    }
     if (status != RP_OK) { print_failure(status, &error); return RP_PROMPT_VALUE; }
     if (!rp_text_ideal_result(stdout, &input, &result)) { return RP_PROMPT_EOF; }
     return RP_PROMPT_VALUE;
@@ -445,7 +468,9 @@ int rp_cli_cases(FILE *stream)
         "  cases/research/propellant_comparison.ini  甲烷/RP-1同几何成对算例\n"
         "      rocketperf study propellants --case cases/research/propellant_comparison.ini\n"
         "  cases/research/s1_area_ratio_ambient.ini  面积比-背压网格研究\n"
-        "      rocketperf study area-ratio-ambient cases/research/s1_area_ratio_ambient.ini\n",
+        "      rocketperf study area-ratio-ambient cases/research/s1_area_ratio_ambient.ini\n"
+        "  cases/research/s3_sealevel_regime.ini      海平面过膨胀域评估(研究场景)\n"
+        "      rocketperf nozzle regime cases/research/s3_sealevel_regime.ini\n",
         stream) >= 0 && fflush(stream) == 0;
 }
 

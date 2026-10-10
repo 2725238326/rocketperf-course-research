@@ -77,19 +77,26 @@ static int propellant_case_main(const char *path, int text_mode)
 
 static int continuous_liquid_main(int count, char **args)
 {
-    /* hp-liquid-state / frozen-liquid-state positional layout:
+    /* hp-liquid-state / frozen-liquid-state / regime-liquid-state share the
+     * positional layout:
      *   [0]=mode [1]=dataset [2]=basis [3]=phase [4..]=TF PF TO PO PC OF
-     *   (frozen adds AREA_RATIO AMBIENT_PA THROAT_M2)
+     *   (frozen and regime add AREA_RATIO AMBIENT_PA THROAT_M2; regime also
+     *   accepts a trailing --text)
      * values[] therefore starts at the first numeric field, index 4. */
     const int fixed = count > 0 && strcmp(args[0], "frozen-liquid-state") == 0;
+    const int regime = count > 0 && strcmp(args[0], "regime-liquid-state") == 0;
+    int text_mode = 0;
     double values[9] = {0};
     RpContinuousLiquidFeed feed = {0};
     RpContinuousLiquidHpResult hp = {0};
     RpContinuousLiquidFixedResult geometry = {0};
+    RpFrozenNozzleInput nozzle = {0};
+    RpFrozenNozzleRegimeResult domain = {0};
     RpError error = {0};
     RpStatus status;
     int written;
-    if (count != (fixed ? 13 : 10)) { goto usage; }
+    if (regime && count == 14 && strcmp(args[13], "--text") == 0) { text_mode = 1; --count; }
+    if (count != (fixed || regime ? 13 : 10)) { goto usage; }
     for (int i = 4; i < count; ++i) {
         const char *next;
         if (!rp_cli_parse_decimal(args[i], &next, &values[i - 4]) || *next != '\0') { goto usage; }
@@ -106,20 +113,52 @@ static int continuous_liquid_main(int count, char **args)
         status = rp_ch4_o2_continuous_liquid_hp_fixed_area(
             &feed, values[6], values[7], values[8], NULL, NULL, &geometry, &error);
         if (status == RP_OK) { hp = geometry.hp; }
+    } else if (regime) {
+        status = rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, &error);
+        if (status == RP_OK) {
+            nozzle.chamber_temperature_k = hp.chamber.gas.temperature_k;
+            nozzle.chamber_pressure_pa = hp.chamber.gas.pressure_pa;
+            memcpy(nozzle.mole_fractions, hp.chamber.gas.mole_fractions,
+                   sizeof(nozzle.mole_fractions));
+            nozzle.area_ratio = values[6];
+            nozzle.ambient_pressure_pa = values[7];
+            status = rp_nozzle_assess_frozen(&nozzle, values[8], NULL, &domain, &error);
+        }
     } else { status = rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &hp, &error); }
     if (status != RP_OK) {
         (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
         return 4;
+    }
+    if (regime && text_mode) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        written = rp_text_heading(stdout, "连续液态 CH4/O2 推力室域评估") &&
+            fprintf(stdout, "  输入: Tf=%.6g K, Pf=%.6g MPa, To=%.6g K, Po=%.6g MPa, "
+                    "Pc=%.6g MPa, O/F=%.6g\n", values[0], values[1] / 1e6, values[2],
+                    values[3] / 1e6, values[4] / 1e6, values[5]) >= 0 &&
+            rp_text_liquid_state(stdout, "燃料入口", &hp.inlet.fuel) &&
+            rp_text_liquid_state(stdout, "氧化剂入口", &hp.inlet.oxidizer) &&
+            fprintf(stdout, "  入口混合焓 %.6g J/kg\n", hp.inlet.mixture_h_j_per_kg) >= 0 &&
+            rp_text_mixture(stdout, "燃烧室产物", &hp.chamber.gas) &&
+            rp_text_chamber_diagnostics(stdout, &hp.chamber) &&
+            rp_text_frozen_nozzle(stdout, &domain.ideal) &&
+            rp_text_frozen_regime(stdout, &nozzle, &domain);
+        rp_cli_console_restore(previous);
+        if (!written || fflush(stdout) != 0) {
+            (void)fputs("io_error: Cannot write liquid regime text report.\n", stderr);
+            return 3;
+        }
+        return 0;
     }
     written = printf(
         "{\"schema_version\":1,\"model\":\"%s\",\"mode\":\"%s\",\"dataset_id\":\"%s\",\"liquid_dataset_id\":\"%s\","
         "\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"%s\",\"fuel_temperature_k\":%.17g,"
         "\"fuel_pressure_pa\":%.17g,\"oxidizer_temperature_k\":%.17g,\"oxidizer_pressure_pa\":%.17g,"
         "\"pressure_pa\":%.17g,\"oxidizer_fuel_mass_ratio\":%.17g",
-        fixed ? "ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1" : "ch4_o2_continuous_liquid_hp_v1",
+        fixed ? "ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1" :
+            regime ? "ch4_o2_continuous_liquid_hp_regime_v1" : "ch4_o2_continuous_liquid_hp_v1",
         args[0], rp_thermo_dataset_id(), rp_liquid_feed_dataset_id(), rp_liquid_feed_enthalpy_basis_id(),
         values[0], values[1], values[2], values[3], values[4], values[5]) >= 0;
-    if (written && fixed) {
+    if (written && (fixed || regime)) {
         written = printf(",\"area_ratio\":%.17g,\"ambient_pressure_pa\":%.17g,\"throat_area_m2\":%.17g",
                          values[6], values[7], values[8]) >= 0;
     }
@@ -137,6 +176,9 @@ static int continuous_liquid_main(int count, char **args)
     if (written && fixed) {
         written = rp_report_write_frozen_report(stdout, &geometry.nozzle.nozzle) && rp_report_write_fixed_geometry(stdout, &geometry.nozzle);
     }
+    if (written && regime) {
+        written = rp_report_write_frozen_report(stdout, &domain.ideal) && rp_report_write_frozen_regime(stdout, &domain);
+    }
     written = written && printf(
         ",\"provenance\":{\"reference_manifest_sha256\":\"%s\",\"input_role\":\"assumed_research\","
         "\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},"
@@ -149,6 +191,9 @@ static int continuous_liquid_main(int count, char **args)
     if (written && fixed) {
         written = fputs(",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"", stdout) >= 0;
     }
+    if (written && regime) {
+        written = fputs(",\"Ideal attached expansion solved with ambient ignored; regime class and 0.4*pa reference are empirical hints, not separation predictions.\"", stdout) >= 0;
+    }
     written = written && fputs("]}\n", stdout) >= 0;
     if (!written || fflush(stdout) != 0) {
         (void)fputs("io_error: Cannot write continuous liquid combustion report.\n", stderr);
@@ -157,7 +202,8 @@ static int continuous_liquid_main(int count, char **args)
     return 0;
 usage:
     (void)fputs("Usage: rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF\n"
-               "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n", stderr);
+               "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n"
+               "       rocketperf combustion regime-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2 [--text]\n", stderr);
     return 2;
 }
 
@@ -200,7 +246,8 @@ int rp_cli_combustion(int count, char **arguments)
     RpError error;
     RpStatus status;
     int written;
-    if (strcmp(mode, "hp-liquid-state") == 0 || strcmp(mode, "frozen-liquid-state") == 0) {
+    if (strcmp(mode, "hp-liquid-state") == 0 || strcmp(mode, "frozen-liquid-state") == 0 ||
+        strcmp(mode, "regime-liquid-state") == 0) {
         return continuous_liquid_main(count, arguments);
     }
     if ((!tp && !hp && !frozen && !fixed && !hp_h && !hp_anchor && !hp_rp1) ||

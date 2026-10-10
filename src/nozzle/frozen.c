@@ -59,6 +59,63 @@ static double sonic_equation(double temperature, const void *opaque)
     return station.mach * station.mach - 1.0;
 }
 
+typedef struct {
+    const FrozenContext *flow;
+    double target_pa;
+} PressureTarget;
+
+static double pressure_equation(double temperature, const void *opaque)
+{
+    const PressureTarget *equation = opaque;
+    RpFrozenFlowStation station = {0};
+    if (flow_station(equation->flow, temperature, &station, NULL) != RP_OK) { return NAN; }
+    return station.gas.pressure_pa - equation->target_pa;
+}
+
+/* Lowest NASA9 range bound among species present in the mixture. */
+static double minimum_frozen_temperature(const double *mole_fractions)
+{
+    double minimum = 0.0;
+    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
+        if (mole_fractions[i] > 0.0) {
+            const RpNasa9Species *species = rp_thermo_find_species(rp_cho_species_id(i));
+            minimum = fmax(minimum, species->ranges[0].t_min_k);
+        }
+    }
+    return minimum;
+}
+
+/* Isentropic area ratio whose station static pressure equals target_pa.
+ * Zero when the bracket leaves the throat..minimum-temperature span. */
+static int area_ratio_for_pressure(const FrozenContext *context,
+                                   double minimum_temperature,
+                                   double throat_temperature,
+                                   double target_pa,
+                                   const RpRootOptions *policy,
+                                   double *area_ratio)
+{
+    PressureTarget equation = {context, target_pa};
+    RpRootResult root;
+    RpFrozenFlowStation station = {0};
+    double ratio;
+    if (!rp_isfinite(target_pa) || target_pa <= 0.0 ||
+        !rp_isfinite(throat_temperature) || throat_temperature <= minimum_temperature) {
+        return 0;
+    }
+    if (rp_root_bisect(pressure_equation, &equation, minimum_temperature,
+                       throat_temperature, policy, &root, NULL) != RP_OK) {
+        return 0;
+    }
+    if (flow_station(context, root.x, &station, NULL) != RP_OK ||
+        station.mass_flux_kg_per_m2_s <= 0.0) {
+        return 0;
+    }
+    ratio = context->throat_flux / station.mass_flux_kg_per_m2_s;
+    if (!rp_isfinite(ratio) || ratio < 1.0) { return 0; }
+    *area_ratio = ratio;
+    return 1;
+}
+
 static double area_equation(double temperature, const void *opaque)
 {
     const FrozenContext *context = opaque;
@@ -85,12 +142,7 @@ RpStatus rp_nozzle_solve_frozen(const RpFrozenNozzleInput *input,
     status = rp_cho_mixture_evaluate(input->mole_fractions, input->chamber_temperature_k,
                                      input->chamber_pressure_pa, &context.chamber, error);
     if (status != RP_OK) { return status; }
-    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
-        if (input->mole_fractions[i] > 0.0) {
-            const RpNasa9Species *species = rp_thermo_find_species(rp_cho_species_id(i));
-            minimum_temperature = fmax(minimum_temperature, species->ranges[0].t_min_k);
-        }
-    }
+    minimum_temperature = minimum_frozen_temperature(input->mole_fractions);
     if (input->chamber_temperature_k <= minimum_temperature) {
         return rp_error_set(error, RP_OUT_OF_DOMAIN, "No frozen expansion interval inside the NASA9 temperature domain.");
     }
@@ -159,6 +211,70 @@ RpStatus rp_nozzle_solve_frozen_fixed_area(const RpFrozenNozzleInput *input,
         !rp_isfinite(result.thrust_n) || result.thrust_n <= 0.0 ||
         !rp_isfinite(result.specific_impulse_s) || result.specific_impulse_s <= 0.0) {
         return rp_error_set(error, RP_NUMERIC_ERROR, "Fixed-geometry nozzle dimensions or performance overflow/underflow.");
+    }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
+}
+
+RpStatus rp_nozzle_assess_frozen(const RpFrozenNozzleInput *input,
+                                 double throat_area_m2,
+                                 const RpRootOptions *options,
+                                 RpFrozenNozzleRegimeResult *output,
+                                 RpError *error)
+{
+    const RpRootOptions defaults = {1e-8, 1e-12, 1e-11, 200U};
+    const RpRootOptions policy = options != NULL ? *options : defaults;
+    RpFrozenNozzleRegimeResult result = {0};
+    RpFrozenNozzleInput attached;
+    FrozenContext context = {0};
+    RpStatus status;
+    double minimum_temperature;
+    double throat_temperature;
+    double effective_velocity;
+    if (input == NULL || output == NULL ||
+        !rp_isfinite(throat_area_m2) || throat_area_m2 <= 0.0) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT,
+                            "Frozen regime input, output and positive throat area are required.");
+    }
+    attached = *input;
+    attached.ambient_pressure_pa = 0.0;
+    status = rp_nozzle_solve_frozen(&attached, &policy, &result.ideal, error);
+    if (status != RP_OK) { return status; }
+    context.chamber = result.ideal.chamber;
+    context.throat_flux = result.ideal.throat.mass_flux_kg_per_m2_s;
+    context.area_ratio = input->area_ratio;
+    minimum_temperature = minimum_frozen_temperature(input->mole_fractions);
+    throat_temperature = result.ideal.throat.gas.temperature_k;
+    result.throat_area_m2 = throat_area_m2;
+    result.mass_flow_kg_per_s = throat_area_m2 * context.throat_flux;
+    effective_velocity = result.ideal.exit.velocity_m_per_s +
+        (result.ideal.exit.gas.pressure_pa - input->ambient_pressure_pa) *
+        input->area_ratio / context.throat_flux;
+    result.ideal_thrust_n = result.mass_flow_kg_per_s * effective_velocity;
+    result.ideal_specific_impulse_s = effective_velocity / 9.80665;
+    result.ambient_over_exit_pressure =
+        input->ambient_pressure_pa / result.ideal.exit.gas.pressure_pa;
+    result.separation_reference_pa = RP_NOZZLE_SEPARATION_FRACTION * input->ambient_pressure_pa;
+    result.matched_area_ratio_available = area_ratio_for_pressure(
+        &context, minimum_temperature, throat_temperature,
+        input->ambient_pressure_pa, &policy, &result.matched_area_ratio);
+    result.separation_area_ratio_available = area_ratio_for_pressure(
+        &context, minimum_temperature, throat_temperature,
+        result.separation_reference_pa, &policy, &result.separation_area_ratio);
+    if (input->ambient_pressure_pa <= result.ideal.exit.gas.pressure_pa) {
+        result.regime = RP_NOZZLE_REGIME_IDEAL_DOMAIN;
+    } else if (result.ideal.exit.gas.pressure_pa >= result.separation_reference_pa) {
+        result.regime = RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE;
+    } else {
+        result.regime = RP_NOZZLE_REGIME_SEPARATION_HINT;
+    }
+    if (!rp_isfinite(result.mass_flow_kg_per_s) || result.mass_flow_kg_per_s <= 0.0 ||
+        !rp_isfinite(result.ideal_thrust_n) || !rp_isfinite(result.ideal_specific_impulse_s) ||
+        !rp_isfinite(result.ambient_over_exit_pressure) || result.ambient_over_exit_pressure < 0.0 ||
+        (result.matched_area_ratio_available && !rp_isfinite(result.matched_area_ratio)) ||
+        (result.separation_area_ratio_available && !rp_isfinite(result.separation_area_ratio))) {
+        return rp_error_set(error, RP_NUMERIC_ERROR, "Non-finite frozen nozzle regime output.");
     }
     *output = result;
     rp_error_clear(error);

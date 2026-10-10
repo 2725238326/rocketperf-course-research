@@ -102,6 +102,7 @@ RP-1使用固定CEA的C1H1.95元素计账、298.15 K指定焓与O2(L)90.170 K。
 ./rocketperf.exe cases
 ./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini
 ./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini --text
+./rocketperf.exe nozzle regime cases/research/s3_sealevel_regime.ini --text
 ./rocketperf.exe study propellants 2.6 2.6 10 0 --text
 ./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170 10 0 0.01
 ./rocketperf.exe cycle prescribed cases/benchmarks/prescribed_cycle.ini
@@ -117,6 +118,8 @@ $LASTEXITCODE
 ```
 
 该例应退出4、stdout为空、stderr说明域限制。成功0；命令语法错误2；文件/格式/输出错误3；模型/求解拒绝4。不能把失败点填零或读成成功状态。
+
+背压高于理想出口压力的过膨胀工况由域评估入口回答而不是附着求解：`nozzle regime CASE.ini`（或`combustion regime-liquid-state ...`）给出理想出口压力、pa/pe、0.4pa经验分离参考、可得时的匹配面积比与分离参考面积比。这些是理想等熵解加经验判据提示，不是分离或侧载预测；附着求解的拒绝契约不变。
 
 ## 8 独立编译纯C源码包
 

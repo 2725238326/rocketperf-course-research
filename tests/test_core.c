@@ -230,6 +230,80 @@ static void test_area_ambient_scan(void)
     }
 }
 
+static void test_regime_ideal(void)
+{
+    RpNozzleInput input = reference_input();
+    RpNozzleRegimeResult regime;
+    RpNozzleRegimeResult sentinel;
+    RpNozzleResult resolved = {0};
+    RpError error = {0};
+    memset(&sentinel, 0x5a, sizeof(sentinel));
+
+    /* Vacuum ambient: ideal domain, identical attached solution. */
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_IDEAL_DOMAIN);
+    CHECK(strcmp(rp_nozzle_regime_name(regime.regime), "ideal_domain") == 0);
+    CHECK(near(regime.ideal.exit_pressure_pa, 127804.52546295094, 1e-10));
+    CHECK(near(regime.thrust_n, regime.ideal.thrust_n, 1e-12));
+    CHECK(regime.ambient_over_exit_pressure == 0.0);
+    CHECK(regime.separation_reference_pa == 0.0);
+    CHECK(!regime.matched_area_ratio_available && !regime.separation_area_ratio_available);
+
+    /* pa < pe: still attached domain; matched area ratio exceeds the given one. */
+    input.ambient_pressure_pa = 1e5;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_IDEAL_DOMAIN);
+    CHECK(regime.matched_area_ratio_available && regime.matched_area_ratio > input.area_ratio);
+    input.area_ratio = regime.matched_area_ratio; input.ambient_pressure_pa = 0.0;
+    CHECK(rp_nozzle_solve_ideal(&input, NULL, &resolved, NULL) == RP_OK);
+    CHECK(near(resolved.exit_pressure_pa, 1e5, 1e-8));
+
+    /* Mild overexpansion: pa > pe but pe >= 0.4 pa. */
+    input = reference_input(); input.ambient_pressure_pa = 2e5;
+    CHECK(rp_nozzle_solve_ideal(&input, NULL, &resolved, NULL) == RP_OUT_OF_DOMAIN);
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE);
+    CHECK(near(regime.ambient_over_exit_pressure, 2e5 / 127804.52546295094, 1e-10));
+    CHECK(near(regime.thrust_n, regime.ideal.thrust_n - 2e5 * regime.ideal.exit_area_m2, 1e-10));
+    CHECK(regime.matched_area_ratio_available && near(regime.matched_area_ratio, 1.3457025255820887, 1e-9));
+    CHECK(regime.separation_area_ratio_available && regime.separation_area_ratio > input.area_ratio);
+    input.area_ratio = regime.matched_area_ratio; input.ambient_pressure_pa = 0.0;
+    CHECK(rp_nozzle_solve_ideal(&input, NULL, &resolved, NULL) == RP_OK);
+    CHECK(near(resolved.exit_pressure_pa, 2e5, 1e-8));
+
+    /* Deep overexpansion: pe < 0.4 pa; the empirical boundary station lies
+     * inside the nozzle (smaller area ratio than the given exit). */
+    input = reference_input(); input.ambient_pressure_pa = 5e5;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_SEPARATION_HINT);
+    CHECK(regime.separation_area_ratio_available && near(regime.separation_area_ratio, 1.3457025255820887, 1e-9));
+    CHECK(regime.matched_area_ratio_available && near(regime.matched_area_ratio, 1.0017546673688915, 1e-9));
+    input.area_ratio = regime.separation_area_ratio; input.ambient_pressure_pa = 0.0;
+    CHECK(rp_nozzle_solve_ideal(&input, NULL, &resolved, NULL) == RP_OK);
+    CHECK(near(resolved.exit_pressure_pa, 2e5, 1e-8));
+
+    /* Extreme ambient: ideal-formula thrust may go negative; still reported. */
+    input = reference_input(); input.ambient_pressure_pa = 1e6;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_SEPARATION_HINT);
+    CHECK(near(regime.thrust_n, 1423.4229023436161 - 1e6 * regime.ideal.exit_area_m2, 1e-9));
+    CHECK(regime.thrust_n < 0.0);
+    CHECK(!regime.matched_area_ratio_available);
+
+    /* Sentinel and validation contract match the attached solver. */
+    regime = sentinel;
+    CHECK(rp_nozzle_assess_ideal(NULL, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    input = reference_input(); input.gamma = NAN;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OUT_OF_DOMAIN);
+    CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);
+    input = reference_input(); input.ambient_pressure_pa = -1.0;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OUT_OF_DOMAIN);
+    input = reference_input(); input.area_ratio = 0.5;
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OUT_OF_DOMAIN);
+}
+
 int main(void)
 {
     test_root();
@@ -237,6 +311,7 @@ int main(void)
     test_scaling_and_balance();
     test_invalid_inputs();
     test_area_ambient_scan();
+    test_regime_ideal();
     (void)printf("core: %u checks, %u failures\n", checks, failures);
     return failures == 0U ? 0 : 1;
 }

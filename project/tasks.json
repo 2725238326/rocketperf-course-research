@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 272,
+  "revision": 276,
   "context": {
     "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
     "evidence_cutoff": "2026-10-06",
@@ -1261,6 +1261,42 @@
         "kind": "quality",
         "path": "project/evidence/IMP-003_20ffb740bc45.json",
         "sha256": "54d550fa5520201019be7048a6e7956ff2954846ee28789ef98a86d332523bb1"
+      }
+    },
+    {
+      "id": "IMP-004",
+      "title": "喷管过膨胀域评估与域外诊断",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "IMP-003"
+      ],
+      "required_artifacts": [
+        "include/rocketperf/nozzle.h",
+        "include/rocketperf/frozen_nozzle.h",
+        "src/nozzle/ideal.c",
+        "src/nozzle/frozen.c",
+        "src/adapters/text_report.c",
+        "src/adapters/json_report.c",
+        "src/adapters/combustion_report.c",
+        "src/cli/main.c",
+        "src/cli/combustion_commands.c",
+        "src/cli/interactive.c",
+        "tests/test_cli.py",
+        "docs/project-guide.md"
+      ],
+      "acceptance": [
+        "新增纯C域评估:pa>pe不再仅拒绝,给出理想pe/pa比/Summerfield型经验分离参考(标注提示非预测)/匹配面积比/分离估计面积比(可得时),原求解契约不变",
+        "CLI新增 nozzle regime CASE.ini 与 combustion regime-liquid-state,JSON新schema不破坏既有输出,--text人读域评估;交互模式out_of_domain自动转域评估",
+        "L0与冻结路径均有C层检查;CLI管道回归覆盖regime JSON/text与交互过膨胀路径;Windows质量入口通过",
+        "modules.json契约同步,架构图重生成并视觉核对;project-guide补regime命令说明"
+      ],
+      "owner": "codex",
+      "note": "验收自评:四条契约均满足;域评估为理想解+经验提示,不声称分离预测;机械PASS不等独立科学审查",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/IMP-004_6d03f26a2653.json",
+        "sha256": "ce3f42c81bed09cd73bfe7844213f324ac7d282c5f7a8642aee883edb4d8bab9"
       }
     }
   ],
@@ -6925,6 +6961,54 @@
       "note": "验收自评:交互/人读/help/cases四项契约均落实,JSON与非TTY退出码契约未变;测试为机械通过,不代表独立科学审查;详见taskshot 2026-10-11_046",
       "previous_hash": "eb5c37419a86223a9d49e1e543eb00073838c474ebd4f9dce6a69680145b4b2a",
       "hash": "e9cf5762efacf72faf7f2edad9ee4e371234e4bf499c3377f10bbacf2c033bad"
+    },
+    {
+      "seq": 290,
+      "at": "2026-10-10T19:17:44+00:00",
+      "task": "IMP-004",
+      "from": null,
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "e9cf5762efacf72faf7f2edad9ee4e371234e4bf499c3377f10bbacf2c033bad",
+      "hash": "e1f5e1a3bbcb3ac9044ab843686f9e5303c7fc3896da778901278d1c63a833cb"
+    },
+    {
+      "seq": 291,
+      "at": "2026-10-10T19:17:54+00:00",
+      "task": "IMP-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "过膨胀域从硬拒绝改为显式域评估:理想解+经验分离提示+匹配面积比;原求解契约不动,新接口为增量",
+      "previous_hash": "e1f5e1a3bbcb3ac9044ab843686f9e5303c7fc3896da778901278d1c63a833cb",
+      "hash": "6415c85d82536852ad32c4b360325eddaf084b4f764d427283810a34af3d0030"
+    },
+    {
+      "seq": 292,
+      "at": "2026-10-10T20:58:27+00:00",
+      "task": "IMP-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "域评估实现完成:L0/冻结assess接口+CLI regime命令+交互自动回退+研究算例;Debug/Release 247/3918/353/44组全过;质量6/6 PASS",
+      "previous_hash": "6415c85d82536852ad32c4b360325eddaf084b4f764d427283810a34af3d0030",
+      "hash": "74afa7925d835fc5fa251965ad3b3b15cab3a61d9364df95e9ab97fd0aea04c0"
+    },
+    {
+      "seq": 293,
+      "at": "2026-10-10T20:58:37+00:00",
+      "task": "IMP-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "验收自评:四条契约均满足;域评估为理想解+经验提示,不声称分离预测;机械PASS不等独立科学审查",
+      "previous_hash": "74afa7925d835fc5fa251965ad3b3b15cab3a61d9364df95e9ab97fd0aea04c0",
+      "hash": "58a0fc9abe114f6af2edb94ccd29e77e70a136c9611f58abe9dc1747394147ca"
     }
   ]
 }

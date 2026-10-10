@@ -23,6 +23,9 @@ RpStatus rp_case_write_study_json(FILE *stream, const RpCase *study,
                                   const RpNozzleStudyGrid *grid,
                                   const RpNozzleStudyPoint *points,
                                   size_t point_count, RpError *error);
+/* Regime assessment report: same validation-before-write contract. */
+RpStatus rp_case_write_regime_json(FILE *stream, const RpCase *study,
+                                   const RpNozzleRegimeResult *regime, RpError *error);
 FILE *rp_fopen_utf8_read(const char *utf8_path);
 
 #endif

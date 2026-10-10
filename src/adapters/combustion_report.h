@@ -12,6 +12,7 @@ int rp_report_write_diagnostics(FILE *stream, const RpCombustionResult *result);
 int rp_report_write_station(FILE *stream, const RpFrozenFlowStation *station);
 int rp_report_write_frozen_report(FILE *stream, const RpFrozenNozzleResult *nozzle);
 int rp_report_write_fixed_geometry(FILE *stream, const RpFrozenNozzleFixedResult *geometry);
+int rp_report_write_frozen_regime(FILE *stream, const RpFrozenNozzleRegimeResult *regime);
 int rp_report_write_liquid_state(FILE *stream, const RpLiquidFeedState *state);
 int rp_report_write_propellant(FILE *stream, const RpPropellantComparisonInput *input,
                                const RpPropellantComparisonResult *result,

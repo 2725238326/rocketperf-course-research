@@ -222,6 +222,34 @@ static int cycle_study_main(const char *path, const char *field_name, const char
     return 0;
 }
 
+static int regime_case_main(const char *path, int text_mode)
+{
+    RpCase study;
+    RpNozzleRegimeResult regime;
+    RpError error = {0};
+    RpStatus status = rp_case_load(path, &study, &error);
+    if (status == RP_OK) { status = rp_nozzle_assess_ideal(&study.input, NULL, &regime, &error); }
+    if (status == RP_OK && text_mode) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        if (fprintf(stdout, "算例 %s (%s)\n  来源: %s\n", study.id, study.kind,
+                    study.source_ref) < 0 ||
+            !rp_text_ideal_regime(stdout, &study.input, &regime) || fflush(stdout) != 0) {
+            status = rp_error_set(&error, RP_IO_ERROR, "Cannot write text regime report.");
+        }
+        rp_cli_console_restore(previous);
+    } else if (status == RP_OK) {
+        status = rp_case_write_regime_json(stdout, &study, &regime, &error);
+        if (status == RP_OK && fflush(stdout) != 0) {
+            status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush regime JSON report.");
+        }
+    }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
+    }
+    return 0;
+}
+
 static int help_main(void)
 {
     return fputs(
@@ -229,6 +257,7 @@ static int help_main(void)
         "       rocketperf interactive            menu mode: screen input, readable results\n"
         "       rocketperf cases                  list bundled .ini cases\n"
         "       rocketperf run CASE.ini [--text]  L0 ideal nozzle (JSON or readable text)\n"
+        "       rocketperf nozzle regime CASE.ini [--text]  overexpanded/back-pressure domain assessment\n"
         "       rocketperf --version\n"
         "\n"
         "Combustion (CH4/O2 gas, anchored and continuous liquid, fixed RP-1):\n"
@@ -242,6 +271,7 @@ static int help_main(void)
         "       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
         "       rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF\n"
         "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "       rocketperf combustion regime-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2 [--text]\n"
         "       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n"
         "       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
         "\n"
@@ -351,6 +381,14 @@ static int cli_main(int argc, char **argv)
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "prescribed-cycle") == 0) {
         if (argc != 6) { (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV\n", stderr); return 2; }
         return cycle_study_main(argv[3], argv[4], argv[5]);
+    }
+    if (argc >= 4 && strcmp(argv[1], "nozzle") == 0 && strcmp(argv[2], "regime") == 0) {
+        const int text_mode = argc == 5 && strcmp(argv[4], "--text") == 0;
+        if (argc != 4 && !text_mode) {
+            (void)fputs("Usage: rocketperf nozzle regime CASE.ini [--text]\n", stderr);
+            return 2;
+        }
+        return regime_case_main(argv[3], text_mode);
     }
     if (argc >= 3 && strcmp(argv[1], "run") == 0) {
         const int text_mode = argc == 4 && strcmp(argv[3], "--text") == 0;

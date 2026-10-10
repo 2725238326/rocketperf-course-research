@@ -29,9 +29,11 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 ./build/release/rocketperf.exe interactive
 ./build/release/rocketperf.exe cases
 ./build/release/rocketperf.exe study propellants 2.6 2.6 10 0 --text
+./build/release/rocketperf.exe nozzle regime cases/research/s3_sealevel_regime.ini --text
+./build/release/rocketperf.exe combustion regime-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 1e7 3.4 40 101325 0.01 --text
 ```
 
-交互菜单逐项提示单位/默认值（q取消、EOF退出），`--text`输出人读中文表格；二者复用与JSON相同的求解接口，不改变机器契约。
+交互菜单逐项提示单位/默认值（q取消、EOF退出），`--text`输出人读中文表格；二者复用与JSON相同的求解接口，不改变机器契约。`nozzle regime`/`regime-liquid-state`为过膨胀域评估入口：附着求解仍拒绝pa>pe，评估给出理想pe、pa/pe、0.4pa经验分离参考（提示非预测）、匹配/分离参考面积比。
 
 研究归档复核使用已保存文件；重新生成参考需要固定上游构建或可选物性环境，要求见相应工具说明。正式运行使用manifest指向的新鲜已测试构建。`build/release/rocketperf.exe`是便捷别名；新RunId/研究版本不能覆盖旧记录。
 
@@ -41,6 +43,7 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 - 推力室、整机、整箭口径分别使用。单喷管HP不闭合支路轴功、回流、喷注或泵后过程。
 - 约302 s和约193.65 MW来自给定热状态合成循环；后者是模型所需排热，不能直接当作冷却设计负荷。
 - 面积和背压研究不计算质量、侧载、流动分离或寿命。局部扰动是情景响应，不能称概率置信区间。
+- 域评估的0.4pa是Summerfield型经验分离参考：pa>pe证明理想pe低于背压，不证明实际分离位置；匹配/分离面积比是理想公式反解，非设计建议。
 - CEA/Cantera等同源数据对照验证软件方法；机械PASS不构成独立实验或具名科学审查。
 - 日常构建与交付使用Windows。历史WSL sanitizer结果只覆盖当时版本；远端CI配置不等于执行记录。
 

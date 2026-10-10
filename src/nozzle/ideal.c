@@ -112,6 +112,83 @@ static int valid_grid_value(double value, int pressure)
     return pressure ? value >= 0.0 : value >= 1.0 && value <= 1e4;
 }
 
+const char *rp_nozzle_regime_name(RpNozzleRegime regime)
+{
+    switch (regime) {
+        case RP_NOZZLE_REGIME_IDEAL_DOMAIN: return "ideal_domain";
+        case RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE: return "overexpanded_possible";
+        case RP_NOZZLE_REGIME_SEPARATION_HINT: return "separation_hint";
+    }
+    return "unknown";
+}
+
+/* Closed-form isentropic area-Mach relation for the area ratio whose exit
+ * static pressure equals target_pa. Zero when the target yields no supersonic
+ * branch (target >= critical pressure or non-finite). */
+static int area_ratio_for_pressure(double stagnation_pressure_pa, double target_pa,
+                                   double gamma, double *area_ratio)
+{
+    const double delta = gamma - 1.0;
+    double mach_sq;
+    double result;
+    if (!rp_isfinite(target_pa) || target_pa <= 0.0) { return 0; }
+    mach_sq = 2.0 / delta * (pow(stagnation_pressure_pa / target_pa, delta / gamma) - 1.0);
+    if (!rp_isfinite(mach_sq) || mach_sq <= 1.0) { return 0; }
+    result = pow(2.0 / (gamma + 1.0) * (1.0 + 0.5 * delta * mach_sq),
+                 (gamma + 1.0) / (2.0 * delta)) / sqrt(mach_sq);
+    if (!rp_isfinite(result) || result < 1.0) { return 0; }
+    *area_ratio = result;
+    return 1;
+}
+
+RpStatus rp_nozzle_assess_ideal(const RpNozzleInput *input,
+                                const RpRootOptions *options,
+                                RpNozzleRegimeResult *output, RpError *error)
+{
+    RpNozzleRegimeResult result = {0};
+    RpNozzleInput attached;
+    RpStatus status;
+    if (input == NULL || output == NULL) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Regime input and output are required.");
+    }
+    if (!valid_base_input(input) ||
+        !rp_isfinite(input->area_ratio) || input->area_ratio < 1.0 || input->area_ratio > 1e4 ||
+        !rp_isfinite(input->ambient_pressure_pa) || input->ambient_pressure_pa < 0.0) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Invalid SI inputs or outside gamma/area-ratio domain.");
+    }
+    attached = *input;
+    attached.ambient_pressure_pa = 0.0;
+    status = rp_nozzle_solve_ideal(&attached, options, &result.ideal, error);
+    if (status != RP_OK) { return status; }
+    result.thrust_n = result.ideal.mass_flow_kg_s * result.ideal.exit_velocity_m_s +
+        (result.ideal.exit_pressure_pa - input->ambient_pressure_pa) * result.ideal.exit_area_m2;
+    result.ambient_over_exit_pressure =
+        input->ambient_pressure_pa / result.ideal.exit_pressure_pa;
+    result.separation_reference_pa = RP_NOZZLE_SEPARATION_FRACTION * input->ambient_pressure_pa;
+    result.matched_area_ratio_available = area_ratio_for_pressure(
+        input->stagnation_pressure_pa, input->ambient_pressure_pa,
+        input->gamma, &result.matched_area_ratio);
+    result.separation_area_ratio_available = area_ratio_for_pressure(
+        input->stagnation_pressure_pa, result.separation_reference_pa,
+        input->gamma, &result.separation_area_ratio);
+    if (input->ambient_pressure_pa <= result.ideal.exit_pressure_pa) {
+        result.regime = RP_NOZZLE_REGIME_IDEAL_DOMAIN;
+    } else if (result.ideal.exit_pressure_pa >= result.separation_reference_pa) {
+        result.regime = RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE;
+    } else {
+        result.regime = RP_NOZZLE_REGIME_SEPARATION_HINT;
+    }
+    if (!rp_isfinite(result.thrust_n) || !rp_isfinite(result.ambient_over_exit_pressure) ||
+        result.ambient_over_exit_pressure < 0.0 ||
+        (result.matched_area_ratio_available && !rp_isfinite(result.matched_area_ratio)) ||
+        (result.separation_area_ratio_available && !rp_isfinite(result.separation_area_ratio))) {
+        return rp_error_set(error, RP_NUMERIC_ERROR, "Non-finite nozzle regime output.");
+    }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
+}
+
 RpStatus rp_nozzle_scan_area_ratio_ambient(const RpNozzleInput *base,
                                            const RpNozzleStudyGrid *grid,
                                            RpNozzleStudyPoint *points,

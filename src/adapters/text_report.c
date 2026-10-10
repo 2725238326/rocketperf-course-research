@@ -194,3 +194,73 @@ int rp_text_propellant_comparison(FILE *stream, const RpPropellantComparisonInpu
     return rp_text_note(stream, "各自具名入口与O/F的算例;不是真实型号性能排名或最优混合比。") &&
         rp_text_note(stream, "九种中性理想气相产物+燃烧室冻结喷管;无凝聚碳、泵、喷注或循环闭合。");
 }
+
+static const char *regime_label(RpNozzleRegime regime)
+{
+    switch (regime) {
+        case RP_NOZZLE_REGIME_IDEAL_DOMAIN:
+            return "理想附着域 (匹配/欠膨胀/真空,附着求解适用)";
+        case RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE:
+            return "过膨胀域:理想出口压力低于背压,但未越过经验分离参考(附着性未知)";
+        case RP_NOZZLE_REGIME_SEPARATION_HINT:
+            return "过膨胀域:理想出口压力已低于0.4倍背压,经验判据提示喷管内可能分离(提示非预测)";
+    }
+    return "未知";
+}
+
+static int text_regime_common(FILE *stream, double ambient_pa, double exit_pa,
+                              double separation_reference_pa,
+                              int separation_available, double separation_ratio,
+                              int matched_available, double matched_ratio)
+{
+    if (!rp_text_value(stream, "理想出口压力 pe", exit_pa, "Pa") ||
+        !rp_text_value(stream, "背压/出口压比 pa/pe", ambient_pa / exit_pa, "-") ||
+        !rp_text_value(stream, "经验分离参考压 0.4pa", separation_reference_pa, "Pa")) { return 0; }
+    if (separation_available &&
+        !rp_text_value(stream, "分离参考面积比(提示)", separation_ratio, "-")) { return 0; }
+    if (matched_available &&
+        !rp_text_value(stream, "该背压匹配面积比", matched_ratio, "-")) { return 0; }
+    return 1;
+}
+
+int rp_text_ideal_regime(FILE *stream, const RpNozzleInput *input,
+                         const RpNozzleRegimeResult *regime)
+{
+    if (!rp_text_heading(stream, "理想气体喷管 L0 域评估") ||
+        fprintf(stream, "  工况分级: %s\n", regime_label(regime->regime)) < 0 ||
+        !rp_text_value(stream, "总压 P0", input->stagnation_pressure_pa, "Pa") ||
+        !rp_text_value(stream, "面积比 Ae/At", input->area_ratio, "-") ||
+        !rp_text_value(stream, "环境背压 pa", input->ambient_pressure_pa, "Pa") ||
+        !text_regime_common(stream, input->ambient_pressure_pa,
+                            regime->ideal.exit_pressure_pa,
+                            regime->separation_reference_pa,
+                            regime->separation_area_ratio_available,
+                            regime->separation_area_ratio,
+                            regime->matched_area_ratio_available,
+                            regime->matched_area_ratio) ||
+        !rp_text_value(stream, "理想出口马赫", regime->ideal.exit_mach, "-") ||
+        !rp_text_value(stream, "理想推力(含压力项)", regime->thrust_n, "N")) { return 0; }
+    return rp_text_note(stream, "理想附着解的pe与pa无关;分离参考与面积比为经验提示,真实推力取决于分离位置,本模型不计算。");
+}
+
+int rp_text_frozen_regime(FILE *stream, const RpFrozenNozzleInput *input,
+                          const RpFrozenNozzleRegimeResult *regime)
+{
+    if (!rp_text_heading(stream, "冻结喷管域评估") ||
+        fprintf(stream, "  工况分级: %s\n", regime_label(regime->regime)) < 0 ||
+        !rp_text_value(stream, "燃烧室压力 Pc", input->chamber_pressure_pa, "Pa") ||
+        !rp_text_value(stream, "面积比 Ae/At", input->area_ratio, "-") ||
+        !rp_text_value(stream, "环境背压 pa", input->ambient_pressure_pa, "Pa") ||
+        !text_regime_common(stream, input->ambient_pressure_pa,
+                            regime->ideal.exit.gas.pressure_pa,
+                            regime->separation_reference_pa,
+                            regime->separation_area_ratio_available,
+                            regime->separation_area_ratio,
+                            regime->matched_area_ratio_available,
+                            regime->matched_area_ratio) ||
+        !rp_text_value(stream, "理想出口马赫", regime->ideal.exit.mach, "-") ||
+        !rp_text_value(stream, "理想质量流量", regime->mass_flow_kg_per_s, "kg/s") ||
+        !rp_text_value(stream, "理想推力(含压力项)", regime->ideal_thrust_n, "N") ||
+        !rp_text_value(stream, "理想比冲(含压力项)", regime->ideal_specific_impulse_s, "s")) { return 0; }
+    return rp_text_note(stream, "理想附着解的pe与pa无关;分离参考与面积比为经验提示,真实推力取决于分离位置,本模型不计算。");
+}

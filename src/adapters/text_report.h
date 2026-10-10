@@ -28,5 +28,11 @@ int rp_text_thermo_state(FILE *stream, const RpNasa9Species *species,
                          double temperature_k, const RpThermoState *state);
 int rp_text_propellant_comparison(FILE *stream, const RpPropellantComparisonInput *input,
                                   const RpPropellantComparisonResult *result);
+/* Regime assessment for back pressures outside the attached domain:
+ * ideal exit pressure, empirical separation reference and matched area ratio. */
+int rp_text_ideal_regime(FILE *stream, const RpNozzleInput *input,
+                         const RpNozzleRegimeResult *regime);
+int rp_text_frozen_regime(FILE *stream, const RpFrozenNozzleInput *input,
+                          const RpFrozenNozzleRegimeResult *regime);
 
 #endif

@@ -328,6 +328,71 @@ static void test_fixed_geometry(void)
     CHECK(rp_nozzle_solve_frozen_fixed_area(&input, 0.01, &roots, &result, NULL) == RP_NO_CONVERGENCE);
     CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
 }
+static void test_regime_frozen(void)
+{
+    RpFrozenNozzleInput input = {0};
+    RpFrozenNozzleRegimeResult regime;
+    RpFrozenNozzleRegimeResult sentinel;
+    RpFrozenNozzleResult resolved;
+    RpError error = {0};
+    memset(&sentinel, 0x5a, sizeof(sentinel));
+    input.chamber_temperature_k = 700.0; input.chamber_pressure_pa = 1e6;
+    input.mole_fractions[6] = 1.0; input.area_ratio = 1.2;
+
+    /* Vacuum ambient: ideal domain, attached solution, no matched area ratio. */
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime == RP_NOZZLE_REGIME_IDEAL_DOMAIN);
+    CHECK(strcmp(rp_nozzle_regime_name(regime.regime), "ideal_domain") == 0);
+    CHECK(regime.mass_flow_kg_per_s > 0.0 &&
+          near(regime.mass_flow_kg_per_s,
+               0.01 * regime.ideal.throat.mass_flux_kg_per_m2_s, 1e-12));
+    CHECK(near(regime.ideal_thrust_n,
+               regime.mass_flow_kg_per_s * regime.ideal.vacuum_effective_velocity_m_per_s, 1e-7));
+    CHECK(!regime.matched_area_ratio_available);
+
+    /* Moderate back pressure below the throat pressure: matched area ratio
+     * resolves back to the same ambient when re-solved. */
+    input.ambient_pressure_pa = 3e5;
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.matched_area_ratio_available);
+    if (regime.matched_area_ratio_available) {
+        RpFrozenNozzleInput matched = input;
+        matched.area_ratio = regime.matched_area_ratio;
+        matched.ambient_pressure_pa = 0.0;
+        CHECK(rp_nozzle_solve_frozen(&matched, NULL, &resolved, NULL) == RP_OK);
+        CHECK(near(resolved.exit.gas.pressure_pa, 3e5, 1e-2));
+    }
+
+    /* Back pressure above the throat pressure: no matched supersonic area
+     * ratio; the empirical separation-reference station still resolves. */
+    input.ambient_pressure_pa = 8e5;
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, &error) == RP_OK);
+    CHECK(regime.regime != RP_NOZZLE_REGIME_IDEAL_DOMAIN);
+    CHECK(!regime.matched_area_ratio_available);
+    CHECK(near(regime.separation_reference_pa, 0.4 * 8e5, 1e-12));
+    CHECK(regime.ambient_over_exit_pressure > 1.0);
+    if (regime.separation_area_ratio_available) {
+        RpFrozenNozzleInput separated = input;
+        separated.area_ratio = regime.separation_area_ratio;
+        separated.ambient_pressure_pa = 0.0;
+        CHECK(rp_nozzle_solve_frozen(&separated, NULL, &resolved, NULL) == RP_OK);
+        CHECK(near(resolved.exit.gas.pressure_pa, 0.4 * 8e5, 1e-2));
+    }
+    /* Regime class is consistent with the reported pe/pa thresholds. */
+    CHECK(regime.regime == (regime.ideal.exit.gas.pressure_pa >= 0.4 * 8e5
+                            ? RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE
+                            : RP_NOZZLE_REGIME_SEPARATION_HINT));
+
+    /* Failure contract: bad inputs leave the caller's output untouched. */
+    regime = sentinel;
+    CHECK(rp_nozzle_assess_frozen(NULL, 0.01, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_nozzle_assess_frozen(&input, 0.0, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(rp_nozzle_assess_frozen(&input, NAN, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    input.area_ratio = 0.0;
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);
+}
 static RpCh4O2EnthalpyFeed enthalpy_feed(const RpCh4O2Feed *feed)
 {
     RpThermoState fuel, oxidizer;
@@ -907,6 +972,7 @@ int main(void)
     test_mixture_failure_contract();
     test_constant_cp_limit();
     test_fixed_geometry();
+    test_regime_frozen();
     test_explicit_enthalpy();
     test_explicit_enthalpy_failures();
     test_liquid_anchor();
