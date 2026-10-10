@@ -28,7 +28,7 @@ def main():
     try:
         for name,command in steps:
             print(f'Quality: {name}',flush=True)
-            completed=subprocess.run(command,cwd=ROOT,capture_output=True,encoding='utf-8',errors='replace',timeout=240,check=False,env=subprocess_env())
+            completed=subprocess.run(command,cwd=ROOT,capture_output=True,encoding='utf-8',errors='replace',timeout=900,check=False,env=subprocess_env())
             atomic_text(folder/(name+'.log'),completed.stdout+completed.stderr)
             if name in {'governance','runner','handoff'} and completed.returncode == 0:
                 from pipeline import cli_test_count

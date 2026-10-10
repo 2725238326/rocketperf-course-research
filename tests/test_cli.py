@@ -106,9 +106,10 @@ class CliTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.folder = Path(self.temp.name)
 
-    def run_app(self, *args):
-        return subprocess.run([str(BINARY), *map(str, args)], cwd=ROOT, capture_output=True,
-                              text=True, encoding="utf-8", timeout=15, check=False)
+    def run_app(self, *args, stdin_text=None):
+        return subprocess.run([str(BINARY), *map(str, args)], cwd=ROOT, input=stdin_text,
+                              capture_output=True, text=True, encoding="utf-8",
+                              timeout=15, check=False)
 
     def case(self, text):
         path = self.folder / "算例 file.ini"
@@ -229,12 +230,84 @@ class CliTests(unittest.TestCase):
 
     def test_help_version_usage_and_missing_file(self):
         self.assertEqual(self.run_app("--help").returncode, 0)
+        help_text = self.run_app("--help").stdout
+        self.assertTrue(help_text.startswith("Usage: rocketperf COMMAND"))
+        for token in ("interactive", "cases", "hp-rp1", "study propellants", "--text"):
+            self.assertIn(token, help_text)
         self.assertIn("0.1.0", self.run_app("--version").stdout)
         self.assertEqual(self.run_app().returncode, 2)
         self.assertEqual(self.run_app("run").returncode, 2)
         missing = self.run_app("run", self.folder / "missing.ini")
         self.assertEqual(missing.returncode, 3)
         self.assertEqual(missing.stdout, "")
+
+    def test_cases_command_lists_bundled_cases(self):
+        run = self.run_app("cases")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        for name in ("air_mach2_vacuum.ini", "prescribed_cycle.ini",
+                     "propellant_comparison.ini", "s1_area_ratio_ambient.ini"):
+            self.assertIn(name, run.stdout)
+
+    def test_run_and_propellant_text_mode(self):
+        run = self.run_app("run", self.case(self.base), "--text")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("比冲 Isp", run.stdout)
+        self.assertIn("air_mach2", run.stdout)
+        self.assertFalse(run.stdout.lstrip().startswith("{"))
+        self.assertEqual(self.run_app("run", self.case(self.base), "--bogus").returncode, 2)
+        pair = self.run_app("study", "propellants", "3.4", "2.6", "10", "0", "--text")
+        self.assertEqual(pair.returncode, 0, pair.stderr)
+        self.assertIn("差值", pair.stdout)
+        self.assertIn("320.8", pair.stdout)
+        case_run = self.run_app("study", "propellants", "--case",
+                                self.case((ROOT/'cases/research/propellant_comparison.ini')
+                                          .read_text(encoding='utf-8')), "--text")
+        self.assertEqual(case_run.returncode, 0, case_run.stderr)
+        self.assertIn("算例", case_run.stdout)
+        self.assertEqual(self.run_app("study", "propellants", "--case").returncode, 2)
+
+    def test_interactive_menu_flows_and_limits(self):
+        # Menu -> cases list -> exit; all output human-readable UTF-8.
+        run = self.run_app("interactive", stdin_text="7\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("算例", run.stdout)
+        self.assertIn("退出交互模式", run.stdout)
+        # Chamber performance via continuous liquid defaults, then exit.
+        run = self.run_app("interactive", stdin_text="1\n1\n\n\n\n\n\n\n\n\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("比冲 Isp", run.stdout)
+        self.assertIn("320.8", run.stdout)
+        self.assertIn("推力 F", run.stdout)
+        # Paired comparison via menu 2 with defaults.
+        run = self.run_app("interactive", stdin_text="2\n\n\n\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("差值", run.stdout)
+        # Thermo + liquid feed quick queries.
+        run = self.run_app("interactive", stdin_text="4\n\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("H2O", run.stdout)
+        run = self.run_app("interactive", stdin_text="5\n1\n\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("密度", run.stdout)
+        # Ideal nozzle path.
+        run = self.run_app("interactive", stdin_text="6\n\n\n\n\n\n\n\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("理想气体喷管", run.stdout)
+
+    def test_interactive_reprompt_cancel_and_eof(self):
+        # Bad numeric input re-prompts; q cancels back to the menu; 0 exits.
+        run = self.run_app("interactive", stdin_text="6\nabc\nq\n0\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("无效数值", run.stdout)
+        # Unknown species reports a domain failure, not a crash.
+        run = self.run_app("interactive", stdin_text="4\nXX\n\nq\n")
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn("out_of_domain", run.stdout)
+        # EOF mid-flow exits cleanly; menu invalid entry is rejected.
+        self.assertEqual(self.run_app("interactive", stdin_text="1\n").returncode, 0)
+        run = self.run_app("interactive", stdin_text="x\n9\n0\n")
+        self.assertEqual(run.returncode, 0)
+        self.assertIn("无效选择", run.stdout)
 
     def test_fixed_liquid_anchor_success_and_geometry(self):
         baseline = None

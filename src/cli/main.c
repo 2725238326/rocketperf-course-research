@@ -3,7 +3,9 @@
 #include "combustion_report.h"
 #include "case_file.h"
 #include "cycle_case.h"
+#include "interactive.h"
 #include "propellant_case.h"
+#include "text_report.h"
 #include "rocketperf/numeric.h"
 #include "rocketperf/version.h"
 #include "rocketperf/thermo.h"
@@ -20,6 +22,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef _WIN32
+#include <io.h>
+#define rp_console_tty() (_isatty(_fileno(stdin)) && _isatty(_fileno(stdout)))
+#else
+#include <unistd.h>
+#define rp_console_tty() (isatty(fileno(stdin)) && isatty(fileno(stdout)))
+#endif
 
 #define RP_STUDY_GRID_LIMIT 32U
 
@@ -212,38 +222,94 @@ static int cycle_study_main(const char *path, const char *field_name, const char
     return 0;
 }
 
-static int cli_main(int argc, char **argv)
+static int help_main(void)
+{
+    return fputs(
+        "Usage: rocketperf COMMAND [ARGS]\n"
+        "       rocketperf interactive            menu mode: screen input, readable results\n"
+        "       rocketperf cases                  list bundled .ini cases\n"
+        "       rocketperf run CASE.ini [--text]  L0 ideal nozzle (JSON or readable text)\n"
+        "       rocketperf --version\n"
+        "\n"
+        "Combustion (CH4/O2 gas, anchored and continuous liquid, fixed RP-1):\n"
+        "       rocketperf combustion tp T_K P_PA OF TF_K TO_K (gas feed)\n"
+        "       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)\n"
+        "       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA\n"
+        "       rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "       rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG\n"
+        "       rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "       rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170\n"
+        "       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "       rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF\n"
+        "       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n"
+        "       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
+        "\n"
+        "Studies and cycle:\n"
+        "       rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA [--text]\n"
+        "       rocketperf study propellants --case CASE.ini [--text]\n"
+        "       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n"
+        "       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)\n"
+        "       rocketperf cycle prescribed CASE.ini (prescribed thermal states, no return)\n"
+        "\n"
+        "Queries:\n"
+        "       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)\n"
+        "       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)\n"
+        "\n"
+        "Bare `rocketperf` opens interactive mode on a console, else prints usage.\n"
+        "The L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.\n",
+        stdout) >= 0 ? 0 : 3;
+}
+
+static int run_case_main(const char *path, int text_mode)
 {
     RpCase study;
     RpNozzleResult result;
     RpError error = {0};
+    RpStatus status = rp_case_load(path, &study, &error);
+    if (status == RP_OK) { status = rp_nozzle_solve_ideal(&study.input, NULL, &result, &error); }
+    if (status == RP_OK && text_mode) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        if (fprintf(stdout, "算例 %s (%s)\n  来源: %s\n", study.id, study.kind,
+                    study.source_ref) < 0 ||
+            !rp_text_ideal_result(stdout, &study.input, &result) || fflush(stdout) != 0) {
+            status = rp_error_set(&error, RP_IO_ERROR, "Cannot write text report.");
+        }
+        rp_cli_console_restore(previous);
+    } else if (status == RP_OK) {
+        status = rp_case_write_json(stdout, &study, &result, &error);
+        if (status == RP_OK && fflush(stdout) != 0) {
+            status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush JSON report.");
+        }
+    }
+    if (status != RP_OK) {
+        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+        return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
+    }
+    return 0;
+}
+
+static int cli_main(int argc, char **argv)
+{
+    RpError error = {0};
     RpStatus status;
     (void)setlocale(LC_NUMERIC, "C");
+    if (argc == 1) {
+        if (rp_console_tty()) { return rp_cli_interactive(); }
+        (void)fputs("Usage: rocketperf COMMAND [ARGS] (try --help or interactive)\n", stderr);
+        return 2;
+    }
     if (argc == 2 && strcmp(argv[1], "--version") == 0) {
         (void)printf("rocketperf %s\n", RP_VERSION);
         return 0;
     }
-    if (argc == 2 && strcmp(argv[1], "--help") == 0) {
-        (void)puts("       rocketperf cycle prescribed CASE.ini (prescribed thermal states, no return)");
-        (void)puts("       rocketperf combustion tp T_K P_PA OF TF_K TO_K (gas feed)");
-        (void)puts("       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)");
-        (void)puts("       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA");
-        (void)puts("       rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2");
-        (void)puts("       rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG");
-        (void)puts("       rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2");
-        (void)puts("       rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170");
-        (void)puts("       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
-        (void)puts("       rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF");
-        (void)puts("       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2");
-        (void)puts("       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)");
-        (void)puts("       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)");
-        (void)puts("       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)");
-        (void)puts("       rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA (Pc=10MPa, At=0.01m2, fixed declared inlets)");
-        (void)puts("       rocketperf study propellants --case CASE.ini");
-        (void)puts("       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170");
-        (void)puts("       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2");
-        (void)puts("Usage: rocketperf run CASE.ini\n       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]\n       rocketperf --version\nThe L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.");
-        return 0;
+    if (argc == 2 && strcmp(argv[1], "--help") == 0) { return help_main(); }
+    if (argc == 2 && strcmp(argv[1], "interactive") == 0) { return rp_cli_interactive(); }
+    if (argc == 2 && strcmp(argv[1], "cases") == 0) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        const int written = rp_cli_cases(stdout);
+        rp_cli_console_restore(previous);
+        return written ? 0 : 3;
     }
     if (argc == 4 && strcmp(argv[1], "thermo") == 0) {
         return thermo_main(argv[2], argv[3]);
@@ -270,34 +336,32 @@ static int cli_main(int argc, char **argv)
         return study_main(argv[3], argc - 4, &argv[4]);
     }
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "propellants") == 0) {
+        int text_mode = 0;
         if (argc >= 4 && strcmp(argv[3], "--case") == 0) {
-            if (argc != 5) {
-                (void)fputs("Usage: rocketperf study propellants --case CASE.ini\n", stderr);
+            if (argc == 6 && strcmp(argv[5], "--text") == 0) { text_mode = 1; }
+            if (argc != 5 && !text_mode) {
+                (void)fputs("Usage: rocketperf study propellants --case CASE.ini [--text]\n", stderr);
                 return 2;
             }
-            return rp_cli_propellant_case(argv[4]);
+            return rp_cli_propellant_case(argv[4], text_mode);
         }
-        return rp_cli_propellants(argc - 3, &argv[3]);
+        if (argc == 8 && strcmp(argv[7], "--text") == 0) { text_mode = 1; argc = 7; }
+        return rp_cli_propellants(argc - 3, &argv[3], text_mode);
     }
     if (argc >= 3 && strcmp(argv[1], "study") == 0 && strcmp(argv[2], "prescribed-cycle") == 0) {
         if (argc != 6) { (void)fputs("Usage: rocketperf study prescribed-cycle CASE.ini FIELD CSV\n", stderr); return 2; }
         return cycle_study_main(argv[3], argv[4], argv[5]);
     }
-    if (argc != 3 || strcmp(argv[1], "run") != 0) {
-        (void)fputs("Usage: rocketperf run CASE.ini (or --help / --version)\n", stderr);
-        return 2;
+    if (argc >= 3 && strcmp(argv[1], "run") == 0) {
+        const int text_mode = argc == 4 && strcmp(argv[3], "--text") == 0;
+        if (argc != 3 && !text_mode) {
+            (void)fputs("Usage: rocketperf run CASE.ini [--text]\n", stderr);
+            return 2;
+        }
+        return run_case_main(argv[2], text_mode);
     }
-    status = rp_case_load(argv[2], &study, &error);
-    if (status == RP_OK) { status = rp_nozzle_solve_ideal(&study.input, NULL, &result, &error); }
-    if (status == RP_OK) { status = rp_case_write_json(stdout, &study, &result, &error); }
-    if (status == RP_OK && fflush(stdout) != 0) {
-        status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush JSON report.");
-    }
-    if (status != RP_OK) {
-        (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
-        return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
-    }
-    return 0;
+    (void)fputs("Usage: rocketperf COMMAND [ARGS] (try --help)\n", stderr);
+    return 2;
 }
 
 #ifdef _WIN32

@@ -94,9 +94,15 @@ RP-1使用固定CEA的C1H1.95元素计账、298.15 K指定焓与O2(L)90.170 K。
 
 解压Windows包后进入包目录，用PowerShell执行。运行程序只需要Windows系统运行库，无需Python、CEA、Fortran、Grok或编译器。
 
+不带参数直接运行 `./rocketperf.exe`（或 `./rocketperf.exe interactive`）进入交互菜单：选择功能后逐项提示参数名、单位和默认值，回车取默认，q取消；求解走与批量命令相同的C接口，结果以带单位的中文表格输出。批量命令输出JSON供复算和归档；`run`、`study propellants`及`--case`路径支持尾随`--text`改为人读输出。`./rocketperf.exe cases`列出随包算例和运行方式。
+
 ```powershell
+./rocketperf.exe interactive
 ./rocketperf.exe --version
+./rocketperf.exe cases
 ./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini
+./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini --text
+./rocketperf.exe study propellants 2.6 2.6 10 0 --text
 ./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170 10 0 0.01
 ./rocketperf.exe cycle prescribed cases/benchmarks/prescribed_cycle.ini
 ```

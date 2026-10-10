@@ -1,12 +1,14 @@
 #include "combustion_commands.h"
 #include "arguments.h"
 #include "combustion_report.h"
+#include "interactive.h"
 #include "propellant_case.h"
+#include "text_report.h"
 #include "rocketperf/numeric.h"
 #include <stdio.h>
 #include <string.h>
 
-int rp_cli_propellants(int count, char **args)
+int rp_cli_propellants(int count, char **args, int text_mode)
 {
     /* Argument-mode counterpart of the --case path: CH4_OF RP1_OF AREA_RATIO
      * AMBIENT_PA. Inlet states are the study's declared defaults (CH4 120 K /
@@ -33,7 +35,13 @@ int rp_cli_propellants(int count, char **args)
         (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
         return 4;
     }
-    written = rp_report_write_propellant(stdout, &input, &result, NULL);
+    if (text_mode) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        written = rp_text_propellant_comparison(stdout, &input, &result);
+        rp_cli_console_restore(previous);
+    } else {
+        written = rp_report_write_propellant(stdout, &input, &result, NULL);
+    }
     if (!written || fflush(stdout) != 0) {
         (void)fputs("io_error: Cannot write propellant comparison.\n", stderr); return 3;
     }
@@ -43,7 +51,7 @@ usage:
     return 2;
 }
 
-static int propellant_case_main(const char *path)
+static int propellant_case_main(const char *path, int text_mode)
 {
     RpPropellantCase study = {0};
     RpPropellantComparisonResult result;
@@ -55,7 +63,14 @@ static int propellant_case_main(const char *path)
         (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
         return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
     }
-    written = rp_report_write_propellant(stdout, &study.input, &result, &study);
+    if (text_mode) {
+        const RpConsoleCodepage previous = rp_cli_console_utf8();
+        written = fprintf(stdout, "算例 %s\n  来源: %s\n", study.id, study.source_ref) >= 0 &&
+            rp_text_propellant_comparison(stdout, &study.input, &result);
+        rp_cli_console_restore(previous);
+    } else {
+        written = rp_report_write_propellant(stdout, &study.input, &result, &study);
+    }
     if (!written || fflush(stdout) != 0) { (void)fputs("io_error: Cannot write propellant case report.\n", stderr); return 3; }
     return 0;
 }
@@ -338,7 +353,7 @@ usage:
 }
 
 
-int rp_cli_propellant_case(const char *path)
+int rp_cli_propellant_case(const char *path, int text_mode)
 {
-    return propellant_case_main(path);
+    return propellant_case_main(path, text_mode);
 }

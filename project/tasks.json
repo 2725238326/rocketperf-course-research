@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 268,
+  "revision": 272,
   "context": {
     "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
     "evidence_cutoff": "2026-10-06",
@@ -1230,6 +1230,37 @@
         "kind": "quality",
         "path": "project/evidence/IMP-002_e9054ebffcd8.json",
         "sha256": "b7ab1b30117eb7a1d4f281deed6adc39561abfe747c340888cb31fa672f93bd7"
+      }
+    },
+    {
+      "id": "IMP-003",
+      "title": "CLI交互模式、人读输出与命令编排重构",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "IMP-002"
+      ],
+      "required_artifacts": [
+        "src/cli/interactive.c",
+        "src/cli/interactive.h",
+        "src/adapters/text_report.c",
+        "src/adapters/text_report.h",
+        "src/cli/main.c",
+        "tests/test_cli.py",
+        "docs/project-guide.md"
+      ],
+      "acceptance": [
+        "interactive子命令或无参TTY进入交互菜单:逐项提示参数名/单位/默认值,非法输入重提示,q/EOF安全退出,结果人读表格;无参非TTY仍返回2",
+        "人读文本报告覆盖推进剂对比、推力室、L0喷管、物性与液体入口,含输入回显、单位与限制;JSON契约不变,既有CLI/核心测试全部保持通过",
+        "help按功能分组并以Usage开头;cases列出内置算例与运行方式;新交互路径有管道输入回归测试",
+        "Windows完整质量入口通过,模块登记同步,架构图与实际一致并视觉核对"
+      ],
+      "owner": "codex",
+      "note": "验收自评:交互/人读/help/cases四项契约均落实,JSON与非TTY退出码契约未变;测试为机械通过,不代表独立科学审查;详见taskshot 2026-10-11_046",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/IMP-003_20ffb740bc45.json",
+        "sha256": "54d550fa5520201019be7048a6e7956ff2954846ee28789ef98a86d332523bb1"
       }
     }
   ],
@@ -6846,6 +6877,54 @@
       "note": "验收完成：三项契约逐项核对通过。严格算例文件拒绝路径、数值一致性、交付含算例均由测试和实际运行支撑。遗留：外部GitHub同步与Release需另行授权；DOC-001待领取",
       "previous_hash": "35a4953a3f9b597aed7c1231ce9b1b0e9770b290a52742c34a901b972ed69721",
       "hash": "b2ff8f2cc56785dfe57a4fa7ad9735d1d2dade47c1565b3b10a8965fa7f9a16d"
+    },
+    {
+      "seq": 286,
+      "at": "2026-10-10T17:45:23+00:00",
+      "task": "IMP-003",
+      "from": null,
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "b2ff8f2cc56785dfe57a4fa7ad9735d1d2dade47c1565b3b10a8965fa7f9a16d",
+      "hash": "4fc7325c835db00e760d8c94c3f54ddd819d4079c4e88d4e154f63457a9fd539"
+    },
+    {
+      "seq": 287,
+      "at": "2026-10-10T17:45:30+00:00",
+      "task": "IMP-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "软件本体与交互补课:interactive菜单、人读文本报告、help/cases重构,面向10-16展示",
+      "previous_hash": "4fc7325c835db00e760d8c94c3f54ddd819d4079c4e88d4e154f63457a9fd539",
+      "hash": "b81ab695c53f6cf91ce805472ac55e11a674de0b2cc56cfcbca8fbf43a81afd9"
+    },
+    {
+      "seq": 288,
+      "at": "2026-10-10T18:45:10+00:00",
+      "task": "IMP-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "interactive菜单(参数/单位/默认值/q/EOF)、text_report人读输出(run/study/--case --text)、cases、help分组Usage开头、UTF-8控制台切换;Debug/Release各41组CLI过;quality 6/6 PASS;quality单步超时240→900s修正",
+      "previous_hash": "b81ab695c53f6cf91ce805472ac55e11a674de0b2cc56cfcbca8fbf43a81afd9",
+      "hash": "eb5c37419a86223a9d49e1e543eb00073838c474ebd4f9dce6a69680145b4b2a"
+    },
+    {
+      "seq": 289,
+      "at": "2026-10-10T18:45:21+00:00",
+      "task": "IMP-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "验收自评:交互/人读/help/cases四项契约均落实,JSON与非TTY退出码契约未变;测试为机械通过,不代表独立科学审查;详见taskshot 2026-10-11_046",
+      "previous_hash": "eb5c37419a86223a9d49e1e543eb00073838c474ebd4f9dce6a69680145b4b2a",
+      "hash": "e9cf5762efacf72faf7f2edad9ee4e371234e4bf499c3377f10bbacf2c033bad"
     }
   ]
 }

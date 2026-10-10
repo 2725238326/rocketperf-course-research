@@ -26,7 +26,12 @@ python tools/kerosene_validation.py verify results/validation/kerosene_anchor_v1
 python tools/propellant_comparison.py verify results/research/propellant_comparison_v1
 ./build/release/rocketperf.exe study propellants --case cases/research/propellant_comparison.ini
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
+./build/release/rocketperf.exe interactive
+./build/release/rocketperf.exe cases
+./build/release/rocketperf.exe study propellants 2.6 2.6 10 0 --text
 ```
+
+交互菜单逐项提示单位/默认值（q取消、EOF退出），`--text`输出人读中文表格；二者复用与JSON相同的求解接口，不改变机器契约。
 
 研究归档复核使用已保存文件；重新生成参考需要固定上游构建或可选物性环境，要求见相应工具说明。正式运行使用manifest指向的新鲜已测试构建。`build/release/rocketperf.exe`是便捷别名；新RunId/研究版本不能覆盖旧记录。
 
