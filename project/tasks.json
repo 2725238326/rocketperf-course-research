@@ -514,7 +514,7 @@
       "acceptance": [
         "逐字段定位原文和单位换算；事实/未知/假设分开；假设含范围、理由和模型ID；自动检查来源ID、重复ID、角色与单位，非法数据测试失败"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "DATA-002验收完成；真实型号缺失字段保持unknown，研究假设单独归档并带model_id和范围。",
       "verification": {
         "kind": "quality",
@@ -540,7 +540,7 @@
       "acceptance": [
         "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "契约已逐项实现并通过新鲜完整质量证据；仅完成NASA9单物种物性，HP平衡、混合熵和温变喷管留给MOD-002。",
       "verification": {
         "kind": "quality",
@@ -567,7 +567,7 @@
       "acceptance": [
         "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "验收契约逐项满足并通过新鲜五项质量检查；只完成外部参考复现，尚未证明项目C热化学/喷管数值。",
       "verification": {
         "kind": "quality",
@@ -597,7 +597,7 @@
       "acceptance": [
         "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "验收完成：固定气态CH4/O2方法算例与C自有实现同条件通过；v2验证归档和文档已更新。此DONE不表示真实发动机性能或独立人员科学审查完成。",
       "verification": {
         "kind": "quality",
@@ -629,7 +629,7 @@
       "acceptance": [
         "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "按任务契约验收给定热状态的外排控制体；完整质量5组PASS、16生产C源静态分析、Windows CMake 6/6 CTest。本人解释验收而非独立科学人审；无液态物性、补燃回流或真实型号闭合，接续ANA-002收益/代价/敏感性",
       "verification": {
         "kind": "quality",
@@ -1255,7 +1255,7 @@
         "help按功能分组并以Usage开头;cases列出内置算例与运行方式;新交互路径有管道输入回归测试",
         "Windows完整质量入口通过,模块登记同步,架构图与实际一致并视觉核对"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "验收自评:交互/人读/help/cases四项契约均落实,JSON与非TTY退出码契约未变;测试为机械通过,不代表独立科学审查;详见taskshot 2026-10-11_046",
       "verification": {
         "kind": "quality",
@@ -1291,7 +1291,7 @@
         "L0与冻结路径均有C层检查;CLI管道回归覆盖regime JSON/text与交互过膨胀路径;Windows质量入口通过",
         "modules.json契约同步,架构图重生成并视觉核对;project-guide补regime命令说明"
       ],
-      "owner": "codex",
+      "owner": "buaabw",
       "note": "验收自评:四条契约均满足;域评估为理想解+经验提示,不声称分离预测;机械PASS不等独立科学审查",
       "verification": {
         "kind": "quality",
@@ -2371,11 +2371,11 @@
       "task": "DATA-002",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "整理项目工作面：优先核对两型动力系统参数证据，Windows C计算作为当前交付主线。",
       "previous_hash": "4955fef677a17089d8e389c3d65cc155e469f62eed9555af9cf2420ef5e57037",
-      "hash": "7fe40dc743b27ada4c3dc2f0c01c95d5d63c6ed14e747f287cbcdc721ef91956"
+      "hash": "abbe15e188a41d454e6795bfb259c89f47e6ec3c843e5a03731004a9f90d0374"
     },
     {
       "seq": 80,
@@ -2383,10 +2383,10 @@
       "task": "DATA-002",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "将当前工作面明确为资料证据与Windows计算，后置展示和报告。",
-      "previous_hash": "7fe40dc743b27ada4c3dc2f0c01c95d5d63c6ed14e747f287cbcdc721ef91956",
+      "previous_hash": "abbe15e188a41d454e6795bfb259c89f47e6ec3c843e5a03731004a9f90d0374",
       "details": {
         "context_before": {
           "phase": "L0/S1教学计算已测试；数据复核、热物性和独立对照待完成",
@@ -2424,7 +2424,7 @@
           ]
         }
       },
-      "hash": "27ec709768434686595bc95afb19a8c553a6fb016b7003e3579c011d78d4a550"
+      "hash": "7d768052387e5866dd6313c3aaf223912cd11047b86f1b6400831a138e6dca38"
     },
     {
       "seq": 81,
@@ -2432,11 +2432,11 @@
       "task": "DATA-002",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "完成参数假设集、来源/角色/单位/范围校验器和正反例测试；两套数据集通过项目检查与质量链。",
-      "previous_hash": "27ec709768434686595bc95afb19a8c553a6fb016b7003e3579c011d78d4a550",
-      "hash": "12cb70e0e7a61b9e82005dea044d18584eb21772bfca436a97196909e3658f67"
+      "previous_hash": "7d768052387e5866dd6313c3aaf223912cd11047b86f1b6400831a138e6dca38",
+      "hash": "1ba841b414470d25a01470f94e92a35751e4d1a34bc9b56dd671094a43a98967"
     },
     {
       "seq": 82,
@@ -2444,11 +2444,11 @@
       "task": "DATA-002",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "DATA-002验收完成；真实型号缺失字段保持unknown，研究假设单独归档并带model_id和范围。",
-      "previous_hash": "12cb70e0e7a61b9e82005dea044d18584eb21772bfca436a97196909e3658f67",
-      "hash": "7c1f2785e387e2d0dcee83166785ef2ec62d182cf797ecfe6d9435e4dd942fd2"
+      "previous_hash": "1ba841b414470d25a01470f94e92a35751e4d1a34bc9b56dd671094a43a98967",
+      "hash": "802d959a00ed7c174a7f0cd4b28d11b853403c39e3d70fc17886b4114fb8c67a"
     },
     {
       "seq": 83,
@@ -2456,11 +2456,11 @@
       "task": "MOD-001",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
-      "previous_hash": "7c1f2785e387e2d0dcee83166785ef2ec62d182cf797ecfe6d9435e4dd942fd2",
-      "hash": "dce407bf4f8ad6b81b36695a584e6854c826a3f79c2dbd6c6aba55ed0ce6c75a"
+      "previous_hash": "802d959a00ed7c174a7f0cd4b28d11b853403c39e3d70fc17886b4114fb8c67a",
+      "hash": "a2cfd3199b1b3d363fa24a521f7adf60405911a77183a9e9e511292212898cbc"
     },
     {
       "seq": 84,
@@ -2468,10 +2468,10 @@
       "task": "MOD-001",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "真实NASA9数据库与可重复参考已落地，补入产物契约；不更改原验收范围。",
-      "previous_hash": "dce407bf4f8ad6b81b36695a584e6854c826a3f79c2dbd6c6aba55ed0ce6c75a",
+      "previous_hash": "a2cfd3199b1b3d363fa24a521f7adf60405911a77183a9e9e511292212898cbc",
       "details": {
         "contract_before": {
           "id": "MOD-001",
@@ -2488,7 +2488,7 @@
           "acceptance": [
             "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "进入NASA9物性实现：先完成单物种cp/h/s C API、数据格式和温区/焓基准测试。",
           "verification": null
         },
@@ -2510,12 +2510,12 @@
           "acceptance": [
             "固定NASA9系数来源、版本、许可和温区；C计算cp/h/s；独立参考对照、温区边界、焓基准及无效输入测试"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "真实NASA9数据库与可重复参考已落地，补入产物契约；不更改原验收范围。",
           "verification": null
         }
       },
-      "hash": "e74043a41ba78ce079c432ae3f0e44e32ae2be8f2122321dabab673dda0b23ba"
+      "hash": "e0b583dd78051ecc942cc9db79aeab57eb37395e64a7439d6b9c7dff5785c973"
     },
     {
       "seq": 85,
@@ -2523,10 +2523,10 @@
       "task": "MOD-001",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "10月3日固定热物性数据并复核型号原文；接续CEA固定算例，不将物性等同发动机计算。",
-      "previous_hash": "e74043a41ba78ce079c432ae3f0e44e32ae2be8f2122321dabab673dda0b23ba",
+      "previous_hash": "e0b583dd78051ecc942cc9db79aeab57eb37395e64a7439d6b9c7dff5785c973",
       "details": {
         "context_before": {
           "phase": "Windows主线：资料证据与C性能计算",
@@ -2562,7 +2562,7 @@
           ]
         }
       },
-      "hash": "aa2f7c80fe91ccb078cba235eb009505f31bdd5ae29f11ef178ad70089722edf"
+      "hash": "c4730a596b8908c3d51be5e93abe4d5c542626e297f7063b643b46dea438a9cc"
     },
     {
       "seq": 86,
@@ -2570,11 +2570,11 @@
       "task": "MOD-001",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "验收对应：CEA版本/NOTICE/哈希及十物种28温区固定；C计算cp/h/s；134状态Cantera软件对照；温区/导数/形成焓/非法输入/输出保持测试齐全，Debug/Release物性1175项与CLI15组零跳过。不是实验或发动机验证。",
-      "previous_hash": "aa2f7c80fe91ccb078cba235eb009505f31bdd5ae29f11ef178ad70089722edf",
-      "hash": "0b8317d81218e4f3565b5e6e5cfa5f42c24d6d7e7bc856e7d294b447ae12d660"
+      "previous_hash": "c4730a596b8908c3d51be5e93abe4d5c542626e297f7063b643b46dea438a9cc",
+      "hash": "311c91b9d1ebfd67a3ca2a03688a184964a7fb8c41137e9f5d2f37cc837387cc"
     },
     {
       "seq": 87,
@@ -2582,11 +2582,11 @@
       "task": "MOD-001",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "契约已逐项实现并通过新鲜完整质量证据；仅完成NASA9单物种物性，HP平衡、混合熵和温变喷管留给MOD-002。",
-      "previous_hash": "0b8317d81218e4f3565b5e6e5cfa5f42c24d6d7e7bc856e7d294b447ae12d660",
-      "hash": "aa247f21a5973547e6b92ec3f334c44bcb0068418c68270fd88b4e80eea1e3b4"
+      "previous_hash": "311c91b9d1ebfd67a3ca2a03688a184964a7fb8c41137e9f5d2f37cc837387cc",
+      "hash": "a9517ff0ef2034a968db6ef0d32c78e8ff985c7b99f7f5b7844f24b1668f847b"
     },
     {
       "seq": 88,
@@ -2594,11 +2594,11 @@
       "task": "REF-001",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "已取得固定CEA源码并Windows构建成功；开始气相CH4/O2的TP/HP和平衡/燃烧室冻结算例归档及重现检查。",
-      "previous_hash": "aa247f21a5973547e6b92ec3f334c44bcb0068418c68270fd88b4e80eea1e3b4",
-      "hash": "cb5b3ba8d9a6d5dbdc39781be04d9cca32cbaca9ce50d2df8f8a0154b2a1cd74"
+      "previous_hash": "a9517ff0ef2034a968db6ef0d32c78e8ff985c7b99f7f5b7844f24b1668f847b",
+      "hash": "b17b45b9ae6452e56bfcca017d9085ec0910ec01fa2529c1effac52d339135c5"
     },
     {
       "seq": 89,
@@ -2606,10 +2606,10 @@
       "task": "REF-001",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "四个固定CH4/O2气态方法算例已归档并独立复跑；补充可复跑工具、原始输出哈希和缺陷记录。",
-      "previous_hash": "cb5b3ba8d9a6d5dbdc39781be04d9cca32cbaca9ce50d2df8f8a0154b2a1cd74",
+      "previous_hash": "b17b45b9ae6452e56bfcca017d9085ec0910ec01fa2529c1effac52d339135c5",
       "details": {
         "contract_before": {
           "id": "REF-001",
@@ -2626,7 +2626,7 @@
           "acceptance": [
             "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "已取得固定CEA源码并Windows构建成功；开始气相CH4/O2的TP/HP和平衡/燃烧室冻结算例归档及重现检查。",
           "verification": null
         },
@@ -2649,12 +2649,12 @@
           "acceptance": [
             "固定CEA版本及系数文件哈希；保存原始输入输出；同条件区分平衡和冻结；记录获得原文、成功运行与失败情况，不把README当复现证据"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "四个固定CH4/O2气态方法算例已归档并独立复跑；补充可复跑工具、原始输出哈希和缺陷记录。",
           "verification": null
         }
       },
-      "hash": "63be92bd8a81f04da33beef21de5bd02ffb185b1e17764caea32457a6d9933fe"
+      "hash": "f7f049b0070a65f67b83f5270b245896dc53c363a855f94cda4a2d47ba09ed93"
     },
     {
       "seq": 90,
@@ -2662,11 +2662,11 @@
       "task": "REF-001",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "固定CEA v3.3.4/提交与数据库；四卡原输入输出/日志/哈希已保存，TP/HP和平衡/燃烧室冻结条件一致；三次正式复跑数值一致，三组证据/缺陷反例测试接入质量入口。初始输出缺陷保留，不采用可疑标签列。仅方法参考。",
-      "previous_hash": "63be92bd8a81f04da33beef21de5bd02ffb185b1e17764caea32457a6d9933fe",
-      "hash": "5eb5995f6790192547903f320bfdb8c560963bff5a2d5b3304b7d0eca09ede3f"
+      "previous_hash": "f7f049b0070a65f67b83f5270b245896dc53c363a855f94cda4a2d47ba09ed93",
+      "hash": "b7e581f6649e4ec24e935483f893234c14deb93cc6a0ee94ede36d22a203782d"
     },
     {
       "seq": 91,
@@ -2674,11 +2674,11 @@
       "task": "REF-001",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "验收契约逐项满足并通过新鲜五项质量检查；只完成外部参考复现，尚未证明项目C热化学/喷管数值。",
-      "previous_hash": "5eb5995f6790192547903f320bfdb8c560963bff5a2d5b3304b7d0eca09ede3f",
-      "hash": "b7d91232ffea353791b67ac447d56dfe35baf89efdd61c836548fe10a45caa85"
+      "previous_hash": "b7e581f6649e4ec24e935483f893234c14deb93cc6a0ee94ede36d22a203782d",
+      "hash": "8d7910fce353ea2d8472710bfcaafaab74e77c310e8ed760910c300c3d890f52"
     },
     {
       "seq": 92,
@@ -2686,11 +2686,11 @@
       "task": "MOD-002",
       "from": "PLANNED",
       "to": "READY",
-      "actor": "codex",
+      "actor": "buaabw",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "b7d91232ffea353791b67ac447d56dfe35baf89efdd61c836548fe10a45caa85",
-      "hash": "5ce4af56494791568af697c3cbb3791567eadf9ff9aea665fda326c2ee6db8d7"
+      "previous_hash": "8d7910fce353ea2d8472710bfcaafaab74e77c310e8ed760910c300c3d890f52",
+      "hash": "799260a305b9162bd532adc6012707a0e9c46a1cc7574b6e489228cccd2767be"
     },
     {
       "seq": 93,
@@ -2698,11 +2698,11 @@
       "task": "MOD-002",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
-      "previous_hash": "5ce4af56494791568af697c3cbb3791567eadf9ff9aea665fda326c2ee6db8d7",
-      "hash": "7af861cc58257cb493d9a7b7d3fca3c0f2e458679339eef56519bddb87bfda88"
+      "previous_hash": "799260a305b9162bd532adc6012707a0e9c46a1cc7574b6e489228cccd2767be",
+      "hash": "f82509768f9ca8c095323a5f66302cd24308ac84eb2207f190a587adb1c399ef"
     },
     {
       "seq": 94,
@@ -2710,10 +2710,10 @@
       "task": "MOD-002",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "物性与参考已完成，将工作面转入C热化学与温变喷管；缺失真实参数不以方法算例替换。",
-      "previous_hash": "7af861cc58257cb493d9a7b7d3fca3c0f2e458679339eef56519bddb87bfda88",
+      "previous_hash": "f82509768f9ca8c095323a5f66302cd24308ac84eb2207f190a587adb1c399ef",
       "details": {
         "context_before": {
           "phase": "Windows主线：真实物性与CEA参考算例",
@@ -2747,7 +2747,7 @@
           ]
         }
       },
-      "hash": "6702f834c2e8bba71aa103b0232b599af12d4fb12b49b2cf47bfb900fb0dfbc6"
+      "hash": "1263de0b5ddf5142239ac0592875de7d28abbac2bcd79a6df4f0495b9c09e6a7"
     },
     {
       "seq": 95,
@@ -2755,10 +2755,10 @@
       "task": "MOD-002",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
-      "previous_hash": "6702f834c2e8bba71aa103b0232b599af12d4fb12b49b2cf47bfb900fb0dfbc6",
+      "previous_hash": "1263de0b5ddf5142239ac0592875de7d28abbac2bcd79a6df4f0495b9c09e6a7",
       "details": {
         "contract_before": {
           "id": "MOD-002",
@@ -2775,7 +2775,7 @@
           "acceptance": [
             "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "物性与CEA参考已齐备；接续受限气相TP→HP→燃烧室冻结喷管，先建设纯C元素/焓残差和显式不收敛契约。",
           "verification": null
         },
@@ -2801,12 +2801,12 @@
           "acceptance": [
             "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
           "verification": null
         }
       },
-      "hash": "bee354bbe1caea7008b97546862e6cb0af4c0f958336993bfad7aec4fb0234f6"
+      "hash": "966cd61c8444c0cbea214905f81cbaea6fe295010e66ec88344eb5e77c253aac"
     },
     {
       "seq": 96,
@@ -2814,10 +2814,10 @@
       "task": "MOD-002",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "TP/HP与燃烧室冻结喷管已通过Windows配置测试和固定CEA对照；准备完整质量验收与本地提交",
-      "previous_hash": "bee354bbe1caea7008b97546862e6cb0af4c0f958336993bfad7aec4fb0234f6",
+      "previous_hash": "966cd61c8444c0cbea214905f81cbaea6fe295010e66ec88344eb5e77c253aac",
       "details": {
         "context_before": {
           "phase": "Windows主线：C燃烧平衡与温变喷管",
@@ -2850,7 +2850,7 @@
           ]
         }
       },
-      "hash": "ca890e15f331d72d919cd456914104d858affe2ba511c82896220cd886a1f272"
+      "hash": "0b10763af6b71ac413de1112bde41a6076e9a845dcde2d91d080349ec61c206f"
     },
     {
       "seq": 97,
@@ -2858,10 +2858,10 @@
       "task": "MOD-002",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "最终验收指向初始化修正后的v2结果；v1保留为早期实跑记录",
-      "previous_hash": "ca890e15f331d72d919cd456914104d858affe2ba511c82896220cd886a1f272",
+      "previous_hash": "0b10763af6b71ac413de1112bde41a6076e9a845dcde2d91d080349ec61c206f",
       "details": {
         "contract_before": {
           "id": "MOD-002",
@@ -2885,7 +2885,7 @@
           "acceptance": [
             "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "补齐已实现API、测试与固定CEA对照产物；不改变气相与燃烧室冻结验收范围",
           "verification": null
         },
@@ -2911,12 +2911,12 @@
           "acceptance": [
             "纯C实现既定气相范围；元素、焓和喷管连续/能量残差通过；同条件CEA对照；相态、温区、正量和不收敛有显式失败状态"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "最终验收指向初始化修正后的v2结果；v1保留为早期实跑记录",
           "verification": null
         }
       },
-      "hash": "be80fde5b4964fc5472800f1ff4447ac45c6fe1d1af98d26341fd1606b4d0265"
+      "hash": "52c64054babd117482fd31fba9e72edc40f0f642bcbe0b041c7517978d821c16"
     },
     {
       "seq": 98,
@@ -2924,11 +2924,11 @@
       "task": "MOD-002",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "Windows C17 TP/HP与燃烧室冻结温变喷管已实现；元素/焓/化学势/连续/能量/熵/声速残差，CEA固定参考、CMake CTest、GCC analyzer与失败契约均有新鲜证据。真实型号、液态入口、凝聚相、循环仍明确不在范围。",
-      "previous_hash": "be80fde5b4964fc5472800f1ff4447ac45c6fe1d1af98d26341fd1606b4d0265",
-      "hash": "73cdfad4e53a19257ee0f6bf1b4c671638db18d08b17b8d56f90dce5a568377d"
+      "previous_hash": "52c64054babd117482fd31fba9e72edc40f0f642bcbe0b041c7517978d821c16",
+      "hash": "7ab2e0e44da0fac0fa43328133bfd628035d11140e4a03583e3cfc173cea9eb4"
     },
     {
       "seq": 99,
@@ -2936,11 +2936,11 @@
       "task": "MOD-002",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "验收完成：固定气态CH4/O2方法算例与C自有实现同条件通过；v2验证归档和文档已更新。此DONE不表示真实发动机性能或独立人员科学审查完成。",
-      "previous_hash": "73cdfad4e53a19257ee0f6bf1b4c671638db18d08b17b8d56f90dce5a568377d",
-      "hash": "7ce607d53fa41ca037877041e21ac23ea56fe1b105cc12e0fe6a27dbb04408cb"
+      "previous_hash": "7ab2e0e44da0fac0fa43328133bfd628035d11140e4a03583e3cfc173cea9eb4",
+      "hash": "a622d5c24379a371c682c8adab6e54bd1ecdb90022a15dbef50f14c7cdc0d295"
     },
     {
       "seq": 100,
@@ -2948,11 +2948,11 @@
       "task": "MOD-003",
       "from": "PLANNED",
       "to": "READY",
-      "actor": "codex",
+      "actor": "buaabw",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "7ce607d53fa41ca037877041e21ac23ea56fe1b105cc12e0fe6a27dbb04408cb",
-      "hash": "b5ad057e1ea9a0130ab9a3114f4a2fd643b7a5cf98d28f97bb607f6d6cac2565"
+      "previous_hash": "a622d5c24379a371c682c8adab6e54bd1ecdb90022a15dbef50f14c7cdc0d295",
+      "hash": "d6cce25f6ba48c9ecd849ba074af54ba598a8b835eede781206545af5ab9865b"
     },
     {
       "seq": 101,
@@ -2960,11 +2960,11 @@
       "task": "ANA-002",
       "from": "PLANNED",
       "to": "READY",
-      "actor": "codex",
+      "actor": "buaabw",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "b5ad057e1ea9a0130ab9a3114f4a2fd643b7a5cf98d28f97bb607f6d6cac2565",
-      "hash": "a69c50b295194b1f1a7a3d0b208b204f7abd4e6587c511020c43dd0bb09731b7"
+      "previous_hash": "d6cce25f6ba48c9ecd849ba074af54ba598a8b835eede781206545af5ab9865b",
+      "hash": "21cda5492947852981b93013030df4e7206b7ee688fc6c78262cb161e6baf05e"
     },
     {
       "seq": 102,
@@ -2972,11 +2972,11 @@
       "task": "MOD-003",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "实现有明确假设的稳态支路/泵/涡轮与整机推力边界；验证质量、能量、轴功率和零支路极限，不推定真实型号循环",
-      "previous_hash": "a69c50b295194b1f1a7a3d0b208b204f7abd4e6587c511020c43dd0bb09731b7",
-      "hash": "0bca7141a2b1fb5f3ebb1fc66ca2623e85d393c4b42e8a7dd5182f5521c84426"
+      "previous_hash": "21cda5492947852981b93013030df4e7206b7ee688fc6c78262cb161e6baf05e",
+      "hash": "f48be5e4208935cf8b920665cb6f3dad8b68b0bf997a4d239217404ca6236a58"
     },
     {
       "seq": 103,
@@ -2984,10 +2984,10 @@
       "task": "MOD-003",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "将已实现的外排循环、C测试、严格输入和固定归档纳入实际验收产物；回流因混合化学未闭合显式拒绝，不降低原质量/轴功/能量/零支路要求",
-      "previous_hash": "0bca7141a2b1fb5f3ebb1fc66ca2623e85d393c4b42e8a7dd5182f5521c84426",
+      "previous_hash": "f48be5e4208935cf8b920665cb6f3dad8b68b0bf997a4d239217404ca6236a58",
       "details": {
         "contract_before": {
           "id": "MOD-003",
@@ -3004,7 +3004,7 @@
           "acceptance": [
             "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "实现有明确假设的稳态支路/泵/涡轮与整机推力边界；验证质量、能量、轴功率和零支路极限，不推定真实型号循环",
           "verification": null
         },
@@ -3032,12 +3032,12 @@
           "acceptance": [
             "选定有来源或明确假设的控制体；C计算支路和轴功率；质量、能量、功率与零支路极限测试；不从家族名推定真实循环"
           ],
-          "owner": "codex",
+          "owner": "buaabw",
           "note": "将已实现的外排循环、C测试、严格输入和固定归档纳入实际验收产物；回流因混合化学未闭合显式拒绝，不降低原质量/轴功/能量/零支路要求",
           "verification": null
         }
       },
-      "hash": "e02bdc77f88c2c5ee6fee53dc3f070c1a17f749ee9556736b14e2df84863712e"
+      "hash": "a5b9b7ae63254739c4b285afbf37e33fd6d904122f1707ab2f90c95009cb9a60"
     },
     {
       "seq": 104,
@@ -3045,10 +3045,10 @@
       "task": "MOD-003",
       "from": "ACTIVE",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "更新已实跑循环能力和后续研究入口；10月4日新增固定源码核验不代表两型性能参数更新",
-      "previous_hash": "e02bdc77f88c2c5ee6fee53dc3f070c1a17f749ee9556736b14e2df84863712e",
+      "previous_hash": "a5b9b7ae63254739c4b285afbf37e33fd6d904122f1707ab2f90c95009cb9a60",
       "details": {
         "context_before": {
           "phase": "Windows主线：燃烧与冻结喷管验收，接续整机循环与改进研究",
@@ -3078,7 +3078,7 @@
           ]
         }
       },
-      "hash": "c31044dedbf490a5f8df13fd2f33827684f4d0db4fda8a024deca56b6c1448e4"
+      "hash": "105c70d6dac8f630a0b0e2fcac0eaf8ceb8f2f6fe7869db150228982fa2c1f33"
     },
     {
       "seq": 105,
@@ -3086,11 +3086,11 @@
       "task": "MOD-003",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "泵制造解、恒cp涡轮解析极限、轴功分流、主/支推力、零支路与三类记账均已C实现和实跑；Debug/Release分别241循环检查、22组CLI；固定合成归档86方程；非零回流明确拒绝，热交换为所需量而非独立燃烧预测",
-      "previous_hash": "c31044dedbf490a5f8df13fd2f33827684f4d0db4fda8a024deca56b6c1448e4",
-      "hash": "619d7f635f603b28375a6f05a13ef6f777f4120d1c1d63fe4ae656ba9e93ced0"
+      "previous_hash": "105c70d6dac8f630a0b0e2fcac0eaf8ceb8f2f6fe7869db150228982fa2c1f33",
+      "hash": "fce359c45d34dc8750862c2b4ca341b1a549c03f992628d46bc98965db903a72"
     },
     {
       "seq": 106,
@@ -3098,11 +3098,11 @@
       "task": "MOD-003",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "按任务契约验收给定热状态的外排控制体；完整质量5组PASS、16生产C源静态分析、Windows CMake 6/6 CTest。本人解释验收而非独立科学人审；无液态物性、补燃回流或真实型号闭合，接续ANA-002收益/代价/敏感性",
-      "previous_hash": "619d7f635f603b28375a6f05a13ef6f777f4120d1c1d63fe4ae656ba9e93ced0",
-      "hash": "3be6e54840502ad438046f4472e1645c700763a69a0455ec41b809d5b3eed267"
+      "previous_hash": "fce359c45d34dc8750862c2b4ca341b1a549c03f992628d46bc98965db903a72",
+      "hash": "ea39eb90500d88773e02780b997825cece7334a41143cfa82f1d290e75e10458"
     },
     {
       "seq": 107,
@@ -3113,8 +3113,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "3be6e54840502ad438046f4472e1645c700763a69a0455ec41b809d5b3eed267",
-      "hash": "a650eead06e23a0760486e8f3a7577f0f9bcdc05d6122ad508f8cdec349efa05"
+      "previous_hash": "ea39eb90500d88773e02780b997825cece7334a41143cfa82f1d290e75e10458",
+      "hash": "10b2cd5e3b12eaa5682cf72b65319e0009c8468f69ff0eca9baf366dcecb1690"
     },
     {
       "seq": 108,
@@ -3125,8 +3125,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "按本地复现修复数据、报告与追溯契约，同时建设阶段交接；不扩展真实发动机模型或最终报告",
-      "previous_hash": "a650eead06e23a0760486e8f3a7577f0f9bcdc05d6122ad508f8cdec349efa05",
-      "hash": "5a890cd2fc2c09c0bd1ca0d3cd7a10f72b98d0c0bd1a3b7157e2567d0bb915bf"
+      "previous_hash": "10b2cd5e3b12eaa5682cf72b65319e0009c8468f69ff0eca9baf366dcecb1690",
+      "hash": "ca8bf0f4626633cf1cc0e82a6688cc73f208f07a8719eff47e5677ec3549e5a9"
     },
     {
       "seq": 109,
@@ -3137,7 +3137,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "暂先闭合排查问题和阶段交接，再接续改进研究",
-      "previous_hash": "5a890cd2fc2c09c0bd1ca0d3cd7a10f72b98d0c0bd1a3b7157e2567d0bb915bf",
+      "previous_hash": "ca8bf0f4626633cf1cc0e82a6688cc73f208f07a8719eff47e5677ec3549e5a9",
       "details": {
         "context_before": {
           "phase": "Windows主线：燃烧、冻结喷管与外排循环验收；接续改进研究。",
@@ -3166,7 +3166,7 @@
           ]
         }
       },
-      "hash": "b130743bc1577fbc4e2a4ac1609611687de23c466b7eaceb801c64bb2286e673"
+      "hash": "f6f548fab70d30ded5e5093ebe957ab3ae91fc12527f19e7d8002fb427975698"
     },
     {
       "seq": 110,
@@ -3177,7 +3177,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "先完成已复现的验收修复和阶段交接，再使用循环结果推进改进研究",
-      "previous_hash": "b130743bc1577fbc4e2a4ac1609611687de23c466b7eaceb801c64bb2286e673",
+      "previous_hash": "f6f548fab70d30ded5e5093ebe957ab3ae91fc12527f19e7d8002fb427975698",
       "details": {
         "contract_before": {
           "id": "ANA-002",
@@ -3222,7 +3222,7 @@
           "verification": null
         }
       },
-      "hash": "f33a8c4f6474542102c59bf9f330e17cde204776eb68ee32165f85332335a319"
+      "hash": "dc52e923d055591c1ea84c1039f6868dbd3f279dd2ac79ab11bdabfc99d318b1"
     },
     {
       "seq": 111,
@@ -3233,7 +3233,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七项验收修复与阶段交接产物已落地，待新鲜全量质量和独立检出复验",
-      "previous_hash": "f33a8c4f6474542102c59bf9f330e17cde204776eb68ee32165f85332335a319",
+      "previous_hash": "dc52e923d055591c1ea84c1039f6868dbd3f279dd2ac79ab11bdabfc99d318b1",
       "details": {
         "context_before": {
           "phase": "Windows验收修复与阶段交接；随后接续改进研究",
@@ -3263,7 +3263,7 @@
           ]
         }
       },
-      "hash": "f8f9428b740df50a6c1c8805763666dcf783c0d4333ca65643f9fc7b50159cc9"
+      "hash": "f16a4e812684ebed33bb011da35d78de8041a17099cafce9481e837c50a90977"
     },
     {
       "seq": 112,
@@ -3274,8 +3274,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七项本地验收漏项已逐项修复并有回归测试；Release/Debug、运行管理、治理、交接全量质量通过，Windows CMake 6/6 CTest通过，版本2循环归档已保存。",
-      "previous_hash": "f8f9428b740df50a6c1c8805763666dcf783c0d4333ca65643f9fc7b50159cc9",
-      "hash": "3f735c20bb57e7e62fa20df26e90e14d6ef3d7dc8749d39e8341dc375608c47e"
+      "previous_hash": "f16a4e812684ebed33bb011da35d78de8041a17099cafce9481e837c50a90977",
+      "hash": "593047174770f7e2672789bd64623c40b3d340d7cb48597165ae14d3a5cc9b15"
     },
     {
       "seq": 113,
@@ -3286,8 +3286,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成：提交、程序、失败语义、交接包和接收复跑链路已建立；研究模型边界与真实型号缺口保留，后续接续ANA-002。",
-      "previous_hash": "3f735c20bb57e7e62fa20df26e90e14d6ef3d7dc8749d39e8341dc375608c47e",
-      "hash": "eb854bdab1a06f0fbcc2b7ef705c81461ef73f0a7bed56daf851c3c256609f28"
+      "previous_hash": "593047174770f7e2672789bd64623c40b3d340d7cb48597165ae14d3a5cc9b15",
+      "hash": "3bea0880ef9fda3256b8feee8e339ea74b2c2e6cd1a8dfd55c872bbbfd0c4b3a"
     },
     {
       "seq": 114,
@@ -3298,8 +3298,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "eb854bdab1a06f0fbcc2b7ef705c81461ef73f0a7bed56daf851c3c256609f28",
-      "hash": "3dbec824b959d267321ff1267c8dd02e9121f6b79845e051c2079e1b373dec41"
+      "previous_hash": "3bea0880ef9fda3256b8feee8e339ea74b2c2e6cd1a8dfd55c872bbbfd0c4b3a",
+      "hash": "2e5d38065b806c7c6e06efe6a6e4559c763c1af0f5c131cf938b4e8b3d944378"
     },
     {
       "seq": 115,
@@ -3310,8 +3310,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "纠正过早DONE：完整质量与局部交接回归已通过，但正式包及独立干净检出尚未验完；完成这些实际验收后再结项。",
-      "previous_hash": "3dbec824b959d267321ff1267c8dd02e9121f6b79845e051c2079e1b373dec41",
-      "hash": "a63bce39e7f5d94dfcfc18861c6e912d094ad84ceb1d1ac453542018e1ea2feb"
+      "previous_hash": "2e5d38065b806c7c6e06efe6a6e4559c763c1af0f5c131cf938b4e8b3d944378",
+      "hash": "040a1cc9caad2686f620a2604fdf1854fa7ff2509e6a8e5e68b191fc99c7db5d"
     },
     {
       "seq": 116,
@@ -3322,8 +3322,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Upstream reopened; prerequisite readiness revoked",
-      "previous_hash": "a63bce39e7f5d94dfcfc18861c6e912d094ad84ceb1d1ac453542018e1ea2feb",
-      "hash": "2ef30919dd70e19e43cf2e656492e6f84e1e045c2dafc2e945a7f24b9f48fb49"
+      "previous_hash": "040a1cc9caad2686f620a2604fdf1854fa7ff2509e6a8e5e68b191fc99c7db5d",
+      "hash": "3e1326da682ad3850d554a7f363ff8e7510ea9db34d6d803ed23d1de6dbd1c3c"
     },
     {
       "seq": 117,
@@ -3334,8 +3334,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "补验正式交接包和独立干净检出；保留已有PASS与失败/修正记录。",
-      "previous_hash": "2ef30919dd70e19e43cf2e656492e6f84e1e045c2dafc2e945a7f24b9f48fb49",
-      "hash": "7f81b9325a5c2b840f9e687b21e87e8c03033b59335ab3d94bcd17d40e81ae3a"
+      "previous_hash": "3e1326da682ad3850d554a7f363ff8e7510ea9db34d6d803ed23d1de6dbd1c3c",
+      "hash": "0d1e86181808a569fced7b1e47f1f2d61088428ef58af376061f0923573d5990"
     },
     {
       "seq": 118,
@@ -3346,8 +3346,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七项修复与完整质量已通过，提交可审查实现；正式包和独立检出仍待实际复验，不提前结项。",
-      "previous_hash": "7f81b9325a5c2b840f9e687b21e87e8c03033b59335ab3d94bcd17d40e81ae3a",
-      "hash": "103a9b0845d6936908a7ffa9385935408a2fefdd88eb05d21c400127c320e3e2"
+      "previous_hash": "0d1e86181808a569fced7b1e47f1f2d61088428ef58af376061f0923573d5990",
+      "hash": "f7c3e527637d5d06b7ed7b6c11bd54e194eec5a5f9dc7a11d126f4bcdd727dfa"
     },
     {
       "seq": 119,
@@ -3358,8 +3358,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "独立检出发现旧物性夹具混合行尾在Git中尚未按-text重固定，主/检出指纹不同；不放宽字节检查，先固定现有字节再复验。",
-      "previous_hash": "103a9b0845d6936908a7ffa9385935408a2fefdd88eb05d21c400127c320e3e2",
-      "hash": "95fb4e0c9f75f46834753772c878bb908ad05904d32cbd843ac0a6b5bf933252"
+      "previous_hash": "f7c3e527637d5d06b7ed7b6c11bd54e194eec5a5f9dc7a11d126f4bcdd727dfa",
+      "hash": "bbba371ea2494dbac80729a708a24e227c26c81d2b59f00d90625170e2b5d7e5"
     },
     {
       "seq": 120,
@@ -3370,8 +3370,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定旧合成夹具当前原始字节，数值和本轮新鲜质量输入未改变；待新bundle的干净检出复验后再结项。",
-      "previous_hash": "95fb4e0c9f75f46834753772c878bb908ad05904d32cbd843ac0a6b5bf933252",
-      "hash": "02481af5b699f690ce72b844a6c40de1993ab0d7a284703c0e2a90fd2d19ed02"
+      "previous_hash": "bbba371ea2494dbac80729a708a24e227c26c81d2b59f00d90625170e2b5d7e5",
+      "hash": "aad2c0947c3beecfdbe2717dd50993c2931075de2014212c1aa4734fb29f5b52"
     },
     {
       "seq": 121,
@@ -3382,8 +3382,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "独立包及干净源码检出完整质量均PASS，补登记结项背景与验收快照后提交最终验收。",
-      "previous_hash": "02481af5b699f690ce72b844a6c40de1993ab0d7a284703c0e2a90fd2d19ed02",
-      "hash": "d272734025f0c9c90481605984cf84db7f71081e33dc6866fbe76f9e603b236a"
+      "previous_hash": "aad2c0947c3beecfdbe2717dd50993c2931075de2014212c1aa4734fb29f5b52",
+      "hash": "d7b14ee9e793180ac6676c0a6c1ee4172fddaacdaf9b6753d33131129d0fa662"
     },
     {
       "seq": 122,
@@ -3394,7 +3394,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "阶段交接和独立检出验收完成，转入同条件改进研究准备；外部资料截止不变。",
-      "previous_hash": "d272734025f0c9c90481605984cf84db7f71081e33dc6866fbe76f9e603b236a",
+      "previous_hash": "d7b14ee9e793180ac6676c0a6c1ee4172fddaacdaf9b6753d33131129d0fa662",
       "details": {
         "context_before": {
           "phase": "Windows验收修复与阶段交接；验收后接续改进研究",
@@ -3425,7 +3425,7 @@
           ]
         }
       },
-      "hash": "fae808874e16eacec4949532d1c3d6811896e8a7ca0809b73316bdfb51ad0aa4"
+      "hash": "e0abe10ec33d09db56f31fffd935c3e2386dea5a6145e3e7f95402742070fc6f"
     },
     {
       "seq": 123,
@@ -3436,8 +3436,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七项修复回归、主工作区完整质量6/6、CMake 6/6及正式包成功/失败复跑通过；cca01de独立bundle克隆完整质量6/6通过且指纹一致；字节固定和状态修正已留事件/快照。",
-      "previous_hash": "fae808874e16eacec4949532d1c3d6811896e8a7ca0809b73316bdfb51ad0aa4",
-      "hash": "21a0aa02626d299f4f51eae3bc1a748881c00710f8f9260e9f298c214d218651"
+      "previous_hash": "e0abe10ec33d09db56f31fffd935c3e2386dea5a6145e3e7f95402742070fc6f",
+      "hash": "3a939fa19d0723ad60da05825ddd7c61fee6e43274051fe03916c2f4ec7d5a4c"
     },
     {
       "seq": 124,
@@ -3448,8 +3448,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "实际软件验收完成；本机交接预验和独立干净检出通过，具名外部接收及科学语义审查仍需接手人完成。保留真实型号/液态/回流边界，解锁ANA-002，不推送。",
-      "previous_hash": "21a0aa02626d299f4f51eae3bc1a748881c00710f8f9260e9f298c214d218651",
-      "hash": "9ab854e3a9e012aecb9085b6d17a1137b03f78b3708f825a5afbedf8bd89f865"
+      "previous_hash": "3a939fa19d0723ad60da05825ddd7c61fee6e43274051fe03916c2f4ec7d5a4c",
+      "hash": "a5873c579f2f46b35ef5896366017661e067388793de4a719e6431f4b5a841ad"
     },
     {
       "seq": 125,
@@ -3460,8 +3460,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "9ab854e3a9e012aecb9085b6d17a1137b03f78b3708f825a5afbedf8bd89f865",
-      "hash": "2d8d35e80f1a9e07a6027d5e53a18f6b75b229c0725768278e5be95b1947bb9d"
+      "previous_hash": "a5873c579f2f46b35ef5896366017661e067388793de4a719e6431f4b5a841ad",
+      "hash": "2c1bc4d0f29e88c8ab38c5ea5df67e5d794a34d9e83bbd6cdfed84fea3074253"
     },
     {
       "seq": 126,
@@ -3472,8 +3472,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "最后依赖审查发现参数测试复用指纹还须覆盖来源索引及本地引用；重开补验，不沿用旧包或旧质量指纹。",
-      "previous_hash": "2d8d35e80f1a9e07a6027d5e53a18f6b75b229c0725768278e5be95b1947bb9d",
-      "hash": "aa69e465e4a6db3c1e2c0939f1592f9c4d8ab320d4989e2fd0dec8312c30549a"
+      "previous_hash": "2c1bc4d0f29e88c8ab38c5ea5df67e5d794a34d9e83bbd6cdfed84fea3074253",
+      "hash": "f9712bbcb92ca8121b093d36fa95999296895245c2957057e565271c54119069"
     },
     {
       "seq": 127,
@@ -3484,8 +3484,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Upstream reopened; prerequisite readiness revoked",
-      "previous_hash": "aa69e465e4a6db3c1e2c0939f1592f9c4d8ab320d4989e2fd0dec8312c30549a",
-      "hash": "70c7470bfe67ed62bc56d74aca65a04cf6606b47befa68e672ae959120f9e53e"
+      "previous_hash": "f9712bbcb92ca8121b093d36fa95999296895245c2957057e565271c54119069",
+      "hash": "028576be1373eb372d40748fdcb23dfc91bb054afcffcff7bbf61e1a927754a0"
     },
     {
       "seq": 128,
@@ -3496,8 +3496,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "补齐参数证据输入依赖，增加定向回归，并重跑全量质量与正式交接。",
-      "previous_hash": "70c7470bfe67ed62bc56d74aca65a04cf6606b47befa68e672ae959120f9e53e",
-      "hash": "c4f94e9bec023f220b4a6037cd93c0d7842345ffc15160899e15ae44d6b9b188"
+      "previous_hash": "028576be1373eb372d40748fdcb23dfc91bb054afcffcff7bbf61e1a927754a0",
+      "hash": "84e4c991c2a89956ff8a2c21961ab36d11a0efd7bd243cf7975cdad8dc2c8f91"
     },
     {
       "seq": 129,
@@ -3508,7 +3508,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "新增来源索引依赖正在补验，避免生成工作面继续显示本轮已经最终验收。",
-      "previous_hash": "c4f94e9bec023f220b4a6037cd93c0d7842345ffc15160899e15ae44d6b9b188",
+      "previous_hash": "84e4c991c2a89956ff8a2c21961ab36d11a0efd7bd243cf7975cdad8dc2c8f91",
       "details": {
         "context_before": {
           "phase": "Windows阶段基础已验收；接续改进代价与敏感性研究",
@@ -3539,7 +3539,7 @@
           ]
         }
       },
-      "hash": "f12d9aad763aa5b2ffdead048636a666dce6baa326d236712626194cb18e8eec"
+      "hash": "ea33304dbdf2c63f905a521a0b6557e693a28880bf453dd15d3333f76d9c444c"
     },
     {
       "seq": 130,
@@ -3550,8 +3550,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "新增来源索引及参数本地引用依赖后完整质量6/6通过，运行管理现20组；待本次源码新检出复验后结项。",
-      "previous_hash": "f12d9aad763aa5b2ffdead048636a666dce6baa326d236712626194cb18e8eec",
-      "hash": "0562e3148a971892fbed45a962cb9e5c601caa41dc0dd0634af7fcca26d0fb40"
+      "previous_hash": "ea33304dbdf2c63f905a521a0b6557e693a28880bf453dd15d3333f76d9c444c",
+      "hash": "9650c4878aa40eaea355c388f150d66c08dd612f8384660ce261c2c61ce85949"
     },
     {
       "seq": 131,
@@ -3562,8 +3562,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "来源依赖补验后的正式包和独立干净克隆完整质量均PASS，登记最终交接背景后验收结项。",
-      "previous_hash": "0562e3148a971892fbed45a962cb9e5c601caa41dc0dd0634af7fcca26d0fb40",
-      "hash": "e14c85e66619ec2d1061fcdb3fad729711b06ded8ba715c211ba8f8785016c55"
+      "previous_hash": "9650c4878aa40eaea355c388f150d66c08dd612f8384660ce261c2c61ce85949",
+      "hash": "1c3ae40f22f1f4a865ca877a71da342a77f9f3580409d1adfd140bc549b18a62"
     },
     {
       "seq": 132,
@@ -3574,7 +3574,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "工程交接补验完成，保留外部接收与真实型号研究边界；资料核验截止不变。",
-      "previous_hash": "e14c85e66619ec2d1061fcdb3fad729711b06ded8ba715c211ba8f8785016c55",
+      "previous_hash": "1c3ae40f22f1f4a865ca877a71da342a77f9f3580409d1adfd140bc549b18a62",
       "details": {
         "context_before": {
           "phase": "Windows交接证据依赖补验；验收后接续改进研究",
@@ -3605,7 +3605,7 @@
           ]
         }
       },
-      "hash": "930ae8bc388ed826ea919821ba0b093114e94a6210560949c59e5cd05a47f9ae"
+      "hash": "9dc292554e23f6c742e29eb7a7f3cac8e101906a9fd4b9c4373c7ced6538111d"
     },
     {
       "seq": 133,
@@ -3616,8 +3616,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "最终补验完成：来源索引和本地引用变化使旧测试证据失效；主工作区与3229b8d独立bundle克隆完整质量6/6通过且指纹一致；运行管理20组，包内成功/失败及具名预验通过。",
-      "previous_hash": "930ae8bc388ed826ea919821ba0b093114e94a6210560949c59e5cd05a47f9ae",
-      "hash": "e0ac4dc35aa8aa71d272def86d86ba721e5926cb49fff3600a1380c3f5ee7366"
+      "previous_hash": "9dc292554e23f6c742e29eb7a7f3cac8e101906a9fd4b9c4373c7ced6538111d",
+      "hash": "de110dc873af7ddb34571b8b6f535e5dfa62ff4676d6d1ecdded6ba6fece1100"
     },
     {
       "seq": 134,
@@ -3628,8 +3628,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七项修复与新增证据依赖已验收，独立干净源码质量及正式交接预验通过；最终提交后重生成包。外部接手者复跑和独立科学语义审查仍待本人执行；真实型号缺口保留，解锁ANA-002，不推送。",
-      "previous_hash": "e0ac4dc35aa8aa71d272def86d86ba721e5926cb49fff3600a1380c3f5ee7366",
-      "hash": "a12cd981256eea136f6ed3c12e273bac0fb084cdc8eb4eaeb8c4f51e125f68a6"
+      "previous_hash": "de110dc873af7ddb34571b8b6f535e5dfa62ff4676d6d1ecdded6ba6fece1100",
+      "hash": "1e2f81195fb4677fb55896a85f3f7c5f733a5f96de166436bb270b27a7128ee1"
     },
     {
       "seq": 135,
@@ -3640,8 +3640,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "a12cd981256eea136f6ed3c12e273bac0fb084cdc8eb4eaeb8c4f51e125f68a6",
-      "hash": "fe84abe6e00dfe86d97e1cb9018ec41e8b095c8634a8dbc9402a3040b7bcb63e"
+      "previous_hash": "1e2f81195fb4677fb55896a85f3f7c5f733a5f96de166436bb270b27a7128ee1",
+      "hash": "d2ac281d416efc1f133317de69bd3f885f421209ec138a448c33eff813cf9c0e"
     },
     {
       "seq": 136,
@@ -3652,8 +3652,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "审阅当前代码/证据/活跃文档，修正误导与维护缺陷；开展C核心同条件扫描、改进代价及敏感性，PPT报告后置。",
-      "previous_hash": "fe84abe6e00dfe86d97e1cb9018ec41e8b095c8634a8dbc9402a3040b7bcb63e",
-      "hash": "f1fd271b1c02d2a45c0ffd836c01734cff19bc4358de552cf10309dcc3bed6db"
+      "previous_hash": "d2ac281d416efc1f133317de69bd3f885f421209ec138a448c33eff813cf9c0e",
+      "hash": "1c2e2434b513eba88eea63ed065c0afd68193fa228925babd79452c81367b244"
     },
     {
       "seq": 137,
@@ -3664,7 +3664,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收漏项已复现修正，39点实际研究归档，继续真实研究状态的参考覆盖；不启动PPT报告",
-      "previous_hash": "f1fd271b1c02d2a45c0ffd836c01734cff19bc4358de552cf10309dcc3bed6db",
+      "previous_hash": "1c2e2434b513eba88eea63ed065c0afd68193fa228925babd79452c81367b244",
       "details": {
         "context_before": {
           "phase": "Windows阶段基础与交接已验收；接续改进代价和敏感性研究",
@@ -3695,7 +3695,7 @@
           ]
         }
       },
-      "hash": "dcff28e35c722d7386b9507c45f201b50df4d956086860d6d59ec243c5379aee"
+      "hash": "68bc3b6fb2a7a982b2ed15fbdd372738b342783a7790b7ae419678090f41a4e7"
     },
     {
       "seq": 138,
@@ -3706,8 +3706,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "dcff28e35c722d7386b9507c45f201b50df4d956086860d6d59ec243c5379aee",
-      "hash": "756c19ff2bf03e4926bc668b3efa5756ddb8958296b2d10bf4107832cf57b050"
+      "previous_hash": "68bc3b6fb2a7a982b2ed15fbdd372738b342783a7790b7ae419678090f41a4e7",
+      "hash": "f26305009979a72c646ea7be50379fc606fd0207e5b12ad79124b89e67c5991c"
     },
     {
       "seq": 139,
@@ -3718,7 +3718,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "用户要求当前研究未完成不开展PPT和最终报告；增加实际研究状态参考覆盖前置",
-      "previous_hash": "756c19ff2bf03e4926bc668b3efa5756ddb8958296b2d10bf4107832cf57b050",
+      "previous_hash": "f26305009979a72c646ea7be50379fc606fd0207e5b12ad79124b89e67c5991c",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -3764,7 +3764,7 @@
           "verification": null
         }
       },
-      "hash": "a1668de31eb9505514f25ed096afef31fdb0ec0ca7e834e37e4d77f71071071b"
+      "hash": "6b108f393c0a33cc6629fd8d9a7f7f4b71cb7dcd72dc9886bd12a9c4bc91fa87"
     },
     {
       "seq": 140,
@@ -3775,7 +3775,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "把剩余科学参考覆盖明确接续为ANA-003，报告/PPT继续研究前置",
-      "previous_hash": "a1668de31eb9505514f25ed096afef31fdb0ec0ca7e834e37e4d77f71071071b",
+      "previous_hash": "6b108f393c0a33cc6629fd8d9a7f7f4b71cb7dcd72dc9886bd12a9c4bc91fa87",
       "details": {
         "context_before": {
           "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
@@ -3806,7 +3806,7 @@
           ]
         }
       },
-      "hash": "9a81db98e6427606ece88d6f52475e520243a56e2625867a94d57bf0858a4217"
+      "hash": "d75e8e7d42f23f8c4808200f76e2c93824383d9427c438b4b38415be3625bb42"
     },
     {
       "seq": 141,
@@ -3817,7 +3817,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "六项完整质量通过，记录合成研究完成边界，接续实际状态参考覆盖，报告PPT后置",
-      "previous_hash": "9a81db98e6427606ece88d6f52475e520243a56e2625867a94d57bf0858a4217",
+      "previous_hash": "d75e8e7d42f23f8c4808200f76e2c93824383d9427c438b4b38415be3625bb42",
       "details": {
         "context_before": {
           "phase": "Windows代码/文档再审与合成改进研究，扩大参考覆盖",
@@ -3848,7 +3848,7 @@
           ]
         }
       },
-      "hash": "ef4becb184ad9f9667fcc4a6ba18475234cacfb39f751ab531dd643d9395dfcc"
+      "hash": "1f286fe67d3ed4d9cb131f1b36d9a6d973edd9abf63738a48ff0e0883f4ee274"
     },
     {
       "seq": 142,
@@ -3859,8 +3859,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "同一数据版本39点C扫描、两项收益与几何代价、五组输入扰动、固定CEA方法复跑及限制均归档；六项质量通过，非整机科学验证",
-      "previous_hash": "ef4becb184ad9f9667fcc4a6ba18475234cacfb39f751ab531dd643d9395dfcc",
-      "hash": "a1ccfcb82b5a87f1393f7fc193277986eb4ae0555cf9432b86a1f2d567160d52"
+      "previous_hash": "1f286fe67d3ed4d9cb131f1b36d9a6d973edd9abf63738a48ff0e0883f4ee274",
+      "hash": "195d7b8deeddb4697f5356d861d33ba88ebcb8936e177958155e516742e07571"
     },
     {
       "seq": 143,
@@ -3871,8 +3871,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "合成研究契约核对完成；真实型号参数和实际状态独立参考不冒充完成，后续ANA-003；PPT报告继续后置",
-      "previous_hash": "a1ccfcb82b5a87f1393f7fc193277986eb4ae0555cf9432b86a1f2d567160d52",
-      "hash": "0c8eb0ff9391178b7711cbe63d4d9083918c31f665bf537148cfc3f68d00c83f"
+      "previous_hash": "195d7b8deeddb4697f5356d861d33ba88ebcb8936e177958155e516742e07571",
+      "hash": "59ad82fb3faae801e7d40633da19b7f00159cd375d24dc1507193ef0cbd593c7"
     },
     {
       "seq": 144,
@@ -3883,8 +3883,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "0c8eb0ff9391178b7711cbe63d4d9083918c31f665bf537148cfc3f68d00c83f",
-      "hash": "4845b7397e573cad2eaf7efeb36dc4136851daf41085ba5027159fc22638300c"
+      "previous_hash": "59ad82fb3faae801e7d40633da19b7f00159cd375d24dc1507193ef0cbd593c7",
+      "hash": "43c4b41cf1521307ca20a3c35495331fbc52cb0926132b024269f7dc7d72ab60"
     },
     {
       "seq": 145,
@@ -3895,8 +3895,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "从已提交的合成研究接续：实际主室和发生器TP独立参考，固定几何区别；PPT报告继续后置",
-      "previous_hash": "4845b7397e573cad2eaf7efeb36dc4136851daf41085ba5027159fc22638300c",
-      "hash": "fffb20059302d2022003dc9ac9371e7ecd418c0644fc01f7a85ed0d89606588e"
+      "previous_hash": "43c4b41cf1521307ca20a3c35495331fbc52cb0926132b024269f7dc7d72ab60",
+      "hash": "bc8293aa4e0f201e95539b539888d988a4b77e14fe1c3cdf22dd0ae1363c0e17"
     },
     {
       "seq": 146,
@@ -3907,8 +3907,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "fffb20059302d2022003dc9ac9371e7ecd418c0644fc01f7a85ed0d89606588e",
-      "hash": "8ceb8be86d07cfbde741197c3a10e17eb88fc51c98738868f57bde08e3e0aa8a"
+      "previous_hash": "bc8293aa4e0f201e95539b539888d988a4b77e14fe1c3cdf22dd0ae1363c0e17",
+      "hash": "09b08ccb275a0bdec4a5ad19f2968c20f0283602d152c667204a77736953e482"
     },
     {
       "seq": 147,
@@ -3919,7 +3919,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "TP合同完成后仍需实际冻结喷管及固定几何研究；不提前启动PPT报告",
-      "previous_hash": "8ceb8be86d07cfbde741197c3a10e17eb88fc51c98738868f57bde08e3e0aa8a",
+      "previous_hash": "09b08ccb275a0bdec4a5ad19f2968c20f0283602d152c667204a77736953e482",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -3967,7 +3967,7 @@
           "verification": null
         }
       },
-      "hash": "d8afc5ea70d5e829b1589556287259249e1236fd44fa21ee0c8ea85caf868798"
+      "hash": "f090c5477fedd5eba501181f66d73b1fc0f7b5eecd240c6945a474be8241dcdb"
     },
     {
       "seq": 148,
@@ -3978,7 +3978,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "六状态实际TP参考和类型/trace反例已落地，准备全量验收；后续实际冻结喷管独立任务",
-      "previous_hash": "d8afc5ea70d5e829b1589556287259249e1236fd44fa21ee0c8ea85caf868798",
+      "previous_hash": "f090c5477fedd5eba501181f66d73b1fc0f7b5eecd240c6945a474be8241dcdb",
       "details": {
         "context_before": {
           "phase": "合成改进与审阅已验收；接续实际研究状态参考覆盖",
@@ -4010,7 +4010,7 @@
           ]
         }
       },
-      "hash": "aa028ef03e781b47c9d8b5fc8289eaedc0b0972e54f75a4f0c858df0ef41eef3"
+      "hash": "d470d76492655dafdf93a492ee18ef49d6a3269e8f3de2ef16f39c2db53b0b8e"
     },
     {
       "seq": 149,
@@ -4021,7 +4021,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "实际六状态TP和类型/trace审阅完成；在最终代码文档上重跑验收后落地提交",
-      "previous_hash": "aa028ef03e781b47c9d8b5fc8289eaedc0b0972e54f75a4f0c858df0ef41eef3",
+      "previous_hash": "d470d76492655dafdf93a492ee18ef49d6a3269e8f3de2ef16f39c2db53b0b8e",
       "details": {
         "context_before": {
           "phase": "合成研究与实际六状态TP已产出；验收后接续冻结喷管参考",
@@ -4054,7 +4054,7 @@
           ]
         }
       },
-      "hash": "cc8ec144c48a0ed437c9f250e7ec0159855975606e17ccd74cd10cffbdc5d018"
+      "hash": "db0999d20911379ac5d4b910a5dc178f0d5d53a4aee512bda0115e29fc5cd9fe"
     },
     {
       "seq": 150,
@@ -4065,8 +4065,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "六个保存研究状态的同条件CEA TP及新C对照通过126项检查；温度和总体O/F邻域、原始输入输出/构建身份及打印精度已归档；固定几何与重新定尺寸、两型可用边界已说明。验收限于该合同，不是整机或实验验证。",
-      "previous_hash": "cc8ec144c48a0ed437c9f250e7ec0159855975606e17ccd74cd10cffbdc5d018",
-      "hash": "c8dc1ce039c35d8a9c67b1bea69c0dba0b34d2b063084d96a5d213176b710050"
+      "previous_hash": "db0999d20911379ac5d4b910a5dc178f0d5d53a4aee512bda0115e29fc5cd9fe",
+      "hash": "14af022a8cefcc4de02c9e5f3f05028f3aa91526b95edd3c388c650d28831e75"
     },
     {
       "seq": 151,
@@ -4077,8 +4077,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "六状态TP、邻域和边界说明按合同验收；强类型/trace/重哈希数值反例通过。实际冻结喷管与固定几何实现接续ANA-004，液态煤油和整机独立参考仍缺，不启动PPT报告。",
-      "previous_hash": "c8dc1ce039c35d8a9c67b1bea69c0dba0b34d2b063084d96a5d213176b710050",
-      "hash": "97c96557d4f6141fb47f7f4251d6be7d8d22013c675a839dbbb0fcc2179a97e4"
+      "previous_hash": "14af022a8cefcc4de02c9e5f3f05028f3aa91526b95edd3c388c650d28831e75",
+      "hash": "781f9bf74de257d4fd6d6ddca3f4e7182f73cf4702d1d2345f7446c0aff1587e"
     },
     {
       "seq": 152,
@@ -4089,8 +4089,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "97c96557d4f6141fb47f7f4251d6be7d8d22013c675a839dbbb0fcc2179a97e4",
-      "hash": "7fdce5fc3dcb88603d2217f35b0447a2c3ce1fadec512da95f5534e79e5d041b"
+      "previous_hash": "781f9bf74de257d4fd6d6ddca3f4e7182f73cf4702d1d2345f7446c0aff1587e",
+      "hash": "bf151f8b9d0c79f3a0b2670ec2a52ed65d9e9717fc699fcf63d595e868fc2584"
     },
     {
       "seq": 153,
@@ -4101,8 +4101,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "从六状态TP继续：核对固定CEA对给定主室温度的支持，补实际冻结喷管及固定At响应；不制作PPT报告",
-      "previous_hash": "7fdce5fc3dcb88603d2217f35b0447a2c3ce1fadec512da95f5534e79e5d041b",
-      "hash": "54c4d4e0b8dc054e1dcc9f093adb103ef0906384f82b8ee805c23221ed5e0f3b"
+      "previous_hash": "bf151f8b9d0c79f3a0b2670ec2a52ed65d9e9717fc699fcf63d595e868fc2584",
+      "hash": "e0bb1eaab09d0109ee9e569617d8f4a0571da4be1c17dcfe2f6c2368dfa36eb3"
     },
     {
       "seq": 154,
@@ -4113,8 +4113,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "54c4d4e0b8dc054e1dcc9f093adb103ef0906384f82b8ee805c23221ed5e0f3b",
-      "hash": "e35be9d57d9f5d6805775ce48c6c5e2cc1dce5251d81a36996d90dc32121043f"
+      "previous_hash": "e0bb1eaab09d0109ee9e569617d8f4a0571da4be1c17dcfe2f6c2368dfa36eb3",
+      "hash": "6e47aa8cea186500c7c422e614e52b849e880b1ff2be78e700f5427e791154f5"
     },
     {
       "seq": 155,
@@ -4125,7 +4125,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "冻结喷管合同后先审入口焓与热边界；PPT最终报告继续后置",
-      "previous_hash": "e35be9d57d9f5d6805775ce48c6c5e2cc1dce5251d81a36996d90dc32121043f",
+      "previous_hash": "6e47aa8cea186500c7c422e614e52b849e880b1ff2be78e700f5427e791154f5",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -4175,7 +4175,7 @@
           "verification": null
         }
       },
-      "hash": "d0c0f9a4c67d7607043fe81049b376680d853dead61bf4c767e695d8ac415c76"
+      "hash": "cee12468b01431c9dcdc4c4de67575145dcd764498da0e3d99ba6a513b54db2b"
     },
     {
       "seq": 156,
@@ -4186,7 +4186,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "同条件冻结参考及C固定喉面积已有产物，待新鲜全量验收；接续入口焓/热边界审阅",
-      "previous_hash": "d0c0f9a4c67d7607043fe81049b376680d853dead61bf4c767e695d8ac415c76",
+      "previous_hash": "cee12468b01431c9dcdc4c4de67575145dcd764498da0e3d99ba6a513b54db2b",
       "details": {
         "context_before": {
           "phase": "实际六状态TP参考已完成；接续冻结喷管与固定几何研究",
@@ -4220,7 +4220,7 @@
           ]
         }
       },
-      "hash": "5cd82aca9eb79d1e136faadd0e55d375674806c0dbc33a9913dd5a8791f4abc4"
+      "hash": "c4f56c294ae619809f077c42bb89121b72669dda127f849fdb757bc4eed4ffb9"
     },
     {
       "seq": 157,
@@ -4231,8 +4231,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "5MPa/3300K及温度/O/F邻域五张CEA指定TP、nfz=1卡与11个固定At C点逐项对照；保存上游原源码、原输出和构建/测试身份；484项含打印及内部关系，不是独立实验。C单喷管从阻塞通量求流量，明确固定流量重定尺寸不同；热/液态煤油与整机闭合仍缺。Windows全量6/6及新建归档复跑通过。",
-      "previous_hash": "5cd82aca9eb79d1e136faadd0e55d375674806c0dbc33a9913dd5a8791f4abc4",
-      "hash": "7880d2b130ebdf7df002405a8e522763a02c537909c2626f1a4bc01829155d0a"
+      "previous_hash": "c4f56c294ae619809f077c42bb89121b72669dda127f849fdb757bc4eed4ffb9",
+      "hash": "5b47f76ae4cd934fb7939edbcb5a6d4194c231e6c9756f52ceb1431a74b46292"
     },
     {
       "seq": 158,
@@ -4243,8 +4243,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "按指定TP冻结参考、固定面积单喷管C结果和边界说明合同验收。源码核实CEA可以保持指定TP，未变更温度制造通过；旧归档字节/运行历史保持。ANA-005接续入口焓与热边界，非完整硬件循环，PPT报告后置。",
-      "previous_hash": "7880d2b130ebdf7df002405a8e522763a02c537909c2626f1a4bc01829155d0a",
-      "hash": "fd0f00b5649c126e8207ffb2bcf259f52628a06c67d5e140530d0df634a8156f"
+      "previous_hash": "5b47f76ae4cd934fb7939edbcb5a6d4194c231e6c9756f52ceb1431a74b46292",
+      "hash": "26fedf3274cc48e20c860639ee72fa305aeba3f9175d351571ae1a2393ff65f0"
     },
     {
       "seq": 159,
@@ -4255,8 +4255,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "fd0f00b5649c126e8207ffb2bcf259f52628a06c67d5e140530d0df634a8156f",
-      "hash": "539a73fee14b5f2150a9532102206cd12d91678052b6aedd14ce1082a2677a6c"
+      "previous_hash": "26fedf3274cc48e20c860639ee72fa305aeba3f9175d351571ae1a2393ff65f0",
+      "hash": "8e3c5f7877dbaed30a0df430e892003cc810c7903a5a470a9fb8005c912c9de5"
     },
     {
       "seq": 160,
@@ -4267,8 +4267,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "冻结喷管已提交，开始入口焓/密度假设与控制体热边界初查；当前不是液态物性或冷却设计实现",
-      "previous_hash": "539a73fee14b5f2150a9532102206cd12d91678052b6aedd14ce1082a2677a6c",
-      "hash": "a226fea79e1ff234e0d968a2180c0998d239ec424003ffb82511f3072079b86b"
+      "previous_hash": "8e3c5f7877dbaed30a0df430e892003cc810c7903a5a470a9fb8005c912c9de5",
+      "hash": "96f0d4fc3dc0455fb1021207b58397a2233094d500ca7d1e380f95bbbe964eec"
     },
     {
       "seq": 161,
@@ -4279,7 +4279,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "冻结参考按合同DONE并提交；接续入口假设核对，移除工作面仍在验收的过期阶段文字",
-      "previous_hash": "a226fea79e1ff234e0d968a2180c0998d239ec424003ffb82511f3072079b86b",
+      "previous_hash": "96f0d4fc3dc0455fb1021207b58397a2233094d500ca7d1e380f95bbbe964eec",
       "details": {
         "context_before": {
           "phase": "指定TP冻结参考与固定面积单喷管已实现，正在验收；接续入口焓和热边界",
@@ -4314,7 +4314,7 @@
           ]
         }
       },
-      "hash": "3234fe90826065c2c32186ec967117a0c88b4192098d924e609531e5dc6ee95d"
+      "hash": "4685ce6497b6ef88def0f713dabc01c5a4dc43ff71a63c2ae68f1af3b534f773"
     },
     {
       "seq": 162,
@@ -4325,7 +4325,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "增加有C实际运行/验证的入口焓与密度扰动档案，并按本轮用户要求补作业对接SVG；不开展PPT报告",
-      "previous_hash": "3234fe90826065c2c32186ec967117a0c88b4192098d924e609531e5dc6ee95d",
+      "previous_hash": "4685ce6497b6ef88def0f713dabc01c5a4dc43ff71a63c2ae68f1af3b534f773",
       "details": {
         "contract_before": {
           "id": "ANA-005",
@@ -4370,7 +4370,7 @@
           "verification": null
         }
       },
-      "hash": "595afc1347229cf7a9dba60ccce072e760f39800a6fcbe9279108615a23194fa"
+      "hash": "93596f799d913163e3c5ba49609be39e3123e286e9453f35c10d8701acefa98f"
     },
     {
       "seq": 163,
@@ -4381,8 +4381,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "595afc1347229cf7a9dba60ccce072e760f39800a6fcbe9279108615a23194fa",
-      "hash": "1c4c0176a44f7f02818711396814a2c7ac203cd16c8b79b9f8337ce42bc85713"
+      "previous_hash": "93596f799d913163e3c5ba49609be39e3123e286e9453f35c10d8701acefa98f",
+      "hash": "54b1e97dc0b42c41d03b272b5e187a063e22820a07f7f457e80c66f29c068a08"
     },
     {
       "seq": 164,
@@ -4393,7 +4393,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "七点入口诊断已复核，更新后续气相HP工作面；线上事实截止不改变",
-      "previous_hash": "1c4c0176a44f7f02818711396814a2c7ac203cd16c8b79b9f8337ce42bc85713",
+      "previous_hash": "54b1e97dc0b42c41d03b272b5e187a063e22820a07f7f457e80c66f29c068a08",
       "details": {
         "context_before": {
           "phase": "指定TP冻结参考与固定面积单喷管已验收；入口焓和控制体热边界初查",
@@ -4428,7 +4428,7 @@
           ]
         }
       },
-      "hash": "9b4732efeb263707b1407c205058aa77da4c1e9ef62a8e698fbdfd467a2aeb45"
+      "hash": "a1b7d61900a79f242263e73fcdc662d6f566991b2bc95271377737c46cb8988d"
     },
     {
       "seq": 165,
@@ -4439,7 +4439,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "按用户研究优先约束，显式入口焓HP仍需完成；报告与PPT保持后置",
-      "previous_hash": "9b4732efeb263707b1407c205058aa77da4c1e9ef62a8e698fbdfd467a2aeb45",
+      "previous_hash": "a1b7d61900a79f242263e73fcdc662d6f566991b2bc95271377737c46cb8988d",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -4491,7 +4491,7 @@
           "verification": null
         }
       },
-      "hash": "2a31e5a835842b4243f5ac5d4b009182ec449713b95bc4b0916404fb0bbe1a0e"
+      "hash": "4753594f536b011c619c5570a76e0c7dc52732ebb233c3477297bdda9a178d63"
     },
     {
       "seq": 166,
@@ -4502,8 +4502,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "逐字段入口假设/NASA9形成焓、七组实际C结果和132条状态及解析响应、Q符号/冷却边界、新模型失败契约均已审；作业SVG已渲染核验，全量6/6 PASS；不含液态煤油或独立科学人审",
-      "previous_hash": "2a31e5a835842b4243f5ac5d4b009182ec449713b95bc4b0916404fb0bbe1a0e",
-      "hash": "4d29096c6c3eefc4abb31c8394f8360d7d34e85d532aa361fdc07a6e04f2388d"
+      "previous_hash": "4753594f536b011c619c5570a76e0c7dc52732ebb233c3477297bdda9a178d63",
+      "hash": "935ec7f0c9bdf5798c1e517b6af3fb470bea4c178289c04c6b7541879e23fb27"
     },
     {
       "seq": 167,
@@ -4514,8 +4514,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "产物与三条验收契约核对完成，质量指纹新鲜；真实型号入口、液态煤油、完整硬件循环及冷却未覆盖，接续ANA-006，PPT报告后置",
-      "previous_hash": "4d29096c6c3eefc4abb31c8394f8360d7d34e85d532aa361fdc07a6e04f2388d",
-      "hash": "e2d9b0d542f346d5121f4ec6963f2f8acbe876cb4576f7a9b4a162ddb021792e"
+      "previous_hash": "935ec7f0c9bdf5798c1e517b6af3fb470bea4c178289c04c6b7541879e23fb27",
+      "hash": "cfe35a0281c87f1ccdfda1ffb3b139eac0bde6c3543632119d7194daccad18bd"
     },
     {
       "seq": 168,
@@ -4526,8 +4526,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "e2d9b0d542f346d5121f4ec6963f2f8acbe876cb4576f7a9b4a162ddb021792e",
-      "hash": "534788b28e3aa28fffd7b0274aeab3da2fce5a5225d8c9775fe766103248909d"
+      "previous_hash": "cfe35a0281c87f1ccdfda1ffb3b139eac0bde6c3543632119d7194daccad18bd",
+      "hash": "9d9706192aa68e2d18abbec3c029750fd6cc8efe20ae3c8d8e450ff25d4877f6"
     },
     {
       "seq": 169,
@@ -4538,8 +4538,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "实现独立显式同NASA9形成焓基准气相HP接口，保留旧API并验证固定面积喷管",
-      "previous_hash": "534788b28e3aa28fffd7b0274aeab3da2fce5a5225d8c9775fe766103248909d",
-      "hash": "687f77a6863cad4e18b2dcaf47aa52bdc5bd6ea0ee8b38a8ec415f009c49f1bd"
+      "previous_hash": "9d9706192aa68e2d18abbec3c029750fd6cc8efe20ae3c8d8e450ff25d4877f6",
+      "hash": "4611ac262dd652619ecc779e58ad64f9fe35bc32ed5b8884017dff9bfc426542"
     },
     {
       "seq": 170,
@@ -4550,8 +4550,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "687f77a6863cad4e18b2dcaf47aa52bdc5bd6ea0ee8b38a8ec415f009c49f1bd",
-      "hash": "209586e472ca6e5dd20640666b7966cd54c99430bd4d6292162fe74243ab429a"
+      "previous_hash": "4611ac262dd652619ecc779e58ad64f9fe35bc32ed5b8884017dff9bfc426542",
+      "hash": "4b87b1b821a2f3c91d864384c7326a2e04558746b9130fc120c38151ac93385b"
     },
     {
       "seq": 171,
@@ -4562,7 +4562,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "用户要求计算研究优先；接续实际固定几何焓响应后再准备报告展示",
-      "previous_hash": "209586e472ca6e5dd20640666b7966cd54c99430bd4d6292162fe74243ab429a",
+      "previous_hash": "4b87b1b821a2f3c91d864384c7326a2e04558746b9130fc120c38151ac93385b",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -4616,7 +4616,7 @@
           "verification": null
         }
       },
-      "hash": "408fe25b23920f76ffb8822368176a82ff1f6384b45b614a4baa9299edeaec6a"
+      "hash": "0481fd6f4d2ae661fb46bc9afd54e79027729c065110cdf776d50dd7fb007429"
     },
     {
       "seq": 172,
@@ -4627,7 +4627,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "显式焓接口与15次方法验证已产出，工作面接续固定几何气态响应，不推进报告",
-      "previous_hash": "408fe25b23920f76ffb8822368176a82ff1f6384b45b614a4baa9299edeaec6a",
+      "previous_hash": "0481fd6f4d2ae661fb46bc9afd54e79027729c065110cdf776d50dd7fb007429",
       "details": {
         "context_before": {
           "phase": "七点入口焓与密度诊断、热边界审阅与作业总览已形成；本轮验收后接续显式焓绝热气相方法",
@@ -4662,7 +4662,7 @@
           ]
         }
       },
-      "hash": "c2311cc892487e0149a5413a597b557f65fa8a6f80cd720b114bb1a354aecc87"
+      "hash": "44dc340faf478dd63c35aefc151ba0861cd392bdca330a310490229b7fd67fca"
     },
     {
       "seq": 173,
@@ -4673,8 +4673,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "显式焓C/API、CLI、固定面积验证、15次归档、Debug/Release/CMake/静态分析和统一质量均已通过；范围与缺口已写明",
-      "previous_hash": "c2311cc892487e0149a5413a597b557f65fa8a6f80cd720b114bb1a354aecc87",
-      "hash": "60f72f70abe1868f59daf22abe82200b3d55ca5f6deb7dd14de61a5f03ad2863"
+      "previous_hash": "44dc340faf478dd63c35aefc151ba0861cd392bdca330a310490229b7fd67fca",
+      "hash": "9bd6924d8260e2b8c68f1ba43615d1787bb915c328015e7f53ea1b5005d17f69"
     },
     {
       "seq": 174,
@@ -4685,8 +4685,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成：同基准气态显式焓HP与旧温度入口等价，固定单喷管关系和失败协议已复核；不宣称液态或整机闭合",
-      "previous_hash": "60f72f70abe1868f59daf22abe82200b3d55ca5f6deb7dd14de61a5f03ad2863",
-      "hash": "b3cc1e2d2a9207167931d17af7ae027de3f2c997cfdd4f7a11dd94a0ee83bf2b"
+      "previous_hash": "9bd6924d8260e2b8c68f1ba43615d1787bb915c328015e7f53ea1b5005d17f69",
+      "hash": "34d0e083997e0222589bb0aee656c84b7fddc6471006f603610cde7f2018d372"
     },
     {
       "seq": 175,
@@ -4697,8 +4697,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "b3cc1e2d2a9207167931d17af7ae027de3f2c997cfdd4f7a11dd94a0ee83bf2b",
-      "hash": "8b7549c363afe4bd3d994c7844372fc2105ee8a71be1686dec812a0f0cc2f538"
+      "previous_hash": "34d0e083997e0222589bb0aee656c84b7fddc6471006f603610cde7f2018d372",
+      "hash": "3eee94c44df1a6f289806ef8fe049ee25b3e74b3f657888963e8a3d2494d11b2"
     },
     {
       "seq": 176,
@@ -4709,8 +4709,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "最终视觉复核发现直接用例标签触及公共依赖虚线，微调标签位置后重新完整验收",
-      "previous_hash": "8b7549c363afe4bd3d994c7844372fc2105ee8a71be1686dec812a0f0cc2f538",
-      "hash": "f5cee39f06f2166fb4cd552cdd384e1151407121d7312da5c2f743488ea5dda2"
+      "previous_hash": "3eee94c44df1a6f289806ef8fe049ee25b3e74b3f657888963e8a3d2494d11b2",
+      "hash": "853d374c6e54e698f6504337b45faa01795b050902a1100deb5b6cef91dd9f0a"
     },
     {
       "seq": 177,
@@ -4721,8 +4721,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Upstream reopened; prerequisite readiness revoked",
-      "previous_hash": "f5cee39f06f2166fb4cd552cdd384e1151407121d7312da5c2f743488ea5dda2",
-      "hash": "173426042b3985b1457a6dd092a19f23ed6379791946e4bff4b02312eb514c1a"
+      "previous_hash": "853d374c6e54e698f6504337b45faa01795b050902a1100deb5b6cef91dd9f0a",
+      "hash": "71d9672df19f1e096a8f6d3c847989f616f7766589bc667bb31d663106894d1f"
     },
     {
       "seq": 178,
@@ -4733,8 +4733,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "完成最终架构标签调整并重跑新鲜完整质量，随后本地提交及独立源码复验",
-      "previous_hash": "173426042b3985b1457a6dd092a19f23ed6379791946e4bff4b02312eb514c1a",
-      "hash": "d7150e9ba2049310dda320f96a9a18c8be0d1d6e11b4f77fbf80db3b5f066a27"
+      "previous_hash": "71d9672df19f1e096a8f6d3c847989f616f7766589bc667bb31d663106894d1f",
+      "hash": "7eeaa8bcaf43919d9f211cccde679e3eb0f43e778422df1e5a26643d45ea30af"
     },
     {
       "seq": 179,
@@ -4745,8 +4745,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "最终架构调整后的完整质量6/6通过；显式气态焓HP、旧API等价、CEA同条件及固定面积关系、15次运行和失败契约逐项复核",
-      "previous_hash": "d7150e9ba2049310dda320f96a9a18c8be0d1d6e11b4f77fbf80db3b5f066a27",
-      "hash": "2e1327eaed4a6a24d0fc59165b4146b423865866a78a3dbac0129c3e7c20f764"
+      "previous_hash": "7eeaa8bcaf43919d9f211cccde679e3eb0f43e778422df1e5a26643d45ea30af",
+      "hash": "6f4ee9469b5b62bc6d3b7e75990064c94edfd25f66711e2a802b648525016019"
     },
     {
       "seq": 180,
@@ -4757,8 +4757,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成：仅气态CH4/O2同NASA9基准的Q=0燃烧室与单喷管；不宣称液态、整机循环或独立实验验证",
-      "previous_hash": "2e1327eaed4a6a24d0fc59165b4146b423865866a78a3dbac0129c3e7c20f764",
-      "hash": "bbb7e95f44e93f059dd4284253ac458298605b62c462944148b5fbde9af33e64"
+      "previous_hash": "6f4ee9469b5b62bc6d3b7e75990064c94edfd25f66711e2a802b648525016019",
+      "hash": "4decf132f381ea2148d2b700ad30442987822e33a196df5fdae9068c877618a8"
     },
     {
       "seq": 181,
@@ -4769,8 +4769,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "bbb7e95f44e93f059dd4284253ac458298605b62c462944148b5fbde9af33e64",
-      "hash": "c8145b83b6c45f1028da96b1ad51756abe9562c5f08acdb3b0d7bca141067890"
+      "previous_hash": "4decf132f381ea2148d2b700ad30442987822e33a196df5fdae9068c877618a8",
+      "hash": "da580f19e89b709532132ac06515e93d20687b65c88706b9a8e6ac48410a538f"
     },
     {
       "seq": 182,
@@ -4781,8 +4781,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定Pc与喉/出口面积，分别扫描气态入口温度对应焓和O/F，新增CEA HP冻结参考和完整归档检查",
-      "previous_hash": "c8145b83b6c45f1028da96b1ad51756abe9562c5f08acdb3b0d7bca141067890",
-      "hash": "27a6fd1f01788ac4d99adc48a7019132a1b9ee6b492ecda1feaf652caa50aa97"
+      "previous_hash": "da580f19e89b709532132ac06515e93d20687b65c88706b9a8e6ac48410a538f",
+      "hash": "5fcccfe5e97a913d3783cebdd4ff50ea3795de17c22e836ba2040901feb90858"
     },
     {
       "seq": 183,
@@ -4793,7 +4793,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "两型所需液态与煤油输入证据优先于最终报告展示，禁止以甲烷气相结果替代一级煤油模型",
-      "previous_hash": "27a6fd1f01788ac4d99adc48a7019132a1b9ee6b492ecda1feaf652caa50aa97",
+      "previous_hash": "5fcccfe5e97a913d3783cebdd4ff50ea3795de17c22e836ba2040901feb90858",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -4849,7 +4849,7 @@
           "verification": null
         }
       },
-      "hash": "15916fa3d55201a0f3cb02d1a1b5aa310e5c2fb41a6f1c1d4a6e41d4f575b145"
+      "hash": "dc974374e425f2dd7aea6fb50430a355d5b1b3d9eaf04cfe628f875e81b989ea"
     },
     {
       "seq": 184,
@@ -4860,8 +4860,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "15916fa3d55201a0f3cb02d1a1b5aa310e5c2fb41a6f1c1d4a6e41d4f575b145",
-      "hash": "0e58fcb467ed01922ba3a6009f9cdc860c95d7f2467a2db050499b40eef80f5f"
+      "previous_hash": "dc974374e425f2dd7aea6fb50430a355d5b1b3d9eaf04cfe628f875e81b989ea",
+      "hash": "de840d9a635c545d94eb3a92882d28dea4ba8e5651359e762c645250aafc1623"
     },
     {
       "seq": 185,
@@ -4872,7 +4872,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "修正接续任务编号为新增RES-006，保留已完成RES-005的复用研究契约；液态与煤油输入证据优先于报告展示",
-      "previous_hash": "0e58fcb467ed01922ba3a6009f9cdc860c95d7f2467a2db050499b40eef80f5f",
+      "previous_hash": "de840d9a635c545d94eb3a92882d28dea4ba8e5651359e762c645250aafc1623",
       "details": {
         "contract_before": {
           "id": "DOC-001",
@@ -4929,7 +4929,7 @@
           "verification": null
         }
       },
-      "hash": "218bb26d9304e63d2a02f4e7df0c3ea98cd6f67907e9b387016b910f50a05e75"
+      "hash": "d4b5e4cca55bc19246a23f626637fdc26425ddd3d35740b532a4d572b5bb3691"
     },
     {
       "seq": 186,
@@ -4940,7 +4940,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "12组入口条件和51次C/12次CEA已归档；接续两型液态与煤油输入证据，不扩展无依据的气相扫描",
-      "previous_hash": "218bb26d9304e63d2a02f4e7df0c3ea98cd6f67907e9b387016b910f50a05e75",
+      "previous_hash": "d4b5e4cca55bc19246a23f626637fdc26425ddd3d35740b532a4d572b5bb3691",
       "details": {
         "context_before": {
           "phase": "显式同基准气态入口焓HP与固定面积验证已形成，接续固定几何响应及参考域扩展",
@@ -4975,7 +4975,7 @@
           ]
         }
       },
-      "hash": "20f1d6bbbc152766c66209cb4643fa8c25ccff3f662f2d0dc50e3ee8372e82c5"
+      "hash": "3d72090ba95b205c0ae4aaf0cbd2f2ddc515557b02409ab249f0958c7c5a2028"
     },
     {
       "seq": 187,
@@ -4986,8 +4986,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "51次C/12次CEA/24固定几何点归档和18种语义反例通过；SVG视觉/漂移/测试指纹通过，修正后完整质量6/6及CMake6/6，比较与范围逐项说明",
-      "previous_hash": "20f1d6bbbc152766c66209cb4643fa8c25ccff3f662f2d0dc50e3ee8372e82c5",
-      "hash": "c1bfacae6ab83f4a401d4e09a53831e94b101916e0e09e05730765093163588e"
+      "previous_hash": "3d72090ba95b205c0ae4aaf0cbd2f2ddc515557b02409ab249f0958c7c5a2028",
+      "hash": "8aa6732fbe82ceebc686003dcf5fbd32f810bc0265a2a3906fa7cbeb1bfeb7f8"
     },
     {
       "seq": 188,
@@ -4998,8 +4998,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成：固定Pc与At/Ae的气态HP响应已可复验；不证明最佳O/F、液态预热净收益或整机真实性能，接续RES-006",
-      "previous_hash": "c1bfacae6ab83f4a401d4e09a53831e94b101916e0e09e05730765093163588e",
-      "hash": "7de1df064a867596eae085f6f21036a43077442240337143a2f6468ce3e052e5"
+      "previous_hash": "8aa6732fbe82ceebc686003dcf5fbd32f810bc0265a2a3906fa7cbeb1bfeb7f8",
+      "hash": "0d3d571d2717da42c6c404facb6efb7723dd3001f062772da577afe6c21495fa"
     },
     {
       "seq": 189,
@@ -5010,8 +5010,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "7de1df064a867596eae085f6f21036a43077442240337143a2f6468ce3e052e5",
-      "hash": "0a1112d3f106c0dc2a0aaf339ea72b30973593b899fa87c4489d0c9410da6792"
+      "previous_hash": "0d3d571d2717da42c6c404facb6efb7723dd3001f062772da577afe6c21495fa",
+      "hash": "8ea46c81f947e3ff33440994b24296314c9828be78a71e27b5e969c1e1e2825b"
     },
     {
       "seq": 190,
@@ -5022,8 +5022,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "核验液态甲烷液氧与煤油入口的相态、焓基准、密度和C17可实现路线",
-      "previous_hash": "0a1112d3f106c0dc2a0aaf339ea72b30973593b899fa87c4489d0c9410da6792",
-      "hash": "d9e87ffc0054b11e59e4e8a42dfbae62c3dcd261d42752966fd94cc9a9555594"
+      "previous_hash": "8ea46c81f947e3ff33440994b24296314c9828be78a71e27b5e969c1e1e2825b",
+      "hash": "e05d3cda010ad6e3815d79aaf34c44f6fa2b790ad369808ca3c196a93054cfb6"
     },
     {
       "seq": 191,
@@ -5034,8 +5034,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "d9e87ffc0054b11e59e4e8a42dfbae62c3dcd261d42752966fd94cc9a9555594",
-      "hash": "7799b687f91c36e74c38e7245950b97a0f180a0c68ca2af4afe5175e1de206bb"
+      "previous_hash": "e05d3cda010ad6e3815d79aaf34c44f6fa2b790ad369808ca3c196a93054cfb6",
+      "hash": "8db97088d2654be6c9dd458da741cfc6993b6ece1f247357427fbcccb520ded5"
     },
     {
       "seq": 192,
@@ -5046,7 +5046,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "液态锚点与EOS/煤油候选已形成，下一实现固定反应物HP；不等待未知型号输入",
-      "previous_hash": "7799b687f91c36e74c38e7245950b97a0f180a0c68ca2af4afe5175e1de206bb",
+      "previous_hash": "8db97088d2654be6c9dd458da741cfc6993b6ece1f247357427fbcccb520ded5",
       "details": {
         "context_before": {
           "phase": "固定几何气态入口焓与O/F响应已形成；接续液态与煤油输入证据及C路线",
@@ -5081,7 +5081,7 @@
           ]
         }
       },
-      "hash": "751534d385eb6ccf129a4b8e84700737a8af7c22b0cf029054e0b826e7a4ecb7"
+      "hash": "6d380d033189b48911738164e57491fb8b42003af0bdb2ac47f045dc80e2cc89"
     },
     {
       "seq": 193,
@@ -5092,8 +5092,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "已完成Grok受限检索与HTTP原文核验；建立CEA液态锚点、CoolProp版本身份、NIST RP-1/RP-2 surrogate候选及真实输入缺口；固定液态反应物C17路线、失败契约与后续停止条件已写入专题和候选数据。完整Windows质量6/6，数据专项14组。",
-      "previous_hash": "751534d385eb6ccf129a4b8e84700737a8af7c22b0cf029054e0b826e7a4ecb7",
-      "hash": "f4df8d42fb0e7960b41c0b92ec34ab75d08d1b6382c0811b34fd941b94ec8dda"
+      "previous_hash": "6d380d033189b48911738164e57491fb8b42003af0bdb2ac47f045dc80e2cc89",
+      "hash": "73c9dec17bcf8503cd7d97b1b534de371debd9b58d81c845fa62f11f876f4a24"
     },
     {
       "seq": 194,
@@ -5104,8 +5104,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成。候选资料和C路线可交接；不宣称连续液体物性、真实煤油、整机闭合或两型绝对性能已实现。下一任务ANA-008固定CEA液态反应物锚点HP。",
-      "previous_hash": "f4df8d42fb0e7960b41c0b92ec34ab75d08d1b6382c0811b34fd941b94ec8dda",
-      "hash": "beb9e320a8cc295e32850cc0b67067baeb6b97b021386fc254c61eb1d4f3a26b"
+      "previous_hash": "73c9dec17bcf8503cd7d97b1b534de371debd9b58d81c845fa62f11f876f4a24",
+      "hash": "14bedc4b49a66fd3e7e5d5ce9c0b77eebcaf18a524846d84cd0b7b9a492fabaa"
     },
     {
       "seq": 195,
@@ -5116,8 +5116,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "beb9e320a8cc295e32850cc0b67067baeb6b97b021386fc254c61eb1d4f3a26b",
-      "hash": "53a1948828e21900a614fb30ae9582832640013c685daa13c530d613e8dd1015"
+      "previous_hash": "14bedc4b49a66fd3e7e5d5ce9c0b77eebcaf18a524846d84cd0b7b9a492fabaa",
+      "hash": "37aad3f32937cfbecfebee44899b2921e07ce7733d4fa9db7a7047b86f1aa1cf"
     },
     {
       "seq": 196,
@@ -5128,8 +5128,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "53a1948828e21900a614fb30ae9582832640013c685daa13c530d613e8dd1015",
-      "hash": "50772d0a8f2b08d0ad58861b8fe9589c647ec5bc15c0be0fee19742691bc3906"
+      "previous_hash": "37aad3f32937cfbecfebee44899b2921e07ce7733d4fa9db7a7047b86f1aa1cf",
+      "hash": "8e32ad721ed1736ccbe139f88acb7acb50a580868f2b6a949763510eabbd713d"
     },
     {
       "seq": 197,
@@ -5140,8 +5140,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "接入固定CEA液态反应物焓与元素库存；新C17接口及同条件CEA燃烧室冻结参考，不扩展液体EOS或真实整机",
-      "previous_hash": "50772d0a8f2b08d0ad58861b8fe9589c647ec5bc15c0be0fee19742691bc3906",
-      "hash": "f5952503c83228a15cbd69d79fdc7cd30b8254a64e971ea1ae1a922558b0faad"
+      "previous_hash": "8e32ad721ed1736ccbe139f88acb7acb50a580868f2b6a949763510eabbd713d",
+      "hash": "adcd4b282f01a8644a26dd5d98abc7ee54e4c4054775fcb7fcdc5e742f3784f8"
     },
     {
       "seq": 198,
@@ -5152,8 +5152,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "f5952503c83228a15cbd69d79fdc7cd30b8254a64e971ea1ae1a922558b0faad",
-      "hash": "e518769de9000abc16ffd19e3bdc63626ffb3d33d0b1ca4eacd5b0c8e3b0091c"
+      "previous_hash": "adcd4b282f01a8644a26dd5d98abc7ee54e4c4054775fcb7fcdc5e742f3784f8",
+      "hash": "7a3d0095b44a7d97ffa387d8154cc4237dcfc7b9f59a71657e2094d4e7be9b2e"
     },
     {
       "seq": 199,
@@ -5164,7 +5164,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定液态锚点C17与新CEA结果已落地，连续液体参考独立接续",
-      "previous_hash": "e518769de9000abc16ffd19e3bdc63626ffb3d33d0b1ca4eacd5b0c8e3b0091c",
+      "previous_hash": "7a3d0095b44a7d97ffa387d8154cc4237dcfc7b9f59a71657e2094d4e7be9b2e",
       "details": {
         "context_before": {
           "phase": "液态与煤油候选已核验；接续固定液态反应物HP的C17方法基准",
@@ -5199,7 +5199,7 @@
           ]
         }
       },
-      "hash": "494b975c7364ec11f9bb04d5a92eab1a0fe7d94c5ebdfdf4711c3230ec866509"
+      "hash": "b4a4f897c93db4c1d67ef32736c6374a91bb8394ad16e2af0a2a0cbb9cf2ee33"
     },
     {
       "seq": 200,
@@ -5210,7 +5210,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "本轮统一质量6/6及独立构建已通过，工作面接续连续单相参考",
-      "previous_hash": "494b975c7364ec11f9bb04d5a92eab1a0fe7d94c5ebdfdf4711c3230ec866509",
+      "previous_hash": "b4a4f897c93db4c1d67ef32736c6374a91bb8394ad16e2af0a2a0cbb9cf2ee33",
       "details": {
         "context_before": {
           "phase": "固定液态锚点HP已计算；完成本轮验收后接续连续单相物性基准",
@@ -5245,7 +5245,7 @@
           ]
         }
       },
-      "hash": "df84777b78f27a9023c0b399c4e0fce9ca9b9c7f1bca1a9a01df029fc5bdf947"
+      "hash": "732e2b399426ca3c79d9ddcf442425157853d5e9d463c397c73784d84d219194"
     },
     {
       "seq": 201,
@@ -5256,8 +5256,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "逐项验收：独立C17锚点焓/库存接口和输出保持反例；21次C/6次新CEA同条件HP/燃烧室冻结及推力派生对照；22种归档语义篡改、Windows6/6质量、18源静态分析、独立CTest6/6和SVG视觉检查。固定锚点不含液体EOS/泵/相态稳定或真实型号；见032快照和验证文档。",
-      "previous_hash": "df84777b78f27a9023c0b399c4e0fce9ca9b9c7f1bca1a9a01df029fc5bdf947",
-      "hash": "17acf19f9403dfa2ed1b27a319df6d06d5ece8fc65636099c2e75a0b330f0a28"
+      "previous_hash": "732e2b399426ca3c79d9ddcf442425157853d5e9d463c397c73784d84d219194",
+      "hash": "088082de08edd2d829bbe274be9dfa641b8508f94c62d215795aec6ac34c4978"
     },
     {
       "seq": 202,
@@ -5268,8 +5268,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "契约产物与新鲜质量一致，软件和同源物性方法对照通过；并非独立科学审查。旧气态API保留，连续液体/煤油/完整循环未完成。RES-007接续离线单相温压与摩尔焓对齐，本批次审查后本地提交、不推送。",
-      "previous_hash": "17acf19f9403dfa2ed1b27a319df6d06d5ece8fc65636099c2e75a0b330f0a28",
-      "hash": "f822a891e45b389df8696071df1aa7ed7358459e0da79849fa194e75e4769598"
+      "previous_hash": "088082de08edd2d829bbe274be9dfa641b8508f94c62d215795aec6ac34c4978",
+      "hash": "f184f6417530a2190da8094699cdad932f235ae5a224761e65ea48a44d3b5a58"
     },
     {
       "seq": 203,
@@ -5280,8 +5280,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "f822a891e45b389df8696071df1aa7ed7358459e0da79849fa194e75e4769598",
-      "hash": "db1624344d478eed7059a6b66c10c7c82d74331aff46f106872c51f72c82391a"
+      "previous_hash": "f184f6417530a2190da8094699cdad932f235ae5a224761e65ea48a44d3b5a58",
+      "hash": "182f1863854f8a288779653a29e3b90251705782057d6a35ad4bdf4fd775721f"
     },
     {
       "seq": 204,
@@ -5292,8 +5292,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "db1624344d478eed7059a6b66c10c7c82d74331aff46f106872c51f72c82391a",
-      "hash": "a1ec0ae874d4ee7033e5988dff9733421b97a99cac719291df8ca8ec1e05313c"
+      "previous_hash": "182f1863854f8a288779653a29e3b90251705782057d6a35ad4bdf4fd775721f",
+      "hash": "24d5fc25dc53085d412a443e50319a42fba07e0066d70328acbaa780fa7e91f5"
     },
     {
       "seq": 205,
@@ -5304,8 +5304,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定5a7546f交接复跑发现推荐DOC-001与worknow指定RES-007不一致，修正任务选择与包内核验",
-      "previous_hash": "a1ec0ae874d4ee7033e5988dff9733421b97a99cac719291df8ca8ec1e05313c",
-      "hash": "16ec476130898a3cbb2edb0e78b9c1bf4ea72410dd403f7e75c6ae91cbd7971d"
+      "previous_hash": "24d5fc25dc53085d412a443e50319a42fba07e0066d70328acbaa780fa7e91f5",
+      "hash": "851fe4a0b2e2f76100ae09c6a15adeebc0de0a91d9ed81b8a250bf7c927a5512"
     },
     {
       "seq": 206,
@@ -5316,8 +5316,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "工作面显式接续/未就绪状态/稳定优先级/null选择与v2任务快照一致性已覆盖；10组交接专项及完整6/6质量通过，旧v1包实读成功。审查后建立REVIEW检查点，生成新包再完成最终验收。",
-      "previous_hash": "16ec476130898a3cbb2edb0e78b9c1bf4ea72410dd403f7e75c6ae91cbd7971d",
-      "hash": "56cd14db2d890c101b0130804e624384eabecc2dccc5d3415889e91437aed1cc"
+      "previous_hash": "851fe4a0b2e2f76100ae09c6a15adeebc0de0a91d9ed81b8a250bf7c927a5512",
+      "hash": "2235f14ed56fbc27c2d61f8cb82b1344942a03d52ba6f869a17007cf4042b838"
     },
     {
       "seq": 207,
@@ -5328,8 +5328,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "10组交接与完整6/6质量通过；a448b60正式v2包推荐RES-007，包内21案例复跑通过，离线bundle克隆再次完整6/6。验收事实/哈希见taskshot/2026-10-05_035-handoff-receipt.md，旧包/历史不回写；同机同agent复验，不冒称独立人员科学审查。",
-      "previous_hash": "56cd14db2d890c101b0130804e624384eabecc2dccc5d3415889e91437aed1cc",
-      "hash": "da9e7382317d0ae7cc53b29dac2789ca1409c585caee35577cc0091d204ed8ba"
+      "previous_hash": "2235f14ed56fbc27c2d61f8cb82b1344942a03d52ba6f869a17007cf4042b838",
+      "hash": "5a5b1a1dfe4ba100a6409976be5ebb04383fe4013c6cec6c3e0878e02e2c7319"
     },
     {
       "seq": 208,
@@ -5340,8 +5340,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "直接推进连续单相CH4/O2离线参考、摩尔焓对齐与验收，不停在规划",
-      "previous_hash": "da9e7382317d0ae7cc53b29dac2789ca1409c585caee35577cc0091d204ed8ba",
-      "hash": "87ff9ac1aad1b8a6fd9433a21e94053c0a1693cb4c5a2aa9db09fd96ee1ff0c3"
+      "previous_hash": "5a5b1a1dfe4ba100a6409976be5ebb04383fe4013c6cec6c3e0878e02e2c7319",
+      "hash": "a904d71e25cb1e993a9223fcbe21ba29f8b835d17352877a1d0edce5653acc87"
     },
     {
       "seq": 209,
@@ -5352,8 +5352,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "87ff9ac1aad1b8a6fd9433a21e94053c0a1693cb4c5a2aa9db09fd96ee1ff0c3",
-      "hash": "3c161f19a71f55e0dcbdccfcd3bc757fe8e5adbfa53feb9e8e9a455fe91e0878"
+      "previous_hash": "a904d71e25cb1e993a9223fcbe21ba29f8b835d17352877a1d0edce5653acc87",
+      "hash": "992d4652981ecbaca8d75cec714c7ec373bbd812cff163ccd82668398dcdc7bd"
     },
     {
       "seq": 210,
@@ -5364,7 +5364,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "连续单相参考和焓对齐已有真实归档，接续C查表实现",
-      "previous_hash": "3c161f19a71f55e0dcbdccfcd3bc757fe8e5adbfa53feb9e8e9a455fe91e0878",
+      "previous_hash": "992d4652981ecbaca8d75cec714c7ec373bbd812cff163ccd82668398dcdc7bd",
       "details": {
         "context_before": {
           "phase": "固定液态锚点HP已建立方法基准；连续单相液体参考待核验",
@@ -5398,7 +5398,7 @@
           ]
         }
       },
-      "hash": "cd28e299509c337fdc46ffe889ef43614a0a5bede38c25849a70ee54865e5ae5"
+      "hash": "3069775987488d63b2a42b9754f3dec1d058263c511598b59378d616b77b38de"
     },
     {
       "seq": 211,
@@ -5409,8 +5409,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定CoolProp7.1.0 wheel/二进制/原流体JSON/许可证；407节点700内部点107饱和对和14理想点归档。独立系数复算相态/密度/理想及残余焓、Gibbs共存条件，零点对齐保留cp/M/R差异，22种重算哈希篡改拒绝；完整Windows6/6通过。温压为假设，未接生产EOS/泵/循环。",
-      "previous_hash": "cd28e299509c337fdc46ffe889ef43614a0a5bede38c25849a70ee54865e5ae5",
-      "hash": "11b6fd425cea067f937b288e78247f4bea34ed7b3b6697b0b4219daf57c654ce"
+      "previous_hash": "3069775987488d63b2a42b9754f3dec1d058263c511598b59378d616b77b38de",
+      "hash": "5cd4dbf69ab91cb04e0267f8b888d9417b1d18831a3eac806b30cc96920180c6"
     },
     {
       "seq": 212,
@@ -5421,8 +5421,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "产物与验收契约逐项一致；摩尔基准/相态边界和内部误差可复验，同源模型复算不是独立实验审查。解锁ANA-009直接落地C查表。",
-      "previous_hash": "11b6fd425cea067f937b288e78247f4bea34ed7b3b6697b0b4219daf57c654ce",
-      "hash": "2899d8494663b7e8e83555084ae34de444193f7e67b77f417df69707129ad663"
+      "previous_hash": "5cd4dbf69ab91cb04e0267f8b888d9417b1d18831a3eac806b30cc96920180c6",
+      "hash": "0e61a42f2dace3e2b5da214370325f460f5abca844b25022704015117358efca"
     },
     {
       "seq": 213,
@@ -5433,8 +5433,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "2899d8494663b7e8e83555084ae34de444193f7e67b77f417df69707129ad663",
-      "hash": "1572f0cb6466372864e67fc5d611e486eeec067823e2af48a071625bc28a42dd"
+      "previous_hash": "0e61a42f2dace3e2b5da214370325f460f5abca844b25022704015117358efca",
+      "hash": "99b4e501cb393f3fbd8a73055fd6a0ee56ee47217b7c0356cef6bde0e83fc4b8"
     },
     {
       "seq": 214,
@@ -5445,8 +5445,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "直接实现固定参考的纯C17温压查表、CLI和全点对照",
-      "previous_hash": "1572f0cb6466372864e67fc5d611e486eeec067823e2af48a071625bc28a42dd",
-      "hash": "fe593a3ce5c30ffbeee7fa8c4ccf31c8a8915e84e0d67119bc592fc7b9ca5aab"
+      "previous_hash": "99b4e501cb393f3fbd8a73055fd6a0ee56ee47217b7c0356cef6bde0e83fc4b8",
+      "hash": "00f621fe01dc309ab789e61cbeb129ca7fb478fc70542d13ff24a93886d7d334"
     },
     {
       "seq": 215,
@@ -5457,7 +5457,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收产物增加实际C成功与拒绝运行归档",
-      "previous_hash": "fe593a3ce5c30ffbeee7fa8c4ccf31c8a8915e84e0d67119bc592fc7b9ca5aab",
+      "previous_hash": "00f621fe01dc309ab789e61cbeb129ca7fb478fc70542d13ff24a93886d7d334",
       "details": {
         "contract_before": {
           "id": "ANA-009",
@@ -5505,7 +5505,7 @@
           "verification": null
         }
       },
-      "hash": "be49b2fb1830389ee1da55b4eb42d8fe72af01c5c3d3e09d83aa175de7b91284"
+      "hash": "672dcbc09362cd552af0a081fbdecb378cd97c6972e76853a3d59e5cdf92fa70"
     },
     {
       "seq": 216,
@@ -5516,8 +5516,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "be49b2fb1830389ee1da55b4eb42d8fe72af01c5c3d3e09d83aa175de7b91284",
-      "hash": "313e9982aa39f64c1d7ac3bcee84f3303680d749afd942a4c8dd9a17e71fdc35"
+      "previous_hash": "672dcbc09362cd552af0a081fbdecb378cd97c6972e76853a3d59e5cdf92fa70",
+      "hash": "4a7189e6753222e9c603871efe868d3445cc6f89cb2579fb84a33b26637e3df2"
     },
     {
       "seq": 217,
@@ -5528,7 +5528,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "连续C17查表实现进入运行核验，接续连续温压HP/固定几何耦合",
-      "previous_hash": "313e9982aa39f64c1d7ac3bcee84f3303680d749afd942a4c8dd9a17e71fdc35",
+      "previous_hash": "4a7189e6753222e9c603871efe868d3445cc6f89cb2579fb84a33b26637e3df2",
       "details": {
         "context_before": {
           "phase": "连续液体离线参考已生成并复核；接续C17受限查表",
@@ -5562,7 +5562,7 @@
           ]
         }
       },
-      "hash": "637e5004a83af6a6568182995223ddf5cff3cbb8a4beddee2448e724d895e1bc"
+      "hash": "0180995b3da0b7af49f2df5e050bb4c6bd0866b2333614471c95f5c3004e390b"
     },
     {
       "seq": 218,
@@ -5573,8 +5573,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "407节点/700内部参考、失败输出保持、22次真实C查询和16种重哈希语义篡改通过；完整Windows质量6/6、独立CMake六项与19源实际GCC静态编译通过；仅独立查表，未接HP/泵/循环",
-      "previous_hash": "637e5004a83af6a6568182995223ddf5cff3cbb8a4beddee2448e724d895e1bc",
-      "hash": "ab5eff6ff29a8b36e776bc0eeea127fb31d64f666ba88c4534d5ed2f54e13c76"
+      "previous_hash": "0180995b3da0b7af49f2df5e050bb4c6bd0866b2333614471c95f5c3004e390b",
+      "hash": "a2fe6a6506f97eef1caabcc52c3c6889aefd581a8d800905cb19a1ddb7c252dd"
     },
     {
       "seq": 219,
@@ -5585,8 +5585,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "纯C受限单相查表验收完成；软件同源核验不是实验或独立科学审查，接续ANA-010连续入口HP/固定几何耦合",
-      "previous_hash": "ab5eff6ff29a8b36e776bc0eeea127fb31d64f666ba88c4534d5ed2f54e13c76",
-      "hash": "e2da4dd67be97e0ee83c64b5222d3325df3c40172e6a7243e23f57a89516013d"
+      "previous_hash": "a2fe6a6506f97eef1caabcc52c3c6889aefd581a8d800905cb19a1ddb7c252dd",
+      "hash": "828e6a960f3cda5fb8311238dd1cd9d7b7214e587afbafc674fb49ebeef36a3e"
     },
     {
       "seq": 220,
@@ -5597,8 +5597,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "e2da4dd67be97e0ee83c64b5222d3325df3c40172e6a7243e23f57a89516013d",
-      "hash": "4e5fdd87f429c77449bb0d9821c5c2ff18e12bc77991b39237d162f4843239b1"
+      "previous_hash": "828e6a960f3cda5fb8311238dd1cd9d7b7214e587afbafc674fb49ebeef36a3e",
+      "hash": "134c7b947b081f558a4642fde405113c31b7d1aa28fc61cc0b3785764c70698a"
     },
     {
       "seq": 221,
@@ -5609,8 +5609,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "提交前复审发现最终语义复核异常未将临时归档标为FAIL；修复并增加异常回归后重新完整验收",
-      "previous_hash": "4e5fdd87f429c77449bb0d9821c5c2ff18e12bc77991b39237d162f4843239b1",
-      "hash": "8940a88afd01498b8d634b0220cd1ef87421b901242c457e4cf3cc4846b690fd"
+      "previous_hash": "134c7b947b081f558a4642fde405113c31b7d1aa28fc61cc0b3785764c70698a",
+      "hash": "5aedb87d8d3a7195f864af8dfcdce1a05c0f5f7f15f0f4fada9b12f5b6158d60"
     },
     {
       "seq": 222,
@@ -5621,8 +5621,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Upstream reopened; prerequisite readiness revoked",
-      "previous_hash": "8940a88afd01498b8d634b0220cd1ef87421b901242c457e4cf3cc4846b690fd",
-      "hash": "a4db66e7b20e248950f4827f3a878ac4d933e5623a1e36e0aa35886b85d63cfe"
+      "previous_hash": "5aedb87d8d3a7195f864af8dfcdce1a05c0f5f7f15f0f4fada9b12f5b6158d60",
+      "hash": "312d12e66038150dc6b54084a4dd1f3adf1812bb6dda0821548af4044b71492d"
     },
     {
       "seq": 223,
@@ -5633,8 +5633,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "修复最终语义复核失败的归档状态，保留原运行档案与此前质量快照",
-      "previous_hash": "a4db66e7b20e248950f4827f3a878ac4d933e5623a1e36e0aa35886b85d63cfe",
-      "hash": "4e4c6cebda0a558c0bb66dff06874ffa7ebba5a40672c5c3ef405f5a174a120c"
+      "previous_hash": "312d12e66038150dc6b54084a4dd1f3adf1812bb6dda0821548af4044b71492d",
+      "hash": "702113fadd5d4ae5c4f01a27add2146985fe069220604809d0716b4fb1901fe5"
     },
     {
       "seq": 224,
@@ -5645,7 +5645,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "完成查表与错误归档复审，连续入口HP/固定几何耦合为下一工作面",
-      "previous_hash": "4e4c6cebda0a558c0bb66dff06874ffa7ebba5a40672c5c3ef405f5a174a120c",
+      "previous_hash": "702113fadd5d4ae5c4f01a27add2146985fe069220604809d0716b4fb1901fe5",
       "details": {
         "context_before": {
           "phase": "连续液体参考与C17查表已落地；核验运行档案后接连续入口HP/固定几何喷管",
@@ -5679,7 +5679,7 @@
           ]
         }
       },
-      "hash": "016823e4b35f6432ed58a66bd703294b5cb07b9ec209b0c8626b31387569277f"
+      "hash": "0f7e1405120a9ce99762584192237716550962fc8cdb55ba8b8eb18188a39aef"
     },
     {
       "seq": 225,
@@ -5690,8 +5690,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "407节点/700内部参考及22次真实C运行通过；补16种归档语义篡改和准备/最终语义失败回归；最新Windows六组完整PASS，独立CMake六项与19生产源实际GCC静态编译通过，科学边界不变",
-      "previous_hash": "016823e4b35f6432ed58a66bd703294b5cb07b9ec209b0c8626b31387569277f",
-      "hash": "c27787a86cfd306651bab2b909a8b131a7914592644b07b8b07f967dbbcd3875"
+      "previous_hash": "0f7e1405120a9ce99762584192237716550962fc8cdb55ba8b8eb18188a39aef",
+      "hash": "1d337beb5abeba609631fb13a54733498ca9750de1f25af7a95dbca8b9dbf751"
     },
     {
       "seq": 226,
@@ -5702,8 +5702,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "连续单相C17查表、来源/质量/焓基准和真实失败协议验收；尚未接HP/泵/循环，接续ANA-010，不启动PPT报告",
-      "previous_hash": "c27787a86cfd306651bab2b909a8b131a7914592644b07b8b07f967dbbcd3875",
-      "hash": "9288704c6c7784fd5edd4e4df4dd72e836fbbe224edd3e5e9447a583523a4b78"
+      "previous_hash": "1d337beb5abeba609631fb13a54733498ca9750de1f25af7a95dbca8b9dbf751",
+      "hash": "1754f488ea717f6a8ae3c8e4863c9e0e5cb8c6e4edb70d4436f957ee8b3b9e74"
     },
     {
       "seq": 227,
@@ -5714,8 +5714,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "9288704c6c7784fd5edd4e4df4dd72e836fbbe224edd3e5e9447a583523a4b78",
-      "hash": "ae4f4dd0d99a932eef33fc0cd6f12aa3789117aa0f725640db72d4a0d2a13643"
+      "previous_hash": "1754f488ea717f6a8ae3c8e4863c9e0e5cb8c6e4edb70d4436f957ee8b3b9e74",
+      "hash": "512e2645d9ca7e7ea85f195b84d75dd7658751eae8b95e373ea5977f9edda969"
     },
     {
       "seq": 228,
@@ -5726,8 +5726,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "实现连续液态入口HP/固定几何喷管，审查边界与活跃文档，保存实际C/CEA运行和研究响应后验收提交",
-      "previous_hash": "ae4f4dd0d99a932eef33fc0cd6f12aa3789117aa0f725640db72d4a0d2a13643",
-      "hash": "f833d1777fb5a9f801fba99d371d3b4423656a20015657965c9643a3bf374e8f"
+      "previous_hash": "512e2645d9ca7e7ea85f195b84d75dd7658751eae8b95e373ea5977f9edda969",
+      "hash": "57dac084375f4b25fd86eb4cdcec2d2bc5fe3e8bfa273428b2df43c6bee05cbd"
     },
     {
       "seq": 229,
@@ -5738,7 +5738,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "本轮实现与审查已进入验收准备；下一步运行完整Windows质量入口后提交任务并做本地Git检查点",
-      "previous_hash": "f833d1777fb5a9f801fba99d371d3b4423656a20015657965c9643a3bf374e8f",
+      "previous_hash": "57dac084375f4b25fd86eb4cdcec2d2bc5fe3e8bfa273428b2df43c6bee05cbd",
       "details": {
         "context_before": {
           "phase": "C17连续单相查表与实际运行核验已落实；下一项接连续入口HP/固定几何喷管",
@@ -5767,7 +5767,7 @@
           ]
         }
       },
-      "hash": "122f68d306822bef2fc9e1e071078b7f252f10019cbb6cbe257983b2e484ff14"
+      "hash": "1d7f61e306c96dba6dfe24a0e4b9f9b157c7af387a31e797d970ea9006b5854b"
     },
     {
       "seq": 230,
@@ -5778,8 +5778,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "122f68d306822bef2fc9e1e071078b7f252f10019cbb6cbe257983b2e484ff14",
-      "hash": "7f54fc2c251d4fcfab79825c2e850a09ad44275df05d2ccd22d0988f34ef1693"
+      "previous_hash": "1d7f61e306c96dba6dfe24a0e4b9f9b157c7af387a31e797d970ea9006b5854b",
+      "hash": "cd98f2e0a0dca68d8b321d4331fe1562877bc2dfa473671686a24ffd81b1f53c"
     },
     {
       "seq": 231,
@@ -5790,7 +5790,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "连续液体方法验收后优先回到两型四级段研究落点，不直接启动PPT或最终报告",
-      "previous_hash": "7f54fc2c251d4fcfab79825c2e850a09ad44275df05d2ccd22d0988f34ef1693",
+      "previous_hash": "cd98f2e0a0dca68d8b321d4331fe1562877bc2dfa473671686a24ffd81b1f53c",
       "details": {
         "context_before": {
           "phase": "C17连续液体入口HP与固定面积喷管已实现并完成归档复核",
@@ -5816,7 +5816,7 @@
           ]
         }
       },
-      "hash": "7312c9a00b0f90ab7fad66087ad50e2715a1954df7b99c7715f11fb45db04911"
+      "hash": "0255c826c6b1c48ba3438d9b8396ec2675dcc721ef10f3be63660dd49da19de6"
     },
     {
       "seq": 232,
@@ -5827,8 +5827,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "连续液体入口焓与C/H/O库存已接入九气相HP和固定面积冻结喷管；47次C运行、18次显式焓CEA对照、Windows CMake 6/6、统一质量6/6及21份生产源fanalyzer证据均已归档，边界与非实验性质已记录。",
-      "previous_hash": "7312c9a00b0f90ab7fad66087ad50e2715a1954df7b99c7715f11fb45db04911",
-      "hash": "e0b24026172caae5c70a5d14dbcb30fc58553cee2ccdb3492b7cfb945c04130a"
+      "previous_hash": "0255c826c6b1c48ba3438d9b8396ec2675dcc721ef10f3be63660dd49da19de6",
+      "hash": "c9dd6418ed016ab19aeb50b040befadb16b3cfca0d54e578ea3a2002b40a268c"
     },
     {
       "seq": 233,
@@ -5839,8 +5839,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "按三项契约完成C17连续入口HP/固定面积喷管、化学质量与元素/能量核验及成功拒绝归档；当前质量证据新鲜。本人语义审阅不冒称独立科学验收；真实两型入口、煤油、泵/分流/循环仍缺，接续ANA-011两型四级段整合，不启动PPT报告。",
-      "previous_hash": "e0b24026172caae5c70a5d14dbcb30fc58553cee2ccdb3492b7cfb945c04130a",
-      "hash": "6066f376d8a155e31a33b6017385db474d54a7f860a2e663cec4a6bf9f68394d"
+      "previous_hash": "c9dd6418ed016ab19aeb50b040befadb16b3cfca0d54e578ea3a2002b40a268c",
+      "hash": "0684fee75d5310e50639d3c3667e4b9ad3c78be7f9dc3ef1e607dad54ba22977"
     },
     {
       "seq": 234,
@@ -5851,8 +5851,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "6066f376d8a155e31a33b6017385db474d54a7f860a2e663cec4a6bf9f68394d",
-      "hash": "d8267ecfc7f1ae9a911f792cbf2c88a4ac53f3c60bf8ab5ed1ae799a15542cdf"
+      "previous_hash": "0684fee75d5310e50639d3c3667e4b9ad3c78be7f9dc3ef1e607dad54ba22977",
+      "hash": "ea2bc2bc9bcbbc503c69e3a1ad43b58ccd6fc6e687ed1a151b451c225b5341e5"
     },
     {
       "seq": 235,
@@ -5863,8 +5863,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "核对已保存两型原文与参数记录，形成四级段的可计算项/缺口/已有研究结果对应，并加入数据关联回归检查。",
-      "previous_hash": "d8267ecfc7f1ae9a911f792cbf2c88a4ac53f3c60bf8ab5ed1ae799a15542cdf",
-      "hash": "8d6817b83b86e4d18d049b9101ce97c1a5a969633b0e5ccf74fd2772a593323a"
+      "previous_hash": "ea2bc2bc9bcbbc503c69e3a1ad43b58ccd6fc6e687ed1a151b451c225b5341e5",
+      "hash": "d79a15e5da91321b6bdd56bb38a8323a1872c785d5359aacfdaf3c06d4bfda16"
     },
     {
       "seq": 236,
@@ -5875,8 +5875,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "8d6817b83b86e4d18d049b9101ce97c1a5a969633b0e5ccf74fd2772a593323a",
-      "hash": "cd465872784df372cc9f2f6e8f0aeb3b9dd21122b02cd7612980d341ab167361"
+      "previous_hash": "d79a15e5da91321b6bdd56bb38a8323a1872c785d5359aacfdaf3c06d4bfda16",
+      "hash": "589a57fce41412032f32473e2444ac88a3b89343aaf795c9826e684c6a170e60"
     },
     {
       "seq": 237,
@@ -5887,7 +5887,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "四级段研究已整合，接续煤油计算实质缺口；两型直接原文复读不刷新线上截止",
-      "previous_hash": "cd465872784df372cc9f2f6e8f0aeb3b9dd21122b02cd7612980d341ab167361",
+      "previous_hash": "589a57fce41412032f32473e2444ac88a3b89343aaf795c9826e684c6a170e60",
       "details": {
         "context_before": {
           "phase": "C17连续液体入口HP与固定面积喷管已实现并归档复核；接续两型四级段证据与计算整合",
@@ -5915,7 +5915,7 @@
           ]
         }
       },
-      "hash": "27da043fa5020f73e3411d8a3ac20772f55a015349da56905eb878f8cc355f19"
+      "hash": "dd7f3cd710f08a91cd5dcd31beefeab426718859d2ce546d539160086af0df4f"
     },
     {
       "seq": 238,
@@ -5926,8 +5926,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "四级段逐对象关联原文/事实/派生/假设/未知；两型研究入口说明可用C方法与必要输入，煤油不挂甲烷HP；汇合三项同条件收益/代价并保留适用域。库存质量及数据身份反例修复后完整质量六组PASS。负责人逐项语义复核，不声称独立科学审查。",
-      "previous_hash": "27da043fa5020f73e3411d8a3ac20772f55a015349da56905eb878f8cc355f19",
-      "hash": "e0de32d639921f85e1cfbd553bcaab090c5f702c8a2d81a764ca266594b6a7f7"
+      "previous_hash": "dd7f3cd710f08a91cd5dcd31beefeab426718859d2ce546d539160086af0df4f",
+      "hash": "cbc7628ad4adc8319ccf237b9d63a257584f74a4a736a30361958ef11f635ee1"
     },
     {
       "seq": 239,
@@ -5938,8 +5938,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "研究文档与四对象机器映射满足三项契约；新鲜完整质量、独立Windows CMake 6/6和21源严格静态分析通过。真实煤油/泵后供给/整机与实验未闭合；RES-008接续参考边界，PPT报告后置。",
-      "previous_hash": "e0de32d639921f85e1cfbd553bcaab090c5f702c8a2d81a764ca266594b6a7f7",
-      "hash": "090c823f880f95da49fe5fc364b8b9689dadd929cd6d86133efb1c1e812631e6"
+      "previous_hash": "cbc7628ad4adc8319ccf237b9d63a257584f74a4a736a30361958ef11f635ee1",
+      "hash": "ba421ed532e3f72bb19b93ba274be5f4b4a04a6798ef712a60ffae6948ad9d80"
     },
     {
       "seq": 240,
@@ -5950,8 +5950,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "090c823f880f95da49fe5fc364b8b9689dadd929cd6d86133efb1c1e812631e6",
-      "hash": "38ec308035cdd44c42122aac5b40b68b9356379f82cac8419d3f89ada91c01fc"
+      "previous_hash": "ba421ed532e3f72bb19b93ba274be5f4b4a04a6798ef712a60ffae6948ad9d80",
+      "hash": "ea12ede4d04ba988cabd8c186293920291c8f87297836e48944cd95ce0a33ab3"
     },
     {
       "seq": 241,
@@ -5962,8 +5962,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "核对固定RP-1元素与焓，实际运行同条件产物集合比较，明确可用条件",
-      "previous_hash": "38ec308035cdd44c42122aac5b40b68b9356379f82cac8419d3f89ada91c01fc",
-      "hash": "ac221335e8c9bc34bfa2232409ebe12e4f1122f2952115fe63ca11f0e02684cb"
+      "previous_hash": "ea12ede4d04ba988cabd8c186293920291c8f87297836e48944cd95ce0a33ab3",
+      "hash": "63d5ae96d5b07f3f1fac5ee76333609658b195f57c4293a0745c6603a2f06ce3"
     },
     {
       "seq": 242,
@@ -5974,8 +5974,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "ac221335e8c9bc34bfa2232409ebe12e4f1122f2952115fe63ca11f0e02684cb",
-      "hash": "d834ce8388582721985eba9719c8de604e8c133151a7692f993360f477e3132c"
+      "previous_hash": "63d5ae96d5b07f3f1fac5ee76333609658b195f57c4293a0745c6603a2f06ce3",
+      "hash": "07d8b053ecab072a4f95284cc8a7ecdd963e53e78de2177b839ff588fb3bb7e4"
     },
     {
       "seq": 243,
@@ -5986,7 +5986,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "补充同条件C研究驱动与保存参考，工程整顿另由GOV-003验收",
-      "previous_hash": "d834ce8388582721985eba9719c8de604e8c133151a7692f993360f477e3132c",
+      "previous_hash": "07d8b053ecab072a4f95284cc8a7ecdd963e53e78de2177b839ff588fb3bb7e4",
       "details": {
         "contract_before": {
           "id": "RES-008",
@@ -6034,7 +6034,7 @@
           "verification": null
         }
       },
-      "hash": "4ce3d7f1353650523d876e32476664432ddbd1623f234b1e153c5d8ac1bbc05b"
+      "hash": "8d8666455005e90ea3c5de91332a79c7bbb5b1bfa770d75c4a0405b474a18603"
     },
     {
       "seq": 244,
@@ -6045,8 +6045,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "4ce3d7f1353650523d876e32476664432ddbd1623f234b1e153c5d8ac1bbc05b",
-      "hash": "84cdae36cad734cc47524a8e79c883ba909c9cfa1349fc8f5caa7a3b5c997428"
+      "previous_hash": "8d8666455005e90ea3c5de91332a79c7bbb5b1bfa770d75c4a0405b474a18603",
+      "hash": "1c260423eed4086387b5872cbde68a075c970da35805bcdbe6acfadd7f0fab81"
     },
     {
       "seq": 245,
@@ -6057,7 +6057,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定RP-1参考与维护整顿，接续公共接口",
-      "previous_hash": "84cdae36cad734cc47524a8e79c883ba909c9cfa1349fc8f5caa7a3b5c997428",
+      "previous_hash": "1c260423eed4086387b5872cbde68a075c970da35805bcdbe6acfadd7f0fab81",
       "details": {
         "context_before": {
           "phase": "两型四级段证据与已有C方法整合；接续煤油参考边界",
@@ -6087,7 +6087,7 @@
           ]
         }
       },
-      "hash": "a942b2b5ec71b41fdf24dd16477627db14592879ec547094454311c3bca8550e"
+      "hash": "df1d310b7f237c1790d8507b93de73f35bf7acbe6d89a7a1c8736c066e7df3f2"
     },
     {
       "seq": 246,
@@ -6098,8 +6098,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "固定RP-1源记录/质量焓/库存与NIST范围已核对；15张CEA卡含真实失败和温度探查，6个C点/2个喷管点及打印参考复核已保存；公共接口与国产批次边界见契约，六组质量通过",
-      "previous_hash": "a942b2b5ec71b41fdf24dd16477627db14592879ec547094454311c3bca8550e",
-      "hash": "c89d2e0c22a0306be9625614d17e74a956e641f42b83bf56a0ec34d8697ad5a7"
+      "previous_hash": "df1d310b7f237c1790d8507b93de73f35bf7acbe6d89a7a1c8736c066e7df3f2",
+      "hash": "a7638ead29932abfa085e4e678afadc4f72b852c8699b60ed8bcae94d59ffee7"
     },
     {
       "seq": 247,
@@ -6110,8 +6110,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "三项验收由专题、方法契约、C驱动与v3归档支持；负责人完成语义审阅，未声称独立实验或真实煤油性能",
-      "previous_hash": "c89d2e0c22a0306be9625614d17e74a956e641f42b83bf56a0ec34d8697ad5a7",
-      "hash": "5dc6393311840aba565f37a2601c2560f00744efc51bbf28c20ec4f37a0be5c9"
+      "previous_hash": "a7638ead29932abfa085e4e678afadc4f72b852c8699b60ed8bcae94d59ffee7",
+      "hash": "e0f6e2555d03c4e640d6987cd707468a63c490d8f8034ff39ab7ab15e66cfa33"
     },
     {
       "seq": 248,
@@ -6122,8 +6122,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "5dc6393311840aba565f37a2601c2560f00744efc51bbf28c20ec4f37a0be5c9",
-      "hash": "788ae32f48325b8405439fc80612a1d6b86a598bf25ad56c789fa22cbcf656fb"
+      "previous_hash": "e0f6e2555d03c4e640d6987cd707468a63c490d8f8034ff39ab7ab15e66cfa33",
+      "hash": "4e15e3884d6db0b06887e81378f86ffce4562b92ab128c08e1b7302fee760c3c"
     },
     {
       "seq": 249,
@@ -6134,8 +6134,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收现行文档整顿、来源核验和交接格式兼容",
-      "previous_hash": "788ae32f48325b8405439fc80612a1d6b86a598bf25ad56c789fa22cbcf656fb",
-      "hash": "23237733d6114456deed4868e7634b35af7cb651dfcdd6b182ccc68d3eb8eba5"
+      "previous_hash": "4e15e3884d6db0b06887e81378f86ffce4562b92ab128c08e1b7302fee760c3c",
+      "hash": "19c490b9b8026d4303f1597c363eceb4ec1ee88aecad89ea538524b5a8d15bd6"
     },
     {
       "seq": 250,
@@ -6146,8 +6146,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "README/交接/规划与索引已整顿，NIST/GitHub原文支持审查规则，交接v3/旧版兼容及密钥网址误报有行为测试，完整质量六组通过",
-      "previous_hash": "23237733d6114456deed4868e7634b35af7cb651dfcdd6b182ccc68d3eb8eba5",
-      "hash": "97d874c1a61c74c18403267e93b2b07cb1421b274e8f1d8ccd3592757cc6411f"
+      "previous_hash": "19c490b9b8026d4303f1597c363eceb4ec1ee88aecad89ea538524b5a8d15bd6",
+      "hash": "a455b4c3734d9cb6c034178e2f64a15cbae2873c36f554e02b090af305cc91ba"
     },
     {
       "seq": 251,
@@ -6158,8 +6158,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "维护审计与快照对应产物；暂存区审查后本地提交，接续MOD-004固定RP-1公共接口，报告PPT后置",
-      "previous_hash": "97d874c1a61c74c18403267e93b2b07cb1421b274e8f1d8ccd3592757cc6411f",
-      "hash": "e44bfdcd65cce939dafd8351090623110583fd89999d6535df8b9fdc3f1c17e5"
+      "previous_hash": "a455b4c3734d9cb6c034178e2f64a15cbae2873c36f554e02b090af305cc91ba",
+      "hash": "9d242e1f637a942d496c65189b86f04774b2d8c7758f5141e43d903f0889179c"
     },
     {
       "seq": 252,
@@ -6170,8 +6170,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "e44bfdcd65cce939dafd8351090623110583fd89999d6535df8b9fdc3f1c17e5",
-      "hash": "2c94010825f2e7b769549e57e4976f38efa61a126b7c53597af7de792101f5ba"
+      "previous_hash": "9d242e1f637a942d496c65189b86f04774b2d8c7758f5141e43d903f0889179c",
+      "hash": "5264e0acb70f2834d29e9592be4a31cd8848ae42a81581a7f1b4677c3ea13f26"
     },
     {
       "seq": 253,
@@ -6182,8 +6182,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "2c94010825f2e7b769549e57e4976f38efa61a126b7c53597af7de792101f5ba",
-      "hash": "39da2c57e26f915ec5e83e85d30c61fecc6bd8aea8ef5e32711b58349e2a3051"
+      "previous_hash": "5264e0acb70f2834d29e9592be4a31cd8848ae42a81581a7f1b4677c3ea13f26",
+      "hash": "0a1290821799e3ccf4fe000d9b123aa363e655b6464733778f14b1c661c9f57e"
     },
     {
       "seq": 254,
@@ -6194,8 +6194,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "审阅用户转交参数，核对发动机/级段/来源对应关系",
-      "previous_hash": "39da2c57e26f915ec5e83e85d30c61fecc6bd8aea8ef5e32711b58349e2a3051",
-      "hash": "edf9a7973e05f200a14c8e2d8190eed82d1da3ba27733955742a83396730265a"
+      "previous_hash": "0a1290821799e3ccf4fe000d9b123aa363e655b6464733778f14b1c661c9f57e",
+      "hash": "f41d4ac090f9935b103c1f3e71e9dfaa5e870f93f4569d0d92438503c4366f0e"
     },
     {
       "seq": 255,
@@ -6206,8 +6206,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "edf9a7973e05f200a14c8e2d8190eed82d1da3ba27733955742a83396730265a",
-      "hash": "0286f6e8f8586ac43e3d1684f959017c09586fc25b540e87b15eedb9d1772a74"
+      "previous_hash": "f41d4ac090f9935b103c1f3e71e9dfaa5e870f93f4569d0d92438503c4366f0e",
+      "hash": "117c1291f43fe0ec3f155003363f6dec2e40d69b225f0907ec3f9582130dc5d6"
     },
     {
       "seq": 256,
@@ -6218,7 +6218,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "参数审阅与固定RP-1公共接口完成，接续同条件计算研究",
-      "previous_hash": "0286f6e8f8586ac43e3d1684f959017c09586fc25b540e87b15eedb9d1772a74",
+      "previous_hash": "117c1291f43fe0ec3f155003363f6dec2e40d69b225f0907ec3f9582130dc5d6",
       "details": {
         "context_before": {
           "phase": "固定RP-1产物边界与C方法研究；维护现行文档和交付检查",
@@ -6249,7 +6249,7 @@
           ]
         }
       },
-      "hash": "09d894dce1cf792d3e9abf2ba6f84cb31c4600b1dff1330ffaa737b341653b9a"
+      "hash": "93609f2fc9542b38aa109c7a915a0944a8d17414ce0a1e6bb6cfed5570f4e907"
     },
     {
       "seq": 257,
@@ -6260,7 +6260,7 @@
       "actor": "root",
       "owner_after": null,
       "note": "公共接口、纯C CLI、七点C/CEA参考与失败回归已落地",
-      "previous_hash": "09d894dce1cf792d3e9abf2ba6f84cb31c4600b1dff1330ffaa737b341653b9a",
+      "previous_hash": "93609f2fc9542b38aa109c7a915a0944a8d17414ce0a1e6bb6cfed5570f4e907",
       "details": {
         "contract_before": {
           "id": "MOD-004",
@@ -6315,7 +6315,7 @@
           "verification": null
         }
       },
-      "hash": "f0ca48744cccd32f1f14cc20e981e05a9b34a79638af58d56dee1e17fe97d425"
+      "hash": "0a9db8042923d9ca6fbb66480b155be52193aecc2be77f0e82cb7aac91ec2b21"
     },
     {
       "seq": 258,
@@ -6326,7 +6326,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "新增产品/试验来源与独立机器数据，保留原DOCX；入口范围和纯C边界已同步",
-      "previous_hash": "f0ca48744cccd32f1f14cc20e981e05a9b34a79638af58d56dee1e17fe97d425",
+      "previous_hash": "0a9db8042923d9ca6fbb66480b155be52193aecc2be77f0e82cb7aac91ec2b21",
       "details": {
         "contract_before": {
           "id": "RES-009",
@@ -6374,7 +6374,7 @@
           "verification": null
         }
       },
-      "hash": "fbb678cfdf793c09013467e4f263c2144b5e600b1cb2d2bab7585a15e7a9ac1d"
+      "hash": "fae91a9224c4c54957a7d3df7c33918b4a21115cd163e634f9b7259ff36075cc"
     },
     {
       "seq": 259,
@@ -6385,7 +6385,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "完整列出原文、审阅、产品数据与交接产物",
-      "previous_hash": "fbb678cfdf793c09013467e4f263c2144b5e600b1cb2d2bab7585a15e7a9ac1d",
+      "previous_hash": "fae91a9224c4c54957a7d3df7c33918b4a21115cd163e634f9b7259ff36075cc",
       "details": {
         "contract_before": {
           "id": "RES-009",
@@ -6438,7 +6438,7 @@
           "verification": null
         }
       },
-      "hash": "df55420dbb8a4b03f64965c9ccbb5028fd6e0b48a9f3251882db491f8d6f39e9"
+      "hash": "ad2aa198c38cbda601b6a99963511e73cad7ea420e9eb3e0640c34a733b35589"
     },
     {
       "seq": 260,
@@ -6449,8 +6449,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "原Word保留哈希/颜色/来源清单；七份新原文和产品记录可追溯，纠正能力/装机误归属，明确灰色必要字段与纯C边界；六组质量通过",
-      "previous_hash": "df55420dbb8a4b03f64965c9ccbb5028fd6e0b48a9f3251882db491f8d6f39e9",
-      "hash": "2f2b216a872c8f4e56e4fbfb77f527a8a4f93994709bd3fa01f9ab197cc91e41"
+      "previous_hash": "ad2aa198c38cbda601b6a99963511e73cad7ea420e9eb3e0640c34a733b35589",
+      "hash": "d787e8f1fa0b15a15bfcd86fd4b4c1c53428dafd0939b4e3eabf8c616c4568e1"
     },
     {
       "seq": 261,
@@ -6461,8 +6461,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "完成组员资料内容及字段归属审阅；Word缺少配套渲染器未称视觉检查通过，产品/试验不能直接填首飞性能卡",
-      "previous_hash": "2f2b216a872c8f4e56e4fbfb77f527a8a4f93994709bd3fa01f9ab197cc91e41",
-      "hash": "f203a0f9d3d0fd960829a32df40bd1910e13446f57e1af0b633136b3e6f4e48d"
+      "previous_hash": "d787e8f1fa0b15a15bfcd86fd4b4c1c53428dafd0939b4e3eabf8c616c4568e1",
+      "hash": "5bb3908d798155ba33a2b3572c29597eb7e1bd469e12f19603338f8bca2fbce2"
     },
     {
       "seq": 262,
@@ -6473,8 +6473,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收固定RP-1公共C接口、CLI与七点保存参考",
-      "previous_hash": "f203a0f9d3d0fd960829a32df40bd1910e13446f57e1af0b633136b3e6f4e48d",
-      "hash": "4d4faf06b01a46c1e25cd48c5b000428fa955b9b2d5856b7a1373b9c58134116"
+      "previous_hash": "5bb3908d798155ba33a2b3572c29597eb7e1bd469e12f19603338f8bca2fbce2",
+      "hash": "19d00be33b94e33865cc525a35c01b96c27386f64cb12430a46c46dd8f1dd856"
     },
     {
       "seq": 263,
@@ -6485,8 +6485,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "具名纯C入口/精确温度/域和失败保持输出已测试，33次C/21张CEA/812项比较及篡改反例归档，四图实际渲染核对，Windows系统库隔离运行通过；完整质量六组PASS",
-      "previous_hash": "4d4faf06b01a46c1e25cd48c5b000428fa955b9b2d5856b7a1373b9c58134116",
-      "hash": "05baef52aca67ec1f397494de4b1e768f6427d688aae51fbaf19e38be39477bc"
+      "previous_hash": "19d00be33b94e33865cc525a35c01b96c27386f64cb12430a46c46dd8f1dd856",
+      "hash": "947ea8f26abe2443e5c28d76020df162163f5bcfaaf2c117f0e58a676318e9ef"
     },
     {
       "seq": 264,
@@ -6497,8 +6497,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "三项契约由C接口/CLI/参考/测试及说明支持；方法不是国产煤油批次或实际发动机，接续ANA-012同条件推进剂/喷管研究，报告PPT后置",
-      "previous_hash": "05baef52aca67ec1f397494de4b1e768f6427d688aae51fbaf19e38be39477bc",
-      "hash": "4e91c10d2a9ee1c6630c2a79ed987d67e4ae2494c91db436b7db8de067c08a25"
+      "previous_hash": "947ea8f26abe2443e5c28d76020df162163f5bcfaaf2c117f0e58a676318e9ef",
+      "hash": "77e3f9cd8cd479e6827a6496d21c52d4c64caa4c9f908503c512524b45ae96d9"
     },
     {
       "seq": 265,
@@ -6509,8 +6509,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "4e91c10d2a9ee1c6630c2a79ed987d67e4ae2494c91db436b7db8de067c08a25",
-      "hash": "cb8687d2489af012ff741042ceaf9818a610f727f06ce20315070b6e40d8bf23"
+      "previous_hash": "77e3f9cd8cd479e6827a6496d21c52d4c64caa4c9f908503c512524b45ae96d9",
+      "hash": "bbbfd3e910617907252dae5b6b4191b9de4b3ec677c1ffc34f62d3be8db89d26"
     },
     {
       "seq": 266,
@@ -6521,8 +6521,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "cb8687d2489af012ff741042ceaf9818a610f727f06ce20315070b6e40d8bf23",
-      "hash": "07041f08c79ad2866f9415dab46d48fb25aa39ffecc64e80e49783ac11ef9476"
+      "previous_hash": "bbbfd3e910617907252dae5b6b4191b9de4b3ec677c1ffc34f62d3be8db89d26",
+      "hash": "e5f3cfadac7be1839fc2ebeb82007dd27fbf778c8d6310ba48e90e6b4262b64d"
     },
     {
       "seq": 267,
@@ -6533,8 +6533,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "用户授权私有GitHub阶段发布、源码与Windows包以及项目解读文档",
-      "previous_hash": "07041f08c79ad2866f9415dab46d48fb25aa39ffecc64e80e49783ac11ef9476",
-      "hash": "b1edfd154fbcf60c7177ae96699dfccb32dc090336397e2d0afa772f21b97040"
+      "previous_hash": "e5f3cfadac7be1839fc2ebeb82007dd27fbf778c8d6310ba48e90e6b4262b64d",
+      "hash": "8fbbd5a7502bc2da3d5092abddf4c7557c16232cd472070d10cba2a6329c5383"
     },
     {
       "seq": 268,
@@ -6545,7 +6545,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "实际两包纯C重建/隔离运行与GitHub五附件回下载一致证据已固定",
-      "previous_hash": "b1edfd154fbcf60c7177ae96699dfccb32dc090336397e2d0afa772f21b97040",
+      "previous_hash": "8fbbd5a7502bc2da3d5092abddf4c7557c16232cd472070d10cba2a6329c5383",
       "details": {
         "contract_before": {
           "id": "REL-002",
@@ -6599,7 +6599,7 @@
           "verification": null
         }
       },
-      "hash": "98eb785bd03e18588ce54bd2040f38c6fdf87992b47280fa050e98e2b6a33f0c"
+      "hash": "19797bd0dbd410c1085850fd6e7f60c4e3e3604cbdc9d5b254823232c29a3fb3"
     },
     {
       "seq": 269,
@@ -6610,7 +6610,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "私有阶段Release已发布，回下载哈希一致，继续研究而非报告PPT",
-      "previous_hash": "98eb785bd03e18588ce54bd2040f38c6fdf87992b47280fa050e98e2b6a33f0c",
+      "previous_hash": "19797bd0dbd410c1085850fd6e7f60c4e3e3604cbdc9d5b254823232c29a3fb3",
       "details": {
         "context_before": {
           "phase": "组员参数审阅与纯C固定RP-1入口；接续推进剂/喷管同条件研究",
@@ -6640,7 +6640,7 @@
           ]
         }
       },
-      "hash": "6271465a6f31b95c59e6d520d05f0828d84f6c6547b31147132b3693897334b7"
+      "hash": "12556e0dd5c15c6ac7ceea2cc3cc84c9583430072168d026dc460cb5eaf870af"
     },
     {
       "seq": 270,
@@ -6651,8 +6651,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "两包固定18e351b：纯C解压构建/CTest5项和8次隔离演示通过；五GitHub附件回下载SHA256一致、私有main及tag确认；详细解读覆盖课程/算法/数据/验证/维护；完整本地质量6组PASS",
-      "previous_hash": "6271465a6f31b95c59e6d520d05f0828d84f6c6547b31147132b3693897334b7",
-      "hash": "7a268c2e0625de93ac704bc4fc0ce8e3ce7dbcd14e5eb2c6b2d8bfb9f0d6e47c"
+      "previous_hash": "12556e0dd5c15c6ac7ceea2cc3cc84c9583430072168d026dc460cb5eaf870af",
+      "hash": "4f00a4b53511abf8f482bab08fad90a92a1fb46f39028e688be2fed67f0ecca1"
     },
     {
       "seq": 271,
@@ -6663,8 +6663,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "阶段交付和语义说明已验收，公开许可证/最终课程报告/PPT及真实型号性能未冒称完成。Release固定18e351b，后续登记提交单独维护；接续ANA-012",
-      "previous_hash": "7a268c2e0625de93ac704bc4fc0ce8e3ce7dbcd14e5eb2c6b2d8bfb9f0d6e47c",
-      "hash": "c96b01238a851f637135a810f993f9323523e433b638aa99ed1ef3e63eb0c8cd"
+      "previous_hash": "4f00a4b53511abf8f482bab08fad90a92a1fb46f39028e688be2fed67f0ecca1",
+      "hash": "aaf6aec8e56d8b556e8cc93121777ad0b76707c4ac0abefdb48810feddde8417"
     },
     {
       "seq": 272,
@@ -6675,8 +6675,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "c96b01238a851f637135a810f993f9323523e433b638aa99ed1ef3e63eb0c8cd",
-      "hash": "1935be09e69c3f8778d96b0b64726e1c0e539aa8f4e962e31234537c5c832775"
+      "previous_hash": "aaf6aec8e56d8b556e8cc93121777ad0b76707c4ac0abefdb48810feddde8417",
+      "hash": "da5293474a16fbf6de458843e4e0dce0dcbfdd904ce894aa4f9d81a7cd985fa5"
     },
     {
       "seq": 273,
@@ -6687,8 +6687,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "tag阶段CI检出detached HEAD，交接包空分支身份失败，修正可交付维护兼容",
-      "previous_hash": "1935be09e69c3f8778d96b0b64726e1c0e539aa8f4e962e31234537c5c832775",
-      "hash": "aa3253b7dee5522e9c06199cc198e90d32114fadf9a2b3348f04ef59dec19663"
+      "previous_hash": "da5293474a16fbf6de458843e4e0dce0dcbfdd904ce894aa4f9d81a7cd985fa5",
+      "hash": "e4bc97f4296841250d5fdb046c0c4d917a3713a9f3194470e0a19ca71885bbc6"
     },
     {
       "seq": 274,
@@ -6699,8 +6699,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "HEAD身份/bundle引用兼容和空分支回归通过，完整本地质量6组PASS，main前序远端WindowsCI通过；修正提交即同步复核",
-      "previous_hash": "aa3253b7dee5522e9c06199cc198e90d32114fadf9a2b3348f04ef59dec19663",
-      "hash": "3f4979c9cdbe24e95de16be61c88a366774c2ef3fc2c7dbc9f68f475c0bcba8e"
+      "previous_hash": "e4bc97f4296841250d5fdb046c0c4d917a3713a9f3194470e0a19ca71885bbc6",
+      "hash": "4c82d1fb582cabd67cfdf7bb4c6d512b6ebc47dab4930d535343d008443733bb"
     },
     {
       "seq": 275,
@@ -6711,8 +6711,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "detached HEAD接收身份已修正；阶段ZIP不变，维护提交同步main，远端CI结果单独核对",
-      "previous_hash": "3f4979c9cdbe24e95de16be61c88a366774c2ef3fc2c7dbc9f68f475c0bcba8e",
-      "hash": "234afa33e2be50fc2a58864893c4afee05411bae43856263287e35299f683c96"
+      "previous_hash": "4c82d1fb582cabd67cfdf7bb4c6d512b6ebc47dab4930d535343d008443733bb",
+      "hash": "7e53445cba1e5a3913fc9b9874ee0fbfa62a33dd88e41796abfa6f24329aad10"
     },
     {
       "seq": 276,
@@ -6723,8 +6723,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "用C CLI完成甲烷连续入口与固定RP-1同几何/压力/背压对照，归档成功拒绝与方法差异",
-      "previous_hash": "234afa33e2be50fc2a58864893c4afee05411bae43856263287e35299f683c96",
-      "hash": "9860a48752f0c6777ff2084501bc0ebea3c857c94dbaa2d2bb487c5ae14485c3"
+      "previous_hash": "7e53445cba1e5a3913fc9b9874ee0fbfa62a33dd88e41796abfa6f24329aad10",
+      "hash": "f30fe001d4a24933347928c9367514a25398434a60edefadfe655347b67a807b"
     },
     {
       "seq": 277,
@@ -6735,7 +6735,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "新增纯C成对接口、研究工具/图及失败回归；所有数值/差值由C产生",
-      "previous_hash": "9860a48752f0c6777ff2084501bc0ebea3c857c94dbaa2d2bb487c5ae14485c3",
+      "previous_hash": "f30fe001d4a24933347928c9367514a25398434a60edefadfe655347b67a807b",
       "details": {
         "contract_before": {
           "id": "ANA-012",
@@ -6788,7 +6788,7 @@
           "verification": null
         }
       },
-      "hash": "865bf362d371e3dcdfd839e44b64416ef71be0927fd684a27a56c37754ad74fe"
+      "hash": "4d8037dc2a8eb79f241fd7985339d98cdc8c9c810eaa0c3dc55caaaebcc3e9c4"
     },
     {
       "seq": 278,
@@ -6799,8 +6799,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "865bf362d371e3dcdfd839e44b64416ef71be0927fd684a27a56c37754ad74fe",
-      "hash": "064c2bab2fd80a1afa3e5938069e4185ca195f39a2e8f39b1ccbe0ffe0494193"
+      "previous_hash": "4d8037dc2a8eb79f241fd7985339d98cdc8c9c810eaa0c3dc55caaaebcc3e9c4",
+      "hash": "a62d6286dfbb19949f1d5be702f6fff5002427626533f34e74460117e58c448b"
     },
     {
       "seq": 279,
@@ -6811,7 +6811,7 @@
       "actor": "root",
       "owner_after": "root",
       "note": "同条件C研究完成，后续统一算例入口",
-      "previous_hash": "064c2bab2fd80a1afa3e5938069e4185ca195f39a2e8f39b1ccbe0ffe0494193",
+      "previous_hash": "a62d6286dfbb19949f1d5be702f6fff5002427626533f34e74460117e58c448b",
       "details": {
         "context_before": {
           "phase": "阶段软件已交付GitHub；接续甲烷与RP-1同条件研究",
@@ -6840,7 +6840,7 @@
           ]
         }
       },
-      "hash": "aac867a24abd20d3949d1508a51c9c550bb5f20c9b00a330b0cd13a5792d9fdd"
+      "hash": "e4a46286cb086e72928007989a2db0c48b535e2b0dff2856417abd9d7966d727"
     },
     {
       "seq": 280,
@@ -6851,8 +6851,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "纯C成对API/CLI/差值与整份失败保持输出完成；三组O-F同Pc/At/几何/背压57次C/8张新CEA/1410项参考归档；图与代码登记已更新实际视觉核对；项目解读去除报告PPT进度措辞；22源静态分析及完整Windows质量6组通过",
-      "previous_hash": "aac867a24abd20d3949d1508a51c9c550bb5f20c9b00a330b0cd13a5792d9fdd",
-      "hash": "f8ca0f4d7ea4a3b36229ee55d393f7d2de09c906725a1bb26e32e09420ddba65"
+      "previous_hash": "e4a46286cb086e72928007989a2db0c48b535e2b0dff2856417abd9d7966d727",
+      "hash": "561d140d92059e5090e299a842d473d1e47945861febdedd07cd7a55571b54d0"
     },
     {
       "seq": 281,
@@ -6863,8 +6863,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "三项契约由成对C接口、输入身份、成功拒绝、原参考/图及结论支持；共同2.6时高比冲但低推力，面积/背压代价已解释，不称型号排名/最优；接续IMP-002",
-      "previous_hash": "f8ca0f4d7ea4a3b36229ee55d393f7d2de09c906725a1bb26e32e09420ddba65",
-      "hash": "a0855b01f2445dfac0cfe1c586ebf19cfabe0e274effe2905218d902018acdd3"
+      "previous_hash": "561d140d92059e5090e299a842d473d1e47945861febdedd07cd7a55571b54d0",
+      "hash": "3481538f9fa1cddee4c2bada0993da8a6fc7a1874aca3d50b15fe835968d7ad3"
     },
     {
       "seq": 282,
@@ -6875,8 +6875,8 @@
       "actor": "root",
       "owner_after": null,
       "note": "Prerequisites completed; task is now ready",
-      "previous_hash": "a0855b01f2445dfac0cfe1c586ebf19cfabe0e274effe2905218d902018acdd3",
-      "hash": "6a74f7ca766717e7e27fff68fe324770c7ce7d0c442b623e1e6400de4bd0d3a4"
+      "previous_hash": "3481538f9fa1cddee4c2bada0993da8a6fc7a1874aca3d50b15fe835968d7ad3",
+      "hash": "36243569f034e343c4db8c35acfed984ea69c948b4e2519d8665f884ff6fbfc9"
     },
     {
       "seq": 283,
@@ -6887,8 +6887,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "按用户要求整理C职责/注释、明确成对算例，改善代码交接与私有发布",
-      "previous_hash": "6a74f7ca766717e7e27fff68fe324770c7ce7d0c442b623e1e6400de4bd0d3a4",
-      "hash": "687accfbc7584595803ce8b52de067a1b45aff26aeb334bd07df1b567da34645"
+      "previous_hash": "36243569f034e343c4db8c35acfed984ea69c948b4e2519d8665f884ff6fbfc9",
+      "hash": "af38a5484750b9ff7546a573bedf22cb9edfb95f4c686ada7ff02dd0953905c5"
     },
     {
       "seq": 284,
@@ -6899,8 +6899,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "C职责注释整理、成对算例文件与结果协议整合完成：CLI拆分为参数解析/燃烧命令/报告适配器，关键注释覆盖表驱动offset链、位置参数布局与身份重钉；coding-style.md提炼既有约定；propellant-case-format.md重写为可用字段表；DEMO_ARGS新增pair演示并核验差值；文档导航修复（project-brief/verification/thermo-validation接入入口）；完整质量6/6 PASS，三个研究归档复核通过（57+8/33+21/47+18）；算例与参数CLI结果数值一致已由test_cli.py断言",
-      "previous_hash": "687accfbc7584595803ce8b52de067a1b45aff26aeb334bd07df1b567da34645",
-      "hash": "35a4953a3f9b597aed7c1231ce9b1b0e9770b290a52742c34a901b972ed69721"
+      "previous_hash": "af38a5484750b9ff7546a573bedf22cb9edfb95f4c686ada7ff02dd0953905c5",
+      "hash": "9dd26f04c6e7c77d1a7c1ef10b8226cc3f72e677820d7175b736b4f96d0a4338"
     },
     {
       "seq": 285,
@@ -6911,8 +6911,8 @@
       "actor": "root",
       "owner_after": "root",
       "note": "验收完成：三项契约逐项核对通过。严格算例文件拒绝路径、数值一致性、交付含算例均由测试和实际运行支撑。遗留：外部GitHub同步与Release需另行授权；DOC-001待领取",
-      "previous_hash": "35a4953a3f9b597aed7c1231ce9b1b0e9770b290a52742c34a901b972ed69721",
-      "hash": "b2ff8f2cc56785dfe57a4fa7ad9735d1d2dade47c1565b3b10a8965fa7f9a16d"
+      "previous_hash": "9dd26f04c6e7c77d1a7c1ef10b8226cc3f72e677820d7175b736b4f96d0a4338",
+      "hash": "215430fa10663966d9878d2c8f1043a06e490390e06fab2981a902490ea648de"
     },
     {
       "seq": 286,
@@ -6920,11 +6920,11 @@
       "task": "IMP-003",
       "from": null,
       "to": "READY",
-      "actor": "codex",
+      "actor": "buaabw",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "b2ff8f2cc56785dfe57a4fa7ad9735d1d2dade47c1565b3b10a8965fa7f9a16d",
-      "hash": "4fc7325c835db00e760d8c94c3f54ddd819d4079c4e88d4e154f63457a9fd539"
+      "previous_hash": "215430fa10663966d9878d2c8f1043a06e490390e06fab2981a902490ea648de",
+      "hash": "b0941ba783950cebfb1df77adefd226be4d74c68f1517c68dfa1a2e21d570a23"
     },
     {
       "seq": 287,
@@ -6932,11 +6932,11 @@
       "task": "IMP-003",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "软件本体与交互补课:interactive菜单、人读文本报告、help/cases重构,面向10-16展示",
-      "previous_hash": "4fc7325c835db00e760d8c94c3f54ddd819d4079c4e88d4e154f63457a9fd539",
-      "hash": "b81ab695c53f6cf91ce805472ac55e11a674de0b2cc56cfcbca8fbf43a81afd9"
+      "previous_hash": "b0941ba783950cebfb1df77adefd226be4d74c68f1517c68dfa1a2e21d570a23",
+      "hash": "bcdac10d6bca2f6575de1c3fbd34b32f71784bfe56f6e0913774aa14436c78b1"
     },
     {
       "seq": 288,
@@ -6944,11 +6944,11 @@
       "task": "IMP-003",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "interactive菜单(参数/单位/默认值/q/EOF)、text_report人读输出(run/study/--case --text)、cases、help分组Usage开头、UTF-8控制台切换;Debug/Release各41组CLI过;quality 6/6 PASS;quality单步超时240→900s修正",
-      "previous_hash": "b81ab695c53f6cf91ce805472ac55e11a674de0b2cc56cfcbca8fbf43a81afd9",
-      "hash": "eb5c37419a86223a9d49e1e543eb00073838c474ebd4f9dce6a69680145b4b2a"
+      "previous_hash": "bcdac10d6bca2f6575de1c3fbd34b32f71784bfe56f6e0913774aa14436c78b1",
+      "hash": "fd3c249a613d95967f4ed9cddc137e3c01f34912a9f81470cc0f4f76a76f52d8"
     },
     {
       "seq": 289,
@@ -6956,11 +6956,11 @@
       "task": "IMP-003",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "验收自评:交互/人读/help/cases四项契约均落实,JSON与非TTY退出码契约未变;测试为机械通过,不代表独立科学审查;详见taskshot 2026-10-11_046",
-      "previous_hash": "eb5c37419a86223a9d49e1e543eb00073838c474ebd4f9dce6a69680145b4b2a",
-      "hash": "e9cf5762efacf72faf7f2edad9ee4e371234e4bf499c3377f10bbacf2c033bad"
+      "previous_hash": "fd3c249a613d95967f4ed9cddc137e3c01f34912a9f81470cc0f4f76a76f52d8",
+      "hash": "fbe619ba13ae8c784299dabe05f423f688a77473a2cdb763fb6ddc1ed54f831b"
     },
     {
       "seq": 290,
@@ -6968,11 +6968,11 @@
       "task": "IMP-004",
       "from": null,
       "to": "READY",
-      "actor": "codex",
+      "actor": "buaabw",
       "owner_after": null,
       "note": "Created with an explicit acceptance contract",
-      "previous_hash": "e9cf5762efacf72faf7f2edad9ee4e371234e4bf499c3377f10bbacf2c033bad",
-      "hash": "e1f5e1a3bbcb3ac9044ab843686f9e5303c7fc3896da778901278d1c63a833cb"
+      "previous_hash": "fbe619ba13ae8c784299dabe05f423f688a77473a2cdb763fb6ddc1ed54f831b",
+      "hash": "72ef34fb1036ea0126a5eec49d4ef22fb53a2455769eae513e85c5ba6a4e9306"
     },
     {
       "seq": 291,
@@ -6980,11 +6980,11 @@
       "task": "IMP-004",
       "from": "READY",
       "to": "ACTIVE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "过膨胀域从硬拒绝改为显式域评估:理想解+经验分离提示+匹配面积比;原求解契约不动,新接口为增量",
-      "previous_hash": "e1f5e1a3bbcb3ac9044ab843686f9e5303c7fc3896da778901278d1c63a833cb",
-      "hash": "6415c85d82536852ad32c4b360325eddaf084b4f764d427283810a34af3d0030"
+      "previous_hash": "72ef34fb1036ea0126a5eec49d4ef22fb53a2455769eae513e85c5ba6a4e9306",
+      "hash": "a734e7754320b4a9a416e950af113e8c0c859097613e384718d5a9bff2a02321"
     },
     {
       "seq": 292,
@@ -6992,11 +6992,11 @@
       "task": "IMP-004",
       "from": "ACTIVE",
       "to": "REVIEW",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "域评估实现完成:L0/冻结assess接口+CLI regime命令+交互自动回退+研究算例;Debug/Release 247/3918/353/44组全过;质量6/6 PASS",
-      "previous_hash": "6415c85d82536852ad32c4b360325eddaf084b4f764d427283810a34af3d0030",
-      "hash": "74afa7925d835fc5fa251965ad3b3b15cab3a61d9364df95e9ab97fd0aea04c0"
+      "previous_hash": "a734e7754320b4a9a416e950af113e8c0c859097613e384718d5a9bff2a02321",
+      "hash": "0417f248e84d164f5b26230bb00ac8f6693484cc4b5a72bb587c1f4efa233bb1"
     },
     {
       "seq": 293,
@@ -7004,11 +7004,11 @@
       "task": "IMP-004",
       "from": "REVIEW",
       "to": "DONE",
-      "actor": "codex",
-      "owner_after": "codex",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
       "note": "验收自评:四条契约均满足;域评估为理想解+经验提示,不声称分离预测;机械PASS不等独立科学审查",
-      "previous_hash": "74afa7925d835fc5fa251965ad3b3b15cab3a61d9364df95e9ab97fd0aea04c0",
-      "hash": "58a0fc9abe114f6af2edb94ccd29e77e70a136c9611f58abe9dc1747394147ca"
+      "previous_hash": "0417f248e84d164f5b26230bb00ac8f6693484cc4b5a72bb587c1f4efa233bb1",
+      "hash": "86236336deaa94e6e58abc7bb12a56c315b9017e712263c6c03a0215760cdc77"
     }
   ]
 }

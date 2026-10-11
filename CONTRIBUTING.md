@@ -1,6 +1,6 @@
 # 维护与贡献
 
-先读[Agent入口](AGENTS.md)、[治理规范](docs/governance.md)和对应[模块架构](docs/architecture/README.md)。
+先读[协作入口](AGENTS.md)、[治理规范](docs/governance.md)和对应[模块架构](docs/architecture/README.md)。
 
 ## 工作流
 

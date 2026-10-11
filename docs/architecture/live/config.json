@@ -1,0 +1,349 @@
+{
+  "meta": {
+    "title": "rocketperf · 动力系统方法流水线",
+    "lang": "zh-CN"
+  },
+  "canvas": {
+    "preset": "4:5",
+    "width": 1200,
+    "height": 1500,
+    "duration": 32,
+    "fps": 30,
+    "preroll": 10
+  },
+  "theme": {
+    "preset": "terminal-dark",
+    "fontSize": 20,
+    "lineHeight": 30,
+    "colors": {
+      "cy": "#86e1e6",
+      "gr": "#86e0a2",
+      "bl": "#8fb4f6",
+      "ye": "#e3c07a",
+      "pu": "#b9a2f2"
+    }
+  },
+  "clock": {
+    "start": "00:00:08",
+    "rate": 1
+  },
+  "titlebar": {
+    "text": "~/rocketperf — 方法流水线 — bash — 92x44"
+  },
+  "credit": {
+    "text": "数字源：tools/quality.py 与研究归档；流动/计数为动画示意 · motion grammar after @thedelost（方法独立重实现）",
+    "y": 1488
+  },
+  "machines": {
+    "stage": {
+      "type": "cycle",
+      "period": 4.5,
+      "t0": 0.8,
+      "order": [0, 1, 2, 3],
+      "log": { "who": "stage", "c": "gr" },
+      "values": [
+        { "t": "NASA9", "m": "NASA9系数 → 温变 cp/h/s", "g": "物性层" },
+        { "t": "HP平衡", "m": "九气相 HP → T≈3602.8 K", "g": "迭代30" },
+        { "t": "冻结喷管", "m": "A40 出口 pe≈18.96 kPa", "g": "阻塞通量" },
+        { "t": "域评估", "m": "pa>pe → regime诊断(非分离预测)", "g": "提示" }
+      ]
+    },
+    "gate": {
+      "type": "triggers",
+      "color": "pu",
+      "period": 6,
+      "on": 3.4,
+      "t0": 1.2,
+      "callsStart": 1,
+      "onText": "校验中",
+      "offText": "待命",
+      "items": [
+        { "name": "守恒残差检查", "adv": ["» 元素/焓/熵/连续", "» 13k+ 项 C 检查"], "to": "→ 核心" },
+        { "name": "CEA同源对照", "adv": ["» 33次C / 21张卡", "» ΔT≤0.02 K"], "to": "→ 参考" },
+        { "name": "失败契约测试", "adv": ["» 越域→out_of_domain", "» 输出保持不变"], "to": "→ 接口" }
+      ],
+      "log": {
+        "who": "gate",
+        "c": "pu",
+        "start": { "m": "{name} · 开始", "g": "校验中" },
+        "end": { "m": "{name} · 通过", "g": "{to}" }
+      }
+    },
+    "pipe": {
+      "type": "lane",
+      "period": 9,
+      "run": 6,
+      "off": 2.4,
+      "busy": "求解中",
+      "done": ["已收敛", "域外→regime"],
+      "phase": 0,
+      "log": {
+        "who": "solve",
+        "c": "cy",
+        "msgs": [
+          ["Pc=10MPa O/F=3.4 → HP+冻结喷管", "液态CH4"],
+          ["A40 pa=101325 → 域评估提示", "过膨胀"],
+          ["成对算例 ΔIsp=+13.85 s", "CH4−RP1"]
+        ]
+      }
+    },
+    "checks": {
+      "type": "counter",
+      "start": 0,
+      "rate": 460,
+      "format": "comma"
+    }
+  },
+  "elements": [
+    {
+      "type": "text",
+      "x": 0, "w": 1200, "y": 82, "align": "center", "ls": 1,
+      "runs": [
+        { "t": "ROCKETPERF 计算流水线", "c": "fg", "b": 1 },
+        { "t": "　·　", "c": "dim", "b": 1 },
+        { "t": "输入 → C17核心 → 报告", "c": "cy", "b": 1 }
+      ]
+    },
+    { "type": "rule", "x": 34, "y": 110, "w": 1132 },
+    {
+      "type": "text",
+      "x": 0, "w": 1200, "y": 140, "align": "center",
+      "runs": [
+        { "sw": "cy" }, { "t": "输入入口", "c": "dim" }, { "t": "　　", "c": "dim" },
+        { "sw": "gr" }, { "t": "C17 求解核心", "c": "dim" }, { "t": "　　", "c": "dim" },
+        { "sw": "bl" }, { "t": "适配器/输出", "c": "dim" }, { "t": "　　", "c": "dim" },
+        { "sw": "pu" }, { "t": "验收门", "c": "dim" }, { "t": "　　", "c": "dim" },
+        { "sw": "ye" }, { "t": "模型边界", "c": "dim" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 34, "y": 186, "w": 252, "h": 540,
+      "color": "pu",
+      "pad": [14, 8, 6],
+      "lines": [
+        { "t": "验收门", "c": "pu", "b": 1 },
+        { "t": "quality.py 6步", "c": "pu" },
+        { "trigger": ["gate", 0], "indent": 10, "size": 18 },
+        "",
+        { "indent": 36, "size": 18, "t": "每轮 Debug+Release", "c": "fg" },
+        { "indent": 36, "size": 18, "t": "全量测试套", "c": "fg" },
+        "",
+        { "indent": 36, "size": 18, "runs": [{ "v": "gate.adv0", "c": "pu", "b": 1 }] },
+        { "indent": 36, "size": 18, "runs": [{ "v": "gate.adv1", "c": "pu", "b": 1 }] },
+        "",
+        { "trigger": ["gate", 1], "indent": 10, "size": 18 },
+        "",
+        { "indent": 36, "size": 18, "t": "同源软件对照", "c": "fg" },
+        { "indent": 36, "size": 18, "t": "非独立实验", "c": "dim" },
+        "",
+        { "trigger": ["gate", 2], "indent": 10, "size": 18 },
+        "",
+        { "indent": 36, "size": 18, "t": "失败语义回归", "c": "fg" },
+        { "indent": 36, "size": 18, "t": "退出码 0/2/3/4", "c": "fg" },
+        "",
+        {
+          "indent": 36, "size": 18,
+          "items": [
+            { "w": 120, "runs": ["本屏调用"] },
+            { "w": 56, "align": "right", "runs": [{ "v": "gate.calls", "c": "pu", "b": 1 }] }
+          ]
+        },
+        { "indent": 36, "size": 16, "t": "(动画计数,示意)", "c": "dim" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 320, "y": 186, "w": 566, "h": 168,
+      "color": "cy",
+      "pad": [12, 10, 8],
+      "lines": [
+        { "t": "输入 · 三种等价入口", "c": "cy", "b": 1 },
+        "",
+        { "indent": 24, "size": 18, "t": "① 交互菜单 interactive — 逐项提示", "c": "fg" },
+        { "indent": 24, "size": 18, "t": "② 算例文件 .ini — 严格字段/来源标注", "c": "fg" },
+        { "indent": 24, "size": 18, "t": "③ CLI 位置参数 — 批量与归档复跑", "c": "fg" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 320, "y": 394, "w": 566, "h": 460,
+      "color": "gr",
+      "container": true,
+      "pad": [12, 10, 8],
+      "lines": [
+        { "t": "C17 纯计算核心 · 单进程", "c": "gr", "b": 1 }
+      ]
+    },
+    {
+      "type": "box",
+      "x": 344, "y": 438, "w": 518, "h": 92,
+      "color": "gr",
+      "pad": [8, 8, 6],
+      "when": { "var": "stage.i", "eq": 0 },
+      "then": { "glow": "gr" },
+      "lines": [
+        { "size": 18, "t": "① NASA9 物性层", "c": "gr", "b": 1 },
+        { "indent": 18, "size": 17, "t": "九系数多项式 · 分温区 cp/h/s", "c": "fg" }
+      ]
+    },
+    {
+      "type": "box",
+      "x": 344, "y": 542, "w": 518, "h": 92,
+      "color": "gr",
+      "pad": [8, 8, 6],
+      "when": { "var": "stage.i", "eq": 1 },
+      "then": { "glow": "gr" },
+      "lines": [
+        { "size": 18, "t": "② HP/TP 平衡", "c": "gr", "b": 1 },
+        { "indent": 18, "size": 17, "t": "九气相 · 元素库存+化学平衡闭合", "c": "fg" }
+      ]
+    },
+    {
+      "type": "box",
+      "x": 344, "y": 646, "w": 518, "h": 92,
+      "color": "gr",
+      "pad": [8, 8, 6],
+      "when": { "var": "stage.i", "eq": 2 },
+      "then": { "glow": "gr" },
+      "lines": [
+        { "size": 18, "t": "③ 喷管 · 冻结(温变) / L0(定比热)", "c": "gr", "b": 1 },
+        { "indent": 18, "size": 17, "t": "声速喉部 · 阻塞通量 · 超声速分支", "c": "fg" }
+      ]
+    },
+    {
+      "type": "box",
+      "x": 344, "y": 750, "w": 518, "h": 92,
+      "color": "gr",
+      "pad": [8, 8, 6],
+      "when": { "var": "stage.i", "eq": 3 },
+      "then": { "glow": "gr" },
+      "lines": [
+        { "size": 18, "t": "④ 域评估 / 循环原型", "c": "gr", "b": 1 },
+        { "indent": 18, "size": 17, "t": "regime诊断+匹配AR · 给定热状态外排", "c": "fg" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 320, "y": 894, "w": 566, "h": 150,
+      "color": "bl",
+      "pad": [12, 10, 8],
+      "lines": [
+        { "t": "适配器", "c": "bl", "b": 1 },
+        "",
+        { "indent": 24, "size": 18, "t": "INI解析 · JSON报告 · 人读文本(--text)", "c": "fg" },
+        { "indent": 24, "size": 18, "t": "Windows UTF-8 控制台切换", "c": "fg" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 320, "y": 1084, "w": 566, "h": 150,
+      "color": "fg",
+      "pad": [12, 10, 8],
+      "lines": [
+        { "t": "输出与契约", "c": "fg", "b": 1 },
+        "",
+        { "indent": 24, "size": 18, "t": "stdout=JSON机器契约 · stderr=诊断", "c": "fg" },
+        { "indent": 24, "size": 18, "t": "results/ 归档 manifest + 哈希", "c": "fg" }
+      ]
+    },
+
+    {
+      "type": "box",
+      "x": 914, "y": 186, "w": 252, "h": 540,
+      "color": "ye",
+      "pad": [14, 8, 6],
+      "lines": [
+        { "t": "模型边界 · 不做", "c": "ye", "b": 1 },
+        "",
+        { "indent": 20, "size": 17, "t": "激波 / 分离 / 侧载", "c": "fg" },
+        { "indent": 20, "size": 17, "t": "真实型号性能", "c": "fg" },
+        { "indent": 20, "size": 17, "t": "凝聚相 · 煤油批次", "c": "fg" },
+        { "indent": 20, "size": 17, "t": "整机循环闭合", "c": "fg" },
+        { "indent": 20, "size": 17, "t": "轨迹 / 级段性能", "c": "fg" },
+        "",
+        { "indent": 20, "size": 17, "t": "regime域评估:", "c": "ye" },
+        { "indent": 20, "size": 17, "t": "理想解+经验提示", "c": "ye" },
+        { "indent": 20, "size": 17, "t": "非分离预测", "c": "ye" },
+        "",
+        { "indent": 20, "size": 16, "t": "对照均为同源软件", "c": "dim" },
+        { "indent": 20, "size": 16, "t": "方法级验证", "c": "dim" }
+      ]
+    },
+
+    {
+      "type": "path",
+      "points": [[603, 354], [603, 394]],
+      "color": "cy",
+      "flow": { "period": 2.4, "offsets": [0, 0.5], "tail": true }
+    },
+    {
+      "type": "path",
+      "points": [[603, 854], [603, 894]],
+      "color": "gr",
+      "flow": { "period": 2.4, "offsets": [0, 0.33, 0.66], "tail": true }
+    },
+    {
+      "type": "path",
+      "points": [[603, 1044], [603, 1084]],
+      "color": "bl",
+      "flow": { "period": 2.4, "offsets": [0, 0.5], "tail": true }
+    },
+
+    { "type": "tarrow", "machine": "gate", "i": 0, "from": [286, 262], "to": [320, 262] },
+    { "type": "tarrow", "machine": "gate", "i": 1, "from": [286, 448], "to": [320, 448] },
+    { "type": "tarrow", "machine": "gate", "i": 2, "from": [286, 576], "to": [320, 576] },
+
+    {
+      "type": "log",
+      "x": 320, "y": 1264, "w": 846, "rows": 6,
+      "padTop": 12, "padBottom": 12, "padLeft": 14,
+      "title": "solve log", "titleX": 14, "titleW": 90,
+      "cols": [
+        { "key": "time", "x": 14 },
+        { "key": "who", "x": 104 },
+        { "key": "m", "x": 190 },
+        { "key": "g", "x": 726 }
+      ]
+    },
+    {
+      "type": "text",
+      "x": 34, "y": 1300,
+      "runs": [
+        { "t": "本轮交付: ", "c": "dim" },
+        { "t": "13,402", "c": "wh", "b": 1 },
+        { "t": " 项C检查", "c": "dim" }
+      ]
+    },
+    {
+      "type": "text",
+      "x": 34, "y": 1340,
+      "runs": [
+        { "t": "CLI回归: ", "c": "dim" },
+        { "t": "44", "c": "wh", "b": 1 },
+        { "t": " 组", "c": "dim" }
+      ]
+    },
+    {
+      "type": "text",
+      "x": 34, "y": 1380,
+      "runs": [
+        { "t": "屏幕求解计数: ", "c": "dim" },
+        { "v": "checks", "c": "cy", "b": 1 },
+        { "t": " (示意)", "c": "dim" }
+      ]
+    },
+    {
+      "type": "text",
+      "x": 34, "y": 1420,
+      "runs": [
+        { "v": "pipe", "c": "cy", "b": 1 }
+      ]
+    }
+  ]
+}

@@ -26,11 +26,11 @@
 | TECH-001 | 确定课程项目技术栈与物理算法路线 | DONE | P0 | root | GOV-001 |
 | DOC-002 | 建立轻量研究结构与文档维护约定 | DONE | P0 | root | GOV-001 |
 | AUD-001 | 运行库验证、代码补审与文档修订 | DONE | P1 | root | 无 |
-| DATA-002 | 参数逐字段复核与输入校验 | DONE | P0 | codex | DATA-001 |
-| MOD-001 | NASA9物性与数据测试 | DONE | P1 | codex | RES-002 |
-| REF-001 | CEA独立对照算例复现 | DONE | P1 | codex | RES-002 |
-| MOD-002 | 受限HP平衡与温变冻结喷管 | DONE | P1 | codex | MOD-001, REF-001 |
-| MOD-003 | 稳态循环与整机边界计算 | DONE | P2 | codex | MOD-002, DATA-002 |
+| DATA-002 | 参数逐字段复核与输入校验 | DONE | P0 | buaabw | DATA-001 |
+| MOD-001 | NASA9物性与数据测试 | DONE | P1 | buaabw | RES-002 |
+| REF-001 | CEA独立对照算例复现 | DONE | P1 | buaabw | RES-002 |
+| MOD-002 | 受限HP平衡与温变冻结喷管 | DONE | P1 | buaabw | MOD-001, REF-001 |
+| MOD-003 | 稳态循环与整机边界计算 | DONE | P2 | buaabw | MOD-002, DATA-002 |
 | ANA-002 | 改进研究与结果复核 | DONE | P1 | root | DATA-002, MOD-002, MOD-003, QA-001 |
 | QA-001 | 修复验收漏项并建立可运行交接 | DONE | P1 | root | MOD-003, DATA-002 |
 | ANA-003 | 实际研究状态的参考覆盖与固定几何边界 | DONE | P1 | root | ANA-002 |
@@ -53,8 +53,8 @@
 | REL-002 | 私有GitHub阶段交付与纯C打包 | DONE | P1 | root | MOD-004, RES-009 |
 | GOV-004 | 标签检出下交接身份兼容 | DONE | P1 | root | REL-002 |
 | IMP-002 | 成对研究算例文件与结果协议整合 | DONE | P1 | root | ANA-012 |
-| IMP-003 | CLI交互模式、人读输出与命令编排重构 | DONE | P1 | codex | IMP-002 |
-| IMP-004 | 喷管过膨胀域评估与域外诊断 | DONE | P1 | codex | IMP-003 |
+| IMP-003 | CLI交互模式、人读输出与命令编排重构 | DONE | P1 | buaabw | IMP-002 |
+| IMP-004 | 喷管过膨胀域评估与域外诊断 | DONE | P1 | buaabw | IMP-003 |
 
 ## 产物和验收
 
