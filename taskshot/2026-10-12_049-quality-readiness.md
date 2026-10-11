@@ -32,3 +32,11 @@ python tools/delivery.py verify --directory build/delivery-qa002-20261012
 ```
 
 新阶段包基于代码/文档检查点生成；最终固定提交、纯C重建与打包验收结果将在以下追加，不能提前称其为课程最终四项交付。当前仍缺真实组员贡献、最终稿/PPT/演练，以及真实型号输入和整机/实验参考；这些缺口不伪装为软件待实现功能。
+
+## 本地阶段包最终验收
+
+- 最终包：`build/delivery-qa002-20261012/`，协议v2，status PASS，校验命令 `python tools/delivery.py verify --directory build/delivery-qa002-20261012` 通过。
+- 固定源码提交：`a31465f4bc1ad0b65bcc3c829a4168f7cf222d9d`；质量指纹 `9434344ab543107db12c6fb17699d859d48b214456d093406c166bf1139be096`。包生成和校验时仓库干净，包后只有本快照/任务状态记录。
+- C源码ZIP 87文件、220349字节，SHA256 `83a21f0346ca562dac00f4ea93e423f4fbde591b304db2e19d8a7b383311b3cb`；Windows x64 ZIP 77文件、241247字节，SHA256 `bec665a8dabea85e02722501ed2f85616eae99aad24603910419ce260064e69d`。
+- Windows程序SHA256 `0c9a93c75713e31559d7cc9175e6d89a81a0c7ade65faad4e3d502dc9f13a807`；隔离PATH下DLL仅系统库。源码包在解压目录独立配置/构建并执行纯C CTest 5/5；源码和运行包各11项演示通过，菜单列出的六个输入均已包含。
+- 本轮没有远端同步、Release发布或最终课程发布。正式任务仍需真实组员贡献确认、报告/PPT定稿与排练；本地阶段包不替代课程四项交付。

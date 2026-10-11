@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 282,
+  "revision": 285,
   "context": {
     "phase": "汇报前质量整改与本地阶段交付",
     "evidence_cutoff": "2026-10-06",
@@ -368,7 +368,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": "buaabw",
-      "note": "用户暂不定稿或制作PPT；先完成代码、研究表述和交付基础的集中质量修整，完成后恢复内容任务。",
+      "note": "QA-002 complete; report and PPT remain blocked pending user decision and confirmed group contributions.",
       "verification": null
     },
     {
@@ -1301,7 +1301,7 @@
     {
       "id": "QA-002",
       "title": "汇报前计算核心、证据表述与交付基础质量修整",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 0,
       "depends_on": [
         "IMP-004",
@@ -1318,8 +1318,12 @@
         "不代填型号未知量、不虚构组员贡献；PPT与最终课程验收保留真实状态，不推送"
       ],
       "owner": "buaabw",
-      "note": "顺序实施已授权的集中质量整改；先定位具体数值、接口及证据问题，再改代码与文档并统一复验。",
-      "verification": null
+      "note": "复核阶段包清单、纯C五项、11项演示、质量指纹和本地快照，QA-002验收完成。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-002_8508c5e42a3c.json",
+        "sha256": "15b2061b9517ff7049df0de63dd6ec2d7d9f1b7af1568aae495f5bb010cc834d"
+      }
     }
   ],
   "events": [
@@ -7158,6 +7162,98 @@
         }
       },
       "hash": "4def5a7860605844c22cbf66fc75733d75f4dc9be72aff3aeb6a960a0318ae0d"
+    },
+    {
+      "seq": 300,
+      "at": "2026-10-11T19:57:00+00:00",
+      "task": "QA-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "代码、证据口径和本地阶段交付完成；六组质量PASS，28个生产C源静态分析PASS，干净提交和源码/运行包独立复验PASS。报告/PPT定稿、具名贡献和真实型号数据仍保留边界。",
+      "previous_hash": "4def5a7860605844c22cbf66fc75733d75f4dc9be72aff3aeb6a960a0318ae0d",
+      "hash": "4dcf9a70b4424f24ce36822beb620dea6b3671b6413ccb5a877d72d2a4310255"
+    },
+    {
+      "seq": 301,
+      "at": "2026-10-11T19:57:03+00:00",
+      "task": "QA-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "复核阶段包清单、纯C五项、11项演示、质量指纹和本地快照，QA-002验收完成。",
+      "previous_hash": "4dcf9a70b4424f24ce36822beb620dea6b3671b6413ccb5a877d72d2a4310255",
+      "hash": "63c4874af09ab9561c7990a850b9b8295d261b5072c7d8806f6a4228a73700a0"
+    },
+    {
+      "seq": 302,
+      "at": "2026-10-11T19:58:15+00:00",
+      "task": "DOC-001",
+      "from": "BLOCKED",
+      "to": "BLOCKED",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "QA-002 complete; report and PPT remain blocked pending user decision and confirmed group contributions.",
+      "previous_hash": "63c4874af09ab9561c7990a850b9b8295d261b5072c7d8806f6a4228a73700a0",
+      "details": {
+        "contract_before": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "BLOCKED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007",
+            "RES-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": "buaabw",
+          "note": "用户暂不定稿或制作PPT；先完成代码、研究表述和交付基础的集中质量修整，完成后恢复内容任务。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-001",
+          "title": "研究报告与展示",
+          "status": "BLOCKED",
+          "priority": 2,
+          "depends_on": [
+            "ANA-002",
+            "MOD-003",
+            "ANA-003",
+            "ANA-004",
+            "ANA-005",
+            "ANA-006",
+            "ANA-007",
+            "RES-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report.md",
+            "deliverables/presentation.pptx",
+            "deliverables/contributions.md"
+          ],
+          "acceptance": [
+            "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
+          ],
+          "owner": "buaabw",
+          "note": "QA-002 complete; report and PPT remain blocked pending user decision and confirmed group contributions.",
+          "verification": null
+        }
+      },
+      "hash": "fd48de31293763eb73f344bcc5cd7a73bbc0bb2755e607404e74d5f9270f3a53"
     }
   ]
 }
