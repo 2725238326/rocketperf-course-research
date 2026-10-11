@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 276,
+  "revision": 277,
   "context": {
     "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
     "evidence_cutoff": "2026-10-06",
@@ -348,7 +348,7 @@
     {
       "id": "DOC-001",
       "title": "研究报告与展示",
-      "status": "READY",
+      "status": "ACTIVE",
       "priority": 2,
       "depends_on": [
         "ANA-002",
@@ -368,8 +368,8 @@
       "acceptance": [
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
-      "owner": null,
-      "note": "修正接续任务编号为新增RES-006，保留已完成RES-005的复用研究契约；液态与煤油输入证据优先于报告展示",
+      "owner": "buaabw",
+      "note": "领取DOC-001；先产出报告骨架+PPT大纲/讲稿/贡献模板内容层，pptx模板排版后续由用户指定的模板工具完成",
       "verification": null
     },
     {
@@ -7009,6 +7009,18 @@
       "note": "验收自评:四条契约均满足;域评估为理想解+经验提示,不声称分离预测;机械PASS不等独立科学审查",
       "previous_hash": "0417f248e84d164f5b26230bb00ac8f6693484cc4b5a72bb587c1f4efa233bb1",
       "hash": "86236336deaa94e6e58abc7bb12a56c315b9017e712263c6c03a0215760cdc77"
+    },
+    {
+      "seq": 294,
+      "at": "2026-10-11T10:38:53+00:00",
+      "task": "DOC-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "领取DOC-001；先产出报告骨架+PPT大纲/讲稿/贡献模板内容层，pptx模板排版后续由用户指定的模板工具完成",
+      "previous_hash": "86236336deaa94e6e58abc7bb12a56c315b9017e712263c6c03a0215760cdc77",
+      "hash": "cb1272d505c04a2c79b208bf32235902720646c85155dc3237d57be87ce7252c"
     }
   ]
 }
