@@ -40,6 +40,7 @@ Get-Content worknow.md
 python tools/handoff.py verify --package .
 ./rocketperf.exe cycle prescribed cases/benchmarks/prescribed_cycle.ini
 ./rocketperf.exe run tests/fixtures/overexpanded.ini
+./rocketperf.exe nozzle regime cases/research/s3_sealevel_regime.ini --text
 ```
 
 第二条应成功；第三条应明确失败，退出码为 4，不应输出成功结果。读包内 `START-HERE.md`；完整源码在 `source.bundle`，用 `git clone source.bundle rocketperf-source` 离线接手，不依赖远端已推送。源码目录的文档链接、doctor和quality不应在精简运行包里执行。

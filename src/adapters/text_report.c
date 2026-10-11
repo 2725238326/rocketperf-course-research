@@ -203,7 +203,7 @@ static const char *regime_label(RpNozzleRegime regime)
         case RP_NOZZLE_REGIME_OVEREXPANDED_POSSIBLE:
             return "过膨胀域:理想出口压力低于背压,但未越过经验分离参考(附着性未知)";
         case RP_NOZZLE_REGIME_SEPARATION_HINT:
-            return "过膨胀域:理想出口压力已低于0.4倍背压,经验判据提示喷管内可能分离(提示非预测)";
+            return "过膨胀域:理想出口压力已低于经验分离参考压,提示喷管内可能分离(提示非预测)";
     }
     return "未知";
 }
@@ -213,9 +213,12 @@ static int text_regime_common(FILE *stream, double ambient_pa, double exit_pa,
                               int separation_available, double separation_ratio,
                               int matched_available, double matched_ratio)
 {
+    char reference_label[48];
+    (void)snprintf(reference_label, sizeof(reference_label), "经验分离参考压 %g*pa",
+                   RP_NOZZLE_SEPARATION_FRACTION);
     if (!rp_text_value(stream, "理想出口压力 pe", exit_pa, "Pa") ||
         !rp_text_value(stream, "背压/出口压比 pa/pe", ambient_pa / exit_pa, "-") ||
-        !rp_text_value(stream, "经验分离参考压 0.4pa", separation_reference_pa, "Pa")) { return 0; }
+        !rp_text_value(stream, reference_label, separation_reference_pa, "Pa")) { return 0; }
     if (separation_available &&
         !rp_text_value(stream, "分离参考面积比(提示)", separation_ratio, "-")) { return 0; }
     if (matched_available &&

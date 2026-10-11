@@ -199,3 +199,13 @@ NIST 2009论文表2是RP-1四组分/RP-2五组分的拟合摩尔分数，邻近�
 归档器首次未识别空组分而FAIL，后续识别输出与日志警告并保留失败，正式v3离线复核可不依赖CEA运行环境。测试拒绝重算哈希后的数值/状态/警告/类型篡改。C驱动记录严格构建、源哈希与运行流；当前属研究工具，公共API/CLI及内部点域验证由MOD-004继续。
 
 交接v3使用明确接收检查字段并读取旧v1/v2，拒绝错版本与双字段。现行文档去除旧日期动作和重复追加说明，历史保留于Git/taskshot。NIST/GitHub原文支持修改审查规则，范围见[核验](../调研/专题/工程内容审查_20261006.md)。执行记录见[研究批次](../taskshot/2026-10-06_040-kerosene.md)与[维护批次](../taskshot/2026-10-06_041-maintenance.md)。
+
+## 交互与域评估批次的梳理复核
+
+日期：2026-10-11。IMP-003/IMP-004 提交后做全仓一致性梳理，不新增模型能力。
+
+- 常量单一来源：分离参考系数统一为 `RP_NOZZLE_SEPARATION_FRACTION`（用户手动改理想/冻结求解侧，本轮补齐三处报告侧硬编码：L0/冻结 JSON `basis` 字符串、文本报告"经验分离参考压"标签与 CLI limitations 字符串），格式用 `%g`/`snprintf` 避免 `%.17g` 浮点噪声进入人读/说明文本；头文件注释中的"0.4*pa"为含义描述保留。
+- 文档契约补齐：`engineering.md` 数值契约段改为双路径表述（附着求解拒绝 + `assess_*` 诊断），`technology-stack.md` 明确域评估不是适用域扩展，`decisions.md` 新增 DEC-020，`receiving.md` 接收核验清单加 regime 命令，`requirements-map.md` REQ-06/07 补 IMP-003/004 任务映射。模块契约（modules.json）此前已同步；架构 SVG 重生成后字节不变（仅 index.html 时间戳）。
+- 复核覆盖：`--help`、`cases`、regime JSON/text、交互回退实跑对照；`nozzle regime` 输出结构含 `limitations` 数组与 `basis` 诚实标注；`study area-ratio-ambient` 扫描入口原本已存在，无重复暴露。
+- 未发现项：src 无 TODO/FIXME；test_cli/test_core/test_combustion 断言与改后文本兼容；s3 算例 schema/kind/source_ref 规范；失败-保持输出契约在两路径测试中覆盖。
+- 边界重申：域评估仍是理想解加经验提示，不计算激波/分离/侧载；pa>pe 不证明实际分离；同源对照证据等级与真实型号性能缺口不变。

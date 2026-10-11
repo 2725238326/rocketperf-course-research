@@ -192,7 +192,8 @@ static int continuous_liquid_main(int count, char **args)
         written = fputs(",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"", stdout) >= 0;
     }
     if (written && regime) {
-        written = fputs(",\"Ideal attached expansion solved with ambient ignored; regime class and 0.4*pa reference are empirical hints, not separation predictions.\"", stdout) >= 0;
+        written = fprintf(stdout, ",\"Ideal attached expansion solved with ambient ignored; regime class and %g*pa reference are empirical hints, not separation predictions.\"",
+                          RP_NOZZLE_SEPARATION_FRACTION) >= 0;
     }
     written = written && fputs("]}\n", stdout) >= 0;
     if (!written || fflush(stdout) != 0) {

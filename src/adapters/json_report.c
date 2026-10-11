@@ -213,11 +213,12 @@ RpStatus rp_case_write_regime_json(FILE *stream, const RpCase *study,
         "    \"separation_reference_pa\": %.17g,\n"
         "    \"separation_area_ratio\": {\"available\": %s, \"area_ratio\": %.17g},\n"
         "    \"matched_area_ratio\": {\"available\": %s, \"area_ratio\": %.17g},\n"
-        "    \"basis\": \"Summerfield-type exit-pressure fraction 0.4; empirical hint about model applicability, not a separation prediction\"\n  },\n",
+        "    \"basis\": \"Summerfield-type exit-pressure fraction %g; empirical hint about model applicability, not a separation prediction\"\n  },\n",
         rp_nozzle_regime_name(regime->regime), regime->ambient_over_exit_pressure,
         regime->thrust_n, regime->separation_reference_pa,
         regime->separation_area_ratio_available ? "true" : "false", regime->separation_area_ratio,
-        regime->matched_area_ratio_available ? "true" : "false", regime->matched_area_ratio);
+        regime->matched_area_ratio_available ? "true" : "false", regime->matched_area_ratio,
+        RP_NOZZLE_SEPARATION_FRACTION);
     (void)fputs("  \"limitations\": [\"ideal constant-gamma gas\", \"attached isentropic solve ignores ambient in expansion; thrust includes the pressure term at actual ambient\", \"separation reference and area ratios are empirical hints, not separation or side-load predictions\", \"no chemistry, losses, shocks, cycle, cooling or reuse prediction\", \"research scenario inputs are not verified engine data\"]\n}\n", stream);
     if (ferror(stream)) { return rp_error_set(error, RP_IO_ERROR, "Cannot write regime JSON report."); }
     rp_error_clear(error);
