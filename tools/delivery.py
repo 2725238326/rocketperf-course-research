@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import math
 import os
 from pathlib import Path
 import re
@@ -38,6 +39,25 @@ DEMO_ARGS = [
              "10000000", "2.6", "298.15", "90.170", "10", "0", "0.01"], 0),
     ("rejection", ["run", "tests/fixtures/overexpanded.ini"], 4),
 ]
+CURRENT_DEMO_ARGS = DEMO_ARGS + [
+    ("ambient", ["run", "cases/benchmarks/air_mach2_ambient.ini"], 0),
+    ("grid", ["study", "area-ratio-ambient", "cases/research/s1_area_ratio_ambient.ini"], 0),
+    ("regime", ["nozzle", "regime", "cases/research/s3_sealevel_regime.ini"], 0),
+    ("regime-text", ["nozzle", "regime", "cases/research/s3_sealevel_regime.ini", "--text"], 0),
+    ("cases", ["cases"], 0),
+    ("interactive", ["interactive"], 0),
+]
+INTERACTIVE_INPUT = "\n".join(["1", "1", "", "", "", "", "", "", "40", "101.325", "", "0"]) + "\n"
+ADVERTISED_CASES = {"cases/" + path for path in (
+    "benchmarks/air_mach2_vacuum.ini", "benchmarks/air_mach2_ambient.ini",
+    "benchmarks/prescribed_cycle.ini", "research/propellant_comparison.ini",
+    "research/s1_area_ratio_ambient.ini", "research/s3_sealevel_regime.ini")}
+
+
+def demo_specs(version):
+    if version not in {1, 2}:
+        raise ValueError("Unsupported delivery version")
+    return DEMO_ARGS if version == 1 else CURRENT_DEMO_ARGS
 
 
 def sha(data):
@@ -147,10 +167,13 @@ def common_files(root, head):
         files["docs/architecture/" + name + ".svg"] = diagram(read_commit(root, head, "docs/architecture/" + name + ".svg"))
     for name, original in LICENSES.items():
         files[name] = read_commit(root, head, original)
-    for name in ("air_mach2_vacuum", "prescribed_cycle"):
+    for name in ("air_mach2_vacuum", "air_mach2_ambient", "prescribed_cycle"):
         relative = "cases/benchmarks/" + name + ".ini"
         files[relative] = read_commit(root, head, relative)
     files["tests/fixtures/overexpanded.ini"] = read_commit(root, head, "tests/fixtures/overexpanded.ini")
+    for name in ("s1_area_ratio_ambient", "s3_sealevel_regime"):
+        relative = "cases/research/" + name + ".ini"
+        files[relative] = read_commit(root, head, relative)
     files["DATA-SOURCES.md"] = (
         "# 数据与许可\n\n固定提交：" + head + "\n\n"
         "NASA9与指定CH4(L)/O2(L)/RP-1常量提取自NASA CEA v3.3.4；上游Apache-2.0 LICENSE/NOTICE随包。\n\n"
@@ -168,6 +191,8 @@ def package_readme(kind, head):
                "ctest --test-dir build/cmake --output-on-failure\n" if kind == "c-source" else
                "./rocketperf.exe run cases/benchmarks/air_mach2_vacuum.ini\n"
                "./rocketperf.exe study propellants --case cases/research/propellant_comparison.ini\n"
+               "./rocketperf.exe nozzle regime cases/research/s3_sealevel_regime.ini --text\n"
+               "./rocketperf.exe cases\n./rocketperf.exe interactive\n"
                "./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170 10 0 0.01\n"
                "./rocketperf.exe run tests/fixtures/overexpanded.ini\n$LASTEXITCODE\n")
     return ("# Rocketperf " + ("纯C源码包" if kind == "c-source" else "Windows x64运行包") +
@@ -179,15 +204,79 @@ def package_readme(kind, head):
             "完整研究资料与维护记录见私有仓库。PACKAGE.json核对逐文件SHA256，Release外部SHA256SUMS.txt核对ZIP来源。\n").encode("utf-8")
 
 
-def check_demo(name, stdout, stderr, code):
-    expected = next(item[2] for item in DEMO_ARGS if item[0] == name)
+def check_regime(report):
+    """Recompute algebraic relations, including inverse area references, without C."""
+    from pipeline import CORE_KEYS, RESULT_KEYS, check_relation, ideal_log_area, snapshot_values
+    values = snapshot_values((ROOT / "cases/research/s3_sealevel_regime.ini").read_text(encoding="utf-8"))
+    expected_inputs = {key: float(values[key]) for key in CORE_KEYS}
+    if (report.get("model") != "ideal_constant_gamma_v1_regime_assessment_v1"
+        or report.get("inputs") != expected_inputs
+        or report.get("case") != dict(id=values["case_id"], kind=values["case_kind"], source_ref=values["source_ref"])
+        or set(report.get("ideal_attached_results", {})) != RESULT_KEYS
+        or not isinstance(report.get("limitations"), list) or not report["limitations"]):
+        raise ValueError("Regime demo identity differs")
+    inputs = report["inputs"]
+    result = report["ideal_attached_results"]
+    gamma = inputs["gamma"]
+    delta = gamma - 1
+    mach = result["exit_mach"]
+    if any(type(x) not in {int, float} or not math.isfinite(x) or x <= 0 for x in result.values()):
+        raise ValueError("Invalid ideal regime result")
+    check_relation(ideal_log_area(mach, gamma), math.log(inputs["area_ratio"]), "area ratio")
+    temperature = inputs["stagnation_temperature_k"] / (1 + delta * mach * mach / 2)
+    pressure = inputs["stagnation_pressure_pa"] * math.exp(-gamma / delta * math.log1p(delta * mach * mach / 2))
+    velocity = mach * math.sqrt(gamma * inputs["gas_constant_j_kg_k"] * temperature)
+    area = inputs["throat_area_m2"] * inputs["area_ratio"]
+    cstar = math.sqrt(inputs["gas_constant_j_kg_k"] * inputs["stagnation_temperature_k"] / gamma) * math.exp((gamma + 1) / (2 * delta) * math.log1p(delta / 2))
+    flow = inputs["stagnation_pressure_pa"] * inputs["throat_area_m2"] / cstar
+    thrust = flow * velocity + pressure * area
+    expected = dict(exit_temperature_k=temperature, exit_pressure_pa=pressure, exit_velocity_m_s=velocity,
+                    exit_area_m2=area, characteristic_velocity_m_s=cstar, mass_flow_kg_s=flow, thrust_n=thrust,
+                    thrust_coefficient=thrust / (inputs["stagnation_pressure_pa"] * inputs["throat_area_m2"]),
+                    specific_impulse_s=thrust / (flow * 9.80665))
+    for key, value in expected.items():
+        check_relation(result[key], value, key)
+    regime = report["regime"]
+    ambient = inputs["ambient_pressure_pa"]
+    if regime["class"] != "separation_hint" or pressure >= .4 * ambient:
+        raise ValueError("Regime demo classification differs")
+    check_relation(regime["ambient_over_exit_pressure"], ambient / pressure, "pressure ratio")
+    check_relation(regime["ideal_thrust_n"], thrust - ambient * area, "ambient thrust")
+    check_relation(regime["separation_reference_pa"], .4 * ambient, "separation reference")
+    for key, target in (("matched_area_ratio", ambient), ("separation_area_ratio", .4 * ambient)):
+        reference = regime[key]
+        if reference["available"] is not True or not 1 <= reference["area_ratio"] <= 1e4:
+            raise ValueError("Regime demo reference availability differs")
+        reference_mach = math.sqrt(2 / delta * math.expm1(delta / gamma *
+                                   (math.log(inputs["stagnation_pressure_pa"]) - math.log(target))))
+        check_relation(reference["area_ratio"], math.exp(ideal_log_area(reference_mach, gamma)), key)
+    if "not a separation prediction" not in regime["basis"]:
+        raise ValueError("Regime demo limitation differs")
+
+
+def check_demo(name, stdout, stderr, code, version=1):
+    expected = next(item[2] for item in demo_specs(version) if item[0] == name)
     if code != expected or (code == 0 and stderr) or (code != 0 and (stdout or not stderr.startswith("out_of_domain:"))):
         raise ValueError("Delivery demonstration protocol differs: " + name)
     if code != 0:
         return
+    if name in {"regime-text", "cases", "interactive"}:
+        required = {"regime-text": ("域评估", "分离"),
+                    "cases": tuple(ADVERTISED_CASES),
+                    "interactive": ("域评估", "分离")}[name]
+        if any(marker not in stdout for marker in required) or "失败 (" in stdout:
+            raise ValueError("Delivery text/interactive demonstration differs: " + name)
+        return
     report = strict_json(stdout)
-    if name == "ideal":
-        validate_result(report, (ROOT / "cases/benchmarks/air_mach2_vacuum.ini").read_text(encoding="utf-8"))
+    if name in {"ideal", "ambient"}:
+        path = "air_mach2_vacuum" if name == "ideal" else "air_mach2_ambient"
+        validate_result(report, (ROOT / ("cases/benchmarks/" + path + ".ini")).read_text(encoding="utf-8"))
+    elif name == "grid":
+        from pipeline import DEFAULT_RATIOS, DEFAULT_PRESSURES, validate_study
+        validate_study(report, (ROOT / "cases/research/s1_area_ratio_ambient.ini").read_text(encoding="utf-8"),
+                       DEFAULT_RATIOS, DEFAULT_PRESSURES)
+    elif name == "regime":
+        check_regime(report)
     elif name == "cycle":
         validate_cycle(report, (ROOT / "cases/benchmarks/prescribed_cycle.ini").read_text(encoding="utf-8"))
     elif name == "pair":
@@ -213,18 +302,19 @@ def check_demo(name, stdout, stderr, code):
         compare_report(report, dict(summary=summary), "frozen-rp1", 10, expected_inputs=rp1_inputs(2.6, 10))
 
 
-def demos(binary, folder, logs, prefix):
+def demos(binary, folder, logs, prefix, version=2):
     clean = subprocess_env()
     clean["PATH"] = str(Path(os.environ["SystemRoot"]) / "System32")
     results = []
-    for name, arguments, code in DEMO_ARGS:
+    for name, arguments, code in demo_specs(version):
         stdout = logs / (prefix + "-" + name + "-stdout.json")
         stderr = logs / (prefix + "-" + name + "-stderr.txt")
         run = subprocess.run([str(binary), *arguments], cwd=folder, env=clean,
+                             input=INTERACTIVE_INPUT if name == "interactive" else None,
                              capture_output=True, encoding="utf-8", errors="strict", timeout=30)
         atomic_text(stdout, run.stdout)
         atomic_text(stderr, run.stderr)
-        check_demo(name, run.stdout, run.stderr, run.returncode)
+        check_demo(name, run.stdout, run.stderr, run.returncode, version)
         results.append(dict(id=name, arguments=arguments, exit_code=code))
     return results
 
@@ -249,7 +339,7 @@ def create(destination, cmake=None, ninja=None):
     destination.mkdir(parents=True)
     logs = destination / "verification"
     logs.mkdir()
-    record = dict(schema_version=1, kind="windows-course-delivery", status="RUNNING", started_at=now(),
+    record = dict(schema_version=2, kind="windows-course-delivery", status="RUNNING", started_at=now(),
                   source_head=head, repository=REPOSITORY, quality_fingerprint=quality["input_fingerprint"])
     atomic_json(destination / "delivery-manifest.json", record)
     try:
@@ -328,11 +418,12 @@ def create(destination, cmake=None, ninja=None):
 
 def verify(directory):
     record = read_json(directory / "delivery-manifest.json")
-    if (not isinstance(record, dict) or type(record.get("schema_version")) is not int or record["schema_version"] != 1
+    if (not isinstance(record, dict) or type(record.get("schema_version")) is not int or record["schema_version"] not in {1, 2}
         or record.get("kind") != "windows-course-delivery" or record.get("status") != "PASS"
         or not isinstance(record.get("source_head"), str) or not re.fullmatch("[a-f0-9]{40}", record["source_head"])
         or set(record.get("archives", {})) != KINDS):
         raise ValueError("Delivery summary identity differs")
+    specifications = demo_specs(record["schema_version"])
     for kind, entry in record["archives"].items():
         if entry["path"] != ARCHIVES[kind]:
             raise ValueError("Delivery archive name differs")
@@ -340,6 +431,8 @@ def verify(directory):
         if digest(path) != entry["sha256"] or type(entry["bytes"]) is not int or path.stat().st_size != entry["bytes"]:
             raise ValueError("Delivery archive hash or size differs")
         packed = inspect_zip(path, kind, record["source_head"])
+        if record["schema_version"] == 2 and not ADVERTISED_CASES <= set(packed["files"]):
+            raise ValueError("Advertised delivery cases missing")
         if type(entry["files"]) is not int or len(packed["files"]) != entry["files"]:
             raise ValueError("Delivery archive file count differs")
         if kind == "windows-x64" and packed["files"]["rocketperf.exe"] != record["binary_sha256"]:
@@ -352,7 +445,7 @@ def verify(directory):
                      'verification/windows-imports.txt'}
     required_logs |= {f'verification/source-{i}-{stream}.txt' for i in range(3) for stream in ('stdout', 'stderr')}
     required_logs |= {f'verification/{prefix}-{name}-{stream}.{extension}'
-                     for prefix in ('source', 'runtime') for name, *_ in DEMO_ARGS
+                     for prefix in ('source', 'runtime') for name, *_ in specifications
                      for stream, extension in (('stdout', 'json'), ('stderr', 'txt'))}
     if set(evidence) != required_logs:
         raise ValueError('Delivery required verification logs missing')
@@ -372,13 +465,13 @@ def verify(directory):
     if '100% tests passed, 0 tests failed out of 5' not in (directory/'verification/source-2-stdout.txt').read_text(encoding='utf-8'):
         raise ValueError('Pure-C CTest log is incomplete')
     for prefix, results in (("source", source["demonstrations"]), ("runtime", record["runtime_demonstrations"])):
-        expected = [dict(id=name, arguments=args, exit_code=code) for name, args, code in DEMO_ARGS]
+        expected = [dict(id=name, arguments=args, exit_code=code) for name, args, code in specifications]
         from adiabatic_study import typed_equal
         typed_equal(results, expected, "delivery demonstrations")
         for item in results:
             name = prefix + "-" + item["id"]
             check_demo(item["id"], (directory / "verification" / (name + "-stdout.json")).read_text(encoding="utf-8"),
-                       (directory / "verification" / (name + "-stderr.txt")).read_text(encoding="utf-8"), item["exit_code"])
+                       (directory / "verification" / (name + "-stderr.txt")).read_text(encoding="utf-8"), item["exit_code"], record["schema_version"])
     expected_sums = "\n".join(f"{digest(directory / name)}  {name}" for name in
                               [*ARCHIVES.values(), "delivery-manifest.json", "project-guide.md"]) + "\n"
     if (directory / "SHA256SUMS.txt").read_text(encoding="utf-8") != expected_sums:

@@ -122,9 +122,8 @@ const char *rp_nozzle_regime_name(RpNozzleRegime regime)
     return "unknown";
 }
 
-/* Closed-form isentropic area-Mach relation for the area ratio whose exit
- * static pressure equals target_pa. Zero when the target yields no supersonic
- * branch (target >= critical pressure or non-finite). */
+/* Invert pressure in log space, including the gamma -> 1 limit. Only expose
+ * geometry inside the same supersonic area domain as the forward solver. */
 static int area_ratio_for_pressure(double stagnation_pressure_pa, double target_pa,
                                    double gamma, double *area_ratio)
 {
@@ -132,11 +131,12 @@ static int area_ratio_for_pressure(double stagnation_pressure_pa, double target_
     double mach_sq;
     double result;
     if (!rp_isfinite(target_pa) || target_pa <= 0.0) { return 0; }
-    mach_sq = 2.0 / delta * (pow(stagnation_pressure_pa / target_pa, delta / gamma) - 1.0);
+    mach_sq = 2.0 / delta * expm1(delta / gamma *
+        (log(stagnation_pressure_pa) - log(target_pa)));
     if (!rp_isfinite(mach_sq) || mach_sq <= 1.0) { return 0; }
-    result = pow(2.0 / (gamma + 1.0) * (1.0 + 0.5 * delta * mach_sq),
-                 (gamma + 1.0) / (2.0 * delta)) / sqrt(mach_sq);
-    if (!rp_isfinite(result) || result < 1.0) { return 0; }
+    result = exp(-0.5 * log(mach_sq) + (gamma + 1.0) / (2.0 * delta) *
+        (log1p(0.5 * delta * mach_sq) - log1p(0.5 * delta)));
+    if (!rp_isfinite(result) || result < 1.0 || result > 1e4) { return 0; }
     *area_ratio = result;
     return 1;
 }

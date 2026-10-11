@@ -47,13 +47,13 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 - CEA/Cantera等同源数据对照验证软件方法；机械PASS不构成独立实验或具名科学审查。
 - 日常构建与交付使用Windows。历史WSL sanitizer结果只覆盖当时版本；远端CI配置不等于执行记录。
 
-公开字段缺失时继续独立方法研究，并记录其影响。具体任务顺序以worknow为准，PPT和最终报告暂缓。
+公开字段缺失时继续独立方法研究，并记录其影响。具体任务顺序以worknow为准。[报告](deliverables/report.md)和[展示内容](deliverables/presentation.md)已有草稿；最终定稿、PPT排版、具名贡献和演练仍待完成。
 
 组员参数审阅见[RES-009](调研/专题/RES-009_组员参数审阅.md)：产品参数与试验产品保留各自身份，TQ-15B能力误归属和长十乙后缀推断不能进入输入。最终Windows计算程序直接由C运行，辅助工具单列于开发/参考附件。
 
 ## 交给其他组员
 
-此次私有GitHub阶段交付的源码包、运行包与详细解读见[交付说明](docs/delivery.md)和[项目解读](docs/project-guide.md)。用户已明确授权本次远端同步和Release；日常工作仍不默认推送。压缩包固定一个干净提交，源码重建和exe运行记录随交付保留。
+本地阶段交付的源码包、运行包与详细解读见[交付说明](docs/delivery.md)和[项目解读](docs/project-guide.md)。当前不执行远端同步或Release；如需外部发布，必须由用户另行明确授权。压缩包固定一个干净提交，源码重建和exe运行记录随交付保留。
 
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 

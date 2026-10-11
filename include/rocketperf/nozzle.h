@@ -78,7 +78,9 @@ const char *rp_nozzle_regime_name(RpNozzleRegime regime);
 /* Answers "what does the ideal model say beyond its attached domain": still
  * solves the isentropic expansion (pe is ambient-independent), then reports
  * pressure ratios, the empirical separation reference and the area ratios
- * that would match pa or reach the separation reference. Input validation
+ * that would match pa or reach the separation reference. Reference area ratios
+ * are available only within the forward solver's range [1, 1e4]; otherwise
+ * their availability flag is zero and their stored value is zero. Input validation
  * matches rp_nozzle_solve_ideal except ambient pressure may exceed pe.
  * Output unchanged on failure; no allocation, I/O or global mutable state. */
 RpStatus rp_nozzle_assess_ideal(const RpNozzleInput *input,

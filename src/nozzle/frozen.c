@@ -27,8 +27,12 @@ static RpStatus flow_station(const FrozenContext *context, double temperature,
     if (!rp_isfinite(pressure) || pressure <= 0.0) {
         return rp_error_set(error, RP_NUMERIC_ERROR, "Frozen nozzle pressure underflow or overflow.");
     }
-    status = rp_cho_mixture_evaluate(context->chamber.mole_fractions, temperature, pressure, &station.gas, error);
-    if (status != RP_OK) { return status; }
+    /* Ideal-gas h/cp/composition do not depend on pressure. Reuse the NASA9
+     * evaluation; only the entropy pressure term changes at this station. */
+    station.gas = at_chamber_pressure;
+    station.gas.pressure_pa = pressure;
+    station.gas.s_j_per_kg_k -= station.gas.gas_constant_j_per_kg_k *
+        (log(pressure) - log(context->chamber.pressure_pa));
     kinetic_energy = context->chamber.h_j_per_kg - station.gas.h_j_per_kg;
     if (kinetic_energy < 0.0 || !rp_isfinite(kinetic_energy)) {
         return rp_error_set(error, RP_NUMERIC_ERROR, "Negative or non-finite frozen nozzle kinetic energy.");
@@ -72,7 +76,7 @@ static double pressure_equation(double temperature, const void *opaque)
     return station.gas.pressure_pa - equation->target_pa;
 }
 
-/* Lowest NASA9 range bound among species present in the mixture. */
+/* Common lower bound: every species present must remain inside its fit. */
 static double minimum_frozen_temperature(const double *mole_fractions)
 {
     double minimum = 0.0;
@@ -111,7 +115,7 @@ static int area_ratio_for_pressure(const FrozenContext *context,
         return 0;
     }
     ratio = context->throat_flux / station.mass_flux_kg_per_m2_s;
-    if (!rp_isfinite(ratio) || ratio < 1.0) { return 0; }
+    if (!rp_isfinite(ratio) || ratio < 1.0 || ratio > 1e4) { return 0; }
     *area_ratio = ratio;
     return 1;
 }
@@ -233,9 +237,10 @@ RpStatus rp_nozzle_assess_frozen(const RpFrozenNozzleInput *input,
     double throat_temperature;
     double effective_velocity;
     if (input == NULL || output == NULL ||
-        !rp_isfinite(throat_area_m2) || throat_area_m2 <= 0.0) {
+        !rp_isfinite(throat_area_m2) || throat_area_m2 <= 0.0 ||
+        !rp_isfinite(input->ambient_pressure_pa) || input->ambient_pressure_pa < 0.0) {
         return rp_error_set(error, RP_INVALID_ARGUMENT,
-                            "Frozen regime input, output and positive throat area are required.");
+                            "Frozen regime requires positive throat area and finite non-negative ambient pressure.");
     }
     attached = *input;
     attached.ambient_pressure_pa = 0.0;

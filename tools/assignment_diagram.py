@@ -124,7 +124,7 @@ def assignment():
         body += text(x, 1100, detail, 19, MUTED)
 
     body += text(60, 1181, "最终交付", 27, INK, 650)
-    body += text(263, 1181, "老师要求 REQ-07—REQ-11  ｜  当前先完成研究与计算，PPT和最终报告后置", 20, MUTED)
+    body += text(263, 1181, "老师要求 REQ-07—REQ-11  ｜  报告与展示已有草稿，定稿与PPT待确认", 20, MUTED)
     for x, title, detail, tag, planned in [
         (60, "程序源代码", "C核心 · 输入 · 测试 · 构建说明", "已有阶段产物", False),
         (522, "程序发布版", "Windows控制台即可 · 可复跑", "阶段交接 ≠ 最终发布", False),

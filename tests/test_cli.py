@@ -383,6 +383,19 @@ class CliTests(unittest.TestCase):
         self.assertIn("域评估", run.stdout)
         self.assertIn("分离", run.stdout)
 
+    def test_interactive_liquid_overexpansion_and_long_input(self):
+        fields = ['1', '1', '', '', '', '', '', '', '40', '101.325', '', '0']
+        run = self.run_app('interactive', stdin_text='\n'.join(fields) + '\n')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertIn('域评估', run.stdout)
+        self.assertIn('分离', run.stdout)
+        self.assertNotIn('失败 (', run.stdout)
+        # A complete oversized line is one invalid input, never several prompts.
+        run = self.run_app('interactive', stdin_text='9' * 300 + '\n0\n')
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertEqual(run.stdout.count('输入过长'), 1)
+        self.assertNotIn('无效选择', run.stdout)
+
     def test_fixed_liquid_anchor_success_and_geometry(self):
         baseline = None
         for name, args, code in liquid_anchor.recipes():

@@ -389,6 +389,13 @@ static void test_regime_frozen(void)
     CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
     CHECK(rp_nozzle_assess_frozen(&input, 0.0, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
     CHECK(rp_nozzle_assess_frozen(&input, NAN, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    input.ambient_pressure_pa = -1.0;
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);
+    input.ambient_pressure_pa = NAN;
+    CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
+    CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);
+    input.ambient_pressure_pa = 0.0;
     input.area_ratio = 0.0;
     CHECK(rp_nozzle_assess_frozen(&input, 0.01, NULL, &regime, NULL) == RP_INVALID_ARGUMENT);
     CHECK(memcmp(&regime, &sentinel, sizeof(regime)) == 0);

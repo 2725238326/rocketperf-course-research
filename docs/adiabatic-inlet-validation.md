@@ -53,4 +53,4 @@ python tools/quality.py
 
 便捷exe只有在核验构建/测试manifest后才用于正式计算。新归档用`python tools/adiabatic_inlet.py archive results/validation/NEW-ID`，拒绝覆盖旧目录。
 
-下一步可在固定气态输入、几何和基准下研究入口焓变化，不能直接将此方法插入真实液泵或给定热状态循环宣称Q=0整机闭合。液态温压/物性/基准转换、煤油、全循环轴功/热闭合、真实两型参数和整机独立参考仍缺；冷却、凝聚相/电离/积碳、分离、寿命也未覆盖。
+后续[固定几何入口响应](adiabatic-inlet-study.md)、[连续液体HP](liquid-combustion-validation.md)与[固定RP-1方法](kerosene-validation.md)已完成各自核验；不能将这些方法直接插入真实液泵或给定热状态循环宣称Q=0整机闭合。实际煤油批次、全循环轴功/热闭合、真实两型输入和整机独立参考仍缺；冷却、凝聚相/电离/积碳、分离、寿命也未覆盖。

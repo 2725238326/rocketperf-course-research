@@ -21,7 +21,7 @@
 | DEC-015 | ACCEPTED | 构建来源统一于模块登记，构建不可变、当前失败不退回旧PASS | GOV-001；Python工具统一行为，PowerShell兼容入口；运行对协议和输入快照做核验 |
 | DEC-016 | ACCEPTED | 三层架构视图采用可再生成SVG/Mermaid/离线HTML，依赖变更须同步视觉设计 | GOV-001；[架构索引](architecture/README.md)，图中明确已实现/计划模块 |
 | DEC-017 | ACCEPTED | 保存基线和任务分支提交，启用本地提交护栏；原始证据不搬迁/改字节 | GOV-001；无远端推送，新增大文件先作存储决定，清理仅输出候选 |
-| DEC-018 | ACCEPTED | CLI＋离线HTML报告，Matplotlib3.10.8绘图；文件/Git存储，不引入GUI/Web服务或数据库 | TECH-001；[技术选型](technology-stack.md)，报告/绘图模块尚待实现，本机已确认Matplotlib可导入 |
+| DEC-018 | ACCEPTED | CLI＋离线HTML报告，Matplotlib3.10.8绘图；文件/Git存储，不引入GUI/Web服务或数据库 | TECH-001；[技术选型](technology-stack.md)，架构离线页和研究SVG已有，计算报告页及课程排版仍待实现 |
 | DEC-019 | ACCEPTED | 现有GCC/Python链作为日常权威构建验收，CMake/Ninja作为IDE及独立构建校核 | TECH-001明确两入口职责，继续共用modules.json源码清单，不临时迁移已测工程链 |
 | DEC-020 | ACCEPTED | 过膨胀域由独立assess诊断接口回答，附着求解契约不变 | IMP-004；0.4pa为Summerfield型经验分离参考（提示非预测），分离/激波仍不计算；三级分类写入JSON/文本并注明非分离预测 |
 

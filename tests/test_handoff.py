@@ -9,9 +9,40 @@ sys.path.insert(0, str(ROOT / 'tools'))
 import handoff
 import delivery
 import zipfile
+import copy
+import json
+import subprocess
 
 
 class HandoffTests(unittest.TestCase):
+    def test_current_delivery_cases_and_regime_algebra(self):
+        head = delivery.git(ROOT, 'rev-parse', 'HEAD', check=True).stdout.strip()
+        self.assertLessEqual(delivery.ADVERTISED_CASES, set(delivery.common_files(ROOT, head)))
+        self.assertEqual(len(delivery.demo_specs(1)), 5)
+        self.assertEqual(len(delivery.demo_specs(2)), 11)
+        with self.assertRaises(ValueError):
+            delivery.demo_specs(3)
+        run = subprocess.run([str(ROOT/'build/release/rocketperf.exe'), 'nozzle', 'regime',
+                              'cases/research/s3_sealevel_regime.ini'], cwd=ROOT,
+                             capture_output=True, encoding='utf-8', check=True, timeout=30)
+        report = json.loads(run.stdout)
+        delivery.check_regime(report)
+        for field, value in (('class', 'ideal_domain'), ('ideal_thrust_n', 1),
+                             ('separation_reference_pa', 0), ('ambient_over_exit_pressure', 1)):
+            broken = copy.deepcopy(report)
+            broken['regime'][field] = value
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                delivery.check_regime(broken)
+        for field in ('matched_area_ratio', 'separation_area_ratio'):
+            broken = copy.deepcopy(report)
+            broken['regime'][field]['available'] = 1
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                delivery.check_regime(broken)
+            broken = copy.deepcopy(report)
+            broken['regime'][field]['area_ratio'] *= 1.1
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                delivery.check_regime(broken)
+
     def test_detached_head_receiving_identity(self):
         original = handoff.git
         def detached(root, *args, **kwargs):

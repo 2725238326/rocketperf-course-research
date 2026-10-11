@@ -23,21 +23,27 @@
 
 typedef enum { RP_PROMPT_VALUE = 1, RP_PROMPT_CANCEL = -1, RP_PROMPT_EOF = 0 } RpPromptStatus;
 
-/* Reads one stdin line; 1=line, 0=EOF. The trailing newline is stripped. */
+/* Read a whole line. Drain oversized input so its tail cannot become the next
+ * menu choice; embedded NUL is also rejected rather than silently truncated. */
 static int menu_read_line(char *buffer, size_t capacity)
 {
-    size_t length;
-    if (fgets(buffer, (int)capacity, stdin) == NULL) { return 0; }
-    length = strlen(buffer);
-    while (length > 0U && (buffer[length - 1U] == '\n' || buffer[length - 1U] == '\r')) {
-        buffer[--length] = '\0';
+    size_t length = 0U;
+    int character;
+    int invalid = 0;
+    while ((character = fgetc(stdin)) != EOF && character != '\n') {
+        if (character == 0 || length + 1U >= capacity) { invalid = 1; }
+        else { buffer[length++] = (char)character; }
     }
+    if (character == EOF && length == 0U && !invalid) { return 0; }
+    if (length > 0U && buffer[length - 1U] == '\r') { --length; }
+    buffer[length] = '\0';
+    if (invalid) { return -1; }
     return 1;
 }
 
 static int canceled(const char *text)
 {
-    return text[0] == 'q' || text[0] == 'Q';
+    return (text[0] == 'q' || text[0] == 'Q') && text[1] == '\0';
 }
 
 /* Prints "  label (unit) [default]: " and reads a line; empty keeps default,
@@ -51,7 +57,13 @@ static RpPromptStatus prompt_raw(const char *label, const char *unit, const char
         (void)fprintf(stdout, "  %s [%s]: ", label, fallback);
     }
     (void)fflush(stdout);
-    if (!menu_read_line(buffer, capacity)) { return RP_PROMPT_EOF; }
+    for (;;) {
+        const int read = menu_read_line(buffer, capacity);
+        if (read == 0) { return RP_PROMPT_EOF; }
+        if (read > 0) { break; }
+        (void)fputs("  输入过长或包含非法字符,请重新输入。\n", stdout);
+        (void)fflush(stdout);
+    }
     if (canceled(buffer)) { return RP_PROMPT_CANCEL; }
     return RP_PROMPT_VALUE;
 }
@@ -159,7 +171,7 @@ static RpPromptStatus flow_continuous_liquid(void)
 {
     double tf, pf, to, po, pc, of, ar, pa, at;
     RpContinuousLiquidFeed feed = {0};
-    RpContinuousLiquidFixedResult result;
+    RpContinuousLiquidHpResult result;
     RpError error = {0};
     RpStatus status;
 #define P(field, label, unit, fallback) \
@@ -181,13 +193,12 @@ static RpPromptStatus flow_continuous_liquid(void)
         fprintf(stdout, "  输入: Tf=%.6g K, Pf=%.6g MPa, To=%.6g K, Po=%.6g MPa, "
                 "Pc=%.6g MPa, O/F=%.6g, Ae/At=%.6g, pa=%.6g kPa, At=%.6g m2\n",
                 tf, pf, to, po, pc, of, ar, pa, at) < 0) { return RP_PROMPT_EOF; }
-    status = rp_ch4_o2_continuous_liquid_hp_fixed_area(&feed, ar, pa * 1e3, at,
-                                                     NULL, NULL, &result, &error);
+    status = rp_ch4_o2_continuous_liquid_hp(&feed, NULL, &result, &error);
     if (status != RP_OK) { print_failure(status, &error); return RP_PROMPT_VALUE; }
-    if (!rp_text_liquid_state(stdout, "燃料入口", &result.hp.inlet.fuel) ||
-        !rp_text_liquid_state(stdout, "氧化剂入口", &result.hp.inlet.oxidizer) ||
-        fprintf(stdout, "  入口混合焓 %.6g J/kg\n", result.hp.inlet.mixture_h_j_per_kg) < 0 ||
-        write_chamber_and_nozzle(&result.hp.chamber, ar, pa * 1e3, at,
+    if (!rp_text_liquid_state(stdout, "燃料入口", &result.inlet.fuel) ||
+        !rp_text_liquid_state(stdout, "氧化剂入口", &result.inlet.oxidizer) ||
+        fprintf(stdout, "  入口混合焓 %.6g J/kg\n", result.inlet.mixture_h_j_per_kg) < 0 ||
+        write_chamber_and_nozzle(&result.chamber, ar, pa * 1e3, at,
             "单相查表入口非泵后/喷注可行性;Q=0;九气相+燃烧室冻结喷管。") != 0) {
         return report_failed() ? RP_PROMPT_EOF : RP_PROMPT_VALUE;
     }
@@ -523,14 +534,21 @@ int rp_cli_interactive(void)
         print_menu();
         (void)fputs("选择 [0-7]: ", stdout);
         (void)fflush(stdout);
-        if (!menu_read_line(line, sizeof(line))) { break; }
+        {
+            const int read = menu_read_line(line, sizeof(line));
+            if (read == 0) { break; }
+            if (read < 0) {
+                (void)fputs("  输入过长或包含非法字符。\n", stdout);
+                continue;
+            }
+        }
         if (canceled(line)) { break; }
         if (line[0] == '\0') { continue; }
         {
             const char *next;
             double value;
             if (!rp_cli_parse_decimal(line, &next, &value) || *next != '\0' ||
-                value != (double)(int)value || value < 0.0 || value > 7.0) {
+                value < 0.0 || value > 7.0 || value != (double)(int)value) {
                 (void)fputs("  无效选择。\n", stdout);
                 continue;
             }

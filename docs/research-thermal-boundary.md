@@ -82,4 +82,4 @@ python tools/quality.py
 
 本页保存的七点研究仍属于给定热状态循环，其焓变化不影响性能的结论不能套到HP。后续[气态显式焓HP](adiabatic-inlet-validation.md)、[固定液态锚点](liquid-anchor-validation.md)和[连续液体入口HP](liquid-combustion-validation.md)已分别完成Q=0燃烧室/单喷管核验。连续模型使用HEOS理想摩尔锚点保留残余焓，不先求汽化路径，也不重复加潜热。它没有改动旧循环或补上泵/分流闭合。
 
-作业与能力边界见[总览SVG](architecture/assignment.svg)和[需求映射](requirements-map.md)。后续按任务板推进泵后能量边界与两型可用结论；PPT/最终报告后置。
+作业与能力边界见[总览SVG](architecture/assignment.svg)和[需求映射](requirements-map.md)。泵后能量和完整循环仍缺闭合输入；报告及展示内容已有草稿，接续任务按[worknow](../worknow.md)推进。

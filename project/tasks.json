@@ -1,17 +1,16 @@
 {
   "schema_version": 1,
-  "revision": 278,
+  "revision": 282,
   "context": {
-    "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
+    "phase": "汇报前质量整改与本地阶段交付",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
+      "DOC-001",
       "REL-001"
     ],
     "facts": [
-      "甲烷与固定RP-1在同Pc/At/面积比/背压下由C成对求解，57次C/8张新CEA参考已归档",
-      "共同O-F2.6的高比冲可同时低推力；差值只适用于具名入口方法，不作型号或最优排名",
-      "Windows计算核心纯C；项目解读说明算法/运行/维护，进度从任务工作面读取",
-      "型号参数/真实循环与方法结果分别解释，不填国产煤油批次或未知工况"
+      "QA-002已修正数值、诊断、交互和证据口径；28源静态分析与45组CLI通过，记录见taskshot/2026-10-12_049-quality-readiness.md。",
+      "报告与展示内容已有草稿；PPT、真实贡献和演练未完成，不把本地阶段包称最终课程提交。"
     ]
   },
   "tasks": [
@@ -348,7 +347,7 @@
     {
       "id": "DOC-001",
       "title": "研究报告与展示",
-      "status": "ACTIVE",
+      "status": "BLOCKED",
       "priority": 2,
       "depends_on": [
         "ANA-002",
@@ -369,7 +368,7 @@
         "覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围"
       ],
       "owner": "buaabw",
-      "note": "领取DOC-001；先产出报告骨架+PPT大纲/讲稿/贡献模板内容层，pptx模板排版后续由用户指定的模板工具完成",
+      "note": "用户暂不定稿或制作PPT；先完成代码、研究表述和交付基础的集中质量修整，完成后恢复内容任务。",
       "verification": null
     },
     {
@@ -1298,6 +1297,29 @@
         "path": "project/evidence/IMP-004_6d03f26a2653.json",
         "sha256": "ce3f42c81bed09cd73bfe7844213f324ac7d282c5f7a8642aee883edb4d8bab9"
       }
+    },
+    {
+      "id": "QA-002",
+      "title": "汇报前计算核心、证据表述与交付基础质量修整",
+      "status": "ACTIVE",
+      "priority": 0,
+      "depends_on": [
+        "IMP-004",
+        "ANA-012"
+      ],
+      "required_artifacts": [
+        "docs/maintenance-audit.md",
+        "taskshot/2026-10-12_049-quality-readiness.md"
+      ],
+      "acceptance": [
+        "复现并修正计算/诊断/解析或报告接口问题，核心保留纯C与失败输出保持；优化给出可复跑性能与数值一致性证据",
+        "研究和展示草稿的物种、算法、比较条件、参考证据等级、来源与现实缺口准确，现行入口不再误称报告未启动",
+        "新鲜六组统一质量、当前全部生产源码静态分析、独立纯C构建与成功/拒绝运行通过；新阶段包固定干净提交并通过校验",
+        "不代填型号未知量、不虚构组员贡献；PPT与最终课程验收保留真实状态，不推送"
+      ],
+      "owner": "buaabw",
+      "note": "顺序实施已授权的集中质量整改；先定位具体数值、接口及证据问题，再改代码与文档并统一复验。",
+      "verification": null
     }
   ],
   "events": [
@@ -7061,6 +7083,81 @@
         }
       },
       "hash": "79516966d0715284f32dc19d8a3431a5631d9eeef7c070b51136da5fde639c63"
+    },
+    {
+      "seq": 296,
+      "at": "2026-10-11T19:04:45+00:00",
+      "task": "DOC-001",
+      "from": "ACTIVE",
+      "to": "BLOCKED",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "用户暂不定稿或制作PPT；先完成代码、研究表述和交付基础的集中质量修整，完成后恢复内容任务。",
+      "previous_hash": "79516966d0715284f32dc19d8a3431a5631d9eeef7c070b51136da5fde639c63",
+      "hash": "e71317f0fdf7f47d8a9599f8f13f5e727c014485db93aca2f17fe044600b71dc"
+    },
+    {
+      "seq": 297,
+      "at": "2026-10-11T19:04:47+00:00",
+      "task": "QA-002",
+      "from": null,
+      "to": "READY",
+      "actor": "buaabw",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "e71317f0fdf7f47d8a9599f8f13f5e727c014485db93aca2f17fe044600b71dc",
+      "hash": "61414842316f929a9ae15bf8a201eaf5c11f7f3e4083bbd3b88022056d0e282a"
+    },
+    {
+      "seq": 298,
+      "at": "2026-10-11T19:04:49+00:00",
+      "task": "QA-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "顺序实施已授权的集中质量整改；先定位具体数值、接口及证据问题，再改代码与文档并统一复验。",
+      "previous_hash": "61414842316f929a9ae15bf8a201eaf5c11f7f3e4083bbd3b88022056d0e282a",
+      "hash": "bba41ea23de4120105809edb4865e58d4e4fbc02b73f961f473efff2e8b3d201"
+    },
+    {
+      "seq": 299,
+      "at": "2026-10-11T19:45:25+00:00",
+      "task": "QA-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "buaabw",
+      "owner_after": "buaabw",
+      "note": "集中整改和六组质量已通过；接续固定干净本地提交并生成/核验阶段包。",
+      "previous_hash": "bba41ea23de4120105809edb4865e58d4e4fbc02b73f961f473efff2e8b3d201",
+      "details": {
+        "context_before": {
+          "phase": "纯C成对方法与喷管收益/代价研究；接续算例文件整合",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "REL-001"
+          ],
+          "facts": [
+            "甲烷与固定RP-1在同Pc/At/面积比/背压下由C成对求解，57次C/8张新CEA参考已归档",
+            "共同O-F2.6的高比冲可同时低推力；差值只适用于具名入口方法，不作型号或最优排名",
+            "Windows计算核心纯C；项目解读说明算法/运行/维护，进度从任务工作面读取",
+            "型号参数/真实循环与方法结果分别解释，不填国产煤油批次或未知工况"
+          ]
+        },
+        "context_after": {
+          "phase": "汇报前质量整改与本地阶段交付",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "QA-002已修正数值、诊断、交互和证据口径；28源静态分析与45组CLI通过，记录见taskshot/2026-10-12_049-quality-readiness.md。",
+            "报告与展示内容已有草稿；PPT、真实贡献和演练未完成，不把本地阶段包称最终课程提交。"
+          ]
+        }
+      },
+      "hash": "4def5a7860605844c22cbf66fc75733d75f4dc9be72aff3aeb6a960a0318ae0d"
     }
   ]
 }

@@ -60,6 +60,27 @@ int main(void)
     CHECK(strstr(text, "excluded\\u000apoint") != NULL);
     CHECK(fclose(stream) == 0);
     {
+        RpNozzleRegimeResult regime, bad;
+        stream = tmpfile(); CHECK(stream != NULL);
+        if (stream != NULL) {
+            CHECK(rp_nozzle_assess_ideal(&study.input, NULL, &regime, &error) == RP_OK);
+            bad = regime; bad.thrust_n = NAN;
+            CHECK(rp_case_write_regime_json(stream, &study, &bad, &error) == RP_INVALID_ARGUMENT);
+            CHECK(ftell(stream) == 0L);
+            bad = regime; bad.regime = (RpNozzleRegime)99;
+            CHECK(rp_case_write_regime_json(stream, &study, &bad, &error) == RP_INVALID_ARGUMENT);
+            CHECK(ftell(stream) == 0L);
+            bad = regime; bad.matched_area_ratio_available = 2;
+            CHECK(rp_case_write_regime_json(stream, &study, &bad, &error) == RP_INVALID_ARGUMENT);
+            CHECK(ftell(stream) == 0L);
+            bad = regime; bad.separation_area_ratio = INFINITY;
+            CHECK(rp_case_write_regime_json(stream, &study, &bad, &error) == RP_INVALID_ARGUMENT);
+            CHECK(ftell(stream) == 0L);
+            CHECK(rp_case_write_regime_json(stream, &study, &regime, &error) == RP_OK);
+            CHECK(fclose(stream) == 0);
+        }
+    }
+    {
         RpCycleCase cycle, sentinel;
         memset(&sentinel, 0x5a, sizeof(sentinel)); cycle = sentinel;
         CHECK(rp_cycle_case_load(NULL, &cycle, &error) == RP_INVALID_ARGUMENT);

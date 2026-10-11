@@ -41,6 +41,23 @@ static int valid_result(const RpNozzleResult *v)
            v->relative_area_residual <= 1e-8;
 }
 
+static int valid_reference_area(int available, double area_ratio)
+{
+    return (available == 0 || available == 1) && rp_isfinite(area_ratio) &&
+        (available ? area_ratio >= 1.0 && area_ratio <= 1e4 : area_ratio == 0.0);
+}
+
+static int valid_regime(const RpNozzleRegimeResult *v)
+{
+    return v->regime >= RP_NOZZLE_REGIME_IDEAL_DOMAIN &&
+        v->regime <= RP_NOZZLE_REGIME_SEPARATION_HINT &&
+        rp_isfinite(v->thrust_n) && rp_isfinite(v->ambient_over_exit_pressure) &&
+        v->ambient_over_exit_pressure >= 0.0 && rp_isfinite(v->separation_reference_pa) &&
+        v->separation_reference_pa >= 0.0 &&
+        valid_reference_area(v->matched_area_ratio_available, v->matched_area_ratio) &&
+        valid_reference_area(v->separation_area_ratio_available, v->separation_area_ratio);
+}
+
 static void quoted(FILE *stream, const char *text)
 {
     (void)fputc('"', stream);
@@ -193,7 +210,7 @@ RpStatus rp_case_write_regime_json(FILE *stream, const RpCase *study,
     if (stream == NULL || study == NULL || regime == NULL) {
         return rp_error_set(error, RP_INVALID_ARGUMENT, "Regime report stream, case and result are required.");
     }
-    if (!valid_case(study) || !valid_result(&regime->ideal)) {
+    if (!valid_case(study) || !valid_result(&regime->ideal) || !valid_regime(regime)) {
         return rp_error_set(error, RP_INVALID_ARGUMENT, "Regime report metadata, input or ideal result is invalid.");
     }
     (void)fprintf(stream, "{\n  \"schema_version\": 1,\n  \"program_version\": \"%s\",\n  \"model\": \"%s_regime_assessment_v1\",\n  \"case\": {\"id\": ", RP_VERSION, RP_IDEAL_NOZZLE_MODEL);

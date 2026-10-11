@@ -71,4 +71,4 @@ python tools/liquid_anchor.py verify results/validation/liquid_anchor_v1
 
 PowerShell中的括号ID必须加引号。稳定exe路径仅是便捷别名；正式新增归档使用manifest指向的新鲜已测Release程序，`archive`目标必须是未存在的新版本。原档案保留当时HEAD、dirty、构建/测试身份，不能随新提交改写。
 
-下一步先解决连续单相液体的温压域、密度和摩尔化学焓对齐；煤油仍需独立fuel模型与批次边界。即使这些完成，也还缺固定硬件循环轴功/分流/热闭合及真实型号同条件输入。PPT和最终报告后置。
+后续已实现[连续单相液体入口](liquid-combustion-validation.md)和[固定RP-1公共方法](kerosene-validation.md)，各有温压/物性/焓基准及适用域。仍缺实际煤油批次、固定硬件循环轴功/分流/热闭合及真实型号同条件输入。当前任务以[worknow](../worknow.md)为准，报告和展示草稿已同步。

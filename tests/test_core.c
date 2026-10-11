@@ -302,6 +302,15 @@ static void test_regime_ideal(void)
     CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OUT_OF_DOMAIN);
     input = reference_input(); input.area_ratio = 0.5;
     CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OUT_OF_DOMAIN);
+
+    /* Analytic gamma -> 1 limit: at M=2, A/At=exp(3/2)/2,
+     * and p/P0=exp(-2). This exercises cancellation in pressure inversion. */
+    input = reference_input(); input.gamma = nextafter(1.0, 2.0);
+    input.area_ratio = exp(1.5) / 2.0;
+    input.ambient_pressure_pa = input.stagnation_pressure_pa * exp(-2.0);
+    CHECK(rp_nozzle_assess_ideal(&input, NULL, &regime, NULL) == RP_OK);
+    CHECK(regime.matched_area_ratio_available);
+    CHECK(near(regime.matched_area_ratio, input.area_ratio, 1e-9));
 }
 
 int main(void)
