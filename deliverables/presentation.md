@@ -34,7 +34,7 @@
 
 ## P4 程序是什么：一条计算流水线（约60秒）
 
-- 图：输入（交互菜单/算例文件/CLI）→ NASA9物性 → HP化学平衡 → 冻结/L0喷管 → 推力比冲计账 → JSON/文本/归档
+- 图：`docs/architecture/live/slide-flow.svg`（16:9动图，PPT里放静态帧+现场切浏览器看动效）
 - 标注：C17纯核心、Windows发布版、失败显式返回
 
 **讲稿**：程序叫 rocketperf，C语言单进程，Windows控制台发布。流水线就是推力室的主线：物性用NASA九系数多项式，燃烧求定焓定压化学平衡，喷管从声速喉部推到出口，最后按 F=m·ve+(pe−pa)Ae 计账。三种入口：交互菜单逐项输入——对应"人工从屏幕输入"的要求；算例文件可复跑；命令行批量。演示后面有。
@@ -113,7 +113,8 @@
 
 ## 素材定位（模板制作时用）
 
-- 架构图：`docs/architecture/`（SVG三视图 + `live/rocketperf-live.html` 动态面板可截图）
+- 汇报用流程动图：`docs/architecture/live/slide-flow.svg`（本页主讲图）
+- 工程架构图：`docs/architecture/`（SVG三视图 + `live/rocketperf-live.html`/`.svg` 动态面板，答辩若被追问工程实现时用）
 - 数据图：`docs/propellant-comparison.svg`、`docs/adiabatic-inlet-response.svg`
 - 算例：`cases/research/`（propellant_comparison、s1_area_ratio_ambient、s3_sealevel_regime）
 - 数字出处：`results/validation/`、`docs/two-vehicle-study.md`、`report.md` 第7节
