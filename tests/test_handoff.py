@@ -96,7 +96,9 @@ class HandoffTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='handoff-', dir=ROOT/'build/test-tmp') as folder:
             package = handoff.create(ROOT, Path(folder)/'package', 'Release', fixture=True)
             original = handoff.read_json(package/'handoff-manifest.json')
-            for change in (None, dict(original['next_task'], priority=True)):
+            base = original['next_task']
+            tampered = dict(base, priority=True) if isinstance(base, dict) else dict(id='X', status='READY', priority=1)
+            for change in ((None, tampered) if base is not None else (tampered,)):
                 with self.subTest(next_task=change):
                     record = dict(original, next_task=change)
                     handoff.atomic_json(package/'handoff-manifest.json', record)

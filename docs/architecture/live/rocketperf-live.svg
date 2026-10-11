@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" font-family="Consolas,'Courier New',monospace" font-size="20">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#b9a2f2"/></marker></defs>
+<rect width="1200" height="1500" fill="#14181d"/>
+<rect x="0" y="0" width="1200" height="54" fill="#1a1f26"/>
+<circle cx="30" cy="27" r="7" fill="#ff5f57"/>
+<circle cx="52" cy="27" r="7" fill="#febc2e"/>
+<circle cx="74" cy="27" r="7" fill="#28c840"/>
+<text x="600.0" y="33" font-size="16" text-anchor="middle"><tspan fill="#9aa7b4">~/rocketperf — 方法流水线 — bash — 92x44</tspan></text>
+<text x="600.0" y="82" font-size="20" text-anchor="middle"><tspan fill="#e8edf2" font-weight="bold">ROCKETPERF 计算流水线</tspan><tspan fill="#9aa7b4" font-weight="bold">　·　</tspan><tspan fill="#86e1e6" font-weight="bold">输入 → C17核心 → 报告</tspan></text>
+<line x1="34" y1="110" x2="1166" y2="110" stroke="#3a4552"/>
+<text x="600.0" y="140" font-size="20" text-anchor="middle"><tspan fill="#86e1e6">■ </tspan><tspan fill="#9aa7b4">输入入口</tspan><tspan fill="#9aa7b4">　　</tspan><tspan fill="#86e0a2">■ </tspan><tspan fill="#9aa7b4">C17 求解核心</tspan><tspan fill="#9aa7b4">　　</tspan><tspan fill="#8fb4f6">■ </tspan><tspan fill="#9aa7b4">适配器/输出</tspan><tspan fill="#9aa7b4">　　</tspan><tspan fill="#b9a2f2">■ </tspan><tspan fill="#9aa7b4">验收门</tspan><tspan fill="#9aa7b4">　　</tspan><tspan fill="#e3c07a">■ </tspan><tspan fill="#9aa7b4">模型边界</tspan></text>
+<rect x="34" y="186" width="252" height="540" rx="6" fill="#1a1f26" stroke="#b9a2f2" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="40" y="220" font-size="20" text-anchor="start"><tspan fill="#b9a2f2" font-weight="bold">验收门</tspan></text>
+<text x="40" y="250" font-size="20" text-anchor="start"><tspan fill="#b9a2f2">quality.py 6步</tspan></text>
+<text x="76" y="340" font-size="18" text-anchor="start"><tspan fill="#e8edf2">每轮 Debug+Release</tspan></text>
+<text x="76" y="370" font-size="18" text-anchor="start"><tspan fill="#e8edf2">全量测试套</tspan></text>
+<text x="76" y="580" font-size="18" text-anchor="start"><tspan fill="#e8edf2">同源软件对照</tspan></text>
+<text x="76" y="610" font-size="18" text-anchor="start"><tspan fill="#9aa7b4">非独立实验</tspan></text>
+<text x="76" y="730" font-size="18" text-anchor="start"><tspan fill="#e8edf2">失败语义回归</tspan></text>
+<text x="76" y="760" font-size="18" text-anchor="start"><tspan fill="#e8edf2">退出码 0/2/3/4</tspan></text>
+<text x="76" y="850" font-size="16" text-anchor="start"><tspan fill="#9aa7b4">(动画计数,示意)</tspan></text>
+<rect x="320" y="186" width="566" height="168" rx="6" fill="#1a1f26" stroke="#86e1e6" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="328" y="218" font-size="20" text-anchor="start"><tspan fill="#86e1e6" font-weight="bold">输入 · 三种等价入口</tspan></text>
+<text x="352" y="278" font-size="18" text-anchor="start"><tspan fill="#e8edf2">① 交互菜单 interactive — 逐项提示</tspan></text>
+<text x="352" y="308" font-size="18" text-anchor="start"><tspan fill="#e8edf2">② 算例文件 .ini — 严格字段/来源标注</tspan></text>
+<text x="352" y="338" font-size="18" text-anchor="start"><tspan fill="#e8edf2">③ CLI 位置参数 — 批量与归档复跑</tspan></text>
+<rect x="320" y="394" width="566" height="460" rx="6" fill="#1a1f26" stroke="#86e0a2" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="328" y="426" font-size="20" text-anchor="start"><tspan fill="#86e0a2" font-weight="bold">C17 纯计算核心 · 单进程</tspan></text>
+<rect x="344" y="438" width="518" height="92" rx="6" fill="#1a1f26" stroke="#86e0a2" fill-opacity="0.55" stroke-opacity="0.9"><animate attributeName="stroke-opacity" values="1;0.35;0.35;0.35;1" keyTimes="0.0;0.25;0.5;0.75;1" dur="18.0s" repeatCount="indefinite"/></rect>
+<text x="350" y="466" font-size="18" text-anchor="start"><tspan fill="#86e0a2" font-weight="bold">① NASA9 物性层</tspan></text>
+<text x="368" y="496" font-size="17" text-anchor="start"><tspan fill="#e8edf2">九系数多项式 · 分温区 cp/h/s</tspan></text>
+<rect x="344" y="542" width="518" height="92" rx="6" fill="#1a1f26" stroke="#86e0a2" fill-opacity="0.55" stroke-opacity="0.9"><animate attributeName="stroke-opacity" values="0.35;1;0.35;0.35;0.35" keyTimes="0.0;0.25;0.5;0.75;1" dur="18.0s" repeatCount="indefinite"/></rect>
+<text x="350" y="570" font-size="18" text-anchor="start"><tspan fill="#86e0a2" font-weight="bold">② HP/TP 平衡</tspan></text>
+<text x="368" y="600" font-size="17" text-anchor="start"><tspan fill="#e8edf2">九气相 · 元素库存+化学平衡闭合</tspan></text>
+<rect x="344" y="646" width="518" height="92" rx="6" fill="#1a1f26" stroke="#86e0a2" fill-opacity="0.55" stroke-opacity="0.9"><animate attributeName="stroke-opacity" values="0.35;0.35;1;0.35;0.35" keyTimes="0.0;0.25;0.5;0.75;1" dur="18.0s" repeatCount="indefinite"/></rect>
+<text x="350" y="674" font-size="18" text-anchor="start"><tspan fill="#86e0a2" font-weight="bold">③ 喷管 · 冻结(温变) / L0(定比热)</tspan></text>
+<text x="368" y="704" font-size="17" text-anchor="start"><tspan fill="#e8edf2">声速喉部 · 阻塞通量 · 超声速分支</tspan></text>
+<rect x="344" y="750" width="518" height="92" rx="6" fill="#1a1f26" stroke="#86e0a2" fill-opacity="0.55" stroke-opacity="0.9"><animate attributeName="stroke-opacity" values="0.35;0.35;0.35;1;0.35" keyTimes="0.0;0.25;0.5;0.75;1" dur="18.0s" repeatCount="indefinite"/></rect>
+<text x="350" y="778" font-size="18" text-anchor="start"><tspan fill="#86e0a2" font-weight="bold">④ 域评估 / 循环原型</tspan></text>
+<text x="368" y="808" font-size="17" text-anchor="start"><tspan fill="#e8edf2">regime诊断+匹配AR · 给定热状态外排</tspan></text>
+<rect x="320" y="894" width="566" height="150" rx="6" fill="#1a1f26" stroke="#8fb4f6" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="328" y="926" font-size="20" text-anchor="start"><tspan fill="#8fb4f6" font-weight="bold">适配器</tspan></text>
+<text x="352" y="986" font-size="18" text-anchor="start"><tspan fill="#e8edf2">INI解析 · JSON报告 · 人读文本(--text)</tspan></text>
+<text x="352" y="1016" font-size="18" text-anchor="start"><tspan fill="#e8edf2">Windows UTF-8 控制台切换</tspan></text>
+<rect x="320" y="1084" width="566" height="150" rx="6" fill="#1a1f26" stroke="#e8edf2" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="328" y="1116" font-size="20" text-anchor="start"><tspan fill="#e8edf2" font-weight="bold">输出与契约</tspan></text>
+<text x="352" y="1176" font-size="18" text-anchor="start"><tspan fill="#e8edf2">stdout=JSON机器契约 · stderr=诊断</tspan></text>
+<text x="352" y="1206" font-size="18" text-anchor="start"><tspan fill="#e8edf2">results/ 归档 manifest + 哈希</tspan></text>
+<rect x="914" y="186" width="252" height="540" rx="6" fill="#1a1f26" stroke="#e3c07a" fill-opacity="0.55" stroke-opacity="0.9"></rect>
+<text x="920" y="220" font-size="20" text-anchor="start"><tspan fill="#e3c07a" font-weight="bold">模型边界 · 不做</tspan></text>
+<text x="940" y="280" font-size="17" text-anchor="start"><tspan fill="#e8edf2">激波 / 分离 / 侧载</tspan></text>
+<text x="940" y="310" font-size="17" text-anchor="start"><tspan fill="#e8edf2">真实型号性能</tspan></text>
+<text x="940" y="340" font-size="17" text-anchor="start"><tspan fill="#e8edf2">凝聚相 · 煤油批次</tspan></text>
+<text x="940" y="370" font-size="17" text-anchor="start"><tspan fill="#e8edf2">整机循环闭合</tspan></text>
+<text x="940" y="400" font-size="17" text-anchor="start"><tspan fill="#e8edf2">轨迹 / 级段性能</tspan></text>
+<text x="940" y="460" font-size="17" text-anchor="start"><tspan fill="#e3c07a">regime域评估:</tspan></text>
+<text x="940" y="490" font-size="17" text-anchor="start"><tspan fill="#e3c07a">理想解+经验提示</tspan></text>
+<text x="940" y="520" font-size="17" text-anchor="start"><tspan fill="#e3c07a">非分离预测</tspan></text>
+<text x="940" y="580" font-size="16" text-anchor="start"><tspan fill="#9aa7b4">对照均为同源软件</tspan></text>
+<text x="940" y="610" font-size="16" text-anchor="start"><tspan fill="#9aa7b4">方法级验证</tspan></text>
+<path d="M603 354 L603 394" stroke="#86e1e6" stroke-opacity="0.45" fill="none"/>
+<circle r="5" fill="#86e1e6"><animateMotion dur="2.4s" begin="0.0s" repeatCount="indefinite" path="M603 354 L603 394"/></circle>
+<circle r="5" fill="#86e1e6"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite" path="M603 354 L603 394"/></circle>
+<path d="M603 854 L603 894" stroke="#86e0a2" stroke-opacity="0.45" fill="none"/>
+<circle r="5" fill="#86e0a2"><animateMotion dur="2.4s" begin="0.0s" repeatCount="indefinite" path="M603 854 L603 894"/></circle>
+<circle r="5" fill="#86e0a2"><animateMotion dur="2.4s" begin="-0.792s" repeatCount="indefinite" path="M603 854 L603 894"/></circle>
+<circle r="5" fill="#86e0a2"><animateMotion dur="2.4s" begin="-1.584s" repeatCount="indefinite" path="M603 854 L603 894"/></circle>
+<path d="M603 1044 L603 1084" stroke="#8fb4f6" stroke-opacity="0.45" fill="none"/>
+<circle r="5" fill="#8fb4f6"><animateMotion dur="2.4s" begin="0.0s" repeatCount="indefinite" path="M603 1044 L603 1084"/></circle>
+<circle r="5" fill="#8fb4f6"><animateMotion dur="2.4s" begin="-1.2s" repeatCount="indefinite" path="M603 1044 L603 1084"/></circle>
+<line x1="286" y1="262" x2="320" y2="262" stroke="#b9a2f2" stroke-width="2" marker-end="url(#arr)"><animate attributeName="opacity" values="0.15;0.15;1;0.15" keyTimes="0;0.0375;0.1437;1" dur="6s" begin="0.0s" repeatCount="indefinite"/></line>
+<line x1="286" y1="448" x2="320" y2="448" stroke="#b9a2f2" stroke-width="2" marker-end="url(#arr)"><animate attributeName="opacity" values="0.15;0.15;1;0.15" keyTimes="0;0.0406;0.1469;1" dur="6s" begin="0.15s" repeatCount="indefinite"/></line>
+<line x1="286" y1="576" x2="320" y2="576" stroke="#b9a2f2" stroke-width="2" marker-end="url(#arr)"><animate attributeName="opacity" values="0.15;0.15;1;0.15" keyTimes="0;0.0437;0.15;1" dur="6s" begin="0.3s" repeatCount="indefinite"/></line>
+<rect x="320" y="1264" width="846" height="204" rx="6" fill="#1a1f26" stroke="#3a4552"/>
+<text x="334" y="1296" font-size="16" text-anchor="start"><tspan fill="#9aa7b4">solve log</tspan></text>
+<text x="334" y="1306" font-size="18" opacity="0"><tspan fill="#9aa7b4">NASA9系数 → 温变 cp/h/s</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1306" font-size="18" opacity="0"><tspan fill="#9aa7b4">成对算例 ΔIsp=+13.85 s</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1306" font-size="18" opacity="0"><tspan fill="#9aa7b4">A40 出口 pe≈18.96 kPa</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1336" font-size="18" opacity="0"><tspan fill="#9aa7b4">九气相 HP → T≈3602.8 K</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1336" font-size="18" opacity="0"><tspan fill="#9aa7b4">守恒残差检查 · 通过</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1336" font-size="18" opacity="0"><tspan fill="#9aa7b4">pa&gt;pe → regime诊断(非分离预测)</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1366" font-size="18" opacity="0"><tspan fill="#9aa7b4">A40 出口 pe≈18.96 kPa</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1366" font-size="18" opacity="0"><tspan fill="#9aa7b4">CEA同源对照 · 通过</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1366" font-size="18" opacity="0"><tspan fill="#9aa7b4">Pc=10MPa O/F=3.4 → HP+冻结喷管</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1396" font-size="18" opacity="0"><tspan fill="#9aa7b4">pa&gt;pe → regime诊断(非分离预测)</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1396" font-size="18" opacity="0"><tspan fill="#9aa7b4">失败契约测试 · 通过</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1396" font-size="18" opacity="0"><tspan fill="#9aa7b4">A40 pa=101325 → 域评估提示</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1426" font-size="18" opacity="0"><tspan fill="#9aa7b4">Pc=10MPa O/F=3.4 → HP+冻结喷管</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1426" font-size="18" opacity="0"><tspan fill="#9aa7b4">NASA9系数 → 温变 cp/h/s</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1426" font-size="18" opacity="0"><tspan fill="#9aa7b4">成对算例 ΔIsp=+13.85 s</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1456" font-size="18" opacity="0"><tspan fill="#9aa7b4">A40 pa=101325 → 域评估提示</tspan><animate attributeName="opacity" values="1;1;0;0;0;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1456" font-size="18" opacity="0"><tspan fill="#9aa7b4">九气相 HP → T≈3602.8 K</tspan><animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="334" y="1456" font-size="18" opacity="0"><tspan fill="#9aa7b4">守恒残差检查 · 通过</tspan><animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0;0" keyTimes="0.0;0.1111;0.2222;0.3333;0.4444;0.5556;0.6667;0.7778;0.8889;1.0" dur="16.0s" repeatCount="indefinite"/></text>
+<text x="1142" y="1456" fill="#86e1e6">▌<animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/></text>
+<text x="34" y="1300" font-size="20" text-anchor="start"><tspan fill="#9aa7b4">本轮交付: </tspan><tspan fill="#ffffff" font-weight="bold">13,402</tspan><tspan fill="#9aa7b4"> 项C检查</tspan></text>
+<text x="34" y="1340" font-size="20" text-anchor="start"><tspan fill="#9aa7b4">CLI回归: </tspan><tspan fill="#ffffff" font-weight="bold">44</tspan><tspan fill="#9aa7b4"> 组</tspan></text>
+<text x="34" y="1380" font-size="20" text-anchor="start"><tspan fill="#9aa7b4">屏幕求解计数: </tspan><tspan fill="#86e1e6" font-weight="bold">—</tspan><tspan fill="#9aa7b4"> (示意)</tspan></text>
+<text x="34" y="1420" font-size="20" text-anchor="start"><tspan fill="#86e1e6" font-weight="bold">—</tspan></text>
+<text x="600.0" y="1488" font-size="14" text-anchor="middle"><tspan fill="#9aa7b4">数字源：tools/quality.py 与研究归档；流动/计数为动画示意 · motion grammar after @thedelost（方法独立重实现）</tspan></text>
+</svg>
