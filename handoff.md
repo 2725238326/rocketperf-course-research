@@ -72,3 +72,5 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 2026-10-13的 `代码.zip`已按字节保存于[接收原件](调研/原始来源/20261013_classmate_code/)，交接与两份 `model-data`分别有哈希身份。实际启动、源码重建、模型差别和参数线索见[代码包审阅](docs/incoming-code-review.md)，研究/展示/最终交付缺口集中在[收尾总览](docs/final-overview.md)。同学的给定温度补燃模型与甲烷代理YF算例没有覆盖当前绝热求解器，也没有更新型号事实截止日期。
 
 无参数闪退来自同学旧命令行exe的退出码2；其bat正常交互可用。当前交付工具v3收齐菜单8的五个研究情景，并提供定位包目录后调用C菜单的 `rocketperf-run.bat`；源码和运行包分别复核17项演示。使用前核验对应本地包manifest为PASS，不把原包中绑定旧exe的测试报告当新exe证据。最终报告、PPT、真实贡献及演练仍按任务契约完成。
+
+报告技术审稿已补齐第7.6节的循环输入、质量/轴功/热量关系及结果；[现行流程图](docs/architecture/report-flow.svg)区分独立入口。朱雀三号二级与长十乙二级开式使用相同数值输入，不算两份独立物理验证。交付verify改读包内INI，检查全部成对输入/差值，并逐个比对菜单显示与JSON；v1/v2/v3已检查旧包兼容。源码未扩展模型适用域，具体问题见[补审记录](docs/review.md)。

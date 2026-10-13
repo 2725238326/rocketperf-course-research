@@ -1,19 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 307,
+  "revision": 313,
   "context": {
-    "phase": "组员代码接收与收尾总览；统一质量和本地演示交付复验",
+    "phase": "报告技术审稿与交付校验修正",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-001",
       "REL-001"
     ],
     "facts": [
-      "组员给定温度补燃与甲烷代理YF算例保持独立身份；接收与参数审阅见docs/incoming-code-review.md。",
-      "当前Q=0开式/富氧补燃正式归档engine_cycles_v2_20261013；五个车辆算例均为研究假设。",
-      "交付v3补齐五个车辆情景与C菜单启动器，源码及运行包各17项演示；使用前检查对应本地manifest。",
-      "收尾总览见docs/final-overview.md；报告/PPT、真实贡献和演练仍须实际完成。",
-      "在线证据截止仍为2026-10-06，接收和文档日期不刷新型号事实。"
+      "报告7.6已列两型一级研究情景的输入、闭合方程与结果；五个车辆入口不等于五个独立物理工况。",
+      "源码/运行包已可复跑；verify读取包内输入，菜单数值与JSON逐项比对。",
+      "报告和讲稿仍为草稿，PPT、真实贡献确认及限时演练尚待完成；要求见docs/final-overview.md。",
+      "组员给定温度补燃及甲烷代理YF例保留为对照，生产C使用独立Q=0模型；来源边界见docs/incoming-code-review.md。"
     ]
   },
   "tasks": [
@@ -1387,6 +1386,34 @@
         "kind": "quality",
         "path": "project/evidence/QA-003_266ccec6cda0.json",
         "sha256": "16ed1fb604b5006c17886b71c2386f3d40060409162a39456b4d335f688ff5e9"
+      }
+    },
+    {
+      "id": "QA-004",
+      "title": "收尾报告技术审稿与交付复核边界修正",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "docs/final-overview.md",
+        "docs/incoming-code-review.md",
+        "deliverables/report.md",
+        "deliverables/presentation.md",
+        "docs/architecture/report-flow.svg",
+        "tools/delivery.py",
+        "taskshot/2026-10-13_054-final-technical-edit.md"
+      ],
+      "acceptance": [
+        "报告逐组列出输入、单位、来源、固定量、变化量与结论范围；两个一级循环列出质量/轴功/热量关系和保存结果，避免把同输入对象计为独立物理样本",
+        "报告与讲稿引用同一实际渲染的入口分支图；更正退出码、交互和regime行为；删去口号、流程包装和泛化完成表述",
+        "交付v1/v2/v3读取各自ZIP输入，输入与旧结果不符/菜单数值篡改/缺项均拒绝；旧包实测兼容，统一质量六组通过，本地提交记录"
+      ],
+      "owner": "root",
+      "note": "技术审稿、现行流程图、包内输入与结果校验及旧包兼容验收完成；原件与生产C模型未改。报告/PPT仍须最终整理、真实贡献确认与实际演练，工程通过不代替实机或独立科学验证。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-004_5556f3aab823.json",
+        "sha256": "2e9dc37671762a87679dc08216e12277125e52e3a61fd68b2cc20ec92ff346b5"
       }
     }
   ],
@@ -8052,6 +8079,156 @@
       "note": "接收审阅、启动定位、总览与可核验本地演示包全部完成；保留甲烷代理/校准/未核来源限制。最终PPT、具名贡献和演练仍由DOC-001契约承担；未推送或外发。",
       "previous_hash": "fa676e22a0722c04cd2c0b012676c255326c35c902a9403448cc8c5811f6249a",
       "hash": "64597c1ce9a5391273c22f77840eda735fb97fa16e1a18da519e156ef9d073ee"
+    },
+    {
+      "seq": 325,
+      "at": "2026-10-13T13:41:45+00:00",
+      "task": "QA-004",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "64597c1ce9a5391273c22f77840eda735fb97fa16e1a18da519e156ef9d073ee",
+      "hash": "960f263b534a7840e78d1386cbeb12f52cbc69bc64176d63d039bcd6c9ee27eb"
+    },
+    {
+      "seq": 326,
+      "at": "2026-10-13T13:41:45+00:00",
+      "task": "QA-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按用户要求做技术审稿与工程复核：修正失实流程图、重复表述和打包验证对当前工作树的耦合",
+      "previous_hash": "960f263b534a7840e78d1386cbeb12f52cbc69bc64176d63d039bcd6c9ee27eb",
+      "hash": "1b33ba1c9c59542d5429ab834869f3bdfc3ad052ac67897b152fdeba512df628"
+    },
+    {
+      "seq": 327,
+      "at": "2026-10-13T14:20:37+00:00",
+      "task": "QA-004",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "技术审稿补输入结果与取舍；修复包内输入校验；保留最终PPT及人员验收缺项",
+      "previous_hash": "1b33ba1c9c59542d5429ab834869f3bdfc3ad052ac67897b152fdeba512df628",
+      "details": {
+        "context_before": {
+          "phase": "组员代码接收与收尾总览；统一质量和本地演示交付复验",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "组员给定温度补燃与甲烷代理YF算例保持独立身份；接收与参数审阅见docs/incoming-code-review.md。",
+            "当前Q=0开式/富氧补燃正式归档engine_cycles_v2_20261013；五个车辆算例均为研究假设。",
+            "交付v3补齐五个车辆情景与C菜单启动器，源码及运行包各17项演示；使用前检查对应本地manifest。",
+            "收尾总览见docs/final-overview.md；报告/PPT、真实贡献和演练仍须实际完成。",
+            "在线证据截止仍为2026-10-06，接收和文档日期不刷新型号事实。"
+          ]
+        },
+        "context_after": {
+          "phase": "报告技术审稿与交付校验修正",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "报告7.6已列两型一级研究情景的输入、闭合方程与结果；五个车辆入口不等于五个独立物理工况。",
+            "源码/运行包已可复跑；verify读取包内输入，菜单数值与JSON逐项比对。",
+            "报告和讲稿仍为草稿，PPT、真实贡献确认及限时演练尚待完成；要求见docs/final-overview.md。",
+            "组员给定温度补燃及甲烷代理YF例保留为对照，生产C使用独立Q=0模型；来源边界见docs/incoming-code-review.md。"
+          ]
+        }
+      },
+      "hash": "b595084ad8c037ba89b85048b37526e809d3da4fc986e8019a76c5291fee044a"
+    },
+    {
+      "seq": 328,
+      "at": "2026-10-13T14:25:41+00:00",
+      "task": "QA-004",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "延续已登记技术审稿：补齐两例输入与结果、同条件取舍，替换错误流程图；修复包内输入/菜单数值校验，保留旧包兼容",
+      "previous_hash": "b595084ad8c037ba89b85048b37526e809d3da4fc986e8019a76c5291fee044a",
+      "details": {
+        "contract_before": {
+          "id": "QA-004",
+          "title": "收尾报告技术审稿与交付复核边界修正",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [],
+          "required_artifacts": [
+            "docs/final-overview.md",
+            "docs/incoming-code-review.md",
+            "deliverables/report.md",
+            "deliverables/presentation.md",
+            "tools/delivery.py",
+            "taskshot/2026-10-13_054-final-technical-edit.md"
+          ],
+          "acceptance": [
+            "逐项复核课程要求、流程图与运行接口；压缩套话并区分证据/假设/结果；交付复验读取包内车辆输入、验证旧包兼容；统一质量六组通过并保留本地可审查提交"
+          ],
+          "owner": "root",
+          "note": "按用户要求做技术审稿与工程复核：修正失实流程图、重复表述和打包验证对当前工作树的耦合",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "QA-004",
+          "title": "收尾报告技术审稿与交付复核边界修正",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [],
+          "required_artifacts": [
+            "docs/final-overview.md",
+            "docs/incoming-code-review.md",
+            "deliverables/report.md",
+            "deliverables/presentation.md",
+            "docs/architecture/report-flow.svg",
+            "tools/delivery.py",
+            "taskshot/2026-10-13_054-final-technical-edit.md"
+          ],
+          "acceptance": [
+            "报告逐组列出输入、单位、来源、固定量、变化量与结论范围；两个一级循环列出质量/轴功/热量关系和保存结果，避免把同输入对象计为独立物理样本",
+            "报告与讲稿引用同一实际渲染的入口分支图；更正退出码、交互和regime行为；删去口号、流程包装和泛化完成表述",
+            "交付v1/v2/v3读取各自ZIP输入，输入与旧结果不符/菜单数值篡改/缺项均拒绝；旧包实测兼容，统一质量六组通过，本地提交记录"
+          ],
+          "owner": "root",
+          "note": "延续已登记技术审稿：补齐两例输入与结果、同条件取舍，替换错误流程图；修复包内输入/菜单数值校验，保留旧包兼容",
+          "verification": null
+        }
+      },
+      "hash": "0438825696a2c641dc4a72019c18cde4108f43367ee0eaa3feb84ade9ac3b95f"
+    },
+    {
+      "seq": 329,
+      "at": "2026-10-13T14:37:17+00:00",
+      "task": "QA-004",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "已核对十章要求、两例数值与原归档、同输入重复情景、面积比相邻收益代价；静态图渲染无覆盖；复现并修复旧输出错配输入，菜单数值/输入/差值篡改拒绝，v1/v2/v3不读当前cases仍通过。完整质量6/6；首轮Debug超时保留，原命令复跑及完整重跑成功，未放宽阈值。",
+      "previous_hash": "0438825696a2c641dc4a72019c18cde4108f43367ee0eaa3feb84ade9ac3b95f",
+      "hash": "3622bd84940ca111ddc60781ad649fc48f8d42dd5bf188811d96cdbb41f7a593"
+    },
+    {
+      "seq": 330,
+      "at": "2026-10-13T14:37:19+00:00",
+      "task": "QA-004",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "技术审稿、现行流程图、包内输入与结果校验及旧包兼容验收完成；原件与生产C模型未改。报告/PPT仍须最终整理、真实贡献确认与实际演练，工程通过不代替实机或独立科学验证。",
+      "previous_hash": "3622bd84940ca111ddc60781ad649fc48f8d42dd5bf188811d96cdbb41f7a593",
+      "hash": "3e5852c2497ccbdfd018727e222c134fe6d740f322eb7a376bd101451cc15a39"
     }
   ]
 }

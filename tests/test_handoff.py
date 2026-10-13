@@ -12,6 +12,7 @@ import zipfile
 import copy
 import json
 import subprocess
+import re
 
 
 class HandoffTests(unittest.TestCase):
@@ -49,14 +50,21 @@ class HandoffTests(unittest.TestCase):
         files = delivery.common_files(ROOT, head)
         self.assertLessEqual(delivery.FINAL_ADVERTISED_CASES, set(files))
         binary = ROOT / 'build/release/rocketperf.exe'
+        vehicle_reports = {}
         for name, arguments, code in delivery.VEHICLE_DEMO_ARGS:
             run = subprocess.run([str(binary), *arguments], cwd=ROOT, capture_output=True,
                                  encoding='utf-8', check=True, timeout=30)
             delivery.check_demo(name, run.stdout, run.stderr, code, 3)
             report = json.loads(run.stdout)
+            vehicle_reports[name] = copy.deepcopy(report)
             report['balance']['engine_specific_impulse_s'] *= 1.1
             with self.subTest(case=name), self.assertRaises(ValueError):
                 delivery.check_demo(name, json.dumps(report), '', 0, 3)
+            case_text = files[arguments[-1]].decode('utf-8')
+            self.assertIn('total_mass_flow_kg_per_s=100', case_text)
+            with self.subTest(case=name), self.assertRaises(ValueError):
+                delivery.check_demo(name, run.stdout, '', 0, 3,
+                                    case_text.replace('total_mass_flow_kg_per_s=100', 'total_mass_flow_kg_per_s=101'))
         if sys.platform == 'win32':
             import os
             with tempfile.TemporaryDirectory(dir=ROOT / 'build/test-tmp') as folder:
@@ -73,9 +81,45 @@ class HandoffTests(unittest.TestCase):
                 run = subprocess.run([os.environ['COMSPEC'], '/d', '/c', str(package / 'rocketperf-run.bat')],
                                      cwd=Path(folder), env=clean, input=delivery.LAUNCHER_INPUT,
                                      capture_output=True, encoding='utf-8', timeout=30)
-                delivery.check_demo('launcher', run.stdout, run.stderr, run.returncode, 3)
+                delivery.check_demo('launcher', run.stdout, run.stderr, run.returncode, 3,
+                                    vehicle_reports=vehicle_reports)
                 with self.assertRaises(ValueError):
-                    delivery.check_demo('launcher', run.stdout.replace('整机研究比冲', '', 1), '', 0, 3)
+                    delivery.check_demo('launcher', run.stdout.replace('整机研究比冲', '', 1), '', 0, 3,
+                                        vehicle_reports=vehicle_reports)
+                changed, count = re.subn(r'(整机研究比冲\s+)[-+\d.eE]+ s', r'\g<1>999.999 s', run.stdout, count=1)
+                self.assertEqual(count, 1)
+                with self.assertRaises(ValueError):
+                    delivery.check_demo('launcher', changed, '', 0, 3, vehicle_reports=vehicle_reports)
+                with self.assertRaises(ValueError):
+                    delivery.check_demo('launcher', run.stdout, '', 0, 3)
+
+    def test_pair_input_and_results_cannot_drift_independently(self):
+        case = (ROOT / 'cases/research/propellant_comparison.ini').read_text(encoding='utf-8')
+        run = subprocess.run([str(ROOT / 'build/release/rocketperf.exe'), 'study', 'propellants', '--case',
+                              'cases/research/propellant_comparison.ini'], cwd=ROOT, capture_output=True,
+                             encoding='utf-8', check=True, timeout=30)
+        # Explicit input must work without looking up any current checkout case.
+        with mock.patch.object(Path, 'read_text', side_effect=AssertionError('unexpected checkout read')):
+            delivery.check_demo('pair', run.stdout, run.stderr, run.returncode, 3, case)
+        for old, new in (('throat_area_m2=0.01', 'throat_area_m2=0.02'),
+                         ('methane_fuel_temperature_k=120', 'methane_fuel_temperature_k=125'),
+                         ('kerosene_oxidizer_fuel_mass_ratio=2.6', 'kerosene_oxidizer_fuel_mass_ratio=2.8'),
+                         ('methane_enthalpy_basis=heos710-cea334-ideal-zero-298.15-v1', 'methane_enthalpy_basis=unknown'),
+                         ('kerosene_phase=liquid', 'kerosene_phase=gas')):
+            self.assertIn(old, case)
+            with self.subTest(field=old), self.assertRaises(ValueError):
+                delivery.check_demo('pair', run.stdout, '', 0, 3, case.replace(old, new))
+        report = json.loads(run.stdout)
+        for field in ('thrust_n', 'isp_s', 'mass_flow_kg_per_s', 'cstar_m_per_s'):
+            broken = copy.deepcopy(report)
+            broken['methane_minus_kerosene'][field] += 1
+            with self.subTest(difference=field), self.assertRaises(ValueError):
+                delivery.check_demo('pair', json.dumps(broken), '', 0, 3, case)
+        for field in ('thrust_n', 'mass_flow_kg_per_s', 'throat_area_m2'):
+            broken = copy.deepcopy(report)
+            broken['methane']['geometry'][field] *= 2
+            with self.subTest(geometry=field), self.assertRaises(ValueError):
+                delivery.check_demo('pair', json.dumps(broken), '', 0, 3, case)
 
     def test_detached_head_receiving_identity(self):
         original = handoff.git

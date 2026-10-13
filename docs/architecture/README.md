@@ -2,6 +2,8 @@
 
 打开[离线架构浏览页](index.html)，先看作业对接总览，再切换业务、计算和执行三视图。图中文字可选取、链接可离线跳转；不依赖网络或CDN，可直接打印。
 
+报告和展示使用[计算入口流程图](report-flow.svg)，生成命令为 `python tools/report_flow.py`。图中L0、推力室、给定温度循环、绝热循环及regime分别调用；旧 `live/slide-flow.svg`只保留历史演示，不能作为现行调用流程。
+
 ## 作业对接总览
 
 ![作业要求与研究架构](assignment.svg)

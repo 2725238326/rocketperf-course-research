@@ -253,10 +253,12 @@ def package_readme(kind, head):
             "完整研究资料与维护记录见私有仓库。PACKAGE.json核对逐文件SHA256，Release外部SHA256SUMS.txt核对ZIP来源。\n").encode("utf-8")
 
 
-def check_regime(report):
+def check_regime(report, input_text=None):
     """Recompute algebraic relations, including inverse area references, without C."""
     from pipeline import CORE_KEYS, RESULT_KEYS, check_relation, ideal_log_area, snapshot_values
-    values = snapshot_values((ROOT / "cases/research/s3_sealevel_regime.ini").read_text(encoding="utf-8"))
+    if input_text is None:
+        input_text = (ROOT / "cases/research/s3_sealevel_regime.ini").read_text(encoding="utf-8")
+    values = snapshot_values(input_text)
     expected_inputs = {key: float(values[key]) for key in CORE_KEYS}
     if (report.get("model") != "ideal_constant_gamma_v1_regime_assessment_v1"
         or report.get("inputs") != expected_inputs
@@ -303,7 +305,29 @@ def check_regime(report):
         raise ValueError("Regime demo limitation differs")
 
 
-def check_demo(name, stdout, stderr, code, version=1):
+def check_launcher(stdout, reports):
+    """Tie each displayed menu result to its separately checked JSON result."""
+    blocks = re.split(r"(?m)^  算例: ", stdout)[1:]
+    if not isinstance(reports, dict) or len(blocks) != len(VEHICLE_CASES) or len(reports) != len(VEHICLE_CASES):
+        raise ValueError("Launcher did not display each vehicle result once")
+    for block, name in zip(blocks, VEHICLE_CASES):
+        report = reports.get("vehicle-" + name)
+        if not isinstance(report, dict) or block.splitlines()[0].strip() != report["case"]["id"]:
+            raise ValueError("Launcher displayed a different vehicle case or order")
+        balance = report["balance"]
+        for label, key, unit, divisor in (
+            ("回流主室流量", "returned_mass_flow_kg_per_s", "kg/s", 1),
+            ("外排流量", "external_mass_flow_kg_per_s", "kg/s", 1),
+            ("整机研究推力", "total_thrust_n", "kN", 1000),
+            ("整机研究比冲", "engine_specific_impulse_s", "s", 1),
+        ):
+            matches = re.findall(r"(?m)^  " + label + r"\s+([-+\d.eE]+) " + re.escape(unit) + r"$", block)
+            expected = float(format(balance[key] / divisor, '.6g'))  # C uses %.6g.
+            if len(matches) != 1 or float(matches[0]) != expected:
+                raise ValueError("Launcher result differs from validated JSON: " + name + " / " + label)
+
+
+def check_demo(name, stdout, stderr, code, version=1, case_text=None, vehicle_reports=None):
     expected = next(item[2] for item in demo_specs(version) if item[0] == name)
     if code != expected or (code == 0 and stderr) or (code != 0 and (stdout or not stderr.startswith("out_of_domain:"))):
         raise ValueError("Delivery demonstration protocol differs: " + name)
@@ -316,41 +340,73 @@ def check_demo(name, stdout, stderr, code, version=1):
                     "launcher": ("绝热研究算例", "整机研究比冲", "循环身份待核", *VEHICLE_CASES)}[name]
         if any(marker not in stdout for marker in required) or "失败 (" in stdout:
             raise ValueError("Delivery text/interactive demonstration differs: " + name)
-        if name == "launcher" and stdout.count("整机研究比冲") != 5:
-            raise ValueError("Launcher did not execute all five vehicle cases")
+        if name == "launcher":
+            check_launcher(stdout, vehicle_reports)
         return
+    def case(relative):
+        return case_text if case_text is not None else (ROOT / relative).read_text(encoding="utf-8")
     report = strict_json(stdout)
     if name in {"ideal", "ambient"}:
         path = "air_mach2_vacuum" if name == "ideal" else "air_mach2_ambient"
-        validate_result(report, (ROOT / ("cases/benchmarks/" + path + ".ini")).read_text(encoding="utf-8"))
+        validate_result(report, case("cases/benchmarks/" + path + ".ini"))
     elif name == "grid":
         from pipeline import DEFAULT_RATIOS, DEFAULT_PRESSURES, validate_study
-        validate_study(report, (ROOT / "cases/research/s1_area_ratio_ambient.ini").read_text(encoding="utf-8"),
+        validate_study(report, case("cases/research/s1_area_ratio_ambient.ini"),
                        DEFAULT_RATIOS, DEFAULT_PRESSURES)
     elif name == "regime":
-        check_regime(report)
+        check_regime(report, case("cases/research/s3_sealevel_regime.ini"))
     elif name == "cycle":
-        validate_cycle(report, (ROOT / "cases/benchmarks/prescribed_cycle.ini").read_text(encoding="utf-8"))
+        validate_cycle(report, case("cases/benchmarks/prescribed_cycle.ini"))
     elif name.startswith("vehicle-"):
         from engine_cycles import validate
-        validate(report, (ROOT / ("cases/vehicles/" + name.removeprefix("vehicle-") + ".ini")).read_text(encoding="utf-8"))
+        validate(report, case("cases/vehicles/" + name.removeprefix("vehicle-") + ".ini"))
     elif name == "pair":
         from propellant_comparison import LIMITS
         from adiabatic_study import typed_equal
-        case = (ROOT / "cases/research/propellant_comparison.ini").read_text(encoding="utf-8")
-        expected_inputs = dict(pressure_pa=1e7, throat_area_m2=.01, area_ratio=10,
-                               ambient_pressure_pa=0, methane_of=2.6, kerosene_of=2.6)
+        from pipeline import snapshot_values, check_relation
+        pair_input = case("cases/research/propellant_comparison.ini")
+        values = snapshot_values(pair_input)
+        numeric_map = {key: key for key in ("pressure_pa", "throat_area_m2", "area_ratio", "ambient_pressure_pa")}
+        numeric_map.update(methane_of="methane_oxidizer_fuel_mass_ratio", kerosene_of="kerosene_oxidizer_fuel_mass_ratio")
+        inlet_map = {
+            "methane": {"dataset": "methane_dataset_id", "basis": "methane_enthalpy_basis",
+                        **{key: "methane_" + key for key in ("fuel_temperature_k", "oxidizer_temperature_k", "fuel_pressure_pa", "oxidizer_pressure_pa")}},
+            "kerosene": {"dataset": "kerosene_dataset_id", "fuel": "kerosene_fuel_id", "oxidizer": "kerosene_oxidizer_id",
+                         **{key: "kerosene_" + key for key in ("fuel_temperature_k", "oxidizer_temperature_k")}},
+        }
+        required = set(numeric_map.values()) | {key for mapping in inlet_map.values() for key in mapping.values()}
+        required |= {"schema_version", "model", "case_id", "source_ref", "methane_phase", "kerosene_phase"}
+        if (set(values) != required or values["schema_version"] != "1" or values["model"] != "propellant_fixed_geometry_v1"
+            or values["methane_phase"] != "liquid" or values["kerosene_phase"] != "liquid"):
+            raise ValueError("Invalid packaged pair input schema")
+        expected_inputs = {key: float(values[field]) for key, field in numeric_map.items()}
+        expected_inlets = {fuel: {key: float(values[field]) if key.endswith(("_k", "_pa")) else values[field]
+                                  for key, field in mapping.items()} for fuel, mapping in inlet_map.items()}
+        numbers = [*expected_inputs.values(), *(v for inlet in expected_inlets.values() for v in inlet.values() if isinstance(v, float))]
+        if any(not math.isfinite(v) for v in numbers):
+            raise ValueError("Non-finite packaged pair input")
         if set(report) != {"schema_version", "study", "case", "inputs", "inlets", "methane",
                            "kerosene", "methane_minus_kerosene", "limitations"}:
             raise ValueError("Pair demo schema differs")
         typed_equal(report["study"], "propellant_fixed_geometry_v1", "pair demo study")
         typed_equal(report["inputs"], expected_inputs, "pair demo inputs")
+        typed_equal(report["inlets"], expected_inlets, "pair inlet states")
+        typed_equal(report["schema_version"], 1, "pair schema")
         typed_equal(report["limitations"], LIMITS, "pair demo limitations")
-        typed_equal(report["case"], {"id": "ch4_rp1_common_geometry",
-                                     "source_ref": "ANA-012 declared method comparison"}, "pair demo case")
-        if (report["methane"]["geometry"]["specific_impulse_s"]
-                - report["kerosene"]["geometry"]["specific_impulse_s"]) != report["methane_minus_kerosene"]["isp_s"]:
-            raise ValueError("Pair demo difference differs")
+        typed_equal(report["case"], {"id": values["case_id"], "source_ref": values["source_ref"]}, "pair demo case")
+        for fuel in ("methane", "kerosene"):
+            g = report[fuel]["geometry"]; n = report[fuel]["nozzle"]
+            if any(type(v) not in (int, float) or not math.isfinite(v) or v <= 0 for v in g.values()):
+                raise ValueError("Invalid pair geometry")
+            check_relation(g["throat_area_m2"], expected_inputs["throat_area_m2"], "pair throat")
+            check_relation(g["exit_area_m2"], g["throat_area_m2"] * expected_inputs["area_ratio"], "pair exit area")
+            check_relation(g["mass_flow_kg_per_s"], expected_inputs["pressure_pa"] * g["throat_area_m2"] / n["cstar_m_per_s"], "pair mass flow")
+            check_relation(g["thrust_n"], g["mass_flow_kg_per_s"] * n["effective_velocity_m_per_s"], "pair thrust")
+            check_relation(g["specific_impulse_s"], g["thrust_n"] / g["mass_flow_kg_per_s"] / 9.80665, "pair Isp")
+        differences = {key: report['methane']['geometry'][field] - report['kerosene']['geometry'][field]
+                       for key, field in (("thrust_n", "thrust_n"), ("isp_s", "specific_impulse_s"), ("mass_flow_kg_per_s", "mass_flow_kg_per_s"))}
+        differences["cstar_m_per_s"] = report['methane']['nozzle']['cstar_m_per_s'] - report['kerosene']['nozzle']['cstar_m_per_s']
+        typed_equal(report["methane_minus_kerosene"], differences, "pair differences")
     elif name == "rp1":
         reference = ROOT / "results/validation/kerosene_anchor_v1/of_2_6_rocket.out"
         summary = parse_output(reference.read_bytes(), True, True, 1e-7)
@@ -361,6 +417,7 @@ def demos(binary, folder, logs, prefix, version=3):
     clean = subprocess_env()
     clean["PATH"] = str(Path(os.environ["SystemRoot"]) / "System32")
     results = []
+    vehicle_reports = {}
     for name, arguments, code in demo_specs(version):
         stdout = logs / (prefix + "-" + name + "-stdout.json")
         stderr = logs / (prefix + "-" + name + "-stderr.txt")
@@ -371,7 +428,11 @@ def demos(binary, folder, logs, prefix, version=3):
                              capture_output=True, encoding="utf-8", errors="strict", timeout=30)
         atomic_text(stdout, run.stdout)
         atomic_text(stderr, run.stderr)
-        check_demo(name, run.stdout, run.stderr, run.returncode, version)
+        case_path = next((value for value in arguments if value.endswith(".ini")), None)
+        case_text = (folder / case_path).read_text(encoding="utf-8") if case_path else None
+        check_demo(name, run.stdout, run.stderr, run.returncode, version, case_text, vehicle_reports)
+        if name.startswith("vehicle-"):
+            vehicle_reports[name] = strict_json(run.stdout)
         results.append(dict(id=name, arguments=arguments, exit_code=code))
     return results
 
@@ -482,6 +543,9 @@ def verify(directory):
         or set(record.get("archives", {})) != KINDS):
         raise ValueError("Delivery summary identity differs")
     specifications = demo_specs(record["schema_version"])
+    demo_cases = {argument for _, arguments, _ in specifications for argument in arguments if argument.endswith(".ini")}
+    packaged_cases = {}
+    packaged_launcher = {}
     for kind, entry in record["archives"].items():
         if entry["path"] != ARCHIVES[kind]:
             raise ValueError("Delivery archive name differs")
@@ -492,12 +556,20 @@ def verify(directory):
         required_cases = FINAL_ADVERTISED_CASES if record["schema_version"] == 3 else ADVERTISED_CASES
         if record["schema_version"] >= 2 and not required_cases <= set(packed["files"]):
             raise ValueError("Advertised delivery cases missing")
-        if record["schema_version"] == 3 and packed["files"].get("rocketperf-run.bat") != sha(launcher_bytes()):
-            raise ValueError("Delivery launcher is missing or differs")
+        with zipfile.ZipFile(path) as archive:
+            packaged_cases[kind] = {name: archive.read(name).decode("utf-8") for name in demo_cases}
+        if record["schema_version"] == 3:
+            if "rocketperf-run.bat" not in packed["files"]:
+                raise ValueError("Delivery launcher is missing")
+            with zipfile.ZipFile(path) as archive:
+                packaged_launcher[kind] = archive.read("rocketperf-run.bat")
         if type(entry["files"]) is not int or len(packed["files"]) != entry["files"]:
             raise ValueError("Delivery archive file count differs")
         if kind == "windows-x64" and packed["files"]["rocketperf.exe"] != record["binary_sha256"]:
             raise ValueError("Delivery binary identity differs")
+    if packaged_cases["c-source"] != packaged_cases["windows-x64"] or (record["schema_version"] == 3 and
+                                            packaged_launcher["c-source"] != packaged_launcher["windows-x64"]):
+        raise ValueError("Source/runtime input or launcher bytes differ")
     evidence = record["verification_files"]
     actual = {p.relative_to(directory).as_posix() for p in (directory / "verification").iterdir() if p.is_file()}
     if not isinstance(evidence, dict) or set(evidence) != actual:
@@ -529,10 +601,17 @@ def verify(directory):
         expected = [dict(id=name, arguments=args, exit_code=code) for name, args, code in specifications]
         from adiabatic_study import typed_equal
         typed_equal(results, expected, "delivery demonstrations")
+        vehicle_reports = {}
         for item in results:
             name = prefix + "-" + item["id"]
-            check_demo(item["id"], (directory / "verification" / (name + "-stdout.json")).read_text(encoding="utf-8"),
-                       (directory / "verification" / (name + "-stderr.txt")).read_text(encoding="utf-8"), item["exit_code"], record["schema_version"])
+            stdout = (directory / "verification" / (name + "-stdout.json")).read_text(encoding="utf-8")
+            case_path = next((value for value in item["arguments"] if value.endswith(".ini")), None)
+            case_text = packaged_cases["c-source" if prefix == "source" else "windows-x64"][case_path] if case_path else None
+            check_demo(item["id"], stdout,
+                       (directory / "verification" / (name + "-stderr.txt")).read_text(encoding="utf-8"),
+                       item["exit_code"], record["schema_version"], case_text, vehicle_reports)
+            if item["id"].startswith("vehicle-"):
+                vehicle_reports[item["id"]] = strict_json(stdout)
     expected_sums = "\n".join(f"{digest(directory / name)}  {name}" for name in
                               [*ARCHIVES.values(), "delivery-manifest.json", "project-guide.md"]) + "\n"
     if (directory / "SHA256SUMS.txt").read_text(encoding="utf-8") != expected_sums:
