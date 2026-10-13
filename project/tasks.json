@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 304,
+  "revision": 307,
   "context": {
     "phase": "组员代码接收与收尾总览；统一质量和本地演示交付复验",
     "evidence_cutoff": "2026-10-06",
@@ -1368,21 +1368,26 @@
     {
       "id": "QA-003",
       "title": "组员代码包接收复核与收尾总览更新",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
         "docs/final-overview.md",
         "docs/incoming-code-review.md",
         "results/research/incoming_code_v1_20261013/manifest.json",
-        "taskshot/2026-10-13_052-incoming-code-review.md"
+        "taskshot/2026-10-13_052-incoming-code-review.md",
+        "taskshot/2026-10-13_053-local-demo-delivery.md"
       ],
       "acceptance": [
         "固定代码.zip身份，复核交接、源码和运行包，复现无参数启动及算例成功/拒绝路径；来源与假设逐项区分，提供可渲染交接阅读入口、启动修正和收尾缺口；完整质量复验并本地检查点"
       ],
       "owner": "root",
-      "note": "按用户授权顺序复核组员代码.zip，更新收尾总览并实跑启动与两型算例；不并行派生agent、不刷新在线事实",
-      "verification": null
+      "note": "接收审阅、启动定位、总览与可核验本地演示包全部完成；保留甲烷代理/校准/未核来源限制。最终PPT、具名贡献和演练仍由DOC-001契约承担；未推送或外发。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-003_266ccec6cda0.json",
+        "sha256": "16ed1fb604b5006c17886b71c2386f3d40060409162a39456b4d335f688ff5e9"
+      }
     }
   ],
   "events": [
@@ -7970,6 +7975,83 @@
         }
       },
       "hash": "1904653d487e179dcd762455e0c4aad90bf500675d480e84ad4c37d3b09f91fa"
+    },
+    {
+      "seq": 322,
+      "at": "2026-10-13T13:17:29+00:00",
+      "task": "QA-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "补充实际固定提交的打包与最终ZIP接收复验快照，验收范围不扩展为最终报告/PPT或实机性能",
+      "previous_hash": "1904653d487e179dcd762455e0c4aad90bf500675d480e84ad4c37d3b09f91fa",
+      "details": {
+        "contract_before": {
+          "id": "QA-003",
+          "title": "组员代码包接收复核与收尾总览更新",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [],
+          "required_artifacts": [
+            "docs/final-overview.md",
+            "docs/incoming-code-review.md",
+            "results/research/incoming_code_v1_20261013/manifest.json",
+            "taskshot/2026-10-13_052-incoming-code-review.md"
+          ],
+          "acceptance": [
+            "固定代码.zip身份，复核交接、源码和运行包，复现无参数启动及算例成功/拒绝路径；来源与假设逐项区分，提供可渲染交接阅读入口、启动修正和收尾缺口；完整质量复验并本地检查点"
+          ],
+          "owner": "root",
+          "note": "按用户授权顺序复核组员代码.zip，更新收尾总览并实跑启动与两型算例；不并行派生agent、不刷新在线事实",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "QA-003",
+          "title": "组员代码包接收复核与收尾总览更新",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [],
+          "required_artifacts": [
+            "docs/final-overview.md",
+            "docs/incoming-code-review.md",
+            "results/research/incoming_code_v1_20261013/manifest.json",
+            "taskshot/2026-10-13_052-incoming-code-review.md",
+            "taskshot/2026-10-13_053-local-demo-delivery.md"
+          ],
+          "acceptance": [
+            "固定代码.zip身份，复核交接、源码和运行包，复现无参数启动及算例成功/拒绝路径；来源与假设逐项区分，提供可渲染交接阅读入口、启动修正和收尾缺口；完整质量复验并本地检查点"
+          ],
+          "owner": "root",
+          "note": "补充实际固定提交的打包与最终ZIP接收复验快照，验收范围不扩展为最终报告/PPT或实机性能",
+          "verification": null
+        }
+      },
+      "hash": "7fdc7ca39a43aa60d221789fdfef2a61cf9b44c9586e4b1b8eed1b40903309f0"
+    },
+    {
+      "seq": 323,
+      "at": "2026-10-13T13:17:30+00:00",
+      "task": "QA-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "逐项验收：原件/来源与模型边界已固定；旧exe无参数2和bat逐提示成功已复现；源码5/5、622字段一致；收尾页面视觉检查；v3源码/运行各17演示及最终ZIP复跑成功。质量六组完整PASS，非实验/独立人员科学验收。",
+      "previous_hash": "7fdc7ca39a43aa60d221789fdfef2a61cf9b44c9586e4b1b8eed1b40903309f0",
+      "hash": "fa676e22a0722c04cd2c0b012676c255326c35c902a9403448cc8c5811f6249a"
+    },
+    {
+      "seq": 324,
+      "at": "2026-10-13T13:17:31+00:00",
+      "task": "QA-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "接收审阅、启动定位、总览与可核验本地演示包全部完成；保留甲烷代理/校准/未核来源限制。最终PPT、具名贡献和演练仍由DOC-001契约承担；未推送或外发。",
+      "previous_hash": "fa676e22a0722c04cd2c0b012676c255326c35c902a9403448cc8c5811f6249a",
+      "hash": "64597c1ce9a5391273c22f77840eda735fb97fa16e1a18da519e156ef9d073ee"
     }
   ]
 }
