@@ -2,7 +2,7 @@
 
 本文件给下一位维护者和讲解者使用。“程序能复跑”“证据完整”和“模型结论成立”分开核对，机械 PASS 不说成科学结论。
 
-当前交接的是 A、B 两部分的方法与工程基础，不是最终报告、PPT或真实发动机参数闭合。完整课程交付仍按 REL-001 的前置任务推进。
+当前源码工作区已包含C17热化学、喷管及绝热开式/补燃循环研究原型，并保存对应研究归档。接收时应核对当前质量报告与归档指纹；这不等于最终报告、PPT或真实发动机参数闭合。完整课程交付仍按 REL-001 的前置任务推进。
 
 接收者只需编译/运行C时，优先使用[阶段交付](delivery.md)的纯C源码或Windows ZIP；[项目解读](project-guide.md)给出详细说明。下面的bundle是完整维护历史的另一种离线接手方式，不能把其中Python开发工具写成exe运行依赖。
 
@@ -50,6 +50,7 @@ python tools/handoff.py verify --package .
 ```powershell
 python tools/quality.py
 python tools/pipeline.py test --configuration Release
+python tools/engine_cycles.py verify results/research/engine_cycles_v2_20261013
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
 ./build/release/rocketperf.exe cycle adiabatic cases/vehicles/zq3_y1_stage1.ini --text
