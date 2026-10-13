@@ -1,0 +1,16 @@
+Internal ctest changing into directory: E:/Work/火发原理/build/incoming-code-3448b18a-20261013/source-build
+Test project E:/Work/火发原理/build/incoming-code-3448b18a-20261013/source-build
+    Start 1: core
+1/5 Test #1: core .............................   Passed    0.03 sec
+    Start 2: thermo
+2/5 Test #2: thermo ...........................   Passed    0.03 sec
+    Start 3: combustion
+3/5 Test #3: combustion .......................   Passed    0.11 sec
+    Start 4: cycle
+4/5 Test #4: cycle ............................   Passed    0.06 sec
+    Start 5: adapters
+5/5 Test #5: adapters .........................   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Total Test time (real) =   0.30 sec

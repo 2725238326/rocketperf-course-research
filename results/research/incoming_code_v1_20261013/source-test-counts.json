@@ -1,0 +1,22 @@
+{
+  "test_adapters": {
+    "exit": 0,
+    "stdout": "adapters: 29 checks, 0 failures"
+  },
+  "test_combustion": {
+    "exit": 0,
+    "stdout": "HP: T=3673.614567611 K, h_residual=-0.00412250659 J/kg\r\nFrozen A=10: T=1691.557875759 K, p=119871.322427388 Pa, cstar=1839.387209484, Ivac=3192.263179601 m/s\r\nFrozen A=40: T=1173.071438895 K, p=18728.774322667 Pa, cstar=1839.387209484, Ivac=3435.407477836 m/s\r\ncombustion: 3894 checks, 0 failures"
+  },
+  "test_core": {
+    "exit": 0,
+    "stdout": "core: 207 checks, 0 failures"
+  },
+  "test_cycle": {
+    "exit": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\r\ncycle: 394 checks, 0 failures"
+  },
+  "test_thermo": {
+    "exit": 0,
+    "stdout": "thermo: 8978 checks, 0 failures"
+  }
+}

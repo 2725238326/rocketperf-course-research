@@ -47,17 +47,37 @@ CURRENT_DEMO_ARGS = DEMO_ARGS + [
     ("cases", ["cases"], 0),
     ("interactive", ["interactive"], 0),
 ]
+VEHICLE_CASES = ("zq3_y1_stage1", "zq3_y1_stage2", "cz10b_first_stage1",
+                 "cz10b_first_stage2", "cz10b_first_stage2_orsc")
+VEHICLE_DEMO_ARGS = [("vehicle-" + name, ["cycle", "adiabatic", "cases/vehicles/" + name + ".ini"], 0)
+                     for name in VEHICLE_CASES]
+FINAL_DEMO_ARGS = CURRENT_DEMO_ARGS + VEHICLE_DEMO_ARGS + [("launcher", ["rocketperf-run.bat"], 0)]
 INTERACTIVE_INPUT = "\n".join(["1", "1", "", "", "", "", "", "", "40", "101.325", "", "0"]) + "\n"
+LAUNCHER_INPUT = "\n".join(value for index in range(1, 6) for value in ("8", str(index))) + "\n0\n"
 ADVERTISED_CASES = {"cases/" + path for path in (
     "benchmarks/air_mach2_vacuum.ini", "benchmarks/air_mach2_ambient.ini",
     "benchmarks/prescribed_cycle.ini", "research/propellant_comparison.ini",
     "research/s1_area_ratio_ambient.ini", "research/s3_sealevel_regime.ini")}
+FINAL_ADVERTISED_CASES = ADVERTISED_CASES | {"cases/vehicles/" + name + ".ini" for name in VEHICLE_CASES}
 
 
 def demo_specs(version):
-    if version not in {1, 2}:
+    if version not in {1, 2, 3}:
         raise ValueError("Unsupported delivery version")
-    return DEMO_ARGS if version == 1 else CURRENT_DEMO_ARGS
+    return {1: DEMO_ARGS, 2: CURRENT_DEMO_ARGS, 3: FINAL_DEMO_ARGS}[version]
+
+
+def launcher_bytes():
+    """Keep paths relative to the package and let the C CLI own its menu/UTF-8."""
+    return ("@echo off\r\nsetlocal\r\npushd \"%~dp0\"\r\n"
+            "if errorlevel 1 exit /b 3\r\n"
+            "if not exist \"rocketperf.exe\" (\r\n"
+            "  echo [ERROR] rocketperf.exe is missing. Extract the complete ZIP first.\r\n"
+            "  popd\r\n  pause\r\n  exit /b 3\r\n)\r\n"
+            "\"rocketperf.exe\" interactive\r\nset \"CODE=%errorlevel%\"\r\npopd\r\n"
+            "if not \"%CODE%\"==\"0\" (\r\n"
+            "  echo [ERROR] rocketperf exited with code %CODE%.\r\n  pause\r\n)\r\n"
+            "exit /b %CODE%\r\n").encode("ascii")
 
 
 def sha(data):
@@ -174,6 +194,30 @@ def common_files(root, head):
     for name in ("s1_area_ratio_ambient", "s3_sealevel_regime"):
         relative = "cases/research/" + name + ".ini"
         files[relative] = read_commit(root, head, relative)
+    for name in VEHICLE_CASES:
+        relative = "cases/vehicles/" + name + ".ini"
+        files[relative] = read_commit(root, head, relative)
+    files["rocketperf-run.bat"] = launcher_bytes()
+    files["docs/vehicle-cycle-cases.md"] = (
+        "# 两型一二级循环研究算例\n\n固定源码提交：" + head + "\n\n"
+        "完整解压后双击 `rocketperf-run.bat`，选择8，再选择1–5。命令行使用 "
+        "`rocketperf.exe cycle adiabatic cases/vehicles/NAME.ini --text`；去掉 `--text`输出JSON。\n\n"
+        "| 菜单 | NAME | 拓扑/入口与证据角色 |\n|---|---|---|\n"
+        "| 1 | zq3_y1_stage1 | 朱雀三号遥一一级背景；甲烷液态表，开式家族研究情景 |\n"
+        "| 2 | zq3_y1_stage2 | 朱雀三号遥一二级背景；甲烷液态表，开式；外排不模拟延伸段混合 |\n"
+        "| 3 | cz10b_first_stage1 | 长十乙一级背景；RP-1指定替代物，全氧化剂富氧补燃；仅家族证据 |\n"
+        "| 4 | cz10b_first_stage2 | 长十乙二级背景；甲烷开式待判情景 |\n"
+        "| 5 | cz10b_first_stage2_orsc | 同一二级背景；甲烷补燃待判情景 |\n\n"
+        "模型 `adiabatic_single_shaft_cycle_v1`以Q=0、入口/回流焓和元素库存求HP温度。"
+        "开式给定涡轮出口压力、求支路流量；补燃全部氧化剂进预燃室，按轴功求涡轮出口压力。"
+        "低于回流压力要求或超出求解域明确拒绝。\n\n"
+        "所有输入工作点和100 kg/s流量均为研究假设，推力随本例流量定尺寸；不是具名发动机性能卡。"
+        "RP-1不是国产煤油批次；长十乙一级具体后缀及二级循环仍待核。"
+        "九种理想气相HP限1000–6000 K，恒密度泵、冻结涡轮/喷管，不含冷却、泵图谱、凝聚相、起动、寿命或实验标定。"
+        "质量/轴功/能量残差只能支持模型内部检查。\n\n"
+        "完整原文、参考卡和接收审阅维护于原工作仓库，本轻量包没有附带全部资料。"
+        "同学旧 `staged_thermal_cycle_v1`给定温度、倒算热量和甲烷代理的YF例不是本接口输入。\n"
+    ).encode("utf-8")
     files["DATA-SOURCES.md"] = (
         "# 数据与许可\n\n固定提交：" + head + "\n\n"
         "NASA9与指定CH4(L)/O2(L)/RP-1常量提取自NASA CEA v3.3.4；上游Apache-2.0 LICENSE/NOTICE随包。\n\n"
@@ -193,12 +237,17 @@ def package_readme(kind, head):
                "./rocketperf.exe study propellants --case cases/research/propellant_comparison.ini\n"
                "./rocketperf.exe nozzle regime cases/research/s3_sealevel_regime.ini --text\n"
                "./rocketperf.exe cases\n./rocketperf.exe interactive\n"
+               "./rocketperf.exe cycle adiabatic cases/vehicles/cz10b_first_stage1.ini --text\n"
                "./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 2.6 298.15 90.170 10 0 0.01\n"
                "./rocketperf.exe run tests/fixtures/overexpanded.ini\n$LASTEXITCODE\n")
     return ("# Rocketperf " + ("纯C源码包" if kind == "c-source" else "Windows x64运行包") +
             "\n\n固定Git提交：" + head + "\n\n"
             "项目详细解读：[docs/project-guide.md](docs/project-guide.md)。数据许可见DATA-SOURCES.md和third_party。\n\n"
             "源码构建需要Windows GCC/CMake/Ninja；exe运行只需Windows系统库。没有Python/Fortran生产依赖。\n\n"
+            "Windows运行包完整解压后，双击 `rocketperf-run.bat` 进入C内置菜单；选择8，再选1–5运行两型一二级研究情景。"
+            "全部工作点是假设，RP-1为指定替代物，长十乙二级循环仍待判。启动器先定位包目录，不要求中文代码页。\n\n"
+            "模型及算例说明见 `docs/vehicle-cycle-cases.md`；完整证据保留于原工作仓库。"
+            "源码包构建后将 `build/cmake/rocketperf.exe`复制到包根目录也可使用启动器。\n\n"
             "```powershell\n" + command + "```\n\n"
             "拒绝算例退出4、stdout为空；成功输出JSON。阶段方法结果不可贴真实发动机性能标签。\n\n"
             "完整研究资料与维护记录见私有仓库。PACKAGE.json核对逐文件SHA256，Release外部SHA256SUMS.txt核对ZIP来源。\n").encode("utf-8")
@@ -260,12 +309,15 @@ def check_demo(name, stdout, stderr, code, version=1):
         raise ValueError("Delivery demonstration protocol differs: " + name)
     if code != 0:
         return
-    if name in {"regime-text", "cases", "interactive"}:
+    if name in {"regime-text", "cases", "interactive", "launcher"}:
         required = {"regime-text": ("域评估", "分离"),
-                    "cases": tuple(ADVERTISED_CASES),
-                    "interactive": ("域评估", "分离")}[name]
+                    "cases": tuple(FINAL_ADVERTISED_CASES if version == 3 else ADVERTISED_CASES),
+                    "interactive": ("域评估", "分离"),
+                    "launcher": ("绝热研究算例", "整机研究比冲", "循环身份待核", *VEHICLE_CASES)}[name]
         if any(marker not in stdout for marker in required) or "失败 (" in stdout:
             raise ValueError("Delivery text/interactive demonstration differs: " + name)
+        if name == "launcher" and stdout.count("整机研究比冲") != 5:
+            raise ValueError("Launcher did not execute all five vehicle cases")
         return
     report = strict_json(stdout)
     if name in {"ideal", "ambient"}:
@@ -279,6 +331,9 @@ def check_demo(name, stdout, stderr, code, version=1):
         check_regime(report)
     elif name == "cycle":
         validate_cycle(report, (ROOT / "cases/benchmarks/prescribed_cycle.ini").read_text(encoding="utf-8"))
+    elif name.startswith("vehicle-"):
+        from engine_cycles import validate
+        validate(report, (ROOT / ("cases/vehicles/" + name.removeprefix("vehicle-") + ".ini")).read_text(encoding="utf-8"))
     elif name == "pair":
         from propellant_comparison import LIMITS
         from adiabatic_study import typed_equal
@@ -302,15 +357,17 @@ def check_demo(name, stdout, stderr, code, version=1):
         compare_report(report, dict(summary=summary), "frozen-rp1", 10, expected_inputs=rp1_inputs(2.6, 10))
 
 
-def demos(binary, folder, logs, prefix, version=2):
+def demos(binary, folder, logs, prefix, version=3):
     clean = subprocess_env()
     clean["PATH"] = str(Path(os.environ["SystemRoot"]) / "System32")
     results = []
     for name, arguments, code in demo_specs(version):
         stdout = logs / (prefix + "-" + name + "-stdout.json")
         stderr = logs / (prefix + "-" + name + "-stderr.txt")
-        run = subprocess.run([str(binary), *arguments], cwd=folder, env=clean,
-                             input=INTERACTIVE_INPUT if name == "interactive" else None,
+        command = ([str(Path(os.environ["SystemRoot"]) / "System32/cmd.exe"), "/d", "/c",
+                    str(folder / "rocketperf-run.bat")] if name == "launcher" else [str(binary), *arguments])
+        run = subprocess.run(command, cwd=folder.parent if name == "launcher" else folder, env=clean,
+                             input=LAUNCHER_INPUT if name == "launcher" else INTERACTIVE_INPUT if name == "interactive" else None,
                              capture_output=True, encoding="utf-8", errors="strict", timeout=30)
         atomic_text(stdout, run.stdout)
         atomic_text(stderr, run.stderr)
@@ -339,7 +396,7 @@ def create(destination, cmake=None, ninja=None):
     destination.mkdir(parents=True)
     logs = destination / "verification"
     logs.mkdir()
-    record = dict(schema_version=2, kind="windows-course-delivery", status="RUNNING", started_at=now(),
+    record = dict(schema_version=3, kind="windows-course-delivery", status="RUNNING", started_at=now(),
                   source_head=head, repository=REPOSITORY, quality_fingerprint=quality["input_fingerprint"])
     atomic_json(destination / "delivery-manifest.json", record)
     try:
@@ -389,6 +446,7 @@ def create(destination, cmake=None, ninja=None):
                 raise ValueError("Pure C source configure/build/test failed")
         if "100% tests passed, 0 tests failed out of 5" not in run.stdout:
             raise ValueError("Expected five executed pure-C tests")
+        shutil.copy2(croot / "build/rocketperf.exe", croot / "rocketperf.exe")
         record["source_build"] = dict(status="PASS", tests=5, commands=commands,
                                       demonstrations=demos(croot / "build/rocketperf.exe", croot, logs, "source"))
         record["runtime_demonstrations"] = demos(destination / "windows-x64/rocketperf.exe", destination / "windows-x64", logs, "runtime")
@@ -418,7 +476,7 @@ def create(destination, cmake=None, ninja=None):
 
 def verify(directory):
     record = read_json(directory / "delivery-manifest.json")
-    if (not isinstance(record, dict) or type(record.get("schema_version")) is not int or record["schema_version"] not in {1, 2}
+    if (not isinstance(record, dict) or type(record.get("schema_version")) is not int or record["schema_version"] not in {1, 2, 3}
         or record.get("kind") != "windows-course-delivery" or record.get("status") != "PASS"
         or not isinstance(record.get("source_head"), str) or not re.fullmatch("[a-f0-9]{40}", record["source_head"])
         or set(record.get("archives", {})) != KINDS):
@@ -431,8 +489,11 @@ def verify(directory):
         if digest(path) != entry["sha256"] or type(entry["bytes"]) is not int or path.stat().st_size != entry["bytes"]:
             raise ValueError("Delivery archive hash or size differs")
         packed = inspect_zip(path, kind, record["source_head"])
-        if record["schema_version"] == 2 and not ADVERTISED_CASES <= set(packed["files"]):
+        required_cases = FINAL_ADVERTISED_CASES if record["schema_version"] == 3 else ADVERTISED_CASES
+        if record["schema_version"] >= 2 and not required_cases <= set(packed["files"]):
             raise ValueError("Advertised delivery cases missing")
+        if record["schema_version"] == 3 and packed["files"].get("rocketperf-run.bat") != sha(launcher_bytes()):
+            raise ValueError("Delivery launcher is missing or differs")
         if type(entry["files"]) is not int or len(packed["files"]) != entry["files"]:
             raise ValueError("Delivery archive file count differs")
         if kind == "windows-x64" and packed["files"]["rocketperf.exe"] != record["binary_sha256"]:

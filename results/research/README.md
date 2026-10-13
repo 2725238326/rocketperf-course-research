@@ -1,5 +1,9 @@
 # 研究计算档案
 
+## 2026-10-13 组员代码接收
+
+[incoming_code_v1_20261013](incoming_code_v1_20261013/manifest.json)固定用户代码ZIP、包内exe及重建exe身份，保存三个循环复跑、两组扫描、四个预期域拒绝、CTest日志、两个bat逐提示记录和源码/清单核对。原资料保存在日期化原始来源目录；[审阅结论](../../docs/incoming-code-review.md)区分给定温度补燃、甲烷代理、流量标定、旧验证报告与当前Q=0研究模型。它是工程接收证据，不是新的在线事实或实验性能验证。
+
 ## 2026-10-13 绝热开式/补燃循环
 
 `adiabatic_single_shaft_cycle_v1`的五个级段研究入口位于`cases/vehicles/`，模型说明见[循环集成对照](../../docs/cycle-integration.md)和[新循环验证](../../docs/engine-cycle-validation.md)。推荐版本为[engine_cycles_v2_20261013](engine_cycles_v2_20261013/manifest.json)：5个成功情景、4个预期拒绝、12张CEA部件HP卡和814项状态关系复算；运行输入、C二进制、固定CEA版本及结果哈希均在清单中。验证只是受限模型内的软件/状态关系证据，不是实机或实验验证。

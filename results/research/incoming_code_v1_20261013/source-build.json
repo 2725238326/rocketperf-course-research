@@ -1,0 +1,42 @@
+[
+  {
+    "name": "configure",
+    "command": [
+      "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\cmake.exe",
+      "-S",
+      "E:\\Work\\火发原理\\build\\incoming-code-3448b18a-20261013\\代码\\rocketperf-c-source",
+      "-B",
+      "E:\\Work\\火发原理\\build\\incoming-code-3448b18a-20261013\\source-build",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=E:\\Work\\火发原理\\build\\tooling\\bin\\ninja.exe",
+      "-DCMAKE_C_COMPILER=D:/program/mingw/mingw64/bin/gcc.exe",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DBUILD_TESTING=ON",
+      "-DROCKETPERF_ENABLE_PYTHON_TESTS=OFF"
+    ],
+    "exit": 0,
+    "elapsed_s": 53.749
+  },
+  {
+    "name": "build",
+    "command": [
+      "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\cmake.exe",
+      "--build",
+      "E:\\Work\\火发原理\\build\\incoming-code-3448b18a-20261013\\source-build"
+    ],
+    "exit": 0,
+    "elapsed_s": 21.346
+  },
+  {
+    "name": "ctest",
+    "command": [
+      "E:\\Work\\火发原理\\build\\tooling\\cmake\\data\\bin\\ctest.exe",
+      "--test-dir",
+      "E:\\Work\\火发原理\\build\\incoming-code-3448b18a-20261013\\source-build",
+      "--output-on-failure"
+    ],
+    "exit": 0,
+    "elapsed_s": 0.857
+  }
+]

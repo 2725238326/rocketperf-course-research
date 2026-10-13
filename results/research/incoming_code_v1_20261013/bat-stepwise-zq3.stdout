@@ -1,0 +1,69 @@
+============================================================
+  ������������ܼ������   rocketperf 0.1.0
+============================================================
+  �� 1 ����ѡ������
+------------------------------------------------------------
+  1  ��׼����       �����Դ��ϳ�������������֤������
+  2  ��ȸ����       һ�� ��ȵ-12A��ȼ������������ʽ��ѭ��
+  3  ����ʮ����     һ�� YF-100K����ѹ��ȼѭ��
+  0  �˳�
+============================================================
+���������ֲ��س�: ============================================================
+  �� 2 ����ѡ��Ҫ���������
+------------------------------------------------------------
+  ��ǰ����:  ��ȸ���� һ�� ��ȵ-12A ��ʽѭ��
+  �����ļ�:  cases\active-cases\zhuque3-tq12a-open.ini
+============================================================
+  1  �鿴����            ȫ�������嵥
+  2  ����ѭ������        �� / ���� / ֧· / ��� -> ������ȳ�
+  3  ����ɨ��            ��һ�����룬�������α仯
+  4  �鿴��ǰ��������    ��ʾ�����ļ����ȫ������
+------------------------------------------------------------
+  5  ��һ������          ���ص� 1 ��
+  0  �˳�
+============================================================
+���������ֲ��س�: ============================================================
+  ����ѭ������
+  ����: ��ȸ���� һ�� ��ȵ-12A ��ʽѭ��
+============================================================
+
+{"schema_version":1,"program_version":"0.1.0","model":"prescribed_thermal_cycle_v1","dataset_id":"cea-v3.3.4-neutral-cho-n-v1","boundary":"pump_inlets_to_two_nozzle_exits_auxiliary_shaft_and_mechanical_heat","case":{"id":"zhuque3_tq12a_open","kind":"research_scenario","source_ref":"Zhuque-3 Y1 single TQ-12A open gas-generator cycle, declared research inputs"},"staged_combustion":false,"inputs":{"total_mass_flow_kg_per_s":233.24000000000001,"overall_oxidizer_fuel_ratio":2.8999999999999999,"fuel_pump_density_kg_per_m3":419.79379962384246,"fuel_pump_inlet_pressure_pa":300000,"fuel_pump_outlet_pressure_pa":12000000,"fuel_pump_efficiency":0.69999999999999996,"fuel_pump_inlet_h_j_per_kg":-4650000,"oxidizer_pump_density_kg_per_m3":1116.2865359646898,"oxidizer_pump_inlet_pressure_pa":300000,"oxidizer_pump_outlet_pressure_pa":12000000,"oxidizer_pump_efficiency":0.75,"oxidizer_pump_inlet_h_j_per_kg":0,"chamber_pressure_pa":10100000,"chamber_temperature_k":3566.2854709662497,"main_area_ratio":40,"generator_oxidizer_fuel_ratio":1,"generator_temperature_k":1800,"turbine_inlet_pressure_pa":12000000,"turbine_outlet_pressure_pa":1000000,"turbine_efficiency":0.69999999999999996,"shaft_efficiency":0.94999999999999996,"auxiliary_power_w":10000,"maximum_branch_fraction":0.25,"return_fraction":0,"return_pressure_drop_pa":0,"branch_area_ratio":2,"branch_axial_projection":1,"ambient_pressure_pa":0},"flows":{"fuel_mass_flow_kg_per_s":59.805128205128206,"oxidizer_mass_flow_kg_per_s":173.43487179487181,"branch_mass_flow_kg_per_s":2.8623848583951941,"branch_fuel_mass_flow_kg_per_s":1.431192429197597,"branch_oxidizer_mass_flow_kg_per_s":1.431192429197597,"main_mass_flow_kg_per_s":230.37761514160482,"main_fuel_mass_flow_kg_per_s":58.373935775930612,"main_oxidizer_mass_flow_kg_per_s":172.0036793656742,"main_oxidizer_fuel_ratio":2.9465835578727018,"external_mass_flow_kg_per_s":2.8623848583951941,"returned_mass_flow_kg_per_s":0},"pumps":{"fuel":{"specific_work_j_per_kg":39815.46590078892,"shaft_power_w":2381169.0427435916,"outlet_h_j_per_kg":-4610184.534099211,"energy_residual_w":6.0535967350006104e-09},"oxidizer":{"specific_work_j_per_kg":13974.906529279733,"shaft_power_w":2423736.1222509476,"outlet_h_j_per_kg":13974.906529279733,"energy_residual_w":0}},"turbine":{"inlet":{"temperature_k":1800,"pressure_pa":12000000,"h_j_per_kg":607094.29019324319,"s_j_per_kg_k":16082.419116522464,"cp_frozen_j_per_kg_k":3230.1737749279505,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"isentropic_outlet":{"temperature_k":976.8133199744625,"pressure_pa":1000000,"h_j_per_kg":-1922425.4120602414,"s_j_per_kg_k":16082.419116522904,"cp_frozen_j_per_kg_k":2894.9509485138619,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"outlet":{"temperature_k":1233.7369346711343,"pressure_pa":1000000,"h_j_per_kg":-1163569.501380757,"s_j_per_kg_k":16771.583343365277,"cp_frozen_j_per_kg_k":3011.7279108149019,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"specific_work_j_per_kg":1770663.7915740001,"entropy_generation_j_per_kg_k":689.16422684281315,"efficiency_residual_j_per_kg":-3.4389086067676544e-06},"main_nozzle":{"chamber":{"temperature_k":3566.2854709662497,"pressure_pa":10100000,"h_j_per_kg":-1278360.5706200858,"s_j_per_kg_k":12632.984174182415,"cp_frozen_j_per_kg_k":2446.3652245337471,"mole_fractions":{"H2":0.13415195184209361,"O2":0.005963665856497379,"H2O":0.46771694329486652,"CO":0.22473556793324515,"CO2":0.093553052480010793,"CH4":2.4738994464134716e-09,"H":0.024976619953393758,"O":0.0044621247408848982,"OH":0.044440071425108495}},"throat":{"gas":{"temperature_k":3235.3857823807762,"pressure_pa":5689153.2118125614,"h_j_per_kg":-2083183.3976193105,"s_j_per_kg_k":12632.984174182415,"cp_frozen_j_per_kg_k":2417.2731368753475,"mole_fractions":{"H2":0.13415195184209361,"O2":0.005963665856497379,"H2O":0.46771694329486652,"CO":0.22473556793324515,"CO2":0.093553052480010793,"CH4":2.4738994464134716e-09,"H":0.024976619953393758,"O":0.0044621247408848982,"OH":0.044440071425108495}},"velocity_m_per_s":1268.7181144755716,"mass_flux_kg_per_m2_s":5407.0877816118063,"mach":0.99999999999957845,"energy_residual_j_per_kg":2.3283064365386963e-10,"entropy_residual_j_per_kg_k":0},"exit":{"gas":{"temperature_k":1100.4332197565218,"pressure_pa":18368.916592170834,"h_j_per_kg":-6860281.9784166543,"s_j_per_kg_k":12632.984174182415,"cp_frozen_j_per_kg_k":1934.5120701885619,"mole_fractions":{"H2":0.13415195184209361,"O2":0.005963665856497379,"H2O":0.46771694329486652,"CO":0.22473556793324515,"CO2":0.093553052480010793,"CH4":2.4738994464134716e-09,"H":0.024976619953393758,"O":0.0044621247408848982,"OH":0.044440071425108495}},"velocity_m_per_s":3341.2337265736346,"mass_flux_kg_per_m2_s":135.1771945414898,"mach":4.3981824013879569,"energy_residual_j_per_kg":6.9849193096160889e-10,"entropy_residual_j_per_kg_k":0},"effective_velocity_m_per_s":3477.1214157259287,"cstar_m_per_s":1867.9186297562339,"continuity_relative_residual":8.8375973206211711e-12,"sonic_relative_residual":-8.4310336490034388e-13},"branch_nozzle":{"chamber":{"temperature_k":1233.7369346711343,"pressure_pa":1000000,"h_j_per_kg":-1163569.501380757,"s_j_per_kg_k":16771.583343365277,"cp_frozen_j_per_kg_k":3011.7279108149019,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"throat":{"gas":{"temperature_k":1054.3694081274853,"pressure_pa":537504.43021878006,"h_j_per_kg":-1696507.7901020003,"s_j_per_kg_k":16771.583343365277,"cp_frozen_j_per_kg_k":2930.4635908295636,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"velocity_m_per_s":1032.4129878311714,"mass_flux_kg_per_m2_s":700.22929983323934,"mach":1.0000000000182288,"energy_residual_j_per_kg":0,"entropy_residual_j_per_kg_k":0},"exit":{"gas":{"temperature_k":672.38252407229561,"pressure_pa":98315.562750577068,"h_j_per_kg":-2783079.8599887565,"s_j_per_kg_k":16771.583343365277,"cp_frozen_j_per_kg_k":2761.7057708897,"mole_fractions":{"H2":0.63923567021550687,"O2":1.5041978718268095e-14,"H2O":0.015965093266679543,"CO":0.32547809594562604,"CO2":0.0021288410358037166,"CH4":0.01716607857366443,"H":2.6171516996701872e-05,"O":1.361808476590801e-12,"OH":4.9444346037769153e-08}},"velocity_m_per_s":1799.7279564467513,"mass_flux_kg_per_m2_s":350.11464991689076,"mach":2.159808579823447,"energy_residual_j_per_kg":2.3283064365386963e-10,"entropy_residual_j_per_kg_k":0},"effective_velocity_m_per_s":2080.53757916317,"cstar_m_per_s":1428.1036229677215,"continuity_relative_residual":7.7426953737358417e-13,"sonic_relative_residual":3.645750368264089e-11},"performance":{"main_thrust_n":801050.93931274011,"branch_thrust_n":5955.2992639188506,"total_thrust_n":807006.238576659,"main_throat_area_m2":0.042606597940773809,"branch_throat_area_m2":0.0040877821866021251,"main_effective_velocity_m_per_s":3477.1214157259287,"engine_effective_velocity_m_per_s":3459.982158191815,"engine_specific_impulse_s":352.81999033225566},"energy":{"pump_power_w":4804905.1649945397,"turbine_power_w":5068321.2263100417,"mechanical_loss_w":253416.0613155023,"generator_required_heat_w":8315797.9258505097,"chamber_required_heat_w":-27794778.983648047,"inlet_enthalpy_rate_w":-278093846.15384614,"exit_total_enthalpy_rate_w":-297836243.27295905},"diagnostics":{"mass_residual_kg_per_s":-5.773159728050814e-15,"shaft_residual_w":0,"energy_residual_w":-1.4461693353950977e-07,"mass_relative_residual":-2.4752013925788087e-17,"shaft_relative_residual":0,"energy_relative_residual":-2.3628647816033479e-16},"limitations":["Prescribed thermal states and feed density/enthalpy, not an adiabatic or real-engine cycle.","Required heat exchange is inferred bookkeeping, not independently validated combustion heat.","No turbine return, liquid property solver, condensed phase, cooling, transient or pump maps.","Matched/underexpanded inviscid frozen nozzles only; no shocks or separation."]}
+
+---- ��� stderr ----
+
+============================================================
+  �˳��� = 0   (0=�ɹ� 2=�﷨ 3=�ļ���ʽ 4=ģ�;ܾ�)
+  ����Ѵ浽  results\zhuque3-tq12a-open.json
+============================================================
+
+Press any key to continue . . . 
+============================================================
+  �� 2 ����ѡ��Ҫ���������
+------------------------------------------------------------
+  ��ǰ����:  ��ȸ���� һ�� ��ȵ-12A ��ʽѭ��
+  �����ļ�:  cases\active-cases\zhuque3-tq12a-open.ini
+============================================================
+  1  �鿴����            ȫ�������嵥
+  2  ����ѭ������        �� / ���� / ֧· / ��� -> ������ȳ�
+  3  ����ɨ��            ��һ�����룬�������α仯
+  4  �鿴��ǰ��������    ��ʾ�����ļ����ȫ������
+------------------------------------------------------------
+  5  ��һ������          ���ص� 1 ��
+  0  �˳�
+============================================================
+���������ֲ��س�: ============================================================
+  �� 2 ����ѡ��Ҫ���������
+------------------------------------------------------------
+  ��ǰ����:  ��ȸ���� һ�� ��ȵ-12A ��ʽѭ��
+  �����ļ�:  cases\active-cases\zhuque3-tq12a-open.ini
+============================================================
+  1  �鿴����            ȫ�������嵥
+  2  ����ѭ������        �� / ���� / ֧· / ��� -> ������ȳ�
+  3  ����ɨ��            ��һ�����룬�������α仯
+  4  �鿴��ǰ��������    ��ʾ�����ļ����ȫ������
+------------------------------------------------------------
+  5  ��һ������          ���ص� 1 ��
+  0  �˳�
+============================================================
+���������ֲ��س�: 
+���˳������ν��������  results\  �ļ����ڡ�

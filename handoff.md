@@ -66,3 +66,9 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 近期批次：[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
 
 本轮文档入口和新旧循环口径整理见[2026-10-13整理记录](taskshot/2026-10-13_051-document-map.md)；完整阅读导航见[文档索引](docs/README.md)。
+
+## 收尾总览与组员代码接收
+
+2026-10-13的 `代码.zip`已按字节保存于[接收原件](调研/原始来源/20261013_classmate_code/)，交接与两份 `model-data`分别有哈希身份。实际启动、源码重建、模型差别和参数线索见[代码包审阅](docs/incoming-code-review.md)，研究/展示/最终交付缺口集中在[收尾总览](docs/final-overview.md)。同学的给定温度补燃模型与甲烷代理YF算例没有覆盖当前绝热求解器，也没有更新型号事实截止日期。
+
+无参数闪退来自同学旧命令行exe的退出码2；其bat正常交互可用。当前交付工具v3收齐菜单8的五个研究情景，并提供定位包目录后调用C菜单的 `rocketperf-run.bat`；源码和运行包分别复核17项演示。使用前核验对应本地包manifest为PASS，不把原包中绑定旧exe的测试报告当新exe证据。最终报告、PPT、真实贡献及演练仍按任务契约完成。

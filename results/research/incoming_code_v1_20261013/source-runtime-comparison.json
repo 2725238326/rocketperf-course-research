@@ -1,0 +1,20 @@
+[
+  {
+    "name": "benchmark",
+    "exit": 0,
+    "numeric_fields_compared": 226,
+    "maximum_scaled_difference": 0.0
+  },
+  {
+    "name": "zq3",
+    "exit": 0,
+    "numeric_fields_compared": 226,
+    "maximum_scaled_difference": 0.0
+  },
+  {
+    "name": "cz10b",
+    "exit": 0,
+    "numeric_fields_compared": 170,
+    "maximum_scaled_difference": 0.0
+  }
+]

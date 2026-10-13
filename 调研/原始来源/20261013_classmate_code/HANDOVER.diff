@@ -1,0 +1,467 @@
+rocketperf-c-source  改动对照（unified diff）
+基线提交: 27e29facf4ba12cc733a178e02c41e6ba968dc8f
+生成时间: 2026-10-12 13:34
+
+说明：
+  * 本文件列出全部 7 个被修改文件的逐行差异。
+  * 新增文件 src/cycle/staged.c（170 行）不在此列表内 —— 它是整份新文件，请直接阅读。
+  * 未列出的文件与基线逐字节一致（哈希见两个包的 PACKAGE.json）。
+
+对比方法（可自行复现）：
+  1. 解压同目录的 rocketperf-c-source.zip，得到基线源码包
+  2. diff -u <基线文件> <当前文件>
+
+==============================================================================
+### include/rocketperf/cycle.h   （基线 129 行 -> 当前 145 行）
+==============================================================================
+--- a/include/rocketperf/cycle.h
++++ b/include/rocketperf/cycle.h
+@@ -4,6 +4,7 @@
+ #include "rocketperf/frozen_nozzle.h"
+ 
+ #define RP_PRESCRIBED_CYCLE_MODEL "prescribed_thermal_cycle_v1"
++#define RP_STAGED_CYCLE_MODEL "staged_thermal_cycle_v1"
+ 
+ typedef struct {
+     double mass_flow_kg_per_s;
+@@ -39,7 +40,10 @@
+ } RpFrozenTurbineResult;
+ 
+ /* Prescribed thermal states, constant-density feed properties and a single shaft.
+- * Only externally exhausted generator gas is supported (return fields == 0).
++ * Two closures share this input:
++ *   open   (prescribed) - generator gas is exhausted overboard, return == 0;
++ *   staged              - the preburner gas returns to the chamber, return == 1,
++ *                         and the whole flow leaves through the main nozzle.
+  * The main and generator TP states use their separate CH4/O2 inventories.
+  * Pump inlet enthalpies MUST use the same formation-enthalpy reference as NASA9;
+  * density and enthalpy are prescribed, NOT evaluated liquid properties.
+@@ -61,8 +65,8 @@
+     double shaft_efficiency;
+     double auxiliary_power_w;
+     double maximum_branch_fraction;
+-    double return_fraction;             /* Reserved: nonzero is unsupported. */
+-    double return_pressure_drop_pa;     /* Reserved: must be zero in v1. */
++    double return_fraction;             /* 0 = open generator, 1 = staged return. */
++    double return_pressure_drop_pa;     /* Staged: return-duct drop. Open: must be zero. */
+     double branch_area_ratio;
+     double branch_axial_projection;
+     double ambient_pressure_pa;
+@@ -125,5 +129,17 @@
+ RpStatus rp_cycle_solve_prescribed(const RpCycleInput *input,
+                                    const RpRootOptions *options,
+                                    RpCycleResult *output, RpError *error);
++/* Staged-combustion (topping) closure: the preburner exhaust expands through the
++ * turbine and is injected into the main chamber instead of being exhausted
++ * overboard, so external flow and branch thrust are zero and the main nozzle
++ * carries the full propellant flow. Requires return_fraction == 1 and a turbine
++ * discharge pressure at least return_pressure_drop_pa above chamber pressure.
++ * Feed split, pumps, preburner, turbine and shaft closure follow the
++ * prescribed-state method and the chamber state stays PRESCRIBED, so this is
++ * still bookkeeping, not an adiabatic closure. branch_area_ratio and
++ * branch_axial_projection are inactive. Every failure leaves output unchanged. */
++RpStatus rp_cycle_solve_staged(const RpCycleInput *input,
++                               const RpRootOptions *options,
++                               RpCycleResult *output, RpError *error);
+ 
+ #endif
+
+==============================================================================
+### include/rocketperf/cycle_study.h   （基线 56 行 -> 当前 61 行）
+==============================================================================
+--- a/include/rocketperf/cycle_study.h
++++ b/include/rocketperf/cycle_study.h
+@@ -52,5 +52,10 @@
+                                   const double *values, size_t count,
+                                   RpCycleResult *baseline, RpCycleStudyPoint *points,
+                                   size_t capacity, size_t *point_count, RpError *error);
++/* Identical grid and metrics, baselined and solved with the staged closure. */
++RpStatus rp_cycle_scan_staged(const RpCycleInput *base, RpCycleStudyField field,
++                              const double *values, size_t count,
++                              RpCycleResult *baseline, RpCycleStudyPoint *points,
++                              size_t capacity, size_t *point_count, RpError *error);
+ 
+ #endif
+
+==============================================================================
+### src/adapters/cycle_case.h   （基线 26 行 -> 当前 27 行）
+==============================================================================
+--- a/src/adapters/cycle_case.h
++++ b/src/adapters/cycle_case.h
+@@ -10,6 +10,7 @@
+     char id[64];
+     char kind[32];
+     char source_ref[256];
++    int staged_combustion;   /* Case-file switch: 1 = staged return, 0 = open generator. */
+     RpCycleInput input;
+ } RpCycleCase;
+ 
+
+==============================================================================
+### project/modules.json   （基线 12 行 -> 当前 12 行）
+==============================================================================
+--- a/project/modules.json
++++ b/project/modules.json
+@@ -7,6 +7,6 @@
+     {"id":"cli","name":"命令行用例编排","state":"implemented","owner_role":"应用入口维护","paths":["src/cli/**"],"sources":["src/cli/main.c","src/cli/arguments.c","src/cli/combustion_commands.c"],"allowed_dependencies":["core","nozzle","thermo","cycle","adapters"],"contract":"命令分派、参数解析与求解调用；stdout结果/stderr诊断；非零失败","checks":["tests/test_cli.py"]},
+     {"id":"tooling","name":"任务 / 质量 / 运行追溯","state":"implemented","owner_role":"工程治理维护","paths":["tools/**","scripts/**","project/**",".githooks/**"],"sources":[],"allowed_dependencies":[],"contract":"任务状态单一来源；参数与报告校核；原子失败记录、Git检查和可运行交接","checks":["tests/test_governance.py","tests/test_runner.py","tests/test_data.py","tests/test_cycle_reference.py","tests/test_handoff.py"]},
+     {"id":"thermo","name":"热化学与物性","state":"implemented","owner_role":"热力建模研究","paths":["src/thermo/**","include/rocketperf/thermo.h","include/rocketperf/combustion.h","include/rocketperf/liquid_feed.h","include/rocketperf/liquid_combustion.h","data/thermo/**"],"sources":["src/thermo/nasa9.c","src/thermo/database.c","src/thermo/mixture.c","src/thermo/equilibrium.c","src/thermo/reactants.c","src/thermo/liquid_feed.c","src/thermo/liquid_combustion.c"],"allowed_dependencies":["core"],"contract":"固定NASA9、九气相TP/HP与CH4(L)/RP-1固定反应物；RP-1限10MPa/O-F2.2..4.0；连续CH4/O2单相表闭合入口HP；无国产煤油批次、泵/循环或通用EOS；失败不改输出","checks":["tests/test_thermo.c","tests/test_combustion.c","tests/test_thermo_data.py","tests/reference/nasa9_cantera.json","tests/reference/liquid_feed.h","tests/test_data.py"]},
+-    {"id":"cycle","name":"部件与整机边界","state":"prototype","owner_role":"循环与系统研究","paths":["src/cycle/**","include/rocketperf/cycle.h","include/rocketperf/cycle_study.h"],"sources":["src/cycle/components.c","src/cycle/prescribed.c","src/cycle/study.c"],"allowed_dependencies":["core","nozzle","thermo"],"contract":"恒密度泵、冻结涡轮、外排计账及单输入扫描/有限步响应；热状态给定；不是完整发生器/补燃循环","checks":["tests/test_cycle.c"]}
++    {"id":"cycle","name":"部件与整机边界","state":"prototype","owner_role":"循环与系统研究","paths":["src/cycle/**","include/rocketperf/cycle.h","include/rocketperf/cycle_study.h"],"sources":["src/cycle/components.c","src/cycle/prescribed.c","src/cycle/staged.c","src/cycle/study.c"],"allowed_dependencies":["core","nozzle","thermo"],"contract":"恒密度泵、冻结涡轮、开式外排与补燃回流两种计账及单输入扫描/有限步响应；热状态给定；不是绝热完整循环，补燃回流压力靠声明余压","checks":["tests/test_cycle.c"]}
+   ]
+ }
+
+==============================================================================
+### src/cycle/study.c   （基线 93 行 -> 当前 110 行）
+==============================================================================
+--- a/src/cycle/study.c
++++ b/src/cycle/study.c
+@@ -15,6 +15,9 @@
+ #undef FIELD
+ #undef PUMP
+ _Static_assert(sizeof(fields) / sizeof(fields[0]) == RP_CYCLE_FIELD_COUNT, "Study field registry mismatch");
++
++typedef RpStatus (*RpCycleSolver)(const RpCycleInput *, const RpRootOptions *,
++                                  RpCycleResult *, RpError *);
+ 
+ const char *rp_cycle_study_field_name(RpCycleStudyField field)
+ {
+@@ -61,10 +64,10 @@
+     }
+     return RP_OK;
+ }
+-RpStatus rp_cycle_scan_prescribed(const RpCycleInput *base, RpCycleStudyField field,
+-                                  const double *values, size_t count,
+-                                  RpCycleResult *baseline, RpCycleStudyPoint *points,
+-                                  size_t capacity, size_t *point_count, RpError *error)
++static RpStatus scan(const RpCycleInput *base, RpCycleStudyField field,
++                     const double *values, size_t count, RpCycleSolver solver,
++                     RpCycleResult *baseline, RpCycleStudyPoint *points,
++                     size_t capacity, size_t *point_count, RpError *error)
+ {
+     RpCycleResult reference;
+     RpStatus status;
+@@ -76,14 +79,14 @@
+     for (size_t i = 0U; i < count; ++i) {
+         if (!rp_isfinite(values[i])) { return rp_error_set(error, RP_INVALID_ARGUMENT, "Study values must be finite."); }
+     }
+-    status = rp_cycle_solve_prescribed(base, NULL, &reference, error);
++    status = solver(base, NULL, &reference, error);
+     if (status != RP_OK) { return status; }
+     for (size_t i = 0U; i < count; ++i) {
+         RpError local_error = {0};
+         RpCycleStudyPoint point = {0};
+         point.value = values[i]; point.input = *base;
+         memcpy((unsigned char *)&point.input + fields[field].offset, &point.value, sizeof(point.value));
+-        point.status = rp_cycle_solve_prescribed(&point.input, NULL, &point.result, &local_error);
++        point.status = solver(&point.input, NULL, &point.result, &local_error);
+         if (point.status == RP_OK) { point.status = compare(base, &reference, field, &point, &local_error); }
+         if (point.status != RP_OK) { memcpy(point.message, local_error.message, sizeof(point.message)); }
+         points[i] = point;
+@@ -91,3 +94,17 @@
+     *baseline = reference; *point_count = count;
+     rp_error_clear(error); return RP_OK;
+ }
++RpStatus rp_cycle_scan_prescribed(const RpCycleInput *base, RpCycleStudyField field,
++                                  const double *values, size_t count,
++                                  RpCycleResult *baseline, RpCycleStudyPoint *points,
++                                  size_t capacity, size_t *point_count, RpError *error)
++{
++    return scan(base, field, values, count, rp_cycle_solve_prescribed, baseline, points, capacity, point_count, error);
++}
++RpStatus rp_cycle_scan_staged(const RpCycleInput *base, RpCycleStudyField field,
++                              const double *values, size_t count,
++                              RpCycleResult *baseline, RpCycleStudyPoint *points,
++                              size_t capacity, size_t *point_count, RpError *error)
++{
++    return scan(base, field, values, count, rp_cycle_solve_staged, baseline, points, capacity, point_count, error);
++}
+
+==============================================================================
+### src/adapters/cycle_case.c   （基线 256 行 -> 当前 306 行）
+==============================================================================
+--- a/src/adapters/cycle_case.c
++++ b/src/adapters/cycle_case.c
+@@ -27,6 +27,35 @@
+ static const char *const metadata[] = {"schema_version", "case_id", "case_kind", "source_ref", "model"};
+ #define FIELD_COUNT (sizeof(fields) / sizeof(fields[0]))
+ #define META_COUNT (sizeof(metadata) / sizeof(metadata[0]))
++/* Optional trailing field: absent means the open gas-generator closure, which
++ * keeps every case file written before staged combustion existed loadable. */
++static const char *const flag_name = "staged_combustion";
++#define REQUIRED_COUNT (META_COUNT + FIELD_COUNT)
++#define FLAG_INDEX REQUIRED_COUNT
++#define SEEN_COUNT (REQUIRED_COUNT + 1U)
++
++static RpStatus assign_flag(RpCycleCase *study, const char *value, unsigned int line, RpError *error)
++{
++    if (strcmp(value, "true") == 0) { study->staged_combustion = 1; return RP_OK; }
++    if (strcmp(value, "false") == 0) { study->staged_combustion = 0; return RP_OK; }
++    return rp_text_parse_failure(error, line, "staged_combustion must be true or false.");
++}
++/* The flag drives the closure, so return_fraction stays a derived field: the
++ * file must leave it at zero and the loader sets 1.0 for the staged closure. */
++static RpStatus select_closure(RpCycleCase *study, RpError *error)
++{
++    if (study->input.return_fraction != 0.0) {
++        return rp_error_set(error, RP_INVALID_ARGUMENT,
++            "return_fraction is driven by staged_combustion; keep the case-file value at 0.");
++    }
++    if (study->staged_combustion) { study->input.return_fraction = 1.0; }
++    return RP_OK;
++}
++static RpStatus solve_case(RpCycleCase *study, RpCycleResult *result, RpError *error)
++{
++    if (study->staged_combustion) { return rp_cycle_solve_staged(&study->input, NULL, result, error); }
++    return rp_cycle_solve_prescribed(&study->input, NULL, result, error);
++}
+ 
+ static RpStatus assign_metadata(RpCycleCase *study, size_t field, const char *value,
+                                  unsigned int line, RpError *error)
+@@ -56,7 +85,7 @@
+ RpStatus rp_cycle_case_load(const char *utf8_path, RpCycleCase *output, RpError *error)
+ {
+     RpCycleCase study = {0};
+-    unsigned char seen[FIELD_COUNT + META_COUNT] = {0};
++    unsigned char seen[SEEN_COUNT] = {0};
+     char buffer[512];
+     unsigned int line = 0U;
+     int line_status;
+@@ -83,9 +112,11 @@
+             for (numeric = 0U; numeric < FIELD_COUNT; ++numeric) { if (strcmp(key, fields[numeric].name) == 0) { break; } }
+             field += numeric;
+         }
+-        if (field == META_COUNT + FIELD_COUNT) { status = rp_text_parse_failure(error, line, "Unknown field."); break; }
++        if (field == REQUIRED_COUNT && strcmp(key, flag_name) == 0) { field = FLAG_INDEX; }
++        if (field >= SEEN_COUNT) { status = rp_text_parse_failure(error, line, "Unknown field."); break; }
+         if (seen[field] != 0U) { status = rp_text_parse_failure(error, line, "Duplicate field."); break; }
+         if (field < META_COUNT) { status = assign_metadata(&study, field, value, line, error); }
++        else if (field == FLAG_INDEX) { status = assign_flag(&study, value, line, error); }
+         else {
+             double number;
+             if (!rp_text_decimal(value, &number)) { status = rp_text_parse_failure(error, line, "Expected finite decimal SI value."); }
+@@ -97,7 +128,7 @@
+     if (status == RP_OK && ferror(file)) { status = rp_error_set(error, RP_IO_ERROR, "Cannot read cycle case file."); }
+     if (fclose(file) != 0 && status == RP_OK) { status = rp_error_set(error, RP_IO_ERROR, "Cannot close cycle case file."); }
+     if (status != RP_OK) { return status; }
+-    for (size_t field = 0U; field < META_COUNT + FIELD_COUNT; ++field) {
++    for (size_t field = 0U; field < REQUIRED_COUNT; ++field) {
+         if (!seen[field]) { return rp_text_parse_failure(error, line, "Missing required field(s)."); }
+     }
+     *output = study; rp_error_clear(error); return RP_OK;
+@@ -147,12 +178,16 @@
+ }
+ static int write_report(FILE *stream, const RpCycleCase *study, const RpCycleResult *result)
+ {
++    const char *model = study->staged_combustion ? RP_STAGED_CYCLE_MODEL : RP_PRESCRIBED_CYCLE_MODEL;
++    const char *boundary = study->staged_combustion
++        ? "pump_inlets_through_preburner_and_turbine_return_into_main_chamber_to_main_exit_auxiliary_shaft_and_mechanical_heat"
++        : "pump_inlets_to_two_nozzle_exits_auxiliary_shaft_and_mechanical_heat";
+     if (fprintf(stream, "{\"schema_version\":1,\"program_version\":\"%s\",\"model\":\"%s\",\"dataset_id\":\"%s\","
+-                        "\"boundary\":\"pump_inlets_to_two_nozzle_exits_auxiliary_shaft_and_mechanical_heat\",\"case\":{\"id\":",
+-        RP_VERSION, RP_PRESCRIBED_CYCLE_MODEL, rp_thermo_dataset_id()) < 0 || !write_string(stream, study->id) ||
++                        "\"boundary\":\"%s\",\"case\":{\"id\":",
++        RP_VERSION, model, rp_thermo_dataset_id(), boundary) < 0 || !write_string(stream, study->id) ||
+         fputs(",\"kind\":", stream) < 0 || !write_string(stream, study->kind) ||
+         fputs(",\"source_ref\":", stream) < 0 || !write_string(stream, study->source_ref) ||
+-        fputs("},\"inputs\":{", stream) < 0) { return 0; }
++        fprintf(stream, "},\"staged_combustion\":%s,\"inputs\":{", study->staged_combustion ? "true" : "false") < 0) { return 0; }
+     for (size_t i = 0U; i < FIELD_COUNT; ++i) {
+         double value;
+         memcpy(&value, (const unsigned char *)&study->input + fields[i].offset, sizeof(value));
+@@ -175,25 +210,33 @@
+             result->turbine.specific_work_j_per_kg, result->turbine.entropy_generation_j_per_kg_k, result->turbine.efficiency_residual_j_per_kg) < 0 ||
+         !write_nozzle(stream, &result->main_nozzle) || fputs(",\"branch_nozzle\":", stream) < 0) { return 0; }
+     if (result->branch_nozzle_active ? !write_nozzle(stream, &result->branch_nozzle) : fputs("null", stream) < 0) { return 0; }
+-    return fprintf(stream, ",\"performance\":{\"main_thrust_n\":%.17g,\"branch_thrust_n\":%.17g,\"total_thrust_n\":%.17g,"
++    if (fprintf(stream, ",\"performance\":{\"main_thrust_n\":%.17g,\"branch_thrust_n\":%.17g,\"total_thrust_n\":%.17g,"
+         "\"main_throat_area_m2\":%.17g,\"branch_throat_area_m2\":%.17g,\"main_effective_velocity_m_per_s\":%.17g,"
+         "\"engine_effective_velocity_m_per_s\":%.17g,\"engine_specific_impulse_s\":%.17g},"
+         "\"energy\":{\"pump_power_w\":%.17g,\"turbine_power_w\":%.17g,\"mechanical_loss_w\":%.17g,"
+         "\"generator_required_heat_w\":%.17g,\"chamber_required_heat_w\":%.17g,"
+         "\"inlet_enthalpy_rate_w\":%.17g,\"exit_total_enthalpy_rate_w\":%.17g},"
+         "\"diagnostics\":{\"mass_residual_kg_per_s\":%.17g,\"shaft_residual_w\":%.17g,\"energy_residual_w\":%.17g,"
+-        "\"mass_relative_residual\":%.17g,\"shaft_relative_residual\":%.17g,\"energy_relative_residual\":%.17g},"
+-        "\"limitations\":[\"Prescribed thermal states and feed density/enthalpy, not an adiabatic or real-engine cycle.\","
+-        "\"Required heat exchange is inferred bookkeeping, not independently validated combustion heat.\","
+-        "\"No turbine return, liquid property solver, condensed phase, cooling, transient or pump maps.\","
+-        "\"Matched/underexpanded inviscid frozen nozzles only; no shocks or separation.\"]}\n",
++        "\"mass_relative_residual\":%.17g,\"shaft_relative_residual\":%.17g,\"energy_relative_residual\":%.17g},",
+         result->main_thrust_n, result->branch_thrust_n, result->total_thrust_n,
+         result->main_throat_area_m2, result->branch_throat_area_m2, result->main_effective_velocity_m_per_s,
+         result->engine_effective_velocity_m_per_s, result->engine_specific_impulse_s,
+         result->pump_power_w, result->turbine_power_w, result->mechanical_loss_w,
+         result->generator_heat_w, result->chamber_heat_w, result->inlet_enthalpy_rate_w, result->exit_total_enthalpy_rate_w,
+         result->mass_residual_kg_per_s, result->shaft_residual_w, result->energy_residual_w,
+-        result->mass_relative_residual, result->shaft_relative_residual, result->energy_relative_residual) >= 0;
++        result->mass_relative_residual, result->shaft_relative_residual, result->energy_relative_residual) < 0) { return 0; }
++    if (study->staged_combustion) {
++        return fputs("\"limitations\":[\"Prescribed thermal states and feed density/enthalpy, not an adiabatic or real-engine cycle.\","
++            "\"Preburner gas returns to the main chamber; required heat is inferred bookkeeping, not validated combustion heat.\","
++            "\"Preburner chemistry uses the fixed CH4/O2 gas equilibrium; no kerosene preburner dataset, condensed phase, cooling or transient.\","
++            "\"Staged return is a declared duct drop, not a modelled injector or manifold.\","
++            "\"Matched/underexpanded inviscid frozen nozzle only; no shocks or separation.\","
++            "\"branch_area_ratio and branch_axial_projection are inactive in the staged closure.\"]}\n", stream) >= 0;
++    }
++    return fputs("\"limitations\":[\"Prescribed thermal states and feed density/enthalpy, not an adiabatic or real-engine cycle.\","
++        "\"Required heat exchange is inferred bookkeeping, not independently validated combustion heat.\","
++        "\"No turbine return, liquid property solver, condensed phase, cooling, transient or pump maps.\","
++        "\"Matched/underexpanded inviscid frozen nozzles only; no shocks or separation.\"]}\n", stream) >= 0;
+ }
+ RpStatus rp_cycle_case_run(const char *utf8_path, FILE *stream, RpError *error)
+ {
+@@ -202,7 +245,8 @@
+     RpStatus status;
+     if (stream == NULL) { return rp_error_set(error, RP_INVALID_ARGUMENT, "Cycle output stream is required."); }
+     status = rp_cycle_case_load(utf8_path, &study, error);
+-    if (status == RP_OK) { status = rp_cycle_solve_prescribed(&study.input, NULL, &result, error); }
++    if (status == RP_OK) { status = select_closure(&study, error); }
++    if (status == RP_OK) { status = solve_case(&study, &result, error); }
+     if (status != RP_OK) { return status; }
+     if (!write_report(stream, &study, &result)) { return rp_error_set(error, RP_IO_ERROR, "Cannot write cycle JSON report."); }
+     rp_error_clear(error); return RP_OK;
+@@ -218,9 +262,15 @@
+     RpStatus status;
+     if (stream == NULL || count > 32U) { return rp_error_set(error, RP_INVALID_ARGUMENT, "Study stream/point limit invalid."); }
+     status = rp_cycle_case_load(utf8_path, &study, error);
+-    if (status == RP_OK) { status = rp_cycle_scan_prescribed(&study.input, field, values, count, &baseline, points, 32U, &used, error); }
++    if (status == RP_OK) { status = select_closure(&study, error); }
++    if (status == RP_OK) {
++        status = study.staged_combustion
++            ? rp_cycle_scan_staged(&study.input, field, values, count, &baseline, points, 32U, &used, error)
++            : rp_cycle_scan_prescribed(&study.input, field, values, count, &baseline, points, 32U, &used, error);
++    }
+     if (status != RP_OK) { return status; }
+-    if (fprintf(stream, "{\"schema_version\":1,\"study\":\"prescribed_cycle_scan_v1\",\"field\":\"%s\",\"baseline\":",
++    if (fprintf(stream, "{\"schema_version\":1,\"study\":\"%s\",\"field\":\"%s\",\"baseline\":",
++                study.staged_combustion ? "staged_cycle_scan_v1" : "prescribed_cycle_scan_v1",
+                 rp_cycle_study_field_name(field)) < 0 || !write_report(stream, &study, &baseline) ||
+         fputs(",\"points\":[", stream) < 0) { goto io_failure; }
+     for (size_t i = 0U; i < used; ++i) {
+
+==============================================================================
+### tests/test_cycle.c   （基线 327 行 -> 当前 436 行）
+==============================================================================
+--- a/tests/test_cycle.c
++++ b/tests/test_cycle.c
+@@ -319,9 +319,118 @@
+     CHECK(rp_cycle_study_field_name(RP_CYCLE_FIELD_COUNT) == NULL);
+     CHECK(!rp_isfinite(rp_cycle_study_input_value(NULL, RP_CYCLE_MAIN_AREA_RATIO)));
+ }
++/* Staged closure: a high-pressure preburner drives the turbine and its exhaust
++ * is injected into a lower-pressure main chamber, so every feed stream leaves
++ * through the main nozzle. Values are declared inputs, not a real engine. */
++static RpCycleInput staged_benchmark(void)
++{
++    RpCycleInput input = benchmark();
++    input.chamber_pressure_pa = 1.0e7;
++    input.main_area_ratio = 35.0;
++    input.generator_oxidizer_fuel_ratio = 1.0;
++    input.generator_temperature_k = 1800.0;
++    input.turbine_inlet_pressure_pa = 2.5e7;
++    input.turbine_outlet_pressure_pa = 2.0e7;
++    input.fuel_pump.outlet_pressure_pa = 2.8e7;
++    input.oxidizer_pump.outlet_pressure_pa = 2.8e7;
++    input.maximum_branch_fraction = 0.9;
++    input.return_fraction = 1.0;
++    input.return_pressure_drop_pa = 5.0e5;
++    input.branch_area_ratio = 1.0;
++    input.branch_axial_projection = 0.0;
++    return input;
++}
++static void check_staged(const RpCycleInput *input, const RpCycleResult *result)
++{
++    const double fuel = input->total_mass_flow_kg_per_s / (1.0 + input->overall_oxidizer_fuel_ratio);
++    const double oxidizer = input->total_mass_flow_kg_per_s - fuel;
++    const double pump = fuel * (input->fuel_pump.outlet_pressure_pa - input->fuel_pump.inlet_pressure_pa) /
++        (input->fuel_pump.density_kg_per_m3 * input->fuel_pump.efficiency) +
++        oxidizer * (input->oxidizer_pump.outlet_pressure_pa - input->oxidizer_pump.inlet_pressure_pa) /
++        (input->oxidizer_pump.density_kg_per_m3 * input->oxidizer_pump.efficiency);
++    const double turbine_drop = result->turbine.inlet.h_j_per_kg - result->turbine.outlet.h_j_per_kg;
++    const double branch = (pump + input->auxiliary_power_w) / input->shaft_efficiency / turbine_drop;
++    const double exit_rate = result->main_mass_flow_kg_per_s * (result->main_nozzle.exit.gas.h_j_per_kg +
++        0.5 * pow(result->main_nozzle.exit.velocity_m_per_s, 2.0));
++    CHECK(near(result->pump_power_w, pump, 1e-6));
++    CHECK(near(result->branch_mass_flow_kg_per_s, branch, 1e-10));
++    CHECK(result->branch_nozzle_active == 0 && result->branch_thrust_n == 0.0 && result->branch_throat_area_m2 == 0.0);
++    CHECK(result->external_mass_flow_kg_per_s == 0.0);
++    CHECK(result->returned_mass_flow_kg_per_s == result->branch_mass_flow_kg_per_s);
++    CHECK(near(result->main_mass_flow_kg_per_s, input->total_mass_flow_kg_per_s, 1e-12));
++    CHECK(near(result->main_mass_flow_kg_per_s, result->main_fuel_mass_flow_kg_per_s + result->main_oxidizer_mass_flow_kg_per_s, 1e-12));
++    CHECK(near(result->main_fuel_mass_flow_kg_per_s, fuel, 1e-12));
++    CHECK(near(result->main_oxidizer_fuel_ratio, input->overall_oxidizer_fuel_ratio, 1e-14));
++    CHECK(near(result->total_thrust_n, result->main_thrust_n, 1e-12));
++    CHECK(near(result->main_effective_velocity_m_per_s, result->main_nozzle.effective_velocity_m_per_s, 1e-12));
++    CHECK(near(result->engine_specific_impulse_s, result->total_thrust_n / input->total_mass_flow_kg_per_s / 9.80665, 1e-10));
++    CHECK(near(result->inlet_enthalpy_rate_w, fuel * input->fuel_pump.inlet_h_j_per_kg +
++        oxidizer * input->oxidizer_pump.inlet_h_j_per_kg, 1e-6));
++    CHECK(near(result->exit_total_enthalpy_rate_w, exit_rate, 1e-6));
++    /* Chamber inflow mixes the turbine discharge with the directly injected feed. */
++    CHECK(near(result->chamber_heat_w, result->main_mass_flow_kg_per_s * result->main_nozzle.chamber.h_j_per_kg -
++        (result->returned_mass_flow_kg_per_s * result->turbine.outlet.h_j_per_kg +
++         (fuel - result->branch_fuel_mass_flow_kg_per_s) * result->fuel_pump.outlet_h_j_per_kg +
++         (oxidizer - result->branch_oxidizer_mass_flow_kg_per_s) * result->oxidizer_pump.outlet_h_j_per_kg), 1e-3));
++    CHECK(fabs(result->mass_relative_residual) < 1e-12);
++    CHECK(fabs(result->shaft_relative_residual) < 1e-8);
++    CHECK(fabs(result->energy_relative_residual) < 1e-10);
++}
++static void test_staged(void)
++{
++    RpCycleInput input = staged_benchmark();
++    RpCycleInput open_input = benchmark();
++    RpCycleResult staged, open, twice, sentinel;
++    RpCycleStudyPoint points[3];
++    RpCycleResult baseline;
++    size_t count = 0U;
++    const double ratios[] = {20.0, 35.0, 60.0};
++    CHECK(rp_cycle_solve_staged(&input, NULL, &staged, NULL) == RP_OK);
++    check_staged(&input, &staged);
++    CHECK(staged.branch_mass_flow_kg_per_s > 0.0 && staged.branch_mass_flow_kg_per_s < input.total_mass_flow_kg_per_s);
++    /* The open closure on its own declared states carries less mass through the main nozzle
++     * because its generator flow leaves overboard. */
++    CHECK(rp_cycle_solve_prescribed(&open_input, NULL, &open, NULL) == RP_OK);
++    CHECK(open.main_mass_flow_kg_per_s < open_input.total_mass_flow_kg_per_s);
++    /* Uniform flow scaling preserves the intensive result. */
++    input = staged_benchmark();
++    input.total_mass_flow_kg_per_s *= 2.0; input.auxiliary_power_w *= 2.0;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OK);
++    CHECK(near(twice.engine_specific_impulse_s, staged.engine_specific_impulse_s, 1e-10));
++    CHECK(near(twice.total_thrust_n, 2.0 * staged.total_thrust_n, 1e-5));
++    /* Staged-only domain rules. */
++    memset(&sentinel, 0x5a, sizeof(sentinel)); twice = sentinel;
++    input = staged_benchmark(); input.return_fraction = 0.5;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.return_fraction = 0.0;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.turbine_outlet_pressure_pa = input.chamber_pressure_pa;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.turbine_outlet_pressure_pa = input.chamber_pressure_pa + 4.0e5;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.fuel_pump.outlet_pressure_pa = 2.0e7;
++    input.oxidizer_pump.outlet_pressure_pa = 2.0e7;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.maximum_branch_fraction = 1e-6;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.auxiliary_power_w = 1e12;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_OUT_OF_DOMAIN);
++    input = staged_benchmark(); input.total_mass_flow_kg_per_s = 0.0;
++    CHECK(rp_cycle_solve_staged(&input, NULL, &twice, NULL) == RP_INVALID_ARGUMENT);
++    CHECK(rp_cycle_solve_staged(NULL, NULL, &twice, NULL) == RP_INVALID_ARGUMENT);
++    CHECK(rp_cycle_solve_staged(&input, NULL, NULL, NULL) == RP_INVALID_ARGUMENT);
++    CHECK(memcmp(&twice, &sentinel, sizeof(twice)) == 0);
++    /* The scan wrapper baselines and solves with the staged closure. */
++    input = staged_benchmark();
++    CHECK(rp_cycle_scan_staged(&input, RP_CYCLE_MAIN_AREA_RATIO, ratios, 3U, &baseline, points, 3U, &count, NULL) == RP_OK);
++    CHECK(count == 3U && points[0].status == RP_OK && points[2].status == RP_OK);
++    CHECK(near(baseline.engine_specific_impulse_s, staged.engine_specific_impulse_s, 1e-12));
++    CHECK(points[2].result.engine_specific_impulse_s > points[0].result.engine_specific_impulse_s);
++    CHECK(points[0].metrics.branch_flow_change_kg_per_s == 0.0);
++}
+ int main(void)
+ {
+-    test_pump(); test_turbine(); test_cycle(); test_inlet_assumptions(); test_cycle_failures(); test_study();
++    test_pump(); test_turbine(); test_cycle(); test_inlet_assumptions(); test_cycle_failures(); test_study(); test_staged();
+     (void)printf("cycle: %u checks, %u failures\n", checks, failures);
+     return failures == 0U ? 0 : 1;
+ }
+

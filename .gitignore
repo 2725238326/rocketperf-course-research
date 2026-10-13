@@ -15,3 +15,5 @@ __pycache__/
 /deliverables/*.zip
 /deliverables/*.exe
 /deliverables/*.bundle
+# Received original remains here; its byte-identical dated evidence copy is tracked.
+/代码.zip

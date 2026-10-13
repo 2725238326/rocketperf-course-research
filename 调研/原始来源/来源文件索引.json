@@ -1,5 +1,77 @@
 [
   {
+    "id": "CL13_code_package_20261013",
+    "url": "user-provided:代码.zip",
+    "available": true,
+    "file": "20261013_classmate_code/代码.zip",
+    "bytes": 519776,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "3448b18aef819867036dfd4b6d0439ce5bff9625b4dde0de481a365dfc83bbee"
+  },
+  {
+    "id": "CL13_handover_20261013",
+    "url": "user-provided:代码.zip/HANDOVER.md",
+    "available": true,
+    "file": "20261013_classmate_code/HANDOVER.md",
+    "bytes": 32079,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "41ddeb2a68f52ef37d562e91ee3895b1e271e623b29643fb340277cac5fb3871"
+  },
+  {
+    "id": "CL13_handover_diff_20261013",
+    "url": "user-provided:代码.zip/HANDOVER.diff",
+    "available": true,
+    "file": "20261013_classmate_code/HANDOVER.diff",
+    "bytes": 31655,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "ffdcf1ea319c14db253ccffe5ae2044cfdef05a0c8da033341c9e49a25bea4de"
+  },
+  {
+    "id": "CL13_tq12a_model_data_20261013",
+    "url": "user-provided:代码.zip/model-data/zhuque3-tq12a.md",
+    "available": true,
+    "file": "20261013_classmate_code/model-data/zhuque3-tq12a.md",
+    "bytes": 9515,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "7cdbe0008f6086467ddc671d6ea880946aade5e88458456c18e17753d364090d"
+  },
+  {
+    "id": "CL13_yf100k_model_data_20261013",
+    "url": "user-provided:代码.zip/model-data/cz10b-yf100k.md",
+    "available": true,
+    "file": "20261013_classmate_code/model-data/cz10b-yf100k.md",
+    "bytes": 9954,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "2d4dcb0716dd7769011b1f15b7fa168657195a0471695d8b8c4e5920be44d754"
+  },
+  {
+    "id": "CL13_tq12a_case_20261013",
+    "url": "user-provided:代码.zip/cases/active-cases/zhuque3-tq12a-open.ini",
+    "available": true,
+    "file": "20261013_classmate_code/cases/zhuque3-tq12a-open.ini",
+    "bytes": 2200,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "06edbe7fe29bef867bb0c624de17c225a3816fd86c9677739c3e61a0d52ef1dc"
+  },
+  {
+    "id": "CL13_yf100k_case_20261013",
+    "url": "user-provided:代码.zip/cases/active-cases/cz10b-yf100k-staged.ini",
+    "available": true,
+    "file": "20261013_classmate_code/cases/cz10b-yf100k-staged.ini",
+    "bytes": 2350,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "33fd879555c95852c730f198d533737b07fc01c6125e4f06297387ff63385628"
+  },
+  {
+    "id": "CL13_staged_source_20261013",
+    "url": "user-provided:代码.zip/src/cycle/staged.c",
+    "available": true,
+    "file": "20261013_classmate_code/src/cycle/staged.c",
+    "bytes": 12256,
+    "saved_at": "2026-10-13T12:45:20+00:00",
+    "sha256": "0432ad0c62c6b9619a54b3ca36a8a60f4ff19a1f5a007518000a88370f0c696b"
+  },
+  {
     "id": "CL00_teammate_document_20261006",
     "url": "user-provided:teammate-parameter-summary",
     "available": true,

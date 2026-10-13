@@ -1,0 +1,20 @@
+[
+  {
+    "name": "bat-exit",
+    "exit": 0,
+    "stdout_bytes": 840,
+    "stderr": ""
+  },
+  {
+    "name": "bat-zq3",
+    "timeout": true,
+    "stdout_bytes": 719596,
+    "stderr": ""
+  },
+  {
+    "name": "bat-cz10b",
+    "timeout": true,
+    "stdout_bytes": 731259,
+    "stderr": ""
+  }
+]

@@ -32,6 +32,8 @@
     {"path":"docs/cycle-validation.md","role":"稳态部件、控制体热交换、外排边界与验证","owner":"cycle"},
     {"path":"docs/engine-cycle-validation.md","role":"绝热开式/富氧补燃新模型、条件算例和试跑证据边界","owner":"cycle"},
     {"path":"docs/cycle-integration.md","role":"独立循环接口的拓扑、方程、输入输出与组员合并对照契约","owner":"cycle"},
+    {"path":"docs/incoming-code-review.md","role":"20261013组员代码包接收、启动与模型/参数审阅及证据边界","owner":"tooling"},
+    {"path":"docs/final-overview.md","role":"课程收尾的研究、计算、演示入口与最终交付缺口总览","owner":"tooling"},
     {"path":"docs/improvement-analysis.md","role":"合成同条件改进、几何代价、输入扰动及不可外推结论","owner":"cycle"},
     {"path":"results/research/README.md","role":"研究计算版本、输入/构建/参考与复验入口","owner":"tooling"},
     {"path":"docs/research-reference-coverage.md","role":"实际TP/冻结参考、打印精度和固定几何边界","owner":"thermo"},

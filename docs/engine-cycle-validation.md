@@ -2,7 +2,7 @@
 
 状态（2026-10-13）：`MOD-009`已有Debug/Release、六组统一质量、30个生产C文件静态分析和正式研究归档；任务语义验收/流转以worknow及任务板为准。归档记录`source_dirty=true`，表示采集时Git工作区有待提交内容（含未纳入项目的根目录ZIP）；确切C二进制、构建/测试和每个输入均以manifest哈希绑定。此状态在后续本地提交后不改写。本文不把本地工程验收说成两型模型的科学验证。
 
-模型`adiabatic_single_shaft_cycle_v1`使用独立实现文件`src/cycle/adiabatic.c`，公共接口`engine_cycle.h`。`staged_combustion=false`选择燃气发生器外排；`true`选择全部氧化剂通过单个富氧预燃室及涡轮的补燃拓扑。后续组员代码到位后按[集成对照契约](cycle-integration.md)逐项比较。
+模型`adiabatic_single_shaft_cycle_v1`使用独立实现文件`src/cycle/adiabatic.c`，公共接口`engine_cycle.h`。`staged_combustion=false`选择燃气发生器外排；`true`选择全部氧化剂通过单个富氧预燃室及涡轮的补燃拓扑。组员代码已按[集成对照契约](cycle-integration.md)比较，其给定温度补燃计账/甲烷代理算例保持独立身份，详见[接收审阅](incoming-code-review.md)。
 
 新接口与历史`prescribed_thermal_cycle_v1`并存。新模型不输入主室/预燃室温度，不通过任意热交换填补焓差；两燃烧过程Q=0，HP由入口形成焓及元素库存求解。恒密度泵把全部轴功加入流体焓；冻结涡轮抽取轴功，机械损失出系统，辅助功为外部负载。两路泵的公共出口压力与喷注/管路压降分别声明。
 

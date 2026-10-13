@@ -20,8 +20,9 @@ class HandoffTests(unittest.TestCase):
         self.assertLessEqual(delivery.ADVERTISED_CASES, set(delivery.common_files(ROOT, head)))
         self.assertEqual(len(delivery.demo_specs(1)), 5)
         self.assertEqual(len(delivery.demo_specs(2)), 11)
+        self.assertEqual(len(delivery.demo_specs(3)), 17)
         with self.assertRaises(ValueError):
-            delivery.demo_specs(3)
+            delivery.demo_specs(4)
         run = subprocess.run([str(ROOT/'build/release/rocketperf.exe'), 'nozzle', 'regime',
                               'cases/research/s3_sealevel_regime.ini'], cwd=ROOT,
                              capture_output=True, encoding='utf-8', check=True, timeout=30)
@@ -42,6 +43,39 @@ class HandoffTests(unittest.TestCase):
             broken['regime'][field]['area_ratio'] *= 1.1
             with self.subTest(field=field), self.assertRaises(ValueError):
                 delivery.check_regime(broken)
+
+    def test_vehicle_delivery_and_launcher_work_from_another_directory(self):
+        head = delivery.git(ROOT, 'rev-parse', 'HEAD', check=True).stdout.strip()
+        files = delivery.common_files(ROOT, head)
+        self.assertLessEqual(delivery.FINAL_ADVERTISED_CASES, set(files))
+        binary = ROOT / 'build/release/rocketperf.exe'
+        for name, arguments, code in delivery.VEHICLE_DEMO_ARGS:
+            run = subprocess.run([str(binary), *arguments], cwd=ROOT, capture_output=True,
+                                 encoding='utf-8', check=True, timeout=30)
+            delivery.check_demo(name, run.stdout, run.stderr, code, 3)
+            report = json.loads(run.stdout)
+            report['balance']['engine_specific_impulse_s'] *= 1.1
+            with self.subTest(case=name), self.assertRaises(ValueError):
+                delivery.check_demo(name, json.dumps(report), '', 0, 3)
+        if sys.platform == 'win32':
+            import os
+            with tempfile.TemporaryDirectory(dir=ROOT / 'build/test-tmp') as folder:
+                package = Path(folder) / '带 空格的运行包'
+                package.mkdir()
+                (package / 'rocketperf.exe').write_bytes(binary.read_bytes())
+                (package / 'rocketperf-run.bat').write_bytes(delivery.launcher_bytes())
+                for relative in delivery.FINAL_ADVERTISED_CASES:
+                    target = package / relative
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(files[relative])
+                clean = delivery.subprocess_env()
+                clean['PATH'] = str(Path(os.environ['SystemRoot']) / 'System32')
+                run = subprocess.run([os.environ['COMSPEC'], '/d', '/c', str(package / 'rocketperf-run.bat')],
+                                     cwd=Path(folder), env=clean, input=delivery.LAUNCHER_INPUT,
+                                     capture_output=True, encoding='utf-8', timeout=30)
+                delivery.check_demo('launcher', run.stdout, run.stderr, run.returncode, 3)
+                with self.assertRaises(ValueError):
+                    delivery.check_demo('launcher', run.stdout.replace('整机研究比冲', '', 1), '', 0, 3)
 
     def test_detached_head_receiving_identity(self):
         original = handoff.git

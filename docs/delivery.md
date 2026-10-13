@@ -20,7 +20,7 @@ python tools/delivery.py create --destination build/delivery-NEW-ID
 python tools/delivery.py verify --directory build/delivery-NEW-ID
 ```
 
-create要求干净提交、新鲜完整质量和已测Release构建，生成两个ZIP后重新解压。源码在解压目录通过CMake禁用Python测试构建，并实际运行五个C测试；运行包在隔离PATH下运行菜单列出的算例、域评估、文本/交互、成功/拒绝及RP-1例。清单保存原始构建/测试身份、重建日志、输出哈希和Git提交。verify核对ZIP结构、哈希、源包C范围与记录，不等同另一个人的科学审查。
+create要求干净提交、新鲜完整质量和已测Release构建，生成两个ZIP后重新解压。源码在解压目录通过CMake禁用Python测试构建，并实际运行五个C测试；运行包在隔离PATH下运行菜单列出的算例、域评估、文本/交互、成功/拒绝及RP-1例。交付v3增加菜单8中的五个车辆研究算例和ASCII双击启动器，均纳入文件哈希；源码重建与运行包各有17项演示，其中启动器从其他当前目录调用并依次运行全部五例。车辆JSON使用已保存状态关系校核，不只看退出0。v1/v2保持可读，各自只代表当时固定能力。清单保存构建/测试身份、重建日志、输出哈希和Git提交。verify核对ZIP结构、哈希、源包C范围与记录，不等同另一个人的科学审查。
 
 本机CMake/Ninja位于build/tooling；可用参数指定本机路径。接收者使用其自己的工具安装路径。不要把本机绝对路径当成每个人的配置。
 

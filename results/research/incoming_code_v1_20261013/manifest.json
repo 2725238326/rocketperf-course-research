@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "kind": "incoming_code_receipt",
+  "status": "PASS",
+  "checked_at": "2026-10-13T13:01:37+00:00",
+  "source_head_before_changes": "f8b9b466d52651664bfd2647c3c366d55edf6089",
+  "source_dirty": true,
+  "received_zip": {
+    "archive_path": "调研/原始来源/20261013_classmate_code/代码.zip",
+    "sha256": "3448b18aef819867036dfd4b6d0439ce5bff9625b4dde0de481a365dfc83bbee",
+    "bytes": 519776
+  },
+  "baseline_head_declared": "27e29facf4ba12cc733a178e02c41e6ba968dc8f",
+  "binary_sha256": "e29da1b24a548f365e15a3abb0c4131d59fc6dfcbd6d8ae7ff337f4d13232a69",
+  "rebuilt_binary_sha256": "d550f54cb6104b48923e51cf612a355b5788c7bf4cd092dc0275247484c5289e",
+  "original_test_binary_sha256": "2d5372f56a558b373f45d532904d44f8293441784b8bbb227224135a4aebc96f",
+  "original_test_evidence_covers_current_exe": false,
+  "windows_system_dlls": [
+    "KERNEL32.dll",
+    "api-ms-win-crt-convert-l1-1-0.dll",
+    "api-ms-win-crt-environment-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "api-ms-win-crt-locale-l1-1-0.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-private-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll"
+  ],
+  "source_ctest": {
+    "tests": 5,
+    "status": "PASS",
+    "compiler": "MinGW GCC14.2.0",
+    "strict_warnings": true
+  },
+  "baseline_numeric_equality": true,
+  "baseline_relation_count": 132,
+  "source_runtime_numeric_fields": 622,
+  "source_runtime_maximum_scaled_difference": 0,
+  "runs": [
+    {
+      "id": "benchmark",
+      "model": "prescribed_thermal_cycle_v1",
+      "thrust_kn": 296.2541987688885,
+      "isp_s": 302.0952096474214,
+      "independent_bookkeeping_relations": 7
+    },
+    {
+      "id": "zq3",
+      "model": "prescribed_thermal_cycle_v1",
+      "thrust_kn": 807.006238576659,
+      "isp_s": 352.81999033225566,
+      "independent_bookkeeping_relations": 7
+    },
+    {
+      "id": "cz10b",
+      "model": "staged_thermal_cycle_v1",
+      "thrust_kn": 1396.0500714836455,
+      "isp_s": 355.89372300521734,
+      "independent_bookkeeping_relations": 7
+    }
+  ],
+  "expected_refusals": [
+    {
+      "id": "zq3-sealevel",
+      "exit_code": 4,
+      "stderr": "out_of_domain: Overexpanded frozen nozzle is outside the supported no-shock domain."
+    },
+    {
+      "id": "cz10b-sealevel",
+      "exit_code": 4,
+      "stderr": "out_of_domain: Overexpanded frozen nozzle is outside the supported no-shock domain."
+    },
+    {
+      "id": "preburner-of-25",
+      "exit_code": 4,
+      "stderr": "out_of_domain: Gas equilibrium O/F=0.1..20."
+    },
+    {
+      "id": "return-pressure-low",
+      "exit_code": 4,
+      "stderr": "out_of_domain: Turbine discharge pressure cannot inject into the chamber across the declared return drop."
+    }
+  ],
+  "original_bat_stepwise": "PASS; 2 cases, each computed and exited 0 from another cwd",
+  "original_bat_buffered_stdin": "TIMEOUT; EOF loops, not accepted as unattended input interface",
+  "scope": "Engineering intake and declared-state bookkeeping only; no online source verification, kerosene-cycle validation, flight performance or independent experiment.",
+  "files": [
+    {
+      "path": "actual-windows-imports.bin",
+      "bytes": 67441,
+      "sha256": "aab152fb0812ff21e2325047835e373a3e19243ef3f1395e986e5ebeaf59b054"
+    },
+    {
+      "path": "baseline-comparison.json",
+      "bytes": 643,
+      "sha256": "cae4db580ec3403e21b9d37c6f7296ee3a380211b7a7d14d2ff9d07f38733dd0"
+    },
+    {
+      "path": "bat-stepwise-cz10b.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bat-stepwise-cz10b.stdout",
+      "bytes": 11604,
+      "sha256": "d53d039129c83ee919d7e0d5a72b4a5dcd7c2e6158146759e25454b3d1cebffb"
+    },
+    {
+      "path": "bat-stepwise-zq3.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "bat-stepwise-zq3.stdout",
+      "bytes": 13324,
+      "sha256": "da37adc0c5789bf60aa4c1f0034595be0c9a92c89818b56b288bc597e6b0022d"
+    },
+    {
+      "path": "batch-checks.json",
+      "bytes": 311,
+      "sha256": "1ccdd8ac80c28b3cf94c3c74a16900e72d51a5c01ed5d9140ec398ba31d2d3ce"
+    },
+    {
+      "path": "batch-stepwise.json",
+      "bytes": 351,
+      "sha256": "7a77b0e261197baf0e3b8e911a3e7623206ebccaeadf798c6884dd7845831807"
+    },
+    {
+      "path": "benchmark.ini",
+      "bytes": 1135,
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec"
+    },
+    {
+      "path": "benchmark.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmark.stdout",
+      "bytes": 8720,
+      "sha256": "16786f1dadfc08e3472dc23abe358cddbcf5f2cc872a2294d8acf8905652c6b8"
+    },
+    {
+      "path": "build.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build.stdout",
+      "bytes": 3583,
+      "sha256": "ffaf323a3ab89dfca11d820cf8c11d749276d039fa9183e5830fdc7d60ca30af"
+    },
+    {
+      "path": "configure.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "configure.stdout",
+      "bytes": 434,
+      "sha256": "c94b6e0477b59e53069ffc0a08b545d881ff7e47ea362803fa29eb41e646682b"
+    },
+    {
+      "path": "ctest.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "ctest.stdout",
+      "bytes": 726,
+      "sha256": "7c59868bf48c6b531f9cd5e32233ac60b047576f9a4bf5b0519b1a31d957461b"
+    },
+    {
+      "path": "cz10b-scan.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b-scan.stdout",
+      "bytes": 30258,
+      "sha256": "b55b4cc07569b88099af93beecaca6152ef1a629c76b8f6bf888d9b597b7a89c"
+    },
+    {
+      "path": "cz10b-sealevel.ini",
+      "bytes": 2413,
+      "sha256": "21bff82eb0cd6ed49e7505094d4da43764e40259ba204d143bf439153034fcc6"
+    },
+    {
+      "path": "cz10b-sealevel.stderr",
+      "bytes": 85,
+      "sha256": "43532c143f642b13b1e98fb4a107d78f8557786cd83b29a38b7e483557b72560"
+    },
+    {
+      "path": "cz10b-sealevel.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b.ini",
+      "bytes": 2350,
+      "sha256": "33fd879555c95852c730f198d533737b07fc01c6125e4f06297387ff63385628"
+    },
+    {
+      "path": "cz10b.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b.stdout",
+      "bytes": 7118,
+      "sha256": "f3bc710b0f846c636f84d77a06cb55ceb113fffd3141b4124b580f098a7b762f"
+    },
+    {
+      "path": "handover-top.png",
+      "bytes": 90610,
+      "sha256": "b624b7215de3c51843ef4ea5ddf3e0fcb10f550645cddd827572c29e81be5298"
+    },
+    {
+      "path": "help.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "help.stdout",
+      "bytes": 2060,
+      "sha256": "c5aea4f457d0e6954547acea88d0f94b08bc49f03c3af01d0ef7272826940fb7"
+    },
+    {
+      "path": "no-args.stderr",
+      "bytes": 56,
+      "sha256": "5e267169545cb91b1fcd558fdbe32afc585f5f93ff0949531eeed091a54d22de"
+    },
+    {
+      "path": "no-args.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "package-checks.json",
+      "bytes": 212,
+      "sha256": "198a302d39a6859fb613d59a935240ec021f6d107c19f93079e8326ed3adde76"
+    },
+    {
+      "path": "preburner-of-25.ini",
+      "bytes": 2408,
+      "sha256": "4c8a340b590c183fa1119bc7270df05f7b9cbd19c74cc52046c8527448790544"
+    },
+    {
+      "path": "preburner-of-25.stderr",
+      "bytes": 45,
+      "sha256": "fce087bcec512cd2ed087bdb3420ee210bd2145883e7169011a9f44e7c2377f4"
+    },
+    {
+      "path": "preburner-of-25.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1552,
+      "sha256": "96d4a0df7072a227973fb1d9e3036559aa0962c4ee8b5680d971def3b55b93f4"
+    },
+    {
+      "path": "rebuilt-benchmark.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rebuilt-benchmark.stdout",
+      "bytes": 8720,
+      "sha256": "16786f1dadfc08e3472dc23abe358cddbcf5f2cc872a2294d8acf8905652c6b8"
+    },
+    {
+      "path": "rebuilt-cz10b.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rebuilt-cz10b.stdout",
+      "bytes": 7118,
+      "sha256": "f3bc710b0f846c636f84d77a06cb55ceb113fffd3141b4124b580f098a7b762f"
+    },
+    {
+      "path": "rebuilt-zq3.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "rebuilt-zq3.stdout",
+      "bytes": 8846,
+      "sha256": "0e3f272812503ac3f86017d22d7150f4c67a0d2f1b93c7812dd829b18543bc8b"
+    },
+    {
+      "path": "rejection.stderr",
+      "bytes": 80,
+      "sha256": "54bf77c885bc998323c71100f346f770bf7a1e6e87e7c8631fa8b8c25f15b34b"
+    },
+    {
+      "path": "rejection.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "return-pressure-low.ini",
+      "bytes": 2408,
+      "sha256": "971a1888e4b70dcaa9e100266e20e6667cda2822c93e5a7eaa25deac3186e5b8"
+    },
+    {
+      "path": "return-pressure-low.stderr",
+      "bytes": 107,
+      "sha256": "20ef7358d0b072fb85ef859b85098ca148d29a31788978405aee4269b63fd09e"
+    },
+    {
+      "path": "return-pressure-low.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source-build.json",
+      "bytes": 1291,
+      "sha256": "005893a7ff71324e403dcf6356ca2c12966d623f433059bc78daab9635a0d57c"
+    },
+    {
+      "path": "source-runtime-comparison.json",
+      "bytes": 379,
+      "sha256": "3e1263b955553fee0099ababd73d8d087811305d34553ccdb1bc14fb4f8b493c"
+    },
+    {
+      "path": "source-test-counts.json",
+      "bytes": 857,
+      "sha256": "760ed84dcc311ed0a9f885706cefd5689287d6efb2f4b66d54e13b447f4c63b6"
+    },
+    {
+      "path": "zq3-scan.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3-scan.stdout",
+      "bytes": 37309,
+      "sha256": "bcc592c7753fc216e07d6915e434a1adafa30f1120ddddf052887646b20a7013"
+    },
+    {
+      "path": "zq3-sealevel.ini",
+      "bytes": 2261,
+      "sha256": "082386ddb3c4def7d73e6e444388a71dfa8d86232ae972d96a83fa24ab37c68f"
+    },
+    {
+      "path": "zq3-sealevel.stderr",
+      "bytes": 85,
+      "sha256": "43532c143f642b13b1e98fb4a107d78f8557786cd83b29a38b7e483557b72560"
+    },
+    {
+      "path": "zq3-sealevel.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3.ini",
+      "bytes": 2200,
+      "sha256": "06edbe7fe29bef867bb0c624de17c225a3816fd86c9677739c3e61a0d52ef1dc"
+    },
+    {
+      "path": "zq3.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3.stdout",
+      "bytes": 8846,
+      "sha256": "0e3f272812503ac3f86017d22d7150f4c67a0d2f1b93c7812dd829b18543bc8b"
+    }
+  ],
+  "baseline_relation_names": [
+    "fuel flow",
+    "oxidizer flow",
+    "fuel pump work",
+    "fuel pump power",
+    "fuel pump enthalpy",
+    "fuel pump energy residual",
+    "oxidizer pump work",
+    "oxidizer pump power",
+    "oxidizer pump enthalpy",
+    "oxidizer pump energy residual",
+    "composition sum",
+    "composition sum",
+    "composition sum",
+    "turbine outlet pressure",
+    "turbine outlet pressure",
+    "generator temperature",
+    "generator pressure",
+    "turbine work",
+    "turbine efficiency",
+    "isentropic outlet entropy",
+    "entropy generation",
+    "turbine efficiency residual",
+    "branch fuel",
+    "branch oxidizer",
+    "main fuel",
+    "main oxidizer",
+    "main OF",
+    "mass closure",
+    "external flow",
+    "pump sum",
+    "shaft closure",
+    "turbine total power",
+    "mechanical loss",
+    "composition sum",
+    "composition sum",
+    "nozzle energy",
+    "nozzle entropy",
+    "nozzle energy residual",
+    "nozzle entropy residual",
+    "composition sum",
+    "nozzle energy",
+    "nozzle entropy",
+    "nozzle energy residual",
+    "nozzle entropy residual",
+    "nozzle continuity",
+    "sonic throat",
+    "nozzle continuity residual",
+    "nozzle sonic residual",
+    "main effective velocity",
+    "main throat area",
+    "main thrust",
+    "composition sum",
+    "composition sum",
+    "nozzle energy",
+    "nozzle entropy",
+    "nozzle energy residual",
+    "nozzle entropy residual",
+    "composition sum",
+    "nozzle energy",
+    "nozzle entropy",
+    "nozzle energy residual",
+    "nozzle entropy residual",
+    "nozzle continuity",
+    "sonic throat",
+    "nozzle continuity residual",
+    "nozzle sonic residual",
+    "branch effective velocity",
+    "branch throat area",
+    "branch thrust",
+    "main chamber temperature",
+    "main chamber pressure",
+    "main effective velocity",
+    "total thrust",
+    "engine velocity",
+    "engine Isp",
+    "required generator heat",
+    "required chamber heat",
+    "inlet enthalpy rate",
+    "exit total enthalpy rate",
+    "global energy accounting",
+    "mass residual",
+    "shaft residual",
+    "energy residual",
+    "mass_relative_residual",
+    "shaft_relative_residual",
+    "energy_relative_residual",
+    "fuel pump residual identity",
+    "oxidizer pump residual identity",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "generator elements",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "main throat Mach",
+    "main throat mass flux",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "main exit Mach",
+    "main exit mass flux",
+    "main cstar",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "branch throat Mach",
+    "branch throat mass flux",
+    "NASA9 h_j_per_kg",
+    "NASA9 s_j_per_kg_k",
+    "NASA9 cp_frozen_j_per_kg_k",
+    "branch exit Mach",
+    "branch exit mass flux",
+    "branch cstar",
+    "main elements",
+    "mass residual identity",
+    "shaft residual identity",
+    "mass_relative_residual identity",
+    "shaft_relative_residual identity",
+    "energy_relative_residual identity"
+  ],
+  "raw_import_output": "actual-windows-imports.bin; original native-codepage bytes preserved"
+}

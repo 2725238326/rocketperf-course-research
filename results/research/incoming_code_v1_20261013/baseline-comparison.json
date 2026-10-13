@@ -1,0 +1,34 @@
+[
+  {
+    "path": "project/modules.json",
+    "baseline_exists": true
+  },
+  {
+    "path": "tests/test_cycle.c",
+    "baseline_exists": true
+  },
+  {
+    "path": "src/adapters/cycle_case.c",
+    "baseline_exists": true
+  },
+  {
+    "path": "src/adapters/cycle_case.h",
+    "baseline_exists": true
+  },
+  {
+    "path": "src/cycle/staged.c",
+    "baseline_exists": false
+  },
+  {
+    "path": "src/cycle/study.c",
+    "baseline_exists": true
+  },
+  {
+    "path": "include/rocketperf/cycle.h",
+    "baseline_exists": true
+  },
+  {
+    "path": "include/rocketperf/cycle_study.h",
+    "baseline_exists": true
+  }
+]

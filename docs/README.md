@@ -9,6 +9,7 @@
 3. [四级段研究](two-vehicle-study.md)：朱雀三号遥一、长十号乙首飞一二级的事实、可运行情景及未知量。
 4. [循环模型现状](engine-cycle-validation.md)：开式/补燃模型、条件性算例、参考对照和限制。
 5. [项目解读](project-guide.md)：研究、程序和验证的完整讲解。
+6. [收尾总览](final-overview.md)：现有成果、演示入口、接收代码的边界和最终材料缺口；[代码包审阅](incoming-code-review.md)保留具体问题与复现。
 
 ## 按工作查找
 

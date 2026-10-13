@@ -1,0 +1,22 @@
+       rocketperf cycle prescribed CASE.ini (prescribed thermal states, no return)
+       rocketperf combustion tp T_K P_PA OF TF_K TO_K (gas feed)
+       rocketperf combustion hp P_PA OF TF_K TO_K (gas feed)
+       rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA
+       rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2
+       rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG
+       rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2
+       rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170
+       rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2
+       rocketperf combustion hp-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF
+       rocketperf combustion frozen-liquid-state DATASET BASIS liquid TF_K PF_PA TO_K PO_PA PC_PA OF AREA_RATIO AMBIENT_PA THROAT_M2
+       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)
+       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)
+       rocketperf study prescribed-cycle CASE.ini FIELD CSV (finite-step study, not engine optimization)
+       rocketperf study propellants CH4_OF RP1_OF AREA_RATIO AMBIENT_PA (Pc=10MPa, At=0.01m2, fixed declared inlets)
+       rocketperf study propellants --case CASE.ini
+       rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170
+       rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2
+Usage: rocketperf run CASE.ini
+       rocketperf study area-ratio-ambient CASE.ini [--area-ratios CSV] [--ambient-pressures CSV]
+       rocketperf --version
+The L0 model accepts synthetic benchmarks/research scenarios, not verified engine datasets.
