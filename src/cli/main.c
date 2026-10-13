@@ -3,6 +3,7 @@
 #include "combustion_report.h"
 #include "case_file.h"
 #include "cycle_case.h"
+#include "engine_case.h"
 #include "interactive.h"
 #include "propellant_case.h"
 #include "text_report.h"
@@ -283,6 +284,7 @@ static int help_main(void)
         "       rocketperf cycle prescribed CASE.ini (prescribed thermal states, no return)\n"
         "\n"
         "Queries:\n"
+        "       rocketperf cycle adiabatic CASE.ini [--text] (GG/ORSC research model)\n"
         "       rocketperf thermo SPECIES TEMPERATURE_K (p_ref=100000 Pa, no equilibrium)\n"
         "       rocketperf liquid-feed coolprop710-cea334-liquid-molar-v1 Methane|Oxygen liquid T_K P_PA (reference table)\n"
         "\n"
@@ -351,8 +353,21 @@ static int cli_main(int argc, char **argv)
         return rp_cli_combustion(argc - 2, &argv[2]);
     }
     if (argc >= 2 && strcmp(argv[1], "cycle") == 0) {
+        if (argc >= 3 && strcmp(argv[2], "adiabatic") == 0) {
+            const int text_mode = argc == 5 && strcmp(argv[4], "--text") == 0;
+            if (argc != 4 && !text_mode) { (void)fputs("Usage: rocketperf cycle adiabatic CASE.ini [--text]\n", stderr); return 2; }
+            const RpConsoleCodepage previous = text_mode ? rp_cli_console_utf8() : (RpConsoleCodepage){0};
+            status = rp_engine_case_run(argv[3], stdout, text_mode, &error);
+            if (status == RP_OK && fflush(stdout) != 0) { status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush engine cycle report."); }
+            if (text_mode) { rp_cli_console_restore(previous); }
+            if (status != RP_OK) {
+                (void)fprintf(stderr, "%s: %s\n", rp_status_name(status), error.message);
+                return status == RP_PARSE_ERROR || status == RP_IO_ERROR ? 3 : 4;
+            }
+            return 0;
+        }
         if (argc != 4 || strcmp(argv[2], "prescribed") != 0) {
-            (void)fputs("Usage: rocketperf cycle prescribed CASE.ini\n", stderr); return 2;
+            (void)fputs("Usage: rocketperf cycle prescribed CASE.ini | adiabatic CASE.ini [--text]\n", stderr); return 2;
         }
         status = rp_cycle_case_run(argv[3], stdout, &error);
         if (status == RP_OK && fflush(stdout) != 0) { status = rp_error_set(&error, RP_IO_ERROR, "Cannot flush cycle report."); }

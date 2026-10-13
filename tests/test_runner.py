@@ -12,6 +12,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 import pipeline
+import engine_cycles
 import combustion_reference
 from projectlib import atomic_json, digest, read_json
 
@@ -186,6 +187,16 @@ class ResultContractTests(unittest.TestCase):
 
 
 class LifecycleTests(unittest.TestCase):
+    def test_cycle_archive_source_identity_is_captured_before_output_creation(self):
+        head = subprocess.CompletedProcess([], 0, "abc123\n", "")
+        clean = subprocess.CompletedProcess([], 0, "", "")
+        dirty = subprocess.CompletedProcess([], 0, "?? code.zip\n", "")
+        with mock.patch.object(engine_cycles, "git", side_effect=(head, clean)) as git_call:
+            self.assertEqual(engine_cycles.source_identity(ROOT), ("abc123", False))
+        self.assertEqual(git_call.call_args_list[1].args[1:3], ("status", "--porcelain"))
+        with mock.patch.object(engine_cycles, "git", side_effect=(head, dirty)):
+            self.assertEqual(engine_cycles.source_identity(ROOT), ("abc123", True))
+
     def test_nonobject_parameter_dataset_is_controlled_failure(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder);atomic_json(root/'data/parameters/bad.json',[])
@@ -195,7 +206,7 @@ class LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder); path=root/'results/validation/fixture/stdout.txt'
             path.parent.mkdir(parents=True); path.write_text('original',encoding='utf-8')
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py','engine_cycles.py','engine_sources.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             for name in ('kerosene_reference.py', 'kerosene_validation.py', 'kerosene_probe.c', 'propellant_comparison.py'):
                 atomic_json(root/'tools'/name, {'fixture':True})
@@ -215,7 +226,7 @@ class LifecycleTests(unittest.TestCase):
     def test_research_navigation_readme_is_not_numeric_test_identity(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py','engine_cycles.py','engine_sources.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             for name in ('kerosene_reference.py', 'kerosene_validation.py', 'kerosene_probe.c', 'propellant_comparison.py'):
                 atomic_json(root/'tools'/name, {'fixture':True})
@@ -233,7 +244,7 @@ class LifecycleTests(unittest.TestCase):
     def test_parameter_source_index_and_local_refs_are_tracked(self):
         with tempfile.TemporaryDirectory(dir=ROOT/'build/test-tmp') as folder:
             root=Path(folder)
-            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py'):
+            for name in ('thermo_data.py','cea_reference.py','combustion_reference.py','cycle_validation.py','gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py','engine_cycles.py','engine_sources.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             for name in ('kerosene_reference.py', 'kerosene_validation.py', 'kerosene_probe.c', 'propellant_comparison.py'):
                 atomic_json(root/'tools'/name, {'fixture':True})
@@ -261,6 +272,8 @@ class LifecycleTests(unittest.TestCase):
         self.assertIn('tools/liquid_eos.py', files)
         self.assertIn('tools/liquid_table.py', files)
         self.assertIn('tools/liquid_combustion.py', files)
+        self.assertIn('tools/engine_cycles.py', files)
+        self.assertIn('tools/engine_sources.py', files)
         self.assertIn('调研/feed_sources.json', files)
         dataset = read_json(ROOT/'data/parameters/feed_property_candidates.json')
         for identity in dataset['source_files'] + dataset['cea_source_files']:
@@ -290,7 +303,7 @@ class LifecycleTests(unittest.TestCase):
             atomic_json(root/'tools/cea_reference.py',{'fixture':True})
             atomic_json(root/'tools/combustion_reference.py',{'fixture':True})
             atomic_json(root/'tools/cycle_validation.py',{'fixture':True})
-            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py'):
+            for name in ('gas_checks.py','check_data.py','handoff.py','cycle_study.py','research_tp_reference.py','research_frozen_reference.py','thermal_boundary.py','adiabatic_inlet.py','adiabatic_study.py','feed_candidates.py','liquid_anchor.py','liquid_feed.py','liquid_eos.py','liquid_table.py','liquid_combustion.py','engine_cycles.py','engine_sources.py'):
                 atomic_json(root/'tools'/name,{'fixture':True})
             for name in ('kerosene_reference.py', 'kerosene_validation.py', 'kerosene_probe.c', 'propellant_comparison.py'):
                 atomic_json(root/'tools'/name, {'fixture':True})

@@ -1,0 +1,64 @@
+{
+  "kind": "existing_source_http_recheck",
+  "status": "COMPLETE",
+  "started_at": "2026-10-12T02:56:26+00:00",
+  "note": "Grok topics 13/14 returned no web_search trace; only known original URLs are read here.",
+  "sources": [
+    {
+      "id": "V09_zq3_y1_20261012",
+      "original_id": "V09_zq3_y1",
+      "url": "https://www.landspace.com/news-detail.html?itemid=66",
+      "http_status": 200,
+      "final_url": "https://www.landspace.com/news-detail.html?itemid=66",
+      "status": "CAPTURED",
+      "file": "调研/原始来源/20261012_engine_cycles/V09_zq3_y1.txt",
+      "sha256": "a8b66e39574d53b5159085ecb4d79ff4448390f018e729615a46cdd9f2adac2e",
+      "bytes": 24474
+    },
+    {
+      "id": "V11_tq15a_20261012",
+      "original_id": "V11_tq15a",
+      "url": "https://www.landspace.com/news-detail.html?itemid=20",
+      "http_status": 200,
+      "final_url": "https://www.landspace.com/news-detail.html?itemid=20",
+      "status": "CAPTURED",
+      "file": "调研/原始来源/20261012_engine_cycles/V11_tq15a.txt",
+      "sha256": "cbb0167c34a1166a4f2f7cfc11f809273e174509c1f38a668d0b7fe3cb6b7cdf",
+      "bytes": 16887
+    },
+    {
+      "id": "V06_casc_engines_20261012",
+      "original_id": "V06_casc_engines",
+      "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+      "http_status": 200,
+      "final_url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+      "status": "CAPTURED",
+      "file": "调研/原始来源/20261012_engine_cycles/V06_casc_engines.txt",
+      "sha256": "23d9ec4337618676f2fab8b29c3d384720ee7a5655c3cb44d71a4a57197c0d36",
+      "bytes": 18755
+    },
+    {
+      "id": "L07_yf100_cmse_20261012",
+      "original_id": "L07_yf100_cmse",
+      "url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html",
+      "http_status": 200,
+      "final_url": "https://www.cmse.gov.cn/dmt/cbw/zrht/2022nian/2022dsiq/202302/t20230221_52733.html",
+      "status": "CAPTURED",
+      "file": "调研/原始来源/20261012_engine_cycles/L07_yf100_cmse.txt",
+      "sha256": "37285cbce9869ec41bf91bf3a172d17ecc77c7c4579dbfa4d4aba14d4750cfa0",
+      "bytes": 30410
+    },
+    {
+      "id": "L06_tq12a_crossref_20261012",
+      "original_id": "L06_tq12a_crossref",
+      "url": "https://api.crossref.org/works/10.1016/j.actaastro.2026.05.033",
+      "http_status": 200,
+      "final_url": "https://api.crossref.org/works/10.1016/j.actaastro.2026.05.033",
+      "status": "CAPTURED",
+      "file": "调研/原始来源/20261012_engine_cycles/L06_tq12a_crossref.txt",
+      "sha256": "4cf0d727fe1b47a23c93aafadc48678ab320c4f8df9551c1b4cdddc8f4a54c9c",
+      "bytes": 9339
+    }
+  ],
+  "finished_at": "2026-10-12T02:56:29+00:00"
+}

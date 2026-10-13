@@ -93,13 +93,13 @@ def assignment():
     body += flow(770, 589, 815, 589)
     body += flow(1071, 589, 1116, 589)
     body += calculation_node(520, 700, 250, "恒密度泵与轴功", ["压升 / 密度 / 效率", "泵功 → 支路流量"], "入口焓与密度显式给定", TEAL)
-    body += calculation_node(821, 700, 250, "给定热状态外排", ["发生器TP → 冻结涡轮", "分流后主室TP → 喷管"], "受限原型 · 不支持回流", TEAL)
-    body += calculation_node(1122, 700, 278, "整机口径与热边界", ["两路轴向推力 / 总消耗", "维持状态所需热交换"], "倒算热量 ≠ 冷却负荷", TEAL)
+    body += calculation_node(821, 700, 250, "循环拓扑模型", ["给定热状态 / Q=0 HP", "开式外排 / 富氧预燃回流"], "两个模型ID · 条件性输入", TEAL)
+    body += calculation_node(1122, 700, 278, "整机口径与守恒", ["主室/支路推力与总消耗", "质量 / 元素 / 焓 / 轴功"], "无冷却/瞬态/实机标定", TEAL)
     body += flow(770, 771, 815, 771, TEAL)
     body += flow(1071, 771, 1116, 771, TEAL)
     body += text(520, 888, "自动执行：严格参数输入 → CLI编排 → 纯C求解 → JSON / 运行记录", 21, INK, 600)
     body += text(520, 927, "Python仅管理、复核和绘图；定比热旧模型保留为教学 / 回归基准。", 20, MUTED)
-    body += text(520, 960, "连续液体已接单独HP/固定喷管；泵、分流、循环仍未闭合。", 20, AMBER, 600)
+    body += text(520, 960, "连续液体HP/喷管与循环原型可运行；真实型号输入和独立验证仍缺。", 20, AMBER, 600)
 
     body += flow(1426, 678, 1476, 678)
     body += rect(1482, 410, 378, 575)
@@ -136,16 +136,16 @@ def assignment():
         body += text(x + 22, 1276, detail, 19, MUTED)
         body += text(x + 22, 1309, tag, 17, AMBER if planned else BLUE, 600)
     body += text(60, 1376, "尚未覆盖", 22, AMBER, 650)
-    body += text(211, 1376, "通用EOS / 国产煤油批次 · 泵后压升与分流 · 全循环硬件 · 冷却分离寿命 · 型号独立参考", 21, MUTED)
+    body += text(211, 1376, "通用EOS / 国产煤油批次 · 泵图谱与喷注 · 冷却和瞬态寿命 · 型号独立整机参考", 21, MUTED)
     body += '<line x1="60" y1="1410" x2="1860" y2="1410" stroke="#cfdae6"/>'
     body += link("../../作业要求/大作业1_要求存档.md", text(60, 1448, "要求依据：用户照片转录与课件差异记录；未指定有限元、CFD、GUI或CEA。", 17, MUTED))
-    body += text(1070, 1448, "两型直接原文核验截至2026-10-03；本图不刷新线上事实。", 17, MUTED)
+    body += text(1070, 1448, "构型来源仍按台账日期；方法情景不写成新型号事实。", 17, MUTED)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
         f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="assignment-title assignment-desc">'
         '<title id="assignment-title">作业要求与动力系统研究架构</title>'
         '<desc id="assignment-desc">三条课程研究主线对应证据参数、C17计算和条件性改进分析；'
-        '共同验证支撑四项交付；连续单相液体表已接独立HP和固定喷管，真实型号、泵与完整循环仍有缺口。</desc>'
+        '共同验证支撑四项交付；连续单相液体表已接HP和固定喷管，另有开式/补燃循环原型，真实型号参数与独立验证仍有缺口。</desc>'
         '<defs><marker id="flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">'
         '<path d="M0,0 L7,3.5 L0,7 Z" fill="#53697d"/></marker></defs>'
         '<g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif">'
@@ -156,7 +156,7 @@ def assignment():
 
 MERMAID = """flowchart TD
   A[REQ-01 调查两型工作方案与能力] --> E[证据与参数：版本 / 工况 / 来源 / 未知]
-  B[REQ-02 C语言理论性能计算] --> C[C17：NASA9 / TP与HP / 冻结喷管 / 给定热状态外排]
+  B[REQ-02 C语言理论性能计算] --> C[C17：NASA9 / TP与HP / 冻结喷管 / 开式与补燃原型]
   L[纯C连续CH4/O2单相表：密度 / 化学焓 / 元素库存] --> C
   R[REQ-03 优缺点与可能改进，含计算] --> I[条件性收益 / 尺寸代价 / 输入响应]
   E --> C --> I

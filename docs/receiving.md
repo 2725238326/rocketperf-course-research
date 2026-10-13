@@ -49,16 +49,21 @@ python tools/handoff.py verify --package .
 
 ```powershell
 python tools/quality.py
+python tools/pipeline.py test --configuration Release
 python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/prescribed_cycle.ini
 python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
+./build/release/rocketperf.exe cycle adiabatic cases/vehicles/zq3_y1_stage1.ini --text
+./build/release/rocketperf.exe cycle adiabatic cases/vehicles/cz10b_first_stage1.ini --text
 ```
 
 `HANDOFF-NEW-ID` 必须是未使用的新目录名。交接包中的 exe 只用于演示和核对哈希；代码修改不能只运行旧 exe，必须重新构建、测试和生成新的运行记录。
 
+`cycle adiabatic`与`cases/vehicles/`属于2026-10-12之后新增的源码工作区研究情景，不在2026-10-07固定阶段包里。接收者从较早ZIP运行时不得假设命令存在；使用包含新模型的干净检查点重建并核对相应来源/测试指纹后，才能复跑这些情景。
+
 ## 讲解顺序
 
 1. 先说课程研究问题和资料缺口，不把公开构型资料补成发动机性能卡。
-2. 再说明输入、控制体和模型 ID：NASA9、九物种气相 TP/HP、冻结喷管、给定热状态外排循环。
+2. 再说明输入、控制体和模型 ID：NASA9、九物种气相 TP/HP、冻结喷管；区分历史给定热状态外排与`adiabatic_single_shaft_cycle_v1`绝热开式/补燃原型。
    新`hp-h`/`frozen-h`需说明相态与形成焓基准，用[保存版本](../results/validation/adiabatic_inlet_v1/manifest.json)演示，不把气态零热交换燃烧室说成液态/整机闭合。
    `hp-liquid`/`frozen-liquid`另有[固定液态锚点版本](liquid-anchor-validation.md)，只用指定温度化学焓与元素库存；PowerShell反应物ID需加引号。讲清“液态反应物记录”不等于液体EOS、泵入口或整机性能。
 3. 演示一个成功算例和一个失败边界，展示 stdout、stderr、run-manifest 和残差。
@@ -70,7 +75,7 @@ python tools/cycle_validation.py --archive-id HANDOFF-NEW-ID
 
 - `prescribed_thermal_cycle_v1` 不是绝热真实发动机循环；热交换是给定状态的倒算量。
 - 合成算例约 302 s 不能写成朱雀三号或长征十号乙性能。
-- 回流、液态物性、泵图谱、冷却、瞬态、凝聚相和真实型号缺失参数仍未闭合。
+- 新模型可计算显式假设的补燃回流；历史`prescribed_thermal_cycle_v1`仍拒绝回流。液相闪蒸/供给路径、泵图谱、冷却、瞬态、凝聚相和真实型号缺失参数仍未闭合。
 - 质量工具通过只表示结构、数值和追溯契约通过，不替代参数原文复核或独立科学审查。
 
 ## 交接完成条件

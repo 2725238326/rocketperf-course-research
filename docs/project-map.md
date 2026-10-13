@@ -5,13 +5,17 @@
 ```text
 火发原理/
 ├─ README.md / AGENTS.md       人与agent入口
+├─ 代码.zip                    辅助归档；当前工作以目录源码为准
 ├─ worknow.md                 生成的当前工作面
 ├─ rules.md / handoff.md       稳定约束与接手叙述
 ├─ project/                   任务、模块、目录策略、验收证据
 ├─ docs/
+│  ├─ README.md               文档导航
 │  ├─ architecture/           三视图SVG/Mermaid/离线HTML
 │  ├─ governance.md           任务/文档/Git/目录操作规范
 │  ├─ engineering.md          计算核心设计契约
+│  ├─ cycle-integration.md    新循环方程及协作合并对照
+│  ├─ engine-cycle-validation.md 新循环边界与试跑
 │  ├─ coding-style.md         C代码撰写规范
 │  ├─ two-vehicle-study.md    四级段事实、方法结果和可计算边界
 │  ├─ tasks.md                生成的完整任务板
@@ -51,7 +55,7 @@
 
 入口负责导航；规范负责约束；操作说明负责命令；研究文档负责论证；历史快照负责“当时做了什么”；生成文件负责展示登记状态。不在多个文件重复维护任务表、Git实况和当前测试计数。
 
-新研究专题使用任务ID命名，结项后链接回调研索引。新模块先定义契约和源码归属，补测试，再更新架构与构建登记。thermo已有受限气相方法与单相液体表/入口HP，cycle仍是给定热状态的prototype；图中保持真实范围，不通过目录暗示高级模型已完成。
+新研究专题使用任务ID命名，结项后链接回调研索引。新模块先定义契约和源码归属，补测试，再更新架构与构建登记。thermo已有受限气相方法与单相液体表/入口HP；cycle保留历史给定热状态模型，并新增绝热开式/补燃研究原型，其验证与正式归档见[循环验证](engine-cycle-validation.md)。工程验收不会把研究原型变成实机标定模型；图中保持真实范围。
 
 ## 产物与存储
 

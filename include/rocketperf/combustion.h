@@ -133,4 +133,21 @@ RpStatus rp_kerosene_equilibrium_hp_anchor(const RpKeroseneAnchorFeed *feed,
                                           const RpCombustionOptions *options,
                                           RpCombustionResult *output, RpError *error);
 
+/* Mixed fresh/returned streams on the pinned chemical mass and enthalpy basis.
+ * Inventory must describe one kg of C/H/O material; positive C, H and O are
+ * required. The basis is an explicit caller assertion, not phase/provenance
+ * validation. Products: nine neutral ideal gases, T=1000..6000 K, p=100..1e9 Pa.
+ * This distinct interface does not broaden the fixed RP-1 anchor method domain.
+ * No liquid flash, condensed carbon or unrestricted fuel-property evaluation.
+ * Every failure leaves output unchanged; NULL options uses HP defaults. */
+typedef struct {
+    double pressure_pa;
+    double h_j_per_kg;
+    double elements_kmol_per_kg[RP_CHO_ELEMENT_COUNT];
+    RpEnthalpyBasis basis;
+} RpChoMixedFeed;
+RpStatus rp_cho_equilibrium_hp_mixed(const RpChoMixedFeed *feed,
+                                     const RpCombustionOptions *options,
+                                     RpCombustionResult *output, RpError *error);
+
 #endif

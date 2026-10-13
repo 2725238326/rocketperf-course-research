@@ -1,0 +1,6 @@
+problem case=zq3_y1_stage1_preburner_nine hp p,bar=110
+reactants
+ name=MIXED_FEED C 1 H 4 O 1.0026913509256596 wt%=100 t,k=298.15 h,j/mole=-94034.84150936018
+only H2 O2 H2O CO CO2 CH4 H O OH
+output siunits trace=1.e-7
+end

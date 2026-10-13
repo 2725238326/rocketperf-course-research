@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "dataset_id": "vehicle-cycle-evidence-v1",
+  "updated_at": "2026-10-13",
+  "status": "evidence_map_and_research_scenario_gate_not_engine_solver_inputs",
+  "records": [
+    {
+      "id": "zq3_y1_stage1_cycle_evidence",
+      "object": "ZQ-3",
+      "variant": "遥一",
+      "stage": "一级",
+      "parameter": "cycle_architecture_evidence",
+      "value": "TQ-12A/相关家族有燃气发生器循环证据；遥一首飞工作点和完整循环卡缺失",
+      "unit": "classification",
+      "data_role": "fact",
+      "operating_boundary": "家族架构与遥一构型背景；不代表单机飞行工况",
+      "source_refs": ["V09_zq3_y1", "L06_tq12a_crossref"],
+      "model_use": "architecture_context_only",
+      "notes": "开式研究案例可用于演示泵功、发生器外排、支路推力和质量/元素/焓边界；不把研究输入当TQ-12A实测输入。"
+    },
+    {
+      "id": "zq3_y1_stage2_cycle_evidence",
+      "object": "ZQ-3",
+      "variant": "遥一",
+      "stage": "二级",
+      "parameter": "cycle_architecture_evidence",
+      "value": "TQ-15A与TQ-12A共用燃气发生器等关键组合件；遥一具体工作点和延伸段混合边界缺失",
+      "unit": "classification",
+      "data_role": "fact",
+      "operating_boundary": "TQ-15A产品/家族描述与遥一构型分别使用；历史朱雀二号性能不迁移",
+      "source_refs": ["V09_zq3_y1", "V11_tq15a", "L06_tq12a_crossref"],
+      "model_use": "architecture_context_only",
+      "notes": "开式情景使用独立外排喷管，不能模拟公开描述中的涡轮排气进入推力室喷管延伸段。"
+    },
+    {
+      "id": "cz10b_first_stage1_cycle_evidence",
+      "object": "CZ-10B",
+      "variant": "首飞",
+      "stage": "一级",
+      "parameter": "cycle_architecture_evidence",
+      "value": "130吨级/ YF-100家族资料支持高压富氧补燃背景；首飞具体发动机后缀和运行点未公开桥接",
+      "unit": "classification",
+      "data_role": "fact",
+      "operating_boundary": "家族技术来源、长十乙总体构型和首飞发动机布局分开记账",
+      "source_refs": ["V01_calt_cz10b", "V06_casc_engines", "V07_cctv_interview", "L07_yf100_cmse"],
+      "model_use": "architecture_context_only",
+      "notes": "RP-1替代物富氧补燃案例用于方法研究；国产煤油组成、密度、泵后状态和完整硬件参数不由此记录补齐。"
+    },
+    {
+      "id": "cz10b_first_stage2_cycle_evidence",
+      "object": "CZ-10B",
+      "variant": "首飞",
+      "stage": "二级",
+      "parameter": "cycle_architecture_evidence",
+      "value": null,
+      "unit": "classification",
+      "data_role": "unknown",
+      "operating_boundary": "公开资料确认液氧甲烷/140吨级描述，但未形成具体首飞装机循环身份桥接",
+      "source_refs": ["V01_calt_cz10b", "V02_calt_news", "V06_casc_engines"],
+      "model_use": "scenario_gate_only",
+      "notes": "同时保留开式和富氧补燃待判情景；程序能运行不等于循环事实已确认。"
+    }
+  ],
+  "missing_real_engine_fields": [
+    "具体发动机后缀与批次",
+    "主室/预燃室压力与O/F定义",
+    "真实燃料组成、形成焓、密度与泵后状态",
+    "泵出口、喷注/管路压降、涡轮入口/出口和轴功率",
+    "回流/排气组成、混合位置、喷管几何与损失",
+    "独立同工况实验或具名性能卡"
+  ],
+  "missing_value_policy": "缺失字段保留null或文字未知；仅以独立研究算例中的显式假设进入C求解器，不把证据地图作为型号输入。"
+}

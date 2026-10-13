@@ -1,0 +1,5 @@
+problem case=cz10b_first_stage2_orsc_preburner_expanded hp p,bar=220
+reactants
+ name=MIXED_FEED C 1 H 4 O 40.107654037026393 wt%=100 t,k=298.15 h,j/mole=-317167.85375340423
+output siunits trace=1.e-7
+end

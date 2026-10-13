@@ -351,6 +351,20 @@ RpStatus rp_cho_equilibrium_hp_inventory(
                           feed_enthalpy_j_per_kg, &policy, output, error);
 }
 
+RpStatus rp_cho_equilibrium_hp_mixed(const RpChoMixedFeed *feed,
+                                     const RpCombustionOptions *options,
+                                     RpCombustionResult *output, RpError *error)
+{
+    if (feed == NULL || output == NULL) {
+        return rp_error_set(error, RP_INVALID_ARGUMENT, "Mixed CHO feed and output are required.");
+    }
+    if (feed->basis != RP_ENTHALPY_NASA9_CEA_V334) {
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Mixed CHO feed requires the pinned NASA9/CEA formation-enthalpy basis.");
+    }
+    return rp_cho_equilibrium_hp_inventory(feed->pressure_pa, feed->elements_kmol_per_kg,
+                                          feed->h_j_per_kg, options, output, error);
+}
+
 RpStatus rp_ch4_o2_equilibrium_hp(const RpCh4O2Feed *feed,
                                   const RpCombustionOptions *options,
                                   RpCombustionResult *output, RpError *error)

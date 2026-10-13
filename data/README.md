@@ -8,6 +8,8 @@
 
 `parameters/feed_property_candidates.json`是RES-006的研究候选档案，不是生产输入。它保留CEA单温度液态反应物锚点、CoolProp EOS身份、NIST surrogate和未知的真实发动机字段；运行`python tools/feed_candidates.py check`可按固定原始来源重生成并核对。
 
+`parameters/vehicle_cycle_evidence.json`只登记四个级段的循环证据角色和缺口：朱雀三号天鹊家族燃气发生器、长十乙一级高压补燃家族背景、长十乙二级待判。它是文档/算例的证据地图，不是求解器输入；求解器只读取`cases/vehicles/`中的明确研究假设。通过方式见[数据契约测试](../tests/test_data.py)。
+
 ANA-008只从固定CEA原文提取CH₄(L)/O₂(L)两条记录生成`src/thermo/reactants_generated.h`，供独立固定锚点HP接口使用；`generate-header`/`check-header`检查其身份。整个候选JSON、CoolProp EOS、RP-1和surrogate不是生产运行时输入；[方法边界](../docs/liquid-anchor-validation.md)不含液体密度/压力修正或真实型号字段。
 
 初版CLI只支持`synthetic_benchmark`和`research_scenario`。增加真实型号类别前须先设计并验证字段级证据契约，而非仅增加一个标签。

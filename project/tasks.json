@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
-  "revision": 285,
+  "revision": 297,
   "context": {
-    "phase": "汇报前质量整改与本地阶段交付",
+    "phase": "文档索引与循环证据口径统一；完成质量复验和语义验收",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "DOC-001",
-      "REL-001"
+      "MOD-009"
     ],
     "facts": [
-      "QA-002已修正数值、诊断、交互和证据口径；28源静态分析与45组CLI通过，记录见taskshot/2026-10-12_049-quality-readiness.md。",
-      "报告与展示内容已有草稿；PPT、真实贡献和演练未完成，不把本地阶段包称最终课程提交。"
+      "新循环正式归档为engine_cycles_v2_20261013，哈希复验已通过；C/CEA对照仅为受限软件状态核验。",
+      "五个车辆算例均为显式假设情景；长十乙二级循环身份仍未知，RP-1是指定替代物。",
+      "报告与展示文档保持草稿，参数原文证据截止日期不随整理更新。"
     ]
   },
   "tasks": [
@@ -1323,6 +1323,43 @@
         "kind": "quality",
         "path": "project/evidence/QA-002_8508c5e42a3c.json",
         "sha256": "15b2061b9517ff7049df0de63dd6ec2d7d9f1b7af1568aae495f5bb010cc834d"
+      }
+    },
+    {
+      "id": "MOD-009",
+      "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+      "status": "DONE",
+      "priority": 0,
+      "depends_on": [
+        "QA-002"
+      ],
+      "required_artifacts": [
+        "include/rocketperf/engine_cycle.h",
+        "src/cycle/adiabatic.c",
+        "docs/engine-cycle-validation.md",
+        "docs/cycle-integration.md",
+        "data/parameters/vehicle_cycle_evidence.json",
+        "cases/vehicles/zq3_y1_stage1.ini",
+        "cases/vehicles/zq3_y1_stage2.ini",
+        "cases/vehicles/cz10b_first_stage1.ini",
+        "cases/vehicles/cz10b_first_stage2.ini",
+        "cases/vehicles/cz10b_first_stage2_orsc.ini",
+        "results/research/engine_cycles_v2_20261013/manifest.json",
+        "taskshot/2026-10-13_050-engine-cycles.md",
+        "docs/README.md",
+        "taskshot/2026-10-13_051-document-map.md"
+      ],
+      "acceptance": [
+        "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+        "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+        "提供JSON/中文文本及五个可复跑研究入口，保存成功拒绝和部件/化学参考；Debug/Release/质量六组、30源严格静态分析和架构视觉检查通过；提供组员方程/接口/输入/验证对照契约。"
+      ],
+      "owner": "root",
+      "note": "验收契约产物与工程证据完成：四级段五情景、独立C17开式/全氧富氧补燃、事务性失败、压力/轴功/守恒及固定参考复核、文档导航与协作对照已落地。真实子型参数、国产煤油身份、长十乙二级循环、冷却/瞬态/泵图谱和独立实验仍未闭合；最终报告/PPT按用户选择保留草稿。仅本地验收，不含外部发布。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/MOD-009_aed76e0b6bdd.json",
+        "sha256": "e0b6636795ff08ce712657dcdb9931e382ad8b15c8c50089e5d150aa2d6ee716"
       }
     }
   ],
@@ -7254,6 +7291,550 @@
         }
       },
       "hash": "fd48de31293763eb73f344bcc5cd7a73bbc0bb2755e607404e74d5f9270f3a53"
+    },
+    {
+      "seq": 303,
+      "at": "2026-10-12T02:23:47+00:00",
+      "task": "MOD-009",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "fd48de31293763eb73f344bcc5cd7a73bbc0bb2755e607404e74d5f9270f3a53",
+      "hash": "cce8a5c70f70c9ab9327f496e72285107830e36236a1f4d20b3fc65d2baaccb1"
+    },
+    {
+      "seq": 304,
+      "at": "2026-10-12T02:23:49+00:00",
+      "task": "MOD-009",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按用户明确要求实现两型研究入口及循环，不启动PPT或最终报告。",
+      "previous_hash": "cce8a5c70f70c9ab9327f496e72285107830e36236a1f4d20b3fc65d2baaccb1",
+      "hash": "045476ae47e9c3a2c6931ab6f2bf9ffef3b5d9d591841a2bbe5bc4d44210938e"
+    },
+    {
+      "seq": 305,
+      "at": "2026-10-12T02:23:51+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户优先补两型与循环。",
+      "previous_hash": "045476ae47e9c3a2c6931ab6f2bf9ffef3b5d9d591841a2bbe5bc4d44210938e",
+      "details": {
+        "context_before": {
+          "phase": "汇报前质量整改与本地阶段交付",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "QA-002已修正数值、诊断、交互和证据口径；28源静态分析与45组CLI通过，记录见taskshot/2026-10-12_049-quality-readiness.md。",
+            "报告与展示内容已有草稿；PPT、真实贡献和演练未完成，不把本地阶段包称最终课程提交。"
+          ]
+        },
+        "context_after": {
+          "phase": "两型构型核对与绝热开式/补燃C17循环实现",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-009"
+          ],
+          "facts": [
+            "MOD-009正在补四级段可运行研究入口及发生器/补燃求解，真实缺失参数保持未知。",
+            "QA-002整改已完成；本轮不启动PPT、贡献确认与演练。"
+          ]
+        }
+      },
+      "hash": "e1f28ee88be2f28f2b438941d320be46c967d775c87e3abf777f3f1c4fc20265"
+    },
+    {
+      "seq": 306,
+      "at": "2026-10-12T03:14:12+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户明确先完成我方版本；独立C文件和布尔架构入口便于后续与组员对照，当前不等待其代码。",
+      "previous_hash": "e1f28ee88be2f28f2b438941d320be46c967d775c87e3abf777f3f1c4fc20265",
+      "details": {
+        "contract_before": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "results/research/engine_cycles_v1_20261012/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "C17实现绝热发生器外排及补燃回流，泵后压力/焓、元素与能量库存、涡轮和轴功分流闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；说明仍未覆盖的硬件和实验边界。"
+          ],
+          "owner": "root",
+          "note": "按用户明确要求实现两型研究入口及循环，不启动PPT或最终报告。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "results/research/engine_cycles_v1_20261012/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "用户明确先完成我方版本；独立C文件和布尔架构入口便于后续与组员对照，当前不等待其代码。",
+          "verification": null
+        }
+      },
+      "hash": "5c6ebcfadbc7057dda5b3ec17296721a07ca4f8b6214c2858aefebba29d8dbdf"
+    },
+    {
+      "seq": 307,
+      "at": "2026-10-13T08:04:52+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "2026-10-13用户要求整理文档群；本轮先统一导航、模型能力及证据边界，循环实现验收继续保留ACTIVE。",
+      "previous_hash": "5c6ebcfadbc7057dda5b3ec17296721a07ca4f8b6214c2858aefebba29d8dbdf",
+      "details": {
+        "contract_before": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "results/research/engine_cycles_v1_20261012/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "用户明确先完成我方版本；独立C文件和布尔架构入口便于后续与组员对照，当前不等待其代码。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "results/research/engine_cycles_v1_20261012/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md",
+            "docs/README.md",
+            "docs/cycle-integration.md",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "2026-10-13用户要求整理文档群；本轮先统一导航、模型能力及证据边界，循环实现验收继续保留ACTIVE。",
+          "verification": null
+        }
+      },
+      "hash": "b767f53ba055f62465323257447cd84cabb50e56222a943de9290a1b09f5e96f"
+    },
+    {
+      "seq": 308,
+      "at": "2026-10-13T08:51:29+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "2026-10-13整理文档入口及模型版本口径；新循环仍待统一质量验收和正式研究归档。",
+      "previous_hash": "b767f53ba055f62465323257447cd84cabb50e56222a943de9290a1b09f5e96f",
+      "details": {
+        "context_before": {
+          "phase": "两型构型核对与绝热开式/补燃C17循环实现",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-009"
+          ],
+          "facts": [
+            "MOD-009正在补四级段可运行研究入口及发生器/补燃求解，真实缺失参数保持未知。",
+            "QA-002整改已完成；本轮不启动PPT、贡献确认与演练。"
+          ]
+        },
+        "context_after": {
+          "phase": "绝热开式/补燃原型验收与文档对齐",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-009"
+          ],
+          "facts": [
+            "文档索引已按项目现状、两型证据、模型契约、验证和交付分层；历史阶段文档保留原日期。",
+            "新增四级段循环证据地图只记家族支持/未知，不作为求解输入；五份循环case均为显式研究假设。",
+            "绝热循环已有Debug/Release局部测试和CEA开发试跑，但代码/文档修改后统一quality与正式results/research归档仍待完成。",
+            "真实型号参数、国产煤油批次、具体首飞二级循环身份和独立整机实验参考仍未知。"
+          ]
+        }
+      },
+      "hash": "86e835084d4a0f6c7bfbed79282aadb5fe82dee98a17c0acc9e4c0bb600d4331"
+    },
+    {
+      "seq": 309,
+      "at": "2026-10-13T09:37:28+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "文档整理后统一quality六组通过；新正式研究归档用2026-10-13日期ID，开发probe仍保留于build。",
+      "previous_hash": "86e835084d4a0f6c7bfbed79282aadb5fe82dee98a17c0acc9e4c0bb600d4331",
+      "details": {
+        "contract_before": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "results/research/engine_cycles_v1_20261012/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md",
+            "docs/README.md",
+            "docs/cycle-integration.md",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "2026-10-13用户要求整理文档群；本轮先统一导航、模型能力及证据边界，循环实现验收继续保留ACTIVE。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "docs/cycle-integration.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "cases/vehicles/cz10b_first_stage2_orsc.ini",
+            "results/research/engine_cycles_v1_20261013/manifest.json",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "文档整理后统一quality六组通过；新正式研究归档用2026-10-13日期ID，开发probe仍保留于build。",
+          "verification": null
+        }
+      },
+      "hash": "cb32bdb6889200831c73f1d4bb65784a337cfda407ce66a097bb21842e846afe"
+    },
+    {
+      "seq": 310,
+      "at": "2026-10-13T10:10:46+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "归档器source_dirty采样时机已修正并加回归；正式结果升为engine_cycles_v2_20261013，保留v1旧归档。",
+      "previous_hash": "cb32bdb6889200831c73f1d4bb65784a337cfda407ce66a097bb21842e846afe",
+      "details": {
+        "contract_before": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "docs/cycle-integration.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "cases/vehicles/cz10b_first_stage2_orsc.ini",
+            "results/research/engine_cycles_v1_20261013/manifest.json",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及可复跑型号入口，保存成功拒绝和部件/化学参考；Debug/Release/质量入口、严格静态分析及架构视觉核对通过；提供后续组员方程/接口/输入/验证对照合并契约。"
+          ],
+          "owner": "root",
+          "note": "文档整理后统一quality六组通过；新正式研究归档用2026-10-13日期ID，开发probe仍保留于build。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "docs/cycle-integration.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "cases/vehicles/cz10b_first_stage2_orsc.ini",
+            "results/research/engine_cycles_v2_20261013/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md",
+            "docs/README.md",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及五个可复跑研究入口，保存成功拒绝和部件/化学参考；Debug/Release/质量六组、30源严格静态分析和架构视觉检查通过；提供组员方程/接口/输入/验证对照契约。"
+          ],
+          "owner": "root",
+          "note": "归档器source_dirty采样时机已修正并加回归；正式结果升为engine_cycles_v2_20261013，保留v1旧归档。",
+          "verification": null
+        }
+      },
+      "hash": "86950766c4d45acf91a655e27ab61e2188a5de0b260b77abaab680deab183281"
+    },
+    {
+      "seq": 311,
+      "at": "2026-10-13T10:33:16+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "收口循环档案、更新跨文档状态并执行最终统一验收",
+      "previous_hash": "86950766c4d45acf91a655e27ab61e2188a5de0b260b77abaab680deab183281",
+      "details": {
+        "context_before": {
+          "phase": "绝热开式/补燃原型验收与文档对齐",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-009"
+          ],
+          "facts": [
+            "文档索引已按项目现状、两型证据、模型契约、验证和交付分层；历史阶段文档保留原日期。",
+            "新增四级段循环证据地图只记家族支持/未知，不作为求解输入；五份循环case均为显式研究假设。",
+            "绝热循环已有Debug/Release局部测试和CEA开发试跑，但代码/文档修改后统一quality与正式results/research归档仍待完成。",
+            "真实型号参数、国产煤油批次、具体首飞二级循环身份和独立整机实验参考仍未知。"
+          ]
+        },
+        "context_after": {
+          "phase": "文档索引与循环证据口径统一；完成质量复验和语义验收",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "MOD-009"
+          ],
+          "facts": [
+            "新循环正式归档为engine_cycles_v2_20261013，哈希复验已通过；C/CEA对照仅为受限软件状态核验。",
+            "五个车辆算例均为显式假设情景；长十乙二级循环身份仍未知，RP-1是指定替代物。",
+            "报告与展示文档保持草稿，参数原文证据截止日期不随整理更新。"
+          ]
+        }
+      },
+      "hash": "d1ad861950dfb58fcaecf03bdb6cec8957bf46b63dd04476088f7106fb1a04d9"
+    },
+    {
+      "seq": 312,
+      "at": "2026-10-13T10:43:56+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "修正快照日期：首次实现跨日至13日整理，正式产物文件为2026-10-13_050；其余契约不变",
+      "previous_hash": "d1ad861950dfb58fcaecf03bdb6cec8957bf46b63dd04476088f7106fb1a04d9",
+      "details": {
+        "contract_before": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "docs/cycle-integration.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "cases/vehicles/cz10b_first_stage2_orsc.ini",
+            "results/research/engine_cycles_v2_20261013/manifest.json",
+            "taskshot/2026-10-12_050-engine-cycles.md",
+            "docs/README.md",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及五个可复跑研究入口，保存成功拒绝和部件/化学参考；Debug/Release/质量六组、30源严格静态分析和架构视觉检查通过；提供组员方程/接口/输入/验证对照契约。"
+          ],
+          "owner": "root",
+          "note": "归档器source_dirty采样时机已修正并加回归；正式结果升为engine_cycles_v2_20261013，保留v1旧归档。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "MOD-009",
+          "title": "两型可运行研究入口与绝热发生器/补燃循环落地",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "QA-002"
+          ],
+          "required_artifacts": [
+            "include/rocketperf/engine_cycle.h",
+            "src/cycle/adiabatic.c",
+            "docs/engine-cycle-validation.md",
+            "docs/cycle-integration.md",
+            "data/parameters/vehicle_cycle_evidence.json",
+            "cases/vehicles/zq3_y1_stage1.ini",
+            "cases/vehicles/zq3_y1_stage2.ini",
+            "cases/vehicles/cz10b_first_stage1.ini",
+            "cases/vehicles/cz10b_first_stage2.ini",
+            "cases/vehicles/cz10b_first_stage2_orsc.ini",
+            "results/research/engine_cycles_v2_20261013/manifest.json",
+            "taskshot/2026-10-13_050-engine-cycles.md",
+            "docs/README.md",
+            "taskshot/2026-10-13_051-document-map.md"
+          ],
+          "acceptance": [
+            "核对首飞构型及循环来源，四级段入口分别记录事实/假设/未知；禁止把研究参数或替代煤油当实机卡。",
+            "独立C17实现文件与布尔切换统一接口完成绝热发生器外排及全氧富氧补燃，泵后压力/焓、元素与能量库存、涡轮和轴功闭合；回流压力不可达、支路饥饿及数值失败显式拒绝且不改输出。",
+            "提供JSON/中文文本及五个可复跑研究入口，保存成功拒绝和部件/化学参考；Debug/Release/质量六组、30源严格静态分析和架构视觉检查通过；提供组员方程/接口/输入/验证对照契约。"
+          ],
+          "owner": "root",
+          "note": "修正快照日期：首次实现跨日至13日整理，正式产物文件为2026-10-13_050；其余契约不变",
+          "verification": null
+        }
+      },
+      "hash": "c54aec49e4b81d3131b4aed0dd091c1e8dc3f2936bcf9a0d7d3257cda710fa14"
+    },
+    {
+      "seq": 313,
+      "at": "2026-10-13T10:51:48+00:00",
+      "task": "MOD-009",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "四级段证据地图与五输入明确事实/假设/未知；独立C17布尔拓扑、HP回流焓/元素、轴功及压力拒绝契约由Debug/Release和归档5成功4拒绝核对；12张CEA卡/814关系及30源静态分析、架构视觉检查见050记录；文档索引/051快照完整，六组新鲜质量PASS。语义核对由当前负责人进行，不声称独立科学审查或实机验证。",
+      "previous_hash": "c54aec49e4b81d3131b4aed0dd091c1e8dc3f2936bcf9a0d7d3257cda710fa14",
+      "hash": "80bca2cd6147a73d26792ae9db475719840c0917603f7757e39e7a74e9e9f6f2"
+    },
+    {
+      "seq": 314,
+      "at": "2026-10-13T10:51:52+00:00",
+      "task": "MOD-009",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收契约产物与工程证据完成：四级段五情景、独立C17开式/全氧富氧补燃、事务性失败、压力/轴功/守恒及固定参考复核、文档导航与协作对照已落地。真实子型参数、国产煤油身份、长十乙二级循环、冷却/瞬态/泵图谱和独立实验仍未闭合；最终报告/PPT按用户选择保留草稿。仅本地验收，不含外部发布。",
+      "previous_hash": "80bca2cd6147a73d26792ae9db475719840c0917603f7757e39e7a74e9e9f6f2",
+      "hash": "373867d89ff595fb2403beb88e63c2601edab634c2b9526dcd234f36fccffdcc"
     }
   ]
 }

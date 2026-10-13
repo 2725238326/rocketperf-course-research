@@ -11,7 +11,7 @@
 | 煤油方法 | [固定RP-1入口](docs/kerosene-validation.md)、[边界研究](调研/专题/RES-008_煤油计算边界.md) | C公共API/CLI已有；10 MPa/O-F2.2–4.0指定反应物，国产燃料批次仍未知 |
 | 改进计算 | [改进分析](docs/improvement-analysis.md)、[入口响应](docs/adiabatic-inlet-study.md) | 同条件收益、几何代价和输入响应；真实改装量或寿命仍缺证据 |
 | 方法比较 | [甲烷/RP-1成对研究](docs/propellant-method-comparison.md) | 同Pc/At/几何/背压，差值由C返回，保留各自入口/O-F身份 |
-| 循环 | [循环核验](docs/cycle-validation.md)、[热边界](docs/research-thermal-boundary.md) | 给定热状态外排原型；泵后供给、回流组成与完整循环尚未闭合 |
+| 循环 | [循环模型对照](docs/cycle-integration.md)、[新循环核验](docs/engine-cycle-validation.md)、[旧外排核验](docs/cycle-validation.md) | 历史给定热状态模型与新Q=0开式/富氧补燃原型并存；新原型已有本轮统一质量与正式研究归档，泵图谱、真实液相供给、冷却和实机标定仍未闭合 |
 | 保存输入、结果与参考 | [研究档案](results/research/README.md) | 每个版本带清单/哈希与失败记录，按其自身日期和构建身份使用 |
 
 [架构三视图](docs/architecture/README.md)说明业务和模块边界。[模型契约](docs/engineering.md)维护物理假设；源码清单由`project/modules.json`维护。
@@ -20,6 +20,10 @@
 
 ```powershell
 python tools/quality.py
+python tools/pipeline.py test --configuration Release
+./build/release/rocketperf.exe cycle adiabatic cases/vehicles/zq3_y1_stage1.ini --text
+./build/release/rocketperf.exe cycle adiabatic cases/vehicles/cz10b_first_stage1.ini --text
+./build/release/rocketperf.exe cycle adiabatic cases/vehicles/cz10b_first_stage2_orsc.ini --text
 python tools/liquid_combustion.py verify results/validation/liquid_combustion_v1
 python tools/kerosene_reference.py verify results/research/kerosene_products_v3_20261006
 python tools/kerosene_validation.py verify results/validation/kerosene_anchor_v1
@@ -41,6 +45,8 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 - RP-1、NIST surrogate和国产煤油批次是不同输入身份；四对象映射关联证据和方法，尚不足以构成真实性能卡。
 - 推力室、整机、整箭口径分别使用。单喷管HP不闭合支路轴功、回流、喷注或泵后过程。
+- 新循环输出的开式/补燃架构是研究情景；朱雀三号家族证据、长十乙一级家族证据和长十乙二级待判状态不能改写成具体首飞子型性能。
+- 新循环本轮已完成统一质量和正式研究归档；`build/engine-cycle-second-probe`仍是早期开发试跑，不是冻结交付。推荐复核`results/research/engine_cycles_v2_20261013/manifest.json`及其验证命令。
 - 约302 s和约193.65 MW来自给定热状态合成循环；后者是模型所需排热，不能直接当作冷却设计负荷。
 - 面积和背压研究不计算质量、侧载、流动分离或寿命。局部扰动是情景响应，不能称概率置信区间。
 - 域评估的0.4pa是Summerfield型经验分离参考：pa>pe证明理想pe低于背压，不证明实际分离位置；匹配/分离面积比是理想公式反解，非设计建议。
@@ -58,3 +64,5 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 
 近期批次：[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
+
+本轮文档入口和新旧循环口径整理见[2026-10-13整理记录](taskshot/2026-10-13_051-document-map.md)；完整阅读导航见[文档索引](docs/README.md)。

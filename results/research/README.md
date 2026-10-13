@@ -1,5 +1,11 @@
 # 研究计算档案
 
+## 2026-10-13 绝热开式/补燃循环
+
+`adiabatic_single_shaft_cycle_v1`的五个级段研究入口位于`cases/vehicles/`，模型说明见[循环集成对照](../../docs/cycle-integration.md)和[新循环验证](../../docs/engine-cycle-validation.md)。推荐版本为[engine_cycles_v2_20261013](engine_cycles_v2_20261013/manifest.json)：5个成功情景、4个预期拒绝、12张CEA部件HP卡和814项状态关系复算；运行输入、C二进制、固定CEA版本及结果哈希均在清单中。验证只是受限模型内的软件/状态关系证据，不是实机或实验验证。
+
+v1保留为归档器dirty标记修正前的历史版本；早期build probe保留在忽略目录`build/`。不改写或覆盖旧版本。两版所有数值只对应声明的研究输入，不代表型号性能或课程最终交付。
+
 ## 2026-10-07 甲烷与固定RP-1成对方法
 
 [propellant_comparison_v1](propellant_comparison_v1/manifest.json)保存57次C运行和8张新CEA卡：三个O/F情景、A10/A40与0/5/100 kPa背压共18个成对点，并逐点单独复跑两方法。15对成功、3对越域；共同几何/差值由C接口返回，1410项参考/关系比较。分析和SVG见[研究说明](../../docs/propellant-method-comparison.md)。复核：`python tools/propellant_comparison.py verify results/research/propellant_comparison_v1`。

@@ -16,12 +16,79 @@ from cycle_study import validate_study as validate_cycle_study
 import liquid_anchor
 import liquid_table
 import liquid_combustion
+import engine_cycles
 
 ROOT = Path(__file__).resolve().parents[1]
 BINARY = None
 
 
 class CliTests(unittest.TestCase):
+    def test_adiabatic_cycles_and_total_engine_boundary(self):
+        for name in engine_cycles.CASES:
+            with self.subTest(case=name):
+                text = (ROOT / f'cases/vehicles/{name}.ini').read_text(encoding='utf-8')
+                run = self.run_app('cycle', 'adiabatic', self.case(text))
+                self.assertEqual(run.returncode, 0, run.stderr)
+                report = json.loads(run.stdout)
+                self.assertGreater(engine_cycles.validate(report, text), 130)
+                b = report['balance']
+                if report['inputs']['staged_combustion']:
+                    self.assertEqual(b['external_mass_flow_kg_per_s'], 0)
+                    self.assertGreater(b['returned_mass_flow_kg_per_s'], 0)
+                    self.assertIsNone(report['branch_nozzle'])
+                else:
+                    self.assertEqual(b['returned_mass_flow_kg_per_s'], 0)
+                    self.assertGreater(b['external_mass_flow_kg_per_s'], 0)
+                run = self.run_app('cycle', 'adiabatic', self.case(text), '--text')
+                self.assertEqual(run.returncode, 0, run.stderr)
+                self.assertIn('整机研究比冲', run.stdout)
+                self.assertIn('非首飞实机性能', run.stdout)
+
+    def test_adiabatic_cycle_schema_and_physical_refusals(self):
+        text = (ROOT / 'cases/vehicles/cz10b_first_stage1.ini').read_text(encoding='utf-8')
+        for bad in (text + 'unknown=1\n', text + 'staged_combustion=false\n', text + '\x00',
+                    text.replace('staged_combustion=true', 'staged_combustion=1'),
+                    text.replace('case_kind=research_scenario', 'case_kind=flight_engine'),
+                    text.replace('main_area_ratio=8\n', ''), text.replace('main_area_ratio=8', 'main_area_ratio=nan')):
+            run = self.run_app('cycle', 'adiabatic', self.case(bad))
+            self.assertEqual(run.returncode, 3, run.stderr); self.assertFalse(run.stdout)
+        for old, new, status in (
+            ('return_pressure_drop_pa=1000000', 'return_pressure_drop_pa=12000000', 'out_of_domain'),
+            ('auxiliary_power_w=10000', 'auxiliary_power_w=100000000', 'out_of_domain'),
+            ('preburner_oxidizer_fuel_ratio=30', 'preburner_oxidizer_fuel_ratio=200', 'not_bracketed'),
+            ('fuel_temperature_k=298.15', 'fuel_temperature_k=300', 'out_of_domain'),
+            ('oxidizer_pump_outlet_pressure_pa=25000000', 'oxidizer_pump_outlet_pressure_pa=22000000', 'out_of_domain'),
+        ):
+            run = self.run_app('cycle', 'adiabatic', self.case(text.replace(old, new)))
+            self.assertEqual(run.returncode, 4, run.stderr); self.assertFalse(run.stdout)
+            self.assertTrue(run.stderr.startswith(status + ':'))
+        for args in (('cycle', 'adiabatic'), ('cycle', 'adiabatic', self.case(text), '--unknown')):
+            self.assertEqual(self.run_app(*args).returncode, 2)
+
+    def test_adiabatic_report_tampering_is_rejected(self):
+        text = (ROOT / 'cases/vehicles/cz10b_first_stage1.ini').read_text(encoding='utf-8')
+        run = self.run_app('cycle', 'adiabatic', self.case(text))
+        self.assertEqual(run.returncode, 0, run.stderr)
+        report = json.loads(run.stdout)
+        changes = (
+            lambda r: r['inputs'].update(staged_combustion=False),
+            lambda r: r['feed_states']['fuel'].update(inlet_h_j_per_kg=0),
+            lambda r: r['feed_states']['fuel'].update(basis='arbitrary_zero'),
+            lambda r: r['balance'].update(engine_specific_impulse_s=r['balance']['engine_specific_impulse_s'] + 1),
+            lambda r: r['balance'].update(energy_residual_w=0),
+            lambda r: r['balance'].update(returned_mass_flow_kg_per_s=0),
+            lambda r: r['mixing'].update(h_j_per_kg=r['mixing']['h_j_per_kg'] + 1000),
+            lambda r: r['turbine']['outlet'].update(pressure_pa=1000000),
+            lambda r: r['preburner']['gas'].update(temperature_k=900),
+            lambda r: r['case'].update(cycle_evidence='flight_verified'),
+            lambda r: r['chamber']['gas']['mole_fractions'].update(CO=0),
+            lambda r: r['pumps']['fuel'].update(outlet_h_j_per_kg=0),
+        )
+        for change in changes:
+            candidate = copy.deepcopy(report); change(candidate)
+            with self.subTest(line=change.__code__.co_firstlineno):
+                with self.assertRaises(ValueError): engine_cycles.validate(candidate, text)
+
     def test_propellant_case_file_matches_arguments_and_rejects_bad_fields(self):
         text = (ROOT/'cases/research/propellant_comparison.ini').read_text(encoding='utf-8')
         run = self.run_app('study','propellants','--case',self.case(text))

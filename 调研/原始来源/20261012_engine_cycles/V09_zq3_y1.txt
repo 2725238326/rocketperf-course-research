@@ -1,0 +1,373 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Content-Type" charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>朱雀三号重复使用遥一运载火箭入轨圆满成功</title>
+    <meta name="keywords" content="2025年12月3日，朱雀三号遥一运载火箭入轨圆满成功。"/>
+    <meta name="description" content="LANDSPACE 新闻中心"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/static/web/css/style.css?version=1.0.9" />
+    <link rel="stylesheet" type="text/css" href="/static/web/css/media.css?version=1.0.9" />
+    <link rel="stylesheet" type="text/css" href="/static/web/css/treesixty.css" />
+</head>
+
+<body>
+
+	<div class="page page-news-detail" >
+
+	    <!--手机端侧滑导航-->
+    <section class="section-mobile-nav">
+        <div class="content">
+            <div class="item-header">
+                <a href="index.html"><img class="logo" src="/static/web/images/logo.png"></a>
+                <span class="menu-btn"></span>
+            </div>
+            <div class="item-nav">
+                <ul class="main-nav">
+                    <li class="menu">
+                        <a class="handle" href="javascript:;">产品与服务<img class="arrow" src="/static/web/images/arrow.png"></a>
+                        <div class="sub-menu">
+                            <a href="product.html?mao=1">产品设备</a>
+                            <a href="product.html?mao=2">产品服务</a>
+                        </div>
+                    </li>
+                    <li class="menu">
+                        <a class="handle" href="javascript:;">蓝箭智慧<img class="arrow" src="/static/web/images/arrow.png"></a>
+                        <div class="sub-menu">
+                            <a href="wisdom.html?mao=1">技术路线</a>
+                            <a href="wisdom.html?ma2=2">基础设施</a>
+                        </div>
+                    </li>
+                    <li class="menu">
+                        <a class="handle" href="javascript:;">新闻中心<img class="arrow" src="/static/web/images/arrow.png"></a>
+                        <div class="sub-menu">
+                            <a href="news.html?catid=1&mao=1">最新新闻</a>
+                            <a href="new2.html?catid=2&mao=1">媒体报道</a>
+                            <a href="new3.html?catid=3&mao=1">蓝洞察</a>
+                            <a href="download.html?mao=1">资料下载</a>
+                        </div>
+                    </li>
+                    <li class="menu">
+                        <a class="handle" href="javascript:;">关于我们<img class="arrow" src="/static/web/images/arrow.png"></a>
+                        <div class="sub-menu">
+                            <a href="about.html?mao=0">企业介绍</a>
+                            <a href="about.html?mao=2">大事记</a>
+                            <a href="about.html?mao=3">荣誉资质</a>
+                            <a href="about.html?mao=4">联系我们</a>
+                        </div>
+                    </li>
+                    <li class="menu">
+                        <a class="handle" href="javascript:;">加入我们<img class="arrow" src="/static/web/images/arrow.png"></a>
+                        <div class="sub-menu">
+                            <a href="https://uq1h428xyc.jobs.feishu.cn/index">社会招聘</a>
+                            <a href="https://uq1h428xyc.jobs.feishu.cn/522146/position/list">校园招聘</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <header class="section-header fixed">
+        <div class="content w12">
+            <div class="top">
+                <div class="top-left">
+                    <a href="index.html"><img class="logo" src="/static/web/images/logo.png"></a>
+                </div>
+
+            <ul class="navbar">
+                <li class="menu">
+                    <a class="menu-handle" href="product.html">
+                        <span class="text">产品与服务</span>
+                        <img class="arrow" src="/static/web/images/arrow.png">
+                    </a>
+                    <ul class="menu-drop">
+                        <li>
+                            <a class="sub-menu" to="section-product" href="product.html?mao=1">产品设备</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" to="section-product" href="product.html?mao=2">产品服务</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="menu-handle" href="wisdom.html">
+                        <span class="text">蓝箭智慧</span>
+                        <img class="arrow" src="/static/web/images/arrow.png">
+                    </a>
+                    <ul class="menu-drop">
+                        <li>
+                            <a class="sub-menu" to="section-product" href="wisdom.html?mao=1">技术路线</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" to="section-product" href="wisdom.html?mao=2">基础设施</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="menu-handle" href="news.html?catid=1">
+                        <span class="text">新闻中心</span>
+                        <img class="arrow" src="/static/web/images/arrow.png">
+                    </a>
+                    <ul class="menu-drop">
+                        <li>
+                            <a class="sub-menu" to="section-product" href="news.html?catid=1&mao=1">最新新闻</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" to="section-product" href="new2.html?catid=2&mao=1">媒体报道</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" to="section-product" href="new3.html?catid=3&mao=1">蓝洞察</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" to="section-product" href="download.html">资料下载</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="menu-handle" href="about.html">
+                        <span class="text">关于我们</span>
+                        <img class="arrow" src="/static/web/images/arrow.png">
+                    </a>
+                    <ul class="menu-drop">
+                        <li>
+                            <a class="sub-menu" href="about.html?mao=0" to="section-product">企业介绍</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" href="about.html?mao=2" to="section-product">大事记</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" href="about.html?mao=3" to="section-product">荣誉资质</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" href="about.html?mao=4" to="section-product">联系我们</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="menu-handle" href="javascript:;">
+                        <span class="text">加入我们</span>
+                        <img class="arrow" src="/static/web/images/arrow.png">
+                    </a>
+                    <ul class="menu-drop">
+                        <li>
+                            <a class="sub-menu" target="_blank" href="https://uq1h428xyc.jobs.feishu.cn/index">社会招聘</a>
+                        </li>
+                        <li>
+                            <a class="sub-menu" target="_blank" href="https://uq1h428xyc.jobs.feishu.cn/522146/position/list">校园招聘</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="top-right">
+                    <div class="item1">
+                        <a class="active" href="/index.html">中文</a>
+                        <i class="line"></i>
+                        <a href="/en/index.html">EN</a>
+                    </div>
+                    <div class="item2">
+                        <a href="plan.html">预定发射</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+		<section class="section-1">
+			<div class="content w12">
+				<div class="item">
+					<a class="text" href="news.html">新闻中心</a>
+					<span class="arrow"></span>
+                                        <a class="text" href="news.html">最新新闻</a>
+                    				</div>
+			</div>
+		</section>
+
+		<section class="section-2">
+			<div class="content w12">
+								<div class="header">
+					<h3 class="title">朱雀三号重复使用遥一运载火箭入轨圆满成功</h3>
+					<div class="times">
+						<span>发布时间：2025-12-03</span>
+						<span>文章来源：蓝箭航天</span>
+					</div>
+				</div>
+				<div class="article">
+				<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">北京时间2025年12月3日，朱雀三号遥一运载火箭在东风商业航天创新试验区发射升空，按程序完成了飞行任务，火箭二级进入预定轨道。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203164322139fc1424.jpg" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">朱雀三号是蓝箭航天面向大型星座组网任务，自主研制的新一代低成本、大运力、高频次、可重复使用液氧甲烷运载火箭。朱雀三号遥一运载火箭采用单芯级两级串联构型，一二级箭体直径4.5米，整流罩直径5.2米，全箭长66.1m，起飞质量约560t，起飞推力7542kN。动力系统基于蓝箭航天自主研制的天鹊系列液氧甲烷发动机，一级采用九台天鹊12A发动机并联；二级采用一台天鹊15A真空型发动机。朱雀三号一子级在级间分离后可进行垂直返回软着陆，设计重复使用次数不低于20次，成熟后航区回收状态下近地轨道运载能力不低于18吨，具备互联网星座一箭多星部署能力，将为国家重大航天工程及卫星互联网发射组网提供强有力的运力支撑。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203164413191369164.jpg" alt="" /><br />
+</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">此次任务的飞行过程中，火箭起飞、一二级分离、二级发动机起动、整流罩分离、二级发动机关机、二级滑行、二级发动机二次起动等关键动作均按计划完成，表现稳定可靠。与此同时，本次任务开展了一子级垂直回收技术的飞行验证。根据飞行测量数据，火箭一子级在着陆段点火后出现异常，未实现在回收场坪的软着陆，残骸着陆于回收场坪边缘，回收试验失败，具体原因正在进一步排查中。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203164453879403906.jpg" alt="" /><strong></strong></span><span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><strong>本次任务取得的技术突破：</strong></span>
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">1.&nbsp;</span><strong>在国内首次实现了全新总体布局的重复使用液氧甲烷运载火箭入轨飞行。</strong><span style="color:rgba(0, 0, 0, 0.9);font-family:"font-size:14px;background-color:#FFFFFF;">突破动力、气动、飞控、结构等多专业耦合设计关键技术，对一子级创新采用燃箱在上/氧箱在下的总体布局和面对称边条翼、P型局部后掠栅格舵及流线型着陆腿外罩为典型特征的气动布局，可有效降低返回过程推进剂消耗量，提升重复使用模式下的运载能力。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">2. <strong>在国内首次实现九机并联液氧甲烷动力系统的集成应用</strong>，突破了大流量推进剂稳定可靠输送技术，满足了全任务复杂剖面下发动机多次起动、深度变推需求，实现了滑行段失重状态大姿态机动下，低温推进剂有效管理和可靠沉底；解决了全过冷加注甲烷易冻结的难题，实现了射前2小时大流量全过冷加注。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">3. <strong>在国内首创全新的高强度不锈钢/高性能激光焊接贮箱制造材料和工艺体系</strong>，自主开发全套不锈钢贮箱激光焊接工艺装备和产线，实现大直径超薄壁不锈钢贮箱制造成本较铝合金大幅降低80%，生产周期缩短40%。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">4. <strong>在国内首次实现入轨级重复使用运载火箭高精度返回导航、制导与控制技术的飞行验证。</strong>突破复杂约束条件、大范围状态变化、强不确定环境下的在线轨迹优化、姿态稳定和高精度控制技术。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;">5. <strong>在国内首次实现重复使用运载火箭混合冗余分布式综合电子集成设计与应用</strong>，构建面向服务的集控制、测量、健康管理于一体的开放式系统。基于高速Powerlink实时以太网构建的高带宽、高可靠性实时通信平台，通信速率超100Mbps，较传统火箭1553B提升百倍。采用汽车电子先进的高可靠计算平台研制高算力返回控制计算机，较传统运载火箭算力提升10倍以上，打造火箭航电系统与高端先进制造业相融合的新质生产力。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203164816a3daf6105.jpg" alt="" />早在2021年，国家航天局就正式发布中国航天“十四五”及未来一个时期发展的重点规划，重点推进重型运载火箭、可重复使用天地往返运输系统等重大工程，提升航天综合实力。蓝箭航天深入贯彻航天强国战略，瞄准全球下一代航天运输系统技术趋势，搭建了集研发设计、生产制造、测试试验、发射回收为一体的技术能力体系，在国内率先完成了基于不锈钢箭体与液氧甲烷推进剂的重复使用运载火箭关键技术攻关。朱雀三号首飞成功入轨，为国家航天运力体系增添了一款性能先进、潜力巨大的新型主力火箭，补强了我国大运力、低成本、高频次进入空间的运载能力，精准响应了国家卫星互联网星座工程建设大规模组网的迫切需求。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/202512031648400c10e6647.jpg" alt="" />本次任务检验了朱雀三号运载火箭测试、发射和飞行全过程方案的正确性与合理性，各系统接口的匹配性，获取了火箭真实飞行状态下的关键工程数据，为后续型号优化设计、提升整体可靠性、实现子级回收及重复使用奠定了重要基础。型号团队将基于本次任务获取的宝贵数据与经验，尽快开展试验过程的全面复盘与技术改进工作，优化回收方案，在后续任务中持续推进火箭可重复使用技术的验证与应用。未来，随着低轨星座组网进入高峰期，朱雀三号将持续迭代，实现从回收重复使用的技术突破，到常态化重复使用发射的航班化运营，致力于成为匹配国家战略需求的核心运力载体，为国家航天强国建设和新质生产力发展贡献蓝箭力量。</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203164930645bf8088.jpg" alt="" />党的二十届四中全会强调，要加快高水平科技自立自强，加快建设航天强国。商业航天是推动航天产业发展、建设航天强国的重要力量。近期，国家航天局再次下发了《推进商业航天高质量安全发展行动计划（2025—2027年）》，通过五大类22条进一步为商业航天擘画发展蓝图。朱雀三号首飞入轨并完成关键技术验证，体现了我国商业航天产业在高质量发展道路上的创新突破与战略担当。蓝箭航天始终坚持创新驱动发展，秉持严谨务实的态度，稳步推进朱雀三号的型号研制与发射回收工作。接下来，我们将继续以重复使用火箭技术为牵引，持续提升技术成熟度，推动我国商业航天运输能力向规模化、体系化跃升，为实现航天强国战略目标注入坚实动能！</span> 
+</p>
+<p>
+	<span style="color:rgba(0, 0, 0, 0.9);font-family:mp-quote, "font-size:15px;background-color:#FFFFFF;"><img src="https://offical-static.landspace.com/20251203165005a8cb55362.jpg" alt="" />谨对国家航天局、中国酒泉卫星发射中心在本次试验任务的组织实施中，给予的专业指导与大力协助，致以诚挚的感谢！<br />
+<br />
+由衷感谢北京市及北京经济技术开发区，浙江省及嘉兴市、湖州市，上海市，江苏省无锡市，甘肃省民勤县等各级党政机关的深切关怀，为公司发展提供坚强后盾！<br />
+<br />
+感谢所有卫星客户、任务承保机构的信赖，蓝箭航天致力于成为全球商业航天领域的优质合作伙伴！<br />
+<br />
+感谢各位股东的鼎力支持，与蓝箭航天一路相伴，并肩作战，屡创佳绩！<br />
+<br />
+感谢各媒体平台的持续关注与广泛报道，为蓝箭航天的发展壮大添砖加瓦！<br />
+<br />
+感谢每一位蓝箭人及背后家属，你们的每一分付出与努力都被深深铭记！</span> 
+</p>				</div>
+				<div class="item-paging">
+										<a href="news-detail.html?itemid=67">上一篇：蓝箭航天成功进行多星堆叠及卫星组合体试验</a>
+										<a href="news-detail.html?itemid=65">下一篇：朱雀三号遥一运载火箭飞行试验任务完成第一阶段工作</a>
+									</div>
+							</div>
+		</section>
+
+		<!--end 蓝洞观察-->
+        
+<footer class="section-footer">
+    <div class="content w12">
+        <div class="item1" data-scroll-reveal>
+            <div class="col-1">
+                <img class="logo" src="/static/web/images/logo1.png">
+                <p><a href="mailto:bp@landspace.com">合作联系：bp@landspace.com</a></p>
+                <p><a href="mailto:hr@landspace.com">应聘联系：hr@landspace.com</a></p>
+                <p><a href="mailto:pr@landspace.com">媒体联系：pr@landspace.com</a></p>
+            </div>
+            <div class="col-2">
+                <dl>
+                    <dt><a to="section-product" href="/product.html">产品与服务</a></dt>
+                    <dd>
+                        <a href="product.html?mao=1">产品设备</a>
+                        <a href="product.html?mao=2">产品服务</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a to="section-banner" href="/wisdom.html">蓝箭智慧</a></dt>
+                    <dd>
+                        <a href="wisdom.html?mao=1">技术路线</a>
+                        <a href="wisdom.html?mao=2">基础设施</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a to="section-news" href="/news.html">新闻中心</a></dt>
+                    <dd>
+                        <a href="news.html?catid=1&mao=1">最新新闻</a>
+                        <a href="new2.html?catid=2&mao=1">媒体报道</a>
+                        <a href="new3.html?catid=3&mao=1">蓝洞察</a>
+                        <a href="download.html">图片下载</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a to="section-about-us" href="/about.html">关于我们</a></dt>
+                    <dd>
+                        <a href="about.html?mao=0">企业介绍</a>
+                        <a href="about.html?mao=2">大事记</a>
+                        <a href="about.html?mao=3">荣誉资质</a>
+                        <a href="about.html?mao=4">联系我们</a>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><a to="section-join-us" href="https://uq1h428xyc.jobs.feishu.cn/index">加入我们</a></dt>
+                    <dd>
+                        <a target="_blank" href="https://uq1h428xyc.jobs.feishu.cn/index">社会招聘</a>
+                        <a target="_blank" href="https://uq1h428xyc.jobs.feishu.cn/522146/position/list">校园招聘</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-3">
+                <div class="row1">
+                    <dl>
+                        <dt>传真 <b>Fax:</b></dt>
+                        <dd><b>(+86）010-56905299</b></dd>
+                    </dl>
+                    <dl>
+                        <dt>电话 <b>Tel:</b></dt>
+                        <dd><b>（+86）010-56905288</b></dd>
+                    </dl>
+                </div>
+                <img class="ewm" src="/static/web/images/ewm.png?version=1.0.9">
+            </div>
+        </div>
+        <div class="item2" data-scroll-reveal>
+            <div class="item-left">
+                <a href="http://beian.miit.gov.cn/" target="_blank">© Copyright 2020. 蓝箭版权所有, 京ICP备15056039号.</a>
+                <a class="link-beian" href="https://beian.mps.gov.cn/#/query/webSearch?code=11011502038229" rel="noreferrer" target="_blank">
+                    <img class="icon" src="/static/web/images/beian.png" alt="">
+                    <span class="text">京公网安备11011502038229</span>
+                </a>
+            </div>
+            <div class="item-right">北京亦庄经济技术开发区荣华南路13号院中航国际广场H1楼</div>
+        </div>
+    </div>
+</footer>
+
+	</div>
+	
+</body>
+<link rel="stylesheet" type="text/css" href="/static/web/swiper/swiper.min.css" />
+<script type="text/javascript" src="/static/web/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/web/js/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="/static/web/js/scrollReveal.js"></script>
+<script type="text/javascript" src="/static/web/js/skrollr.min.js"></script>
+<script type="text/javascript" src="/static/web/swiper/swiper.min.js"></script>
+<script type="text/javascript" src="/static/web/js/common.js?version=1.0.9"></script>
+<script type="text/javascript" src="/static/web/js/threesixty.min.js"></script>
+
+
+
+	<script>
+		$(function(){
+		});
+	</script>
+
+
+</html>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?337e0d4ab66af15ca824d7057e62dca9";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>

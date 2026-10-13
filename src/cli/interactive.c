@@ -1,5 +1,6 @@
 #include "interactive.h"
 #include "arguments.h"
+#include "engine_case.h"
 #include "text_report.h"
 #include "rocketperf/combustion.h"
 #include "rocketperf/frozen_nozzle.h"
@@ -481,7 +482,13 @@ int rp_cli_cases(FILE *stream)
         "  cases/research/s1_area_ratio_ambient.ini  面积比-背压网格研究\n"
         "      rocketperf study area-ratio-ambient cases/research/s1_area_ratio_ambient.ini\n"
         "  cases/research/s3_sealevel_regime.ini      海平面过膨胀域评估(研究场景)\n"
-        "      rocketperf nozzle regime cases/research/s3_sealevel_regime.ini\n",
+        "      rocketperf nozzle regime cases/research/s3_sealevel_regime.ini\n"
+        "  cases/vehicles/zq3_y1_stage1.ini  朱雀三遥一一级 开式架构研究\n"
+        "  cases/vehicles/zq3_y1_stage2.ini  朱雀三遥一二级 开式架构研究\n"
+        "  cases/vehicles/cz10b_first_stage1.ini  长十乙一级 RP-1富氧补燃研究\n"
+        "  cases/vehicles/cz10b_first_stage2.ini  长十乙二级 开式待判情景\n"
+        "  cases/vehicles/cz10b_first_stage2_orsc.ini  长十乙二级 补燃待判情景\n"
+        "      rocketperf cycle adiabatic CASE.ini --text\n",
         stream) >= 0 && fflush(stream) == 0;
 }
 
@@ -497,6 +504,7 @@ static void print_menu(void)
         "  [5] 液体入口状态查询 (CH4/O2 单相表)\n"
         "  [6] 理想气体喷管 L0 (教学算例)\n"
         "  [7] 内置算例清单\n"
+        "  [8] 两型一二级循环研究算例 (开式/补燃)\n"
         "  [0] 退出\n", RP_VERSION);
 }
 
@@ -523,6 +531,26 @@ void rp_cli_console_restore(RpConsoleCodepage previous)
 #endif
 }
 
+static RpPromptStatus flow_engine_cycle(void)
+{
+    static const char *const paths[] = {
+        "cases/vehicles/zq3_y1_stage1.ini", "cases/vehicles/zq3_y1_stage2.ini", "cases/vehicles/cz10b_first_stage1.ini",
+        "cases/vehicles/cz10b_first_stage2.ini", "cases/vehicles/cz10b_first_stage2_orsc.ini"
+    };
+    double selection;
+    RpError error = {0};
+    RpStatus status;
+    (void)fputs("  1 朱雀三遥一一级 / 2 二级 / 3 长十乙一级补燃 / 4 二级开式待判 / 5 二级补燃待判\n", stdout);
+    const RpPromptStatus prompt = prompt_number("选择研究算例", "1..5", 1.0, &selection);
+    if (prompt != RP_PROMPT_VALUE) { return prompt; }
+    if (selection < 1.0 || selection > 5.0 || selection != (double)(int)selection) {
+        (void)fputs("  无效选择。\n", stdout); return RP_PROMPT_VALUE;
+    }
+    status = rp_engine_case_run(paths[(int)selection - 1], stdout, 1, &error);
+    if (status != RP_OK) { print_failure(status, &error); }
+    return RP_PROMPT_VALUE;
+}
+
 int rp_cli_interactive(void)
 {
     char line[RP_MENU_LINE];
@@ -532,7 +560,7 @@ int rp_cli_interactive(void)
         int choice = -1;
         RpPromptStatus status;
         print_menu();
-        (void)fputs("选择 [0-7]: ", stdout);
+        (void)fputs("选择 [0-8]: ", stdout);
         (void)fflush(stdout);
         {
             const int read = menu_read_line(line, sizeof(line));
@@ -548,7 +576,7 @@ int rp_cli_interactive(void)
             const char *next;
             double value;
             if (!rp_cli_parse_decimal(line, &next, &value) || *next != '\0' ||
-                value < 0.0 || value > 7.0 || value != (double)(int)value) {
+                value < 0.0 || value > 8.0 || value != (double)(int)value) {
                 (void)fputs("  无效选择。\n", stdout);
                 continue;
             }
@@ -562,6 +590,7 @@ int rp_cli_interactive(void)
             case 4: status = flow_thermo(); break;
             case 5: status = flow_liquid_feed(); break;
             case 6: status = flow_ideal_nozzle(); break;
+            case 8: status = flow_engine_cycle(); break;
             default:
                 if (!rp_cli_cases(stdout)) { status = RP_PROMPT_EOF; }
                 else { status = RP_PROMPT_VALUE; }

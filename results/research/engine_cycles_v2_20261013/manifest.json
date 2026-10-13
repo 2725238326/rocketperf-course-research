@@ -1,0 +1,1073 @@
+{
+  "kind": "adiabatic_cycle_research",
+  "schema_version": 1,
+  "status": "PASS",
+  "model": "adiabatic_single_shaft_cycle_v1",
+  "started_at": "2026-10-13T10:15:53+00:00",
+  "source_head": "83d13a5c107a80e0fafd6f24f4b5acf69eacd290",
+  "source_dirty": true,
+  "c_binary_sha256": "f05c8422238c353e620fad4b109890c6691d95fbdcf0c5327caad02063e95177",
+  "build_manifest_sha256": "1c1180179bd63a325b9299a137586698a05dcc506c73d6ce1e7010c032767883",
+  "cea_commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+  "cea_binary_sha256": "1f6d3b30e078740291f61f85c6153480cc302bdfe7ced21527b5327c3f6dbba6",
+  "thermo_sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363",
+  "runs": [
+    {
+      "id": "zq3_y1_stage1",
+      "exit_code": 0,
+      "relations": 176
+    },
+    {
+      "id": "zq3_y1_stage2",
+      "exit_code": 0,
+      "relations": 176
+    },
+    {
+      "id": "cz10b_first_stage1",
+      "exit_code": 0,
+      "relations": 143
+    },
+    {
+      "id": "cz10b_first_stage2",
+      "exit_code": 0,
+      "relations": 176
+    },
+    {
+      "id": "cz10b_first_stage2_orsc",
+      "exit_code": 0,
+      "relations": 143
+    },
+    {
+      "id": "reject_return_pressure",
+      "exit_code": 4,
+      "expected_status": "out_of_domain"
+    },
+    {
+      "id": "reject_return_power",
+      "exit_code": 4,
+      "expected_status": "out_of_domain"
+    },
+    {
+      "id": "reject_low_preburner_temperature",
+      "exit_code": 4,
+      "expected_status": "not_bracketed"
+    },
+    {
+      "id": "reject_starvation",
+      "exit_code": 4,
+      "expected_status": "out_of_domain"
+    }
+  ],
+  "cea_runs": [
+    {
+      "id": "zq3_y1_stage1_preburner_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            110.0
+          ],
+          "temperature_k": [
+            1322.98
+          ],
+          "h_kj_per_kg": [
+            -2930.811
+          ],
+          "molar_mass_kg_per_kmol": [
+            13.70393
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.463405
+          ],
+          "H2O": [
+            0.109481
+          ],
+          "CO": [
+            0.254102
+          ],
+          "CO2": [
+            0.03234
+          ],
+          "CH4": [
+            0.140672
+          ],
+          "H": [
+            1.03e-07
+          ]
+        }
+      }
+    },
+    {
+      "id": "zq3_y1_stage1_preburner_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            110.0
+          ],
+          "temperature_k": [
+            1322.99
+          ],
+          "h_kj_per_kg": [
+            -2930.811
+          ],
+          "molar_mass_kg_per_kmol": [
+            13.70513
+          ]
+        },
+        "mole_fractions": {
+          "C2H2,acetylene": [
+            2.889e-07
+          ],
+          "C2H4": [
+            3.16e-05
+          ],
+          "C2H6": [
+            6.524e-05
+          ],
+          "C3H6,propylene": [
+            2.499e-07
+          ],
+          "CH2CO,ketene": [
+            1.081e-06
+          ],
+          "CH3": [
+            6.272e-07
+          ],
+          "CH3CHO,ethanal": [
+            3.589e-07
+          ],
+          "CH3OH": [
+            8.757e-07
+          ],
+          "CH4": [
+            0.140542
+          ],
+          "CO": [
+            0.254053
+          ],
+          "CO2": [
+            0.032349
+          ],
+          "H": [
+            1.03e-07
+          ],
+          "H2": [
+            0.46341
+          ],
+          "H2O": [
+            0.109538
+          ],
+          "HCHO,formaldehy": [
+            6.115e-06
+          ],
+          "HCOOH": [
+            1.87e-06
+          ]
+        }
+      }
+    },
+    {
+      "id": "zq3_y1_stage1_chamber_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3614.07
+          ],
+          "h_kj_per_kg": [
+            -1507.976
+          ],
+          "molar_mass_kg_per_kmol": [
+            22.02887
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.072393
+          ],
+          "O2": [
+            0.028493
+          ],
+          "H2O": [
+            0.490579
+          ],
+          "CO": [
+            0.169019
+          ],
+          "CO2": [
+            0.135678
+          ],
+          "H": [
+            0.020439
+          ],
+          "O": [
+            0.010993
+          ],
+          "OH": [
+            0.072405
+          ]
+        }
+      }
+    },
+    {
+      "id": "zq3_y1_stage1_chamber_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3613.68
+          ],
+          "h_kj_per_kg": [
+            -1507.976
+          ],
+          "molar_mass_kg_per_kmol": [
+            22.03106
+          ]
+        },
+        "mole_fractions": {
+          "CO": [
+            0.169042
+          ],
+          "CO2": [
+            0.135646
+          ],
+          "COOH": [
+            1.929e-05
+          ],
+          "H": [
+            0.020426
+          ],
+          "H2": [
+            0.072417
+          ],
+          "H2O": [
+            0.490531
+          ],
+          "H2O2": [
+            3.121e-05
+          ],
+          "HCHO,formaldehy": [
+            5.19e-07
+          ],
+          "HCO": [
+            1.556e-05
+          ],
+          "HCOOH": [
+            3.229e-06
+          ],
+          "HO2": [
+            0.0001712
+          ],
+          "O": [
+            0.010968
+          ],
+          "O2": [
+            0.028416
+          ],
+          "O3": [
+            2.192e-07
+          ],
+          "OH": [
+            0.072311
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage1_preburner_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            220.0
+          ],
+          "temperature_k": [
+            1244.44
+          ],
+          "h_kj_per_kg": [
+            -421.122
+          ],
+          "molar_mass_kg_per_kmol": [
+            31.87935
+          ]
+        },
+        "mole_fractions": {
+          "O2": [
+            0.854679
+          ],
+          "H2O": [
+            0.071739
+          ],
+          "CO2": [
+            0.07358
+          ],
+          "OH": [
+            2.045e-06
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage1_preburner_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            220.0
+          ],
+          "temperature_k": [
+            1244.44
+          ],
+          "h_kj_per_kg": [
+            -421.122
+          ],
+          "molar_mass_kg_per_kmol": [
+            31.87935
+          ]
+        },
+        "mole_fractions": {
+          "CO2": [
+            0.07358
+          ],
+          "H2O": [
+            0.071739
+          ],
+          "HO2": [
+            2.137e-07
+          ],
+          "O2": [
+            0.854679
+          ],
+          "OH": [
+            2.045e-06
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage1_chamber_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3723.71
+          ],
+          "h_kj_per_kg": [
+            -785.994
+          ],
+          "molar_mass_kg_per_kmol": [
+            23.602
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.079513
+          ],
+          "O2": [
+            0.017879
+          ],
+          "H2O": [
+            0.33339
+          ],
+          "CO": [
+            0.315187
+          ],
+          "CO2": [
+            0.153905
+          ],
+          "H": [
+            0.026863
+          ],
+          "O": [
+            0.011204
+          ],
+          "OH": [
+            0.062059
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage1_chamber_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3723.34
+          ],
+          "h_kj_per_kg": [
+            -785.994
+          ],
+          "molar_mass_kg_per_kmol": [
+            23.60414
+          ]
+        },
+        "mole_fractions": {
+          "CO": [
+            0.315194
+          ],
+          "CO2": [
+            0.153873
+          ],
+          "COOH": [
+            2.73e-05
+          ],
+          "H": [
+            0.026846
+          ],
+          "H2": [
+            0.079526
+          ],
+          "H2O": [
+            0.33335
+          ],
+          "H2O2": [
+            1.879e-05
+          ],
+          "HCHO,formaldehy": [
+            1.069e-06
+          ],
+          "HCO": [
+            3.534e-05
+          ],
+          "HCOOH": [
+            4.126e-06
+          ],
+          "HO2": [
+            0.0001138
+          ],
+          "O": [
+            0.011182
+          ],
+          "O2": [
+            0.01784
+          ],
+          "O3": [
+            1.318e-07
+          ],
+          "OH": [
+            0.061989
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_preburner_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            220.0
+          ],
+          "temperature_k": [
+            1083.74
+          ],
+          "h_kj_per_kg": [
+            -482.208
+          ],
+          "molar_mass_kg_per_kmol": [
+            31.24092
+          ]
+        },
+        "mole_fractions": {
+          "O2": [
+            0.857508
+          ],
+          "H2O": [
+            0.094994
+          ],
+          "CO2": [
+            0.047497
+          ],
+          "OH": [
+            2.358e-07
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_preburner_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            220.0
+          ],
+          "temperature_k": [
+            1083.74
+          ],
+          "h_kj_per_kg": [
+            -482.208
+          ],
+          "molar_mass_kg_per_kmol": [
+            31.24092
+          ]
+        },
+        "mole_fractions": {
+          "CO2": [
+            0.047497
+          ],
+          "H2O": [
+            0.094994
+          ],
+          "O2": [
+            0.857508
+          ],
+          "OH": [
+            2.358e-07
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_chamber_nine",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3601.48
+          ],
+          "h_kj_per_kg": [
+            -1558.58
+          ],
+          "molar_mass_kg_per_kmol": [
+            21.75723
+          ]
+        },
+        "mole_fractions": {
+          "H2": [
+            0.080213
+          ],
+          "O2": [
+            0.022048
+          ],
+          "H2O": [
+            0.492388
+          ],
+          "CO": [
+            0.178309
+          ],
+          "CO2": [
+            0.129924
+          ],
+          "H": [
+            0.020944
+          ],
+          "O": [
+            0.009385
+          ],
+          "OH": [
+            0.066789
+          ]
+        }
+      }
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_chamber_expanded",
+      "summary": {
+        "status": "COMPLETE",
+        "diagnostics": [],
+        "rows": {
+          "pressure_bar": [
+            100.0
+          ],
+          "temperature_k": [
+            3601.1
+          ],
+          "h_kj_per_kg": [
+            -1558.58
+          ],
+          "molar_mass_kg_per_kmol": [
+            21.75906
+          ]
+        },
+        "mole_fractions": {
+          "CO": [
+            0.178327
+          ],
+          "CO2": [
+            0.129892
+          ],
+          "COOH": [
+            1.905e-05
+          ],
+          "H": [
+            0.020931
+          ],
+          "H2": [
+            0.080238
+          ],
+          "H2O": [
+            0.492343
+          ],
+          "H2O2": [
+            2.72e-05
+          ],
+          "HCHO,formaldehy": [
+            6.062e-07
+          ],
+          "HCO": [
+            1.697e-05
+          ],
+          "HCOOH": [
+            3.416e-06
+          ],
+          "HO2": [
+            0.0001393
+          ],
+          "O": [
+            0.009364
+          ],
+          "O2": [
+            0.021991
+          ],
+          "O3": [
+            1.459e-07
+          ],
+          "OH": [
+            0.066706
+          ]
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "zq3_y1_stage1_preburner_nine",
+      "c_temperature_k": 1322.9766164440662,
+      "cea_temperature_k": 1322.98,
+      "c_minus_cea_k": -0.003383555933851312,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "zq3_y1_stage1_preburner_expanded",
+      "c_temperature_k": 1322.9766164440662,
+      "cea_temperature_k": 1322.99,
+      "c_minus_cea_k": -0.013383555933842217,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    },
+    {
+      "id": "zq3_y1_stage1_chamber_nine",
+      "c_temperature_k": 3614.071471616626,
+      "cea_temperature_k": 3614.07,
+      "c_minus_cea_k": 0.0014716166256221186,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "zq3_y1_stage1_chamber_expanded",
+      "c_temperature_k": 3614.071471616626,
+      "cea_temperature_k": 3613.68,
+      "c_minus_cea_k": 0.39147161662594954,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    },
+    {
+      "id": "cz10b_first_stage1_preburner_nine",
+      "c_temperature_k": 1244.4423735141754,
+      "cea_temperature_k": 1244.44,
+      "c_minus_cea_k": 0.0023735141753604694,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "cz10b_first_stage1_preburner_expanded",
+      "c_temperature_k": 1244.4423735141754,
+      "cea_temperature_k": 1244.44,
+      "c_minus_cea_k": 0.0023735141753604694,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    },
+    {
+      "id": "cz10b_first_stage1_chamber_nine",
+      "c_temperature_k": 3723.7099688500166,
+      "cea_temperature_k": 3723.71,
+      "c_minus_cea_k": -3.114998344244668e-05,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "cz10b_first_stage1_chamber_expanded",
+      "c_temperature_k": 3723.7099688500166,
+      "cea_temperature_k": 3723.34,
+      "c_minus_cea_k": 0.3699688500164484,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_preburner_nine",
+      "c_temperature_k": 1083.7438367307186,
+      "cea_temperature_k": 1083.74,
+      "c_minus_cea_k": 0.003836730718603576,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_preburner_expanded",
+      "c_temperature_k": 1083.7438367307186,
+      "cea_temperature_k": 1083.74,
+      "c_minus_cea_k": 0.003836730718603576,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_chamber_nine",
+      "c_temperature_k": 3601.4802930876613,
+      "cea_temperature_k": 3601.48,
+      "c_minus_cea_k": 0.000293087661248137,
+      "carbon_mole_fraction": 0,
+      "product_set": "nine"
+    },
+    {
+      "id": "cz10b_first_stage2_orsc_chamber_expanded",
+      "c_temperature_k": 3601.4802930876613,
+      "cea_temperature_k": 3601.1,
+      "c_minus_cea_k": 0.3802930876613573,
+      "carbon_mole_fraction": 0,
+      "product_set": "expanded"
+    }
+  ],
+  "files": [
+    {
+      "path": "build-manifest.json",
+      "sha256": "1c1180179bd63a325b9299a137586698a05dcc506c73d6ce1e7010c032767883"
+    },
+    {
+      "path": "cz10b_first_stage1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage1-stdout.txt",
+      "sha256": "45c7b09b9c468093099b36db12e223da5da106df798f9499631a5135cd2f73c2"
+    },
+    {
+      "path": "cz10b_first_stage1.ini",
+      "sha256": "74427bbb56262098bc23a5cac8cd363912268918e03d3995d617ebee0055a3ac"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_expanded-cea-stdout.txt",
+      "sha256": "50f827777b532545ac1a8092d2458bf716d30d82f624af25ef8a056fd7c59d91"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_expanded.inp",
+      "sha256": "1d0c1530536c4e9c1163c29a98cf2188fbab0dc7e368e97f42ca8c70fb5fb7de"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_expanded.out",
+      "sha256": "96163ad1e798854844b3c79ebaeb815bb101ce986a80bed4d1fda47ae62f91e8"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_nine-cea-stdout.txt",
+      "sha256": "ffbcfc31c07384ec33f7b1be39482b8e22d763c7e084b0043b47b01a54a0e2c2"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_nine.inp",
+      "sha256": "7d25eb66ff1f39f558aa754febc2e5751c2b66d46a9cab320d9d5727827d9847"
+    },
+    {
+      "path": "cz10b_first_stage1_chamber_nine.out",
+      "sha256": "4553126f85b8cda01378249d5a6d78a204ad3541334036f357f56cacf87e50ee"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_expanded-cea-stdout.txt",
+      "sha256": "4f7561137c30995b1645d76ad2de754c40848eead0b8cc0b739e53e3a77a9355"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_expanded.inp",
+      "sha256": "09d708b9160cd8dd2c5ba1df5602860044c9daceefe3147b58899de75b6cee1a"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_expanded.out",
+      "sha256": "8eb08a79aa33b07a8460e36c6283586fdb6da47b58817aab6e9c1512cdbab959"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_nine-cea-stdout.txt",
+      "sha256": "6a2d6c50549c60bfb1dc9cf762115ddbf9d88d7f0e5658420887fdd66a6739f0"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_nine.inp",
+      "sha256": "c7616c98eaac16e8b4e5b1e7906157897da238bcf7953e5adc4d2298e8b2b1b3"
+    },
+    {
+      "path": "cz10b_first_stage1_preburner_nine.out",
+      "sha256": "10d0fa17209ef94aea1fbb146e5e60af3949d372b5978577bb94801059822565"
+    },
+    {
+      "path": "cz10b_first_stage2-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2-stdout.txt",
+      "sha256": "3af6eec820f290ec2d1267d5ae1e78f4e74ffcd57c9a0ae455206dcfe55af831"
+    },
+    {
+      "path": "cz10b_first_stage2.ini",
+      "sha256": "e2ad75e6404fd314482c47a9e483279383d1a600dab822599446aae5800eac4e"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc-stdout.txt",
+      "sha256": "34d6e8457bc49b6b3896998ff7224a23635e2d04b5f67ef966906f94d0b52032"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc.ini",
+      "sha256": "4414e41ea915b162a62ff27950b9ac0521d08bda38ed4467ad0da5a959a77266"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_expanded-cea-stdout.txt",
+      "sha256": "e1a3b214915070f86c4d5610e0ee6241e3c18501aa46b0629a65325ca178c6f5"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_expanded.inp",
+      "sha256": "f042012efeb1f37de545b95b935de2ab018e7478f50788fbe5c697e18bef3b54"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_expanded.out",
+      "sha256": "b606a7c53c2f3e4ecdfec2ac21693daa1be20e507fe57a137e8d895c4a2e9ab5"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_nine-cea-stdout.txt",
+      "sha256": "bfa054ae6ba4d53efba5e71c4cf13dda7920eeced619d0ab1e18931e83bad46b"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_nine.inp",
+      "sha256": "b8ccd96a6e933cd436f2f0b6fc731c0e94904c2cfa1f61259ff6c21bd083bae7"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_chamber_nine.out",
+      "sha256": "3235c4fcf45fd47bc9ccb439148dd1aa6b101972bf59e3ed22687ede79b1c530"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_expanded-cea-stdout.txt",
+      "sha256": "4deb289929a6d2484a44afe2300e1e0b2808059ddc1c3664437f6b41ece80373"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_expanded.inp",
+      "sha256": "1b9ab728b15b7aa86d5c257ba3c6d6143880d83ab3de080e9739ac663653382a"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_expanded.out",
+      "sha256": "04f71eeeacf327a39e3237c458c4cee690e940d1b43368a1c39e0eff7613f1f4"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_nine-cea-stdout.txt",
+      "sha256": "b71e2a1e560916f64330edc5068d04095a10259e11f222aa568cd82d6c5b8fb5"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_nine.inp",
+      "sha256": "a1b2caeba84df5566f3d80b8614e212dd8d1b1a5fc8f3c0355238c4d0f957a0e"
+    },
+    {
+      "path": "cz10b_first_stage2_orsc_preburner_nine.out",
+      "sha256": "2d9589e6478167b1fe00a0cd5d7435d3ef8f52459f2a3662ca09553a2059269c"
+    },
+    {
+      "path": "reject_low_preburner_temperature-stderr.txt",
+      "sha256": "7845f7a4d2ed1727fdac8c8e302be6dff1457ebda816deb4a663b7bdf965e095"
+    },
+    {
+      "path": "reject_low_preburner_temperature-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_low_preburner_temperature.ini",
+      "sha256": "463580032579b8077c0da904e62a0fda7e0d697bd24826477ab1025223cb09f9"
+    },
+    {
+      "path": "reject_return_power-stderr.txt",
+      "sha256": "c0f901edd7b5f07766377985937a58a150883ee185b4a956e4db939de4e5d548"
+    },
+    {
+      "path": "reject_return_power-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_return_power.ini",
+      "sha256": "34112bbfa02deda2776df32f3514cc92fbd20e86b6d97d613366a8bc11913ff1"
+    },
+    {
+      "path": "reject_return_pressure-stderr.txt",
+      "sha256": "a237965162e957618075dfa281aac578c51ebcf9f1ca91919b68954ba2a47d22"
+    },
+    {
+      "path": "reject_return_pressure-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_return_pressure.ini",
+      "sha256": "b46603912107848a20cb5ac9b0dea0bea78081cbb33e6ce68301f2ed70077afc"
+    },
+    {
+      "path": "reject_starvation-stderr.txt",
+      "sha256": "b4f1d4359b839428ab82ec67024ae8ebe515070a414efabbd09585e828ed6eb4"
+    },
+    {
+      "path": "reject_starvation-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reject_starvation.ini",
+      "sha256": "adf6a158f9266e55ee2a3c58737626502567c9bae0129bace6d714c2856d7af2"
+    },
+    {
+      "path": "test-report.json",
+      "sha256": "9f69e86458ce89001e143998cb1b372c9dbcbad8eaaa14ed09670ce4260e3573"
+    },
+    {
+      "path": "zq3_y1_stage1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage1-stdout.txt",
+      "sha256": "a31f6d1f2b60981c5fb658ac22378d3d3db55efb7f4629bd983ccc1f0e999d7a"
+    },
+    {
+      "path": "zq3_y1_stage1.ini",
+      "sha256": "d534172d32604bfb0a4264a82eaf248b0ebb846fc264a373cbd13fa592db4042"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_expanded-cea-stdout.txt",
+      "sha256": "f02be5a262a163ed3be81b0d54a6e7ee13f531450cef3f7545f6795e77f8fb89"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_expanded.inp",
+      "sha256": "45153720948da5ec0c40ee08ee652d7859929b28259785ca3225e4f3b2b6079b"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_expanded.out",
+      "sha256": "c4dcb9c8a60d4e59ba33f13022a574ae743be92eddc7d53c2fe1671321d6c8a5"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_nine-cea-stdout.txt",
+      "sha256": "374adcaa3eba11d793b415cf41cc79ada54088f62f2d0a4f7ca8f3b5b4b0911a"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_nine.inp",
+      "sha256": "def90dac33ea24488175aea6a19815ff620975ed6c97ca27cc2f0a28764a2cb9"
+    },
+    {
+      "path": "zq3_y1_stage1_chamber_nine.out",
+      "sha256": "95d2cf617e22fba28fb00bcf9c72d8abb2bda32e317aaefb15bd8d5e74cdea0f"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_expanded-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_expanded-cea-stdout.txt",
+      "sha256": "e8eb8f26f809f8f15b67ed673e18d56c617958d773f9f5f08f7665e45bf60d22"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_expanded.inp",
+      "sha256": "92d730c9e0938be44d4729d17a3f1a83f632d72ca2f196a7f8d6735893932df0"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_expanded.out",
+      "sha256": "eec3218533006941ad3861c373fa6e4763427ca5375cbd297c92ca5c85dcca70"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_nine-cea-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_nine-cea-stdout.txt",
+      "sha256": "5b3bbcb830f4e0babfc0ea5d0bf0d814fd22423a3e38bfa2c9ca75ebaf941f78"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_nine.inp",
+      "sha256": "44fde9ab3daa0dac332f2aabdb582bfa844c35992df276f397ae39054eb3c684"
+    },
+    {
+      "path": "zq3_y1_stage1_preburner_nine.out",
+      "sha256": "c5912d9bb9a0b262ca5b32200dbc32ff6379d5774bab781a895bb79aeb0deb31"
+    },
+    {
+      "path": "zq3_y1_stage2-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "zq3_y1_stage2-stdout.txt",
+      "sha256": "7adbb93e772af8352fe6cc5ec8aa91029efe87a71ac2fc6283d796c066f39d6d"
+    },
+    {
+      "path": "zq3_y1_stage2.ini",
+      "sha256": "8d0398d7d2e5330a57cac048d43b27449a697ebef2a9c5050206c565fa809c60"
+    }
+  ],
+  "scope": "Assumed single-shaft GG/ORSC; CEA validates chemical method on shared data, not real engines or independent experiment.",
+  "finished_at": "2026-10-13T10:15:55+00:00"
+}

@@ -1,0 +1,5 @@
+problem case=cz10b_first_stage2_orsc_chamber_expanded hp p,bar=100
+reactants
+ name=MIXED_FEED C 1 H 4.0000000000000018 O 3.4091505931472459 wt%=100 t,k=298.15 h,j/mole=-110015.21289500574
+output siunits trace=1.e-7
+end

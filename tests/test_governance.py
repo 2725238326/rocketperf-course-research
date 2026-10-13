@@ -27,7 +27,7 @@ class GovernanceTests(unittest.TestCase):
             self.assertIn(requirement, text)
         for required in ("朱雀三号", "长征十号乙", "给定热状态",
                          "固定锚点", "单相液体表 → h / 元素库存",
-                         "连续液体已接HP；不含泵/循环", "泵、分流、循环仍未闭合",
+                         "连续液体已接HP；不含泵/循环", "泵图谱与喷注",
                          "软件PASS", "程序源代码", "程序发布版", "展示PPT", "研究报告"):
             self.assertIn(required, text)
         for obsolete in ("连续查表尚未接HP", "液体表未接HP", "HP用固定液态锚点"):

@@ -1,6 +1,6 @@
 # C17工程基底与设计约定
 
-程序版本：0.1.0。计算模型分别以ID标明：定比热教学基线、受限气相TP/HP、燃烧室冻结温变喷管和给定热状态的外排循环，仍不是两型真实发动机求解器。契约见[基准说明](benchmarks.md)、[算例格式](case-format.md)、[热化学验证](thermo-nozzle-validation.md)和[循环验证](cycle-validation.md)；可视化入口见[架构三视图](architecture/README.md)。
+程序版本：0.1.0。模型分别以ID标明：定比热教学基线、受限气相TP/HP、燃烧室冻结温变喷管、历史给定热状态外排循环，以及新增的绝热开式/富氧补燃原型。新循环仍是条件性研究模型，不能当作两型真实发动机求解器。契约见[基准说明](benchmarks.md)、[算例格式](case-format.md)、[热化学验证](thermo-nozzle-validation.md)、[旧循环验证](cycle-validation.md)和[新循环验证](engine-cycle-validation.md)；可视化入口见[架构三视图](architecture/README.md)。
 
 ## 为什么采用这些设计
 
@@ -29,7 +29,8 @@
 - `src/thermo/`：固定NASA9、九物种气相混合物、带主元4×4消元与阻尼Newton的TP平衡、外层HP二分。气态温度/显式焓与[固定液态反应物锚点](liquid-anchor-validation.md)分别验证入口后共享元素库存/焓求解；不编造温度、不低温外推、不改变旧API；固定锚点不是液体EOS。
 - `src/thermo/liquid_feed.c`：[固定连续单相表](liquid-feed-contract.md)的纯C双线性查询；`src/thermo/liquid_combustion.c`将查表化学焓和C/H/O库存接入九气相HP，`src/nozzle/liquid.c`复用固定面积冻结喷管。不可变数据、闭合域拒绝、EOS密度和CEA化学焓质量口径分列，失败输出保持；不包含泵/喷注/分流/循环闭合。
 - `src/nozzle/ideal.c`/`src/nozzle/frozen.c`：L0定比热与燃烧室组分冻结的温变准一维喷管；冻结路径调用热化学混合物，不复制物性公式。固定喉面积接口复用同一解并由通量求流量/推力，不新增整机闭合职责。`assess_*`域评估接口回答越域工况"理想模型说什么"，独立于附着求解契约。
-- `src/cycle/`：恒密度泵、温变冻结涡轮、单轴外排支路与主/支喷管；热状态给定，非零回流显式拒绝，不做补燃混合化学闭合。
+- `src/cycle/components.c`、`prescribed.c`、`study.c`：保留旧模型`prescribed_thermal_cycle_v1`，输入热状态、恒密度泵入口性质，闭合单轴外排支路与主/支喷管；该模型仍拒绝非零回流。
+- `src/cycle/adiabatic.c`：新模型`adiabatic_single_shaft_cycle_v1`，C17 HP求预燃室/发生器与主室状态；布尔拓扑切换开式外排或全氧化剂富氧预燃室回流，分别闭合轴功、质量/元素与焓流。它不含泵图谱、液相闪蒸、冷却、凝聚碳、瞬态或实机标定。
 - `src/adapters/`：严格INI读取、JSON输出和Windows UTF-8路径转换。
 - `src/cli/`：输入→求解→报告的单一工作流；成功stdout为JSON，错误写stderr且非零退出。
 - `scripts/`：构建、测试、一次运行的归档和项目完整性核验。

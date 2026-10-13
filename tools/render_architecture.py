@@ -67,7 +67,7 @@ def components(modules):
     m={x['id']:x for x in modules}
     body=node(60,230,310,m['cli']['name'],["run / thermo / combustion","cycle / study"],"src/cli · 用例入口",h=145)
     body+=node(470,230,430,m['adapters']['name'],["闭合INI / JSON / UTF-8路径"],"src/adapters · 成功求解后才输出",h=145)
-    body+=node(470,510,430,m['cycle']['name'],["液泵 → 轴功率 → 外排支路","主 / 支推力与所需热交换","单输入扫描 · 几何代价 · 有限步响应"],"prototype · 给定热状态，拒绝回流",state=m['cycle']['state'],h=165)
+    body+=node(470,510,430,m['cycle']['name'],["历史：给定热状态外排","新增：Q=0开式 / 富氧补燃","HP混合 · 质量/元素/轴功"],"prototype · 无冷却/瞬态/实机标定",state=m['cycle']['state'],h=165)
     body+=node(1160,230,460,m['thermo']['name'],["NASA9 → 九气相产物TP / HP","固定CH4(L) / RP-1反应物锚点","单相液体表 → h / 元素库存 → HP"],"RP-1限10MPa；不含泵 / 分流 / 循环闭合",h=190)
     body+=node(1160,510,460,m['nozzle']['name'],["定比热 / 温变冻结 / 固定喉部","甲烷与RP-1同几何成对比较","单喷管流量、推力与显式残差"],"主喷管与支路复用 · 非整机闭合",h=165)
     body+=node(650,870,430,m['core']['name'],["夹逼求根 / 状态码 / 显式失败"],"所有计算模块允许依赖的公共基础",h=120)
@@ -82,9 +82,9 @@ def components(modules):
     body+=arrow([(1160,330),(1110,330),(1110,930),(1080,930)],"core",1140,812,True)
     body+=arrow([(1390,675),(1390,930),(1080,930)],"core",1220,916,True)
     body+=arrow([(540,375),(400,375),(400,930),(650,930)],"值类型 / 状态契约",495,916,True)
-    body+=text(60,1035,"纯计算核心无I/O；失败保持输出。循环热量是维持给定状态所需的交换，不是绝热燃烧预测。",20,GREEN,650)
+    body+=text(60,1035,"纯计算核心无I/O；失败保持输出。新循环由入口焓/元素库存求Q=0状态；历史模型热量仍是维持给定状态所需交换。",20,GREEN,650)
     body+=text(60,1070,"为避免连线遮挡：CLI → core，adapters → nozzle / thermo 的公共依赖在Mermaid中完整列出。",18,MUTED)
-    return frame("02","功能核心：支路功率与两路喷管如何连接","实线为主要用例 / 求解；虚线为公共基础依赖。灰色为受限循环原型，不代表补燃已实现。",1180,body)
+    return frame("02","功能核心：支路功率与循环拓扑如何连接","实线为主要用例 / 求解；虚线为公共基础依赖。循环模块为条件性研究原型，不代表具名飞行发动机。",1180,body)
 
 
 def workflow():

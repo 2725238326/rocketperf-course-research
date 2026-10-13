@@ -1,0 +1,51 @@
+
+ problem case=cz10b_first_stage1_preburner_nine hp p,bar=220
+ reactants
+  name=MIXED_FEED C 1 H 1.9499999999999997 O 26.206325862219835 wt%=100 t,k=298.15 h,j/mole=-182456.12148606329
+ only H2 O2 H2O CO CO2 CH4 H O OH
+ output siunits trace=1.e-7
+ end
+
+
+
+               THERMODYNAMIC EQUILIBRIUM COMBUSTION PROPERTIES AT ASSIGNED
+
+                           PRESSURES
+
+ CASE = cz10b_first_stage1_preburner_nine
+ 
+            REACTANT     MOLES    ENERGY      TEMP
+                                  KJ/MOL         K
+     MIXED_FEED        100.000 -182456.121    298.15
+O/F =    0.00000    % Fuel =   0.00000    r, Eq. Ratio =  0.00000    phi, Eq. Ratio =  0.00000
+ 
+ THERMODYNAMIC PROPERTIES
+ 
+ P, bar               220.00000
+ T, K                   1244.44
+ Density, kg/m^3      0.6778E+2
+ H, kJ/kg              -421.122
+ U, kJ/kg              -745.687
+ G, kJ/kg             -8709.165
+ S, kJ/kg-K              6.6600
+ 
+ M, (1/n)              31.87935
+ (dln(V)/dln(P))t      -1.00000
+ (dln(V)/dln(T))p       1.00001
+ Cp, kJ/kg-K            1.19173
+ Gamma_s                1.28017
+ Son. Vel., m/s         644.592
+ 
+MOLE FRACTIONS
+ 
+ O2                    0.854679
+ H2O                   0.071739
+ CO2                   0.073580
+ OH                    2.045E-6
+
+PRODUCTS WHICH WERE CONSIDERED BUT WHOSE MOLE FRACTIONS
+WERE LESS THAN 1.000000E-07 FOR ALL ASSIGNED CONDITIONS
+
+ H2              CO              CH4             H               O              
+
+

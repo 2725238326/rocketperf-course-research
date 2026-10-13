@@ -1,6 +1,6 @@
 # Rocketperf 项目解读
 
-本项目为朱雀三号与长征十号乙动力系统课程研究提供资料、C17性能计算和条件性改进分析。现有程序在Windows上直接运行，能够计算燃烧室、喷管和给定热状态的循环计账。真实型号性能卡尚不完整，报告中的方法算例须保留其输入假设。
+本项目为朱雀三号与长征十号乙动力系统课程研究提供资料、C17性能计算和条件性改进分析。现有程序在Windows上直接运行，包含燃烧室、喷管、历史给定热状态循环，以及新增的绝热开式/补燃循环原型。真实型号性能卡尚不完整，报告中的方法算例须保留其输入假设；新增模型仍在统一验收中。
 
 本文说明研究对象、数据口径、C17计算方法、模块职责、运行编译和验证方式。任务与版本实况由完整仓库的worknow和doctor维护。
 
@@ -42,7 +42,7 @@
 
 气态、指定液态锚点和连续液体入口有不同接口。连续液体查询返回密度与化学焓，HP只使用已对齐的化学焓和元素库存；入口压力只选择物性状态，并未求贮箱、泵和喷注压差。
 
-给定热状态循环是另一条路径：恒密度泵估算轴功，冻结涡轮提供轴功，按预算求支路流量，分别计算主/支喷管，再按总消耗和总推力计整机口径。热状态为输入，所需热交换由能量边界倒算；它尚不构成绝热完整发动机循环。非零回流明确拒绝。
+循环现在有两个独立模型ID。旧`prescribed_thermal_cycle_v1`仍输入主室/发生器热状态并报告维持状态所需热交换，且仍拒绝回流。新增`adiabatic_single_shaft_cycle_v1`由入口焓/元素库存用Q=0 HP求预燃室和主室状态；布尔输入选择开式外排或全氧化剂富氧预燃室补燃，后者闭合冻结涡轮轴功、回流压力、回流元素/焓及主室混合。新模型仍是受限研究原型，不含泵图谱、相态闪蒸、冷却、凝聚碳、瞬态或实机标定。细节见[循环模型对照](cycle-integration.md)和[验证/限制](engine-cycle-validation.md)。
 
 ## 4 C模块和设计
 
@@ -53,10 +53,10 @@
 | src/core | 状态码、有限数、夹逼二分 | status.c、root.c；RpStatus/RpError |
 | src/thermo | NASA9、混合物、TP/HP、具名反应物、单相液体表 | equilibrium.c、reactants.c、liquid_feed.c |
 | src/nozzle | 定比热/温变冻结喷管、固定喉面积 | ideal.c、frozen.c、liquid.c |
-| src/cycle | 泵/涡轮、外排支路、同条件扫描 | components.c、prescribed.c、study.c |
-| src/adapters | INI、JSON、Windows UTF-8路径 | case_file.c、cycle_case.c、platform.c |
+| src/cycle | 两类稳态循环、泵/涡轮、喷管边界、扫描 | components.c、prescribed.c、adiabatic.c、study.c |
+| src/adapters | INI、JSON/中文文本、Windows UTF-8路径 | case_file.c、cycle_case.c、engine_case.c、platform.c |
 | src/cli | 用户参数、调用顺序和报告 | main.c |
-| include/rocketperf | 公共输入、输出和函数声明 | combustion.h、frozen_nozzle.h、cycle.h |
+| include/rocketperf | 公共输入、输出和函数声明 | combustion.h、frozen_nozzle.h、cycle.h、engine_cycle.h |
 
 核心通过值类型结构体传SI字段，无文件/网络/控制台I/O、堆分配或全局可变状态，可被CLI、单元测试或其他C调用方复用。格式化错误文字不等于执行控制台I/O。
 

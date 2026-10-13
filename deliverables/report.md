@@ -22,7 +22,7 @@
 | 入口 | 气态直接给定 / 固定锚点液态 / 单相液体查表 | 查表覆盖 CH4/O2 液体温压网格，化学焓与元素库存对齐 |
 | 喷管 | 燃烧室冻结（温变比热）/ L0 理想（定比热） | 声速喉部、阻塞通量、超声速分支求根 |
 | 推力 | F = m·ve + (pe − pa)·Ae；Isp = F/(m·g0) | 压力推力项含背压，可为负 |
-| 循环原型 | 给定热状态的双路外排合成 | 主室 + 支路排气独立喷管，只做合成计账 |
+| 循环原型 | 历史给定热状态外排模型；另有新增Q=0绝热开式/富氧补燃模型ID | 旧模型给定两路热状态；新模型求预燃室/主室HP并显式闭合回流焓、元素和轴功；两者均非实机标定 |
 | 域评估 | regime 诊断（附着域外不静默） | pa>pe 时给出理想解、0.4pa 经验参考、匹配面积比 |
 
 数值策略：全程 `double`，不用 fast-math。TP组分内核求四个元素势/总摩尔量变量，采用解析Jacobian、带主元消元、阻尼Newton及线搜索；HP温度外层和喷管标量根采用夹逼二分。NaN/无穷/越域显式返回状态码，失败不改动输出缓冲。pa>pe时附着求解器拒绝，由独立regime接口提供理想解与经验提示。
@@ -48,6 +48,7 @@
 - 固定RP-1锚点路径：10 MPa、O/F 2.2–4.0、RP-1 298.15 K/O2(L)90.170 K，已实现并核验的具名方法；国产煤油组成未知，不绑定真实燃料。
 - 早期 7 MPa/面积比 18 为定比热方法包络参数，非两型室压证据。
 - 合成外排循环算例：100 kg/s、主室给定 5 MPa/3300 K，为合成边界非循环仿真。
+- 新绝热循环案例（2026-10-13验收归档）：四级段配置背景分别绑定五个开式/补燃研究情景；所有流量、压力、O/F、泵效率和面积比为显式研究假设，不是实际飞行发动机工作点。长十乙一级燃料采用固定RP-1指定替代物。
 
 ## 4. 程序设计思想与关键技术
 
@@ -88,13 +89,14 @@
    输出：stdout JSON（机器契约）/ --text 人读表格 / results 归档
 ```
 
-并行路径：循环原型（给定热状态双路外排合成）、敏感性扫描（area-ratio-ambient / inlet-response）、回归测试套（C 层守恒 + CLI 契约）。
+并行路径：旧循环原型（给定热状态双路外排合成）、新循环原型（Q=0 HP开式/富氧补燃、回流焓/元素闭合）、敏感性扫描（area-ratio-ambient / inlet-response）、回归测试套（C层守恒 + CLI契约）。新模型不是旧接口的回流字段开关，详见[集成对照](../docs/cycle-integration.md)。
 
 ## 6. 程序说明
 
 - 构建：`python tools/pipeline.py build --configuration Release`（GCC，另支持Debug）；纯C源码包可直接用CMake/Ninja构建，无Python生产依赖。`build/release/rocketperf.exe`为便捷别名，正式交付固定已测试构建身份；Windows控制台UTF-8输出。
-- 裸跑 `rocketperf` 进入中文交互菜单：选计算类型（燃烧+喷管/液态入口/纯喷管 L0/循环原型），逐项提示参数名/单位/默认值，`q` 取消，结果为人读表格。
-- 批量：`rocketperf run CASE.ini`、`nozzle regime CASE.ini [--text]`、`combustion regime-liquid-state ...`、`study area-ratio-ambient ...`、`cases` 列内置算例。
+- 裸跑 `rocketperf` 进入中文交互菜单：选计算类型（燃烧+喷管/液态入口/纯喷管 L0/循环算例），逐项提示参数名/单位/默认值，`q`取消，结果为人读表格。
+- 批量：`rocketperf run CASE.ini`、`nozzle regime CASE.ini [--text]`、`combustion regime-liquid-state ...`、`cycle adiabatic CASE.ini [--text]`、`study area-ratio-ambient ...`、`cases`列内置算例。
+- 新循环研究入口示例：`rocketperf cycle adiabatic cases/vehicles/cz10b_first_stage1.ini --text`；正式归档与限制见[新循环验证](../docs/engine-cycle-validation.md)。旧的`cycle prescribed`契约仍独立存在。
 - 输出契约：stdout 为 JSON（schema 固定，供脚本/归档），stderr 为诊断；退出码 0/2/3/4 对应成功/用法/非法/域外。
 - 交互模式遇过膨胀自动转域评估并注明限制；`--text` 输出中文标注的站参数表与限制行。
 
@@ -158,16 +160,17 @@ Pc=10 MPa、At=0.01 m²、CH4 120 K/O2 100 K 查表入口、O/F=3.4、面积比 
 | 甲烷同源对照 | 47次C/18张显式焓CEA卡；室温最大差0.004406 K、c*最大差0.003504 m/s | 连续入口方法在保存条件下的软件核验 |
 | RP-1同源对照 | 33次C/21张CEA卡；同九物种参考采用0.02 K打印感知容差；扩展产物内部点燃温差0.31–0.46 K | 数值实现与产物集合差异分别解释 |
 | 成对方法 | 57次C/8张新CEA卡；共同几何、各自入口及C差值逐字段核对 | 条件性比较，不是燃料或型号排名 |
+| 新循环状态 | 5成功情景、4预期拒绝、12张CEA部件HP卡、814项状态关系；九气相温差约0.004 K以内，扩展产物差值最高约0.392 K | 所测假设情景的部件软件对照与守恒核验，不是实机循环或实验验证 |
 | 工程质量 | 新鲜质量报告的project/governance/Debug/Release/runner/handoff六组，以及独立纯C构建 | 工程级；不能替代科学语义审查 |
 
-证据分别见[甲烷验证](../docs/liquid-combustion-validation.md)、[RP-1验证](../docs/kerosene-validation.md)、[成对研究](../docs/propellant-method-comparison.md)和[质量规范](../docs/governance.md)。CEA/NASA9物性同源；CoolProp查表对照检验生成与插值流程；两者均非独立发动机实验。
+证据分别见[甲烷验证](../docs/liquid-combustion-validation.md)、[RP-1验证](../docs/kerosene-validation.md)、[成对研究](../docs/propellant-method-comparison.md)、[新循环验证](../docs/engine-cycle-validation.md)和[质量规范](../docs/governance.md)。CEA/NASA9物性同源；CoolProp查表对照检验生成与插值流程；两者均非独立发动机实验。
 
 ## 8. 结论与感悟
 
 - 保存资料支持分版本的构型与工作能力比较：遥一9×TQ-12A+TQ-15A，长十乙首飞一级煤油、二级甲烷。多次起动、并联与回收动作说明需要研究的工况；当前稳态模型未验证这些动态能力。
 - 本次保存且核验的资料不足以建立一致单机性能卡，必要输入继续保留未知；所有性能计算为声明假设下的方法算例。
 - 方法上得到的定量关系：同边界下甲烷比冲高而推力低；大面积比真空增益与海平面过膨胀代价此消彼长；支路排气与入口焓对推力/比冲影响不同向——改进评价必须多量并看。
-- 无激波/分离/侧载/凝聚相/国产煤油批次/整机循环闭合；对照证据为软件方法级。固定RP-1边界已核验，后续研究优先真实燃料身份、泵后/喷注与循环组成能量边界及异源参考。
+- 无激波/分离/侧载/凝聚相/国产煤油批次/实机部件标定或独立整机实验验证；新循环仅对显式假设情景闭合质量/元素/焓/轴功。固定RP-1边界已核验，仍需真实燃料身份、泵后/喷注、冷却与异源整机参考。
 
 ## 9. 参考文献
 

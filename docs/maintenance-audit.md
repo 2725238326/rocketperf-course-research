@@ -25,3 +25,11 @@ README导航；worknow/任务板展示登记状态；rules维护约束；handoff
 QA-002 针对当前代码、研究表述和交付基础做了集中复核。已修正 `gamma→1` 面积反解的数值消去、冻结喷管重复物性计算、非法背压与诊断字段的失败保持、交互超长输入和浮点转菜单索引；新增液态过膨胀交互回归。新增 `tools/static_analysis.py` 对登记的28个生产C源文件执行 GCC 14.2.0 `-fanalyzer` 与严格警告，新增 `tools/benchmark_frozen.py` 保存固定旧版/新版交替采样和推力校验。
 
 本轮交付脚本补齐菜单列出的6个算例、域评估文本、中文交互和网格扫描；当前交付协议为v2，`tools/delivery.py` 仍读取旧内部包协议，14项交接测试通过。当前性能记录为单机固定2000次A10/A40冻结喷管求解，中位CPU时间旧版0.159 s、新版0.085 s，累计推力校验值均为360319492.45191073 N；该记录只说明本机该输入的实现开销，不是发动机精度或通用加速保证。证据目录和最终阶段包路径写入QA-002快照。
+
+## 2026-10-13 文档群与循环状态对齐
+
+新增`docs/README.md`按接手、研究、模型、验证和交付分层导航；根`README.md`缩短为项目概述、当前循环入口和常用命令。`docs/engineering.md`、`model-design.md`、`two-vehicle-study.md`、`project-guide.md`、`technology-stack.md`和架构图同步区分历史`prescribed_thermal_cycle_v1`与新增`adiabatic_single_shaft_cycle_v1`；后者仍是MOD-009中的条件性原型，未把家族资料写成飞行子型性能。
+
+新增[循环集成对照](cycle-integration.md)、[新模型验证页](engine-cycle-validation.md)和`vehicle_cycle_evidence.json`；原循环验证页仍保留其v1契约，并链接新版本。数据图只登记来源身份/未知字段，不成为求解输入。调研索引说明2026-10-12两次循环检索返回没有实际搜索轨迹，故其内容不能作证；五份本地原文复读与既有文件哈希一致，没有刷新型号参数。
+
+`python tools/project.py check`通过（550个本地链接、无问题）；四张架构图重新生成，更新的作业图和组件图已渲染目视检查，无裁切/重叠；新增循环证据JSON校验通过，开发档案复核为5个成功案例、4个预期拒绝、12张CEA卡、814条状态关系。MOD-009仍ACTIVE：本批文档整理不替代代码/文档变化后的统一`quality.py`、新鲜Release、静态分析和正式受版本控制的研究归档。
