@@ -1,3 +1,48 @@
+/**
+ * equilibrium.c: 化学平衡求解器（Gibbs自由能最小化）
+ *
+ * 物理模型：
+ *   等温等压（TP）或等焓等压（HP）条件下，C-H-O体系的化学平衡态。
+ *   目标：最小化混合物的总Gibbs自由能 G = Σ(ni·gi)，受元素守恒约束。
+ *
+ *   采用的9个气相物种（理想气体）：
+ *     H2, O2, H2O, CO, CO2, CH4, H, O, OH
+ *
+ *   3个元素守恒方程：
+ *     C: Σ(ni·Ci) = C_total
+ *     H: Σ(ni·Hi) = H_total
+ *     O: Σ(ni·Oi) = O_total
+ *
+ *   加上物质总量归一化：
+ *     Σ(ni) = N
+ *
+ * 数值方法：
+ *   - TP问题：求解4维非线性方程组（Newton-Raphson + 步长阻尼 + 线搜索）
+ *     变量：πC, πH, πO, ln(N)（元素化学势 + 总物质量）
+ *     初值策略：从6000 K高温平衡态出发，每500 K逐步延拓到目标温度（continuation），
+ *     避免低温下Newton迭代落入局部极小或Jacobian病态区域
+ *   - HP问题：外层二分查找温度T，使得混合物焓等于目标焓
+ *   - Log-sum-exp技巧：保持残差和Jacobian数值稳定（避免exp溢出）
+ *
+ * 物性数据：
+ *   - 热力学性质来自NASA9多项式（CEA数据库）
+ *   - 温度范围：1000-6000 K（NASA9有效区间）
+ *   - 压力范围：100 Pa - 1 GPa（理想气体假设的工程适用区）
+ *
+ * 适用范围：
+ *   ✓ 碳氢燃料（CH4、煤油）+ O2燃烧的火箭发动机
+ *   ✓ 高温（>1000 K）、理想气体行为
+ *   ✓ 燃烧室、预燃室的化学平衡态
+ *   ✗ 不建模：固相（碳黑、金属氧化物）、液相、离子
+ *   ✗ 不建模：动力学（点火延迟、解离/复合速率）
+ *   ✗ 不适用：含N物种（如肼、硝酸）、含金属（如铝粉）
+ *
+ * 验证：
+ *   - 与NASA CEA计算对照（TP和HP模式）
+ *   - 元素守恒检查：|Σ(ni·Ei) - E_total| / E_total < tol
+ *   - 焓守恒检查（HP）：|h_mixture - h_target| < tol
+ */
+
 #include "rocketperf/combustion.h"
 #include "rocketperf/numeric.h"
 #include "equilibrium_internal.h"
@@ -5,6 +50,7 @@
 #include <float.h>
 #include <math.h>
 #include <stddef.h>
+#include <stdio.h>
 
 #define RP_EQUILIBRIUM_DIMENSION 4U
 
@@ -189,11 +235,22 @@ static RpStatus equilibrium_tp(double pressure_pa, const double supplied_invento
     double total = 0.0;
     RpStatus status;
     if (temperature_k < 1000.0 || temperature_k > 6000.0 || pressure_pa < 100.0 || pressure_pa > 1e9) {
-        return rp_error_set(error, RP_OUT_OF_DOMAIN, "Restricted gas equilibrium: T=1000..6000 K, p=100..1e9 Pa.");
+        char message[256];
+        (void)snprintf(message, sizeof(message),
+            "Gas equilibrium out of range: T=%.1f K (need 1000-6000 K), P=%.3e Pa (need 100 Pa-1 GPa). "
+            "NASA9 polynomials and ideal-gas assumption are only valid in this domain.",
+            temperature_k, pressure_pa);
+        return rp_error_set(error, RP_OUT_OF_DOMAIN, message);
     }
     for (unsigned int e = 0U; e < RP_CHO_ELEMENT_COUNT; ++e) {
         if (!rp_isfinite(supplied_inventory[e]) || supplied_inventory[e] <= 0.0) {
-            return rp_error_set(error, RP_INVALID_ARGUMENT, "Invalid product elemental inventory.");
+            char message[256];
+            const char *element_name[] = {"C", "H", "O"};
+            (void)snprintf(message, sizeof(message),
+                "Invalid elemental inventory: %s = %.6e kmol/kg (must be finite and positive). "
+                "Check that fuel and oxidizer compositions are physically meaningful.",
+                element_name[e], supplied_inventory[e]);
+            return rp_error_set(error, RP_INVALID_ARGUMENT, message);
         }
         inventory[e] = supplied_inventory[e] / supplied_inventory[0];
     }
@@ -226,7 +283,14 @@ static RpStatus equilibrium_tp(double pressure_pa, const double supplied_invento
         }
         result.element_relative_residual[e] = (amount - inventory[e]) / inventory[e];
         if (fabs(result.element_relative_residual[e]) > 2.0 * policy->equilibrium_tolerance) {
-            return rp_error_set(error, RP_NO_CONVERGENCE, "Element conservation residual exceeds tolerance.");
+            char message[256];
+            const char *element_name[] = {"C", "H", "O"};
+            (void)snprintf(message, sizeof(message),
+                "Element conservation failed: %s residual = %.3e (> %.3e tolerance). "
+                "T=%.1f K, P=%.3e Pa. Likely numerical instability or poor initial guess.",
+                element_name[e], fabs(result.element_relative_residual[e]),
+                2.0 * policy->equilibrium_tolerance, temperature_k, pressure_pa);
+            return rp_error_set(error, RP_NO_CONVERGENCE, message);
         }
     }
     status = rp_cho_mixture_evaluate(fractions, temperature_k, pressure_pa, &result.gas, error);

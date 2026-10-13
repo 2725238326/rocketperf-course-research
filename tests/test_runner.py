@@ -70,7 +70,7 @@ class ResultContractTests(unittest.TestCase):
         for index in (0,5):
             candidate=copy.deepcopy(report); point=candidate['points'][index]
             point.pop('results');point.pop('diagnostics');point['status']='out_of_domain'
-            point['error']='Overexpanded/back-pressure flow is not supported by this model.'
+            point['error']='Overexpanded: ambient pressure (200.00 kPa) > exit pressure (120.00 kPa), pa/pe=1.67. Attached flow assumption violated. Reduce area ratio (40.0) or increase Pc.'
             with self.subTest(index=index),self.assertRaises(ValueError):
                 pipeline.validate_study(candidate,self.input,pipeline.DEFAULT_RATIOS,pipeline.DEFAULT_PRESSURES)
 

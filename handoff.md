@@ -63,7 +63,7 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 
-近期批次：[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
+近期批次：[代码质量实质改进与真实核查](taskshot/2026-10-14_055-quality-substance-and-reality-check.md)、[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
 
 本轮文档入口和新旧循环口径整理见[2026-10-13整理记录](taskshot/2026-10-13_051-document-map.md)；完整阅读导航见[文档索引](docs/README.md)。
 

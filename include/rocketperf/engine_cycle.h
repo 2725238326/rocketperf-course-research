@@ -15,39 +15,50 @@ typedef struct {
     RpEnthalpyBasis basis;
 } RpCyclePropellant;
 
+/**
+ * 发动机循环输入参数
+ *
+ * 描述液体火箭发动机的热力循环（燃气发生器或补燃循环）。
+ * 所有推进剂流量、压力、效率均为设计点参数。
+ */
 typedef struct {
-    bool staged_combustion; /* false: GG external exhaust; true: all-O ORSC. */
-    double total_mass_flow_kg_per_s;
-    double overall_oxidizer_fuel_ratio;
-    RpCyclePropellant fuel;
-    RpCyclePropellant oxidizer;
-    double chamber_pressure_pa;
-    double main_area_ratio;
-    double preburner_pressure_pa;
-    double preburner_oxidizer_fuel_ratio;
-    double turbine_outlet_pressure_pa; /* GG only; must be zero for ORSC. */
-    double turbine_efficiency;
-    double shaft_efficiency;
-    double auxiliary_power_w;
-    double maximum_branch_fraction;
-    double pump_to_chamber_drop_pa;
-    double pump_to_preburner_drop_pa;
-    double return_pressure_drop_pa; /* ORSC only; must be zero for GG. */
-    double branch_area_ratio;       /* Must be 1 for inactive ORSC exhaust. */
-    double branch_axial_projection; /* Must be 0 for ORSC. */
-    double ambient_pressure_pa;
+    bool staged_combustion;              /* [-] false=燃气发生器循环(GG), true=富氧补燃循环(ORSC) */
+    double total_mass_flow_kg_per_s;     /* [kg/s] 总推进剂流量，范围 0.1-1000 kg/s */
+    double overall_oxidizer_fuel_ratio;  /* [-] 总体氧燃比(O/F)，范围 0.1-20 */
+    RpCyclePropellant fuel;              /* 燃料属性（元素组成+泵入口状态） */
+    RpCyclePropellant oxidizer;          /* 氧化剂属性（元素组成+泵入口状态） */
+    double chamber_pressure_pa;          /* [Pa] 主燃烧室压力，范围 1e5-1e8 Pa (0.1-100 MPa) */
+    double main_area_ratio;              /* [-] 主喷管面积比 Ae/At，范围 1-1e4 */
+    double preburner_pressure_pa;        /* [Pa] 预燃室压力，范围 1e5-1e8 Pa */
+    double preburner_oxidizer_fuel_ratio;/* [-] 预燃室氧燃比，GG典型0.5-2，ORSC需>overall_O/F */
+    double turbine_outlet_pressure_pa;   /* [Pa] 涡轮出口压力（GG必须>0，ORSC必须=0自动求解） */
+    double turbine_efficiency;           /* [-] 涡轮等熵效率，范围 0.6-0.85，典型0.7 */
+    double shaft_efficiency;             /* [-] 轴传动效率，范围 0.9-1.0，典型0.98 */
+    double auxiliary_power_w;            /* [W] 辅助功率消耗（发电机等），≥0 */
+    double maximum_branch_fraction;      /* [-] 最大分流比，范围 0.01-0.3，典型0.1 */
+    double pump_to_chamber_drop_pa;      /* [Pa] 泵出口到主燃烧室管路损失，≥0 */
+    double pump_to_preburner_drop_pa;    /* [Pa] 泵出口到预燃室管路损失，≥0 */
+    double return_pressure_drop_pa;      /* [Pa] 涡轮出口到主燃烧室管路损失（ORSC必须>0，GG必须=0） */
+    double branch_area_ratio;            /* [-] 分支喷管面积比（GG燃气排气，ORSC必须=1） */
+    double branch_axial_projection;      /* [-] 分支喷管轴向投影比（ORSC必须=0） */
+    double ambient_pressure_pa;          /* [Pa] 环境背压，范围 0-1e5 Pa，海平面101325 Pa */
 } RpEngineCycleInput;
 
+/**
+ * 发动机循环计算结果
+ *
+ * 包含推力性能、燃烧状态和收敛诊断信息。
+ */
 typedef struct {
-    RpCycleResult balance;
-    RpCombustionResult preburner;
-    RpCombustionResult chamber;
-    double main_inlet_h_j_per_kg;
-    double main_elements_kmol_per_kg[RP_CHO_ELEMENT_COUNT];
-    double preburner_enthalpy_residual_w;
-    double chamber_enthalpy_residual_w;
-    double exit_element_relative_residual[RP_CHO_ELEMENT_COUNT];
-    unsigned int turbine_pressure_iterations;
+    RpCycleResult balance;                /* 循环平衡结果（推力、比冲、流量分配） */
+    RpCombustionResult preburner;         /* 预燃室燃烧平衡态 */
+    RpCombustionResult chamber;           /* 主燃烧室燃烧平衡态 */
+    double main_inlet_h_j_per_kg;         /* [J/kg] 主燃烧室入口混合物比焓 */
+    double main_elements_kmol_per_kg[RP_CHO_ELEMENT_COUNT]; /* [kmol/kg] 主燃烧室元素库存(C,H,O) */
+    double preburner_enthalpy_residual_w; /* [W] 预燃室焓守恒残差（功率单位） */
+    double chamber_enthalpy_residual_w;   /* [W] 主燃烧室焓守恒残差（功率单位） */
+    double exit_element_relative_residual[RP_CHO_ELEMENT_COUNT]; /* [-] 出口元素守恒相对残差 */
+    unsigned int turbine_pressure_iterations; /* [-] 涡轮压力迭代次数（ORSC循环） */
 } RpEngineCycleResult;
 
 /* Single implementation file: src/cycle/adiabatic.c. Pure C17, no I/O/heap.

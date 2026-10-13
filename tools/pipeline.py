@@ -110,7 +110,7 @@ def validate_study(report, input_text, ratios, pressures):
             if set(point)!={'area_ratio','ambient_pressure_pa','status','error'} or not isinstance(point['error'],str) or not point['error'].strip():
                 raise ValueError('Domain exclusion has no valid diagnostic')
             inputs={**report['base_inputs'],'area_ratio':ratio,'ambient_pressure_pa':pressure}
-            if (point['error'] != 'Overexpanded/back-pressure flow is not supported by this model.'
+            if (not point['error'].startswith('Overexpanded:')
                 or not ideal_exclusion_supported(inputs)):
                 raise ValueError('Domain exclusion is inconsistent with back-pressure/area inputs')
         else: raise ValueError('Calculation error is not an expected domain exclusion')
