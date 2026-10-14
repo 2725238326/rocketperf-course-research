@@ -9,7 +9,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
   presets(c1, [["c* 峰值", () => P.of.set(peakC[0])], ["比冲峰值", () => P.of.set(peakI[0])], ["基线 3.4", () => P.of.set(3.4)],
     ["发生器 1.0", () => P.of.set(1.0), "朱雀三号一级开式情景的发生器混合比"], ["凝聚碳区", () => P.of.set(0.8)]]);
   card(V.rail, "凝聚碳判据", `<p>九气相模型里没有固体碳。平衡解给出碳的元素化学势 π<sub>C</sub>，石墨活度 <b>a<sub>C</sub> = exp(π<sub>C</sub> − g°<sub>C(gr)</sub>/RT)</b>。` +
-    `a<sub>C</sub> &gt; 1 时固体碳更稳定，九气相态已不是平衡解，C 程序直接拒算，不靠经验划 O/F 下限。</p>` +
+    `a<sub>C</sub> &gt; 1 时固体碳更稳定，九气相态平衡假设失效，程序拒算。</p>` +
     `<p class="muted">核对：Boudouard 平衡 2CO = C(gr) + CO₂ 独立重算一致（对数差 &lt; 10⁻⁶）；归档 CEA 扩展产物中 RP-1 O/F 1.0 析出石墨，对应 a<sub>C</sub> ≈ 3.2。</p>`);
   P.ev = evidence(V.rail);
   P.chain = chain(V.stage, "C 调用链");
@@ -67,8 +67,8 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
       P.k[2].set({ html: `<div class="v">${sci(p.ac, 3)}</div>`, foot: p.ac > 0.1 ? `${badge("warn", "接近边界")}仍为气相平衡解` : `${badge("ok", "气相解有效")}远离凝聚碳` });
       P.k[3].set({ v: p.isp, d: 2, unit: "s", foot: `峰值 <b>${fx(peakI[1], 2)} s</b> @ O/F ${ofKey(peakI[0])}` });
     } else {
-      P.k[0].set({ refused: "C 拒算", foot: "固体碳稳定，九气相态不是平衡解" });
-      P.k[1].set({ refused: "C 拒算", foot: "不外推" });
+      P.k[0].set({ refused: "C 拒算", foot: "固体碳稳定" });
+      P.k[1].set({ refused: "C 拒算" });
       P.k[2].set({ html: `<div class="v" style="color:var(--bad)">${fx(p.ac, 2)}</div>`, foot: `${badge("bad", "a<sub>C</sub> > 1")}固体碳热力学稳定` });
       P.k[3].set({ refused: "C 拒算", foot: "—" });
     }

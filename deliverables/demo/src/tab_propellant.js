@@ -12,7 +12,7 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
     ["各自比冲峰值", () => { P.lock.checked = false; P.ch4.set(peakIsp("ch4", AX.ch4_of)[0], true); P.rp1.set(peakIsp("rp1", AX.rp1_of)[0]); }],
     ["推力差变号 2.9", () => { P.lock.checked = true; P.ch4.set(2.9); }]]);
   card(V.rail, "", `<p><b>入口</b>：${DATA.provenance.inlets.ch4}；${DATA.provenance.inlets.rp1}。</p>` +
-    `<p class="muted">甲烷 O/F 2.0–4.0（富燃端由石墨判据守住）；RP-1 O/F 2.2–4.0（C 方法域）。同 O/F 不等于同当量比；这是方法成对比较，不是燃料或型号排名。</p>`);
+    `<p class="muted">甲烷 O/F 2.0–4.0；RP-1 O/F 2.2–4.0。方法成对比较。</p>`);
   P.ev1 = evidence(V.rail, "甲烷侧证据"); P.ev2 = evidence(V.rail, "RP-1 侧证据");
   P.chain = chain(V.stage, "C 调用链");
   const row = kpiRow(V.stage, 4);
@@ -64,8 +64,8 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
     if (ok(a) && ok(b)) {
       P.take.innerHTML = `同 P<sub>c</sub>、A<sub>t</sub> 时 <b>F = C<sub>F</sub>·P<sub>c</sub>·A<sub>t</sub></b>，c* 不进入推力：C<sub>F</sub> ${fx(a.cf, 4)} 对 ${fx(b.cf, 4)}，推力只差 <b>${sgn(pct(a.f, b.f), 2)}%</b>。` +
         `甲烷 c* 高 ${sgn(a.cstar - b.cstar, 1)} m/s，由 <b>ṁ = P<sub>c</sub>A<sub>t</sub>/c*</b> 少用 <b>${fx(Math.abs(pct(a.mdot, b.mdot)), 2)}%</b> 推进剂，这就是比冲 ${sgn(a.isp - b.isp, 2)} s 的来源。` +
-        (P.ch4.get() !== P.rp1.get() ? " 两侧 O/F 不同，属各自声明条件。" : " 推力差随 O/F 变号，不能作为选推进剂的依据。");
-    } else P.take.innerHTML = "背压高于理想出口压力时，C 按“过膨胀超出无激波模型域”拒算，页面不外推。降低面积比或切换到更低背压。";
+        (P.ch4.get() !== P.rp1.get() ? “” : “ 推力差变号点 “ + fx(cross, 1) + “。”);
+    } else P.take.innerHTML = “过膨胀超出模型域，程序拒算。降低面积比或切换到更低背压。”;
     P.f1.redraw(); P.f2.redraw();
   }
   P.ch4.on(() => { if (P.lock.checked) { if (AX.rp1_of.includes(P.ch4.get())) P.rp1.set(P.ch4.get(), true); else P.lock.checked = false; } render(); });

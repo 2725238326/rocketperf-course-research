@@ -1,15 +1,15 @@
 .schematic { position: absolute; inset: 0; width: 100%; height: 100%; }
 .schematic text { font-family: var(--ff); }
 .schematic .comp { cursor: pointer; }
-.schematic .comp:hover .outline, .schematic .comp.sel .outline { stroke: var(--blue); stroke-width: 2.4; }
+.schematic .comp:hover .outline, .schematic .comp.sel .outline { stroke: var(--blue); stroke-width: 3; }
 .schematic .comp.sel .halo { opacity: 1; }
 .schematic .halo { opacity: 0; transition: opacity 0.15s; }
-.schematic .name, .schematic .sub, .schematic .dim { paint-order: stroke; stroke: #fff; stroke-width: 3.5px; stroke-linejoin: round; }
-.schematic .name { font-size: 15px; font-weight: 700; fill: var(--ink); }
-.schematic .sub { font-size: 12.5px; fill: var(--ink-2); }
-.schematic .dim { font-size: 11.5px; fill: var(--ink-3); font-family: var(--mono); }
+.schematic .name, .schematic .sub, .schematic .dim { paint-order: stroke; stroke: #fff; stroke-width: 4.5px; stroke-linejoin: round; }
+.schematic .name { font-size: 19px; font-weight: 700; fill: var(--ink); }
+.schematic .sub { font-size: 16px; fill: var(--ink-2); }
+.schematic .dim { font-size: 15px; fill: var(--ink-3); font-family: var(--mono); }
 .schematic .pill rect { fill: #fff; stroke-width: 1.4; }
-.schematic .pill text { font-size: 12.5px; font-weight: 700; font-family: var(--mono); }
+.schematic .pill text { font-size: 16px; font-weight: 700; font-family: var(--mono); }
 
 /* moving dashes along pipes; speed is uniform and only shows direction */
 .schematic .flow { stroke-dasharray: 2 14; stroke-linecap: round; animation: rp-flow 1.1s linear infinite; }

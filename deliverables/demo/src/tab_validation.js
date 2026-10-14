@@ -13,7 +13,7 @@ TABS.push({ id: "validation", title: "CEA 对照", init() {
   P.fuel = seg(c1, "显示", [["all", "全部"], ["ch4", "液甲烷"], ["rp1", "RP-1"]], "all");
   card(V.rail, "", `<div class="ev"><table>` + [["液甲烷：C 运行 / CEA 卡", `${VD.ch4.c_runs} / ${VD.ch4.cea_cards}`], ["RP-1：C 运行 / CEA 卡", `${VD.rp1.c_runs} / ${VD.rp1.cea_cards}`],
     ["对照字段", fx(all.length, 0)], ["超出容差", all.filter((p) => p.q > 1).length], ["最紧一项", `${fx(worst.q * 100, 1)}% 容差`]].map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join("") + `</table></div>`);
-  card(V.rail, "这项对照证明什么", `<p>检查的是：相同物性与相同输入下，C 实现算出的平衡态和喷管解与参考软件一致。</p><p class="muted">它不是发动机实验验证；CEA 还支持更多产物、凝聚相和平衡喷管，本对照只比较两者共同的九气相冻结口径。</p>` +
+  card(V.rail, "CEA 对照", `<p>相同物性与输入下，C 实现的平衡态和喷管解与 CEA v3.3.4 一致。</p><p class="muted">对照范围：两者共同的九气相冻结口径。</p>` +
     `<p class="muted">来源：${VD.ch4.archive}、${VD.rp1.archive}（保存的 manifest），页面不重新运行 CEA。</p>`);
   P.chain = chain(V.stage, "对照流程");
   P.chain.set([{ name: "同一 thermo.inp", val: "NASA9 · 十物种" }, { name: "同一入口焓 / 库存", val: "显式焓卡" }, { name: "C 程序", val: `${VD.ch4.c_runs + VD.rp1.c_runs} 次运行` },

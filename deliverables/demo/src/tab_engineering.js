@@ -46,6 +46,6 @@ TABS.push({ id: "engineering", title: "工程与质量", init() {
       `轴 ${sci(c.balance.shaft_residual_w, 1)} W · 焓 ${fx(c.balance.energy_residual_w, 2)} W`])) +
     sec("解析与参考", [["L0 理想喷管 Mach 2", "A/A* = 27/16 精确解"], ["液甲烷对 CEA", `${DATA.validation.ch4.cea_cards} 卡 · T 差 ≤ 0.0044 K`], ["RP-1 对 CEA", `${DATA.validation.rp1.cea_cards} 卡 · T 差 ≤ 0.0043 K`],
       ["积碳判据", "Boudouard 独立重算一致"]]) +
-    `<p class="muted" style="font-size:0.72rem;margin-top:0.5rem">同源物性下的软件核验，不是发动机实验验证。证据归档：${esc(ev.archive)}</p></div>`;
+    ``;
   takeaway(V.stage).innerHTML = `快、稳、准都有可复跑的记录：基准用 <code>tools/benchmark_frozen.py --driver hp</code>，检查用 <code>python tools/quality.py</code>，本页数据用 <code>python tools/demo_data.py --check</code> 一键重算比对。`;
 } });

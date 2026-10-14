@@ -5,7 +5,6 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
   const rail = card(V.rail, "循环三本账",
     `<p>共同输入：总供给 ${cases[0].inputs.total_mass_flow_kg_per_s} kg/s，主室 ${fx(cases[0].inputs.chamber_pressure_pa / 1e6, 0)} MPa，主喷管面积比 ${cases[0].inputs.main_area_ratio}，海平面背压。泵、预燃室、涡轮、主室在一次 C 调用里同时闭合质量、轴功、焓与元素。</p>`);
   P.sel = seg(rail, "研究情景", [[0, "开式 · 朱雀三号一级"], [1, "补燃 · 长十乙一级"]], 0);
-  card(V.rail, "", `<p style="color:var(--warn)"><b>两情景燃料、混合比、泵压都不同</b>，各自检查闭合，不作循环优劣比较。</p>`);
   const key = card(V.rail, "关键核对", "<p></p>");
   P.ev = evidence(V.rail);
   P.chain = chain(V.stage, "C 调用链");
