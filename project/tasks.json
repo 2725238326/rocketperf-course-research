@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 321,
+  "revision": 325,
   "context": {
     "phase": "报告技术审稿与交付校验修正",
     "evidence_cutoff": "2026-10-06",
@@ -1469,6 +1469,35 @@
         "kind": "quality",
         "path": "project/evidence/QA-006_76185e091ed7.json",
         "sha256": "9c22311ca32ef70ef6497ab3ff19bc511a6c6d4f623d3cfe1c834f406157418f"
+      }
+    },
+    {
+      "id": "QA-007",
+      "title": "演示页重构、HP求解提速与工程证据归档",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/demo/src/page.html",
+        "deliverables/demo/index.html",
+        "tools/demo_page.py",
+        "src/thermo/equilibrium.c",
+        "tools/benchmark_hp.c",
+        "results/research/engineering_evidence_20261014/manifest.json",
+        "deliverables/presentation.md",
+        "taskshot/2026-10-15_060-demo-rebuild-and-hp-speedup.md"
+      ],
+      "acceptance": [
+        "演示页六页由模块化源码组装为离线单文件；图表按容器像素绘制，可悬停/点击/拖动选点；循环页用部件图形绘制，喷管喉部与出口按计算尺寸；1366×768/1920×1080无溢出、无标签重叠",
+        "HP外层改为保持夹逼的Illinois割线+热启动，回退路径保留；同输入基准与旧提交对比并归档，结果差在HP容差内；全部回归与CEA对照通过",
+        "讲稿给出快/稳/准可讲点与证据路径；演示数据--check通过；统一质量六组通过"
+      ],
+      "owner": "root",
+      "note": "验收完成。1366×768下两页左栏需内部滚动；PPT/贡献/计时演练由小组完成",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-007_db633f84f1f6.json",
+        "sha256": "c4365d84f5b6d00ee132f99324b89afec0370e1748b6c2c8db68fa46f615e50c"
       }
     }
   ],
@@ -8380,6 +8409,54 @@
       "note": "验收完成。判据只判平衡稳定性，不算积碳速率；PPT/贡献/计时演练由小组完成",
       "previous_hash": "d8771d0f1ec5e0ff8c3c531070f8e39db88623097a0beb02726991b7745923c1",
       "hash": "f3fcd426024437fa3ffb2f7eb3136a947b61b0b07541b820e19d31e5ec2b7568"
+    },
+    {
+      "seq": 339,
+      "at": "2026-10-14T17:24:28+00:00",
+      "task": "QA-007",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "f3fcd426024437fa3ffb2f7eb3136a947b61b0b07541b820e19d31e5ec2b7568",
+      "hash": "1457bca642d18a0c52a403f3c8fcec844233d91894e3ca2e922005b86676107c"
+    },
+    {
+      "seq": 340,
+      "at": "2026-10-14T17:24:28+00:00",
+      "task": "QA-007",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户要求打磨演示页排版与交互、循环页用实际图形、构建优化/质量/准确性可讲点",
+      "previous_hash": "1457bca642d18a0c52a403f3c8fcec844233d91894e3ca2e922005b86676107c",
+      "hash": "790b6152ac7c1dd7c73929323600b3361090a26d66cecbb3cfab60f211419dd1"
+    },
+    {
+      "seq": 341,
+      "at": "2026-10-14T17:32:51+00:00",
+      "task": "QA-007",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "演示页六页模块化重构、图表按容器绘制且可交互、循环页部件图形与按尺寸喷管；HP Illinois+热启动6.43×且结果差在容差内并归档；讲稿快/稳/准可讲点；--check与质量六组PASS",
+      "previous_hash": "790b6152ac7c1dd7c73929323600b3361090a26d66cecbb3cfab60f211419dd1",
+      "hash": "44d11004d74043a836377605966c314179e0bbfd634e2301a42febae0cf399ee"
+    },
+    {
+      "seq": 342,
+      "at": "2026-10-14T17:32:53+00:00",
+      "task": "QA-007",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成。1366×768下两页左栏需内部滚动；PPT/贡献/计时演练由小组完成",
+      "previous_hash": "44d11004d74043a836377605966c314179e0bbfd634e2301a42febae0cf399ee",
+      "hash": "6462e8b7d4cd6f353a3df16e561cd5f791c7a86129948d293ec70aeb1ed6041f"
     }
   ]
 }

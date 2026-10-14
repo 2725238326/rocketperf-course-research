@@ -1,5 +1,14 @@
 # 研究计算档案
 
+## 2026-10-14 工程证据
+
+[engineering_evidence_20261014](engineering_evidence_20261014/manifest.json)保存HP平衡求解器从二分改为Illinois割线+热启动前后的CPU基准（基线提交a342eb5，310次液甲烷HP，9组交替采样，中位0.900→0.140 s，温度和差1.6×10⁻⁶ K），以及GCC `-fanalyzer`对30个生产编译单元的通过记录。只说明本机该输入的实现开销，不是发动机精度或通用加速结论。`tools/demo_page.py`读取时逐文件核对哈希。
+
+```powershell
+python tools/benchmark_frozen.py --driver hp --baseline a342eb5 --samples 9 --destination build/perf/hp-NEW
+python tools/static_analysis.py --destination build/perf/analyzer-NEW
+```
+
 ## 2026-10-13 组员代码接收
 
 [incoming_code_v1_20261013](incoming_code_v1_20261013/manifest.json)固定用户代码ZIP、包内exe及重建exe身份，保存三个循环复跑、两组扫描、四个预期域拒绝、CTest日志、两个bat逐提示记录和源码/清单核对。原资料保存在日期化原始来源目录；[审阅结论](../../docs/incoming-code-review.md)区分给定温度补燃、甲烷代理、流量标定、旧验证报告与当前Q=0研究模型。它是工程接收证据，不是新的在线事实或实验性能验证。

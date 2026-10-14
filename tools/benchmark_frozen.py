@@ -1,4 +1,9 @@
-"""Compare frozen-nozzle CPU time against a fixed Git version, using identical inputs."""
+"""Compare solver CPU time against a fixed Git version, using identical inputs.
+
+Drivers: frozen (2000 fixed-composition A10/A40 nozzle solves; checksum must be
+bit-identical) and hp (310 liquid CH4/O2 HP solves; summed temperatures must
+agree within the HP enthalpy tolerance, since the solve path may change).
+"""
 from __future__ import annotations
 
 import argparse
@@ -11,7 +16,13 @@ import sys
 from projectlib import ROOT, atomic_json, atomic_text, digest, git, local_path, now, read_json, strict_json, subprocess_env
 
 
-def benchmark(destination: Path, baseline: str, samples: int):
+DRIVERS = {"frozen": ("tools/benchmark_frozen.c", 2000, "checksum_thrust_n", 0.0),
+           # |dh| <= 0.01 J/kg with cp ~ 2.5 kJ/(kg K) bounds each T to ~4e-6 K; 310 points.
+           "hp": ("tools/benchmark_hp.c", 310, "checksum_temperature_k", 310 * 1e-5)}
+
+
+def benchmark(destination: Path, baseline: str, samples: int, driver_name: str = "frozen"):
+    driver_path, expected_runs, checksum_key, checksum_tolerance = DRIVERS[driver_name]
     if destination.exists() or not destination.resolve().is_relative_to((ROOT / "build").resolve()):
         raise ValueError("Choose an unused benchmark directory under build/")
     if not 3 <= samples <= 31:
@@ -40,8 +51,8 @@ def benchmark(destination: Path, baseline: str, samples: int):
             target = folder / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
-        driver = folder / "benchmark_frozen.c"
-        driver.write_bytes((ROOT / "tools/benchmark_frozen.c").read_bytes())
+        driver = folder / Path(driver_path).name
+        driver.write_bytes((ROOT / driver_path).read_bytes())
         identities[label] = {name: digest(folder / name) for name in names}
         binary = folder / ("benchmark.exe" if sys.platform == "win32" else "benchmark")
         command = [compiler, *flags, *sources, driver.name, "-lm", "-o", str(binary)]
@@ -58,20 +69,22 @@ def benchmark(destination: Path, baseline: str, samples: int):
             run = subprocess.run([str(binaries[label])], capture_output=True, encoding="utf-8",
                                  check=True, timeout=30, env=subprocess_env())
             value = strict_json(run.stdout)
-            if value["runs"] != 2000 or value["cpu_seconds"] <= 0:
+            if value["runs"] != expected_runs or value["cpu_seconds"] <= 0:
                 raise ValueError("Invalid benchmark output")
             measurements[label].append(value)
-    checksums = {item["checksum_thrust_n"] for items in measurements.values() for item in items}
-    if len(checksums) != 1:
-        raise ValueError("Benchmark numeric checksum changed")
+    checksums = [item[checksum_key] for items in measurements.values() for item in items]
+    if max(checksums) - min(checksums) > checksum_tolerance:
+        raise ValueError("Benchmark numeric checksum changed beyond the declared tolerance")
     medians = {label: statistics.median(item["cpu_seconds"] for item in items)
                for label, items in measurements.items()}
-    record = dict(schema_version=1, status="PASS", finished_at=now(), baseline_head=head,
-                  compiler=compiler, flags=flags, driver_sha256=digest(ROOT / "tools/benchmark_frozen.c"),
+    record = dict(schema_version=1, status="PASS", finished_at=now(), baseline_head=head, driver=driver_name,
+                  checksum_tolerance=checksum_tolerance,
+                  compiler=compiler, flags=flags, driver_sha256=digest(ROOT / driver_path),
                   source_hashes=identities, binary_hashes={label: digest(path) for label, path in binaries.items()},
                   samples=measurements, median_cpu_seconds=medians,
                   reduction_fraction=1 - medians["after"] / medians["before"],
-                  note="Single-machine CPU benchmark for 2000 fixed-composition A10/A40 solves; not engine accuracy or a universal speed claim")
+                  speedup=medians["before"] / medians["after"],
+                  note=f"Single-machine CPU benchmark ({driver_name}, {expected_runs} fixed solves); not engine accuracy or a universal speed claim")
     report = destination / "benchmark.json"
     atomic_json(report, record)
     return report
@@ -82,9 +95,10 @@ if __name__ == "__main__":
     parser.add_argument("--destination", required=True)
     parser.add_argument("--baseline", required=True)
     parser.add_argument("--samples", type=int, default=9)
+    parser.add_argument("--driver", choices=sorted(DRIVERS), default="frozen")
     args = parser.parse_args()
     try:
-        print(benchmark(local_path(ROOT, args.destination), args.baseline, args.samples))
+        print(benchmark(local_path(ROOT, args.destination), args.baseline, args.samples, args.driver))
     except (OSError, ValueError, KeyError, subprocess.SubprocessError) as exc:
         print(str(exc), file=sys.stderr)
         sys.exit(1)

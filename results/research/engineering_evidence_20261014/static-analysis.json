@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "started_at": "2026-10-14T16:17:06+00:00",
+  "finished_at": "2026-10-14T16:17:22+00:00",
+  "compiler": "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+  "checks": 30,
+  "compiler_version": "gcc.EXE (x86_64-win32-seh-rev0, Built by MinGW-Builds project) 14.2.0",
+  "input_count": 62,
+  "note": "GCC -fanalyzer with strict warnings over every registered production C translation unit (tools/static_analysis.py); full per-unit logs stay under build/.",
+  "units": [
+    {
+      "source": "src/core/status.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/core/root.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/nozzle/ideal.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/nozzle/frozen.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/nozzle/liquid.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/nozzle/propellant_study.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/case_file.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/case_text.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/cycle_case.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/engine_case.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/propellant_case.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/combustion_report.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/text_report.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/json_report.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/adapters/platform.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cli/main.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cli/arguments.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cli/combustion_commands.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cli/interactive.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/nasa9.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/database.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/mixture.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/equilibrium.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/reactants.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/liquid_feed.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/thermo/liquid_combustion.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cycle/components.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cycle/prescribed.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cycle/adiabatic.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    },
+    {
+      "source": "src/cycle/study.c",
+      "exit_code": 0,
+      "log_bytes": 0
+    }
+  ]
+}

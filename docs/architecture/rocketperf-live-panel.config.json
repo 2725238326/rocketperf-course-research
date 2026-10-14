@@ -21,7 +21,7 @@
  "machines": {
   "checks": {
    "type": "counter",
-   "start": 13759,
+   "start": 13772,
    "rate": 0,
    "format": "comma"
   },
@@ -772,7 +772,7 @@
      "c": "mute"
     },
     {
-     "t": "13759项检查 · CEA对照",
+     "t": "13772项检查 · CEA对照",
      "c": "mute"
     },
     {
@@ -917,7 +917,7 @@
   "text": "~/rocketperf — C17 热化学计算核心"
  },
  "credit": {
-  "text": "循环为条件性研究原型 · 数据来源: rocketperf 归档 results/validation · 13759项检查与CEA对照",
+  "text": "循环为条件性研究原型 · 数据来源: rocketperf 归档 results/validation · 13772项检查与CEA对照",
   "y": 1490
  }
 }

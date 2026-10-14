@@ -246,14 +246,29 @@ static RpStatus carbon_guard(const RpCombustionResult *result, RpError *error)
     return rp_error_set(error, RP_OUT_OF_DOMAIN, message);
 }
 
-/* Inventory and inlet h are separate from product Gibbs data; no fabricated feed T. */
+/* A converged TP state plus its element potentials and ln N, reused as the
+ * Newton start for a nearby temperature inside the HP search. */
+typedef struct {
+    RpCombustionResult result;
+    double variables[RP_EQUILIBRIUM_DIMENSION];
+} TpState;
+
+/* Warm starts are only tried within this temperature distance of the seed;
+ * farther away the 500 K cold continuation path is used directly. */
+#define RP_WARM_START_SPAN_K 500.0
+
+/* Inventory and inlet h are separate from product Gibbs data; no fabricated feed T.
+ * seed may be NULL (cold continuation from 6000 K). A failed warm start falls
+ * back to the cold path with a fresh iteration budget, so the warm path can
+ * only change the Newton start, never the converged equilibrium. */
 static RpStatus equilibrium_tp(double pressure_pa, const double supplied_inventory[RP_CHO_ELEMENT_COUNT], double feed_enthalpy,
-                               double temperature_k, const RpCombustionOptions *policy,
-                               RpCombustionResult *output, RpError *error)
+                               double temperature_k, const RpCombustionOptions *policy, const TpState *seed,
+                               TpState *output, RpError *error)
 {
     RpCombustionResult result = {0};
     double inventory[RP_CHO_ELEMENT_COUNT];
     double variables[RP_EQUILIBRIUM_DIMENSION];
+    int warm = 0;
     double logs[RP_CHO_SPECIES_COUNT];
     double initial_gibbs[RP_CHO_SPECIES_COUNT];
     double fractions[RP_CHO_SPECIES_COUNT];
@@ -282,18 +297,26 @@ static RpStatus equilibrium_tp(double pressure_pa, const double supplied_invento
         inventory[e] = supplied_inventory[e] / supplied_inventory[0];
     }
     log_pressure = log(pressure_pa) - log(rp_thermo_reference_pressure_pa());
-    status = gibbs_at_temperature(continuation, initial_gibbs, error);
-    if (status != RP_OK) { return status; }
-    variables[1] = initial_gibbs[6] + log(0.1) + log_pressure;
-    variables[2] = initial_gibbs[7] + log(0.1) + log_pressure;
-    variables[0] = initial_gibbs[3] + log(0.2) + log_pressure - variables[2];
-    variables[3] = log((inventory[0] + inventory[1] + inventory[2]) / 2.0);
-    for (;;) {
-        status = solve_temperature(continuation, log_pressure, inventory, policy, variables,
-                                   &result.equilibrium_iterations, logs, &result.equilibrium_residual, error);
+    if (seed != NULL && fabs(seed->result.gas.temperature_k - temperature_k) <= RP_WARM_START_SPAN_K) {
+        for (unsigned int j = 0U; j < RP_EQUILIBRIUM_DIMENSION; ++j) { variables[j] = seed->variables[j]; }
+        warm = solve_temperature(temperature_k, log_pressure, inventory, policy, variables,
+                                 &result.equilibrium_iterations, logs, &result.equilibrium_residual, error) == RP_OK;
+    }
+    if (!warm) {
+        result.equilibrium_iterations = 0U;
+        status = gibbs_at_temperature(continuation, initial_gibbs, error);
         if (status != RP_OK) { return status; }
-        if (continuation == temperature_k) { break; }
-        continuation = fmax(temperature_k, continuation - 500.0);
+        variables[1] = initial_gibbs[6] + log(0.1) + log_pressure;
+        variables[2] = initial_gibbs[7] + log(0.1) + log_pressure;
+        variables[0] = initial_gibbs[3] + log(0.2) + log_pressure - variables[2];
+        variables[3] = log((inventory[0] + inventory[1] + inventory[2]) / 2.0);
+        for (;;) {
+            status = solve_temperature(continuation, log_pressure, inventory, policy, variables,
+                                       &result.equilibrium_iterations, logs, &result.equilibrium_residual, error);
+            if (status != RP_OK) { return status; }
+            if (continuation == temperature_k) { break; }
+            continuation = fmax(temperature_k, continuation - 500.0);
+        }
     }
     for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
         fractions[i] = exp(logs[i] - variables[3]);
@@ -325,7 +348,8 @@ static RpStatus equilibrium_tp(double pressure_pa, const double supplied_invento
     status = graphite_activity(temperature_k, variables[0], &result.graphite_activity, error);
     if (status != RP_OK) { return status; }
     result.enthalpy_residual_j_per_kg = result.gas.h_j_per_kg - feed_enthalpy;
-    *output = result;
+    output->result = result;
+    for (unsigned int j = 0U; j < RP_EQUILIBRIUM_DIMENSION; ++j) { output->variables[j] = variables[j]; }
     rp_error_clear(error);
     return RP_OK;
 }
@@ -348,55 +372,78 @@ RpStatus rp_ch4_o2_equilibrium_tp(const RpCh4O2Feed *feed, double temperature_k,
     }
     gas_inventory(feed->oxidizer_fuel_mass_ratio, inventory);
     {
-        RpCombustionResult result;
-        status = equilibrium_tp(feed->pressure_pa, inventory, enthalpy, temperature_k, &policy, &result, error);
-        if (status == RP_OK) { status = carbon_guard(&result, error); }
+        TpState state;
+        status = equilibrium_tp(feed->pressure_pa, inventory, enthalpy, temperature_k, &policy, NULL, &state, error);
+        if (status == RP_OK) { status = carbon_guard(&state.result, error); }
         if (status != RP_OK) { return status; }
-        *output = result;
+        *output = state.result;
     }
     rp_error_clear(error);
     return RP_OK;
 }
 
+/* h_products(T) - h_in is smooth and increasing in T, so the root is kept
+ * bracketed and each trial uses a false-position step with the Illinois
+ * weight (a retained endpoint's residual is halved), falling back to the
+ * midpoint if the step is not strictly inside the bracket. The bracket never
+ * loses the root; only the number of TP solves changes. */
 static RpStatus equilibrium_hp_state(double pressure_pa, const double inventory[RP_CHO_ELEMENT_COUNT], double enthalpy,
                                      const RpCombustionOptions *policy,
                                      RpCombustionResult *output, RpError *error)
 {
-    RpCombustionResult lower_state;
-    RpCombustionResult upper_state;
+    TpState lower_state;
+    TpState upper_state;
     double lower = policy->hp_lower_temperature_k;
     double upper = policy->hp_upper_temperature_k;
+    double f_lower, f_upper;
+    int kept = 0; /* -1 lower endpoint retained last step, +1 upper, 0 none */
     RpStatus status;
-    status = equilibrium_tp(pressure_pa, inventory, enthalpy, lower, policy, &lower_state, error);
+    status = equilibrium_tp(pressure_pa, inventory, enthalpy, lower, policy, NULL, &lower_state, error);
     if (status != RP_OK) { return status; }
-    status = equilibrium_tp(pressure_pa, inventory, enthalpy, upper, policy, &upper_state, error);
+    status = equilibrium_tp(pressure_pa, inventory, enthalpy, upper, policy, NULL, &upper_state, error);
     if (status != RP_OK) { return status; }
-    if (fabs(lower_state.enthalpy_residual_j_per_kg) <= policy->enthalpy_tolerance_j_per_kg) {
-        *output = lower_state; rp_error_clear(error); return RP_OK;
+    f_lower = lower_state.result.enthalpy_residual_j_per_kg;
+    f_upper = upper_state.result.enthalpy_residual_j_per_kg;
+    if (fabs(f_lower) <= policy->enthalpy_tolerance_j_per_kg) {
+        *output = lower_state.result; rp_error_clear(error); return RP_OK;
     }
-    if (fabs(upper_state.enthalpy_residual_j_per_kg) <= policy->enthalpy_tolerance_j_per_kg) {
-        *output = upper_state; rp_error_clear(error); return RP_OK;
+    if (fabs(f_upper) <= policy->enthalpy_tolerance_j_per_kg) {
+        *output = upper_state.result; rp_error_clear(error); return RP_OK;
     }
-    if ((lower_state.enthalpy_residual_j_per_kg < 0.0) == (upper_state.enthalpy_residual_j_per_kg < 0.0)) {
+    if ((f_lower < 0.0) == (f_upper < 0.0)) {
         return rp_error_set(error, RP_NOT_BRACKETED, "HP enthalpy root is not bracketed in the allowed temperature interval.");
     }
     for (unsigned int iteration = 1U; iteration <= policy->max_hp_iterations; ++iteration) {
-        const double middle = 0.5 * lower + 0.5 * upper;
-        RpCombustionResult result;
-        if (middle == lower || middle == upper) {
+        const double width = upper - lower;
+        double trial = upper - f_upper * width / (f_upper - f_lower);
+        TpState state;
+        const TpState *seed;
+        double f_trial;
+        if (!rp_isfinite(trial) || trial <= lower || trial >= upper) {
+            trial = 0.5 * lower + 0.5 * upper;
+        }
+        if (trial == lower || trial == upper) {
             return rp_error_set(error, RP_NO_CONVERGENCE, "HP temperature bracket stagnated before enthalpy tolerance.");
         }
-        status = equilibrium_tp(pressure_pa, inventory, enthalpy, middle, policy, &result, error);
+        seed = trial - lower < upper - trial ? &lower_state : &upper_state;
+        status = equilibrium_tp(pressure_pa, inventory, enthalpy, trial, policy, seed, &state, error);
         if (status != RP_OK) { return status; }
-        if (fabs(result.enthalpy_residual_j_per_kg) <= policy->enthalpy_tolerance_j_per_kg) {
-            result.hp_iterations = iteration;
-            *output = result;
+        f_trial = state.result.enthalpy_residual_j_per_kg;
+        if (fabs(f_trial) <= policy->enthalpy_tolerance_j_per_kg) {
+            state.result.hp_iterations = iteration;
+            *output = state.result;
             rp_error_clear(error);
             return RP_OK;
         }
-        if ((result.enthalpy_residual_j_per_kg < 0.0) == (lower_state.enthalpy_residual_j_per_kg < 0.0)) {
-            lower = middle; lower_state = result;
-        } else { upper = middle; }
+        if ((f_trial < 0.0) == (f_lower < 0.0)) {
+            lower = trial; lower_state = state; f_lower = f_trial;
+            if (kept == 1) { f_upper *= 0.5; }
+            kept = 1;
+        } else {
+            upper = trial; upper_state = state; f_upper = f_trial;
+            if (kept == -1) { f_lower *= 0.5; }
+            kept = -1;
+        }
     }
     return rp_error_set(error, RP_NO_CONVERGENCE, "HP iteration budget exhausted.");
 }

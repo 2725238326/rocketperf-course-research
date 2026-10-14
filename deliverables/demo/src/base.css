@@ -1,0 +1,49 @@
+:root {
+  --navy: #0B2A6B; --blue: #1F5FBF; --blue-2: #5385C5; --blue-3: #BBCEE5; --blue-bg: #EEF3FA;
+  --ink: #1A2233; --ink-2: #485266; --ink-3: #7A8496; --line: #DFE4EC; --line-2: #EEF1F5;
+  --bg: #F4F6FA; --card: #FFFFFF;
+  /* one meaning per colour: fuel warm, oxidiser cool, hot gas red, shaft grey */
+  --ch4: #0F8A8A; --rp1: #C8741E; --lox: #2F6FD1; --gas: #C2412D; --shaft: #66758C;
+  --ok: #1E7F4F; --ok-bg: #E5F3EA; --warn: #9A5B00; --warn-bg: #FFF2D6; --bad: #B3261E; --bad-bg: #FBE9E7;
+  --ff: "Alibaba PuHuiTi 2.0", "Alibaba PuHuiTi", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+  --mono: "Cascadia Mono", Consolas, "SFMono-Regular", monospace;
+  --r: 12px;
+  font-size: clamp(12.5px, 0.42vw + 7.3px, 17px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body { font-family: var(--ff); color: var(--ink); background: var(--bg); display: grid; grid-template-rows: auto 1fr auto;
+  font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+sub, sup { font-size: 0.72em; line-height: 0; }
+code, .mono { font-family: var(--mono); }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.top { display: flex; align-items: center; gap: 1.6rem; padding: 0 1.6rem; height: 3.6rem; min-width: 0;
+  background: linear-gradient(90deg, #0B2A6B, #12398A); color: #fff; }
+.brand { display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; }
+.brand .mark { width: 1.9rem; height: 1.9rem; }
+.brand b { display: block; font-size: 1.12rem; letter-spacing: 0.02em; }
+.brand span { display: block; font-size: 0.74rem; opacity: 0.72; }
+nav[role="tablist"] { display: flex; gap: 0.15rem; margin-left: auto; height: 100%; min-width: 0; }
+nav button { font: inherit; font-size: 0.92rem; color: rgba(255,255,255,0.72); background: none; border: 0; cursor: pointer;
+  padding: 0 0.85rem; height: 100%; position: relative; white-space: nowrap; }
+nav button:hover { color: #fff; }
+nav button kbd { font-family: var(--mono); font-size: 0.7rem; opacity: 0.55; margin-right: 0.3rem; }
+nav button[aria-selected="true"] { color: #fff; font-weight: 600; }
+nav button[aria-selected="true"]::after { content: ""; position: absolute; left: 0.6rem; right: 0.6rem; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #8DB4F0; }
+.tools { display: flex; gap: 0.4rem; }
+.tool { font: inherit; font-size: 0.8rem; color: #fff; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px; padding: 0.25rem 0.75rem; cursor: pointer; }
+.tool[aria-pressed="false"] { opacity: 0.55; }
+
+main { min-height: 0; min-width: 0; padding: 0.9rem 1.4rem 0.4rem; }
+.view { height: 100%; display: grid; grid-template-columns: minmax(16.5rem, 20rem) minmax(0, 1fr); gap: 1rem; min-height: 0; }
+.view[hidden] { display: none; }
+.rail { display: flex; flex-direction: column; gap: 0.75rem; min-height: 0; overflow-y: auto; overflow-x: hidden; padding-right: 2px; }
+.stage { display: flex; flex-direction: column; gap: 0.75rem; min-height: 0; min-width: 0; }
+.foot { display: flex; justify-content: space-between; gap: 1.5rem; padding: 0.3rem 1.4rem 0.5rem; font-size: 0.72rem; color: var(--ink-3);
+  white-space: nowrap; overflow: hidden; }
+.foot span { overflow: hidden; text-overflow: ellipsis; }
+.foot code { font-size: 0.7rem; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

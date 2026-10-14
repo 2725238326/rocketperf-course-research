@@ -63,7 +63,7 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 按[接收说明](docs/receiving.md)固定干净提交后生成运行包与离线源码bundle，接收者实际复跑成功与拒绝案例，并说明确认与未确认内容。新包v3使用`checks`记录接收检查，v2保留任务快照，v1/v2可读；旧包只代表其固定版本。
 
-近期批次：[凝聚碳判据与代码规整](taskshot/2026-10-14_059-carbon-guard-and-tidy.md)、[答辩前代码与叙事审查及演示页](taskshot/2026-10-14_058-defense-review-and-demo.md)、[代码质量实质改进与真实核查](taskshot/2026-10-14_055-quality-substance-and-reality-check.md)、[答辩内容核查](taskshot/2026-10-14_056-defense-content-integrity-check.md)、[文档群与目录整理](taskshot/2026-10-14_057-repo-tidy.md)、[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
+近期批次：[演示页重构、HP提速与工程证据](taskshot/2026-10-15_060-demo-rebuild-and-hp-speedup.md)、[凝聚碳判据与代码规整](taskshot/2026-10-14_059-carbon-guard-and-tidy.md)、[答辩前代码与叙事审查及演示页](taskshot/2026-10-14_058-defense-review-and-demo.md)、[代码质量实质改进与真实核查](taskshot/2026-10-14_055-quality-substance-and-reality-check.md)、[答辩内容核查](taskshot/2026-10-14_056-defense-content-integrity-check.md)、[文档群与目录整理](taskshot/2026-10-14_057-repo-tidy.md)、[汇报前质量整改](taskshot/2026-10-12_049-quality-readiness.md)、[参数审阅与RP-1接口](taskshot/2026-10-06_042-parameters-and-rp1.md)、[RP-1研究](taskshot/2026-10-06_040-kerosene.md)、[维护整顿](taskshot/2026-10-06_041-maintenance.md)。历史过程见taskshot；风险与补审见[review](docs/review.md)。每个实质批次审查并本地提交；外部推送需另有授权。
 
 本轮文档入口和新旧循环口径整理见[2026-10-13整理记录](taskshot/2026-10-13_051-document-map.md)；完整阅读导航见[文档索引](docs/README.md)。
 
@@ -71,6 +71,6 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 2026-10-13的 `代码.zip`已按字节保存于[接收原件](调研/原始来源/20261013_classmate_code/)，交接与两份 `model-data`分别有哈希身份。实际启动、源码重建、模型差别和参数线索见[代码包审阅](docs/incoming-code-review.md)，研究/展示/最终交付缺口集中在[收尾总览](docs/final-overview.md)。同学的给定温度补燃模型与甲烷代理YF算例没有覆盖当前绝热求解器，也没有更新型号事实截止日期。
 
-无参数闪退来自同学旧命令行exe的退出码2；其bat正常交互可用。当前交付工具v3收齐菜单8的五个研究情景，并提供定位包目录后调用C菜单的 `rocketperf-run.bat`；源码和运行包分别复核17项演示。使用前核验对应本地包manifest为PASS，不把原包中绑定旧exe的测试报告当新exe证据。最终报告、PPT、真实贡献及演练仍按任务契约完成。答辩演示页`deliverables/demo/index.html`为离线单文件（五页），数据由`tools/demo_data.py`从已测Release exe生成，改C或输入后需重跑并`--check`。九气相平衡在收敛后计算石墨活度，`a_C>1`返回越域（凝聚碳区）；石墨拟合在`src/thermo/graphite_generated.h`，固定气相数据集不变。
+无参数闪退来自同学旧命令行exe的退出码2；其bat正常交互可用。当前交付工具v3收齐菜单8的五个研究情景，并提供定位包目录后调用C菜单的 `rocketperf-run.bat`；源码和运行包分别复核17项演示。使用前核验对应本地包manifest为PASS，不把原包中绑定旧exe的测试报告当新exe证据。最终报告、PPT、真实贡献及演练仍按任务契约完成。答辩演示页`deliverables/demo/index.html`为离线单文件（六页），由`tools/demo_data.py`用已测Release exe生成数据并从`deliverables/demo/src`组装；只改页面源码用`--assemble`，改C或输入后重跑并`--check`。九气相平衡在收敛后计算石墨活度，`a_C>1`返回越域（凝聚碳区）；石墨拟合在`src/thermo/graphite_generated.h`，固定气相数据集不变。
 
 报告技术审稿已补齐第7.6节的循环输入、质量/轴功/热量关系及结果；[现行流程图](docs/architecture/report-flow.svg)区分独立入口。朱雀三号二级与长十乙二级开式使用相同数值输入，不算两份独立物理验证。交付verify改读包内INI，检查全部成对输入/差值，并逐个比对菜单显示与JSON；v1/v2/v3已检查旧包兼容。源码未扩展模型适用域，具体问题见[补审记录](docs/review.md)。

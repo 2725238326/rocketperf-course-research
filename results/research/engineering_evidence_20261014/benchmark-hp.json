@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "finished_at": "2026-10-14T16:15:40+00:00",
+  "baseline_head": "a342eb5fe54e91b55105b347cfeb2bfcdcc6d72e",
+  "driver": "hp",
+  "checksum_tolerance": 0.0031000000000000003,
+  "compiler": "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+  "flags": [
+    "-std=c17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Wconversion",
+    "-Wshadow",
+    "-Wstrict-prototypes",
+    "-Wmissing-prototypes",
+    "-Iinclude"
+  ],
+  "driver_sha256": "5cc0a67326a96e70b693dbe9fd27e3c542bc290bb2281901ddf7a8914ce4302d",
+  "source_hashes": {
+    "before": {
+      "src/core/status.c": "2e0ac6905d9044f2bcd2a90c487b469717cd146226e9583454633e69c5911583",
+      "src/core/root.c": "3ec8a6a6ab5b4ee9080de4cdee4a8bd2ec62026d53461dc3606ea5ef89a7edb0",
+      "src/nozzle/ideal.c": "0a77345c2982d2ad277c6c5d206a080f6fe53f518758c6ad639d6bee258aaece",
+      "src/nozzle/frozen.c": "ecf5d6b078e353bd961e233b2cd4f5cb333e1c05c4b1d5e154d75b52c01df206",
+      "src/nozzle/liquid.c": "3774610e5452bc8db705f371223abcf52dd24ea57079fbf1e4766d117547fee9",
+      "src/nozzle/propellant_study.c": "b3230498a127450e021d1646bff7f6fcb8a68c678d3275c164cbfa25b10bc1d8",
+      "src/thermo/nasa9.c": "ffe45ac55f920b7da55d7f4faa4300db1078eb9764beead80c2c2c021dccb4d1",
+      "src/thermo/database.c": "9db7e4f47adcb322457fdeb70be11f3244927c4f2afb631c8ab00c7449ca89b9",
+      "src/thermo/mixture.c": "4737d4c0d0906032bf2cf3655fb2333e5700c714a1b04679a1f7f4ace1afeb74",
+      "src/thermo/equilibrium.c": "9f192793787ce752a6a36282efb4ff5e9f498fa21b886391b9c51f6c625e3c4f",
+      "src/thermo/reactants.c": "7251ac2fb488b7271bdf97569c4f5732ef6e1d013e1fc034ad060e43b4399e6d",
+      "src/thermo/liquid_feed.c": "2c2fb8135a973f266eab398341432a6660352005aa0398cfd90304171c9148a6",
+      "src/thermo/liquid_combustion.c": "e4789e7f45eb976c04b4e5e9170bea193f0e0bf3eaf893761ce65065690fe228",
+      "src/cycle/components.c": "07f034aace63e31be1c8cf2353ed4bb03e39777a1b3800bd1bc610d839dac82a",
+      "src/cycle/prescribed.c": "159565a685edd50cb8712b217054826a8b34076af0c33a327bfb2718fdd43e69",
+      "src/cycle/adiabatic.c": "9a845b9f2798d8cda0af214141333a8ed533244114d89136527327cb21949e47",
+      "src/cycle/study.c": "9857ba429ae75321c502739af7e61a68cf5e9bb1daf3b13cfd912866159da5dd",
+      "include/rocketperf/combustion.h": "1eedc79df9ad54d793c84b3deb456a3a44da7aff9a455e12b355e06d03aa7151",
+      "include/rocketperf/cycle.h": "94ad1a82a3810102801f3558fb3a98f76c18e919b3b8da198af625e55d655803",
+      "include/rocketperf/cycle_study.h": "a036fcca0ff25fef527e9c06412b6903016d5c21f68b858cf87c9fa85e26a389",
+      "include/rocketperf/engine_cycle.h": "3101ab93ee807f2685ee40bb05f74bf96a4e66aa17993c52cd6821070b55cc58",
+      "include/rocketperf/frozen_nozzle.h": "792317e5e5533670a56ac21cd5cad312b58531d50a8a4d605c65df9a55b9c2fd",
+      "include/rocketperf/liquid_combustion.h": "ddade9bfb61abd1bfd5cd66f9b928d82a26e0e9decfb2f908eb47620dea86555",
+      "include/rocketperf/liquid_feed.h": "b5e66b6aa81bd4d42b472786d0e3dec86fdbfae143fdf659cce173352bb06da8",
+      "include/rocketperf/liquid_nozzle.h": "bcc67d5b8469805ce4618a738b7304929cd11d05e6d759356e0c427776a6c5c4",
+      "include/rocketperf/nozzle.h": "35828a7374154e14fffc4a4dd0c8edcf7d2699a6d0bb245592faadd62985a078",
+      "include/rocketperf/numeric.h": "2bb017539635550f7a7d3dd47ecf0c1d8614d7b6f810a8bd92402bab26ee7308",
+      "include/rocketperf/propellant_study.h": "2659b0025c078be6a3fd75ec295160a61b6212cf720b26d3505eae94d47e04e5",
+      "include/rocketperf/root.h": "7c2ca71434fd410a5f1b37e53cf9f27b975980d30e26ebbdac8f4721819ff11f",
+      "include/rocketperf/status.h": "9a7fa15e736970d6e97528bb41ee50d378da07aba00273fff6f8abb051f2c457",
+      "include/rocketperf/thermo.h": "99062fa8d51e66539b2bba194961ee9fad2ac8ef29c4f5853d53665b31ef4116",
+      "include/rocketperf/version.h": "8edbb87f1ea28841e6866a8b53bc77f00a49883f78f9820a90b36425a26b5123",
+      "src/adapters/case_file.h": "c8700ca369c6026459a3921f79e7838df2f2dbfb47a908d0821cf793ffb010df",
+      "src/adapters/case_text.h": "f6fb6281e0c13f7f4a7c5ef866425b19a764288c20237b29146e00c951cb8445",
+      "src/adapters/combustion_report.h": "43b25421cf7fd03d87f010fb84b67484c11139efb758411d14690c65dcd8d2cc",
+      "src/adapters/cycle_case.h": "a3b3b618312c085e90f7d2fb022acfcf72e067cbec1a57c38b6d59c2117f3a5e",
+      "src/adapters/engine_case.h": "6553bb72ae8963520b9fac967c55426b6df3cc5ed11ede1fd415142783061e7c",
+      "src/adapters/propellant_case.h": "045b89d7c8dd67a0c74bee2e87fba0a8c50e94354e87180c0a6dbffdd29a7e4a",
+      "src/adapters/text_report.h": "570e825db88ec482d3d578c3a935a7b271a3cc9f4bfde9ae77ce9a3ebc244e99",
+      "src/cli/arguments.h": "8f21244147361086c9306fd97df8e9faf66aea34699faaa2e996d27913714f24",
+      "src/cli/combustion_commands.h": "c5092f66675ce07e5ccde274c4d966bf83f32b15dc0769308df76e69ebed62f8",
+      "src/cli/interactive.h": "0e6b9600596c4b474ffb56b863870d4d6695c36695c13c0e414e26a4e90d779f",
+      "src/thermo/database_generated.h": "b1ed92c98dd61f59b55b7ec1be8f68f5918d5af2d5d8a2c5711a1ddabec16ad9",
+      "src/thermo/equilibrium_internal.h": "2dec8e2b2ab08b507c1dea55d2bd989558981f4d332c3161c7ea42873dd0c73e",
+      "src/thermo/graphite_generated.h": "7b38e64a061d20cabe5adcc5d276d5df61fddeb0235dff12e9a64fe108899318",
+      "src/thermo/liquid_feed_generated.h": "ba2085fad6f78d68dc5a44913c3559cbd5b2982b3e38554aa460210ea1b70b2c",
+      "src/thermo/reactants_generated.h": "e76b6cef8d5fefa88b8548086fccb0dc21ae68f9a155e6b5a61b4c012db8f45c"
+    },
+    "after": {
+      "src/core/status.c": "2e0ac6905d9044f2bcd2a90c487b469717cd146226e9583454633e69c5911583",
+      "src/core/root.c": "3ec8a6a6ab5b4ee9080de4cdee4a8bd2ec62026d53461dc3606ea5ef89a7edb0",
+      "src/nozzle/ideal.c": "0a77345c2982d2ad277c6c5d206a080f6fe53f518758c6ad639d6bee258aaece",
+      "src/nozzle/frozen.c": "ecf5d6b078e353bd961e233b2cd4f5cb333e1c05c4b1d5e154d75b52c01df206",
+      "src/nozzle/liquid.c": "3774610e5452bc8db705f371223abcf52dd24ea57079fbf1e4766d117547fee9",
+      "src/nozzle/propellant_study.c": "b3230498a127450e021d1646bff7f6fcb8a68c678d3275c164cbfa25b10bc1d8",
+      "src/thermo/nasa9.c": "ffe45ac55f920b7da55d7f4faa4300db1078eb9764beead80c2c2c021dccb4d1",
+      "src/thermo/database.c": "9db7e4f47adcb322457fdeb70be11f3244927c4f2afb631c8ab00c7449ca89b9",
+      "src/thermo/mixture.c": "4737d4c0d0906032bf2cf3655fb2333e5700c714a1b04679a1f7f4ace1afeb74",
+      "src/thermo/equilibrium.c": "0031b29a29575f71f38a8cb4bcd0cbfe83eba6bf4bf53ad41a4df2e5ce93c5d0",
+      "src/thermo/reactants.c": "7251ac2fb488b7271bdf97569c4f5732ef6e1d013e1fc034ad060e43b4399e6d",
+      "src/thermo/liquid_feed.c": "2c2fb8135a973f266eab398341432a6660352005aa0398cfd90304171c9148a6",
+      "src/thermo/liquid_combustion.c": "e4789e7f45eb976c04b4e5e9170bea193f0e0bf3eaf893761ce65065690fe228",
+      "src/cycle/components.c": "07f034aace63e31be1c8cf2353ed4bb03e39777a1b3800bd1bc610d839dac82a",
+      "src/cycle/prescribed.c": "159565a685edd50cb8712b217054826a8b34076af0c33a327bfb2718fdd43e69",
+      "src/cycle/adiabatic.c": "9a845b9f2798d8cda0af214141333a8ed533244114d89136527327cb21949e47",
+      "src/cycle/study.c": "9857ba429ae75321c502739af7e61a68cf5e9bb1daf3b13cfd912866159da5dd",
+      "include/rocketperf/combustion.h": "1eedc79df9ad54d793c84b3deb456a3a44da7aff9a455e12b355e06d03aa7151",
+      "include/rocketperf/cycle.h": "94ad1a82a3810102801f3558fb3a98f76c18e919b3b8da198af625e55d655803",
+      "include/rocketperf/cycle_study.h": "a036fcca0ff25fef527e9c06412b6903016d5c21f68b858cf87c9fa85e26a389",
+      "include/rocketperf/engine_cycle.h": "3101ab93ee807f2685ee40bb05f74bf96a4e66aa17993c52cd6821070b55cc58",
+      "include/rocketperf/frozen_nozzle.h": "792317e5e5533670a56ac21cd5cad312b58531d50a8a4d605c65df9a55b9c2fd",
+      "include/rocketperf/liquid_combustion.h": "ddade9bfb61abd1bfd5cd66f9b928d82a26e0e9decfb2f908eb47620dea86555",
+      "include/rocketperf/liquid_feed.h": "b5e66b6aa81bd4d42b472786d0e3dec86fdbfae143fdf659cce173352bb06da8",
+      "include/rocketperf/liquid_nozzle.h": "bcc67d5b8469805ce4618a738b7304929cd11d05e6d759356e0c427776a6c5c4",
+      "include/rocketperf/nozzle.h": "35828a7374154e14fffc4a4dd0c8edcf7d2699a6d0bb245592faadd62985a078",
+      "include/rocketperf/numeric.h": "2bb017539635550f7a7d3dd47ecf0c1d8614d7b6f810a8bd92402bab26ee7308",
+      "include/rocketperf/propellant_study.h": "2659b0025c078be6a3fd75ec295160a61b6212cf720b26d3505eae94d47e04e5",
+      "include/rocketperf/root.h": "7c2ca71434fd410a5f1b37e53cf9f27b975980d30e26ebbdac8f4721819ff11f",
+      "include/rocketperf/status.h": "9a7fa15e736970d6e97528bb41ee50d378da07aba00273fff6f8abb051f2c457",
+      "include/rocketperf/thermo.h": "271fd0313ce020a54acb16857753b50227c3b5a9f185376e11ccd94972772afd",
+      "include/rocketperf/version.h": "8edbb87f1ea28841e6866a8b53bc77f00a49883f78f9820a90b36425a26b5123",
+      "src/adapters/case_file.h": "c8700ca369c6026459a3921f79e7838df2f2dbfb47a908d0821cf793ffb010df",
+      "src/adapters/case_text.h": "f6fb6281e0c13f7f4a7c5ef866425b19a764288c20237b29146e00c951cb8445",
+      "src/adapters/combustion_report.h": "43b25421cf7fd03d87f010fb84b67484c11139efb758411d14690c65dcd8d2cc",
+      "src/adapters/cycle_case.h": "a3b3b618312c085e90f7d2fb022acfcf72e067cbec1a57c38b6d59c2117f3a5e",
+      "src/adapters/engine_case.h": "6553bb72ae8963520b9fac967c55426b6df3cc5ed11ede1fd415142783061e7c",
+      "src/adapters/propellant_case.h": "045b89d7c8dd67a0c74bee2e87fba0a8c50e94354e87180c0a6dbffdd29a7e4a",
+      "src/adapters/text_report.h": "570e825db88ec482d3d578c3a935a7b271a3cc9f4bfde9ae77ce9a3ebc244e99",
+      "src/cli/arguments.h": "8f21244147361086c9306fd97df8e9faf66aea34699faaa2e996d27913714f24",
+      "src/cli/combustion_commands.h": "c5092f66675ce07e5ccde274c4d966bf83f32b15dc0769308df76e69ebed62f8",
+      "src/cli/interactive.h": "0e6b9600596c4b474ffb56b863870d4d6695c36695c13c0e414e26a4e90d779f",
+      "src/thermo/database_generated.h": "b1ed92c98dd61f59b55b7ec1be8f68f5918d5af2d5d8a2c5711a1ddabec16ad9",
+      "src/thermo/equilibrium_internal.h": "2dec8e2b2ab08b507c1dea55d2bd989558981f4d332c3161c7ea42873dd0c73e",
+      "src/thermo/graphite_generated.h": "7b38e64a061d20cabe5adcc5d276d5df61fddeb0235dff12e9a64fe108899318",
+      "src/thermo/liquid_feed_generated.h": "ba2085fad6f78d68dc5a44913c3559cbd5b2982b3e38554aa460210ea1b70b2c",
+      "src/thermo/reactants_generated.h": "e76b6cef8d5fefa88b8548086fccb0dc21ae68f9a155e6b5a61b4c012db8f45c"
+    }
+  },
+  "binary_hashes": {
+    "before": "8801eaf582ca150e07525718306b331e14ef88158f7adde4d50637bf89b4d5cf",
+    "after": "4341d8c733756d0448fd234c8beed03ca164794e2900f051b9cac47c035c5fe9"
+  },
+  "samples": {
+    "before": [
+      {
+        "runs": 310,
+        "cpu_seconds": 0.906,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.919,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.907,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.92,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.879,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.875,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.885,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.9,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.878,
+        "mean_hp_iterations": 29.7097,
+        "checksum_temperature_k": 877401.9667552784
+      }
+    ],
+    "after": [
+      {
+        "runs": 310,
+        "cpu_seconds": 0.138,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.13,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.14,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.167,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.14,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.142,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.142,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.138,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      },
+      {
+        "runs": 310,
+        "cpu_seconds": 0.149,
+        "mean_hp_iterations": 8.19355,
+        "checksum_temperature_k": 877401.9667568575
+      }
+    ]
+  },
+  "median_cpu_seconds": {
+    "before": 0.9,
+    "after": 0.14
+  },
+  "reduction_fraction": 0.8444444444444444,
+  "speedup": 6.428571428571428,
+  "note": "Single-machine CPU benchmark (hp, 310 fixed solves); not engine accuracy or a universal speed claim"
+}

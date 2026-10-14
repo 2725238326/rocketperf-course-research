@@ -111,7 +111,18 @@ static void test_tp_hp_reference(void)
     CHECK(near(result.gas.molar_mass_kg_per_kmol, 21.46443, 2e-5));
     CHECK(fabs(result.enthalpy_residual_j_per_kg) <= 0.01);
     for (unsigned int i = 0U; i < 9U; ++i) { CHECK(near(result.gas.mole_fractions[i], hp_y[i], 2e-6)); }
-    (void)printf("HP: T=%.9f K, h_residual=%.9g J/kg\n", result.gas.temperature_k, result.enthalpy_residual_j_per_kg);
+    /* Illinois secant with warm-started TP: guard the iteration count, and check the
+     * warm-started state equals a cold 6000 K continuation at the same temperature. */
+    CHECK(result.hp_iterations >= 1U && result.hp_iterations <= 15U);
+    {
+        RpCombustionResult cold;
+        CHECK(rp_ch4_o2_equilibrium_tp(&feed, result.gas.temperature_k, NULL, &cold, NULL) == RP_OK);
+        for (unsigned int i = 0U; i < 9U; ++i) { CHECK(near(cold.gas.mole_fractions[i], result.gas.mole_fractions[i], 1e-10)); }
+        CHECK(near(cold.gas.h_j_per_kg, result.gas.h_j_per_kg, 1e-4)); /* 1% of the HP tolerance */
+        CHECK(near(cold.graphite_activity / result.graphite_activity, 1.0, 1e-8));
+    }
+    (void)printf("HP: T=%.9f K, h_residual=%.9g J/kg, hp_iterations=%u\n", result.gas.temperature_k,
+                 result.enthalpy_residual_j_per_kg, result.hp_iterations);
     for (unsigned int i = 0U; i < 2U; ++i) {
         const double areas[2] = {10.0, 40.0};
         const double temperatures[2] = {1691.56, 1173.07};
