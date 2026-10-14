@@ -2,61 +2,304 @@
   "schema_version": 1,
   "wip_limit": 1,
   "max_new_blob_bytes": 25000000,
-  "archive_prefixes": ["调研/原始来源/","调研/文献/","调研/检索记录/","作业要求/"],
+  "archive_prefixes": [
+    "调研/原始来源/",
+    "调研/文献/",
+    "调研/检索记录/",
+    "作业要求/"
+  ],
   "protected_file": "第2章推力室和发动机的主要参数20260911.pptx",
-  "allowed_roots": [".editorconfig",".gitattributes",".github",".githooks",".gitignore","AGENTS.md","CMakeLists.txt","CONTRIBUTING.md","README.md","cases","data","deliverables","docs","handoff.md","include","project","results","rules.md","scripts","src","taskshot","tests","third_party","tools","worknow.md","代码.zip","作业要求","调研","第2章推力室和发动机的主要参数20260911.pptx"],
-  "generated_documents": ["worknow.md","docs/tasks.md"],
+  "allowed_roots": [
+    ".editorconfig",
+    ".gitattributes",
+    ".githooks",
+    ".github",
+    ".gitignore",
+    "AGENTS.md",
+    "CMakeLists.txt",
+    "CONTRIBUTING.md",
+    "PPT",
+    "README.md",
+    "cases",
+    "data",
+    "deliverables",
+    "docs",
+    "handoff.md",
+    "include",
+    "project",
+    "results",
+    "rules.md",
+    "scripts",
+    "src",
+    "taskshot",
+    "tests",
+    "third_party",
+    "tools",
+    "worknow.md",
+    "代码.zip",
+    "作业要求",
+    "第2章推力室和发动机的主要参数20260911.pptx",
+    "调研"
+  ],
+  "generated_documents": [
+    "worknow.md",
+    "docs/tasks.md"
+  ],
   "canonical_documents": [
-    {"path":"docs/review.md","role":"补审发现、运行库证据与未完成项","owner":"tooling"},
-    {"path":"docs/model-design.md","role":"当前与扩展模型设计；区分已有代码和计划","owner":"nozzle"},
-    {"path":"docs/model-implementation.md","role":"L0/S1接口、失败语义和复现命令","owner":"nozzle"},
-    {"path":"docs/model-validation.md","role":"软件、数学参考、模型差异与输入误差","owner":"nozzle"},
-    {"path":"docs/study-results.md","role":"公开构型与空气算例阶段结果，不替代最终研究","owner":"nozzle"},
-    {"path":"docs/technology-stack.md","role":"本次交付技术选型、工具职责和延期边界","owner":"tooling"},
-    {"path":"README.md","role":"入口与最短使用路径","owner":"tooling"},
-    {"path":"rules.md","role":"用户约束和执行规则","owner":"tooling"},
-    {"path":"handoff.md","role":"接手方式、风险与最近快照入口；不重复任务状态","owner":"tooling"},
-    {"path":"docs/governance.md","role":"任务、文档、Git和目录治理规范","owner":"tooling"},
-    {"path":"docs/architecture/README.md","role":"作业对接总览、业务/计算/治理三视图与模块契约入口","owner":"tooling"},
-    {"path":"docs/README.md","role":"按工作入口组织的文档索引；不重复实时任务状态","owner":"tooling"},
-    {"path":"docs/engineering.md","role":"物理核心和接口设计契约","owner":"nozzle"},
-    {"path":"docs/case-format.md","role":"外部输入输出协议","owner":"adapters"},
-    {"path":"docs/benchmarks.md","role":"教学参考推导与适用域","owner":"nozzle"},
-    {"path":"docs/project-plan.md","role":"研究目标、里程碑与分工建议","owner":"tooling"},
-    {"path":"docs/requirements-map.md","role":"老师要求到产物的映射","owner":"tooling"},
-    {"path":"docs/two-vehicle-study.md","role":"两型四级段证据、已有计算与输入缺口的研究汇合入口","owner":"tooling"},
-    {"path":"docs/research-structure.md","role":"研究资料/问题/参数/结论的轻量组织方法","owner":"tooling"},
-    {"path":"docs/research-writing.md","role":"证据边界和简洁研究写作约定","owner":"tooling"},
-    {"path":"docs/research-agenda.md","role":"待回答的研究问题清单，不是完成状态表","owner":"tooling"},
-    {"path":"docs/decisions.md","role":"决定及依据，不维护实时任务状态","owner":"tooling"},
-    {"path":"docs/cycle-validation.md","role":"稳态部件、控制体热交换、外排边界与验证","owner":"cycle"},
-    {"path":"docs/engine-cycle-validation.md","role":"绝热开式/富氧补燃新模型、条件算例和试跑证据边界","owner":"cycle"},
-    {"path":"docs/cycle-integration.md","role":"独立循环接口的拓扑、方程、输入输出与组员合并对照契约","owner":"cycle"},
-    {"path":"docs/incoming-code-review.md","role":"20261013组员代码包接收、启动与模型/参数审阅及证据边界","owner":"tooling"},
-    {"path":"docs/final-overview.md","role":"课程收尾的研究、计算、演示入口与最终交付缺口总览","owner":"tooling"},
-    {"path":"docs/improvement-analysis.md","role":"合成同条件改进、几何代价、输入扰动及不可外推结论","owner":"cycle"},
-    {"path":"results/research/README.md","role":"研究计算版本、输入/构建/参考与复验入口","owner":"tooling"},
-    {"path":"docs/research-reference-coverage.md","role":"实际TP/冻结参考、打印精度和固定几何边界","owner":"thermo"},
-    {"path":"docs/research-thermal-boundary.md","role":"入口焓/密度假设传播、热交换范围与有来源的扩展契约","owner":"cycle"},
-    {"path":"docs/adiabatic-inlet-validation.md","role":"显式同基准气态入口焓HP、固定面积喷管及参考/失败验证","owner":"thermo"},
-    {"path":"docs/adiabatic-inlet-study.md","role":"固定喷管的气态入口焓/O-F响应、新CEA参考和不可外推结论","owner":"thermo"},
-    {"path":"docs/liquid-anchor-validation.md","role":"固定液态反应物焓/元素库存HP、CEA新对照与失败边界；非液体EOS","owner":"thermo"},
-    {"path":"docs/liquid-feed-contract.md","role":"连续单相液体参考域、摩尔化学焓对齐、质量口径及C查表失败契约","owner":"thermo"},
-    {"path":"docs/liquid-feed-validation.md","role":"纯C连续液体查表、全节点/内部参考、CLI成功拒绝与构建运行证据","owner":"thermo"},
-    {"path":"docs/liquid-combustion-validation.md","role":"连续液体入口焓/元素库存到HP与固定面积喷管的C/CEA运行、守恒与边界","owner":"thermo"},
-    {"path":"调研/专题/RES-007_连续液体基准.md","role":"固定HEOS离线参考、同源系数独立复算、理想比热差和插值误差","owner":"thermo"},
-    {"path":"调研/专题/RES-006_液态与煤油入口.md","role":"固定液态反应物/EOS/煤油surrogate候选、焓基准与后续C实现边界","owner":"thermo"},
-    {"path":"调研/专题/RES-008_煤油计算边界.md","role":"固定RP-1产物集合比较、C研究驱动和煤油输入边界","owner":"thermo"},
-    {"path":"调研/专题/工程内容审查_20261006.md","role":"生成内容风险的来源核验和项目修改审查规则","owner":"tooling"},
-    {"path":"docs/maintenance-audit.md","role":"文档维护职责和已修正的重复、过时与术语问题","owner":"tooling"},
-    {"path":"调研/专题/RES-009_组员参数审阅.md","role":"组员来源与参数的对象、版本、用途审阅","owner":"tooling"},
-    {"path":"docs/kerosene-validation.md","role":"纯C固定RP-1公共入口、参考覆盖和适用边界","owner":"thermo"},
-    {"path":"docs/project-guide.md","role":"组员和接收者的详细研究、程序、验证与维护解读","owner":"tooling"},
-    {"path":"docs/propellant-method-comparison.md","role":"甲烷/RP-1同条件C成对研究、参考及喷管收益/代价","owner":"nozzle"},
-    {"path":"docs/delivery.md","role":"私有GitHub阶段发布、纯C与Windows包的生成/核验规范","owner":"tooling"},
-    {"path":"docs/coding-style.md","role":"C代码撰写规范：分层、命名、契约注释与警告纪律","owner":"tooling"},
-    {"path":"docs/propellant-case-format.md","role":"成对推进剂算例文件字段、固定入口与错误协议","owner":"adapters"},
-    {"path":"deliverables/README.md","role":"下载交付包和查看详细解读的入口","owner":"tooling"},
-    {"path":"docs/receiving.md","role":"阶段交付、人员对接、接收复验与讲解顺序","owner":"tooling"}
+    {
+      "path": "docs/review.md",
+      "role": "补审发现、运行库证据与未完成项",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/model-design.md",
+      "role": "当前与扩展模型设计；区分已有代码和计划",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/model-implementation.md",
+      "role": "L0/S1接口、失败语义和复现命令",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/model-validation.md",
+      "role": "软件、数学参考、模型差异与输入误差",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/study-results.md",
+      "role": "公开构型与空气算例阶段结果，不替代最终研究",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/technology-stack.md",
+      "role": "本次交付技术选型、工具职责和延期边界",
+      "owner": "tooling"
+    },
+    {
+      "path": "README.md",
+      "role": "入口与最短使用路径",
+      "owner": "tooling"
+    },
+    {
+      "path": "rules.md",
+      "role": "用户约束和执行规则",
+      "owner": "tooling"
+    },
+    {
+      "path": "handoff.md",
+      "role": "接手方式、风险与最近快照入口；不重复任务状态",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/governance.md",
+      "role": "任务、文档、Git和目录治理规范",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "role": "作业对接总览、业务/计算/治理三视图与模块契约入口",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/README.md",
+      "role": "按工作入口组织的文档索引；不重复实时任务状态",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/engineering.md",
+      "role": "物理核心和接口设计契约",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/case-format.md",
+      "role": "外部输入输出协议",
+      "owner": "adapters"
+    },
+    {
+      "path": "docs/benchmarks.md",
+      "role": "教学参考推导与适用域",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/project-plan.md",
+      "role": "研究目标、里程碑与分工建议",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/requirements-map.md",
+      "role": "老师要求到产物的映射",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/two-vehicle-study.md",
+      "role": "两型四级段证据、已有计算与输入缺口的研究汇合入口",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/research-structure.md",
+      "role": "研究资料/问题/参数/结论的轻量组织方法",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/research-writing.md",
+      "role": "证据边界和简洁研究写作约定",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/research-agenda.md",
+      "role": "待回答的研究问题清单，不是完成状态表",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/decisions.md",
+      "role": "决定及依据，不维护实时任务状态",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/cycle-validation.md",
+      "role": "稳态部件、控制体热交换、外排边界与验证",
+      "owner": "cycle"
+    },
+    {
+      "path": "docs/engine-cycle-validation.md",
+      "role": "绝热开式/富氧补燃新模型、条件算例和试跑证据边界",
+      "owner": "cycle"
+    },
+    {
+      "path": "docs/cycle-integration.md",
+      "role": "独立循环接口的拓扑、方程、输入输出与组员合并对照契约",
+      "owner": "cycle"
+    },
+    {
+      "path": "docs/incoming-code-review.md",
+      "role": "20261013组员代码包接收、启动与模型/参数审阅及证据边界",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/final-overview.md",
+      "role": "课程收尾的研究、计算、演示入口与最终交付缺口总览",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/improvement-analysis.md",
+      "role": "合成同条件改进、几何代价、输入扰动及不可外推结论",
+      "owner": "cycle"
+    },
+    {
+      "path": "results/research/README.md",
+      "role": "研究计算版本、输入/构建/参考与复验入口",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/research-reference-coverage.md",
+      "role": "实际TP/冻结参考、打印精度和固定几何边界",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/research-thermal-boundary.md",
+      "role": "入口焓/密度假设传播、热交换范围与有来源的扩展契约",
+      "owner": "cycle"
+    },
+    {
+      "path": "docs/adiabatic-inlet-validation.md",
+      "role": "显式同基准气态入口焓HP、固定面积喷管及参考/失败验证",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/adiabatic-inlet-study.md",
+      "role": "固定喷管的气态入口焓/O-F响应、新CEA参考和不可外推结论",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/liquid-anchor-validation.md",
+      "role": "固定液态反应物焓/元素库存HP、CEA新对照与失败边界；非液体EOS",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/liquid-feed-contract.md",
+      "role": "连续单相液体参考域、摩尔化学焓对齐、质量口径及C查表失败契约",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/liquid-feed-validation.md",
+      "role": "纯C连续液体查表、全节点/内部参考、CLI成功拒绝与构建运行证据",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/liquid-combustion-validation.md",
+      "role": "连续液体入口焓/元素库存到HP与固定面积喷管的C/CEA运行、守恒与边界",
+      "owner": "thermo"
+    },
+    {
+      "path": "调研/专题/RES-007_连续液体基准.md",
+      "role": "固定HEOS离线参考、同源系数独立复算、理想比热差和插值误差",
+      "owner": "thermo"
+    },
+    {
+      "path": "调研/专题/RES-006_液态与煤油入口.md",
+      "role": "固定液态反应物/EOS/煤油surrogate候选、焓基准与后续C实现边界",
+      "owner": "thermo"
+    },
+    {
+      "path": "调研/专题/RES-008_煤油计算边界.md",
+      "role": "固定RP-1产物集合比较、C研究驱动和煤油输入边界",
+      "owner": "thermo"
+    },
+    {
+      "path": "调研/专题/工程内容审查_20261006.md",
+      "role": "生成内容风险的来源核验和项目修改审查规则",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/maintenance-audit.md",
+      "role": "文档维护职责和已修正的重复、过时与术语问题",
+      "owner": "tooling"
+    },
+    {
+      "path": "调研/专题/RES-009_组员参数审阅.md",
+      "role": "组员来源与参数的对象、版本、用途审阅",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/kerosene-validation.md",
+      "role": "纯C固定RP-1公共入口、参考覆盖和适用边界",
+      "owner": "thermo"
+    },
+    {
+      "path": "docs/project-guide.md",
+      "role": "组员和接收者的详细研究、程序、验证与维护解读",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/propellant-method-comparison.md",
+      "role": "甲烷/RP-1同条件C成对研究、参考及喷管收益/代价",
+      "owner": "nozzle"
+    },
+    {
+      "path": "docs/delivery.md",
+      "role": "私有GitHub阶段发布、纯C与Windows包的生成/核验规范",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/coding-style.md",
+      "role": "C代码撰写规范：分层、命名、契约注释与警告纪律",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/propellant-case-format.md",
+      "role": "成对推进剂算例文件字段、固定入口与错误协议",
+      "owner": "adapters"
+    },
+    {
+      "path": "deliverables/README.md",
+      "role": "下载交付包和查看详细解读的入口",
+      "owner": "tooling"
+    },
+    {
+      "path": "docs/receiving.md",
+      "role": "阶段交付、人员对接、接收复验与讲解顺序",
+      "owner": "tooling"
+    }
   ]
 }

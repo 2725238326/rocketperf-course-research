@@ -17,3 +17,5 @@ __pycache__/
 /deliverables/*.bundle
 # Received original remains here; its byte-identical dated evidence copy is tracked.
 /代码.zip
+# PPT template pack: local material, not versioned
+PPT/
