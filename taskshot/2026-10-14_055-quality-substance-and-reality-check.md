@@ -6,7 +6,7 @@
 
 - **"13744项测试无法验证"是错误结论**。前期评估用grep数CHECK宏（754个）否定测试规模，但13744来自 `test-report.json` 真实统计：core 250 + adapters 41 + thermo 8978（参数化物性数据点逐项检查）+ combustion 3922 + cycle 505 + CLI 48组。数字属实，口径为"验证检查项"含参数化展开，不是13744个独立用例。
 - **"构建系统不可用"是方法错误**。构建入口是 `scripts/build.ps1` → `tools/pipeline.py`，不是裸cmake/make。前期评估没找对入口就下了结论。
-- 两处修正已写回 [code-quality-reality-check.md](../docs/code-quality-reality-check.md)，不静默抹去原结论。
+- 两处修正曾写回评估文档；该文档连同同批评估材料已于2026-10-14整理时删除（见 057 taskshot），事实记录以本条目为准。
 
 ## 代码实质改进
 
