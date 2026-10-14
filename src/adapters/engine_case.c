@@ -129,9 +129,7 @@ RpStatus rp_engine_case_load(const char *path, RpEngineCycleCase *output, RpErro
         size_t field, numeric;
         ++line;
         if (line > 128U || line_status < 0) { status = rp_text_parse_failure(error, line, "Line limits or embedded NUL."); break; }
-        if (line == 1U && strlen(buffer) >= 3U && memcmp(buffer, "\xEF\xBB\xBF", 3U) == 0) {
-            memmove(buffer, buffer + 3, strlen(buffer) - 2U);
-        }
+        if (line == 1U) { rp_text_strip_bom(buffer); }
         text = rp_text_trim(buffer);
         if (*text == '\0' || *text == '#') { continue; }
         separator = strchr(text, '=');
@@ -161,16 +159,6 @@ RpStatus rp_engine_case_load(const char *path, RpEngineCycleCase *output, RpErro
     status = build_propellants(&study, error);
     if (status != RP_OK) { return status; }
     *output = study; rp_error_clear(error); return RP_OK;
-}
-
-static int json_string(FILE *stream, const char *value)
-{
-    if (fputc('"', stream) == EOF) { return 0; }
-    for (const char *p = value; *p != '\0'; ++p) {
-        if ((*p == '"' || *p == '\\') && fputc('\\', stream) == EOF) { return 0; }
-        if (fputc((unsigned char)*p, stream) == EOF) { return 0; }
-    }
-    return fputc('"', stream) != EOF;
 }
 
 static int json_propellant(FILE *stream, const RpCyclePropellant *feed)
@@ -218,10 +206,10 @@ static int json_report(FILE *stream, const RpEngineCycleCase *study, const RpEng
     if (fprintf(stream, "{\"schema_version\":1,\"program_version\":\"%s\",\"model\":\"%s\",\"dataset_id\":\"%s\","
                        "\"architecture\":\"%s\",\"case\":{\"id\":", RP_VERSION, RP_ADIABATIC_CYCLE_MODEL, rp_thermo_dataset_id(),
                        study->input.staged_combustion ? "all_oxidizer_staged_combustion" : "gas_generator_external") < 0 ||
-        !json_string(stream, study->id) || fputs(",\"kind\":\"research_scenario\",\"object_ref\":", stream) < 0 || !json_string(stream, study->object_ref) ||
-        fputs(",\"cycle_evidence\":", stream) < 0 || !json_string(stream, study->cycle_evidence) ||
-        fputs(",\"source_ref\":", stream) < 0 || !json_string(stream, study->source_ref) || fputs("},\"inputs\":{\"feed_model\":", stream) < 0 ||
-        !json_string(stream, study->feed_model) || fprintf(stream, ",\"staged_combustion\":%s", study->input.staged_combustion ? "true" : "false") < 0) { return 0; }
+        !rp_text_write_json_string(stream, study->id) || fputs(",\"kind\":\"research_scenario\",\"object_ref\":", stream) < 0 || !rp_text_write_json_string(stream, study->object_ref) ||
+        fputs(",\"cycle_evidence\":", stream) < 0 || !rp_text_write_json_string(stream, study->cycle_evidence) ||
+        fputs(",\"source_ref\":", stream) < 0 || !rp_text_write_json_string(stream, study->source_ref) || fputs("},\"inputs\":{\"feed_model\":", stream) < 0 ||
+        !rp_text_write_json_string(stream, study->feed_model) || fprintf(stream, ",\"staged_combustion\":%s", study->input.staged_combustion ? "true" : "false") < 0) { return 0; }
     for (size_t i = 0U; i < FIELD_COUNT; ++i) {
         double value;
         memcpy(&value, (const unsigned char *)study + fields[i].offset, sizeof(value));

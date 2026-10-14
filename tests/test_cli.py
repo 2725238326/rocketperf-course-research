@@ -614,6 +614,29 @@ class CliTests(unittest.TestCase):
                 self.assertEqual(result.stdout, '')
                 self.assertTrue(result.stderr.strip())
 
+    def test_menu_cycle_cases_resolve_beside_executable(self):
+        # Double-click or shortcut launches start elsewhere; menu 8 must still find bundled INI.
+        with tempfile.TemporaryDirectory() as elsewhere:
+            run=subprocess.run([str(BINARY),'interactive'],cwd=elsewhere,input='8\n1\n0\n',capture_output=True,
+                               text=True,encoding='utf-8',timeout=30,check=False)
+        self.assertEqual(run.returncode,0,run.stderr)
+        self.assertIn('296.268',run.stdout); self.assertNotIn('失败',run.stdout)
+
+    def test_condensed_carbon_guard_is_reported_and_enforced(self):
+        liquid=('combustion','hp-liquid-state','coolprop710-cea334-liquid-molar-v1','heos710-cea334-ideal-zero-298.15-v1',
+                'liquid','120','1e7','100','1e7','1e7')
+        for ratio, low, high in (('2.6',0,1e-3),('1.0',0.5,1.0)):
+            run=self.run_app(*liquid,ratio)
+            self.assertEqual(run.returncode,0,run.stderr)
+            activity=json.loads(run.stdout)['diagnostics']['graphite_activity']
+            self.assertTrue(low<activity<high,activity)
+        for arguments in (liquid+('0.5',),('combustion','hp','1e7','0.5','300','300')):
+            run=self.run_app(*arguments)
+            self.assertEqual(run.returncode,4);self.assertFalse(run.stdout)
+            self.assertTrue(run.stderr.startswith('out_of_domain:') and 'graphite activity' in run.stderr,run.stderr)
+        cycle=json.loads(self.run_app('cycle','adiabatic',str(ROOT/'cases/vehicles/zq3_y1_stage1.ini')).stdout)
+        self.assertTrue(0.8<cycle['preburner']['diagnostics']['graphite_activity']<0.9)
+
     def test_tp_frozen_fixed_geometry_scaling_and_backpressure(self):
         arguments=('3300','5000000','3.436135057526204','298.15','298.15','10')
         reports=[]

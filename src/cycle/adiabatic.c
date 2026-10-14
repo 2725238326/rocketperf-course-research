@@ -47,6 +47,7 @@
 
 #include "rocketperf/engine_cycle.h"
 #include "rocketperf/numeric.h"
+#include "rocketperf/version.h"
 
 #include <math.h>
 #include <stddef.h>
@@ -257,7 +258,7 @@ static RpStatus finish_balance(const RpEngineCycleInput *input, RpEngineCycleRes
     balance->total_thrust_n = balance->main_thrust_n + balance->branch_thrust_n;
     balance->main_effective_velocity_m_per_s = balance->main_thrust_n / balance->main_mass_flow_kg_per_s;
     balance->engine_effective_velocity_m_per_s = balance->total_thrust_n / input->total_mass_flow_kg_per_s;
-    balance->engine_specific_impulse_s = balance->engine_effective_velocity_m_per_s / 9.80665;
+    balance->engine_specific_impulse_s = balance->engine_effective_velocity_m_per_s / RP_STANDARD_GRAVITY_M_S2;
     balance->mechanical_loss_w = (1.0 - input->shaft_efficiency) * balance->branch_mass_flow_kg_per_s * balance->turbine.specific_work_j_per_kg;
     balance->inlet_enthalpy_rate_w = balance->fuel_mass_flow_kg_per_s * input->fuel.pump.inlet_h_j_per_kg +
         balance->oxidizer_mass_flow_kg_per_s * input->oxidizer.pump.inlet_h_j_per_kg;

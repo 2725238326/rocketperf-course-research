@@ -76,6 +76,17 @@ RpStatus rp_cho_mixture_evaluate(const double mole_fractions[RP_CHO_SPECIES_COUN
     return RP_OK;
 }
 
+double rp_cho_minimum_temperature(const double mole_fractions[RP_CHO_SPECIES_COUNT])
+{
+    double minimum = 0.0;
+    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
+        if (mole_fractions[i] > 0.0) {
+            minimum = fmax(minimum, rp_thermo_find_species(species_ids[i])->ranges[0].t_min_k);
+        }
+    }
+    return minimum;
+}
+
 RpStatus rp_ch4_o2_feed_enthalpy(const RpCh4O2Feed *feed, double *output, RpError *error)
 {
     RpThermoState fuel;

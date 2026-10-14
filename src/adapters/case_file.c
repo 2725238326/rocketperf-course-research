@@ -77,16 +77,12 @@ RpStatus rp_case_load(const char *utf8_path, RpCase *output, RpError *error)
         char *key;
         char *value;
         unsigned int field;
-        size_t length;
         ++line;
         if (line > 128U || line_status < 0) {
             status = parse_failure(error, line, "Case exceeds line limits or contains an embedded NUL.");
             break;
         }
-        length = strlen(buffer);
-        if (line == 1U && length >= 3U && memcmp(buffer, "\xEF\xBB\xBF", 3U) == 0) {
-            memmove(buffer, buffer + 3, length - 2U);
-        }
+        if (line == 1U) { rp_text_strip_bom(buffer); }
         text = rp_text_trim(buffer);
         if (*text == '\0' || *text == '#') { continue; }
         separator = strchr(text, '=');

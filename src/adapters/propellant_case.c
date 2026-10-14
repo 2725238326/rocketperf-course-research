@@ -80,9 +80,7 @@ RpStatus rp_propellant_case_load(const char *utf8_path, RpPropellantCase *output
         if (line > 128U || line_status < 0) {
             status = rp_text_parse_failure(error, line, "Line limit exceeded or embedded NUL."); break;
         }
-        if (line == 1U && strlen(buffer) >= 3U && memcmp(buffer, "\xEF\xBB\xBF", 3U) == 0) {
-            memmove(buffer, buffer + 3, strlen(buffer) - 2U);
-        }
+        if (line == 1U) { rp_text_strip_bom(buffer); }
         text = rp_text_trim(buffer);
         if (*text == '\0' || *text == '#') { continue; }
         separator = strchr(text, '=');

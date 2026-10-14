@@ -26,11 +26,11 @@
 
 - `src/core/`：状态码、类型明确的有限值检查、带预算的二分求根。
 - `src/nozzle/`：定常、定比热、理想气体、喉部声速、超声速出口分支；匹配/欠膨胀范围。
-- `src/thermo/`：固定NASA9、九物种气相混合物、带主元4×4消元与阻尼Newton的TP平衡、外层HP二分。气态温度/显式焓与[固定液态反应物锚点](liquid-anchor-validation.md)分别验证入口后共享元素库存/焓求解；不编造温度、不低温外推、不改变旧API；固定锚点不是液体EOS。
+- `src/thermo/`：固定NASA9、九物种气相混合物、带主元4×4消元与阻尼Newton的TP平衡、外层HP二分。气态温度/显式焓与[固定液态反应物锚点](liquid-anchor-validation.md)分别验证入口后共享元素库存/焓求解；不编造温度、不低温外推、不改变旧API；固定锚点不是液体EOS。每个返回的TP/HP态附石墨活度`graphite_activity=exp(π_C−g°_C(gr)/RT)`，大于1时以`RP_OUT_OF_DOMAIN`拒绝（HP只判收敛温度）；C(gr)拟合由`tools/thermo_data.py`从同一thermo.inp生成到`graphite_generated.h`，不进入产物物种表，固定气相数据集ID与字节不变。
 - `src/thermo/liquid_feed.c`：[固定连续单相表](liquid-feed-contract.md)的纯C双线性查询；`src/thermo/liquid_combustion.c`将查表化学焓和C/H/O库存接入九气相HP，`src/nozzle/liquid.c`复用固定面积冻结喷管。不可变数据、闭合域拒绝、EOS密度和CEA化学焓质量口径分列，失败输出保持；不包含泵/喷注/分流/循环闭合。
 - `src/nozzle/ideal.c`/`src/nozzle/frozen.c`：L0定比热与燃烧室组分冻结的温变准一维喷管；冻结路径调用热化学混合物，不复制物性公式。固定喉面积接口复用同一解并由通量求流量/推力，不新增整机闭合职责。`assess_*`域评估接口回答越域工况"理想模型说什么"，独立于附着求解契约。
 - `src/cycle/components.c`、`prescribed.c`、`study.c`：保留旧模型`prescribed_thermal_cycle_v1`，输入热状态、恒密度泵入口性质，闭合单轴外排支路与主/支喷管；该模型仍拒绝非零回流。
-- `src/cycle/adiabatic.c`：新模型`adiabatic_single_shaft_cycle_v1`，C17 HP求预燃室/发生器与主室状态；布尔拓扑切换开式外排或全氧化剂富氧预燃室回流，分别闭合轴功、质量/元素与焓流。它不含泵图谱、液相闪蒸、冷却、凝聚碳、瞬态或实机标定。
+- `src/cycle/adiabatic.c`：新模型`adiabatic_single_shaft_cycle_v1`，C17 HP求预燃室/发生器与主室状态；布尔拓扑切换开式外排或全氧化剂富氧预燃室回流，分别闭合轴功、质量/元素与焓流。它不含泵图谱、液相闪蒸、冷却、凝聚碳相、瞬态或实机标定；预燃室与主室状态均经石墨活度判据，固体碳稳定时拒算。
 - `src/adapters/`：严格INI读取、JSON输出和Windows UTF-8路径转换。
 - `src/cli/`：输入→求解→报告的单一工作流；成功stdout为JSON，错误写stderr且非零退出。
 - `scripts/`：构建、测试、一次运行的归档和项目完整性核验。

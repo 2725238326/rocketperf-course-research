@@ -1,14 +1,5 @@
 #include "combustion_report.h"
-
-static int write_quoted(FILE *stream, const char *value)
-{
-    if (fputc('"', stream) == EOF) { return 0; }
-    for (const char *p = value; *p != '\0'; ++p) {
-        if ((*p == '"' || *p == '\\') && fputc('\\', stream) == EOF) { return 0; }
-        if (fputc((unsigned char)*p, stream) == EOF) { return 0; }
-    }
-    return fputc('"', stream) != EOF;
-}
+#include "case_text.h"
 
 int rp_report_write_mixture(FILE *stream, const RpGasMixture *gas)
 {
@@ -36,11 +27,12 @@ int rp_report_write_station(FILE *stream, const RpFrozenFlowStation *station)
 int rp_report_write_diagnostics(FILE *stream, const RpCombustionResult *result)
 {
     return fprintf(stream, ",\"diagnostics\":{\"element_relative_residual\":[%.17g,%.17g,%.17g],\"equilibrium_residual\":%.17g,"
-                  "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u}",
+                  "\"enthalpy_residual_j_per_kg\":%.17g,\"equilibrium_iterations\":%u,\"hp_iterations\":%u,"
+                  "\"graphite_activity\":%.17g}",
                   result->element_relative_residual[0], result->element_relative_residual[1],
                   result->element_relative_residual[2], result->equilibrium_residual,
                   result->enthalpy_residual_j_per_kg, result->equilibrium_iterations,
-                  result->hp_iterations) >= 0;
+                  result->hp_iterations, result->graphite_activity) >= 0;
 }
 
 int rp_report_write_frozen_report(FILE *stream, const RpFrozenNozzleResult *nozzle)
@@ -98,8 +90,8 @@ int rp_report_write_propellant(FILE *stream, const RpPropellantComparisonInput *
 {
     if (fputs("{\"schema_version\":1,\"study\":\"propellant_fixed_geometry_v1\",", stream) < 0) { return 0; }
     if (study != NULL) {
-        if (fputs("\"case\":{\"id\":", stream) < 0 || !write_quoted(stream, study->id) ||
-            fputs(",\"source_ref\":", stream) < 0 || !write_quoted(stream, study->source_ref) ||
+        if (fputs("\"case\":{\"id\":", stream) < 0 || !rp_text_write_json_string(stream, study->id) ||
+            fputs(",\"source_ref\":", stream) < 0 || !rp_text_write_json_string(stream, study->source_ref) ||
             fputs("},", stream) < 0) { return 0; }
     }
     return fprintf(stream,

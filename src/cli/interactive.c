@@ -1,5 +1,6 @@
 #include "interactive.h"
 #include "arguments.h"
+#include "case_file.h"
 #include "engine_case.h"
 #include "text_report.h"
 #include "rocketperf/combustion.h"
@@ -546,7 +547,16 @@ static RpPromptStatus flow_engine_cycle(void)
     if (selection < 1.0 || selection > 5.0 || selection != (double)(int)selection) {
         (void)fputs("  无效选择。\n", stdout); return RP_PROMPT_VALUE;
     }
-    status = rp_engine_case_run(paths[(int)selection - 1], stdout, 1, &error);
+    {
+        /* Bundled cases sit beside the exe; double-clicking from Explorer or a
+         * shortcut must not depend on the shell's current directory. */
+        char path[1200];
+        if (!rp_find_bundled_case(paths[(int)selection - 1], path, sizeof(path))) {
+            (void)fprintf(stdout, "  失败 (io_error): 找不到 %s;请在完整解压的运行包内运行。\n", paths[(int)selection - 1]);
+            return RP_PROMPT_VALUE;
+        }
+        status = rp_engine_case_run(path, stdout, 1, &error);
+    }
     if (status != RP_OK) { print_failure(status, &error); }
     return RP_PROMPT_VALUE;
 }

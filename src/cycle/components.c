@@ -71,11 +71,7 @@ RpStatus rp_frozen_turbine_solve(const RpFrozenTurbineInput *input,
         result.outlet = result.inlet; result.isentropic_outlet = result.inlet;
         *output = result; rp_error_clear(error); return RP_OK;
     }
-    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
-        if (input->mole_fractions[i] > 0.0) {
-            minimum_temperature = fmax(minimum_temperature, rp_thermo_find_species(rp_cho_species_id(i))->ranges[0].t_min_k);
-        }
-    }
+    minimum_temperature = rp_cho_minimum_temperature(input->mole_fractions);
     if (input->temperature_k <= minimum_temperature) {
         return rp_error_set(error, RP_OUT_OF_DOMAIN, "No turbine expansion interval in the NASA9 temperature domain.");
     }

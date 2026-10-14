@@ -25,12 +25,16 @@ PC_PA = 1e7
 THROAT_M2 = 0.01
 AREA_RATIOS = (2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 40, 50, 60)
 AMBIENTS_PA = (0, 5000, 50000, 101325)
-CH4_OF = tuple(round(2.4 + 0.1 * i, 1) for i in range(17))   # 2.4 .. 4.0
+CH4_OF = tuple(round(2.0 + 0.1 * i, 1) for i in range(21))   # 2.0 .. 4.0
+CHAMBER_OF = tuple(round(0.5 + 0.1 * i, 1) for i in range(36))  # 0.5 .. 4.0, carbon guard visible
 RP1_OF = tuple(round(2.2 + 0.1 * i, 1) for i in range(19))   # 2.2 .. 4.0 (method domain)
 CH4_ARGS = ("coolprop710-cea334-liquid-molar-v1", "heos710-cea334-ideal-zero-298.15-v1", "liquid",
             "120", "1e7", "100", "1e7")
 RP1_ARGS = ("cea-v3.3.4-rp1-o2l-assigned-v1", "liquid", "RP-1", "O2(L)", "10000000")
 CYCLES = ("zq3_y1_stage1", "cz10b_first_stage1")
+SPECIES = ("H2", "O2", "H2O", "CO", "CO2", "CH4", "H", "O", "OH")
+VALIDATION = (("ch4", "results/validation/liquid_combustion_v1"), ("rp1", "results/validation/kerosene_anchor_v1"))
+GRAPHITE = re.compile(r"graphite activity ([0-9.eE+-]+)")
 
 
 def number(value):
@@ -64,6 +68,34 @@ def chamber_point(exe, fuel, ratio, area, ambient):
             "cf": number(nozzle["thrust_coefficient"]), "tc": number(data["chamber"]["temperature_k"]),
             "pe": number(nozzle["exit"]["gas"]["pressure_pa"]), "me": number(nozzle["exit"]["mach"]),
             "ae": number(geometry["exit_area_m2"])}
+
+
+def chamber_sweep(exe, ratio):
+    """Liquid CH4/O2 chamber at Pc 10 MPa, frozen A10 vacuum; carbon-guard refusals keep a_C."""
+    arguments = ("combustion", "frozen-liquid-state", *CH4_ARGS, f"{PC_PA:g}", f"{ratio}", "10", "0", f"{THROAT_M2}")
+    data, failure = run(exe, arguments)
+    if failure:
+        found = GRAPHITE.search(failure["message"])
+        return {**failure, "ac": number(float(found.group(1))) if found else None}
+    gas = data["chamber"]
+    cp, gas_r = gas["cp_frozen_j_per_kg_k"], gas["gas_constant_j_per_kg_k"]
+    return {"status": "ok", "tc": number(gas["temperature_k"]), "cstar": number(data["nozzle"]["cstar_m_per_s"]),
+            "isp": number(data["geometry"]["specific_impulse_s"]), "mw": number(gas["molar_mass_kg_per_kmol"]),
+            "gamma": number(cp / (cp - gas_r)), "ac": number(data["diagnostics"]["graphite_activity"]),
+            "x": [number(gas["mole_fractions"][s]) for s in SPECIES]}
+
+
+def validation_summary():
+    """Archived C-vs-CEA field comparisons; read from the saved manifests, not recomputed."""
+    out = {}
+    for fuel, folder in VALIDATION:
+        manifest = read_json(ROOT / folder / "manifest.json")
+        rows = [[case, row["field"], number(row["difference"]), row["absolute_tolerance"]]
+                for case, entries in manifest["comparisons"].items() for row in entries]
+        out[fuel] = {"archive": folder, "c_runs": len(manifest.get("runs", manifest.get("recipes", []))),
+                     "cea_cards": len(list((ROOT / folder).glob("*.inp"))),
+                     "rows": rows}
+    return out
 
 
 def matched_area(exe, ratio, ambient):
@@ -100,6 +132,7 @@ def cycle(exe, name):
             "turbine_out_t": number(t["outlet"]["temperature_k"]),
             "return_floor_pa": data["inputs"]["chamber_pressure_pa"] + data["inputs"]["return_pressure_drop_pa"],
             "element_residual": [number(x) for x in data["diagnostics"]["exit_element_relative_residual"]],
+            "preburner_ac": number(data["preburner"]["diagnostics"]["graphite_activity"]),
             **{k: number(b[k]) for k in keys}}
 
 
@@ -109,11 +142,12 @@ def generate(exe):
     with ThreadPoolExecutor(max_workers=8) as pool:
         points = list(pool.map(lambda job: chamber_point(exe, *job), jobs))
         matched = list(pool.map(lambda job: matched_area(exe, *job), [(r, p) for r in CH4_OF for p in AMBIENTS_PA[1:]]))
+        chamber = list(pool.map(lambda ratio: chamber_sweep(exe, ratio), CHAMBER_OF))
     grid = {"ch4": {}, "rp1": {}}
     for (fuel, ratio, area, ambient), point in zip(jobs, points):
         grid[fuel][f"{ratio}|{area}|{ambient}"] = point
     match = {f"{r}|{p}": m for (r, p), m in zip([(r, p) for r in CH4_OF for p in AMBIENTS_PA[1:]], matched)}
-    return grid, match, len(jobs) + len(matched)
+    return grid, match, dict(zip(map(str, CHAMBER_OF), chamber)), len(jobs) + len(matched) + len(chamber)
 
 
 def main():
@@ -123,11 +157,13 @@ def main():
     manifest_path = verified_build(ROOT, "Release", require_tests=True)
     manifest = read_json(manifest_path)
     exe = local_path(ROOT, manifest["application"]["path"])
-    grid, match, runs = generate(exe)
+    grid, match, chamber, runs = generate(exe)
     cycles = [cycle(exe, name) for name in CYCLES]
     payload = {"axes": {"pc_pa": PC_PA, "throat_m2": THROAT_M2, "area_ratios": AREA_RATIOS,
-                        "ambients_pa": AMBIENTS_PA, "ch4_of": CH4_OF, "rp1_of": RP1_OF},
-               "grid": grid, "matched_area_ratio": match, "cycles": cycles,
+                        "ambients_pa": AMBIENTS_PA, "ch4_of": CH4_OF, "rp1_of": RP1_OF, "chamber_of": CHAMBER_OF,
+                        "species": SPECIES},
+               "grid": grid, "matched_area_ratio": match, "chamber": chamber, "cycles": cycles,
+               "validation": validation_summary(),
                "provenance": {"binary_sha256": manifest["application"]["sha256"],
                               "build_manifest": manifest_path.relative_to(ROOT).as_posix(),
                               "build_manifest_sha256": digest(manifest_path),
@@ -142,7 +178,7 @@ def main():
         # Physics fields must match exactly; build identity changes with every rebuild and is reported only.
         embedded = json.loads(MARK.search(page).group(2))
         fresh = json.loads(json.dumps(payload))
-        for field in ("axes", "grid", "matched_area_ratio", "cycles"):
+        for field in ("axes", "grid", "matched_area_ratio", "chamber", "cycles", "validation"):
             if embedded.get(field) != fresh[field]:
                 raise SystemExit(f"Embedded demo data field '{field}' differs from a fresh run of the tested build.")
         same = embedded["provenance"].get("binary_sha256") == fresh["provenance"]["binary_sha256"]

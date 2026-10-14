@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 317,
+  "revision": 321,
   "context": {
     "phase": "报告技术审稿与交付校验修正",
     "evidence_cutoff": "2026-10-06",
@@ -1440,6 +1440,35 @@
         "kind": "quality",
         "path": "project/evidence/QA-005_7224399996ab.json",
         "sha256": "61fd60265cc771993cd9ead69710c2e9a19f608a74027475459f6704d3589bc8"
+      }
+    },
+    {
+      "id": "QA-006",
+      "title": "甲烷富燃凝聚碳判据、代码规整与演示内容充实",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "src/thermo/equilibrium.c",
+        "src/thermo/graphite_generated.h",
+        "tools/thermo_data.py",
+        "src/adapters/platform.c",
+        "deliverables/demo/index.html",
+        "deliverables/presentation.md",
+        "deliverables/report.md",
+        "taskshot/2026-10-14_059-carbon-guard-and-tidy.md"
+      ],
+      "acceptance": [
+        "石墨活度由平衡碳元素势计算并随每个TP/HP结果输出，a_C>1时拒算且不改输出；Boudouard独立重算一致；归档CEA凝聚相方向一致；固定气相数据集字节不变",
+        "重复的g0、温度下限、BOM与JSON字符串辅助合并；菜单8在任意工作目录可运行并有回归测试；全部测试与统一质量六组通过",
+        "演示页增至五页（燃烧室积碳边界、CEA对照），全部数值由已测exe生成或读自归档；讲稿15分钟内12页并与报告一致"
+      ],
+      "owner": "root",
+      "note": "验收完成。判据只判平衡稳定性，不算积碳速率；PPT/贡献/计时演练由小组完成",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-006_76185e091ed7.json",
+        "sha256": "9c22311ca32ef70ef6497ab3ff19bc511a6c6d4f623d3cfe1c834f406157418f"
       }
     }
   ],
@@ -8303,6 +8332,54 @@
       "note": "验收完成。遗留：甲烷O/F方法域是否收窄待用户定；DOC-001验收条款仍写10分钟，待解除阻塞时修订；PPT/贡献/计时演练由小组完成",
       "previous_hash": "e84ca47bb6a7a992eca2e8114bf68f6ae0020b33148947ad19a64285485c4d46",
       "hash": "308f9a47e430ba6c4ab964cc58c2c4f247fcac569e33d75fa218884bee989291"
+    },
+    {
+      "seq": 335,
+      "at": "2026-10-14T15:50:29+00:00",
+      "task": "QA-006",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "308f9a47e430ba6c4ab964cc58c2c4f247fcac569e33d75fa218884bee989291",
+      "hash": "05f94952de6da430381474d4311c7359ba64ff8592d3face70eb9957a8ae248b"
+    },
+    {
+      "seq": 336,
+      "at": "2026-10-14T15:50:30+00:00",
+      "task": "QA-006",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户要求15分钟内、内容饱满、甲烷按判断优化、代码规整且运行无误",
+      "previous_hash": "05f94952de6da430381474d4311c7359ba64ff8592d3face70eb9957a8ae248b",
+      "hash": "d84d6033ab6a69aeb8fa34edf1e219fcef007d179e983b7fad0cf9c761340454"
+    },
+    {
+      "seq": 337,
+      "at": "2026-10-14T15:58:16+00:00",
+      "task": "QA-006",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "石墨活度判据全路径生效且有Boudouard独立核对与CEA凝聚相方向核对；固定气相数据集字节不变；四类重复代码合并、零警告；菜单8任意目录可运行并有回归测试；演示页五页、2501次C运行复现；讲稿12页约13分45秒；质量六组PASS",
+      "previous_hash": "d84d6033ab6a69aeb8fa34edf1e219fcef007d179e983b7fad0cf9c761340454",
+      "hash": "d8771d0f1ec5e0ff8c3c531070f8e39db88623097a0beb02726991b7745923c1"
+    },
+    {
+      "seq": 338,
+      "at": "2026-10-14T15:58:19+00:00",
+      "task": "QA-006",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成。判据只判平衡稳定性，不算积碳速率；PPT/贡献/计时演练由小组完成",
+      "previous_hash": "d8771d0f1ec5e0ff8c3c531070f8e39db88623097a0beb02726991b7745923c1",
+      "hash": "f3fcd426024437fa3ffb2f7eb3136a947b61b0b07541b820e19d31e5ec2b7568"
     }
   ]
 }

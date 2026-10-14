@@ -22,7 +22,7 @@
  *   - 残差：log(Ae_calculated / Ae_target)
  *
  * 适用范围：
- *   ✓ 燃烧室高温燃气；膨胀温度下限取各物种NASA9拟合区下限（minimum_frozen_temperature）
+ *   ✓ 燃烧室高温燃气；膨胀温度下限取各物种NASA9拟合区下限（rp_cho_minimum_temperature）
  *   ✓ 燃烧室平衡态已知（9物种C-H-O混合物）
  *   ✓ 喷管停留时间短（<10 ms），化学冻结假设成立
  *   ✗ 不适用：碳烟析出、H₂O高温再解离、液滴携带
@@ -42,6 +42,7 @@
 
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/numeric.h"
+#include "rocketperf/version.h"
 
 #include <math.h>
 #include <stddef.h>
@@ -118,19 +119,6 @@ static double pressure_equation(double temperature, const void *opaque)
     return station.gas.pressure_pa - equation->target_pa;
 }
 
-/* Common lower bound: every species present must remain inside its fit. */
-static double minimum_frozen_temperature(const double *mole_fractions)
-{
-    double minimum = 0.0;
-    for (unsigned int i = 0U; i < RP_CHO_SPECIES_COUNT; ++i) {
-        if (mole_fractions[i] > 0.0) {
-            const RpNasa9Species *species = rp_thermo_find_species(rp_cho_species_id(i));
-            minimum = fmax(minimum, species->ranges[0].t_min_k);
-        }
-    }
-    return minimum;
-}
-
 /* Isentropic area ratio whose station static pressure equals target_pa.
  * Zero when the bracket leaves the throat..minimum-temperature span. */
 static int area_ratio_for_pressure(const FrozenContext *context,
@@ -188,7 +176,7 @@ RpStatus rp_nozzle_solve_frozen(const RpFrozenNozzleInput *input,
     status = rp_cho_mixture_evaluate(input->mole_fractions, input->chamber_temperature_k,
                                      input->chamber_pressure_pa, &context.chamber, error);
     if (status != RP_OK) { return status; }
-    minimum_temperature = minimum_frozen_temperature(input->mole_fractions);
+    minimum_temperature = rp_cho_minimum_temperature(input->mole_fractions);
     if (input->chamber_temperature_k <= minimum_temperature) {
         return rp_error_set(error, RP_OUT_OF_DOMAIN, "No frozen expansion interval inside the NASA9 temperature domain.");
     }
@@ -251,7 +239,7 @@ RpStatus rp_nozzle_solve_frozen_fixed_area(const RpFrozenNozzleInput *input,
     result.exit_area_m2 = throat_area_m2 * input->area_ratio;
     result.mass_flow_kg_per_s = throat_area_m2 * result.nozzle.throat.mass_flux_kg_per_m2_s;
     result.thrust_n = result.mass_flow_kg_per_s * result.nozzle.effective_velocity_m_per_s;
-    result.specific_impulse_s = result.nozzle.effective_velocity_m_per_s / 9.80665;
+    result.specific_impulse_s = result.nozzle.effective_velocity_m_per_s / RP_STANDARD_GRAVITY_M_S2;
     if (!rp_isfinite(result.exit_area_m2) || result.exit_area_m2 <= 0.0 ||
         !rp_isfinite(result.mass_flow_kg_per_s) || result.mass_flow_kg_per_s <= 0.0 ||
         !rp_isfinite(result.thrust_n) || result.thrust_n <= 0.0 ||
@@ -291,7 +279,7 @@ RpStatus rp_nozzle_assess_frozen(const RpFrozenNozzleInput *input,
     context.chamber = result.ideal.chamber;
     context.throat_flux = result.ideal.throat.mass_flux_kg_per_m2_s;
     context.area_ratio = input->area_ratio;
-    minimum_temperature = minimum_frozen_temperature(input->mole_fractions);
+    minimum_temperature = rp_cho_minimum_temperature(input->mole_fractions);
     throat_temperature = result.ideal.throat.gas.temperature_k;
     result.throat_area_m2 = throat_area_m2;
     result.mass_flow_kg_per_s = throat_area_m2 * context.throat_flux;
@@ -299,7 +287,7 @@ RpStatus rp_nozzle_assess_frozen(const RpFrozenNozzleInput *input,
         (result.ideal.exit.gas.pressure_pa - input->ambient_pressure_pa) *
         input->area_ratio / context.throat_flux;
     result.ideal_thrust_n = result.mass_flow_kg_per_s * effective_velocity;
-    result.ideal_specific_impulse_s = effective_velocity / 9.80665;
+    result.ideal_specific_impulse_s = effective_velocity / RP_STANDARD_GRAVITY_M_S2;
     result.ambient_over_exit_pressure =
         input->ambient_pressure_pa / result.ideal.exit.gas.pressure_pa;
     result.separation_reference_pa = RP_NOZZLE_SEPARATION_FRACTION * input->ambient_pressure_pa;

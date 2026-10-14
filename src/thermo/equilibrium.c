@@ -52,6 +52,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#include "rocketperf/thermo.h"
+#include "graphite_generated.h"
+
 #define RP_EQUILIBRIUM_DIMENSION 4U
 
 RpCombustionOptions rp_combustion_default_options(void)
@@ -219,6 +222,30 @@ static void gas_inventory(double of_ratio, double inventory[RP_CHO_ELEMENT_COUNT
                    rp_thermo_find_species("O2")->molar_mass_kg_per_kmol;
 }
 
+/* At equilibrium the carbon element potential is mu_C/RT, so pure graphite has
+ * activity exp(pi_C - g_gr/RT). Above one, C(gr) would condense and the nine-gas
+ * state is no longer the constrained Gibbs minimum. */
+static RpStatus graphite_activity(double temperature, double carbon_potential, double *activity, RpError *error)
+{
+    RpThermoState state;
+    const RpStatus status = rp_nasa9_evaluate(&rp_graphite, temperature, &state, error);
+    if (status != RP_OK) { return status; }
+    *activity = exp(carbon_potential - rp_graphite.molar_mass_kg_per_kmol *
+        (state.h_j_per_kg / temperature - state.s_j_per_kg_k) / RP_UNIVERSAL_GAS_CONSTANT_J_KMOL_K);
+    return RP_OK;
+}
+
+static RpStatus carbon_guard(const RpCombustionResult *result, RpError *error)
+{
+    char message[256];
+    if (result->graphite_activity <= 1.0) { return RP_OK; }
+    (void)snprintf(message, sizeof(message),
+        "Condensed carbon is thermodynamically stable: graphite activity %.3g > 1 at T=%.1f K, p=%.3e Pa. "
+        "The nine-gas model has no C(gr); this fuel-rich state is outside its domain.",
+        result->graphite_activity, result->gas.temperature_k, result->gas.pressure_pa);
+    return rp_error_set(error, RP_OUT_OF_DOMAIN, message);
+}
+
 /* Inventory and inlet h are separate from product Gibbs data; no fabricated feed T. */
 static RpStatus equilibrium_tp(double pressure_pa, const double supplied_inventory[RP_CHO_ELEMENT_COUNT], double feed_enthalpy,
                                double temperature_k, const RpCombustionOptions *policy,
@@ -295,6 +322,8 @@ static RpStatus equilibrium_tp(double pressure_pa, const double supplied_invento
     }
     status = rp_cho_mixture_evaluate(fractions, temperature_k, pressure_pa, &result.gas, error);
     if (status != RP_OK) { return status; }
+    status = graphite_activity(temperature_k, variables[0], &result.graphite_activity, error);
+    if (status != RP_OK) { return status; }
     result.enthalpy_residual_j_per_kg = result.gas.h_j_per_kg - feed_enthalpy;
     *output = result;
     rp_error_clear(error);
@@ -318,13 +347,20 @@ RpStatus rp_ch4_o2_equilibrium_tp(const RpCh4O2Feed *feed, double temperature_k,
         return rp_error_set(error, RP_OUT_OF_DOMAIN, "Gas equilibrium O/F=0.1..20.");
     }
     gas_inventory(feed->oxidizer_fuel_mass_ratio, inventory);
-    return equilibrium_tp(feed->pressure_pa, inventory, enthalpy, temperature_k,
-                          &policy, output, error);
+    {
+        RpCombustionResult result;
+        status = equilibrium_tp(feed->pressure_pa, inventory, enthalpy, temperature_k, &policy, &result, error);
+        if (status == RP_OK) { status = carbon_guard(&result, error); }
+        if (status != RP_OK) { return status; }
+        *output = result;
+    }
+    rp_error_clear(error);
+    return RP_OK;
 }
 
-static RpStatus equilibrium_hp(double pressure_pa, const double inventory[RP_CHO_ELEMENT_COUNT], double enthalpy,
-                               const RpCombustionOptions *policy,
-                               RpCombustionResult *output, RpError *error)
+static RpStatus equilibrium_hp_state(double pressure_pa, const double inventory[RP_CHO_ELEMENT_COUNT], double enthalpy,
+                                     const RpCombustionOptions *policy,
+                                     RpCombustionResult *output, RpError *error)
 {
     RpCombustionResult lower_state;
     RpCombustionResult upper_state;
@@ -363,6 +399,21 @@ static RpStatus equilibrium_hp(double pressure_pa, const double inventory[RP_CHO
         } else { upper = middle; }
     }
     return rp_error_set(error, RP_NO_CONVERGENCE, "HP iteration budget exhausted.");
+}
+
+/* Bracket endpoints may be carbon-rich trial states; only the converged
+ * temperature is judged against the condensed-carbon guard. */
+static RpStatus equilibrium_hp(double pressure_pa, const double inventory[RP_CHO_ELEMENT_COUNT], double enthalpy,
+                               const RpCombustionOptions *policy,
+                               RpCombustionResult *output, RpError *error)
+{
+    RpCombustionResult result;
+    RpStatus status = equilibrium_hp_state(pressure_pa, inventory, enthalpy, policy, &result, error);
+    if (status == RP_OK) { status = carbon_guard(&result, error); }
+    if (status != RP_OK) { return status; }
+    *output = result;
+    rp_error_clear(error);
+    return RP_OK;
 }
 
 RpStatus rp_cho_equilibrium_hp_inventory(

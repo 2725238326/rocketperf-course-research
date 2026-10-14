@@ -4,6 +4,7 @@
 #include "rocketperf/liquid_nozzle.h"
 #include "rocketperf/propellant_study.h"
 #include "../src/thermo/equilibrium_internal.h"
+#include "../src/thermo/graphite_generated.h"
 
 #include <math.h>
 #include <float.h>
@@ -971,9 +972,57 @@ static void test_propellant_comparison(void)
         CHECK(memcmp(&result, &saved, sizeof(result)) == 0);
     }
 }
+static double reduced_gibbs(const RpNasa9Species *species, double temperature)
+{
+    RpThermoState state;
+    if (rp_nasa9_evaluate(species, temperature, &state, NULL) != RP_OK) { return NAN; }
+    return species->molar_mass_kg_per_kmol * (state.h_j_per_kg / temperature - state.s_j_per_kg_k) /
+        RP_UNIVERSAL_GAS_CONSTANT_J_KMOL_K;
+}
+
+/* Recompute a_C from the Boudouard equilibrium 2CO = C(gr) + CO2 using only the
+ * returned composition, independent of the solver's element potential. */
+static double boudouard_activity(const RpGasMixture *gas)
+{
+    const double log_p = log(gas->pressure_pa / rp_thermo_reference_pressure_pa());
+    const double t = gas->temperature_k;
+    const double mu_co = reduced_gibbs(rp_thermo_find_species("CO"), t) + log(gas->mole_fractions[3]) + log_p;
+    const double mu_co2 = reduced_gibbs(rp_thermo_find_species("CO2"), t) + log(gas->mole_fractions[4]) + log_p;
+    return exp(2.0 * mu_co - mu_co2 - reduced_gibbs(&rp_graphite, t));
+}
+
+static void test_condensed_carbon_guard(void)
+{
+    RpCh4O2Feed feed = reference_feed();
+    RpCombustionResult sentinel, result;
+    RpError error;
+    /* Stoichiometric-side state: graphite far from stable, value is reported. */
+    CHECK(rp_ch4_o2_equilibrium_hp(&feed, NULL, &result, NULL) == RP_OK);
+    CHECK(result.graphite_activity > 0.0 && result.graphite_activity < 1e-3);
+    CHECK(near(log(result.graphite_activity), log(boudouard_activity(&result.gas)), 1e-6));
+    /* O/F=1.0 gas feed: rich but still gas-only (a_C about 0.8). */
+    feed.oxidizer_fuel_mass_ratio = 1.0; feed.fuel_temperature_k = 300.0; feed.oxidizer_temperature_k = 300.0;
+    CHECK(rp_ch4_o2_equilibrium_hp(&feed, NULL, &result, NULL) == RP_OK);
+    CHECK(result.graphite_activity > 0.5 && result.graphite_activity < 1.0);
+    CHECK(near(log(result.graphite_activity), log(boudouard_activity(&result.gas)), 1e-6));
+    /* O/F=0.5: graphite would condense; the nine-gas state is refused, output untouched. */
+    memset(&sentinel, 0x5a, sizeof(sentinel)); result = sentinel;
+    feed.oxidizer_fuel_mass_ratio = 0.5;
+    CHECK(rp_ch4_o2_equilibrium_hp(&feed, NULL, &result, &error) == RP_OUT_OF_DOMAIN);
+    CHECK(strstr(error.message, "graphite activity") != NULL);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    /* TP path is guarded too: rich mixture at a low prescribed temperature. */
+    CHECK(rp_ch4_o2_equilibrium_tp(&feed, 1100.0, NULL, &result, NULL) == RP_OUT_OF_DOMAIN);
+    CHECK(memcmp(&result, &sentinel, sizeof(result)) == 0);
+    feed.oxidizer_fuel_mass_ratio = 3.4;
+    CHECK(rp_ch4_o2_equilibrium_tp(&feed, 1100.0, NULL, &result, NULL) == RP_OK);
+    CHECK(result.graphite_activity < 1.0);
+}
+
 int main(void)
 {
     test_tp_hp_reference();
+    test_condensed_carbon_guard();
     test_sweep_and_relations();
     test_failures();
     test_mixture_failure_contract();

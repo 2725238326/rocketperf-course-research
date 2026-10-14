@@ -27,5 +27,10 @@ RpStatus rp_case_write_study_json(FILE *stream, const RpCase *study,
 RpStatus rp_case_write_regime_json(FILE *stream, const RpCase *study,
                                    const RpNozzleRegimeResult *regime, RpError *error);
 FILE *rp_fopen_utf8_read(const char *utf8_path);
+/* Locate a bundled relative case: the current directory first, then the
+ * executable's folder and up to four parents (release package, build/release or
+ * build/artifacts/<config>/<id> layouts).
+ * Writes a UTF-8 path into output; returns zero when no candidate opens. */
+int rp_find_bundled_case(const char *relative, char *output, size_t capacity);
 
 #endif

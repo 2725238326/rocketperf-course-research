@@ -59,6 +59,20 @@ int rp_text_decimal(const char *text, double *output)
     *output = result;
     return 1;
 }
+void rp_text_strip_bom(char *buffer)
+{
+    const size_t length = strlen(buffer);
+    if (length >= 3U && memcmp(buffer, "\xEF\xBB\xBF", 3U) == 0) { memmove(buffer, buffer + 3, length - 2U); }
+}
+int rp_text_write_json_string(FILE *stream, const char *value)
+{
+    if (fputc('"', stream) == EOF) { return 0; }
+    for (const char *p = value; *p != '\0'; ++p) {
+        if ((*p == '"' || *p == '\\') && fputc('\\', stream) == EOF) { return 0; }
+        if (fputc((unsigned char)*p, stream) == EOF) { return 0; }
+    }
+    return fputc('"', stream) != EOF;
+}
 RpStatus rp_text_parse_failure(RpError *error, unsigned int line, const char *message)
 {
     char detail[192];

@@ -69,11 +69,11 @@ int rp_text_chamber_diagnostics(FILE *stream, const RpCombustionResult *result)
 {
     return fprintf(stream,
         "  诊断: 元素残差 [%.3g %.3g %.3g], 平衡残差 %.3g, 焓残差 %.4g J/kg, "
-        "平衡迭代 %u, HP迭代 %u\n",
+        "平衡迭代 %u, HP迭代 %u, 石墨活度 %.3g (<1 无凝聚碳)\n",
         result->element_relative_residual[0], result->element_relative_residual[1],
         result->element_relative_residual[2], result->equilibrium_residual,
         result->enthalpy_residual_j_per_kg, result->equilibrium_iterations,
-        result->hp_iterations) >= 0;
+        result->hp_iterations, result->graphite_activity) >= 0;
 }
 
 static int text_station(FILE *stream, const char *name, const RpFrozenFlowStation *station)

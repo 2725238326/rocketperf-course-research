@@ -1,5 +1,6 @@
 #include "rocketperf/cycle.h"
 #include "rocketperf/numeric.h"
+#include "rocketperf/version.h"
 
 #include <math.h>
 #include <stddef.h>
@@ -129,7 +130,7 @@ RpStatus rp_cycle_solve_prescribed(const RpCycleInput *input,
     result.total_thrust_n = result.main_thrust_n + result.branch_thrust_n;
     result.main_effective_velocity_m_per_s = result.main_thrust_n / result.main_mass_flow_kg_per_s;
     result.engine_effective_velocity_m_per_s = result.total_thrust_n / input->total_mass_flow_kg_per_s;
-    result.engine_specific_impulse_s = result.engine_effective_velocity_m_per_s / 9.80665;
+    result.engine_specific_impulse_s = result.engine_effective_velocity_m_per_s / RP_STANDARD_GRAVITY_M_S2;
     result.mass_residual_kg_per_s = input->total_mass_flow_kg_per_s - result.main_mass_flow_kg_per_s - result.external_mass_flow_kg_per_s;
     result.shaft_residual_w = input->shaft_efficiency * result.branch_mass_flow_kg_per_s * result.turbine.specific_work_j_per_kg - pump_power - input->auxiliary_power_w;
     inlet_enthalpy_rate = fuel.mass_flow_kg_per_s * fuel.inlet_h_j_per_kg + oxidizer.mass_flow_kg_per_s * oxidizer.inlet_h_j_per_kg;

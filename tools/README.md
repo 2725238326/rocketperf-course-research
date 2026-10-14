@@ -9,7 +9,7 @@
 | pipeline.py | 不可变构建、测试报告、运行生命周期和输出协议校验 |
 | quality.py | 统一质量入口及完整PASS/FAIL证据 |
 | check_data.py | 字段级来源、数据角色、单位/范围及假设检查；四级段映射的身份、版本/级段、模型与产物关联 |
-| thermo_data.py / cea_reference.py | 固定物性与CEA原始数据/参考完整性；Cantera仅参考生成路径 |
+| thermo_data.py / cea_reference.py | 固定物性与CEA原始数据/参考完整性；另生成仅供凝聚碳判据使用的C(gr)拟合头文件；Cantera仅参考生成路径 |
 | gas_checks.py / cycle_validation.py | 对保存状态和计账关系独立复算；不作生产平衡/循环求解 |
 | cycle_study.py | 校核C扫描的逐点状态、比较量和有限步响应，归档与复验研究版本 |
 | research_tp_reference.py | 从保存合成循环取实际主室/发生器TP条件，运行固定CEA与C并保存六状态参考 |
@@ -23,7 +23,7 @@
 | liquid_table.py | 从固定参考生成C表/原输出测试常量，检查纯C的实际CLI密度/焓与拒绝协议，归档并离线复验 |
 | liquid_combustion.py | 连续液体入口HP/固定面积喷管的C与显式焓CEA运行、守恒/身份和预期拒绝核验；不求生产物理 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
-| demo_data.py | 调用已测Release exe预计算答辩演示页网格（2213次C运行）并嵌入deliverables/demo/index.html；`--check`逐字段复核，页面不做物理计算 |
+| demo_data.py | 调用已测Release exe预计算答辩演示页五页数据（2501次C运行）、读取CEA对照归档，嵌入deliverables/demo/index.html；`--check`逐字段复核，页面不做物理计算 |
 | delivery.py | 固定提交生成纯C源码/Windows ZIP，五个C测试重建、隔离运行与逐文件/ZIP核验；GitHub上传由gh显式执行 |
 | kerosene_reference.py / kerosene_probe.c | 固定RP-1产物集合比较、C研究驱动和保存结果复核；不提供国产煤油CLI接口 |
 | kerosene_validation.py | 固定RP-1公共C API/CLI的33次运行、21张CEA卡和812项参考/关系复核 |

@@ -85,10 +85,14 @@ typedef struct {
     double enthalpy_residual_j_per_kg;     /* [J/kg] 焓残差（HP模式），TP模式时非零 */
     unsigned int equilibrium_iterations;   /* [-] TP迭代次数（最终温度的迭代，不含HP试探） */
     unsigned int hp_iterations;            /* [-] HP外层迭代次数（温度二分次数） */
+    double graphite_activity;              /* [-] 石墨活度 a_C = exp(πC − g°C(gr)/RT)；>1 时凝聚碳热力学有利 */
 } RpCombustionResult;
 
 /* Fixed order: H2 O2 H2O CO CO2 CH4 H O OH; elements: C H O.
  * Ideal gas only. Numerical bounds: T=1000..6000 K, p=100..1e9 Pa, O/F=0.1..20.
+ * Every returned TP/HP state also has graphite_activity <= 1: if solid carbon
+ * would be stable the nine-gas state is not an equilibrium and the call fails
+ * with RP_OUT_OF_DOMAIN instead of returning it.
  * These are guards, not a certified ideal-gas or gas-phase stability envelope.
  * enthalpy_residual is generally nonzero for TP; HP enforces its tolerance.
  * equilibrium_iterations counts the final TP continuation, not all HP calls.
@@ -99,6 +103,9 @@ RpCombustionOptions rp_combustion_default_options(void);
 RpStatus rp_cho_mixture_evaluate(const double mole_fractions[RP_CHO_SPECIES_COUNT],
                                  double temperature_k, double pressure_pa,
                                  RpGasMixture *output, RpError *error);
+/* Highest NASA9 lower fit bound among species present (fraction > 0): the
+ * lowest temperature a frozen-composition expansion may reach. */
+double rp_cho_minimum_temperature(const double mole_fractions[RP_CHO_SPECIES_COUNT]);
 RpStatus rp_ch4_o2_feed_enthalpy(const RpCh4O2Feed *feed, double *output, RpError *error);
 RpStatus rp_ch4_o2_equilibrium_tp(const RpCh4O2Feed *feed, double temperature_k,
                                   const RpCombustionOptions *options,

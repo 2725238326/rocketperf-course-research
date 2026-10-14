@@ -184,7 +184,9 @@ def validate(report, input_text):
         if not 1000 <= hp["gas"]["temperature_k"] <= 6000: raise ValueError("HP temperature out of domain")
         same("HP Q=0", hp["gas"]["h_j_per_kg"], h, .01, 0)
         diagnostics = hp["diagnostics"]
-        if set(diagnostics) != {"element_relative_residual", "equilibrium_residual", "enthalpy_residual_j_per_kg", "equilibrium_iterations", "hp_iterations"}: raise ValueError("Invalid HP diagnostics")
+        base_keys = {"element_relative_residual", "equilibrium_residual", "enthalpy_residual_j_per_kg", "equilibrium_iterations", "hp_iterations"}
+        if set(diagnostics) not in (base_keys, base_keys | {"graphite_activity"}): raise ValueError("Invalid HP diagnostics")
+        if "graphite_activity" in diagnostics and not 0 <= diagnostics["graphite_activity"] <= 1: raise ValueError("HP graphite activity outside gas-only domain")
         same("HP h residual identity", diagnostics["enthalpy_residual_j_per_kg"], hp["gas"]["h_j_per_kg"] - h, 1e-7, 0)
         if not 0 <= diagnostics["equilibrium_residual"] <= 1e-10 or any(abs(x) > 2e-10 for x in diagnostics["element_relative_residual"]): raise ValueError("HP chemical residual limit")
         if len(diagnostics["element_relative_residual"]) != 3 or any(type(diagnostics[k]) is not int or not 0 <= diagnostics[k] <= 10000 for k in ("hp_iterations", "equilibrium_iterations")): raise ValueError("HP diagnostics types")

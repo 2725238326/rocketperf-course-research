@@ -199,7 +199,10 @@ def compare_report(report, reference, mode, area=None, *, expected_inputs=None):
     of_ratio=expected_input['oxidizer_fuel_mass_ratio']
     bounded('element_ratio.O_C', oxygen / carbon, 2 * of_ratio * (13.976183 if rp1 else 16.04246) / 31.9988, 2e-8)
     diagnostics = report['diagnostics']
-    if (not isinstance(diagnostics,dict) or set(diagnostics)!={'element_relative_residual','equilibrium_residual','enthalpy_residual_j_per_kg','equilibrium_iterations','hp_iterations'}
+    # Archives before 2026-10-14 lack graphite_activity; newer reports must carry a value in [0, 1].
+    base_keys={'element_relative_residual','equilibrium_residual','enthalpy_residual_j_per_kg','equilibrium_iterations','hp_iterations'}
+    if (not isinstance(diagnostics,dict) or set(diagnostics) not in (base_keys, base_keys|{'graphite_activity'})
+        or ('graphite_activity' in diagnostics and (type(diagnostics['graphite_activity']) not in (int,float) or not 0<=diagnostics['graphite_activity']<=1))
         or not isinstance(diagnostics['element_relative_residual'],list)
         or any(type(diagnostics[k]) is not int or not 0<=diagnostics[k]<=100000 for k in ('equilibrium_iterations','hp_iterations'))):
         raise ValueError('Invalid combustion diagnostics shape/counts')
