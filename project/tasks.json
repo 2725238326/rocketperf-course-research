@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 313,
+  "revision": 317,
   "context": {
     "phase": "报告技术审稿与交付校验修正",
     "evidence_cutoff": "2026-10-06",
@@ -1414,6 +1414,32 @@
         "kind": "quality",
         "path": "project/evidence/QA-004_5556f3aab823.json",
         "sha256": "2e9dc37671762a87679dc08216e12277125e52e3a61fd68b2cc20ec92ff346b5"
+      }
+    },
+    {
+      "id": "QA-005",
+      "title": "答辩前代码与叙事审查及交互演示页",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/demo/index.html",
+        "tools/demo_data.py",
+        "docs/review.md",
+        "deliverables/presentation.md",
+        "taskshot/2026-10-14_058-defense-review-and-demo.md"
+      ],
+      "acceptance": [
+        "C核心逐模块审读并实测边界输入，问题分级写入review；叙事中与C输出或物理关系不符的表述更正并逐项列出",
+        "演示页全部数值由rocketperf.exe预计算生成，页面不含物理公式现算；拒算点按C返回状态显示；离线单文件可打开",
+        "讲稿按15分钟重排并与report第7节数字一致；统一质量六组通过"
+      ],
+      "owner": "root",
+      "note": "验收完成。遗留：甲烷O/F方法域是否收窄待用户定；DOC-001验收条款仍写10分钟，待解除阻塞时修订；PPT/贡献/计时演练由小组完成",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-005_7224399996ab.json",
+        "sha256": "61fd60265cc771993cd9ead69710c2e9a19f608a74027475459f6704d3589bc8"
       }
     }
   ],
@@ -8229,6 +8255,54 @@
       "note": "技术审稿、现行流程图、包内输入与结果校验及旧包兼容验收完成；原件与生产C模型未改。报告/PPT仍须最终整理、真实贡献确认与实际演练，工程通过不代替实机或独立科学验证。",
       "previous_hash": "3622bd84940ca111ddc60781ad649fc48f8d42dd5bf188811d96cdbb41f7a593",
       "hash": "3e5852c2497ccbdfd018727e222c134fe6d740f322eb7a376bd101451cc15a39"
+    },
+    {
+      "seq": 331,
+      "at": "2026-10-14T14:16:56+00:00",
+      "task": "QA-005",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "3e5852c2497ccbdfd018727e222c134fe6d740f322eb7a376bd101451cc15a39",
+      "hash": "7b537587fafa37a961fa67bcf50efffaf5a4f5b007e69f6db938b0adfb2b3dfc"
+    },
+    {
+      "seq": 332,
+      "at": "2026-10-14T14:16:57+00:00",
+      "task": "QA-005",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户确认15分钟答辩、PPT自制；本轮审代码、核叙事、做演示页",
+      "previous_hash": "7b537587fafa37a961fa67bcf50efffaf5a4f5b007e69f6db938b0adfb2b3dfc",
+      "hash": "75b6508f8fed6cf6551c711ef4669caec478a3d71e78f473869a746d6625af1b"
+    },
+    {
+      "seq": 333,
+      "at": "2026-10-14T14:58:03+00:00",
+      "task": "QA-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "C核心审读+CLI边界实测，问题分级入review；c*/推力叙事错误已更正（报告7.2/7.5/判断1、成对研究、讲稿）；演示页2213点由已测exe生成、--check复现、页面只查表；讲稿15分钟11页；质量六组PASS",
+      "previous_hash": "75b6508f8fed6cf6551c711ef4669caec478a3d71e78f473869a746d6625af1b",
+      "hash": "e84ca47bb6a7a992eca2e8114bf68f6ae0020b33148947ad19a64285485c4d46"
+    },
+    {
+      "seq": 334,
+      "at": "2026-10-14T14:58:05+00:00",
+      "task": "QA-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成。遗留：甲烷O/F方法域是否收窄待用户定；DOC-001验收条款仍写10分钟，待解除阻塞时修订；PPT/贡献/计时演练由小组完成",
+      "previous_hash": "e84ca47bb6a7a992eca2e8114bf68f6ae0020b33148947ad19a64285485c4d46",
+      "hash": "308f9a47e430ba6c4ab964cc58c2c4f247fcac569e33d75fa218884bee989291"
     }
   ]
 }

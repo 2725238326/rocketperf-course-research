@@ -22,7 +22,7 @@
  *   - 残差：log(Ae_calculated / Ae_target)
  *
  * 适用范围：
- *   ✓ 高温燃气（>1000 K），真实热容效应显著
+ *   ✓ 燃烧室高温燃气；膨胀温度下限取各物种NASA9拟合区下限（minimum_frozen_temperature）
  *   ✓ 燃烧室平衡态已知（9物种C-H-O混合物）
  *   ✓ 喷管停留时间短（<10 ms），化学冻结假设成立
  *   ✗ 不适用：碳烟析出、H₂O高温再解离、液滴携带
@@ -34,9 +34,9 @@
  *   - exit_area_ratio: 面积比 Ae/At，范围 [1.0, 1e4]
  *   - ambient_pressure_pa: 背压 [Pa]，需 ≥ 0
  *
- * 验证：
- *   - 能量守恒：|h + u²/2 - h0| / h0 < 1e-6
- *   - 熵守恒：|s - s0| < 1e-3 J/(kg·K)
+ * 验证（rp_nozzle_solve_frozen内拒绝超限结果）：
+ *   - 能量残差：|h + u²/2 - h0| ≤ 1e-5 J/kg（喉部与出口）
+ *   - 熵残差：|s - s0| ≤ 1e-7 J/(kg·K)；连续性与声速相对残差 ≤ 1e-8
  *   - 与NASA CEA冻结流模式对照（Frozen expansion）
  */
 

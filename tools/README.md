@@ -23,6 +23,7 @@
 | liquid_table.py | 从固定参考生成C表/原输出测试常量，检查纯C的实际CLI密度/焓与拒绝协议，归档并离线复验 |
 | liquid_combustion.py | 连续液体入口HP/固定面积喷管的C与显式焓CEA运行、守恒/身份和预期拒绝核验；不求生产物理 |
 | handoff.py | 固定提交、离线源码bundle、已测程序及具名软件接收 |
+| demo_data.py | 调用已测Release exe预计算答辩演示页网格（2213次C运行）并嵌入deliverables/demo/index.html；`--check`逐字段复核，页面不做物理计算 |
 | delivery.py | 固定提交生成纯C源码/Windows ZIP，五个C测试重建、隔离运行与逐文件/ZIP核验；GitHub上传由gh显式执行 |
 | kerosene_reference.py / kerosene_probe.c | 固定RP-1产物集合比较、C研究驱动和保存结果复核；不提供国产煤油CLI接口 |
 | kerosene_validation.py | 固定RP-1公共C API/CLI的33次运行、21张CEA卡和812项参考/关系复核 |

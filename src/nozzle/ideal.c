@@ -56,7 +56,7 @@ static int valid_base_input(const RpNozzleInput *input)
  * 输入约束：
  *   - gamma: 比热比，范围 (1.0, 2.0]，燃气典型值 1.15-1.40
  *   - stagnation_pressure_pa: 滞止压力 [Pa]，需 > 0
- *   - stagnation_temperature_k: 滞止温度 [K]，NASA9 范围 300-6000 K
+ *   - stagnation_temperature_k: 滞止温度 [K]，需 > 0（定比热模型，不调用NASA9）
  *   - area_ratio: 面积比 Ae/At，范围 [1.0, 1e4]，典型 2-100
  *   - throat_area_m2: 喉部面积 [m²]，需 > 0
  *   - ambient_pressure_pa: 背压 [Pa]，需 ≥ 0；当 pa > pe 时拒绝（超膨胀）
@@ -68,7 +68,6 @@ static int valid_base_input(const RpNozzleInput *input)
  *   RP_NO_CONVERGENCE: 面积-马赫数关系求解不收敛（罕见，通常因输入异常）
  *
  * 验证：
- *   - 与 NASA CEA 理想冻结模式对照（Isentropic/Frozen 选项）
  *   - 解析解检查：Ma=2 时的面积比 A/A* ≈ 1.6875（γ=1.4）
  *   - 守恒检查：质量流量 ṁ = ρ*A*u* = Pc·At/c*
  *
