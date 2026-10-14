@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-IGNORED_DIRS = {".git", "build", "__pycache__", ".venv", "node_modules", ".locks"}
+IGNORED_DIRS = {".git", "build", "__pycache__", ".venv", "node_modules", ".locks", ".claude"}
 DYNAMIC_PATHS = {"project/tasks.json", "worknow.md", "docs/tasks.md"}
 QUALITY_CHECKS = {"project", "governance", "debug", "release", "runner", "handoff"}
 

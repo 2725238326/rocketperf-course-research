@@ -1058,8 +1058,8 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
     if (ok(a) && ok(b)) {
       P.take.innerHTML = `同 P<sub>c</sub>、A<sub>t</sub> 时 <b>F = C<sub>F</sub>·P<sub>c</sub>·A<sub>t</sub></b>，c* 不进入推力：C<sub>F</sub> ${fx(a.cf, 4)} 对 ${fx(b.cf, 4)}，推力只差 <b>${sgn(pct(a.f, b.f), 2)}%</b>。` +
         `甲烷 c* 高 ${sgn(a.cstar - b.cstar, 1)} m/s，由 <b>ṁ = P<sub>c</sub>A<sub>t</sub>/c*</b> 少用 <b>${fx(Math.abs(pct(a.mdot, b.mdot)), 2)}%</b> 推进剂，这就是比冲 ${sgn(a.isp - b.isp, 2)} s 的来源。` +
-        (P.ch4.get() !== P.rp1.get() ? “” : “ 推力差变号点 “ + fx(cross, 1) + “。”);
-    } else P.take.innerHTML = “过膨胀超出模型域，程序拒算。降低面积比或切换到更低背压。”;
+        (P.ch4.get() === P.rp1.get() ? ` 同 O/F 下推力差随 O/F 变号。` : "");
+    } else P.take.innerHTML = `过膨胀超出模型域，程序拒算。降低面积比或切换到更低背压。`;
     P.f1.redraw(); P.f2.redraw();
   }
   P.ch4.on(() => { if (P.lock.checked) { if (AX.rp1_of.includes(P.ch4.get())) P.rp1.set(P.ch4.get(), true); else P.lock.checked = false; } render(); });

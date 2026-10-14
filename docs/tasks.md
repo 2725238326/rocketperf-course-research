@@ -189,9 +189,9 @@
 
 产物：`deliverables/report.md`、`deliverables/presentation.pptx`、`deliverables/contributions.md`
 
-- 覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按10分钟演练；高级模型未通过时先由用户确认调整范围
+- 覆盖REQ-08各项，引用可定位；图表指向已存输入和结果；实际小组分工由组员确认；展示内容按15分钟演练；高级模型未通过时先由用户确认调整范围
 
-备注：QA-002 complete; report and PPT remain blocked pending user decision and confirmed group contributions.
+备注：QA-002 complete; presentation.md (15-min script, 825s budget) final draft done; blocked pending PPT production and confirmed group contributions.
 
 ### REL-001 · 发布和提交检查
 
