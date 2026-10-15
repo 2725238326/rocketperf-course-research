@@ -21,7 +21,7 @@
  "machines": {
   "checks": {
    "type": "counter",
-   "start": 13772,
+   "start": 13722,
    "rate": 0,
    "format": "comma"
   },
@@ -71,11 +71,11 @@
     "c": "gr",
     "msgs": [
      [
-      "HP converged T=3602.8K",
+      "HP converged T=3602.8K (O/F 3.4)",
       ""
      ],
      [
-      "9-species equilibrium ok",
+      "9-species equilibrium, a_C<1",
       ""
      ]
     ]
@@ -96,11 +96,11 @@
     "c": "pu",
     "msgs": [
      [
-      "throat choked mdot=55.2kg/s",
+      "throat choked mdot=55.22kg/s",
       ""
      ],
      [
-      "area ratio 10 ok",
+      "eps=10 vacuum Isp=320.8s",
       ""
      ]
     ]
@@ -121,11 +121,11 @@
     "c": "ye",
     "msgs": [
      [
-      "turbine p_out=17.9MPa",
+      "ORSC turbine p_out=17.95MPa",
       ""
      ],
      [
-      "shaft balance closed",
+      "mass/shaft/enthalpy closed",
       ""
      ]
     ]
@@ -150,7 +150,7 @@
       ""
      ],
      [
-      "CEA delta 0.0044K",
+      "CEA |dT|<=0.0044K",
       ""
      ]
     ]
@@ -411,7 +411,7 @@
    "y": 1458,
    "runs": [
     {
-     "t": "checks ",
+     "t": "C checks ",
      "c": "dim"
     },
     {
@@ -772,7 +772,7 @@
      "c": "mute"
     },
     {
-     "t": "13772项检查 · CEA对照",
+     "t": "13722项C检查 · CEA对照",
      "c": "mute"
     },
     {
@@ -917,7 +917,7 @@
   "text": "~/rocketperf — C17 热化学计算核心"
  },
  "credit": {
-  "text": "循环为条件性研究原型 · 数据来源: rocketperf 归档 results/validation · 13772项检查与CEA对照",
+  "text": "循环为条件性研究原型 · 数据来源: rocketperf 归档 results/validation · 13722项C检查另50组CLI与CEA对照",
   "y": 1490
  }
 }

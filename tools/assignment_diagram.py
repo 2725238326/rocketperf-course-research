@@ -1,7 +1,8 @@
-"""Coursework requirements → method → results, then verification and deliverables (16:9 SVG)."""
+"""Coursework requirements → method → results, then verification and deliverables (16:9 dark SVG)."""
 
-from diagram_kit import (BODY, INK, MUTED, NAVY, OCHRE, TEAL, TONE, ZONE, arrow, card, document,
-                         header, link, rect, text, zone)
+from diagram_style import (BASE, COMPUTE, CYCLE, FG, INPUT, NOTE, OUTPUT, VERIFY, document, edge, line, rect,
+                          rich, text)
+from diagram_kit import link
 
 WIDTH, HEIGHT = 1920, 1080
 COL_X, COL_W = [80, 680, 1280], 560
@@ -31,41 +32,46 @@ DELIVER = [("程序源代码", "C17 核心与测试"), ("发布版", "Windows �
 
 
 def column(x, number, title, ids, target, method, results, gap):
-    out = zone(x, 146, COL_W, 584, "navy")
-    out += text(x + 24, 196, number, 34, NAVY, 700)
-    out += link(target, text(x + 80, 194, title, 24, INK, 700, limit=COL_W - 104))
-    out += text(x + 80, 222, ids, 14, MUTED)
-    out += card(x + 20, 246, COL_W - 40, 132, "slate", "方法", method, 17, 30)
-    out += card(x + 20, 394, COL_W - 40, 236, "teal", "结果", results, 17, 36)
-    out += rect(x + 20, 646, COL_W - 40, 64, ZONE["ochre"], TONE["ochre"], 6, width=1)
-    out += text(x + 40, 672, "未覆盖", 13, OCHRE, 700)
-    out += text(x + 40, 698, gap, 16, BODY, limit=COL_W - 80)
+    out = rect(x, 112, COL_W, 618, "#333", "#202020", 10)
+    out += text(x + 24, 160, number, 30, INPUT, 700, mono=True)
+    out += link(target, text(x + 80, 158, title, 24, FG, 700, limit=COL_W - 104))
+    out += text(x + 80, 184, ids, 14, NOTE, mono=True)
+    out += rect(x + 20, 206, COL_W - 40, 140, INPUT, "#2d2d2d", 8, 1.5)
+    out += text(x + 40, 236, "方法", 16, INPUT, 700) + line(x + 40, 250, x + COL_W - 40, 250, "#3c3c3c")
+    for i, row in enumerate(method):
+        out += rich(x + 40, 282 + i * 30, row, 17, FG, limit=COL_W - 80)
+    out += rect(x + 20, 362, COL_W - 40, 232, COMPUTE, "#2d2d2d", 8, 1.5)
+    out += text(x + 40, 392, "结果", 16, COMPUTE, 700) + line(x + 40, 406, x + COL_W - 40, 406, "#3c3c3c")
+    for i, row in enumerate(results):
+        out += rich(x + 40, 442 + i * 38, row, 17, FG, COMPUTE, limit=COL_W - 80)
+    out += rect(x + 20, 610, COL_W - 40, 100, CYCLE, "#2d2d2d", 8, 1.5, "5 4")
+    out += text(x + 40, 644, "未覆盖", 15, CYCLE, 700)
+    out += text(x + 40, 680, gap, 16, FG, limit=COL_W - 80)
     return out
 
 
 def assignment():
-    body = header("作业要求与完成情况", "朱雀三号 · 长征十号乙：三项研究要求的方法与计算结果，经统一验证后形成四项交付", WIDTH)
+    body = (text(80, 58, "作业要求与完成情况", 32, FG, 700)
+            + text(80, 90, "朱雀三号 · 长征十号乙：三项研究要求的方法与计算结果，经统一验证后形成四项交付", 18, NOTE)
+            + line(80, 100, 1840, 100, "#333"))
     for x, spec in zip(COL_X, COLUMNS):
         body += column(x, *spec)
-        body += arrow([(x + COL_W / 2, 730), (x + COL_W / 2, 770)])
-
-    body += zone(80, 774, 1760, 110, "teal")
-    body += text(108, 838, "验证", 22, TEAL, 700)
+        body += edge([(x + COL_W / 2, 730), (x + COL_W / 2, 768)])
+    body += rect(80, 772, 1760, 112, VERIFY, "#241f27", 10, 1.5)
+    body += text(108, 836, "验证", 22, VERIFY, 700)
     for i, (t, d) in enumerate(CHECKS):
-        cx = 260 + i * 400
-        body += text(cx, 818, t, 18, INK, 700)
-        body += text(cx, 852, d, 16, BODY, limit=370)
-    body += arrow([(960, 884), (960, 916)])
-
-    body += zone(80, 920, 1760, 110, "slate")
-    body += text(108, 984, "交付", 22, NAVY, 700)
+        cx = 240 + i * 404
+        body += text(cx, 816, t, 18, FG, 700) + rich(cx, 850, d, 16, NOTE, VERIFY, limit=370)
+    body += edge([(960, 884), (960, 918)])
+    body += rect(80, 922, 1760, 112, OUTPUT, "#1f2526", 10, 1.5)
+    body += text(108, 986, "交付", 22, OUTPUT, 700)
     for i, (t, d) in enumerate(DELIVER):
-        cx = 260 + i * 400
-        body += card(cx, 938, 370, 74, "navy", t, [])
-        body += text(cx + 18, 1002, d, 15, BODY, limit=330)
+        cx = 220 + i * 404
+        body += rect(cx, 940, 384, 76, "#444", "#2d2d2d", 8)
+        body += text(cx + 18, 970, t, 18, FG, 700) + text(cx + 18, 1000, d, 15, NOTE, limit=330)
     body += link("../../作业要求/大作业1_要求存档.md",
                  text(1840, 1062, "数值为给定假设下的程序结果，输入见报告第 3、7 节　·　要求原文：作业要求/大作业1_要求存档.md　·　交付 REQ-07～11",
-                      13, MUTED, anchor="end"))
+                      13, NOTE, anchor="end"))
     return document("assignment", WIDTH, HEIGHT, "作业要求与完成情况",
                     "三项作业要求（REQ-01至REQ-06）各自的方法、结果与未覆盖内容；经解析解、CEA同源对照、守恒残差与复跑验证；"
                     "四项交付（REQ-07至REQ-11）：程序源代码、发布版、展示 PPT、研究报告。",
