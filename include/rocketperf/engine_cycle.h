@@ -23,25 +23,25 @@ typedef struct {
  */
 typedef struct {
     bool staged_combustion;              /* [-] false=燃气发生器循环(GG), true=富氧补燃循环(ORSC) */
-    double total_mass_flow_kg_per_s;     /* [kg/s] 总推进剂流量，范围 0.1-1000 kg/s */
-    double overall_oxidizer_fuel_ratio;  /* [-] 总体氧燃比(O/F)，范围 0.1-20 */
+    double total_mass_flow_kg_per_s;     /* [kg/s] 总推进剂流量，有限且>0 */
+    double overall_oxidizer_fuel_ratio;  /* [-] 总体氧燃比(O/F)，有限且>0；另受HP/分流约束 */
     RpCyclePropellant fuel;              /* 燃料属性（元素组成+泵入口状态） */
     RpCyclePropellant oxidizer;          /* 氧化剂属性（元素组成+泵入口状态） */
-    double chamber_pressure_pa;          /* [Pa] 主燃烧室压力，范围 1e5-1e8 Pa (0.1-100 MPa) */
+    double chamber_pressure_pa;          /* [Pa] 数值接收100..1e9；物理适用性另行核验 */
     double main_area_ratio;              /* [-] 主喷管面积比 Ae/At，范围 1-1e4 */
-    double preburner_pressure_pa;        /* [Pa] 预燃室压力，范围 1e5-1e8 Pa */
+    double preburner_pressure_pa;        /* [Pa] 数值接收100..1e9，另受供给/回流约束 */
     double preburner_oxidizer_fuel_ratio;/* [-] 预燃室氧燃比，GG典型0.5-2，ORSC需>overall_O/F */
     double turbine_outlet_pressure_pa;   /* [Pa] 涡轮出口压力（GG必须>0，ORSC必须=0自动求解） */
-    double turbine_efficiency;           /* [-] 涡轮等熵效率，范围 0.6-0.85，典型0.7 */
-    double shaft_efficiency;             /* [-] 轴传动效率，范围 0.9-1.0，典型0.98 */
+    double turbine_efficiency;           /* [-] 涡轮等熵效率，有限且0<eta<=1 */
+    double shaft_efficiency;             /* [-] 轴传动效率，有限且0<eta<=1 */
     double auxiliary_power_w;            /* [W] 辅助功率消耗（发电机等），≥0 */
-    double maximum_branch_fraction;      /* [-] 最大分流比，范围 0.01-0.3，典型0.1 */
+    double maximum_branch_fraction;      /* [-] 最大分流比，有限且0<f<1 */
     double pump_to_chamber_drop_pa;      /* [Pa] 泵出口到主燃烧室管路损失，≥0 */
     double pump_to_preburner_drop_pa;    /* [Pa] 泵出口到预燃室管路损失，≥0 */
-    double return_pressure_drop_pa;      /* [Pa] 涡轮出口到主燃烧室管路损失（ORSC必须>0，GG必须=0） */
+    double return_pressure_drop_pa;      /* [Pa] 回流压降：ORSC有限且>=0，GG必须=0 */
     double branch_area_ratio;            /* [-] 分支喷管面积比（GG燃气排气，ORSC必须=1） */
     double branch_axial_projection;      /* [-] 分支喷管轴向投影比（ORSC必须=0） */
-    double ambient_pressure_pa;          /* [Pa] 环境背压，范围 0-1e5 Pa，海平面101325 Pa */
+    double ambient_pressure_pa;          /* [Pa] 有限且>=0；各喷管另检查背压适用域 */
 } RpEngineCycleInput;
 
 /**

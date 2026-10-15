@@ -1,0 +1,5 @@
+﻿epsilon,ambient_pa,status,isp_s,exit_pressure_pa
+10,0,ok,324.425,114238.0
+10,101325,ok,305.384,114238.0
+40,0,ok,347.74,17239.8
+40,101325,out_of_domain,,

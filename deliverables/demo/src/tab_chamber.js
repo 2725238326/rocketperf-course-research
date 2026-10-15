@@ -80,7 +80,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
       { name: "结果", val: ok(p) ? `T<sub>c</sub> ${fx(p.tc, 0)} K` : "out_of_domain", state: ok(p) ? "ok" : "bad" }]);
     P.ev.set(ok(p) ? [["HP 外层 / 末次 Newton", `${d[0]} / ${d[1]}`], ["元素守恒最大相对残差", sci(d[2])], ["焓残差", `${sci(d[3])} J/kg`], ["喷管连续性残差", sci(d[4])]]
       : [["状态", p.status], ["石墨活度", fx(p.ac, 3)], ["说明", "求解收敛后被判据拒绝"]], command("ch4", { of: ofKey(of), ar: 10, pa: 0 }));
-    P.take.innerHTML = `c* 在 O/F ≈ <b>${ofKey(peakC[0])}</b> 达峰，燃温到 <b>${ofKey(peakT[0])}</b> 才达峰：富燃侧产物摩尔质量更小，c* ∝ √(T/M) 先到顶。` +
+    P.take.innerHTML = `当前采样中 c* 在 O/F ≈ <b>${ofKey(peakC[0])}</b> 达峰，燃温到 <b>${ofKey(peakT[0])}</b> 才达峰。c* 同时受 T、平均摩尔质量 M 与 γ 影响，c* ∝ √(T/M) 仅用于近似固定 γ 时解释趋势。` +
       `O/F 降到 <b>${ofKey(edge)}</b> 以下 a<sub>C</sub> 越过 1，C 拒算。朱雀三号一级开式发生器（O/F 1.0、11 MPa）a<sub>C</sub> = <b>${fx(gen.preburner.ac, 3)}</b>，在边界内但余量不大。`;
     P.comp.redraw(); P.peak.redraw(); P.ac.redraw();
   }

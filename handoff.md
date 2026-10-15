@@ -2,7 +2,7 @@
 
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
-2026-10-15制作前审核见[统筹审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)。用户当前仅要求审核，PPT由小组后续开展制作。四项P1内容问题待定稿时销项；软件核验通过不代表整改已完成。当前工作区缺旧总览引用的阶段包，最终定稿后再生成并核验本轮交付包。
+2026-10-15用户明确当前需要讲稿、讲解思路、模板具体选页和逐页图文替换指导，由小组组合PPT后再共同优化，不要求代做PPT。展示15分钟、提问另计5分钟，两人分段主讲，姓名与贡献稍后本人填写。制作前审核见[审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)，本轮整改与指导见[063记录](taskshot/2026-10-15_063-two-speaker-presentation.md)。正文建议12页，A讲1–6、B讲7–12，预算13:45含100秒演示，未人工实测。旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验。
 
 ## 研究产物
 
@@ -55,7 +55,7 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 - CEA/Cantera等同源数据对照验证软件方法；机械PASS不构成独立实验或具名科学审查。
 - 日常构建与交付使用Windows。历史WSL sanitizer结果只覆盖当时版本；远端CI配置不等于执行记录。
 
-公开字段缺失时继续独立方法研究，并记录其影响。具体任务顺序以worknow为准。[报告](deliverables/report.md)和[展示内容](deliverables/presentation.md)已有草稿；最终定稿、PPT排版、具名贡献和演练仍待完成。
+公开字段缺失时继续独立方法研究，并记录其影响。具体任务顺序以worknow为准。[报告](deliverables/report.md)、[逐页制作指导](deliverables/ppt-structure.md)与[讲解思路](deliverables/presentation.md)已衔接。小组组合PPT后再优化；组号、姓名、真实贡献、人工演练与最终四件套验收仍待完成。
 
 组员参数审阅见[RES-009](调研/专题/RES-009_组员参数审阅.md)：产品参数与试验产品保留各自身份，TQ-15B能力误归属和长十乙后缀推断不能进入输入。最终Windows计算程序直接由C运行，辅助工具单列于开发/参考附件。
 

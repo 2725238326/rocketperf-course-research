@@ -32,10 +32,10 @@ RP1_ARGS = ("cea-v3.3.4-rp1-o2l-assigned-v1", "liquid", "RP-1", "O2(L)", "100000
 CYCLES = ("zq3_y1_stage1", "cz10b_first_stage1")
 SPECIES = ("H2", "O2", "H2O", "CO", "CO2", "CH4", "H", "O", "OH")
 GRAPHITE = re.compile(r"graphite activity ([0-9.eE+-]+)")
-COMMANDS = {"ch4": "rocketperf combustion frozen-liquid-state " + " ".join(CH4_ARGS) + " 1e7 {of} {ar} {pa} 0.01",
-            "rp1": "rocketperf combustion frozen-rp1 " + " ".join(RP1_ARGS) + " {of} 298.15 90.170 {ar} {pa} 0.01",
-            "regime": "rocketperf combustion regime-liquid-state " + " ".join(CH4_ARGS) + " 1e7 {of} {ar} {pa} 0.01 --text",
-            "cycle": "rocketperf cycle adiabatic cases/vehicles/{case}.ini --text"}
+COMMANDS = {"ch4": "./build/release/rocketperf.exe combustion frozen-liquid-state " + " ".join(CH4_ARGS) + " 1e7 {of} {ar} {pa} 0.01",
+            "rp1": "./build/release/rocketperf.exe combustion frozen-rp1 " + " ".join(RP1_ARGS) + " {of} 298.15 90.170 {ar} {pa} 0.01",
+            "regime": "./build/release/rocketperf.exe combustion regime-liquid-state " + " ".join(CH4_ARGS) + " 1e7 {of} {ar} {pa} 0.01 --text",
+            "cycle": "./build/release/rocketperf.exe cycle adiabatic cases/vehicles/{case}.ini --text"}
 
 
 def number(value):

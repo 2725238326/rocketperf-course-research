@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "PASS",
+  "started_at": "2026-10-15T10:11:11+00:00",
+  "input_fingerprint": "16c5e507f457a54dead958c9a1e51633a48342acc228a096d722e61434ab85dc",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/debug.log"
+    },
+    {
+      "name": "release",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Release"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/release.log"
+    },
+    {
+      "name": "runner",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/runner.log"
+    },
+    {
+      "name": "handoff",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_handoff.py",
+        "-v"
+      ],
+      "log": "build/presentation-guidance-20261015/quality/handoff.log"
+    }
+  ],
+  "finished_at": "2026-10-15T10:17:34+00:00"
+}

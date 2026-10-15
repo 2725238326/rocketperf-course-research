@@ -1,18 +1,19 @@
 {
   "schema_version": 1,
-  "revision": 330,
+  "revision": 337,
   "context": {
-    "phase": "PPT制作前统筹审核与内容整改准备",
+    "phase": "双人讲述与PPT逐页制作指导",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-001",
       "REL-001"
     ],
     "facts": [
-      "制作前审核发现四项P1：算例混用、残差单位、循环输入输出口径和理论答问；清单见docs/preproduction-audit-20261015.md，整改未代做。",
-      "当前C程序和研究归档可复跑；旧总览引用的阶段包在本地缺失，定稿后须重新生成并核验本轮包。",
-      "PPT尚待小组开展制作；真实贡献与实测限时演练待本人完成确认，不能作为制作前已完成事项。",
-      "五个车辆入口不等于五个独立工况；研究假设、RP-1方法身份及型号事实截止保持原边界。"
+      "当前交付为讲稿、讲解思路、模板具体选页、逐页图文替换指导及C结果图表数据，不代做最终PPT。",
+      "建议小组先组合12页正文，A讲P1至P6，B讲P7至P12，仅交接一次；组合后共同优化页面。",
+      "展示15分钟，提问另计5分钟；讲述预算13分45秒含100秒演示，人工计时与实际贡献待本人完成。",
+      "四项P1已在报告与讲述中整改，算例身份、残差单位、循环输入输出与理论条件分别说明。",
+      "旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验；在线证据截止保持2026-10-06。"
     ]
   },
   "tasks": [
@@ -1521,6 +1522,36 @@
         "kind": "quality",
         "path": "project/evidence/QA-009_a995f74cf37f.json",
         "sha256": "d3265dcf4933d5200f3ac1ce1f6535fe3c62e355bd7a2a36f5858341d8d5a450"
+      }
+    },
+    {
+      "id": "DOC-003",
+      "title": "双人讲述方案与PPT逐页制作指导",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "QA-009"
+      ],
+      "required_artifacts": [
+        "deliverables/ppt-structure.md",
+        "deliverables/presentation.md",
+        "deliverables/defense-script.md",
+        "deliverables/demo-choreography.md",
+        "deliverables/timing-chart.md",
+        "taskshot/2026-10-15_063-two-speaker-presentation.md"
+      ],
+      "acceptance": [
+        "围绕课程要求、已完成成果与可证实优势组织内容，每页核心结论、证据和边界明确，修正审核发现的算例混用及理论口径。",
+        "选定工作区原始PPT模板的具体页，逐页说明复制页码、保留/删除/替换区域、可直接使用的文字、现有图片或图表数据来源及制作步骤；不生成最终PPT。",
+        "双人分段讲稿含开场、指图动作、转场、一次交接、演示分工及问答，按展示15分钟和另计5分钟提问规划；身份与人工演练待本人填写。",
+        "更新交接、任务工作面和taskshot，完成内容/链接/数字核对及新鲜统一质量，审查本地检查点；小组组合页面后再进入视觉优化，不把当前指导当最终课程交付。"
+      ],
+      "owner": "root",
+      "note": "讲述与制作指导的修订契约已满足：12页正文逐项选模板并给替换步骤，双人讲稿/转场/问答、演示分工和待填计时表齐全，图表数据核对完成。当前负责人语义核对与机械PASS不代表独立科学审查；PPT由小组组合后再优化，DOC-001与REL-001保持原待办。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-003_9bae6a35128e.json",
+        "sha256": "2e7d2b9d3f107fdc70f7d677767625045a6c48211f50083ec976018b18680bfd"
       }
     }
   ],
@@ -8570,6 +8601,207 @@
       "note": "审核产物和三项验收契约已逐项自评：质量与代表性复现通过，四项P1仍明确待内容定稿时整改。审核完成不代表科学独立审查或课程最终交付完成；DOC-001和REL-001真实状态保持。",
       "previous_hash": "41f65e373da35c43431aac5b785021810fa1277c1d4cf92ad3b92639c56b7c16",
       "hash": "b87e468e2df95dbd6acdeb2f270328e6d82ccb6b58442740265a3de984c3717f"
+    },
+    {
+      "seq": 348,
+      "at": "2026-10-15T09:21:32+00:00",
+      "task": "DOC-003",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "b87e468e2df95dbd6acdeb2f270328e6d82ccb6b58442740265a3de984c3717f",
+      "hash": "20ff9fd315474b632f3ed578e22beb9cc17e836ea85f8948901da11c867e68dc"
+    },
+    {
+      "seq": 349,
+      "at": "2026-10-15T09:21:34+00:00",
+      "task": "DOC-003",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户现已授权统筹制作PPT及讲述，确认两人分段主讲；姓名/贡献稍后本人填写。实施制作子任务，DOC-001整体验收仍需真实贡献与实测演练。",
+      "previous_hash": "20ff9fd315474b632f3ed578e22beb9cc17e836ea85f8948901da11c867e68dc",
+      "hash": "ea2acb4dc2fd72c2adaf467c19358348fe35851c971378276c7bcc23ff22426f"
+    },
+    {
+      "seq": 350,
+      "at": "2026-10-15T09:55:26+00:00",
+      "task": "DOC-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "双人PPT及讲述材料已制作并逐页核对，进入新鲜质量验收；用户更新展示15分钟、提问另计5分钟。",
+      "previous_hash": "ea2acb4dc2fd72c2adaf467c19358348fe35851c971378276c7bcc23ff22426f",
+      "details": {
+        "context_before": {
+          "phase": "PPT制作前统筹审核与内容整改准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "制作前审核发现四项P1：算例混用、残差单位、循环输入输出口径和理论答问；清单见docs/preproduction-audit-20261015.md，整改未代做。",
+            "当前C程序和研究归档可复跑；旧总览引用的阶段包在本地缺失，定稿后须重新生成并核验本轮包。",
+            "PPT尚待小组开展制作；真实贡献与实测限时演练待本人完成确认，不能作为制作前已完成事项。",
+            "五个车辆入口不等于五个独立工况；研究假设、RP-1方法身份及型号事实截止保持原边界。"
+          ]
+        },
+        "context_after": {
+          "phase": "双人PPT制作与讲述配套验收",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "已制作12页正文和6页备答，A讲P1至P6，B讲P7至P12，仅交接一次；组号、姓名与实际贡献待本人填写。",
+            "用户2026-10-15确认展示15分钟，提问另计5分钟；正文预算13分45秒含100秒演示，人工实测尚未完成。",
+            "制作前审核四项P1已在本轮报告、PPT、备注和演示口径中整改，历史审核保留；软件核验不等于实机验证。",
+            "旧阶段包本地缺失，最终定稿后须由REL-001重新冻结并核验本轮四件套。",
+            "当前计算仍是理想气体与研究情景，未获得同批真实性能输入；在线事实证据截止保持2026-10-06。"
+          ]
+        }
+      },
+      "hash": "b7fe41dee702e42dc53f0e071c348b88e6d6adb4ef9665a1e2524cb2fc9e51f3"
+    },
+    {
+      "seq": 351,
+      "at": "2026-10-15T10:05:28+00:00",
+      "task": "DOC-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户纠正范围：不代做PPT；交付贴合成果优势的讲稿、讲解思路、模板具体选页及逐页替换指导，由小组组合后再优化。误生成文件已保留为过程记录。",
+      "previous_hash": "b7fe41dee702e42dc53f0e071c348b88e6d6adb4ef9665a1e2524cb2fc9e51f3",
+      "details": {
+        "contract_before": {
+          "id": "DOC-003",
+          "title": "双人答辩PPT与讲述配套制作",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "QA-009"
+          ],
+          "required_artifacts": [
+            "deliverables/presentation.pptx",
+            "deliverables/presentation.md",
+            "deliverables/defense-script.md",
+            "deliverables/demo-choreography.md",
+            "deliverables/timing-chart.md",
+            "taskshot/2026-10-15_063-two-speaker-presentation.md"
+          ],
+          "acceptance": [
+            "修正制作前审核四项P1及相关文档口径；研究假设、型号事实与参考验证范围准确，每页数字回指输入和保存结果。",
+            "完成12页正文及6页附录的可编辑PPT，采用工作区模板和16比9白底学术版式，逐页渲染检查；双人只交接一次，姓名与真实贡献由用户后填。",
+            "逐页提供讲者备注、双人分段台词、转场、演示动作与失败备选，计划控制15分钟并留缓冲；演练表明确未实测，不代验收真实贡献或最终课程交付。",
+            "更新交接和taskshot，运行新鲜统一质量及PPT结构、版式和数字核验，审查暂存区并本地提交；不外部推送。"
+          ],
+          "owner": "root",
+          "note": "用户现已授权统筹制作PPT及讲述，确认两人分段主讲；姓名/贡献稍后本人填写。实施制作子任务，DOC-001整体验收仍需真实贡献与实测演练。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-003",
+          "title": "双人讲述方案与PPT逐页制作指导",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "QA-009"
+          ],
+          "required_artifacts": [
+            "deliverables/ppt-structure.md",
+            "deliverables/presentation.md",
+            "deliverables/defense-script.md",
+            "deliverables/demo-choreography.md",
+            "deliverables/timing-chart.md",
+            "taskshot/2026-10-15_063-two-speaker-presentation.md"
+          ],
+          "acceptance": [
+            "围绕课程要求、已完成成果与可证实优势组织内容，每页核心结论、证据和边界明确，修正审核发现的算例混用及理论口径。",
+            "选定工作区原始PPT模板的具体页，逐页说明复制页码、保留/删除/替换区域、可直接使用的文字、现有图片或图表数据来源及制作步骤；不生成最终PPT。",
+            "双人分段讲稿含开场、指图动作、转场、一次交接、演示分工及问答，按展示15分钟和另计5分钟提问规划；身份与人工演练待本人填写。",
+            "更新交接、任务工作面和taskshot，完成内容/链接/数字核对及新鲜统一质量，审查本地检查点；小组组合页面后再进入视觉优化，不把当前指导当最终课程交付。"
+          ],
+          "owner": "root",
+          "note": "用户纠正范围：不代做PPT；交付贴合成果优势的讲稿、讲解思路、模板具体选页及逐页替换指导，由小组组合后再优化。误生成文件已保留为过程记录。",
+          "verification": null
+        }
+      },
+      "hash": "7b581e6d53405c230bf6a3df3824c148ef2fd0d4c6e8444c15d93f8338ac1159"
+    },
+    {
+      "seq": 352,
+      "at": "2026-10-15T10:10:34+00:00",
+      "task": "DOC-003",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户明确只需要讲稿与具体模板选页/图文替换指导，小组组合后再优化；任务契约及入口已同步。",
+      "previous_hash": "7b581e6d53405c230bf6a3df3824c148ef2fd0d4c6e8444c15d93f8338ac1159",
+      "details": {
+        "context_before": {
+          "phase": "双人PPT制作与讲述配套验收",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "已制作12页正文和6页备答，A讲P1至P6，B讲P7至P12，仅交接一次；组号、姓名与实际贡献待本人填写。",
+            "用户2026-10-15确认展示15分钟，提问另计5分钟；正文预算13分45秒含100秒演示，人工实测尚未完成。",
+            "制作前审核四项P1已在本轮报告、PPT、备注和演示口径中整改，历史审核保留；软件核验不等于实机验证。",
+            "旧阶段包本地缺失，最终定稿后须由REL-001重新冻结并核验本轮四件套。",
+            "当前计算仍是理想气体与研究情景，未获得同批真实性能输入；在线事实证据截止保持2026-10-06。"
+          ]
+        },
+        "context_after": {
+          "phase": "双人讲述与PPT逐页制作指导",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "当前交付为讲稿、讲解思路、模板具体选页、逐页图文替换指导及C结果图表数据，不代做最终PPT。",
+            "建议小组先组合12页正文，A讲P1至P6，B讲P7至P12，仅交接一次；组合后共同优化页面。",
+            "展示15分钟，提问另计5分钟；讲述预算13分45秒含100秒演示，人工计时与实际贡献待本人完成。",
+            "四项P1已在报告与讲述中整改，算例身份、残差单位、循环输入输出与理论条件分别说明。",
+            "旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验；在线证据截止保持2026-10-06。"
+          ]
+        }
+      },
+      "hash": "14c7095344160d39cd92e76f7e5f4e06c72741c7e2dc3d8af4a79a0a5cfd6695"
+    },
+    {
+      "seq": 353,
+      "at": "2026-10-15T10:19:01+00:00",
+      "task": "DOC-003",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按用户纠正后的范围交付：逐页指南给出模板3的实际复制页序、图文替换区域、可用正文与截图工况；讲解思路和双人稿突出成果及可证实优势，含一次交接和15分钟加5分钟提问安排；6份CSV均来自已核对C保存结果。四项P1口径整改，当前不交付代做PPT。新鲜统一质量六组PASS；小组组合、人员贡献、实测和最终课程交付另待完成。",
+      "previous_hash": "14c7095344160d39cd92e76f7e5f4e06c72741c7e2dc3d8af4a79a0a5cfd6695",
+      "hash": "d5d0d0e75c9b89f1d814681f884df4714d78e481b90f5c5e95becdeb2da7ad52"
+    },
+    {
+      "seq": 354,
+      "at": "2026-10-15T10:19:05+00:00",
+      "task": "DOC-003",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "讲述与制作指导的修订契约已满足：12页正文逐项选模板并给替换步骤，双人讲稿/转场/问答、演示分工和待填计时表齐全，图表数据核对完成。当前负责人语义核对与机械PASS不代表独立科学审查；PPT由小组组合后再优化，DOC-001与REL-001保持原待办。",
+      "previous_hash": "d5d0d0e75c9b89f1d814681f884df4714d78e481b90f5c5e95becdeb2da7ad52",
+      "hash": "2f3299f96213688cd1575584fd1970fb6096b02fcd550be9a740ba38cd61dc62"
     }
   ]
 }

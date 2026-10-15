@@ -3,7 +3,7 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
   const V = view("cycle"), P = {};
   const cases = DATA.cycles;
   const rail = card(V.rail, "循环三本账",
-    `<p>共同输入：总供给 ${cases[0].inputs.total_mass_flow_kg_per_s} kg/s，主室 ${fx(cases[0].inputs.chamber_pressure_pa / 1e6, 0)} MPa，主喷管面积比 ${cases[0].inputs.main_area_ratio}，海平面背压。泵、预燃室、涡轮、主室在一次 C 调用里同时闭合质量、轴功、焓与元素。</p>`);
+    `<p>共同输入：总供给 ${cases[0].inputs.total_mass_flow_kg_per_s} kg/s，主室 ${fx(cases[0].inputs.chamber_pressure_pa / 1e6, 0)} MPa，主喷管面积比 ${cases[0].inputs.main_area_ratio}，海平面背压。泵、预燃室、涡轮、主室在一次 C 调用里同时闭合质量、轴功、焓与元素。</p><p>两情景的燃料、O/F和泵压不同，不能用温度或比冲差单独评价循环优劣。</p>`);
   P.sel = seg(rail, "研究情景", [[0, "开式 · 朱雀三号一级"], [1, "补燃 · 长十乙一级"]], 0);
   const key = card(V.rail, "关键核对", "<p></p>");
   P.ev = evidence(V.rail);

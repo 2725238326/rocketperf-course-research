@@ -1,0 +1,38 @@
+{
+  "source": "deliverables/demo/index.html",
+  "source_sha256": "3674fbf5d87050dd33e9e13a176eae850030a12130baf5b4a0521f5efb8f84f8",
+  "claim_boundary": "Saved C output, not measured vehicle performance; export only, no PPT created.",
+  "refused_points": "Empty cells, never zero or extrapolated performance.",
+  "files": [
+    {
+      "file": "p5-chamber.csv",
+      "data_rows": 21,
+      "sha256": "c026680c62620fb2baab0924c6d4030a53d9154e71117b92ca7351872b554626"
+    },
+    {
+      "file": "p6-propellants.csv",
+      "data_rows": 5,
+      "sha256": "e215a7f956686609df497162e5a7df68915b551686063cd38ac3d51d2482901c"
+    },
+    {
+      "file": "p7-nozzle-vacuum.csv",
+      "data_rows": 6,
+      "sha256": "51a7823960c3d97875fbb9507d6a20a625e18fdf972bdc4d226aabba5a3c0ac1"
+    },
+    {
+      "file": "p8-ambient.csv",
+      "data_rows": 4,
+      "sha256": "3ffcafe37b0f2a5fbbf202c077a8936e275fe45db9a8c54e50cee9cfe84a2b41"
+    },
+    {
+      "file": "p9-cycle.csv",
+      "data_rows": 19,
+      "sha256": "97993ccdc6c9228a744301e29996815deeb0d4a62c60376cfd26a18e10a6916d"
+    },
+    {
+      "file": "backup-backpressures.csv",
+      "data_rows": 15,
+      "sha256": "b3ad4b26f08d9f9807081bc01cb575076ba91b510b495c1edf3e3343c06fdf06"
+    }
+  ]
+}
