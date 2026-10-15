@@ -47,4 +47,19 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   const start = TABS.findIndex((t) => `#${t.id}` === location.hash);
   select(start >= 0 ? start : 0);
+  /* ?set=label:value,... types values into the visible page's controls; used to
+   * script reproducible screenshots for the slides. */
+  const preset = new URLSearchParams(location.search).get("set");
+  if (preset) setTimeout(() => applyPreset(preset), 400);
 });
+function applyPreset(text) {
+  const v = document.querySelector(".view:not([hidden])");
+  for (const item of text.split(",")) {
+    const [label, value] = item.split(":");
+    const btn = [...v.querySelectorAll("button")].find((b) => b.textContent.trim().startsWith(label));
+    if (btn && value === undefined) { btn.click(); continue; }
+    const ctl = [...v.querySelectorAll(".ctl")].find((c) => c.querySelector("label") && c.querySelector("label").textContent.includes(label));
+    const box = ctl && ctl.querySelector("input.num");
+    if (box) { box.value = value; box.dispatchEvent(new Event("change")); }
+  }
+}
