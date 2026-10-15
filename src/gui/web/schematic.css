@@ -1,0 +1,38 @@
+.schematic { position: absolute; inset: 0; width: 100%; height: 100%; }
+.schematic text { font-family: var(--ff); }
+.schematic .comp { cursor: pointer; }
+.schematic .comp:hover .outline, .schematic .comp.sel .outline { stroke: var(--blue); stroke-width: 3; }
+.schematic .comp.sel .halo { opacity: 1; }
+.schematic .halo { opacity: 0; transition: opacity 0.15s; }
+.schematic .name, .schematic .sub, .schematic .dim { paint-order: stroke; stroke: #fff; stroke-width: 4.5px; stroke-linejoin: round; }
+.schematic .name { font-size: 19px; font-weight: 700; fill: var(--ink); }
+.schematic .sub { font-size: 16px; fill: var(--ink-2); }
+.schematic .dim { font-size: 15px; fill: var(--ink-3); font-family: var(--mono); }
+.schematic .pill rect { fill: #fff; stroke-width: 1.4; }
+.schematic .pill text { font-size: 16px; font-weight: 700; font-family: var(--mono); }
+
+/* moving dashes along pipes; speed is uniform and only shows direction */
+.schematic .flow { stroke-dasharray: 2 14; stroke-linecap: round; animation: rp-flow 1.1s linear infinite; }
+@keyframes rp-flow { to { stroke-dashoffset: -16; } }
+.schematic .spin { animation: rp-spin 1.6s linear infinite; transform-box: fill-box; transform-origin: center; }
+.schematic .spin.slow { animation-duration: 2.6s; }
+@keyframes rp-spin { to { transform: rotate(360deg); } }
+.schematic .shaft-run { stroke-dasharray: 6 10; animation: rp-flow 0.6s linear infinite; }
+.schematic .flicker { animation: rp-flicker 0.18s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: top center; }
+@keyframes rp-flicker { from { transform: scaleY(1); opacity: 0.95; } to { transform: scaleY(1.035); opacity: 0.82; } }
+.schematic .wave { animation: rp-wave 3s ease-in-out infinite alternate; }
+@keyframes rp-wave { from { transform: translateX(-6px); } to { transform: translateX(6px); } }
+.still .schematic .flow, .still .schematic .spin, .still .schematic .shaft-run, .still .schematic .flicker, .still .schematic .wave { animation: none; }
+
+/* cycle tab layout */
+.cycle-stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem); gap: 0.75rem; flex: 1; min-height: 0; }
+.cycle-side { display: flex; flex-direction: column; gap: 0.6rem; min-height: 0; overflow-y: auto; }
+.detail h3 { display: flex; justify-content: space-between; }
+.ledger { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 0.6rem 0.85rem; }
+.ledger h4 { margin: 0 0 0.35rem; font-size: 0.84rem; font-weight: 650; display: flex; justify-content: space-between; align-items: baseline; }
+.ledger h4 span { font-family: var(--mono); font-size: 0.74rem; color: var(--ok); font-weight: 600; }
+.bal { display: grid; grid-template-columns: 3.4rem 1fr; gap: 0.2rem 0.5rem; align-items: center; font-size: 0.72rem; color: var(--ink-3); }
+.bal .bar { display: flex; height: 0.9rem; border-radius: 3px; overflow: hidden; background: var(--line-2); }
+.bal .bar span { display: block; height: 100%; }
+.bal-note { font-size: 0.72rem; color: var(--ink-2); margin-top: 0.3rem; line-height: 1.5; }
+.bal-note b { font-family: var(--mono); color: var(--ink); font-weight: 600; }

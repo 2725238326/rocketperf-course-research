@@ -865,7 +865,11 @@ static void write_cycle_result(RpGuiBuffer *out, const RpEngineCycleResult *resu
     rp_gui_num(out, "returned_flow", b->returned_mass_flow_kg_per_s);
     rp_gui_num(out, "external_flow", b->external_mass_flow_kg_per_s);
     rp_gui_num(out, "main_flow", b->main_mass_flow_kg_per_s);
+    rp_gui_num(out, "main_fuel_flow", b->main_fuel_mass_flow_kg_per_s);
+    rp_gui_num(out, "main_oxidizer_flow", b->main_oxidizer_mass_flow_kg_per_s);
     rp_gui_num(out, "main_of", b->main_oxidizer_fuel_ratio);
+    rp_gui_num(out, "inlet_enthalpy_rate", b->inlet_enthalpy_rate_w);
+    rp_gui_num(out, "exit_enthalpy_rate", b->exit_total_enthalpy_rate_w);
     rp_gui_num(out, "turbine_power", b->turbine_power_w);
     rp_gui_num(out, "pump_power", b->pump_power_w);
     rp_gui_num(out, "mechanical_loss", b->mechanical_loss_w);
@@ -889,6 +893,7 @@ static void write_cycle_result(RpGuiBuffer *out, const RpEngineCycleResult *resu
     rp_gui_num(out, "preburner_enthalpy_residual", result->preburner_enthalpy_residual_w);
     rp_gui_num(out, "chamber_enthalpy_residual", result->chamber_enthalpy_residual_w);
     rp_gui_num(out, "exit_element_residual", max_abs(result->exit_element_relative_residual, RP_CHO_ELEMENT_COUNT));
+    rp_gui_numbers(out, "exit_element_residuals", result->exit_element_relative_residual, RP_CHO_ELEMENT_COUNT);
     rp_gui_num(out, "turbine_pressure_iterations", (double)result->turbine_pressure_iterations);
     rp_gui_close(out, '}');
 }
