@@ -2,6 +2,8 @@
 
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
+2026-10-15制作前审核见[统筹审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)。用户当前仅要求审核，PPT由小组后续开展制作。四项P1内容问题待定稿时销项；软件核验通过不代表整改已完成。当前工作区缺旧总览引用的阶段包，最终定稿后再生成并核验本轮交付包。
+
 ## 研究产物
 
 | 需要理解的内容 | 阅读入口 | 使用边界 |

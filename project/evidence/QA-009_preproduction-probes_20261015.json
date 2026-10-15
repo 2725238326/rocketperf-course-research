@@ -1,0 +1,400 @@
+{
+  "summary": {
+    "at": "2026-10-15T07:46:09+00:00",
+    "build_manifest": "build/artifacts/release/97de9a4472b24268a3a1bc33cd9add3e/build-manifest.json",
+    "binary_sha256": "df279b414fda36b90c36f2eb5fed2a44c26c850c6ca410fb57eb455b9037aefd",
+    "binary_matches_manifest": true,
+    "l0": {
+      "matched_area_ratio": 9.923325702539813,
+      "Isp_vacuum_A10_s": 298.84552121217035,
+      "Isp_vacuum_A40_s": 323.19617336240026,
+      "Isp_vacuum_matched_area_s": 298.67979717218117,
+      "delta_vacuum_40_minus_10_s": 24.350652150229905,
+      "delta_vacuum_40_minus_matched_s": 24.51637619021909
+    },
+    "liquid_O_F_2_6": {
+      "Isp_vacuum_A10_s": 324.42509616423956,
+      "Isp_vacuum_A40_s": 347.74013404482713,
+      "Isp_sealevel_A10_s": 305.38422784150436,
+      "matched_area_ratio": {
+        "available": true,
+        "area_ratio": 10.910200420808001
+      },
+      "delta_vacuum_40_minus_10_s": 23.315037880587568,
+      "same_geometry_A10_vacuum_minus_sealevel_s": 19.040868322735207
+    },
+    "cycles": {
+      "zq3_y1_stage1": {
+        "staged": false,
+        "input_turbine_outlet_pressure_pa": 800000,
+        "output_turbine_outlet_pressure_pa": 800000,
+        "pressure_iterations": 0,
+        "balance": {
+          "mass_residual_kg_per_s": -3.1086244689504383e-15,
+          "shaft_residual_w": 0,
+          "energy_residual_w": 0.0007604960701428354,
+          "mass_relative_residual": -3.1086244689504386e-17,
+          "shaft_relative_residual": 0,
+          "energy_relative_residual": 2.4414226295307237e-12
+        },
+        "element_relative_residual": [
+          6.269369379197088e-16,
+          0,
+          -1.8389828222311998e-16
+        ]
+      },
+      "cz10b_first_stage1": {
+        "staged": true,
+        "input_turbine_outlet_pressure_pa": 0,
+        "output_turbine_outlet_pressure_pa": 17947456.57593012,
+        "pressure_iterations": 27,
+        "balance": {
+          "mass_residual_kg_per_s": 0,
+          "shaft_residual_w": -0.02318360609933734,
+          "energy_residual_w": 0.023462830373318866,
+          "mass_relative_residual": 0,
+          "shaft_relative_residual": -7.228378342898791e-09,
+          "energy_relative_residual": 1.4925575429984455e-10
+        },
+        "element_relative_residual": [
+          -1.9949857752257215e-12,
+          -3.8432859274806225e-12,
+          8.667203201294061e-13
+        ]
+      }
+    },
+    "rocketperf_on_PATH": null,
+    "probe_exit_codes": {
+      "l0_sealevel_regime": 0,
+      "l0_vacuum_A10": 0,
+      "l0_vacuum_A40": 0,
+      "l0_vacuum_matched_area": 0,
+      "paired": 0,
+      "zq3_y1_stage1": 0,
+      "cz10b_first_stage1": 0,
+      "liquid_A10_vacuum": 0,
+      "liquid_A40_vacuum": 0,
+      "liquid_A10_sealevel": 0,
+      "liquid_A40_sealevel_reject": 4,
+      "missing_file": 3,
+      "missing_argument": 2,
+      "nonfinite": 2,
+      "liquid_sealevel_regime": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "l0_sealevel_regime",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "nozzle",
+        "regime",
+        "cases/research/s3_sealevel_regime.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"program_version\": \"0.1.0\",\n  \"model\": \"ideal_constant_gamma_v1_regime_assessment_v1\",\n  \"case\": {\"id\": \"s3_sealevel_regime\", \"kind\": \"research_scenario\", \"source_ref\": \"docs/two-vehicle-study.md\"},\n  \"inputs\": {\n    \"gamma\": 1.2,\n    \"gas_constant_j_kg_k\": 350,\n    \"stagnation_temperature_k\": 3400,\n    \"stagnation_pressure_pa\": 8000000,\n    \"throat_area_m2\": 0.01,\n    \"area_ratio\": 40,\n    \"ambient_pressure_pa\": 101325\n  },\n  \"ideal_attached_results\": {\n      \"exit_mach\": 4.2394016826096959,\n      \"exit_temperature_k\": 1215.4783317919128,\n      \"exit_pressure_pa\": 16699.359395560245,\n      \"exit_velocity_m_s\": 3029.0247616145311,\n      \"exit_area_m2\": 0.40000000000000002,\n      \"characteristic_velocity_m_s\": 1682.0644261023667,\n      \"mass_flow_kg_s\": 47.560603956992175,\n      \"thrust_n\": 150741.99082129545,\n      \"thrust_coefficient\": 1.884274885266193,\n      \"specific_impulse_s\": 323.19617336240026\n  },\n  \"regime\": {\n    \"class\": \"separation_hint\",\n    \"ambient_over_exit_pressure\": 6.0675980197742589,\n    \"ideal_thrust_n\": 110211.99082129545,\n    \"separation_reference_pa\": 40530,\n    \"separation_area_ratio\": {\"available\": true, \"area_ratio\": 20.012934132414873},\n    \"matched_area_ratio\": {\"available\": true, \"area_ratio\": 9.9233257025398132},\n    \"basis\": \"Summerfield-type exit-pressure fraction 0.4; empirical hint about model applicability, not a separation prediction\"\n  },\n  \"limitations\": [\"ideal constant-gamma gas\", \"attached isentropic solve ignores ambient in expansion; thrust includes the pressure term at actual ambient\", \"separation reference and area ratios are empirical hints, not separation or side-load predictions\", \"no chemistry, losses, shocks, cycle, cooling or reuse prediction\", \"research scenario inputs are not verified engine data\"]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "l0_vacuum_A10",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "run",
+        "E:\\Work\\火发原理\\build\\preproduction-audit-20261015\\l0_vacuum_A10.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"program_version\": \"0.1.0\",\n  \"model\": \"ideal_constant_gamma_v1\",\n  \"case\": {\"id\": \"s3_sealevel_regime\", \"kind\": \"research_scenario\", \"source_ref\": \"docs/two-vehicle-study.md\"},\n  \"inputs\": {\n    \"gamma\": 1.2,\n    \"gas_constant_j_kg_k\": 350,\n    \"stagnation_temperature_k\": 3400,\n    \"stagnation_pressure_pa\": 8000000,\n    \"area_ratio\": 10,\n    \"throat_area_m2\": 0.01,\n    \"ambient_pressure_pa\": 0\n  },\n  \"results\": {\n    \"exit_mach\": 3.278340793015559,\n    \"exit_temperature_k\": 1638.7502070367191,\n    \"exit_pressure_pa\": 100298.17762224066,\n    \"exit_velocity_m_s\": 2719.7884348687458,\n    \"exit_area_m2\": 0.10000000000000001,\n    \"characteristic_velocity_m_s\": 1682.0644261023667,\n    \"mass_flow_kg_s\": 47.560603956992175,\n    \"thrust_n\": 139384.5983598241,\n    \"thrust_coefficient\": 1.7423074794978013,\n    \"specific_impulse_s\": 298.84552121217035\n  },\n  \"diagnostics\": {\"root_iterations\": 40, \"relative_area_residual\": 2.8892443992803335e-12},\n  \"limitations\": [\"ideal constant-gamma gas\", \"steady one-dimensional choked flow\", \"matched or underexpanded only\", \"no chemistry, losses, cycle, cooling, separation or reuse prediction\"]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "l0_vacuum_A40",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "run",
+        "E:\\Work\\火发原理\\build\\preproduction-audit-20261015\\l0_vacuum_A40.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"program_version\": \"0.1.0\",\n  \"model\": \"ideal_constant_gamma_v1\",\n  \"case\": {\"id\": \"s3_sealevel_regime\", \"kind\": \"research_scenario\", \"source_ref\": \"docs/two-vehicle-study.md\"},\n  \"inputs\": {\n    \"gamma\": 1.2,\n    \"gas_constant_j_kg_k\": 350,\n    \"stagnation_temperature_k\": 3400,\n    \"stagnation_pressure_pa\": 8000000,\n    \"area_ratio\": 40,\n    \"throat_area_m2\": 0.01,\n    \"ambient_pressure_pa\": 0\n  },\n  \"results\": {\n    \"exit_mach\": 4.2394016826096959,\n    \"exit_temperature_k\": 1215.4783317919128,\n    \"exit_pressure_pa\": 16699.359395560245,\n    \"exit_velocity_m_s\": 3029.0247616145311,\n    \"exit_area_m2\": 0.40000000000000002,\n    \"characteristic_velocity_m_s\": 1682.0644261023667,\n    \"mass_flow_kg_s\": 47.560603956992175,\n    \"thrust_n\": 150741.99082129545,\n    \"thrust_coefficient\": 1.884274885266193,\n    \"specific_impulse_s\": 323.19617336240026\n  },\n  \"diagnostics\": {\"root_iterations\": 41, \"relative_area_residual\": 3.4421354655419114e-12},\n  \"limitations\": [\"ideal constant-gamma gas\", \"steady one-dimensional choked flow\", \"matched or underexpanded only\", \"no chemistry, losses, cycle, cooling, separation or reuse prediction\"]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "l0_vacuum_matched_area",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "run",
+        "E:\\Work\\火发原理\\build\\preproduction-audit-20261015\\l0_vacuum_matched_area.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"program_version\": \"0.1.0\",\n  \"model\": \"ideal_constant_gamma_v1\",\n  \"case\": {\"id\": \"s3_sealevel_regime\", \"kind\": \"research_scenario\", \"source_ref\": \"docs/two-vehicle-study.md\"},\n  \"inputs\": {\n    \"gamma\": 1.2,\n    \"gas_constant_j_kg_k\": 350,\n    \"stagnation_temperature_k\": 3400,\n    \"stagnation_pressure_pa\": 8000000,\n    \"area_ratio\": 9.9233257025398096,\n    \"throat_area_m2\": 0.01,\n    \"ambient_pressure_pa\": 0\n  },\n  \"results\": {\n    \"exit_mach\": 3.2729691542190267,\n    \"exit_temperature_k\": 1641.5345248914271,\n    \"exit_pressure_pa\": 101325.00000008893,\n    \"exit_velocity_m_s\": 2717.6377601615723,\n    \"exit_area_m2\": 0.099233257025398092,\n    \"characteristic_velocity_m_s\": 1682.0644261023667,\n    \"mass_flow_kg_s\": 47.560603956992175,\n    \"thrust_n\": 139307.30297771911,\n    \"thrust_coefficient\": 1.7413412872214888,\n    \"specific_impulse_s\": 298.67979717218117\n  },\n  \"diagnostics\": {\"root_iterations\": 36, \"relative_area_residual\": 6.6258110109607391e-13},\n  \"limitations\": [\"ideal constant-gamma gas\", \"steady one-dimensional choked flow\", \"matched or underexpanded only\", \"no chemistry, losses, cycle, cooling, separation or reuse prediction\"]\n}\n",
+      "stderr": ""
+    },
+    {
+      "label": "paired",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "study",
+        "propellants",
+        "--case",
+        "cases/research/propellant_comparison.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"study\":\"propellant_fixed_geometry_v1\",\"case\":{\"id\":\"ch4_rp1_common_geometry\",\"source_ref\":\"ANA-012 declared method comparison\"},\"inputs\":{\"pressure_pa\":10000000,\"throat_area_m2\":0.01,\"area_ratio\":10,\"ambient_pressure_pa\":0,\"methane_of\":2.6000000000000001,\"kerosene_of\":2.6000000000000001},\"inlets\":{\"methane\":{\"dataset\":\"coolprop710-cea334-liquid-molar-v1\",\"basis\":\"heos710-cea334-ideal-zero-298.15-v1\",\"fuel_temperature_k\":120,\"oxidizer_temperature_k\":100,\"fuel_pressure_pa\":10000000,\"oxidizer_pressure_pa\":10000000},\"kerosene\":{\"dataset\":\"cea-v3.3.4-rp1-o2l-assigned-v1\",\"fuel\":\"RP-1\",\"oxidizer\":\"O2(L)\",\"fuel_temperature_k\":298.14999999999998,\"oxidizer_temperature_k\":90.170000000000002}},\"methane\":{\"chamber\":{\"temperature_k\":3277.005595897801,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2527.9119122873822,\"h_j_per_kg\":-1809315.8619882693,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"diagnostics\":{\"element_relative_residual\":[-1.8873791418627661e-15,-1.6653345369377348e-15,-3.4069016770184074e-15],\"equilibrium_residual\":3.6637359812630166e-15,\"enthalpy_residual_j_per_kg\":-5.6822318583726883e-05,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":6.819121941012387e-05},\"inlet_mixture_h_j_per_kg\":-1809315.8619314469,\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":2962.705035945125,\"pressure_pa\":5617537.9238356249,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2493.6699140683886,\"h_j_per_kg\":-2598624.8335045297,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":1256.4306359813584,\"mach\":1.0000000000082938,\"mass_flux_kg_per_m2_s\":5426.3673026202923,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1424.6792990817412,\"pressure_pa\":114238.01785703482,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2154.9618161296262,\"h_j_per_kg\":-6222734.6915471982,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":2970.9994377511853,\"mach\":3.3522137465031063,\"mass_flux_kg_per_m2_s\":542.63673026001732,\"energy_residual_j_per_kg\":4.6566128730773926e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1842.8535044377084,\"vacuum_effective_velocity_m_per_s\":3181.5233692990396,\"effective_velocity_m_per_s\":3181.5233692990396,\"thrust_coefficient\":1.7264114383686653,\"continuity_relative_residual\":-3.7075897907357103e-12,\"sonic_relative_residual\":1.6587620166319539e-11},\"geometry\":{\"throat_area_m2\":0.01,\"exit_area_m2\":0.10000000000000001,\"mass_flow_kg_per_s\":54.263673026202923,\"thrust_n\":172641.14383686654,\"specific_impulse_s\":324.42509616423956}},\"kerosene\":{\"chamber\":{\"temperature_k\":3724.0068037756432,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":23.60075551473405,\"gas_constant_j_per_kg_k\":352.29846751343263,\"cp_frozen_j_per_kg_k\":2037.5271254313093,\"h_j_per_kg\":-784206.10994712461,\"s_j_per_kg_k\":11127.431046107591,\"mole_fractions\":{\"H2\":0.079521999028469167,\"O2\":0.017892065970662507,\"H2O\":0.33333260846943991,\"CO\":0.31520424295587968,\"CO2\":0.15386269828810525,\"CH4\":7.634906907909442e-10,\"H\":0.026880932898823082,\"O\":0.011215065660779096,\"OH\":0.062090385964350632}},\"diagnostics\":{\"element_relative_residual\":[8.0846440653203899e-12,6.3106215409975572e-12,1.0839952493054655e-11],\"equilibrium_residual\":1.2124079518116559e-11,\"enthalpy_residual_j_per_kg\":-0.00044861366041004658,\"equilibrium_iterations\":1,\"hp_iterations\":8,\"graphite_activity\":2.5738892521921746e-05},\"inlet_mixture_h_j_per_kg\":-784206.10949851095,\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":3369.3121580017942,\"pressure_pa\":5621627.7693407815,\"molar_mass_kg_per_kmol\":23.60075551473405,\"gas_constant_j_per_kg_k\":352.29846751343263,\"cp_frozen_j_per_kg_k\":2016.8124107733458,\"h_j_per_kg\":-1503323.9701206223,\"s_j_per_kg_k\":11127.431046107591,\"mole_fractions\":{\"H2\":0.079521999028469167,\"O2\":0.017892065970662507,\"H2O\":0.33333260846943991,\"CO\":0.31520424295587968,\"CO2\":0.15386269828810525,\"CH4\":7.634906907909442e-10,\"H\":0.026880932898823082,\"O\":0.011215065660779096,\"OH\":0.062090385964350632}},\"velocity_m_per_s\":1199.2646581747481,\"mach\":0.99999999998713751,\"mass_flux_kg_per_m2_s\":5679.6963524580769,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1657.6129760025674,\"pressure_pa\":116786.73303731476,\"molar_mass_kg_per_kmol\":23.60075551473405,\"gas_constant_j_per_kg_k\":352.29846751343263,\"cp_frozen_j_per_kg_k\":1812.7913394333325,\"h_j_per_kg\":-4817139.0878002774,\"s_j_per_kg_k\":11127.431046107591,\"mole_fractions\":{\"H2\":0.079521999028469167,\"O2\":0.017892065970662507,\"H2O\":0.33333260846943991,\"CO\":0.31520424295587968,\"CO2\":0.15386269828810525,\"CH4\":7.634906907909442e-10,\"H\":0.026880932898823082,\"O\":0.011215065660779096,\"OH\":0.062090385964350632}},\"velocity_m_per_s\":2840.0468228017485,\"mach\":3.3358335038437743,\"mass_flux_kg_per_m2_s\":567.96963525007504,\"energy_residual_j_per_kg\":1.1641532182693481e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1760.6575034019502,\"vacuum_effective_velocity_m_per_s\":3045.6682606216973,\"effective_velocity_m_per_s\":3045.6682606216973,\"thrust_coefficient\":1.729847091065039,\"continuity_relative_residual\":7.5133232968482844e-12,\"sonic_relative_residual\":-2.5724977703589502e-11},\"geometry\":{\"throat_area_m2\":0.01,\"exit_area_m2\":0.10000000000000001,\"mass_flow_kg_per_s\":56.796963524580768,\"thrust_n\":172984.7091065039,\"specific_impulse_s\":310.57173047082313}},\"methane_minus_kerosene\":{\"thrust_n\":-343.56526963735814,\"isp_s\":13.853365693416436,\"mass_flow_kg_per_s\":-2.5332904983778448,\"cstar_m_per_s\":82.196001035758172},\"limitations\":[\"Declared inlet states and O/F; not flight engine performance or optimum mixtures.\",\"Nine neutral gas HP and chamber-frozen nozzle; no carbon, pump, cycle or hardware losses.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "zq3_y1_stage1",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "cycle",
+        "adiabatic",
+        "cases/vehicles/zq3_y1_stage1.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"program_version\":\"0.1.0\",\"model\":\"adiabatic_single_shaft_cycle_v1\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"architecture\":\"gas_generator_external\",\"case\":{\"id\":\"zq3_y1_stage1_gg_assumed\",\"kind\":\"research_scenario\",\"object_ref\":\"zq3_y1_stage1\",\"cycle_evidence\":\"family_supported\",\"source_ref\":\"V09_zq3_y1;V11_tq15a;L06_tq12a_crossref;MOD-009 ZQ1-A1 assumptions\"},\"inputs\":{\"feed_model\":\"methane_liquid_table\",\"staged_combustion\":false,\"total_mass_flow_kg_per_s\":100,\"overall_oxidizer_fuel_ratio\":3.3999999999999999,\"fuel_pump_inlet_pressure_pa\":1000000,\"fuel_pump_outlet_pressure_pa\":13000000,\"fuel_pump_efficiency\":0.69999999999999996,\"oxidizer_pump_inlet_pressure_pa\":1000000,\"oxidizer_pump_outlet_pressure_pa\":13000000,\"oxidizer_pump_efficiency\":0.75,\"fuel_temperature_k\":120,\"oxidizer_temperature_k\":100,\"fuel_density_override_kg_per_m3\":0,\"chamber_pressure_pa\":10000000,\"main_area_ratio\":8,\"preburner_pressure_pa\":11000000,\"preburner_oxidizer_fuel_ratio\":1,\"turbine_outlet_pressure_pa\":800000,\"turbine_efficiency\":0.69999999999999996,\"shaft_efficiency\":0.94999999999999996,\"auxiliary_power_w\":10000,\"maximum_branch_fraction\":0.20000000000000001,\"pump_to_chamber_drop_pa\":1000000,\"pump_to_preburner_drop_pa\":1000000,\"return_pressure_drop_pa\":0,\"branch_area_ratio\":1.5,\"branch_axial_projection\":1,\"ambient_pressure_pa\":101325},\"feed_states\":{\"fuel\":{\"density_kg_per_m3\":410.79815662359039,\"inlet_h_j_per_kg\":-5530630.5978516294,\"basis\":\"NASA9_CEA_v334\",\"elements_kmol_per_kg\":[0.062334579609361659,0.24933831843744664,0]},\"oxidizer\":{\"density_kg_per_m3\":1093.0127346539266,\"inlet_h_j_per_kg\":-387360.76377983147,\"basis\":\"NASA9_CEA_v334\",\"elements_kmol_per_kg\":[0,0,0.062502343837893923]}},\"pumps\":{\"fuel\":{\"specific_work_j_per_kg\":41730.608734364272,\"shaft_power_w\":948422.92578100611,\"outlet_h_j_per_kg\":-5488899.9891172647,\"energy_residual_w\":8.0326572060585022e-09},\"oxidizer\":{\"specific_work_j_per_kg\":14638.438778177617,\"shaft_power_w\":1131152.0874046341,\"outlet_h_j_per_kg\":-372722.32500165387,\"energy_residual_w\":-1.1641532182693481e-09}},\"preburner\":{\"gas\":{\"temperature_k\":1322.9766162907347,\"pressure_pa\":11000000,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":3086.3128272301001,\"h_j_per_kg\":-2930811.1570594781,\"s_j_per_kg_k\":13801.286919622522,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"diagnostics\":{\"element_relative_residual\":[4.3076653355456074e-14,1.9095836023552692e-14,1.5501402630433752e-14],\"equilibrium_residual\":4.3187675657918589e-14,\"enthalpy_residual_j_per_kg\":-1.862645149230957e-08,\"equilibrium_iterations\":1,\"hp_iterations\":6,\"graphite_activity\":0.86874941956865304}},\"chamber\":{\"gas\":{\"temperature_k\":3614.0714702933033,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":22.028870072215589,\"gas_constant_j_per_kg_k\":377.43697124469691,\"cp_frozen_j_per_kg_k\":2312.0564901170528,\"h_j_per_kg\":-1507975.7469004334,\"s_j_per_kg_k\":11949.184090748458,\"mole_fractions\":{\"H2\":0.072392893926466167,\"O2\":0.028493107959088802,\"H2O\":0.49057910313071679,\"CO\":0.16901933876172934,\"CO2\":0.13567785768568252,\"CH4\":2.5148110364696646e-10,\"H\":0.020439303634188669,\"O\":0.010992906609553614,\"OH\":0.072405488041093119}},\"diagnostics\":{\"element_relative_residual\":[4.4408920985006262e-16,8.8817841970012523e-16,5.0520989770316619e-16],\"equilibrium_residual\":8.8817841970012523e-16,\"enthalpy_residual_j_per_kg\":-7.754424586892128e-06,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":9.586712200098068e-06}},\"turbine\":{\"inlet\":{\"temperature_k\":1322.9766162907347,\"pressure_pa\":11000000,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":3086.3128272301001,\"h_j_per_kg\":-2930811.1570594781,\"s_j_per_kg_k\":13801.286919622522,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"isentropic_outlet\":{\"temperature_k\":758.15723445037702,\"pressure_pa\":800000,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":2643.9941245608279,\"h_j_per_kg\":-4555737.3441807665,\"s_j_per_kg_k\":13801.286919622098,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"outlet\":{\"temperature_k\":937.21437747434118,\"pressure_pa\":800000,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":2798.9613209405716,\"h_j_per_kg\":-4068259.4880452091,\"s_j_per_kg_k\":14377.928400063896,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"specific_work_j_per_kg\":1137448.330985731,\"efficiency_residual_j_per_kg\":8.2910992205142975e-07,\"entropy_generation_j_per_kg_k\":576.64148044137437},\"main_nozzle\":{\"chamber\":{\"temperature_k\":3614.0714702933033,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":22.028870072215589,\"gas_constant_j_per_kg_k\":377.43697124469691,\"cp_frozen_j_per_kg_k\":2312.0564901170528,\"h_j_per_kg\":-1507975.7469004334,\"s_j_per_kg_k\":11949.184090748458,\"mole_fractions\":{\"H2\":0.072392893926466167,\"O2\":0.028493107959088802,\"H2O\":0.49057910313071679,\"CO\":0.16901933876172934,\"CO2\":0.13567785768568252,\"CH4\":2.5148110364696646e-10,\"H\":0.020439303634188669,\"O\":0.010992906609553614,\"OH\":0.072405488041093119}},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":3290.6106533521051,\"pressure_pa\":5648578.3357563373,\"molar_mass_kg_per_kmol\":22.028870072215589,\"gas_constant_j_per_kg_k\":377.43697124469691,\"cp_frozen_j_per_kg_k\":2286.2272999580755,\"h_j_per_kg\":-2251768.8085241099,\"s_j_per_kg_k\":11949.184090748458,\"mole_fractions\":{\"H2\":0.072392893926466167,\"O2\":0.028493107959088802,\"H2O\":0.49057910313071679,\"CO\":0.16901933876172934,\"CO2\":0.13567785768568252,\"CH4\":2.5148110364696646e-10,\"H\":0.020439303634188669,\"O\":0.010992906609553614,\"OH\":0.072405488041093119}},\"velocity_m_per_s\":1219.6663983431506,\"mach\":1.0000000000113796,\"mass_flux_kg_per_m2_s\":5547.01419563523,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1783.3861218266711,\"pressure_pa\":164028.90496694602,\"molar_mass_kg_per_kmol\":22.028870072215589,\"gas_constant_j_per_kg_k\":377.43697124469691,\"cp_frozen_j_per_kg_k\":2056.6015653546337,\"h_j_per_kg\":-5556040.5492108753,\"s_j_per_kg_k\":11949.184090748458,\"mole_fractions\":{\"H2\":0.072392893926466167,\"O2\":0.028493107959088802,\"H2O\":0.49057910313071679,\"CO\":0.16901933876172934,\"CO2\":0.13567785768568252,\"CH4\":2.5148110364696646e-10,\"H\":0.020439303634188669,\"O\":0.010992906609553614,\"OH\":0.072405488041093119}},\"velocity_m_per_s\":2845.3698537485216,\"mach\":3.133757371037647,\"mass_flux_kg_per_m2_s\":693.3767744603548,\"energy_residual_j_per_kg\":-2.3283064365386963e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1802.771661891308,\"vacuum_effective_velocity_m_per_s\":3081.9351830328997,\"effective_velocity_m_per_s\":2935.8025121199903,\"thrust_coefficient\":1.6284938210311155,\"continuity_relative_residual\":8.5826901141672352e-12,\"sonic_relative_residual\":2.2759127915605859e-11}},\"branch_nozzle\":{\"chamber\":{\"temperature_k\":937.21437747434118,\"pressure_pa\":800000,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":2798.9613209405716,\"h_j_per_kg\":-4068259.4880452091,\"s_j_per_kg_k\":14377.928400063896,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":820.44596257718467,\"pressure_pa\":437834.83985879662,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":2699.2789799204943,\"h_j_per_kg\":-4389316.7404183373,\"s_j_per_kg_k\":14377.928400063896,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"velocity_m_per_s\":801.32047568139456,\"mach\":0.99999999996268873,\"mass_flux_kg_per_m2_s\":704.81488614520754,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":629.56021442788165,\"pressure_pa\":140154.05291134334,\"molar_mass_kg_per_kmol\":13.703930686750732,\"gas_constant_j_per_kg_k\":606.724463955342,\"cp_frozen_j_per_kg_k\":2526.0131580339007,\"h_j_per_kg\":-4888202.86627133,\"s_j_per_kg_k\":14377.928400063896,\"mole_fractions\":{\"H2\":0.46340474408603421,\"O2\":8.496488000345078e-18,\"H2O\":0.10948077332290497,\"CO\":0.25410244900601403,\"CO2\":0.03234033555192458,\"CH4\":0.14067159461928744,\"H\":1.0298962752685106e-07,\"O\":7.3919371764349775e-17,\"OH\":4.2420706872303983e-10}},\"velocity_m_per_s\":1280.5806325461283,\"mach\":1.8061128683127554,\"mass_flux_kg_per_m2_s\":469.87659076716733,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1135.0498063050022,\"vacuum_effective_velocity_m_per_s\":1578.8590649396558,\"effective_velocity_m_per_s\":1363.2173368949288,\"thrust_coefficient\":1.2010198401184653,\"continuity_relative_residual\":7.865263995654459e-12,\"sonic_relative_residual\":-7.4622530377155272e-11}},\"balance\":{\"fuel_mass_flow_kg_per_s\":22.727272727272727,\"oxidizer_mass_flow_kg_per_s\":77.27272727272728,\"branch_mass_flow_kg_per_s\":1.9337604931490833,\"branch_fuel_mass_flow_kg_per_s\":0.96688024657454164,\"branch_oxidizer_mass_flow_kg_per_s\":0.96688024657454164,\"returned_mass_flow_kg_per_s\":0,\"external_mass_flow_kg_per_s\":1.9337604931490833,\"main_mass_flow_kg_per_s\":98.06623950685092,\"main_fuel_mass_flow_kg_per_s\":21.760392480698187,\"main_oxidizer_mass_flow_kg_per_s\":76.305847026152733,\"main_oxidizer_fuel_ratio\":3.5066392802352819,\"turbine_power_w\":2199552.6454585688,\"pump_power_w\":2079575.0131856403,\"mechanical_loss_w\":109977.63227292855,\"generator_heat_w\":0,\"chamber_heat_w\":0,\"inlet_enthalpy_rate_w\":-155628572.60688764,\"exit_total_enthalpy_rate_w\":-155748550.23992106,\"main_throat_area_m2\":0.017679103757119667,\"branch_throat_area_m2\":0.0027436430914864157,\"main_thrust_n\":287903.11229837354,\"branch_thrust_n\":2636.1358296633175,\"total_thrust_n\":290539.24812803685,\"main_effective_velocity_m_per_s\":2935.8025121199898,\"engine_effective_velocity_m_per_s\":2905.3924812803684,\"engine_specific_impulse_s\":296.26758182257635,\"mass_residual_kg_per_s\":-3.1086244689504383e-15,\"shaft_residual_w\":0,\"energy_residual_w\":0.00076049607014283538,\"mass_relative_residual\":-3.1086244689504386e-17,\"shaft_relative_residual\":0,\"energy_relative_residual\":2.4414226295307237e-12},\"mixing\":{\"h_j_per_kg\":-1507975.746892679,\"elements_kmol_per_kg\":[0.013831721540870095,0.055326886163480381,0.048633396280451338]},\"diagnostics\":{\"preburner_enthalpy_residual_w\":-3.6019096023386034e-08,\"chamber_enthalpy_residual_w\":-0.00076044725877597692,\"exit_element_relative_residual\":[6.2693693791970876e-16,0,-1.8389828222311998e-16],\"turbine_pressure_iterations\":0},\"limitations\":[\"Research inputs, not calibrated flight-engine performance.\",\"Nine ideal CHO gases, HP 1000..6000 K; no carbon condensation or low-temperature preburner coverage.\",\"Constant-density pumps, frozen turbine/nozzles, single shaft, Q=0; no cooling, maps or transients.\",\"RP-1 is an assigned surrogate; its feed enthalpies have no liquid pressure correction.\",\"Separate external nozzle does not reproduce TQ-15A extension mixing.\",\"Mass flow sizes nozzle geometry; matched/underexpanded domain only.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "cz10b_first_stage1",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "cycle",
+        "adiabatic",
+        "cases/vehicles/cz10b_first_stage1.ini"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"program_version\":\"0.1.0\",\"model\":\"adiabatic_single_shaft_cycle_v1\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"architecture\":\"all_oxidizer_staged_combustion\",\"case\":{\"id\":\"cz10b_first_stage1_orsc_rp1_assumed\",\"kind\":\"research_scenario\",\"object_ref\":\"cz10b_first_stage1\",\"cycle_evidence\":\"family_supported\",\"source_ref\":\"V06_casc_engines;V07_cctv_interview;L07_yf100_cmse;MOD-009 CZ1-A1 assumptions\"},\"inputs\":{\"feed_model\":\"rp1_assigned\",\"staged_combustion\":true,\"total_mass_flow_kg_per_s\":100,\"overall_oxidizer_fuel_ratio\":2.6000000000000001,\"fuel_pump_inlet_pressure_pa\":1000000,\"fuel_pump_outlet_pressure_pa\":25000000,\"fuel_pump_efficiency\":0.69999999999999996,\"oxidizer_pump_inlet_pressure_pa\":1000000,\"oxidizer_pump_outlet_pressure_pa\":25000000,\"oxidizer_pump_efficiency\":0.75,\"fuel_temperature_k\":298.14999999999998,\"oxidizer_temperature_k\":90.170000000000002,\"fuel_density_override_kg_per_m3\":810,\"chamber_pressure_pa\":10000000,\"main_area_ratio\":8,\"preburner_pressure_pa\":22000000,\"preburner_oxidizer_fuel_ratio\":30,\"turbine_outlet_pressure_pa\":0,\"turbine_efficiency\":0.69999999999999996,\"shaft_efficiency\":0.94999999999999996,\"auxiliary_power_w\":10000,\"maximum_branch_fraction\":0.94999999999999996,\"pump_to_chamber_drop_pa\":1000000,\"pump_to_preburner_drop_pa\":1000000,\"return_pressure_drop_pa\":1000000,\"branch_area_ratio\":1,\"branch_axial_projection\":0,\"ambient_pressure_pa\":101325},\"feed_states\":{\"fuel\":{\"density_kg_per_m3\":810,\"inlet_h_j_per_kg\":-1768558.6973210066,\"basis\":\"NASA9_CEA_v334\",\"elements_kmol_per_kg\":[0.07155029381054899,0.13952307293057051,0]},\"oxidizer\":{\"density_kg_per_m3\":1143.2513397131804,\"inlet_h_j_per_kg\":-405608.96033601259,\"basis\":\"NASA9_CEA_v334\",\"elements_kmol_per_kg\":[0,0,0.062502343837893923]}},\"pumps\":{\"fuel\":{\"specific_work_j_per_kg\":42328.042328042335,\"shaft_power_w\":1175778.9535567316,\"outlet_h_j_per_kg\":-1726230.6549929641,\"energy_residual_w\":3.0267983675003052e-09},\"oxidizer\":{\"specific_work_j_per_kg\":27990.34550707649,\"shaft_power_w\":2021524.9532888578,\"outlet_h_j_per_kg\":-377618.61482893612,\"energy_residual_w\":-1.1641532182693481e-09}},\"preburner\":{\"gas\":{\"temperature_k\":1244.4423756720239,\"pressure_pa\":22000000,\"molar_mass_kg_per_kmol\":31.879346335895836,\"gas_constant_j_per_kg_k\":260.8118093888877,\"cp_frozen_j_per_kg_k\":1191.5985773915043,\"h_j_per_kg\":-421122.22902777838,\"s_j_per_kg_k\":6660.0454217313472,\"mole_fractions\":{\"H2\":1.6189413143377407e-10,\"O2\":0.85467869021169041,\"H2O\":0.07173937006904392,\"CO\":2.5643896625988353e-10,\"CO2\":0.073579889963611894,\"CH4\":1.3510072679324988e-37,\"H\":3.7700307370979456e-13,\"O\":3.8700970723243553e-09,\"OH\":2.0454668466229838e-06}},\"diagnostics\":{\"element_relative_residual\":[6.6613381477509392e-16,4.6686301548339924e-15,9.0829907912726697e-15],\"equilibrium_residual\":1.021405182655144e-14,\"enthalpy_residual_j_per_kg\":-2.6775524020195007e-09,\"equilibrium_iterations\":1,\"hp_iterations\":8,\"graphite_activity\":2.0352627026813557e-18}},\"chamber\":{\"gas\":{\"temperature_k\":3723.7099701848942,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":23.601998351622338,\"gas_constant_j_per_kg_k\":352.27991613805375,\"cp_frozen_j_per_kg_k\":2037.5181405686592,\"h_j_per_kg\":-785994.16440875083,\"s_j_per_kg_k\":11126.950884330399,\"mole_fractions\":{\"H2\":0.079512871285921424,\"O2\":0.017879127225389424,\"H2O\":0.33339018958174715,\"CO\":0.31518656435082126,\"CO2\":0.15390507837779521,\"CH4\":7.6341203721806064e-10,\"H\":0.026863399605785016,\"O\":0.011203588396133985,\"OH\":0.062059180412994394}},\"diagnostics\":{\"element_relative_residual\":[8.4212636863867374e-12,6.572861912865425e-12,1.128223991777893e-11],\"equilibrium_residual\":1.2619350009401842e-11,\"enthalpy_residual_j_per_kg\":-0.00046646245755255222,\"equilibrium_iterations\":1,\"hp_iterations\":8,\"graphite_activity\":2.5737832782468048e-05}},\"turbine\":{\"inlet\":{\"temperature_k\":1244.4423756720239,\"pressure_pa\":22000000,\"molar_mass_kg_per_kmol\":31.879346335895836,\"gas_constant_j_per_kg_k\":260.8118093888877,\"cp_frozen_j_per_kg_k\":1191.5985773915043,\"h_j_per_kg\":-421122.22902777838,\"s_j_per_kg_k\":6660.0454217313472,\"mole_fractions\":{\"H2\":1.6189413143377407e-10,\"O2\":0.85467869021169041,\"H2O\":0.07173937006904392,\"CO\":2.5643896625988353e-10,\"CO2\":0.073579889963611894,\"CH4\":1.3510072679324988e-37,\"H\":3.7700307370979456e-13,\"O\":3.8700970723243553e-09,\"OH\":2.0454668466229838e-06}},\"isentropic_outlet\":{\"temperature_k\":1190.0434221320008,\"pressure_pa\":17947456.575930119,\"molar_mass_kg_per_kmol\":31.879346335895836,\"gas_constant_j_per_kg_k\":260.8118093888877,\"cp_frozen_j_per_kg_k\":1184.321810072749,\"h_j_per_kg\":-485748.21448053396,\"s_j_per_kg_k\":6660.045421731289,\"mole_fractions\":{\"H2\":1.6189413143377407e-10,\"O2\":0.85467869021169041,\"H2O\":0.07173937006904392,\"CO\":2.5643896625988353e-10,\"CO2\":0.073579889963611894,\"CH4\":1.3510072679324988e-37,\"H\":3.7700307370979456e-13,\"O\":3.8700970723243553e-09,\"OH\":2.0454668466229838e-06}},\"outlet\":{\"temperature_k\":1206.3982829686413,\"pressure_pa\":17947456.575930119,\"molar_mass_kg_per_kmol\":31.879346335895836,\"gas_constant_j_per_kg_k\":260.8118093888877,\"cp_frozen_j_per_kg_k\":1186.5612156347402,\"h_j_per_kg\":-466360.41884565668,\"s_j_per_kg_k\":6676.226124097645,\"mole_fractions\":{\"H2\":1.6189413143377407e-10,\"O2\":0.85467869021169041,\"H2O\":0.07173937006904392,\"CO\":2.5643896625988353e-10,\"CO2\":0.073579889963611894,\"CH4\":1.3510072679324988e-37,\"H\":3.7700307370979456e-13,\"O\":3.8700970723243553e-09,\"OH\":2.0454668466229838e-06}},\"specific_work_j_per_kg\":45238.189817878301,\"efficiency_residual_j_per_kg\":9.4939605332911015e-07,\"entropy_generation_j_per_kg_k\":16.180702366297737},\"main_nozzle\":{\"chamber\":{\"temperature_k\":3723.7099701848942,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":23.601998351622338,\"gas_constant_j_per_kg_k\":352.27991613805375,\"cp_frozen_j_per_kg_k\":2037.5181405686592,\"h_j_per_kg\":-785994.16440875083,\"s_j_per_kg_k\":11126.950884330399,\"mole_fractions\":{\"H2\":0.079512871285921424,\"O2\":0.017879127225389424,\"H2O\":0.33339018958174715,\"CO\":0.31518656435082126,\"CO2\":0.15390507837779521,\"CH4\":7.6341203721806064e-10,\"H\":0.026863399605785016,\"O\":0.011203588396133985,\"OH\":0.062059180412994394}},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":3369.0623799554733,\"pressure_pa\":5621651.6922248378,\"molar_mass_kg_per_kmol\":23.601998351622338,\"gas_constant_j_per_kg_k\":352.27991613805375,\"cp_frozen_j_per_kg_k\":2016.8036712229539,\"h_j_per_kg\":-1505013.4952681472,\"s_j_per_kg_k\":11126.950884330399,\"mole_fractions\":{\"H2\":0.079512871285921424,\"O2\":0.017879127225389424,\"H2O\":0.33339018958174715,\"CO\":0.31518656435082126,\"CO2\":0.15390507837779521,\"CH4\":7.6341203721806064e-10,\"H\":0.026863399605785016,\"O\":0.011203588396133985,\"OH\":0.062059180412994394}},\"velocity_m_per_s\":1199.182497253355,\"mach\":0.99999999999943645,\"mass_flux_kg_per_m2_s\":5680.0515674463713,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1758.3310578264854,\"pressure_pa\":158518.39880708701,\"molar_mass_kg_per_kmol\":23.601998351622338,\"gas_constant_j_per_kg_k\":352.27991613805375,\"cp_frozen_j_per_kg_k\":1833.8160960933751,\"h_j_per_kg\":-4634678.5395733221,\"s_j_per_kg_k\":11126.950884330399,\"mole_fractions\":{\"H2\":0.079512871285921424,\"O2\":0.017879127225389424,\"H2O\":0.33339018958174715,\"CO\":0.31518656435082126,\"CO2\":0.15390507837779521,\"CH4\":7.6341203721806064e-10,\"H\":0.026863399605785016,\"O\":0.011203588396133985,\"OH\":0.062059180412994394}},\"velocity_m_per_s\":2774.4132263109514,\"mach\":3.1685102842449471,\"mass_flux_kg_per_m2_s\":710.00644593624963,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1760.5473966666441,\"vacuum_effective_velocity_m_per_s\":2997.6765497858169,\"effective_velocity_m_per_s\":2854.9665778120188,\"thrust_coefficient\":1.621635738530816,\"continuity_relative_residual\":7.6805228843568329e-12,\"sonic_relative_residual\":-1.1270984145994589e-12}},\"branch_nozzle\":null,\"balance\":{\"fuel_mass_flow_kg_per_s\":27.777777777777779,\"oxidizer_mass_flow_kg_per_s\":72.222222222222229,\"branch_mass_flow_kg_per_s\":74.629629629629633,\"branch_fuel_mass_flow_kg_per_s\":2.4074074074074074,\"branch_oxidizer_mass_flow_kg_per_s\":72.222222222222229,\"returned_mass_flow_kg_per_s\":74.629629629629633,\"external_mass_flow_kg_per_s\":0,\"main_mass_flow_kg_per_s\":100,\"main_fuel_mass_flow_kg_per_s\":25.37037037037037,\"main_oxidizer_mass_flow_kg_per_s\":0,\"main_oxidizer_fuel_ratio\":2.6000000000000001,\"turbine_power_w\":3376109.3756269361,\"pump_power_w\":3197303.9068455892,\"mechanical_loss_w\":168805.46756115716,\"generator_heat_w\":0,\"chamber_heat_w\":0,\"inlet_enthalpy_rate_w\":-78420610.949851096,\"exit_total_enthalpy_rate_w\":-78599416.440875083,\"main_throat_area_m2\":0.017605473966666441,\"branch_throat_area_m2\":0,\"main_thrust_n\":285496.65778120188,\"branch_thrust_n\":0,\"total_thrust_n\":285496.65778120188,\"main_effective_velocity_m_per_s\":2854.9665778120188,\"engine_effective_velocity_m_per_s\":2854.9665778120188,\"engine_specific_impulse_s\":291.1255706905028,\"mass_residual_kg_per_s\":0,\"shaft_residual_w\":-0.023183606099337339,\"energy_residual_w\":0.023462830373318866,\"mass_relative_residual\":0,\"shaft_relative_residual\":-7.228378342898791e-09,\"energy_relative_residual\":1.4925575429984455e-10},\"mixing\":{\"h_j_per_kg\":-785994.16394228837,\"elements_kmol_per_kg\":[0.019875081614041373,0.038756409147380683,0.045140581660701173]},\"diagnostics\":{\"preburner_enthalpy_residual_w\":-1.9982474407664052e-07,\"chamber_enthalpy_residual_w\":-0.046646245755255222,\"exit_element_relative_residual\":[-1.9949857752257215e-12,-3.8432859274806225e-12,8.6672032012940612e-13],\"turbine_pressure_iterations\":27},\"limitations\":[\"Research inputs, not calibrated flight-engine performance.\",\"Nine ideal CHO gases, HP 1000..6000 K; no carbon condensation or low-temperature preburner coverage.\",\"Constant-density pumps, frozen turbine/nozzles, single shaft, Q=0; no cooling, maps or transients.\",\"RP-1 is an assigned surrogate; its feed enthalpies have no liquid pressure correction.\",\"Separate external nozzle does not reproduce TQ-15A extension mixing.\",\"Mass flow sizes nozzle geometry; matched/underexpanded domain only.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "liquid_A10_vacuum",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "frozen-liquid-state",
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        "liquid",
+        "120",
+        "1e7",
+        "100",
+        "1e7",
+        "10000000",
+        "2.6",
+        "10",
+        "0",
+        "0.01"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"model\":\"ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1\",\"mode\":\"frozen-liquid-state\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"liquid_dataset_id\":\"coolprop710-cea334-liquid-molar-v1\",\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"heos710-cea334-ideal-zero-298.15-v1\",\"fuel_temperature_k\":120,\"fuel_pressure_pa\":10000000,\"oxidizer_temperature_k\":100,\"oxidizer_pressure_pa\":10000000,\"pressure_pa\":10000000,\"oxidizer_fuel_mass_ratio\":2.6000000000000001,\"area_ratio\":10,\"ambient_pressure_pa\":0,\"throat_area_m2\":0.01},\"boundary\":{\"fuel\":{\"density_kg_per_m3\":419.79379962384246,\"h_j_per_mol\":-88521.901917786687,\"h_j_per_kg\":-5517975.5422663791,\"eos_molar_mass_kg_per_mol\":0.016042799999999999,\"chemical_molar_mass_kg_per_mol\":0.016042459999999998},\"oxidizer\":{\"density_kg_per_m3\":1116.2865359646898,\"h_j_per_mol\":-12252.605872348349,\"h_j_per_kg\":-382908.29257185734,\"eos_molar_mass_kg_per_mol\":0.031998800000000001,\"chemical_molar_mass_kg_per_mol\":0.031998800000000001},\"fuel_mass_fraction\":0.27777777777777779,\"oxidizer_mass_fraction\":0.72222222222222221,\"inlet_mixture_h_j_per_kg\":-1809315.8619314469,\"element_inventory_kmol_per_kg\":[0.017315161002600464,0.069260644010401856,0.045140581660701166],\"heat_transfer_j_per_kg\":0,\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0},\"chamber\":{\"temperature_k\":3277.005595897801,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2527.9119122873822,\"h_j_per_kg\":-1809315.8619882693,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"diagnostics\":{\"element_relative_residual\":[-1.8873791418627661e-15,-1.6653345369377348e-15,-3.4069016770184074e-15],\"equilibrium_residual\":3.6637359812630166e-15,\"enthalpy_residual_j_per_kg\":-5.6822318583726883e-05,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":6.819121941012387e-05},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":2962.705035945125,\"pressure_pa\":5617537.9238356249,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2493.6699140683886,\"h_j_per_kg\":-2598624.8335045297,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":1256.4306359813584,\"mach\":1.0000000000082938,\"mass_flux_kg_per_m2_s\":5426.3673026202923,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1424.6792990817412,\"pressure_pa\":114238.01785703482,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2154.9618161296262,\"h_j_per_kg\":-6222734.6915471982,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":2970.9994377511853,\"mach\":3.3522137465031063,\"mass_flux_kg_per_m2_s\":542.63673026001732,\"energy_residual_j_per_kg\":4.6566128730773926e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1842.8535044377084,\"vacuum_effective_velocity_m_per_s\":3181.5233692990396,\"effective_velocity_m_per_s\":3181.5233692990396,\"thrust_coefficient\":1.7264114383686653,\"continuity_relative_residual\":-3.7075897907357103e-12,\"sonic_relative_residual\":1.6587620166319539e-11},\"geometry\":{\"throat_area_m2\":0.01,\"exit_area_m2\":0.10000000000000001,\"mass_flow_kg_per_s\":54.263673026202923,\"thrust_n\":172641.14383686654,\"specific_impulse_s\":324.42509616423956},\"provenance\":{\"reference_manifest_sha256\":\"b1118927139793f0ef418872fb2074b37915c624d43bfca9ad519caba2b5a651\",\"input_role\":\"assumed_research\",\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\",\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\",\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\",\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "liquid_A40_vacuum",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "frozen-liquid-state",
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        "liquid",
+        "120",
+        "1e7",
+        "100",
+        "1e7",
+        "10000000",
+        "2.6",
+        "40",
+        "0",
+        "0.01"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"model\":\"ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1\",\"mode\":\"frozen-liquid-state\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"liquid_dataset_id\":\"coolprop710-cea334-liquid-molar-v1\",\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"heos710-cea334-ideal-zero-298.15-v1\",\"fuel_temperature_k\":120,\"fuel_pressure_pa\":10000000,\"oxidizer_temperature_k\":100,\"oxidizer_pressure_pa\":10000000,\"pressure_pa\":10000000,\"oxidizer_fuel_mass_ratio\":2.6000000000000001,\"area_ratio\":40,\"ambient_pressure_pa\":0,\"throat_area_m2\":0.01},\"boundary\":{\"fuel\":{\"density_kg_per_m3\":419.79379962384246,\"h_j_per_mol\":-88521.901917786687,\"h_j_per_kg\":-5517975.5422663791,\"eos_molar_mass_kg_per_mol\":0.016042799999999999,\"chemical_molar_mass_kg_per_mol\":0.016042459999999998},\"oxidizer\":{\"density_kg_per_m3\":1116.2865359646898,\"h_j_per_mol\":-12252.605872348349,\"h_j_per_kg\":-382908.29257185734,\"eos_molar_mass_kg_per_mol\":0.031998800000000001,\"chemical_molar_mass_kg_per_mol\":0.031998800000000001},\"fuel_mass_fraction\":0.27777777777777779,\"oxidizer_mass_fraction\":0.72222222222222221,\"inlet_mixture_h_j_per_kg\":-1809315.8619314469,\"element_inventory_kmol_per_kg\":[0.017315161002600464,0.069260644010401856,0.045140581660701166],\"heat_transfer_j_per_kg\":0,\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0},\"chamber\":{\"temperature_k\":3277.005595897801,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2527.9119122873822,\"h_j_per_kg\":-1809315.8619882693,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"diagnostics\":{\"element_relative_residual\":[-1.8873791418627661e-15,-1.6653345369377348e-15,-3.4069016770184074e-15],\"equilibrium_residual\":3.6637359812630166e-15,\"enthalpy_residual_j_per_kg\":-5.6822318583726883e-05,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":6.819121941012387e-05},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":2962.705035945125,\"pressure_pa\":5617537.9238356249,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2493.6699140683886,\"h_j_per_kg\":-2598624.8335045297,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":1256.4306359813584,\"mach\":1.0000000000082938,\"mass_flux_kg_per_m2_s\":5426.3673026202923,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":950.33986437534634,\"pressure_pa\":17239.834765723779,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":1952.054269154034,\"h_j_per_kg\":-7198635.5658490844,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":3283.0838258749395,\"mach\":4.4748356812785293,\"mass_flux_kg_per_m2_s\":135.65918256327765,\"energy_residual_j_per_kg\":-4.6566128730773926e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1842.8535044377084,\"vacuum_effective_velocity_m_per_s\":3410.1657855307039,\"effective_velocity_m_per_s\":3410.1657855307039,\"thrust_coefficient\":1.8504812115118257,\"continuity_relative_residual\":-1.6435630634248355e-11,\"sonic_relative_residual\":1.6587620166319539e-11},\"geometry\":{\"throat_area_m2\":0.01,\"exit_area_m2\":0.40000000000000002,\"mass_flow_kg_per_s\":54.263673026202923,\"thrust_n\":185048.12115118257,\"specific_impulse_s\":347.74013404482713},\"provenance\":{\"reference_manifest_sha256\":\"b1118927139793f0ef418872fb2074b37915c624d43bfca9ad519caba2b5a651\",\"input_role\":\"assumed_research\",\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\",\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\",\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\",\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "liquid_A10_sealevel",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "frozen-liquid-state",
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        "liquid",
+        "120",
+        "1e7",
+        "100",
+        "1e7",
+        "10000000",
+        "2.6",
+        "10",
+        "101325",
+        "0.01"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"model\":\"ch4_o2_continuous_liquid_hp_frozen_fixed_area_v1\",\"mode\":\"frozen-liquid-state\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"liquid_dataset_id\":\"coolprop710-cea334-liquid-molar-v1\",\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"heos710-cea334-ideal-zero-298.15-v1\",\"fuel_temperature_k\":120,\"fuel_pressure_pa\":10000000,\"oxidizer_temperature_k\":100,\"oxidizer_pressure_pa\":10000000,\"pressure_pa\":10000000,\"oxidizer_fuel_mass_ratio\":2.6000000000000001,\"area_ratio\":10,\"ambient_pressure_pa\":101325,\"throat_area_m2\":0.01},\"boundary\":{\"fuel\":{\"density_kg_per_m3\":419.79379962384246,\"h_j_per_mol\":-88521.901917786687,\"h_j_per_kg\":-5517975.5422663791,\"eos_molar_mass_kg_per_mol\":0.016042799999999999,\"chemical_molar_mass_kg_per_mol\":0.016042459999999998},\"oxidizer\":{\"density_kg_per_m3\":1116.2865359646898,\"h_j_per_mol\":-12252.605872348349,\"h_j_per_kg\":-382908.29257185734,\"eos_molar_mass_kg_per_mol\":0.031998800000000001,\"chemical_molar_mass_kg_per_mol\":0.031998800000000001},\"fuel_mass_fraction\":0.27777777777777779,\"oxidizer_mass_fraction\":0.72222222222222221,\"inlet_mixture_h_j_per_kg\":-1809315.8619314469,\"element_inventory_kmol_per_kg\":[0.017315161002600464,0.069260644010401856,0.045140581660701166],\"heat_transfer_j_per_kg\":0,\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0},\"chamber\":{\"temperature_k\":3277.005595897801,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2527.9119122873822,\"h_j_per_kg\":-1809315.8619882693,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"diagnostics\":{\"element_relative_residual\":[-1.8873791418627661e-15,-1.6653345369377348e-15,-3.4069016770184074e-15],\"equilibrium_residual\":3.6637359812630166e-15,\"enthalpy_residual_j_per_kg\":-5.6822318583726883e-05,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":6.819121941012387e-05},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":2962.705035945125,\"pressure_pa\":5617537.9238356249,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2493.6699140683886,\"h_j_per_kg\":-2598624.8335045297,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":1256.4306359813584,\"mach\":1.0000000000082938,\"mass_flux_kg_per_m2_s\":5426.3673026202923,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":1424.6792990817412,\"pressure_pa\":114238.01785703482,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2154.9618161296262,\"h_j_per_kg\":-6222734.6915471982,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":2970.9994377511853,\"mach\":3.3522137465031063,\"mass_flux_kg_per_m2_s\":542.63673026001732,\"energy_residual_j_per_kg\":4.6566128730773926e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1842.8535044377084,\"vacuum_effective_velocity_m_per_s\":3181.5233692990396,\"effective_velocity_m_per_s\":2994.7962379618884,\"thrust_coefficient\":1.6250864383686652,\"continuity_relative_residual\":-3.7075897907357103e-12,\"sonic_relative_residual\":1.6587620166319539e-11},\"geometry\":{\"throat_area_m2\":0.01,\"exit_area_m2\":0.10000000000000001,\"mass_flow_kg_per_s\":54.263673026202923,\"thrust_n\":162508.64383686651,\"specific_impulse_s\":305.38422784150436},\"provenance\":{\"reference_manifest_sha256\":\"b1118927139793f0ef418872fb2074b37915c624d43bfca9ad519caba2b5a651\",\"input_role\":\"assumed_research\",\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\",\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\",\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\",\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\",\"Single fixed-area chamber-frozen inviscid nozzle; no shocks, separation or hardware losses.\"]}\n",
+      "stderr": ""
+    },
+    {
+      "label": "liquid_A40_sealevel_reject",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "frozen-liquid-state",
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        "liquid",
+        "120",
+        "1e7",
+        "100",
+        "1e7",
+        "10000000",
+        "2.6",
+        "40",
+        "101325",
+        "0.01"
+      ],
+      "exit_code": 4,
+      "stdout": "",
+      "stderr": "out_of_domain: Overexpanded frozen nozzle is outside the supported no-shock domain.\n"
+    },
+    {
+      "label": "missing_file",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "run",
+        "E:\\Work\\火发原理\\build\\preproduction-audit-20261015\\does-not-exist.ini"
+      ],
+      "exit_code": 3,
+      "stdout": "",
+      "stderr": "io_error: Cannot open case file.\n"
+    },
+    {
+      "label": "missing_argument",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "hp"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Usage (gas feed, SI): rocketperf combustion tp T_K P_PA OF TF_K TO_K\n                     rocketperf combustion hp P_PA OF TF_K TO_K\n                     rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA\n                     rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG\n                     rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170\n                     rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n                     rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
+    },
+    {
+      "label": "nonfinite",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "hp",
+        "nan",
+        "3.4",
+        "300",
+        "300"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Usage (gas feed, SI): rocketperf combustion tp T_K P_PA OF TF_K TO_K\n                     rocketperf combustion hp P_PA OF TF_K TO_K\n                     rocketperf combustion frozen P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA\n                     rocketperf combustion frozen-tp T_K P_PA OF TF_K TO_K AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG\n                     rocketperf combustion frozen-h nasa9-cea-v3.3.4 gas P_PA OF HF_JKG HO_JKG AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170\n                     rocketperf combustion frozen-liquid cea-v3.3.4-ch4l-o2l-assigned-v1 liquid CH4(L) O2(L) P_PA OF 111.643 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n                     rocketperf combustion hp-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170\n                     rocketperf combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 OF 298.15 90.170 AREA_RATIO AMBIENT_PA THROAT_M2\n"
+    },
+    {
+      "label": "liquid_sealevel_regime",
+      "command": [
+        "build\\artifacts\\release\\97de9a4472b24268a3a1bc33cd9add3e\\rocketperf.exe",
+        "combustion",
+        "regime-liquid-state",
+        "coolprop710-cea334-liquid-molar-v1",
+        "heos710-cea334-ideal-zero-298.15-v1",
+        "liquid",
+        "120",
+        "1e7",
+        "100",
+        "1e7",
+        "10000000",
+        "2.6",
+        "40",
+        "101325",
+        "0.01"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"schema_version\":1,\"model\":\"ch4_o2_continuous_liquid_hp_regime_v1\",\"mode\":\"regime-liquid-state\",\"dataset_id\":\"cea-v3.3.4-neutral-cho-n-v1\",\"liquid_dataset_id\":\"coolprop710-cea334-liquid-molar-v1\",\"inputs\":{\"feed_phase\":\"liquid\",\"enthalpy_basis\":\"heos710-cea334-ideal-zero-298.15-v1\",\"fuel_temperature_k\":120,\"fuel_pressure_pa\":10000000,\"oxidizer_temperature_k\":100,\"oxidizer_pressure_pa\":10000000,\"pressure_pa\":10000000,\"oxidizer_fuel_mass_ratio\":2.6000000000000001,\"area_ratio\":40,\"ambient_pressure_pa\":101325,\"throat_area_m2\":0.01},\"boundary\":{\"fuel\":{\"density_kg_per_m3\":419.79379962384246,\"h_j_per_mol\":-88521.901917786687,\"h_j_per_kg\":-5517975.5422663791,\"eos_molar_mass_kg_per_mol\":0.016042799999999999,\"chemical_molar_mass_kg_per_mol\":0.016042459999999998},\"oxidizer\":{\"density_kg_per_m3\":1116.2865359646898,\"h_j_per_mol\":-12252.605872348349,\"h_j_per_kg\":-382908.29257185734,\"eos_molar_mass_kg_per_mol\":0.031998800000000001,\"chemical_molar_mass_kg_per_mol\":0.031998800000000001},\"fuel_mass_fraction\":0.27777777777777779,\"oxidizer_mass_fraction\":0.72222222222222221,\"inlet_mixture_h_j_per_kg\":-1809315.8619314469,\"element_inventory_kmol_per_kg\":[0.017315161002600464,0.069260644010401856,0.045140581660701166],\"heat_transfer_j_per_kg\":0,\"inlet_kinetic_energy_j_per_kg\":0,\"shaft_work_j_per_kg\":0},\"chamber\":{\"temperature_k\":3277.005595897801,\"pressure_pa\":10000000,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2527.9119122873822,\"h_j_per_kg\":-1809315.8619882693,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"diagnostics\":{\"element_relative_residual\":[-1.8873791418627661e-15,-1.6653345369377348e-15,-3.4069016770184074e-15],\"equilibrium_residual\":3.6637359812630166e-15,\"enthalpy_residual_j_per_kg\":-5.6822318583726883e-05,\"equilibrium_iterations\":1,\"hp_iterations\":9,\"graphite_activity\":6.819121941012387e-05},\"nozzle\":{\"freeze_location\":\"chamber\",\"throat\":{\"gas\":{\"temperature_k\":2962.705035945125,\"pressure_pa\":5617537.9238356249,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":2493.6699140683886,\"h_j_per_kg\":-2598624.8335045297,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":1256.4306359813584,\"mach\":1.0000000000082938,\"mass_flux_kg_per_m2_s\":5426.3673026202923,\"energy_residual_j_per_kg\":0,\"entropy_residual_j_per_kg_k\":0},\"exit\":{\"gas\":{\"temperature_k\":950.33986437534634,\"pressure_pa\":17239.834765723779,\"molar_mass_kg_per_kmol\":18.938681152230373,\"gas_constant_j_per_kg_k\":439.02265068868411,\"cp_frozen_j_per_kg_k\":1952.054269154034,\"h_j_per_kg\":-7198635.5658490844,\"s_j_per_kg_k\":12923.899254897968,\"mole_fractions\":{\"H2\":0.20108550731416783,\"O2\":0.00052820345929098381,\"H2O\":0.43969510697038944,\"CO\":0.25699935338087782,\"CO2\":0.070926942415625013,\"CH4\":1.7531281335671153e-08,\"H\":0.015466537931230177,\"O\":0.00062091431147081471,\"OH\":0.014677416685666616}},\"velocity_m_per_s\":3283.0838258749395,\"mach\":4.4748356812785293,\"mass_flux_kg_per_m2_s\":135.65918256327765,\"energy_residual_j_per_kg\":-4.6566128730773926e-10,\"entropy_residual_j_per_kg_k\":0},\"cstar_m_per_s\":1842.8535044377084,\"vacuum_effective_velocity_m_per_s\":3410.1657855307039,\"effective_velocity_m_per_s\":3410.1657855307039,\"thrust_coefficient\":1.8504812115118257,\"continuity_relative_residual\":-1.6435630634248355e-11,\"sonic_relative_residual\":1.6587620166319539e-11},\"regime\":{\"class\":\"separation_hint\",\"ambient_over_exit_pressure\":5.8773765164764953,\"separation_reference_pa\":40530,\"separation_area_ratio\":{\"available\":true,\"area_ratio\":21.32560069981292},\"matched_area_ratio\":{\"available\":true,\"area_ratio\":10.910200420808001},\"ideal_attached\":{\"throat_area_m2\":0.01,\"mass_flow_kg_per_s\":54.263673026202923,\"thrust_n\":144518.12115118257,\"specific_impulse_s\":271.57666075388647},\"basis\":\"Summerfield-type exit-pressure fraction 0.4; empirical hint about model applicability, not a separation prediction\"},\"provenance\":{\"reference_manifest_sha256\":\"b1118927139793f0ef418872fb2074b37915c624d43bfca9ad519caba2b5a651\",\"input_role\":\"assumed_research\",\"density_mass_basis\":\"CoolProp7.1.0 EOS molar mass\",\"chemical_mass_basis\":\"CEA v3.3.4 molar mass\"},\"limitations\":[\"Restricted nine-species ideal-gas products; no ions, condensed products or soot.\",\"Assumed pure single-phase liquid table states; no flash, extrapolation or measured engine inlet claim.\",\"HEOS enthalpy uses one CEA ideal-zero alignment; remaining ideal-cp differences are retained.\",\"Inlet pressures select enthalpy, not a pump path or injector feasibility calculation.\",\"Q=0 with no inlet kinetic energy or shaft work; no split-flow or full-cycle closure.\",\"Ideal attached expansion solved with ambient ignored; regime class and 0.4*pa reference are empirical hints, not separation predictions.\"]}\n",
+      "stderr": ""
+    }
+  ],
+  "audit_kind": "preproduction_read_only",
+  "source_commit": "88c2818f78c5792052f6f84fdc25995242809128",
+  "static_analysis": {
+    "status": "PASS",
+    "compiler_version": "gcc.EXE (x86_64-win32-seh-rev0, Built by MinGW-Builds project) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "translation_units": 30,
+    "report_sha256": "88f16e59c4b18997f6832b8551753f222eb9890b5047c56211927a9cd012e842"
+  },
+  "javascript_syntax": {
+    "files": 13,
+    "failures": [],
+    "checks": [
+      {
+        "path": "deliverables/demo/src/charts.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/charts_more.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/core.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/main.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/schematic_cycle.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/schematic_parts.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_chamber.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_cycle.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_engineering.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_nozzle.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_propellant.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/tab_validation.js",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "path": "deliverables/demo/src/ui.js",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ]
+  }
+}

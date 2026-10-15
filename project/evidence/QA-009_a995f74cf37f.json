@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "PASS",
+  "started_at": "2026-10-15T07:53:03+00:00",
+  "input_fingerprint": "91044e44ae6e7eded9c22f2b36f1c1f080ad5eea3c247eb0a32f69653b9b52e6",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/debug.log"
+    },
+    {
+      "name": "release",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Release"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/release.log"
+    },
+    {
+      "name": "runner",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/runner.log"
+    },
+    {
+      "name": "handoff",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_handoff.py",
+        "-v"
+      ],
+      "log": "build/preproduction-audit-20261015/quality/handoff.log"
+    }
+  ],
+  "finished_at": "2026-10-15T08:01:04+00:00"
+}

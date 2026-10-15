@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "revision": 325,
+  "revision": 330,
   "context": {
-    "phase": "报告技术审稿与交付校验修正",
+    "phase": "PPT制作前统筹审核与内容整改准备",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-001",
       "REL-001"
     ],
     "facts": [
-      "报告7.6已列两型一级研究情景的输入、闭合方程与结果；五个车辆入口不等于五个独立物理工况。",
-      "源码/运行包已可复跑；verify读取包内输入，菜单数值与JSON逐项比对。",
-      "报告和讲稿仍为草稿，PPT、真实贡献确认及限时演练尚待完成；要求见docs/final-overview.md。",
-      "组员给定温度补燃及甲烷代理YF例保留为对照，生产C使用独立Q=0模型；来源边界见docs/incoming-code-review.md。"
+      "制作前审核发现四项P1：算例混用、残差单位、循环输入输出口径和理论答问；清单见docs/preproduction-audit-20261015.md，整改未代做。",
+      "当前C程序和研究归档可复跑；旧总览引用的阶段包在本地缺失，定稿后须重新生成并核验本轮包。",
+      "PPT尚待小组开展制作；真实贡献与实测限时演练待本人完成确认，不能作为制作前已完成事项。",
+      "五个车辆入口不等于五个独立工况；研究假设、RP-1方法身份及型号事实截止保持原边界。"
     ]
   },
   "tasks": [
@@ -1498,6 +1498,29 @@
         "kind": "quality",
         "path": "project/evidence/QA-007_db633f84f1f6.json",
         "sha256": "c4365d84f5b6d00ee132f99324b89afec0370e1748b6c2c8db68fa46f615e50c"
+      }
+    },
+    {
+      "id": "QA-009",
+      "title": "PPT制作前课程大作业统筹审核",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "docs/preproduction-audit-20261015.md",
+        "taskshot/2026-10-15_062-preproduction-audit.md"
+      ],
+      "acceptance": [
+        "核对老师要求、当前报告讲稿、数值输入与输出、代码验证和交付基础；发现按严重程度逐项提供文件定位和复现依据。",
+        "本任务仅审核并形成审查记录，不制作PPT、不代填贡献、不把未制作PPT或尚未演练当作制作前缺陷；保留后续任务真实状态。",
+        "运行统一质量入口与演示数据复核，区分软件通过、物理结论范围和实际缺口；维护交接、审查暂存区并建立本地检查点。"
+      ],
+      "owner": "root",
+      "note": "审核产物和三项验收契约已逐项自评：质量与代表性复现通过，四项P1仍明确待内容定稿时整改。审核完成不代表科学独立审查或课程最终交付完成；DOC-001和REL-001真实状态保持。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/QA-009_a995f74cf37f.json",
+        "sha256": "d3265dcf4933d5200f3ac1ce1f6535fe3c62e355bd7a2a36f5858341d8d5a450"
       }
     }
   ],
@@ -8457,6 +8480,96 @@
       "note": "验收完成。1366×768下两页左栏需内部滚动；PPT/贡献/计时演练由小组完成",
       "previous_hash": "44d11004d74043a836377605966c314179e0bbfd634e2301a42febae0cf399ee",
       "hash": "6462e8b7d4cd6f353a3df16e561cd5f791c7a86129948d293ec70aeb1ed6041f"
+    },
+    {
+      "seq": 343,
+      "at": "2026-10-15T07:41:51+00:00",
+      "task": "QA-009",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "6462e8b7d4cd6f353a3df16e561cd5f791c7a86129948d293ec70aeb1ed6041f",
+      "hash": "7dcc6e4624e11d2d50a51331a9a92e392e89afe74c5062135ec225aa73cae7b1"
+    },
+    {
+      "seq": 344,
+      "at": "2026-10-15T07:41:52+00:00",
+      "task": "QA-009",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户明确开展制作前审核；已将误生成PPT移出正式目录，现有报告、讲稿、源码和输入不改写。",
+      "previous_hash": "7dcc6e4624e11d2d50a51331a9a92e392e89afe74c5062135ec225aa73cae7b1",
+      "hash": "4bd5d5143c87ed49e1ed2c09537b4d72e53fcc132991b11722fab58fe562465e"
+    },
+    {
+      "seq": 345,
+      "at": "2026-10-15T07:52:27+00:00",
+      "task": "QA-009",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户明确制作前审核；新增审查记录，保留后续制作与真实贡献验收。旧阶段包当前工作区缺失，历史核验不改写。",
+      "previous_hash": "4bd5d5143c87ed49e1ed2c09537b4d72e53fcc132991b11722fab58fe562465e",
+      "details": {
+        "context_before": {
+          "phase": "报告技术审稿与交付校验修正",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "报告7.6已列两型一级研究情景的输入、闭合方程与结果；五个车辆入口不等于五个独立物理工况。",
+            "源码/运行包已可复跑；verify读取包内输入，菜单数值与JSON逐项比对。",
+            "报告和讲稿仍为草稿，PPT、真实贡献确认及限时演练尚待完成；要求见docs/final-overview.md。",
+            "组员给定温度补燃及甲烷代理YF例保留为对照，生产C使用独立Q=0模型；来源边界见docs/incoming-code-review.md。"
+          ]
+        },
+        "context_after": {
+          "phase": "PPT制作前统筹审核与内容整改准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "制作前审核发现四项P1：算例混用、残差单位、循环输入输出口径和理论答问；清单见docs/preproduction-audit-20261015.md，整改未代做。",
+            "当前C程序和研究归档可复跑；旧总览引用的阶段包在本地缺失，定稿后须重新生成并核验本轮包。",
+            "PPT尚待小组开展制作；真实贡献与实测限时演练待本人完成确认，不能作为制作前已完成事项。",
+            "五个车辆入口不等于五个独立工况；研究假设、RP-1方法身份及型号事实截止保持原边界。"
+          ]
+        }
+      },
+      "hash": "0668936a8a08b1dbbf2c6334161d5dfa4bbbe3f0571a334aec11b88db3a947ce"
+    },
+    {
+      "seq": 346,
+      "at": "2026-10-15T08:02:37+00:00",
+      "task": "QA-009",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "四项P1与五项P2均有源码/文档定位和复现依据；15项C探针、30源静态分析、13份JS语法、四份研究归档及2501次演示数据复核支持审核结论。六组新鲜质量PASS；只完成审核，内容整改与PPT/贡献/演练未代做。",
+      "previous_hash": "0668936a8a08b1dbbf2c6334161d5dfa4bbbe3f0571a334aec11b88db3a947ce",
+      "hash": "41f65e373da35c43431aac5b785021810fa1277c1d4cf92ad3b92639c56b7c16"
+    },
+    {
+      "seq": 347,
+      "at": "2026-10-15T08:02:39+00:00",
+      "task": "QA-009",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "审核产物和三项验收契约已逐项自评：质量与代表性复现通过，四项P1仍明确待内容定稿时整改。审核完成不代表科学独立审查或课程最终交付完成；DOC-001和REL-001真实状态保持。",
+      "previous_hash": "41f65e373da35c43431aac5b785021810fa1277c1d4cf92ad3b92639c56b7c16",
+      "hash": "b87e468e2df95dbd6acdeb2f270328e6d82ccb6b58442740265a3de984c3717f"
     }
   ]
 }
