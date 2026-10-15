@@ -4,4 +4,4 @@
 
 阅读[项目详细解读](../docs/project-guide.md)，按[交付说明](../docs/delivery.md)选择纯C源码或Windows运行包。完整维护资料在仓库；阶段预发布不代替课程最终报告和PPT。
 
-课程交付文档：研究报告[report.md](report.md)、展示大纲与讲稿[presentation.md](presentation.md)、分工说明[contributions.md](contributions.md)。`presentation.pptx`由讲稿大纲套用模板后生成。
+课程交付文档：研究报告[report.md](report.md)、展示大纲与讲稿[presentation.md](presentation.md)、逐字稿与演练方案[defense-script.md](defense-script.md)、分工说明[contributions.md](contributions.md)。`presentation.pptx`由讲稿大纲套用模板后生成。
