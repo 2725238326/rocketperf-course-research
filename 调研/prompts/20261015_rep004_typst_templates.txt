@@ -1,0 +1,13 @@
+任务：为一份大学中文课程研究报告（火箭发动机原理课程，A4竖版，含封面、目录、摘要、章节编号、公式、程序流程图、表格、参考文献、成员分工表）寻找合适且正式的 Typst 模板。
+
+请检索 GitHub 上活跃维护的 Typst 中文/学术报告模板，例如：
+- typst-doc 生态中的中文报告模板（如 typst-cn 系列）
+- 现代中文现代索引模板 modern-nju-thesis、thu-thesis-typst 等高校模板中可复用的报告模板
+- 通用学术报告模板（如 ubiquitous-octo meme 之外）：typst report template with CJK support
+
+要求：
+1. 列出3-5个候选模板，给出GitHub仓库URL、stars、最近更新时间、许可证。
+2. 说明每个模板是否支持：中文排版、封面、目录、数学公式、代码块、流程图嵌入、参考文献（bibliography）。
+3. 推荐最适合"课程研究报告"用途的一个，并说明理由。
+4. 给出典型用法（#import 或 #show 语法示例）。
+每条结论附URL和支持片段。不要输出思考过程。
