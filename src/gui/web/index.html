@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RocketPerf · 液体火箭发动机性能计算</title>
+<style>/*STYLE*/</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c3 2.5 4.5 6 4.5 10.5L14 17h-4l-2.5-4.5C7.5 8 9 4.5 12 2z"/><circle cx="12" cy="9.5" r="1.6"/><path d="M10 17l-1 4 3-1.5 3 1.5-1-4"/></svg></div>
+      <div><b>RocketPerf 液体火箭发动机性能计算</b><small>C17 计算核心 · 燃烧平衡 · 冻结喷管 · 发动机循环</small></div>
+    </div>
+    <div class="spacer"></div>
+    <span class="pill" id="op-pill" title="当前燃烧室工作点（各模块共用）"></span>
+    <span class="pill" id="calc-pill" title="最近一次 C 计算用时"><span class="dot"></span><span id="calc-text">C 核心就绪</span></span>
+    <button class="icon-btn" id="theme-btn" title="切换深色/浅色 (T)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <button class="icon-btn" id="full-btn" title="全屏 (F11)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </header>
+  <nav class="rail" id="rail">
+    <button data-view="overview"><span class="key">1</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>总览</button>
+    <button data-view="chamber"><span class="key">2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.2 1.2-3.6 2.3-4.6.3 1.6 1.1 2.6 2.2 2.9C10.8 9 11 6 12 3z"/></svg>燃烧室</button>
+    <button data-view="nozzle"><span class="key">3</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M9 3h6v4l-1 3c2 4 4 7 5 11H5c1-4 3-7 5-11L9 7z"/></svg>喷管</button>
+    <button data-view="compare"><span class="key">4</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3 3 0 0 0 6 0zM19 7l-3 7a3 3 0 0 0 6 0z"/></svg>推进剂</button>
+    <button data-view="cycle"><span class="key">5</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>循环</button>
+    <div class="grow"></div>
+    <button data-view="about"><span class="key">6</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>说明</button>
+  </nav>
+  <main id="views"></main>
+  <footer class="foot">
+    <span id="foot-model"></span>
+    <span>等效命令</span><code id="foot-cmd"></code><button id="copy-cmd" title="复制命令，可在发布目录直接运行 rocketperf.exe 复现">复制</button>
+  </footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+<div class="toast" id="toast"></div>
+<script>/*SCRIPT*/</script>
+</body>
+</html>

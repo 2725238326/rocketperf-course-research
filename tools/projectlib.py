@@ -146,6 +146,8 @@ def project_files(root: Path):
                                 and not (relative == Path("results") and d == "local"))
         for name in sorted(filenames):
             if name.startswith('.writing-'): continue
+            # A linked git worktree has a .git file at its root instead of a directory.
+            if relative == Path(".") and name == ".git": continue
             path = Path(folder) / name
             if not path.is_symlink():
                 yield path

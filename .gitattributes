@@ -13,3 +13,5 @@ tests/reference/cea/raw/** -text -whitespace
 results/validation/** -text -whitespace
 results/research/** -text -whitespace
 data/thermo/** -text -whitespace
+# Vendored SDK headers keep upstream CRLF bytes so third_party/README hashes hold.
+third_party/webview2/** -text -whitespace

@@ -82,8 +82,10 @@ def components(modules):
     body+=arrow([(1160,330),(1110,330),(1110,930),(1080,930)],"core",1140,812,True)
     body+=arrow([(1390,675),(1390,930),(1080,930)],"core",1220,916,True)
     body+=arrow([(540,375),(400,375),(400,930),(650,930)],"值类型 / 状态契约",495,916,True)
+    body+=node(60,790,330,m['gui']['name'],["WebView2窗口 · 工作线程调用"],"src/gui · 与CLI同一C求解链",h=120)
+    body+=arrow([(390,850),(435,850),(435,330),(470,330)],"JSON桥接",444,700)
     body+=text(60,1035,"纯计算核心无I/O；失败保持输出。新循环由入口焓/元素库存求Q=0状态；历史模型热量仍是维持给定状态所需交换。",20,GREEN,650)
-    body+=text(60,1070,"为避免连线遮挡：CLI → core，adapters → nozzle / thermo 的公共依赖在Mermaid中完整列出。",18,MUTED)
+    body+=text(60,1070,"为避免连线遮挡：CLI / GUI → core，adapters → nozzle / thermo 的公共依赖在Mermaid中完整列出。",18,MUTED)
     return frame("02","功能核心：支路功率与循环拓扑如何连接","实线为主要用例 / 求解；虚线为公共基础依赖。循环模块为条件性研究原型，不代表具名飞行发动机。",1180,body)
 
 
@@ -108,8 +110,9 @@ def workflow():
 
 def expected_architecture(root):
     modules=read_json(root/"project/modules.json")["modules"]
-    visible={'cli','adapters','nozzle','core','thermo','cycle'}
+    visible={'cli','gui','adapters','nozzle','core','thermo','cycle'}
     drawn={('cli','adapters'),('cli','nozzle'),('cli','core'),('cli','thermo'),('cli','cycle'),
+           ('gui','adapters'),('gui','nozzle'),('gui','core'),('gui','thermo'),('gui','cycle'),
            ('adapters','core'),('adapters','nozzle'),('adapters','thermo'),('adapters','cycle'),
            ('nozzle','core'),('nozzle','thermo'),('thermo','core'),('cycle','core'),('cycle','nozzle'),('cycle','thermo')}
     actual={(m['id'],dep) for m in modules if m['id'] in visible for dep in m['allowed_dependencies']}
