@@ -46,46 +46,37 @@ typedef struct {
     double mixture_h_j_per_kg;
     double element_inventory_kmol_per_kg[RP_CHO_ELEMENT_COUNT];
 } RpAnchorInlet;
-/**
- * 化学平衡求解器配置参数
- */
+/* Accepted ranges are enforced by the solvers; defaults in parentheses. */
 typedef struct {
-    double equilibrium_tolerance;          /* [-] 平衡残差收敛阈值，范围 [1e-13, 1e-8]，典型 1e-10 */
-    double enthalpy_tolerance_j_per_kg;    /* [J/kg] HP模式焓收敛阈值，范围 (0, 1]，典型 0.01 */
-    double hp_lower_temperature_k;         /* [K] HP二分下界，≥1000 K（NASA9下限） */
-    double hp_upper_temperature_k;         /* [K] HP二分上界，≤6000 K（NASA9上限） */
-    unsigned int max_equilibrium_iterations; /* [-] TP迭代上限，范围 [1, 10000]，典型 400 */
-    unsigned int max_hp_iterations;        /* [-] HP外层迭代上限，范围 [1, 1000]，典型 80 */
+    double equilibrium_tolerance;            /* 1e-13..1e-8 (1e-10), max |log residual| */
+    double enthalpy_tolerance_j_per_kg;      /* (0, 1] J/kg (0.01) */
+    double hp_lower_temperature_k;           /* >= 1000 K, solver bound (NASA9 fits start at 200 K) */
+    double hp_upper_temperature_k;           /* <= 6000 K */
+    unsigned int max_equilibrium_iterations; /* 1..10000 (400) Newton steps */
+    unsigned int max_hp_iterations;          /* 1..1000 (80) temperature trials */
 } RpCombustionOptions;
-/**
- * 气体混合物热力学状态
- *
- * 基于化学平衡计算（9个C-H-O物种），理想气体假设。
- */
+
+/* Ideal-gas CHO mixture; species order below. h includes formation enthalpy
+ * on the NASA9 basis, s includes the -R ln(x_i) mixing and ln(p/p_ref) terms. */
 typedef struct {
-    double temperature_k;                  /* [K] 温度，范围 1000-6000 K */
-    double pressure_pa;                    /* [Pa] 压力，范围 100 Pa - 1e9 Pa */
-    double mole_fractions[RP_CHO_SPECIES_COUNT]; /* [-] 摩尔分数 xi，Σxi = 1，顺序见注释 */
-    double molar_mass_kg_per_kmol;         /* [kg/kmol] 混合物平均摩尔质量 M = Σ(xi·Mi) */
-    double gas_constant_j_per_kg_k;        /* [J/(kg·K)] 比气体常数 R = R_universal / M */
-    double cp_frozen_j_per_kg_k;           /* [J/(kg·K)] 冻结比热 cp，成分不变时的热容 */
-    double h_j_per_kg;                     /* [J/kg] 比焓，相对于NASA9参考态（元素298.15K） */
-    double s_j_per_kg_k;                   /* [J/(kg·K)] 比熵，包含化学贡献和热贡献 */
+    double temperature_k;
+    double pressure_pa;
+    double mole_fractions[RP_CHO_SPECIES_COUNT];
+    double molar_mass_kg_per_kmol;
+    double gas_constant_j_per_kg_k;
+    double cp_frozen_j_per_kg_k;           /* fixed composition */
+    double h_j_per_kg;
+    double s_j_per_kg_k;
 } RpGasMixture;
 
-/**
- * 化学平衡计算结果
- *
- * 包含平衡态热力学性质和收敛诊断信息。
- */
 typedef struct {
-    RpGasMixture gas;                      /* 平衡态混合物性质 */
-    double element_relative_residual[RP_CHO_ELEMENT_COUNT]; /* [-] 元素守恒相对残差（C, H, O） */
-    double equilibrium_residual;           /* [-] 平衡方程残差（最大分量）*/
-    double enthalpy_residual_j_per_kg;     /* [J/kg] 焓残差（HP模式），TP模式时非零 */
-    unsigned int equilibrium_iterations;   /* [-] TP迭代次数（最终温度的迭代，不含HP试探） */
-    unsigned int hp_iterations;            /* [-] HP外层迭代次数（温度二分次数） */
-    double graphite_activity;              /* [-] 石墨活度 a_C = exp(πC − g°C(gr)/RT)；>1 时凝聚碳热力学有利 */
+    RpGasMixture gas;
+    double element_relative_residual[RP_CHO_ELEMENT_COUNT]; /* C, H, O */
+    double equilibrium_residual;           /* max |log residual| of the Newton system */
+    double enthalpy_residual_j_per_kg;
+    unsigned int equilibrium_iterations;
+    unsigned int hp_iterations;            /* false-position temperature trials */
+    double graphite_activity;              /* exp(pi_C - g_C(gr)/RT); > 1 means C(gr) would condense */
 } RpCombustionResult;
 
 /* Fixed order: H2 O2 H2O CO CO2 CH4 H O OH; elements: C H O.

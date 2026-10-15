@@ -1,168 +1,84 @@
-"""Editable SVG that connects the coursework to evidence and implemented models."""
+"""Coursework requirements → method → results, then verification and deliverables (16:9 SVG)."""
 
-from html import escape
+from diagram_kit import (BODY, INK, MUTED, NAVY, OCHRE, TEAL, TONE, ZONE, arrow, card, document,
+                         header, link, rect, text, zone)
 
+WIDTH, HEIGHT = 1920, 1080
+COL_X, COL_W = [80, 680, 1280], 560
 
-WIDTH, HEIGHT = 1920, 1480
-INK, MUTED = "#172d46", "#53697d"
-BLUE, TEAL, AMBER = "#245dc2", "#087f83", "#a56215"
-LINE, BG = "#cfdae6", "#f3f6fa"
+COLUMNS = [
+    ("01", "调查工作方案与能力", "REQ-01 · REQ-04", "../../调研/README.md",
+     ["按级段分别整理公开资料", "每个参数记出处、日期、子型、工况"],
+     ["朱雀三号遥一：一级 **9 × TQ-12A**", "　二级 **1 × TQ-15A** 真空型",
+      "长征十号乙首飞：一级 **7 台液氧煤油**", "　二级 **液氧甲烷**"],
+     "无同批单机性能参数，不给型号绝对性能"),
+    ("02", "用基本理论计算性能", "REQ-02 · REQ-05 · REQ-06", "../engineering.md",
+     ["C17：NASA9 物性 → HP 平衡求燃温", "冻结喷管 → 流量、推力、比冲"],
+     ["Pc 10 MPa、面积比 10、真空", "　甲烷 Isp **324.4 s**，RP-1 **310.6 s**",
+      "一级开式 / 补燃情景", "　推力 **290.5 / 285.5 kN**"],
+     "输入为研究假设，不是发动机标定数据"),
+    ("03", "优缺点与可能改进", "REQ-03", "../improvement-analysis.md",
+     ["固定其余输入，每次只改一个因素", "收益与代价同时给出"],
+     ["同喉面积：甲烷 Isp **+13.9 s**，推力 **−0.20%**", "面积比 10→40：Isp **+23.4 s**",
+      "　代价：出口面积 **× 4**", "富燃发生器 O/F **0.9～1.0** 触及积碳边界"],
+     "未计算喷管质量、冷却、流动分离"),
+]
 
-
-def text(x, y, value, size=21, color=INK, weight=400):
-    return (
-        f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
-        f'font-weight="{weight}">{escape(value)}</text>'
-    )
-
-
-def lines(x, y, values, size=21, color=MUTED, gap=31):
-    return "".join(text(x, y + i * gap, v, size, color) for i, v in enumerate(values))
-
-
-def rect(x, y, w, h, fill="#ffffff", stroke=LINE, radius=14):
-    return (
-        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{radius}" '
-        f'fill="{fill}" stroke="{stroke}" stroke-width="1.4"/>'
-    )
-
-
-def link(target, content):
-    return f'<a href="{escape(target, quote=True)}">{content}</a>'
-
-
-def flow(x1, y1, x2, y2, color=BLUE, dashed=False):
-    dash = ' stroke-dasharray="7 6"' if dashed else ""
-    return (
-        f'<path d="M{x1},{y1} L{x2},{y2}" stroke="{color}" '
-        f'stroke-width="2.4" fill="none" marker-end="url(#flow-arrow)"{dash}/>'
-    )
+CHECKS = [("解析解", "L0 喷管、泵功与公式一致"), ("CEA 同源对照", "液甲烷燃温最大差 **0.0044 K**"),
+          ("守恒残差", "质量 · 元素 · 焓 · 轴功"), ("可复跑", "输入、构建版本、输出哈希")]
+DELIVER = [("程序源代码", "C17 核心与测试"), ("发布版", "Windows 控制台"),
+           ("展示 PPT", "10 月 16 日 · 15 分钟"), ("研究报告", "10 项内容 · 分工")]
 
 
-def requirement(x, number, title, detail, ids):
-    return link(
-        "../requirements-map.md",
-        rect(x, 210, 576, 145)
-        + text(x + 24, 250, number, 23, BLUE, 650)
-        + text(x + 75, 251, title, 27, INK, 650)
-        + text(x + 24, 293, detail, 21, MUTED)
-        + text(x + 24, 330, ids, 17, BLUE, 600),
-    )
-
-
-def calculation_node(x, y, w, title, body, footer, color=BLUE, fill="#ffffff"):
-    return (
-        rect(x, y, w, 143, fill, color, 10)
-        + text(x + 18, y + 34, title, 23, INK, 650)
-        + lines(x + 18, y + 68, body, 19, MUTED, 27)
-        + text(x + 18, y + 124, footer, 16, color, 600)
-    )
+def column(x, number, title, ids, target, method, results, gap):
+    out = zone(x, 146, COL_W, 584, "navy")
+    out += text(x + 24, 196, number, 34, NAVY, 700)
+    out += link(target, text(x + 80, 194, title, 24, INK, 700, limit=COL_W - 104))
+    out += text(x + 80, 222, ids, 14, MUTED)
+    out += card(x + 20, 246, COL_W - 40, 132, "slate", "方法", method, 17, 30)
+    out += card(x + 20, 394, COL_W - 40, 236, "teal", "结果", results, 17, 36)
+    out += rect(x + 20, 646, COL_W - 40, 64, ZONE["ochre"], TONE["ochre"], 6, width=1)
+    out += text(x + 40, 672, "未覆盖", 13, OCHRE, 700)
+    out += text(x + 40, 698, gap, 16, BODY, limit=COL_W - 80)
+    return out
 
 
 def assignment():
-    """No live task status or completion percentages: this is a capability map."""
-    body = rect(0, 0, WIDTH, HEIGHT, BG, BG, 0)
-    body += text(60, 48, "ROCKETPERF  /  COURSEWORK × SYSTEM DESIGN", 17, BLUE, 650)
-    body += text(60, 108, "从作业要求到可验证的动力系统研究", 43, INK, 700)
-    body += text(60, 151, "研究对象：朱雀三号 · 长征十号乙   ｜   按级段、子型和工况分别比较", 24, MUTED)
-    body += text(60, 188, "老师要求回答三个问题；软件服务于研究，不以模块数量代替结论。", 20, MUTED)
-    body += requirement(60, "01", "调查工作方案与能力", "先核对对象和公开证据，再确定能比较什么。", "老师要求  REQ-01 · REQ-04")
-    body += requirement(672, "02", "用基本理论分析性能", "C语言自动计算，交代输入、方法和适用条件。", "老师要求  REQ-02 · REQ-05 · REQ-06")
-    body += requirement(1284, "03", "研究优缺点及可能改进", "包含计算，同时说明收益、代价和局限。", "老师要求  REQ-03")
+    body = header("作业要求与完成情况", "朱雀三号 · 长征十号乙：三项研究要求的方法与计算结果，经统一验证后形成四项交付", WIDTH)
+    for x, spec in zip(COL_X, COLUMNS):
+        body += column(x, *spec)
+        body += arrow([(x + COL_W / 2, 730), (x + COL_W / 2, 770)])
 
-    # Evidence → computation → interpretation. Lane widths allow readable CJK.
-    body += flow(249, 355, 249, 404)
-    body += flow(960, 355, 960, 404)
-    body += flow(1671, 355, 1671, 404)
-    body += rect(60, 410, 378, 575)
-    body += link("../../调研/README.md", text(84, 454, "证据与参数", 29, INK, 650))
-    body += text(84, 488, "两型分别建账，不拼接参数", 20, TEAL, 600)
-    body += lines(84, 542, ["原文与日期", "级段 · 子型 · 批次", "原单位 · 工况 · 系统边界"], 22, INK, 34)
-    body += '<line x1="84" y1="637" x2="414" y2="637" stroke="#cfdae6"/>'
-    body += lines(84, 678, ["事实：可定位的原文", "派生：公式与输入可复核", "假设：单独标注用途", "未知：留空，不自动补数"], 21, MUTED, 35)
-    body += link("../research-reference-coverage.md", text(84, 854, "真实型号输入仍有缺口", 21, AMBER, 650))
-    body += lines(84, 892, ["缺参数不阻断方法验证", "但不能输出型号绝对性能"], 20, MUTED, 31)
+    body += zone(80, 774, 1760, 110, "teal")
+    body += text(108, 838, "验证", 22, TEAL, 700)
+    for i, (t, d) in enumerate(CHECKS):
+        cx = 260 + i * 400
+        body += text(cx, 818, t, 18, INK, 700)
+        body += text(cx, 852, d, 16, BODY, limit=370)
+    body += arrow([(960, 884), (960, 916)])
 
-    body += flow(438, 678, 488, 678)
-    body += rect(494, 410, 932, 575, "#edf3fd", "#b6c9e9")
-    body += link("../engineering.md", text(520, 454, "C17 计算核心", 29, INK, 650))
-    body += text(520, 488, "项目实现选择：零维 / 准一维 / 稳态；不是有限元或CFD", 20, MUTED)
-    body += calculation_node(520, 518, 250, "物性与燃烧状态", ["九气相TP/HP · 固定锚点", "单相液体表 → h / 元素库存"], "连续液体已接HP；不含泵/循环")
-    body += calculation_node(821, 518, 250, "冻结喷管", ["温变物性 / 阻塞通量", "流量 · c* · 推力 · 比冲"], "给定流量 / 固定喉面积")
-    body += calculation_node(1122, 518, 278, "单点与扫描结果", ["状态 · 残差 · 越域原因", "尺寸 · 同条件性能变化"], "成功与失败都保留")
-    body += flow(770, 589, 815, 589)
-    body += flow(1071, 589, 1116, 589)
-    body += calculation_node(520, 700, 250, "恒密度泵与轴功", ["压升 / 密度 / 效率", "泵功 → 支路流量"], "入口焓与密度显式给定", TEAL)
-    body += calculation_node(821, 700, 250, "循环拓扑模型", ["给定热状态 / Q=0 HP", "开式外排 / 富氧预燃回流"], "两个模型ID · 条件性输入", TEAL)
-    body += calculation_node(1122, 700, 278, "整机口径与守恒", ["主室/支路推力与总消耗", "质量 / 元素 / 焓 / 轴功"], "无冷却/瞬态/实机标定", TEAL)
-    body += flow(770, 771, 815, 771, TEAL)
-    body += flow(1071, 771, 1116, 771, TEAL)
-    body += text(520, 888, "自动执行：严格参数输入 → CLI编排 → 纯C求解 → JSON / 运行记录", 21, INK, 600)
-    body += text(520, 927, "Python仅管理、复核和绘图；定比热旧模型保留为教学 / 回归基准。", 20, MUTED)
-    body += text(520, 960, "连续液体HP/喷管与循环原型可运行；真实型号输入和独立验证仍缺。", 20, AMBER, 600)
-
-    body += flow(1426, 678, 1476, 678)
-    body += rect(1482, 410, 378, 575)
-    body += link("../improvement-analysis.md", text(1506, 454, "研究分析", 29, INK, 650))
-    body += text(1506, 488, "比较必须使用相同条件", 20, TEAL, 600)
-    body += lines(1506, 542, ["喷管面积比与环境背压", "支路排气的轴向贡献", "效率与输入的局部响应"], 21, INK, 34)
-    body += '<line x1="1506" y1="637" x2="1836" y2="637" stroke="#cfdae6"/>'
-    body += lines(1506, 678, ["量化：推力 / 比冲收益", "同时报告：出口尺寸代价", "说明：固定几何或重新定尺寸", "指出：模型域与缺失物理"], 20, MUTED, 35)
-    body += text(1506, 854, "已有合成研究，不是型号改装", 21, AMBER, 650)
-    body += lines(1506, 892, ["局部扰动不是置信区间", "条件性趋势不是实测结论"], 20, MUTED, 31)
-
-    # A common evidence gate under all research lanes.
-    body += rect(60, 1017, 1800, 119, "#e8f4f2", "#bad9d3", 12)
-    body += text(84, 1058, "共同验证", 25, TEAL, 650)
-    for x, title, detail in [
-        (286, "解析极限与守恒", "物理关系 / 失败输出保持"),
-        (674, "固定NASA9 / CEA对照", "同源物性，不是实验验证"),
-        (1102, "完整计算记录", "输入 / 状态 / 构建与哈希"),
-        (1490, "固定版本复跑", "软件PASS ≠ 科学结论"),
-    ]:
-        body += text(x, 1058, title, 22, INK, 600)
-        body += text(x, 1100, detail, 19, MUTED)
-
-    body += text(60, 1181, "最终交付", 27, INK, 650)
-    body += text(263, 1181, "老师要求 REQ-07—REQ-11  ｜  报告与展示已有草稿，定稿与PPT待确认", 20, MUTED)
-    for x, title, detail, tag, planned in [
-        (60, "程序源代码", "C核心 · 输入 · 测试 · 构建说明", "已有阶段产物", False),
-        (522, "程序发布版", "Windows控制台即可 · 可复跑", "阶段交接 ≠ 最终发布", False),
-        (984, "展示PPT", "2026-10-16 第3—5节", "展示≤10分钟 · 提问≤5分钟", True),
-        (1446, "研究报告", "要求的10项内容 · 真实人员分工", "结论与引用须对应实际程序", True),
-    ]:
-        body += rect(x, 1205, 414, 127, "#fffaf1" if planned else "#ffffff", "#e5cda9" if planned else LINE, 12)
-        body += text(x + 22, 1242, title, 25, INK, 650)
-        body += text(x + 22, 1276, detail, 19, MUTED)
-        body += text(x + 22, 1309, tag, 17, AMBER if planned else BLUE, 600)
-    body += text(60, 1376, "尚未覆盖", 22, AMBER, 650)
-    body += text(211, 1376, "通用EOS / 国产煤油批次 · 泵图谱与喷注 · 冷却和瞬态寿命 · 型号独立整机参考", 21, MUTED)
-    body += '<line x1="60" y1="1410" x2="1860" y2="1410" stroke="#cfdae6"/>'
-    body += link("../../作业要求/大作业1_要求存档.md", text(60, 1448, "要求依据：用户照片转录与课件差异记录；未指定有限元、CFD、GUI或CEA。", 17, MUTED))
-    body += text(1070, 1448, "构型来源仍按台账日期；方法情景不写成新型号事实。", 17, MUTED)
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
-        f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-labelledby="assignment-title assignment-desc">'
-        '<title id="assignment-title">作业要求与动力系统研究架构</title>'
-        '<desc id="assignment-desc">三条课程研究主线对应证据参数、C17计算和条件性改进分析；'
-        '共同验证支撑四项交付；连续单相液体表已接HP和固定喷管，另有开式/补燃循环原型，真实型号参数与独立验证仍有缺口。</desc>'
-        '<defs><marker id="flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">'
-        '<path d="M0,0 L7,3.5 L0,7 Z" fill="#53697d"/></marker></defs>'
-        '<g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif">'
-        + body
-        + "</g></svg>\n"
-    )
+    body += zone(80, 920, 1760, 110, "slate")
+    body += text(108, 984, "交付", 22, NAVY, 700)
+    for i, (t, d) in enumerate(DELIVER):
+        cx = 260 + i * 400
+        body += card(cx, 938, 370, 74, "navy", t, [])
+        body += text(cx + 18, 1002, d, 15, BODY, limit=330)
+    body += link("../../作业要求/大作业1_要求存档.md",
+                 text(1840, 1062, "数值为给定假设下的程序结果，输入见报告第 3、7 节　·　要求原文：作业要求/大作业1_要求存档.md　·　交付 REQ-07～11",
+                      13, MUTED, anchor="end"))
+    return document("assignment", WIDTH, HEIGHT, "作业要求与完成情况",
+                    "三项作业要求（REQ-01至REQ-06）各自的方法、结果与未覆盖内容；经解析解、CEA同源对照、守恒残差与复跑验证；"
+                    "四项交付（REQ-07至REQ-11）：程序源代码、发布版、展示 PPT、研究报告。",
+                    body)
 
 
 MERMAID = """flowchart TD
-  A[REQ-01 调查两型工作方案与能力] --> E[证据与参数：版本 / 工况 / 来源 / 未知]
-  B[REQ-02 C语言理论性能计算] --> C[C17：NASA9 / TP与HP / 冻结喷管 / 开式与补燃原型]
-  L[纯C连续CH4/O2单相表：密度 / 化学焓 / 元素库存] --> C
-  R[REQ-03 优缺点与可能改进，含计算] --> I[条件性收益 / 尺寸代价 / 输入响应]
+  A[REQ-01/04 调查两型工作方案与能力] --> E[按级段整理：出处 / 日期 / 子型 / 工况]
+  B[REQ-02/05/06 用基本理论计算性能] --> C[C17：NASA9 → HP平衡 → 冻结喷管 → 推力]
+  R[REQ-03 优缺点与改进，含计算] --> I[固定其余输入，单因素比较]
   E --> C --> I
-  C --> V[解析关系 / 固定软件对照 / 保存结果与哈希 / 复跑]
+  C --> V[验证：解析解 / CEA同源对照 / 守恒残差 / 归档复跑]
   I --> V
-  V --> D[REQ-07至REQ-11：源码 / 发布版 / PPT / 报告]
-  V -. 证据或范围不足 .-> E
-  U[未覆盖：通用EOS与国产煤油批次 / 泵后压升与分流 / 全循环硬件 / 冷却分离寿命 / 型号独立参考] -. 限制结论 .-> I
+  V --> D[REQ-07至11：源代码 / 发布版 / PPT / 报告]
+  U[未覆盖：喷管质量 / 冷却 / 流动分离 / 型号实测参数] -. 限制结论 .-> I
 """

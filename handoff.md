@@ -2,7 +2,7 @@
 
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
-2026-10-15用户明确当前需要讲稿、讲解思路、模板具体选页和逐页图文替换指导，由小组组合PPT后再共同优化，不要求代做PPT。展示15分钟、提问另计5分钟，两人分段主讲，姓名与贡献稍后本人填写。制作前审核见[审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)，本轮整改与指导见[063记录](taskshot/2026-10-15_063-two-speaker-presentation.md)。正文建议12页，A讲1–6、B讲7–12，预算13:45含100秒演示，未人工实测。旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验。
+2026-10-15用户明确当前需要讲稿、讲解思路、模板具体选页和逐页图文替换指导，由小组组合PPT后再共同优化，不要求代做PPT。展示15分钟、提问另计5分钟，两人分段主讲，姓名与贡献稍后本人填写。制作前审核见[审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)，本轮整改与指导见[063记录](taskshot/2026-10-15_063-two-speaker-presentation.md)。正文建议13页（[064记录](taskshot/2026-10-15_064-presentation-enrichment.md)新增P5程序实现页，正文改用模板5），A讲1–7、B讲8–13，备答P14–P20，预算13:55含100秒演示，未人工实测。旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验。
 
 ## 研究产物
 

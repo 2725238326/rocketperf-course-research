@@ -100,15 +100,6 @@ RpStatus rp_cycle_case_load(const char *utf8_path, RpCycleCase *output, RpError 
     }
     *output = study; rp_error_clear(error); return RP_OK;
 }
-static int write_string(FILE *stream, const char *value)
-{
-    if (fputc('"', stream) == EOF) { return 0; }
-    for (const char *p = value; *p != '\0'; ++p) {
-        if ((*p == '"' || *p == '\\') && fputc('\\', stream) == EOF) { return 0; }
-        if (fputc((unsigned char)*p, stream) == EOF) { return 0; }
-    }
-    return fputc('"', stream) != EOF;
-}
 static int write_gas(FILE *stream, const RpGasMixture *gas)
 {
     if (fprintf(stream, "{\"temperature_k\":%.17g,\"pressure_pa\":%.17g,\"h_j_per_kg\":%.17g,"
@@ -147,9 +138,9 @@ static int write_report(FILE *stream, const RpCycleCase *study, const RpCycleRes
 {
     if (fprintf(stream, "{\"schema_version\":1,\"program_version\":\"%s\",\"model\":\"%s\",\"dataset_id\":\"%s\","
                         "\"boundary\":\"pump_inlets_to_two_nozzle_exits_auxiliary_shaft_and_mechanical_heat\",\"case\":{\"id\":",
-        RP_VERSION, RP_PRESCRIBED_CYCLE_MODEL, rp_thermo_dataset_id()) < 0 || !write_string(stream, study->id) ||
-        fputs(",\"kind\":", stream) < 0 || !write_string(stream, study->kind) ||
-        fputs(",\"source_ref\":", stream) < 0 || !write_string(stream, study->source_ref) ||
+        RP_VERSION, RP_PRESCRIBED_CYCLE_MODEL, rp_thermo_dataset_id()) < 0 || !rp_text_write_json_string(stream, study->id) ||
+        fputs(",\"kind\":", stream) < 0 || !rp_text_write_json_string(stream, study->kind) ||
+        fputs(",\"source_ref\":", stream) < 0 || !rp_text_write_json_string(stream, study->source_ref) ||
         fputs("},\"inputs\":{", stream) < 0) { return 0; }
     for (size_t i = 0U; i < FIELD_COUNT; ++i) {
         double value;
@@ -239,7 +230,7 @@ RpStatus rp_cycle_case_study(const char *utf8_path, RpCycleStudyField field,
                     m->thrust_relative_change, m->isp_relative_change, m->elasticity_defined ? "true" : "false",
                     m->thrust_secant_elasticity, m->isp_secant_elasticity) < 0) { goto io_failure; }
         } else {
-            if (fputs(",\"error\":", stream) < 0 || !write_string(stream, p->message)) { goto io_failure; }
+            if (fputs(",\"error\":", stream) < 0 || !rp_text_write_json_string(stream, p->message)) { goto io_failure; }
             if (p->status != RP_OUT_OF_DOMAIN && p->status != RP_INVALID_ARGUMENT) { numeric_failure = 1; }
         }
         if (fputc('}', stream) == EOF) { goto io_failure; }

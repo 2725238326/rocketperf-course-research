@@ -1,57 +1,96 @@
-"""Render the CLI/model branches as one static 16:9 report figure."""
-from html import escape
+"""Program flowchart: input zone → five command branches through solver stages → result zone."""
 from pathlib import Path
+
+from diagram_kit import (BODY, INK, MUTED, NAVY, STROKE, TONE, arrow, card, document, header,
+                         legend, line, rect, text, zone)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'docs/architecture/report-flow.svg'
+WIDTH, HEIGHT = 1920, 1080
+TOP, ROW_H, ROW_GAP = 214, 86, 22
+STEP_X0, STEP_W, STEP_GAP = 620, 220, 34
+END_X = 1600
+
+# Step tone = what kind of physics it computes.
+KIND = {"in": "slate", "turbo": "ochre", "chem": "teal", "noz": "navy"}
+BRANCHES = [
+    ("理想喷管", "run", [("in", "给定 γ、R、T₀、P₀"), ("noz", "定比热等熵膨胀")]),
+    ("推力室", "combustion frozen-*", [("in", "入口焓与元素量"), ("chem", "HP 绝热平衡"), ("noz", "冻结喷管")]),
+    ("给定温度循环", "cycle prescribed", [("turbo", "泵功与涡轮功"), ("chem", "TP 平衡 → 所需 Q"), ("noz", "主喷管 + 支路喷管")]),
+    ("绝热开式 / 补燃", "cycle adiabatic", [("in", "泵后焓（液体表）"), ("turbo", "轴功平衡 → 支路流量"),
+                                     ("chem", "预燃室、主室 HP"), ("noz", "主喷管 + 外排")]),
+    ("过膨胀诊断", "nozzle regime", [("in", "给定 γ、R、T₀、P₀"), ("noz", "理想 pe、匹配面积比")]),
+]
+
+
+def step(x, y, kind, label):
+    tone = KIND[kind]
+    return (rect(x, y + 14, STEP_W, ROW_H - 28, "#ffffff", TONE[tone], 6, width=1.4)
+            + f'<rect x="{x}" y="{y + 14}" width="6" height="{ROW_H - 28}" rx="2" fill="{TONE[tone]}"/>'
+            + text(x + STEP_W / 2 + 3, y + ROW_H / 2 + 6, label, 17, INK, 500, anchor="middle", limit=STEP_W - 24))
 
 
 def main():
-    parts = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" '
-             'font-family="Microsoft YaHei,Arial,sans-serif">',
-             '<rect width="1600" height="900" fill="#f5f7f8"/>',
-             '<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">'
-             '<path d="M0 0L8 4L0 8Z" fill="#557983"/></marker></defs>']
+    body = header("程序流程图", "一次计算：读入并检查输入 → 按命令进入对应求解链 → 成功写出结果，失败只返回退出码", WIDTH)
+    rows = [TOP + i * (ROW_H + ROW_GAP) for i in range(len(BRANCHES))]
+    bottom = rows[-1] + ROW_H
+    mid = (TOP + bottom) / 2
 
-    def text(x, y, value, size=22, color='#243c46', bold=False):
-        parts.append(f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
-                     f'font-weight="{"bold" if bold else "normal"}">{escape(value)}</text>')
+    body += zone(80, TOP - 50, 300, bottom - TOP + 70, "slate", "① 输入")
+    body += card(104, mid - 150, 252, 120, "slate", "读入", ["命令行参数", "INI 算例 · 中文菜单"], 16, 26)
+    body += arrow([(230, mid - 30), (230, mid + 6)])
+    body += card(104, mid + 10, 252, 120, "slate", "检查", ["单位、取值范围、模型 ID", "**不合格即停止**"], 16, 26)
 
-    def box(x, y, w, h, title, lines, color='#206b78'):
-        parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="9" '
-                     f'fill="white" stroke="{color}" stroke-width="2"/>')
-        text(x+18, y+33, title, 24, color, True)
-        for i, line in enumerate(lines):
-            text(x+18, y+65+29*i, line, 20)
+    body += zone(400, TOP - 50, END_X - 400 + 30, bottom - TOP + 70, "navy", "② 按命令选择求解链")
+    body += arrow([(356, mid + 70), (404, mid + 70)])
+    body += line(420, rows[0] + ROW_H / 2, 420, rows[-1] + ROW_H / 2, STROKE, 1.6)
+    body += line(404, mid + 70, 420, mid + 70, STROKE, 1.6)
+    for (label, command, steps), y in zip(BRANCHES, rows):
+        cy = y + ROW_H / 2
+        body += rect(436, y + 10, 166, ROW_H - 20, "#ffffff", "#c3ccd8", 6)
+        body += text(452, cy - 4, label, 17, INK, 700, limit=140)
+        body += text(452, cy + 20, command, 12, MUTED, mono=True, limit=140)
+        body += line(420, cy, 436, cy, STROKE, 1.6)
+        body += arrow([(602, cy), (STEP_X0 - 3, cy)])
+        x = STEP_X0
+        for j, (kind, s) in enumerate(steps):
+            body += step(x, y, kind, s)
+            x += STEP_W
+            if j < len(steps) - 1:
+                body += arrow([(x, cy), (x + STEP_GAP - 3, cy)]); x += STEP_GAP
+        body += line(x, cy, END_X, cy, "#9aa6b4", 1.4)
+    body += line(END_X, rows[0] + ROW_H / 2, END_X, rows[-1] + ROW_H / 2, "#9aa6b4", 1.4)
 
-    def wire(path, arrow=True):
-        marker = ' marker-end="url(#arrow)"' if arrow else ''
-        parts.append(f'<path d="{path}" fill="none" stroke="#557983" stroke-width="2"{marker}/>')
+    body += zone(1650, TOP - 50, 190, bottom - TOP + 70, "teal", "③ 结果")
+    body += arrow([(END_X, mid), (1670, mid)])
+    body += card(1672, TOP + 10, 150, 150, "teal", "成功", ["JSON", "或中文表格"], 16, 28)
+    body += card(1672, bottom - 160, 150, 150, "ochre", "失败", ["退出码 2/3/4", "**不写结果**"], 16, 28)
+    body += text(1680, mid + 6, "求解完成？", 16, INK, 700)
+    body += arrow([(1747, mid - 16), (1747, TOP + 166)])
+    body += arrow([(1747, mid + 14), (1747, bottom - 166)])
 
-    text(45, 65, '程序流程：选择入口，再执行对应计算', 34, bold=True)
-    text(45, 107, '各支路独立调用；NASA9物性、HP和喷管内核按模型需要复用。', 23)
-    box(40, 330, 290, 182, '输入与校验', ['CLI / 交互菜单 / INI', '解析单位、范围、模型', '进入所选计算支路'])
-    branches = [
-        ('L0 理想喷管', ['给定 γ、R、T₀、P₀、面积与背压 → 定比热喷管；不经过HP'], '#206b78'),
-        ('推力室', ['气态 / 液态入口焓与元素 → HP → 冻结喷管 → 流量与推力'], '#206b78'),
-        ('给定热状态外排循环', ['泵 → 给定温度TP → 涡轮与分流 → 两喷管及所需热量Q'], '#206b78'),
-        ('绝热开式 / 富氧补燃循环', ['泵后焓 → 预燃HP与轴功 → 分流或回流 → 主室HP / 喷管'], '#206b78'),
-        ('regime 独立诊断入口', ['理想状态 → pa/pe、匹配面积比、0.4pa经验参考；不预测分离'], '#a26127'),
-    ]
-    wire('M330 421H365', False)
-    wire('M365 219V699', False)
-    wire('M1210 219V699', False)
-    for i, (title, lines, color) in enumerate(branches):
-        y = 170+120*i
-        box(410, y, 765, 98, title, lines, color)
-        wire(f'M365 {y+49}H404')
-        wire(f'M1175 {y+49}H1210', False)
-    wire('M1210 401H1248')
-    box(1255, 300, 305, 240, '返回状态', ['成功：JSON / 中文表格', '失败：状态码与诊断', '计算失败不写回结果', '归档由运行工具完成'])
-    text(45, 797, '附着喷管：pa > pe 返回越域。仅部分交互入口提供诊断；循环不会自动改换模型。', 23)
-    text(45, 843, 'c*由喉部阻塞流量得到；给定温度循环的所需Q与绝热循环的Q=0分开处理。', 23)
-    parts.append('</svg>')
-    OUT.write_text('\n'.join(parts)+'\n', encoding='utf-8')
+    body += legend(400, bottom + 52, [("slate", "入口状态", False), ("ochre", "泵与涡轮", False),
+                                       ("teal", "燃烧平衡", False), ("navy", "喷管膨胀", False)])
+
+    y = 820
+    body += rect(80, y, 1760, 196, "#f7f9fb", "none", 10)
+    body += text(108, y + 44, "关键关系", 16, NAVY, 700)
+    for i, f in enumerate(["c* = pc·At / ṁ", "CF = F / (pc·At)", "Isp = F / (ṁ·g0)"]):
+        body += (f'<text x="{108 + i * 260}" y="{y + 92}" font-size="23" fill="{INK}" '
+                 f'font-family="Cambria Math,Cambria,Times New Roman,serif">{f}</text>')
+    body += text(108, y + 138, "ṁ 为喉部阻塞质量流量，pc 为燃烧室压力，At 为喉部面积，g0 = 9.80665 m/s²。", 16, MUTED)
+    notes = ["附着喷管遇 pa > pe 返回越域，不自动转入诊断；诊断给理想解和经验参考，不计算分离位置。",
+             "给定温度循环输出维持温度所需的热量 Q；绝热循环 Q = 0，由入口焓和元素量求燃温。",
+             "退出码 2 = 命令用法错误，3 = 文件或格式错误，4 = 求解失败（含越域、不收敛）。"]
+    body += text(960, y + 44, "使用要点", 16, NAVY, 700)
+    for i, n in enumerate(notes):
+        body += text(960, y + 84 + i * 34, n, 16, BODY, limit=860)
+    body += line(940, y + 24, 940, y + 172, "#d5dbe3")
+    svg = document("flow", WIDTH, HEIGHT, "程序流程图",
+                   "输入经读入与检查后，按命令进入理想喷管、推力室、给定温度循环、绝热开式/补燃循环或过膨胀诊断五条求解链；"
+                   "求解成功输出JSON或中文表格，失败返回退出码且不写结果。",
+                   body)
+    OUT.write_text(svg, encoding='utf-8', newline='\n')
     print(OUT)
 
 

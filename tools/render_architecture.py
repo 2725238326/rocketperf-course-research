@@ -64,27 +64,38 @@ def business():
 
 
 def components(modules):
+    """Three tinted layers; module cards with header bands; arrows are call direction."""
+    from diagram_kit import (INK as K_INK, MUTED as K_MUTED, NAVY, STROKE, arrow as k_arrow, card,
+                             document, header, legend, rect, text as k_text, zone)
     m={x['id']:x for x in modules}
-    body=node(60,230,310,m['cli']['name'],["run / thermo / combustion","cycle / study"],"src/cli · 用例入口",h=145)
-    body+=node(470,230,430,m['adapters']['name'],["闭合INI / JSON / UTF-8路径"],"src/adapters · 成功求解后才输出",h=145)
-    body+=node(470,510,430,m['cycle']['name'],["历史：给定热状态外排","新增：Q=0开式 / 富氧补燃","HP混合 · 质量/元素/轴功"],"prototype · 无冷却/瞬态/实机标定",state=m['cycle']['state'],h=165)
-    body+=node(1160,230,460,m['thermo']['name'],["NASA9 → 九气相产物TP / HP","固定CH4(L) / RP-1反应物锚点","单相液体表 → h / 元素库存 → HP"],"RP-1限10MPa；不含泵 / 分流 / 循环闭合",h=190)
-    body+=node(1160,510,460,m['nozzle']['name'],["定比热 / 温变冻结 / 固定喉部","甲烷与RP-1同几何成对比较","单喷管流量、推力与显式残差"],"主喷管与支路复用 · 非整机闭合",h=165)
-    body+=node(650,870,430,m['core']['name'],["夹逼求根 / 状态码 / 显式失败"],"所有计算模块允许依赖的公共基础",h=120)
-    body+=arrow([(370,280),(470,280)],"文件流程",420,266)
-    body+=arrow([(685,375),(685,510)],"循环用例",751,486)
-    body+=arrow([(900,570),(1020,570),(1020,300),(1160,300)],"发生器 / 主室TP",1030,423)
-    body+=arrow([(900,625),(1160,625)],"两路喷管",1030,611)
-    body+=arrow([(1390,510),(1390,420)],"气相组分 / 物性",1494,472)
-    body+=arrow([(215,375),(215,450),(970,450),(970,250),(1160,250)],"thermo / combustion 直接用例",550,435)
-    body+=arrow([(150,375),(150,745),(1480,745),(1480,675)],"定比热 / 冻结喷管直接用例",1240,733)
-    body+=arrow([(685,675),(685,870)],"core",723,791,True)
-    body+=arrow([(1160,330),(1110,330),(1110,930),(1080,930)],"core",1140,812,True)
-    body+=arrow([(1390,675),(1390,930),(1080,930)],"core",1220,916,True)
-    body+=arrow([(540,375),(400,375),(400,930),(650,930)],"值类型 / 状态契约",495,916,True)
-    body+=text(60,1035,"纯计算核心无I/O；失败保持输出。新循环由入口焓/元素库存求Q=0状态；历史模型热量仍是维持给定状态所需交换。",20,GREEN,650)
-    body+=text(60,1070,"为避免连线遮挡：CLI → core，adapters → nozzle / thermo 的公共依赖在Mermaid中完整列出。",18,MUTED)
-    return frame("02","功能核心：支路功率与循环拓扑如何连接","实线为主要用例 / 求解；虚线为公共基础依赖。循环模块为条件性研究原型，不代表具名飞行发动机。",1180,body)
+    W,H=1920,1080
+    body=header("代码模块与调用关系","C17，30 个源文件约 5900 行；上层调用下层，计算层与基础层不做文件读写、打印和动态内存分配",W)
+
+    body+=zone(80,146,1760,176,"slate","入口层")
+    body+=card(104,190,820,112,"slate",m['cli']['name'],["命令分派 · 参数解析 · **中文交互菜单**","结果写 stdout，诊断写 stderr，失败返回非零退出码"],16,28,note="src/cli")
+    body+=card(996,190,820,112,"slate",m['adapters']['name'],["读取 **INI 算例**，检查单位与取值范围","输出 JSON 或中文表格；**求解成功后才写出**"],16,28,note="src/adapters")
+    body+=k_arrow([(924,246),(992,246)])
+
+    body+=zone(80,346,1760,370,"navy","计算层")
+    body+=card(104,390,540,232,"teal",m['thermo']['name'],["**NASA9** 九系数物性","九气相 **TP / HP** 化学平衡","液态 CH₄ / O₂ 物性表求入口焓","石墨活度 **a_C > 1** 时拒算"],16,30,note="src/thermo")
+    body+=card(690,390,540,232,"navy",m['nozzle']['name'],["**定比热**理想喷管","**冻结、变物性**喷管","喉部阻塞求流量、c*、推力、比冲","过膨胀诊断（不预测分离）"],16,30,note="src/nozzle")
+    body+=card(1276,390,540,232,"ochre",m['cycle']['name'],["泵功与涡轮**轴功平衡**","给定温度外排循环（旧模型）","**Q = 0** 开式 / 富氧补燃循环","质量、元素、焓、轴功守恒"],16,30,note="src/cycle",dashed=True)
+    body+=k_arrow([(1276,506),(1234,506)])
+    body+=k_arrow([(690,506),(648,506)])
+    body+=k_arrow([(1546,622),(1546,672),(374,672),(374,626)])
+    body+=k_text(960,664,"循环直接调用 HP 平衡，求预燃室与主室状态",15,K_MUTED,anchor="middle")
+    for x in (374,820,1100,1546): body+=k_arrow([(x,302),(x,386)])
+
+    body+=zone(80,740,1760,160,"slate","基础层")
+    body+=card(104,784,1712,96,"slate",m['core']['name'],["夹逼求根 · 有限数检查 · **状态码与错误信息**；被所有模块使用，本身无依赖"],16,28,note="src/core")
+    body+=k_arrow([(960,716),(960,780)],dashed=True)
+
+    body+=legend(104,940,[("slate","入口 / 基础",False),("teal","物性与燃烧",False),("navy","喷管",False),("ochre","研究原型（未实机标定）",True)])
+    body+=k_text(104,986,"实线箭头：调用方向。虚线箭头：所有模块共用基础层。依赖方向由 tools/project.py check 逐个 #include 检查。",16,K_MUTED)
+    body+=k_text(104,1018,"输入 / 输出层也直接引用三个计算模块来组装算例；完整依赖列表见 components.mmd。",16,K_MUTED)
+    return document("components",W,H,"代码模块与调用关系",
+                    "入口层（命令行、输入输出）调用计算层的热化学、喷管和循环模块；循环调用喷管与热化学，喷管调用热化学；所有模块共用数值与错误契约基础层。",
+                    body)
 
 
 def workflow():

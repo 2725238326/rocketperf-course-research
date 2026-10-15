@@ -41,10 +41,10 @@ typedef struct {
 /* Prescribed thermal states, constant-density feed properties and a single shaft.
  * Only externally exhausted generator gas is supported (return fields == 0).
  * The main and generator TP states use their separate CH4/O2 inventories.
- * Pump inlet enthalpies MUST use the same formation-enthalpy reference as NASA9;
- * density and enthalpy are prescribed, NOT evaluated liquid properties.
- * Heat terms are the exchange REQUIRED to maintain the prescribed temperatures,
- * not a prediction of combustion efficiency or an adiabatic cycle closure. */
+ * Pump inlet enthalpies must use the NASA9 formation-enthalpy reference;
+ * density and enthalpy are prescribed, not evaluated liquid properties.
+ * Heat terms are the exchange needed to hold the prescribed temperatures,
+ * not a combustion-efficiency prediction or an adiabatic cycle closure. */
 typedef struct {
     double total_mass_flow_kg_per_s;
     double overall_oxidizer_fuel_ratio;

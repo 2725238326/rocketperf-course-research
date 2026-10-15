@@ -111,7 +111,7 @@ static void test_tp_hp_reference(void)
     CHECK(near(result.gas.molar_mass_kg_per_kmol, 21.46443, 2e-5));
     CHECK(fabs(result.enthalpy_residual_j_per_kg) <= 0.01);
     for (unsigned int i = 0U; i < 9U; ++i) { CHECK(near(result.gas.mole_fractions[i], hp_y[i], 2e-6)); }
-    /* Illinois secant with warm-started TP: guard the iteration count, and check the
+    /* Illinois false position with warm-started TP: guard the iteration count, and check the
      * warm-started state equals a cold 6000 K continuation at the same temperature. */
     CHECK(result.hp_iterations >= 1U && result.hp_iterations <= 15U);
     {

@@ -122,6 +122,11 @@ static RpPromptStatus prompt_word(const char *label, const char *fallback,
     return RP_PROMPT_VALUE;
 }
 
+/* Prompt one number into field; cancel or EOF returns from the caller. */
+#define P(field, label, unit, fallback) \
+    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
+      if (s != RP_PROMPT_VALUE) { return s; } }
+
 static void print_failure(RpStatus status, const RpError *error)
 {
     (void)fprintf(stdout, "  失败 (%s): %s\n", rp_status_name(status), error->message);
@@ -176,15 +181,11 @@ static RpPromptStatus flow_continuous_liquid(void)
     RpContinuousLiquidHpResult result;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(tf, "燃料温度 Tf", "K", 120.0) P(pf, "燃料压力 Pf", "MPa", 10.0)
     P(to, "氧化剂温度 To", "K", 100.0) P(po, "氧化剂压力 Po", "MPa", 10.0)
     P(pc, "燃烧室压力 Pc", "MPa", 10.0) P(of, "氧燃比 O/F", "", 3.4)
     P(ar, "喷管面积比 Ae/At", "", 10.0) P(pa, "环境背压 pa", "kPa", 0.0)
     P(at, "喉部面积 At", "m2", 0.01)
-#undef P
     feed.dataset_id = rp_liquid_feed_dataset_id();
     feed.enthalpy_basis_id = rp_liquid_feed_enthalpy_basis_id();
     feed.fuel_phase = RP_LIQUID_SINGLE_PHASE; feed.oxidizer_phase = RP_LIQUID_SINGLE_PHASE;
@@ -215,13 +216,9 @@ static RpPromptStatus flow_anchor_liquid(void)
     RpCombustionResult chamber;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(pc, "燃烧室压力 Pc", "MPa", 10.0) P(of, "氧燃比 O/F", "", 3.4)
     P(ar, "喷管面积比 Ae/At", "", 10.0) P(pa, "环境背压 pa", "kPa", 0.0)
     P(at, "喉部面积 At", "m2", 0.01)
-#undef P
     feed.pressure_pa = pc * 1e6; feed.oxidizer_fuel_mass_ratio = of;
     feed.fuel_anchor_id = "CH4(L)"; feed.oxidizer_anchor_id = "O2(L)";
     feed.fuel_temperature_k = 111.643; feed.oxidizer_temperature_k = 90.170;
@@ -252,13 +249,9 @@ static RpPromptStatus flow_kerosene(void)
     RpError error = {0};
     RpStatus status;
     (void)fputs("  固定 RP-1 方法: Pc=10 MPa, RP-1 298.15 K, O2(L) 90.170 K, O/F 2.2..4.0。\n", stdout);
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(of, "氧燃比 O/F", "", 2.6)
     P(ar, "喷管面积比 Ae/At", "", 10.0) P(pa, "环境背压 pa", "kPa", 0.0)
     P(at, "喉部面积 At", "m2", 0.01)
-#undef P
     feed.dataset_id = rp_kerosene_dataset_id();
     feed.reactants.pressure_pa = 1e7; feed.reactants.oxidizer_fuel_mass_ratio = of;
     feed.reactants.fuel_anchor_id = "RP-1"; feed.reactants.oxidizer_anchor_id = "O2(L)";
@@ -286,14 +279,10 @@ static RpPromptStatus flow_gas_feed(void)
     RpCombustionResult chamber;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(pc, "燃烧室压力 Pc", "MPa", 10.0) P(of, "氧燃比 O/F", "", 3.4)
     P(tf, "气态甲烷温度 Tf", "K", 300.0) P(to, "气态氧温度 To", "K", 300.0)
     P(ar, "喷管面积比 Ae/At", "", 10.0) P(pa, "环境背压 pa", "kPa", 0.0)
     P(at, "喉部面积 At", "m2", 0.01)
-#undef P
     feed.pressure_pa = pc * 1e6; feed.oxidizer_fuel_mass_ratio = of;
     feed.fuel_temperature_k = tf; feed.oxidizer_temperature_k = to;
     feed.phase = RP_FEED_GAS;
@@ -332,12 +321,8 @@ static RpPromptStatus flow_propellant_compare(void)
     RpPropellantComparisonResult result;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(ch4_of, "甲烷氧燃比 O/F", "", 3.4) P(rp1_of, "RP-1氧燃比 O/F", "", 2.6)
     P(ar, "喷管面积比 Ae/At", "", 10.0) P(pa, "环境背压 pa", "kPa", 0.0)
-#undef P
     input.methane = (RpContinuousLiquidFeed){rp_liquid_feed_dataset_id(),
         rp_liquid_feed_enthalpy_basis_id(), RP_LIQUID_SINGLE_PHASE, RP_LIQUID_SINGLE_PHASE,
         120.0, 1e7, 100.0, 1e7, 1e7, ch4_of};
@@ -357,12 +342,8 @@ static RpPromptStatus flow_gas_hp(void)
     RpCombustionResult chamber;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(pc, "燃烧室压力 Pc", "MPa", 10.0) P(of, "氧燃比 O/F", "", 3.4)
     P(tf, "气态甲烷温度 Tf", "K", 300.0) P(to, "气态氧温度 To", "K", 300.0)
-#undef P
     feed.pressure_pa = pc * 1e6; feed.oxidizer_fuel_mass_ratio = of;
     feed.fuel_temperature_k = tf; feed.oxidizer_temperature_k = to;
     feed.phase = RP_FEED_GAS;
@@ -440,9 +421,6 @@ static RpPromptStatus flow_ideal_nozzle(void)
     RpNozzleResult result;
     RpError error = {0};
     RpStatus status;
-#define P(field, label, unit, fallback) \
-    { const RpPromptStatus s = prompt_number(label, unit, fallback, &field); \
-      if (s != RP_PROMPT_VALUE) { return s; } }
     P(input.gamma, "比热比 gamma", "", 1.4)
     P(input.gas_constant_j_kg_k, "气体常数 R", "J/(kg·K)", 287.0)
     P(input.stagnation_temperature_k, "总温 T0", "K", 300.0)
@@ -450,7 +428,6 @@ static RpPromptStatus flow_ideal_nozzle(void)
     P(input.throat_area_m2, "喉部面积 At", "m2", 0.001)
     P(input.area_ratio, "面积比 Ae/At", "", 1.6875)
     P(input.ambient_pressure_pa, "环境背压 pa", "kPa", 0.0)
-#undef P
     input.stagnation_pressure_pa *= 1e6; input.ambient_pressure_pa *= 1e3;
     status = rp_nozzle_solve_ideal(&input, NULL, &result, &error);
     if (status == RP_OUT_OF_DOMAIN) {

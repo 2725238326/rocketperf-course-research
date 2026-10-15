@@ -1,44 +1,10 @@
-/**
- * frozen.c: 冻结流喷管求解器（理想气体混合物、温变比热）
- *
- * 物理模型：
- *   1. 等熵膨胀：ds = 0，从燃烧室滞止状态到出口
- *   2. 燃烧室冻结：燃烧室到喉部及出口沿用相同摩尔分数（无化学反应）
- *   3. 理想气体物性：cp(T), h(T), s(T,P) 来自NASA9多项式（温度相关）
- *   4. 一维稳定流：忽略边界层、激波、径向速度
- *
- * 与ideal.c的区别：
- *   - ideal.c：γ = 常数（理想气体，单一比热比）
- *   - frozen.c：cp(T), γ(T) 变化（仍用理想气体状态方程）
- *
- * 守恒方程：
- *   - 能量：h0 = h + u²/2（总焓守恒，h0为燃烧室滞止焓）
- *   - 熵：s = s0（等熵膨胀，s0为燃烧室滞止熵）
- *   - 质量：ṁ = ρ·A·u（质量流量守恒）
- *
- * 数值方法：
- *   - 外层：二分查找出口温度 Te，使得面积比匹配
- *   - 内层：给定 Te，计算 Pe（等熵关系）、ue（能量守恒）、Ae（质量守恒）
- *   - 残差：log(Ae_calculated / Ae_target)
- *
- * 适用范围：
- *   ✓ 燃烧室高温燃气；膨胀温度下限取各物种NASA9拟合区下限（rp_cho_minimum_temperature）
- *   ✓ 燃烧室平衡态已知（9物种C-H-O混合物）
- *   ✓ 声明采用化学冻结近似；不由本程序预测停留时间或反应时间尺度
- *   ✗ 不适用：碳烟析出、H₂O高温再解离、液滴携带
- *   ✗ 不建模：边界层、激波、流动分离、非设计点损失
- *
- * 输入约束：
- *   - chamber: 燃烧室平衡态（温度、压力、摩尔分数）
- *   - throat_area_m2: 喉部面积 [m²]，需 > 0
- *   - exit_area_ratio: 面积比 Ae/At，范围 [1.0, 1e4]
- *   - ambient_pressure_pa: 背压 [Pa]，需 ≥ 0
- *
- * 验证（rp_nozzle_solve_frozen内拒绝超限结果）：
- *   - 能量残差：|h + u²/2 - h0| ≤ 1e-5 J/kg（喉部与出口）
- *   - 熵残差：|s - s0| ≤ 1e-7 J/(kg·K)；连续性与声速相对残差 ≤ 1e-8
- *   - 与NASA CEA冻结流模式对照（Frozen expansion）
- */
+/* Chamber-frozen ideal-gas nozzle with NASA9 cp(T): unlike ideal.c, gamma
+ * varies along the expansion. Each station is parameterized by T; p follows
+ * from s(T,p) = s0, u from h0 = h + u^2/2, and the area from continuity.
+ * The throat is the sonic root and the exit is bisected in T down to the
+ * highest NASA9 lower fit bound of the species present. Results are rejected
+ * if |dh0| > 1e-5 J/kg, |ds| > 1e-7 J/(kg K), or the continuity/sonic
+ * relative residuals exceed 1e-8. Compared against CEA frozen mode. */
 
 #include "rocketperf/frozen_nozzle.h"
 #include "rocketperf/numeric.h"

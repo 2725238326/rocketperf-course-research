@@ -1,49 +1,11 @@
-/**
- * adiabatic.c: 绝热发动机循环求解器
- *
- * 物理模型：
- *   液体火箭发动机的热力循环分析（燃气发生器循环和补燃循环）。
- *   假设：绝热（无热损失）、稳态流动、理想燃烧和膨胀。
- *
- * 支持的循环类型：
- *   1. 燃气发生器循环（Gas Generator, GG）
- *      - 预燃室产生燃气驱动涡轮，涡轮排气直接排出
- *      - 主燃烧室使用剩余推进剂，经主喷管膨胀
- *      - 需要外部指定涡轮出口压力
- *
- *   2. 富氧补燃循环（Oxygen-Rich Staged Combustion, ORSC）
- *      - 全部氧化剂进入预燃室，富氧燃气驱动涡轮后回流主燃烧室与新鲜燃料补燃
- *      - 所有燃气都经主喷管排出，无外排
- *      - 涡轮出口压力由轴功平衡二分求解，须不低于主室压力+回流压降
- *
- * 守恒方程：
- *   - 质量守恒：ṁ_fuel + ṁ_ox = ṁ_total（分配到预燃室和主燃烧室）
- *   - 功率平衡：W_turbine·η_shaft = W_pump_fuel + W_pump_ox + W_aux
- *   - 焓守恒：每个燃烧室的HP求解，涡轮的等熵膨胀
- *
- * 关键假设：
- *   1. 泵效率和涡轮效率为给定常数（等熵效率）
- *   2. 管路压降为给定常数（Pa）
- *   3. 燃烧效率100%（达到化学平衡）
- *   4. 喷管等熵冻结膨胀（理想气体）
- *
- * 适用范围：
- *   ✓ 碳氢燃料（CH4、煤油）+ 液氧（LOX）推进剂组合
- *   ✓ 主室/预燃室压力 100 Pa-1 GPa（输入校验范围），HP温度 1000-6000 K
- *   ✓ 声明假设下的研究情景，不是实机标定
- *   ✗ 不建模：冷却剂再生加热、密封泄漏、凝聚碳、泵图谱、瞬态启动
- *   ✗ 不建模：结构热应力、材料限制、加工约束
- *
- * 输入约束：
- *   - 推进剂必须是CH燃料 + 纯O2氧化剂，元素库存基于NASA9-CEA-v334
- *   - GG循环：必须指定turbine_outlet_pressure_pa > 0
- *   - ORSC循环：turbine_outlet_pressure_pa自动计算（输入必须为0）
- *
- * 验证：
- *   - 质量相对残差 ≤ 1e-12，轴功相对残差 ≤ 2e-8，出口元素相对残差 ≤ 1e-8（finish_balance）
- *   - 全局焓残差上限随HP焓容差与流量缩放，见finish_balance
- *   - 预燃室/主室HP状态与NASA CEA部件卡对照（tests/test_cycle_reference.py）
- */
+/* Adiabatic single-shaft GG/ORSC cycle (contract in engine_cycle.h).
+ * Shaft: eta_shaft * W_turbine = W_pump_fuel + W_pump_ox + W_aux.
+ * GG: turbine p_out is declared and the branch flow follows from the shaft
+ * load. ORSC: the branch flow is fixed by the preburner O/F and p_out is
+ * bisected between chamber p + return drop and preburner p.
+ * finish_balance rejects mass > 1e-12, shaft > 2e-8 and exit element
+ * > 1e-8 relative residuals; the energy bound scales with the HP tolerance.
+ * Component HP states are checked against CEA in tests/test_cycle_reference.py. */
 
 #include "rocketperf/engine_cycle.h"
 #include "rocketperf/numeric.h"
@@ -90,14 +52,10 @@ static RpStatus validate_input(const RpEngineCycleInput *input, RpError *error)
         !rp_isfinite(input->branch_area_ratio) || input->branch_area_ratio < 1.0 || input->branch_area_ratio > 1e4 ||
         !rp_isfinite(input->branch_axial_projection) || input->branch_axial_projection < 0.0 || input->branch_axial_projection > 1.0 ||
         !rp_isfinite(input->ambient_pressure_pa) || input->ambient_pressure_pa < 0.0) {
-        char message[512];
+        char message[192];
         (void)snprintf(message, sizeof(message),
-            "Invalid cycle input detected. Check: "
-            "chamber_pressure_pa=%.3e (need 100 Pa-1 GPa), "
-            "overall_O/F=%.3f (need >0), "
-            "turbine_efficiency=%.3f (need 0-1), "
-            "preburner_O/F=%.3f (need >0). "
-            "Verify all flow rates, pressures, efficiencies and area ratios are finite and within physical bounds.",
+            "Invalid cycle input: Pc=%.3e Pa (100 Pa-1 GPa), O/F=%.4g (>0), "
+            "turbine efficiency=%.4g (0-1), preburner O/F=%.4g (>0); flows and areas finite.",
             input->chamber_pressure_pa, input->overall_oxidizer_fuel_ratio,
             input->turbine_efficiency, input->preburner_oxidizer_fuel_ratio);
         return rp_error_set(error, RP_INVALID_ARGUMENT, message);
@@ -113,12 +71,10 @@ static RpStatus validate_input(const RpEngineCycleInput *input, RpError *error)
         }
         if (!rp_isfinite(lower) || lower >= input->preburner_pressure_pa ||
             input->preburner_oxidizer_fuel_ratio <= input->overall_oxidizer_fuel_ratio) {
-            char message[512];
+            char message[192];
             (void)snprintf(message, sizeof(message),
-                "ORSC cycle physical constraint violated: "
-                "Preburner pressure (%.3e Pa) must exceed chamber+return drop (%.3e Pa), "
-                "and preburner O/F (%.3f) must exceed overall O/F (%.3f) to leave fresh fuel for main chamber. "
-                "Adjust preburner_pressure_pa or preburner_oxidizer_fuel_ratio.",
+                "ORSC needs preburner pressure %.3e Pa > chamber + return drop %.3e Pa "
+                "and preburner O/F %.4g > overall O/F %.4g.",
                 input->preburner_pressure_pa, lower,
                 input->preburner_oxidizer_fuel_ratio, input->overall_oxidizer_fuel_ratio);
             return rp_error_set(error, RP_OUT_OF_DOMAIN, message);

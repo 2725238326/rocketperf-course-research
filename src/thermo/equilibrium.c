@@ -1,47 +1,11 @@
-/**
- * equilibrium.c: 化学平衡求解器（Gibbs自由能最小化）
- *
- * 物理模型：
- *   等温等压（TP）或等焓等压（HP）条件下，C-H-O体系的化学平衡态。
- *   目标：最小化混合物的总Gibbs自由能 G = Σ(ni·gi)，受元素守恒约束。
- *
- *   采用的9个气相物种（理想气体）：
- *     H2, O2, H2O, CO, CO2, CH4, H, O, OH
- *
- *   3个元素守恒方程：
- *     C: Σ(ni·Ci) = C_total
- *     H: Σ(ni·Hi) = H_total
- *     O: Σ(ni·Oi) = O_total
- *
- *   加上物质总量归一化：
- *     Σ(ni) = N
- *
- * 数值方法：
- *   - TP问题：求解4维非线性方程组（Newton-Raphson + 步长阻尼 + 线搜索）
- *     变量：πC, πH, πO, ln(N)（元素化学势 + 总物质量）
- *     初值策略：从6000 K高温平衡态出发，每500 K逐步延拓到目标温度（continuation），
- *     避免低温下Newton迭代落入局部极小或Jacobian病态区域
- *   - HP问题：保持夹逼的Illinois假位法查找T；TP热启动失败回退冷延拓
- *   - Log-sum-exp技巧：保持残差和Jacobian数值稳定（避免exp溢出）
- *
- * 物性数据：
- *   - 热力学性质来自NASA9多项式（CEA数据库）
- *   - 平衡求解温度：1000-6000 K（本求解器限定域；NASA9拟合本身覆盖200-6000 K）
- *   - 数值接收压力：100 Pa - 1 GPa；不等于全范围理想气体物理适用性验证
- *
- * 适用范围：
- *   ✓ 碳氢燃料（CH4、煤油）+ O2燃烧的火箭发动机
- *   ✓ 高温（>1000 K）、理想气体行为
- *   ✓ 燃烧室、预燃室的化学平衡态
- *   ✗ 不建模：固相（碳黑、金属氧化物）、液相、离子
- *   ✗ 不建模：动力学（点火延迟、解离/复合速率）
- *   ✗ 不适用：含N物种（如肼、硝酸）、含金属（如铝粉）
- *
- * 验证：
- *   - 与NASA CEA计算对照（TP和HP模式）
- *   - 元素守恒检查：|Σ(ni·Ei) - E_total| / E_total < tol
- *   - 焓守恒检查（HP）：|h_mixture - h_target| < tol
- */
+/* Gibbs minimization for nine ideal CHO gases (element-potential method).
+ * With ln n_i = ln N - g_i/RT - ln(p/p_ref) + sum_e a_ie pi_e, the unknowns
+ * are pi_C, pi_H, pi_O and ln N: three element balances plus sum n_i = N.
+ * TP: damped Newton with backtracking, cold-started at 6000 K and continued
+ * downward in 500 K steps. HP: bracketed Illinois false position on T, each
+ * trial warm-started from the nearer bracket state. Solver domain is
+ * 1000..6000 K and 100 Pa..1 GPa; no condensed phases, ions or N species.
+ * Compared with CEA TP and HP reference runs. */
 
 #include "rocketperf/combustion.h"
 #include "rocketperf/numeric.h"

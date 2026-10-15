@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 337,
+  "revision": 341,
   "context": {
     "phase": "双人讲述与PPT逐页制作指导",
     "evidence_cutoff": "2026-10-06",
@@ -1553,6 +1553,54 @@
         "path": "project/evidence/DOC-003_9bae6a35128e.json",
         "sha256": "2e7d2b9d3f107fdc70f7d677767625045a6c48211f50083ec976018b18680bfd"
       }
+    },
+    {
+      "id": "DOC-004",
+      "title": "讲述内容充实：程序实现页与成果表述审阅",
+      "status": "ACTIVE",
+      "priority": 1,
+      "depends_on": [
+        "DOC-003"
+      ],
+      "required_artifacts": [
+        "deliverables/ppt-structure.md",
+        "deliverables/defense-script.md",
+        "deliverables/presentation.md",
+        "deliverables/timing-chart.md",
+        "deliverables/ppt-materials/p5-program.csv",
+        "taskshot/2026-10-15_064-presentation-enrichment.md"
+      ],
+      "acceptance": [
+        "审阅DOC-003讲述材料，修正备答页号等不一致，压缩防御性结尾，使每页以成果结论收束。",
+        "新增C程序实现与工程能力页，数字由保存的C演示数据和仓库实况导出，选定模板页并给出替换指导；时间预算重新核算。",
+        "更新讲稿、时间表、演示编排、交接与taskshot，新鲜统一质量PASS后建立本地检查点，不外部推送。"
+      ],
+      "owner": "root",
+      "note": "程序页数据文件按新页序命名为p5-program.csv",
+      "verification": null
+    },
+    {
+      "id": "GUI-001",
+      "title": "桌面图形界面：WebView2窗口与C桥接",
+      "status": "READY",
+      "priority": 2,
+      "depends_on": [],
+      "required_artifacts": [
+        "src/gui/gui_bridge.c",
+        "src/gui/gui_main.c",
+        "src/gui/web/index.html",
+        "tools/gui_build.py",
+        "tests/test_gui.py",
+        "taskshot/2026-10-15_065-desktop-gui.md"
+      ],
+      "acceptance": [
+        "老师允许的“带用户友好界面形式”发布版：rocketperf-gui.exe为静态链接单文件，只导入Windows系统DLL，WebView2运行时随系统提供；全部计算由C17核心在进程内完成。",
+        "燃烧室、喷管、推进剂对比、循环四个模块实时调用C；同输入下与已测CLI数值一致（tests/test_gui.py逐项比对），拒算保留C状态与原文消息。",
+        "第三方webview 0.12.0与WebView2 SDK头文件记录来源、版本、许可与哈希；模块登记、架构重生成并视觉检查；浏览器预览与原生窗口实际截图核验。"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
     }
   ],
   "events": [
@@ -8802,6 +8850,105 @@
       "note": "讲述与制作指导的修订契约已满足：12页正文逐项选模板并给替换步骤，双人讲稿/转场/问答、演示分工和待填计时表齐全，图表数据核对完成。当前负责人语义核对与机械PASS不代表独立科学审查；PPT由小组组合后再优化，DOC-001与REL-001保持原待办。",
       "previous_hash": "d5d0d0e75c9b89f1d814681f884df4714d78e481b90f5c5e95becdeb2da7ad52",
       "hash": "2f3299f96213688cd1575584fd1970fb6096b02fcd550be9a740ba38cd61dc62"
+    },
+    {
+      "seq": 355,
+      "at": "2026-10-15T10:34:49+00:00",
+      "task": "DOC-004",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "2f3299f96213688cd1575584fd1970fb6096b02fcd550be9a740ba38cd61dc62",
+      "hash": "d6deae0724d35fc405e61d91cd350e2e7ff9aa58baa8ea6bd1aa08526b00b0ad"
+    },
+    {
+      "seq": 356,
+      "at": "2026-10-15T10:34:50+00:00",
+      "task": "DOC-004",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户要求审阅并充实代码与工作的展示",
+      "previous_hash": "d6deae0724d35fc405e61d91cd350e2e7ff9aa58baa8ea6bd1aa08526b00b0ad",
+      "hash": "1971ca3516fa745ebaf77b8b45953369321e84db4006df1c4d8fcb7e8127b23f"
+    },
+    {
+      "seq": 357,
+      "at": "2026-10-15T10:40:27+00:00",
+      "task": "DOC-004",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "程序页数据文件按新页序命名为p5-program.csv",
+      "previous_hash": "1971ca3516fa745ebaf77b8b45953369321e84db4006df1c4d8fcb7e8127b23f",
+      "details": {
+        "contract_before": {
+          "id": "DOC-004",
+          "title": "讲述内容充实：程序实现页与成果表述审阅",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-003"
+          ],
+          "required_artifacts": [
+            "deliverables/ppt-structure.md",
+            "deliverables/defense-script.md",
+            "deliverables/presentation.md",
+            "deliverables/ppt-materials/p11-engineering.csv",
+            "taskshot/2026-10-15_064-presentation-enrichment.md"
+          ],
+          "acceptance": [
+            "审阅DOC-003讲述材料，修正备答页号等不一致，压缩防御性结尾，使每页以成果结论收束。",
+            "新增C程序实现与工程能力页，数字由保存的C演示数据和仓库实况导出，选定模板页并给出替换指导；时间预算重新核算。",
+            "更新讲稿、时间表、演示编排、交接与taskshot，新鲜统一质量PASS后建立本地检查点，不外部推送。"
+          ],
+          "owner": "root",
+          "note": "用户要求审阅并充实代码与工作的展示",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-004",
+          "title": "讲述内容充实：程序实现页与成果表述审阅",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-003"
+          ],
+          "required_artifacts": [
+            "deliverables/ppt-structure.md",
+            "deliverables/defense-script.md",
+            "deliverables/presentation.md",
+            "deliverables/timing-chart.md",
+            "deliverables/ppt-materials/p5-program.csv",
+            "taskshot/2026-10-15_064-presentation-enrichment.md"
+          ],
+          "acceptance": [
+            "审阅DOC-003讲述材料，修正备答页号等不一致，压缩防御性结尾，使每页以成果结论收束。",
+            "新增C程序实现与工程能力页，数字由保存的C演示数据和仓库实况导出，选定模板页并给出替换指导；时间预算重新核算。",
+            "更新讲稿、时间表、演示编排、交接与taskshot，新鲜统一质量PASS后建立本地检查点，不外部推送。"
+          ],
+          "owner": "root",
+          "note": "程序页数据文件按新页序命名为p5-program.csv",
+          "verification": null
+        }
+      },
+      "hash": "55b06099692c2f607963e3ab78a7e1e13eb8f57f2b183e9b1d97b526d8ba5c2a"
+    },
+    {
+      "seq": 358,
+      "at": "2026-10-15T12:40:46+00:00",
+      "task": "GUI-001",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "55b06099692c2f607963e3ab78a7e1e13eb8f57f2b183e9b1d97b526d8ba5c2a",
+      "hash": "a8b1ad620b3b97c625a842c88ecece7e5c12cefe622d167ce179eee34c3b2891"
     }
   ]
 }

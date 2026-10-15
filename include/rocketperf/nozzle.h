@@ -5,39 +5,31 @@
 
 #include <stddef.h>
 
-/**
- * 喷管求解输入参数
- *
- * 所有单位为SI基本单位。理想气体假设，比热比γ为常数。
- */
+/* SI units throughout. Constant gamma; the stagnation temperature is not
+ * checked against NASA9 fit ranges. */
 typedef struct {
-    double gamma;                      /* [-] 比热比 cp/cv，范围 (1.0, 2.0]，燃气典型 1.15-1.40 */
-    double gas_constant_j_kg_k;        /* [J/(kg·K)] 比气体常数 R = R_universal / M */
-    double stagnation_temperature_k;   /* [K] 滞止温度（喉部上游总温），NASA9 范围 300-6000 K */
-    double stagnation_pressure_pa;     /* [Pa] 滞止压力（喉部上游总压），需 > 0 */
-    double area_ratio;                 /* [-] 面积比 Ae/At，范围 [1.0, 1e4]，典型 2-100 */
-    double throat_area_m2;             /* [m²] 喉部面积 At，需 > 0 */
-    double ambient_pressure_pa;        /* [Pa] 背压/环境压力，≥ 0；超膨胀时（pa > pe）求解拒绝 */
+    double gamma;                      /* (1, 2] */
+    double gas_constant_j_kg_k;
+    double stagnation_temperature_k;
+    double stagnation_pressure_pa;
+    double area_ratio;                 /* Ae/At, 1..1e4 */
+    double throat_area_m2;
+    double ambient_pressure_pa;        /* >= 0; pa > pe is rejected as overexpanded */
 } RpNozzleInput;
 
-/**
- * 喷管求解输出结果
- *
- * 出口参数基于理想冻结膨胀。推力包含压力项（pe-pa）·Ae。
- */
 typedef struct {
-    double exit_mach;                  /* [-] 出口马赫数 Me，超音速膨胀通常 Me > 1 */
-    double exit_temperature_k;         /* [K] 出口静温 Te = T0 / (1 + (γ-1)/2 · Me²) */
-    double exit_pressure_pa;           /* [Pa] 出口静压 pe，等熵膨胀计算 */
-    double exit_velocity_m_s;          /* [m/s] 出口速度 ue = Me · √(γ R Te) */
-    double exit_area_m2;               /* [m²] 出口面积 Ae = At · (Ae/At) */
-    double characteristic_velocity_m_s;/* [m/s] 特征速度 c* = Pc·At/ṁ，反映燃烧室效率 */
-    double mass_flow_kg_s;             /* [kg/s] 质量流量 ṁ = Pc·At/c*，喉部阻塞流 */
-    double thrust_n;                   /* [N] 推力 F = ṁ·ue + (pe-pa)·Ae */
-    double thrust_coefficient;         /* [-] 推力系数 CF = F / (Pc·At) */
-    double specific_impulse_s;         /* [s] 比冲 Isp = F / (ṁ·g0)，g0 = 9.80665 m/s² */
-    double relative_area_residual;     /* [-] 面积方程残差（相对值），收敛检查用 */
-    unsigned int root_iterations;      /* [-] 求根迭代次数 */
+    double exit_mach;
+    double exit_temperature_k;
+    double exit_pressure_pa;
+    double exit_velocity_m_s;
+    double exit_area_m2;
+    double characteristic_velocity_m_s;
+    double mass_flow_kg_s;             /* choked: Pc*At/c* */
+    double thrust_n;                   /* mdot*ue + (pe - pa)*Ae */
+    double thrust_coefficient;         /* F/(Pc*At) */
+    double specific_impulse_s;         /* F/(mdot*g0) */
+    double relative_area_residual;     /* |A/A*(Me)/(Ae/At) - 1| */
+    unsigned int root_iterations;
 } RpNozzleResult;
 
 typedef struct {

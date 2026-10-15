@@ -419,7 +419,6 @@ static int cli_main(int argc, char **argv)
 
 #ifdef _WIN32
 #include <windows.h>
-#include <stdlib.h>
 
 int wmain(int argc, wchar_t **wide_argv);
 int wmain(int argc, wchar_t **wide_argv)

@@ -400,7 +400,6 @@ usage:
     return 2;
 }
 
-
 int rp_cli_propellant_case(const char *path, int text_mode)
 {
     return propellant_case_main(path, text_mode);

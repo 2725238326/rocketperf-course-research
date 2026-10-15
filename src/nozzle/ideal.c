@@ -38,53 +38,9 @@ static int valid_base_input(const RpNozzleInput *input)
            positive_finite(input->throat_area_m2);
 }
 
-/**
- * rp_nozzle_solve_ideal: 理想冻结膨胀喷管求解
- *
- * 物理模型：
- *   1. 等熵膨胀：ds = 0，从滞止状态到出口，无熵增
- *   2. 成分冻结：从喉部到出口，物种摩尔分数不变（无重组、解离、凝聚）
- *   3. 理想气体：p = ρRT，γ = cp/cv = 常数（不随温度和压力变化）
- *   4. 一维稳定流：忽略边界层、激波、径向速度、时间演化
- *
- * 适用范围：
- *   ✓ 高温燃气（>1000 K）在中等压力（1-30 MPa）下的短时膨胀
- *   ✓ 喷管长度较短（停留时间 <10 ms），化学冻结假设成立
- *   ✗ 不适用：碳烟析出、H₂O/CO₂高温再解离、液滴携带、边界层分离
- *   ✗ 不建模：流动分离、激波、非设计点损失、二维/三维效应
- *
- * 输入约束：
- *   - gamma: 比热比，范围 (1.0, 2.0]，燃气典型值 1.15-1.40
- *   - stagnation_pressure_pa: 滞止压力 [Pa]，需 > 0
- *   - stagnation_temperature_k: 滞止温度 [K]，需 > 0（定比热模型，不调用NASA9）
- *   - area_ratio: 面积比 Ae/At，范围 [1.0, 1e4]，典型 2-100
- *   - throat_area_m2: 喉部面积 [m²]，需 > 0
- *   - ambient_pressure_pa: 背压 [Pa]，需 ≥ 0；当 pa > pe 时拒绝（超膨胀）
- *
- * 失败条件：
- *   RP_INVALID_ARGUMENT: 输入指针为空
- *   RP_OUT_OF_DOMAIN: 参数超出物理约束（如 gamma≤1 或 area_ratio<1）
- *                      或超膨胀条件（ambient_pressure > exit_pressure）
- *   RP_NO_CONVERGENCE: 面积-马赫数关系求解不收敛（罕见，通常因输入异常）
- *
- * 验证：
- *   - 解析解检查：Ma=2 时的面积比 A/A* ≈ 1.6875（γ=1.4）
- *   - 守恒检查：质量流量 ṁ = ρ*A*u* = Pc·At/c*
- *
- * 典型调用：
- *   RpNozzleInput input = {
- *       .gamma = 1.25,
- *       .gas_constant_j_kg_k = 350.0,
- *       .stagnation_temperature_k = 3500.0,
- *       .stagnation_pressure_pa = 10e6,  // 10 MPa
- *       .area_ratio = 20.0,
- *       .throat_area_m2 = 0.01,
- *       .ambient_pressure_pa = 101325.0  // 1 atm (sea level)
- *   };
- *   RpNozzleResult result;
- *   RpError error = {0};
- *   RpStatus status = rp_nozzle_solve_ideal(&input, NULL, &result, &error);
- */
+/* Constant-gamma isentropic expansion: bisect the supersonic branch of the
+ * area-Mach relation on [1, upper], upper doubled (up to 512) to bracket Ae/At.
+ * Analytic check: gamma=1.4, M=2 gives Ae/At=1.6875 (test_core.c). */
 RpStatus rp_nozzle_solve_ideal(const RpNozzleInput *input,
                              const RpRootOptions *options,
                              RpNozzleResult *output, RpError *error)
