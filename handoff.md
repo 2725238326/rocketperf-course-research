@@ -6,6 +6,8 @@
 
 ## 研究产物
 
+当前最终组装入口已更新为[最终PPT制作指南](deliverables/ppt-making-final.md)，配套defense-script-final.md已同步：P2任务、P3构型、P4路径、P5公式，P7–P11研究页号不变，P12核验、P13四级段结论。主讲仍14页、13:30，备答3页；默认静态图表即可完成。旧ppt-plan-solo.md仅作上一版参考。四张GUI截图已查看，其中cycle-orsc.png实际为开式，不能作补燃图。详情见[066记录](taskshot/2026-10-16_066-final-ppt-making-guide.md)。
+
 2026-10-16用户依据PPT启动脚本选择先做单人方案与讲稿。当前单人制作入口为[逐页方案](deliverables/ppt-plan-solo.md)和[单人讲稿](deliverables/defense-script-final.md)：模板31，封面＋12页正文＋致谢，共14页主讲，另3页备答，预算13:30含100秒GUI演示。搭档只答富氧补燃问题。旧双人文件保留，不再据其页码组装这版。GUI截图及控件操作尚待核验，封面人员与日期、人工计时仍待确认；未生成PPTX。本次按用户“只写文档、不改project/”范围保留任务登记和生成工作面，未流转DOC-004。过程见[065记录](taskshot/2026-10-16_065-solo-presentation-prep.md)。
 
 | 需要理解的内容 | 阅读入口 | 使用边界 |
