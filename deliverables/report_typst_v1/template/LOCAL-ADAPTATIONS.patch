@@ -1,0 +1,170 @@
+--- a/covers.typ
++++ b/covers.typ
+@@ -59,6 +59,7 @@
+ #let cover_report(
+   title: "",
+   title_2: "",
++  title_3: "",
+   authors: "",
+   class: "",
+   grade: "",
+@@ -72,16 +73,34 @@
+   type: 1,
+   ..args
+ ) = {
++  let date_parts = date
+   date = date_format(date: date, lang: lang, size: 字号.三号)
+   align(center + horizon)[
+-    #image("assets/校名.jpg", width: 40%)
+-    #image("assets/校徽.jpg", width: 60%)
++    #if type == "6" {
++      text(title_3, font: 字体.黑体, size: 字号.小二)
++      v(2cm)
++    } else {
++      image("assets/校名.jpg", width: 40%)
++      image("assets/校徽.jpg", width: 60%)
++    }
+     #text(title, font: 字体.宋体, size: 字号.小一, weight: "bold")
+     #v(0.5em)
+-    #if (type == "4" or type == "5") {
++    #if (type == "4" or type == "5" or type == "6") {
+         text(title_2, font: 字体.宋体, size: 字号.二号, weight: "bold")
+     }
+-    #if (lang == "en") {
++    #if type == "6" {
++      v(2cm)
++      set text(size: 12pt)
++      grid(
++        columns: (80pt, 300pt),
++        column-gutter: 12pt,
++        row-gutter: 22pt,
++        align: (right, left),
++        [课题对象], [朱雀三号与长征十号乙动力系统],
++        [小组成员], [#authors],
++        [提交日期], [#date_format(date: date_parts, lang: lang, size: 12pt)],
++      )
++    } else if (lang == "en") {
+       let title = (_info_key("Project Name"), _info_value(title_2))
+       let authors = (_info_key("Student Name"), _info_value(authors))
+       let id = (_info_key("Student ID"), _info_value(id))
+--- a/fonts.typ
++++ b/fonts.typ
+@@ -1,14 +1,14 @@
+ // typst 读取字体的规则是从前往后，如果找不到对应就往后找
+ // 下面是我觉得还算好看的字体，不过基本只使用了宋体和黑体，英文统一用 Arial，中文分宋体、黑体和楷体
+ #let 字体 = (
+-  宋体: ("Arial", "Noto Serif CJK SC"),
+-  黑体: ("Arial", "Noto Sans CJK SC"),
+-  思源宋体: "Noto Serif CJK SC",
+-  思源黑体: "Noto Sans CJK SC",
+-  楷体: ("Arial", "LXGW WenKai"),
++  宋体: "SimSun",
++  黑体: "SimHei",
++  思源宋体: "SimSun",
++  思源黑体: "SimHei",
++  楷体: "KaiTi",
+   ntl: "Microsoft New Tai Lue",
+-  meslo: "MesloLGS NF",
+-  meslo-mono: "MesloLGS Nerd Font Mono",
++  meslo: "Consolas",
++  meslo-mono: "Consolas",
+   tnr: "Times New Roman",
+ );
+ 
+--- a/lib.typ
++++ b/lib.typ
+@@ -27,7 +27,7 @@
+   body
+ ) = {
+   // 信息处理和打包
+-  if type(authors) == array {authors = authors.join(", ")} // 多作者（array）时，分隔为字符串
++  if type(authors) == array {authors = authors.join(if lang == "zh" {"　"} else {", "})}
+   if type(date) == datetime {date = (date.year(), date.month(), date.day())} // 日期处理为 array
+   let infos = (
+     title: title,
+@@ -46,7 +46,7 @@
+   // 设置 page
+   let header1 = context { // ignore cover and toc
+     if (counter(page).get().first() <= 2) {none}
+-    else {align(right, text(size: 10pt, weight: "bold", title))}
++    else {align(right, text(size: 9pt, title))}
+   }
+   let header2 = { // all
+     align(right, text(size: 10pt, weight: "bold", title))
+@@ -61,7 +61,7 @@
+     set align(center)
+     set text(10pt)
+     if (counter(page).get().first() <= 2) {none}
+-    else {"Page " + counter(page).display("1 of 1", both: true)}
++    else {counter(page).display("1")}
+   }
+   let footer2 = context { // all
+     set align(center)
+@@ -72,7 +72,7 @@
+   set page(
+     paper: "a4",
+     numbering: "1",
+-    margin: (x: 2cm, y: 1.5cm),
++    margin: (left: 2.5cm, right: 2.5cm, top: 2.4cm, bottom: 2.3cm),
+     header:
+       if (header == true or header == "type1") {header1}
+       else if (header == "type2") {header2}
+@@ -85,7 +85,7 @@
+   )
+ 
+   // 导入规则
+-  set-page-properties(margin-left: 2cm) // drafting, set to same as page's margin x
++  set-page-properties(margin-left: 2.5cm)
+   show: process_figure_and_equation.with(unnumbered-label: "-")
+   show: checklist.with(fill: luma(95%), stroke: blue, radius: .2em)
+   show: shorthand // 导入 math shorthand
+@@ -103,15 +103,12 @@
+   set math.mat(delim: "[")
+   set math.vec(delim: "[")
+   // 引用与链接字体蓝色显示
+-  show ref: set text(fill: colors.blue)
+-  show link: it => {
+-    set text(fill: colors.blue)
+-    it + h(2pt) + text(size: 8.5pt, fajumplink)
+-  }
++  show ref: set text(fill: black)
++  show link: set text(fill: black)
+   // 设置字体与语言
+   set text(font: 字体.宋体, size: 字号.小四, lang: lang)
+   show emph: text.with(font: 字体.楷体) // 中文斜体显示为楷体
+-  set par(first-line-indent: (amount: 2em, all: true))
++  set par(first-line-indent: (amount: 2em, all: true), leading: .65em, spacing: .7em)
+   // 设置 bullet list 和 enum 的 marker，相比默认更像 markdown，另外刻意调大了一点（适合老年人
+   set list(marker: ([●], [○], [■], [□], [►]), tight: false, spacing: .8em)
+   set enum(numbering: numbly("{1}.", "{2:a}.", "{3:i}."), full: true, tight: false, spacing: .8em)
+@@ -120,15 +117,15 @@
+   // show: align-list-marker-with-baseline
+   // show: align-enum-marker-with-baseline
+   // 设置 figure (for long table or code) breakable
+-  show figure: set block(breakable: true)
++  show figure: set block(breakable: false)
+ 
+   // 设置标题
+   show heading.where(level: 1): it => {
+     set block(spacing: 1em)
+-    align(center, text(weight: "bold", font: 字体.黑体, size: 18pt, it))
++    align(center, text(weight: "bold", font: 字体.黑体, size: 16pt, it))
+   }
+-  show heading.where(level: 2): set text(weight: "bold", font: 字体.黑体, size: 17pt)
+-  show heading.where(level: 3): set text(weight: "bold", font: 字体.黑体, size: 16pt)
++  show heading.where(level: 2): set text(weight: "bold", font: 字体.黑体, size: 13pt)
++  show heading.where(level: 3): set text(weight: "bold", font: 字体.黑体, size: 12pt)
+   show heading.where(level: 4): set text(weight: "bold", font: 字体.黑体, size: 15pt)
+   show heading.where(level: 5): set text(weight: "bold", font: 字体.黑体, size: 14pt)
+   set heading(numbering: (..nums) => { // 设置标题编号
+--- a/math.typ
++++ b/math.typ
+@@ -57,7 +57,7 @@
+ #let fact = $"!"$ // alternative to '!'
+ #let na = $nabla$
+ #let di = $dif$
+-#let pa = $diff$ // partial
++#let pa = $partial$ // partial; Typst 0.14 spelling
+ #let ii = $i i$
+ #let ij = $i j$
+ #let ik = $i k$

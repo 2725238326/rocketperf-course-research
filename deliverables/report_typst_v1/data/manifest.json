@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-10-16",
+  "sources": [
+    {
+      "path": "deliverables/demo/index.html",
+      "sha256": "3674fbf5d87050dd33e9e13a176eae850030a12130baf5b4a0521f5efb8f84f8",
+      "role": "saved C sweep, refusals and cycle balance; six significant digits"
+    },
+    {
+      "path": "results/validation/liquid_combustion_v1/base_A10-stdout.txt",
+      "sha256": "a5ab2b6900bd76dc78926100fdddc7311ba6245ff41e738b32288766cefbdbc5",
+      "role": "full-precision archived C result"
+    },
+    {
+      "path": "results/validation/liquid_combustion_v1/fuel_hot_A10-stdout.txt",
+      "sha256": "e08ba8f44c9d985e52bdf60c8651c4660b0aa176ec385df0c85ec8efb4ccede0",
+      "role": "full-precision archived C result"
+    },
+    {
+      "path": "results/validation/liquid_combustion_v1/oxidizer_hot_A10-stdout.txt",
+      "sha256": "0141fe56884edc6178949451e9eebec1090942c538ad97165a28abad3db8ccd0",
+      "role": "full-precision archived C result"
+    },
+    {
+      "path": "results/validation/liquid_combustion_v1/both_hot_A10-stdout.txt",
+      "sha256": "84e295ea974fd02f2ff0328f835dc6be28a356b247621044df6339bcb7321b58",
+      "role": "full-precision archived C result"
+    },
+    {
+      "path": "results/research/propellant_comparison_v1/common_2_6_A10_p0_pair-stdout.json",
+      "sha256": "f9b3265fca0a9bfe6a611e8d35e56030de5be956725db3685c4e037969189ea8",
+      "role": "full-precision paired C result; copied byte-for-byte"
+    }
+  ],
+  "notes": [
+    "Snapshot does not refresh online vehicle evidence.",
+    "Refusal activities printed by C have three significant digits; no interpolated carbon boundary.",
+    "Prescribed-temperature cycle and ideal-gas diagnostic are not merged with HP results."
+  ],
+  "files": [
+    {
+      "path": "common_2_6_A10_p0_pair-stdout.json",
+      "sha256": "f9b3265fca0a9bfe6a611e8d35e56030de5be956725db3685c4e037969189ea8",
+      "bytes": 6547
+    },
+    {
+      "path": "inlet-response.json",
+      "sha256": "409b208d307b1b2bb46d5877ce55e89fce580841df474f3ee20dcedc6a34dbb0",
+      "bytes": 27274
+    },
+    {
+      "path": "saved-demo-results.json",
+      "sha256": "c5492aaa1f24ba0f345d129a474c8db1fa1fabe20f764df5a1316e85d9f8a9d8",
+      "bytes": 923864
+    }
+  ]
+}

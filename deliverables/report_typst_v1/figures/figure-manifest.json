@@ -1,0 +1,138 @@
+{
+  "figures": [
+    {
+      "figure": "fig01_calculation_flow",
+      "sources": [
+        "docs/architecture/report-flow.svg",
+        "C API model contracts"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "7acf2ec4a6ac4f8c9702fb36429ec31e342115c838f61a8f218fa93276a2cc7e",
+        "pdf": "49091d580753036d27b4a8d4f54b329f633de8ad5a010fc9445d07d0e6388f64",
+        "png": "7f1f75302ff2b876ba20482933af8e065950ef8c2085db408c6a04cb4152d96e"
+      }
+    },
+    {
+      "figure": "fig02_chamber_tradeoff",
+      "sources": [
+        "saved-demo-results.json:chamber"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "eefebda520b8c0422adcfba7fa837b7dc35aa6a217350fbe77611729602e6bf2",
+        "pdf": "d58e249bfe3589cfd97a3a24e13c9acd9cd75f36886ceacaf3b4976fd7a95a05",
+        "png": "c3bae02420e0540f3010afc75e02990055f3e8055e2691a0ed55f8f902d63674"
+      }
+    },
+    {
+      "figure": "fig03_propellant_comparison",
+      "sources": [
+        "common_2_6_A10_p0_pair-stdout.json"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "7fa22d32539214855dafcf24902f18c0f60c61733f00101a2c4454e3c572cdfe",
+        "pdf": "07e747d6ef6ae4554a431d5b2dbf3f6251d610e8977461810ac45180abaeb5a9",
+        "png": "1d5089225e45151b54e96e0c7c0822360d20ab55cc746c7b02404777bf809bdc"
+      }
+    },
+    {
+      "figure": "fig04_nozzle_tradeoff",
+      "sources": [
+        "saved-demo-results.json:grid.ch4 at O/F=2.6, pa=0"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "df3776cb2972328c74a74d7c045860dd676191408d9e4d22ac9ba9eed5d9891c",
+        "pdf": "eda2510a4d94ea0cd1479f733d781ae5d279401b6b8a518da77dc4b6eb39b8aa",
+        "png": "b953abafe544e6ce87e27024d7bfa33c5ca6b8ab7c049b9cb6b9c801830c7acd"
+      }
+    },
+    {
+      "figure": "fig05_backpressure_domain",
+      "sources": [
+        "saved-demo-results.json:grid.ch4 at O/F=2.6"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "168c43936ff21a973df9eac1399ca5dc0c16e9b2e23afed6df6a2500d70babc5",
+        "pdf": "a9a4e01f1bc8e4ecb0c55b7539fea411d22504e1077a3f757f4162756fbdd4a7",
+        "png": "f13695094bfbcf760ac2b74cee990328a959ba223b14c186d4306b90d6a49848"
+      }
+    },
+    {
+      "figure": "fig06_cycle_comparison",
+      "sources": [
+        "saved-demo-results.json:cycles[*].balance"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "f69d1459fd73fe0b442d051f4f9d7a43e72c125104883def951dbd7e023441fb",
+        "pdf": "449926fa0daf39f61fc3c66c01c1a7c3f61b40e1653602b630c78a609161cac0",
+        "png": "f45128cfc0e49e67c81df58e3cf810bbf9dc04e611b35b2753650fcd8d8bab43"
+      }
+    },
+    {
+      "figure": "fig07_inlet_response",
+      "sources": [
+        "inlet-response.json"
+      ],
+      "formats": [
+        "svg",
+        "pdf",
+        "png"
+      ],
+      "png_dpi": 450,
+      "svg_text": "outlined for portable rendering",
+      "sha256": {
+        "svg": "6afc0b5a1df4424458a7e9c3e02873e4495f03bf97c91930770207e666a530e6",
+        "pdf": "b1a8e8529e0ed931fd940b32fe040f6032af1193261a7d37201289d87895017f",
+        "png": "96737ca6f3835fad97dfedc484f5584c19a1317b287ff2588820027c53ca429e"
+      }
+    }
+  ],
+  "data_sha256": {
+    "common_2_6_A10_p0_pair-stdout.json": "f9b3265fca0a9bfe6a611e8d35e56030de5be956725db3685c4e037969189ea8",
+    "inlet-response.json": "409b208d307b1b2bb46d5877ce55e89fce580841df474f3ee20dcedc6a34dbb0",
+    "manifest.json": "c917ba304be2f16c82b613e51696da7e528250ac4f49573375794162e22e460b",
+    "saved-demo-results.json": "c5492aaa1f24ba0f345d129a474c8db1fa1fabe20f764df5a1316e85d9f8a9d8"
+  },
+  "matplotlib": "3.10.8"
+}

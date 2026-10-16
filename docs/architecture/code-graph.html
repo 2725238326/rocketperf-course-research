@@ -1,0 +1,124 @@
+<!doctype html>
+<meta charset="utf-8"><title>rocketperf · C 代码关系</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--line:#21262d;--fg:#e6edf3;--mut:#8b949e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Segoe UI","Microsoft YaHei",sans-serif;
+ display:grid;grid-template-columns:236px 1fr 320px;grid-template-rows:54px 1fr;height:100vh}
+header{grid-column:1/4;display:flex;align-items:center;gap:14px;padding:0 18px;background:#010409;border-bottom:1px solid var(--line)}
+h1{font-size:15px;margin:0;font-weight:650;letter-spacing:.02em}
+h1 em{color:var(--mut);font-style:normal;font-weight:400;font-size:12.5px;margin-left:12px}
+input{margin-left:auto;background:#0d1117;border:1px solid #30363d;color:var(--fg);border-radius:6px;padding:7px 12px;width:230px;font-size:13px;outline:none}
+input:focus{border-color:#58a6ff}
+aside,#detail{background:var(--panel);overflow:auto}
+aside{border-right:1px solid var(--line);padding:14px 14px}
+#detail{border-left:1px solid var(--line);padding:18px}
+h2{font-size:11px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase;margin:12px 0 6px}
+.mod{display:flex;align-items:center;gap:8px;padding:5px 6px;font-size:13px;cursor:pointer;border-radius:6px;user-select:none}
+.mod:hover{background:#1c2330}.mod.off{opacity:.35}
+.mod i{width:9px;height:9px;border-radius:2px;flex:none}.mod .cnt{margin-left:auto;color:var(--mut);font-size:11px}
+svg{width:100%;height:100%;background:radial-gradient(ellipse at 50% 42%,#141b24,#0d1117)}
+.node{cursor:pointer}.node text{pointer-events:none}
+#detail h3{font-size:15px;margin:0 0 3px;word-break:break-all}
+.path{color:var(--mut);font:12px Consolas,monospace;word-break:break-all}
+.badge{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;border:1px solid;margin:9px 0}
+ul{list-style:none;padding:0;margin:4px 0 12px}
+li{font:12.5px Consolas,monospace;padding:3px 2px;cursor:pointer;border-radius:4px}
+li:hover{background:#1c2330;color:#58a6ff}
+.empty{color:var(--mut);font-size:13px;line-height:1.6}
+</style>
+<header><h1>rocketperf · C 代码关系<em id="stat"></em></h1>
+<input id="q" placeholder="筛选文件名…"></header>
+<aside><h2>模块</h2><div id="mods"></div>
+<h2>图例</h2><div class="empty">方块 = .c 源文件<br>圆角 = .h 头文件<br>连线 = #include 依赖<br><br>滚轮缩放 · 拖动画布<br>拖节点微调 · 点击看依赖</div></aside>
+<svg id="stage"></svg>
+<div id="detail"><div class="empty" id="placeholder">点击一个文件，查看它 include 了谁、被谁引用。</div></div>
+<script>
+const DATA={"nodes": [{"id": "include/rocketperf/combustion.h", "name": "combustion.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/cycle.h", "name": "cycle.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/cycle_study.h", "name": "cycle_study.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/engine_cycle.h", "name": "engine_cycle.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/frozen_nozzle.h", "name": "frozen_nozzle.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/liquid_combustion.h", "name": "liquid_combustion.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/liquid_feed.h", "name": "liquid_feed.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/liquid_nozzle.h", "name": "liquid_nozzle.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/nozzle.h", "name": "nozzle.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/numeric.h", "name": "numeric.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/propellant_study.h", "name": "propellant_study.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/root.h", "name": "root.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/status.h", "name": "status.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/thermo.h", "name": "thermo.h", "module": "include", "kind": "h"}, {"id": "include/rocketperf/version.h", "name": "version.h", "module": "include", "kind": "h"}, {"id": "src/adapters/case_file.c", "name": "case_file.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/case_file.h", "name": "case_file.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/case_text.c", "name": "case_text.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/case_text.h", "name": "case_text.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/combustion_report.c", "name": "combustion_report.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/combustion_report.h", "name": "combustion_report.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/cycle_case.c", "name": "cycle_case.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/cycle_case.h", "name": "cycle_case.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/engine_case.c", "name": "engine_case.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/engine_case.h", "name": "engine_case.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/json_report.c", "name": "json_report.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/platform.c", "name": "platform.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/propellant_case.c", "name": "propellant_case.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/propellant_case.h", "name": "propellant_case.h", "module": "adapters", "kind": "h"}, {"id": "src/adapters/text_report.c", "name": "text_report.c", "module": "adapters", "kind": "c"}, {"id": "src/adapters/text_report.h", "name": "text_report.h", "module": "adapters", "kind": "h"}, {"id": "src/cli/arguments.c", "name": "arguments.c", "module": "cli", "kind": "c"}, {"id": "src/cli/arguments.h", "name": "arguments.h", "module": "cli", "kind": "h"}, {"id": "src/cli/combustion_commands.c", "name": "combustion_commands.c", "module": "cli", "kind": "c"}, {"id": "src/cli/combustion_commands.h", "name": "combustion_commands.h", "module": "cli", "kind": "h"}, {"id": "src/cli/interactive.c", "name": "interactive.c", "module": "cli", "kind": "c"}, {"id": "src/cli/interactive.h", "name": "interactive.h", "module": "cli", "kind": "h"}, {"id": "src/cli/main.c", "name": "main.c", "module": "cli", "kind": "c"}, {"id": "src/core/root.c", "name": "root.c", "module": "core", "kind": "c"}, {"id": "src/core/status.c", "name": "status.c", "module": "core", "kind": "c"}, {"id": "src/cycle/adiabatic.c", "name": "adiabatic.c", "module": "cycle", "kind": "c"}, {"id": "src/cycle/components.c", "name": "components.c", "module": "cycle", "kind": "c"}, {"id": "src/cycle/prescribed.c", "name": "prescribed.c", "module": "cycle", "kind": "c"}, {"id": "src/cycle/study.c", "name": "study.c", "module": "cycle", "kind": "c"}, {"id": "src/nozzle/frozen.c", "name": "frozen.c", "module": "nozzle", "kind": "c"}, {"id": "src/nozzle/ideal.c", "name": "ideal.c", "module": "nozzle", "kind": "c"}, {"id": "src/nozzle/liquid.c", "name": "liquid.c", "module": "nozzle", "kind": "c"}, {"id": "src/nozzle/propellant_study.c", "name": "propellant_study.c", "module": "nozzle", "kind": "c"}, {"id": "src/thermo/database.c", "name": "database.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/equilibrium.c", "name": "equilibrium.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/equilibrium_internal.h", "name": "equilibrium_internal.h", "module": "thermo", "kind": "h"}, {"id": "src/thermo/liquid_combustion.c", "name": "liquid_combustion.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/liquid_feed.c", "name": "liquid_feed.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/mixture.c", "name": "mixture.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/nasa9.c", "name": "nasa9.c", "module": "thermo", "kind": "c"}, {"id": "src/thermo/reactants.c", "name": "reactants.c", "module": "thermo", "kind": "c"}], "edges": [["src/adapters/case_file.c", "src/adapters/case_file.h"], ["src/adapters/case_file.c", "src/adapters/case_text.h"], ["src/adapters/case_file.c", "include/rocketperf/version.h"], ["src/adapters/case_file.c", "include/rocketperf/numeric.h"], ["src/adapters/case_file.h", "include/rocketperf/nozzle.h"], ["src/adapters/case_text.c", "src/adapters/case_text.h"], ["src/adapters/case_text.c", "include/rocketperf/numeric.h"], ["src/adapters/case_text.h", "include/rocketperf/status.h"], ["src/adapters/combustion_report.c", "src/adapters/combustion_report.h"], ["src/adapters/combustion_report.c", "src/adapters/case_text.h"], ["src/adapters/combustion_report.h", "include/rocketperf/frozen_nozzle.h"], ["src/adapters/combustion_report.h", "include/rocketperf/liquid_feed.h"], ["src/adapters/combustion_report.h", "src/adapters/propellant_case.h"], ["src/adapters/cycle_case.c", "src/adapters/cycle_case.h"], ["src/adapters/cycle_case.c", "src/adapters/case_file.h"], ["src/adapters/cycle_case.c", "src/adapters/case_text.h"], ["src/adapters/cycle_case.c", "include/rocketperf/version.h"], ["src/adapters/cycle_case.h", "include/rocketperf/cycle.h"], ["src/adapters/cycle_case.h", "include/rocketperf/cycle_study.h"], ["src/adapters/engine_case.c", "src/adapters/engine_case.h"], ["src/adapters/engine_case.c", "src/adapters/case_file.h"], ["src/adapters/engine_case.c", "src/adapters/case_text.h"], ["src/adapters/engine_case.c", "src/adapters/combustion_report.h"], ["src/adapters/engine_case.c", "src/adapters/text_report.h"], ["src/adapters/engine_case.c", "include/rocketperf/liquid_feed.h"], ["src/adapters/engine_case.c", "include/rocketperf/version.h"], ["src/adapters/engine_case.h", "include/rocketperf/engine_cycle.h"], ["src/adapters/json_report.c", "src/adapters/case_file.h"], ["src/adapters/json_report.c", "include/rocketperf/version.h"], ["src/adapters/json_report.c", "include/rocketperf/numeric.h"], ["src/adapters/platform.c", "src/adapters/case_file.h"], ["src/adapters/propellant_case.c", "src/adapters/propellant_case.h"], ["src/adapters/propellant_case.c", "src/adapters/case_file.h"], ["src/adapters/propellant_case.c", "src/adapters/case_text.h"], ["src/adapters/propellant_case.h", "include/rocketperf/propellant_study.h"], ["src/adapters/text_report.c", "src/adapters/text_report.h"], ["src/adapters/text_report.h", "include/rocketperf/frozen_nozzle.h"], ["src/adapters/text_report.h", "include/rocketperf/liquid_feed.h"], ["src/adapters/text_report.h", "include/rocketperf/liquid_nozzle.h"], ["src/adapters/text_report.h", "include/rocketperf/nozzle.h"], ["src/adapters/text_report.h", "include/rocketperf/propellant_study.h"], ["src/adapters/text_report.h", "include/rocketperf/thermo.h"], ["src/cli/arguments.c", "src/cli/arguments.h"], ["src/cli/arguments.c", "include/rocketperf/numeric.h"], ["src/cli/combustion_commands.c", "src/cli/combustion_commands.h"], ["src/cli/combustion_commands.c", "src/cli/arguments.h"], ["src/cli/combustion_commands.c", "src/adapters/combustion_report.h"], ["src/cli/combustion_commands.c", "src/cli/interactive.h"], ["src/cli/combustion_commands.c", "src/adapters/propellant_case.h"], ["src/cli/combustion_commands.c", "src/adapters/text_report.h"], ["src/cli/combustion_commands.c", "include/rocketperf/numeric.h"], ["src/cli/interactive.c", "src/cli/interactive.h"], ["src/cli/interactive.c", "src/cli/arguments.h"], ["src/cli/interactive.c", "src/adapters/case_file.h"], ["src/cli/interactive.c", "src/adapters/engine_case.h"], ["src/cli/interactive.c", "src/adapters/text_report.h"], ["src/cli/interactive.c", "include/rocketperf/combustion.h"], ["src/cli/interactive.c", "include/rocketperf/frozen_nozzle.h"], ["src/cli/interactive.c", "include/rocketperf/liquid_combustion.h"], ["src/cli/interactive.c", "include/rocketperf/liquid_feed.h"], ["src/cli/interactive.c", "include/rocketperf/liquid_nozzle.h"], ["src/cli/interactive.c", "include/rocketperf/nozzle.h"], ["src/cli/interactive.c", "include/rocketperf/propellant_study.h"], ["src/cli/interactive.c", "include/rocketperf/thermo.h"], ["src/cli/interactive.c", "include/rocketperf/version.h"], ["src/cli/main.c", "src/cli/arguments.h"], ["src/cli/main.c", "src/cli/combustion_commands.h"], ["src/cli/main.c", "src/adapters/combustion_report.h"], ["src/cli/main.c", "src/adapters/case_file.h"], ["src/cli/main.c", "src/adapters/cycle_case.h"], ["src/cli/main.c", "src/adapters/engine_case.h"], ["src/cli/main.c", "src/cli/interactive.h"], ["src/cli/main.c", "src/adapters/propellant_case.h"], ["src/cli/main.c", "src/adapters/text_report.h"], ["src/cli/main.c", "include/rocketperf/numeric.h"], ["src/cli/main.c", "include/rocketperf/version.h"], ["src/cli/main.c", "include/rocketperf/thermo.h"], ["src/cli/main.c", "include/rocketperf/combustion.h"], ["src/cli/main.c", "include/rocketperf/frozen_nozzle.h"], ["src/cli/main.c", "include/rocketperf/liquid_feed.h"], ["src/cli/main.c", "include/rocketperf/liquid_nozzle.h"], ["src/cli/main.c", "include/rocketperf/propellant_study.h"], ["src/core/root.c", "include/rocketperf/root.h"], ["src/core/root.c", "include/rocketperf/numeric.h"], ["src/core/status.c", "include/rocketperf/status.h"], ["src/cycle/adiabatic.c", "include/rocketperf/engine_cycle.h"], ["src/cycle/adiabatic.c", "include/rocketperf/numeric.h"], ["src/cycle/adiabatic.c", "include/rocketperf/version.h"], ["src/cycle/components.c", "include/rocketperf/cycle.h"], ["src/cycle/components.c", "include/rocketperf/numeric.h"], ["src/cycle/prescribed.c", "include/rocketperf/cycle.h"], ["src/cycle/prescribed.c", "include/rocketperf/numeric.h"], ["src/cycle/prescribed.c", "include/rocketperf/version.h"], ["src/cycle/study.c", "include/rocketperf/cycle_study.h"], ["src/cycle/study.c", "include/rocketperf/numeric.h"], ["src/nozzle/frozen.c", "include/rocketperf/frozen_nozzle.h"], ["src/nozzle/frozen.c", "include/rocketperf/numeric.h"], ["src/nozzle/frozen.c", "include/rocketperf/version.h"], ["src/nozzle/ideal.c", "include/rocketperf/nozzle.h"], ["src/nozzle/ideal.c", "include/rocketperf/version.h"], ["src/nozzle/ideal.c", "include/rocketperf/numeric.h"], ["src/nozzle/liquid.c", "include/rocketperf/liquid_nozzle.h"], ["src/nozzle/liquid.c", "include/rocketperf/numeric.h"], ["src/nozzle/propellant_study.c", "include/rocketperf/propellant_study.h"], ["src/nozzle/propellant_study.c", "include/rocketperf/numeric.h"], ["src/thermo/database.c", "include/rocketperf/thermo.h"], ["src/thermo/equilibrium.c", "include/rocketperf/combustion.h"], ["src/thermo/equilibrium.c", "include/rocketperf/numeric.h"], ["src/thermo/equilibrium.c", "src/thermo/equilibrium_internal.h"], ["src/thermo/equilibrium.c", "include/rocketperf/thermo.h"], ["src/thermo/equilibrium_internal.h", "include/rocketperf/combustion.h"], ["src/thermo/liquid_combustion.c", "include/rocketperf/liquid_combustion.h"], ["src/thermo/liquid_combustion.c", "include/rocketperf/numeric.h"], ["src/thermo/liquid_combustion.c", "src/thermo/equilibrium_internal.h"], ["src/thermo/liquid_feed.c", "include/rocketperf/liquid_feed.h"], ["src/thermo/liquid_feed.c", "include/rocketperf/numeric.h"], ["src/thermo/mixture.c", "include/rocketperf/combustion.h"], ["src/thermo/mixture.c", "include/rocketperf/numeric.h"], ["src/thermo/nasa9.c", "include/rocketperf/thermo.h"], ["src/thermo/nasa9.c", "include/rocketperf/numeric.h"], ["src/thermo/reactants.c", "include/rocketperf/combustion.h"], ["src/thermo/reactants.c", "include/rocketperf/numeric.h"], ["src/thermo/reactants.c", "src/thermo/equilibrium_internal.h"], ["include/rocketperf/combustion.h", "include/rocketperf/thermo.h"], ["include/rocketperf/cycle.h", "include/rocketperf/frozen_nozzle.h"], ["include/rocketperf/cycle_study.h", "include/rocketperf/cycle.h"], ["include/rocketperf/engine_cycle.h", "include/rocketperf/cycle.h"], ["include/rocketperf/frozen_nozzle.h", "include/rocketperf/combustion.h"], ["include/rocketperf/frozen_nozzle.h", "include/rocketperf/nozzle.h"], ["include/rocketperf/frozen_nozzle.h", "include/rocketperf/root.h"], ["include/rocketperf/liquid_combustion.h", "include/rocketperf/combustion.h"], ["include/rocketperf/liquid_combustion.h", "include/rocketperf/liquid_feed.h"], ["include/rocketperf/liquid_feed.h", "include/rocketperf/status.h"], ["include/rocketperf/liquid_nozzle.h", "include/rocketperf/frozen_nozzle.h"], ["include/rocketperf/liquid_nozzle.h", "include/rocketperf/liquid_combustion.h"], ["include/rocketperf/nozzle.h", "include/rocketperf/root.h"], ["include/rocketperf/propellant_study.h", "include/rocketperf/liquid_nozzle.h"], ["include/rocketperf/root.h", "include/rocketperf/status.h"], ["include/rocketperf/thermo.h", "include/rocketperf/status.h"]]}, COLOR={"cli": ["cli 命令行", "#58a6ff"], "adapters": ["adapters 输入输出", "#3fb9c4"], "thermo": ["thermo 热化学", "#f0883e"], "nozzle": ["nozzle 喷管", "#d2a679"], "cycle": ["cycle 循环", "#e3b341"], "core": ["core 数值", "#8b949e"], "include": ["公共头文件", "#bc8cff"]};
+const NS='http://www.w3.org/2000/svg', svg=document.getElementById('stage');
+const nodes=DATA.nodes.map(n=>({...n,x:0,y:0,vx:0,vy:0}));
+const byId=Object.fromEntries(nodes.map(n=>[n.id,n]));
+const edges=DATA.edges.map(([a,b])=>({a:byId[a],b:byId[b]})).filter(e=>e.a&&e.b);
+const adj={}; edges.forEach(e=>{(adj[e.a.id]=adj[e.a.id]||new Set()).add(e.b.id);(adj[e.b.id]=adj[e.b.id]||new Set()).add(e.a.id)});
+document.getElementById('stat').textContent=nodes.length+' 个文件 · '+edges.length+' 条依赖';
+
+const hidden=new Set();
+document.getElementById('mods').innerHTML=Object.entries(COLOR).map(([m,[label,c]])=>{
+  const n=nodes.filter(x=>x.module===m).length; return n?
+  '<div class="mod" data-m="'+m+'"><i style="background:'+c+'"></i>'+label+'<span class="cnt">'+n+'</span></div>':''}).join('');
+document.getElementById('mods').onclick=ev=>{const d=ev.target.closest('.mod'); if(!d) return;
+  hidden.has(d.dataset.m)?hidden.delete(d.dataset.m):hidden.add(d.dataset.m); d.classList.toggle('off'); paint()};
+
+const g=document.createElementNS(NS,'g'); svg.appendChild(g);
+const linkG=document.createElementNS(NS,'g'), nodeG=document.createElementNS(NS,'g');
+g.append(linkG,nodeG);
+const curves=edges.map(()=>{const p=document.createElementNS(NS,'path'); p.setAttribute('fill','none'); linkG.appendChild(p); return p});
+const marks=nodes.map(n=>{const s=document.createElementNS(NS,'g'); s.classList.add('node');
+  const r=document.createElementNS(NS,'rect'), t=document.createElementNS(NS,'text');
+  r.setAttribute('height','26'); r.setAttribute('rx', n.kind==='c'?5:13);
+  r.setAttribute('fill','#1c2333'); r.setAttribute('stroke',COLOR[n.module][1]); r.setAttribute('stroke-width','1.5');
+  t.textContent=n.name; t.setAttribute('fill','#e6edf3'); t.setAttribute('font-size','12');
+  s.append(r,t); nodeG.appendChild(s);
+  s.onpointerdown=ev=>{ev.stopPropagation(); dragNode=n; sx=ev.clientX; sy=ev.clientY; moved=false};
+  s.onclick=ev=>{ev.stopPropagation(); if(!moved){sel=sel===n?null:n; detail(n)}};
+  return s});
+
+const cols={cli:0,adapters:1,thermo:2,nozzle:3,cycle:4,core:5,include:6};
+const groups={}; nodes.forEach(n=>{(groups[n.module]=groups[n.module]||[]).push(n)});
+Object.values(groups).forEach(a=>a.sort((p,q)=>p.name.localeCompare(q.name)));
+const X=n=>150+cols[n.module]*215, Y=n=>50+groups[n.module].indexOf(n)*(740/groups[n.module].length);
+nodes.forEach(n=>{n.x=X(n); n.y=Y(n)+20});
+for(let k=0;k<600;k++){
+  for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];
+    let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||1; if(d>240) continue;
+    const f=Math.min(50,1600/(d*d)); a.vx+=dx/d*f; a.vy+=dy/d*f; b.vx-=dx/d*f; b.vy-=dy/d*f}
+  edges.forEach(e=>{let dx=e.b.x-e.a.x,dy=e.b.y-e.a.y; e.a.vx+=dx*.006; e.a.vy+=dy*.006; e.b.vx-=dx*.006; e.b.vy-=dy*.006});
+  nodes.forEach(n=>{n.vx+=(X(n)-n.x)*.14; n.vy+=(Y(n)-n.y)*.14; n.vx*=.4; n.vy*=.4;
+    n.x=Math.max(30,Math.min(1580,n.x+n.vx)); n.y=Math.max(24,Math.min(800,n.y+n.vy))});
+}
+
+let sel=null, dragNode=null, dragPan=false, moved=false, sx=0, sy=0, tx=0, ty=0, sc=1, query='';
+function vis(n){return !hidden.has(n.module) && (!query || n.name.toLowerCase().includes(query))}
+function paint(){ const near = sel? new Set([sel.id, ...(adj[sel.id]||[])]) : null;
+  curves.forEach((p,i)=>{const e=edges[i], on=vis(e.a)&&vis(e.b);
+    const mx=(e.a.x+e.b.x)/2, my=(e.a.y+e.b.y)/2-18;
+    p.setAttribute('d','M'+e.a.x+' '+e.a.y+' Q'+mx+' '+my+' '+e.b.x+' '+e.b.y);
+    const hot=near&&near.has(e.a.id)&&near.has(e.b.id);
+    p.setAttribute('stroke', hot? COLOR[e.b.module][1] : '#3a4454');
+    p.setAttribute('stroke-width', hot?1.8:1);
+    p.setAttribute('stroke-opacity', on ? (hot ? .9 : (near ? .08 : .5)) : .04); });
+  marks.forEach((s,i)=>{const n=nodes[i], w=n.name.length*7.1+18;
+    s.setAttribute('transform','translate('+(n.x-w/2)+','+(n.y-13)+')');
+    s.firstChild.setAttribute('width',w);
+    s.lastChild.setAttribute('x',9); s.lastChild.setAttribute('y',17);
+    const on=vis(n), hot=!near||near.has(n.id);
+    s.setAttribute('opacity', on ? (hot ? 1 : .14) : .05);
+    s.firstChild.setAttribute('stroke-width', sel===n?2.6:1.5); }); }
+paint();
+const xs=nodes.map(n=>n.x), ys=nodes.map(n=>n.y);
+const minX=Math.min(...xs)-90, maxX=Math.max(...xs)+110, minY=Math.min(...ys)-36, maxY=Math.max(...ys)+36;
+sc=Math.min(svg.clientWidth/(maxX-minX), svg.clientHeight/(maxY-minY));
+tx=(svg.clientWidth-(minX+maxX)*sc)/2; ty=(svg.clientHeight-(minY+maxY)*sc)/2; apply();
+
+function detail(n){ document.getElementById('detail').innerHTML =
+  '<h3>'+n.name+'</h3><div class="path">'+n.id+'</div>'
+  +'<span class="badge" style="color:'+COLOR[n.module][1]+';border-color:'+COLOR[n.module][1]+'">'+COLOR[n.module][0]+'</span>'
+  +section('include', edges.filter(e=>e.a===n).map(e=>e.b))
+  +section('被引用', edges.filter(e=>e.b===n).map(e=>e.a)); }
+function section(title,list){ return '<h2>'+title+' · '+list.length+'</h2>'
+  +(list.length? '<ul>'+list.map(n=>'<li data-id="'+n.id+'">'+n.name+'</li>').join('')+'</ul>'
+    : '<div class="empty">无</div>'); }
+document.getElementById('detail').onclick=ev=>{const li=ev.target.closest('li'); if(!li) return;
+  sel=byId[li.dataset.id]; detail(sel); paint(); };
+
+svg.onpointerdown=ev=>{dragPan=true; dragNode=null; sx=ev.clientX; sy=ev.clientY; moved=false};
+addEventListener('pointermove',ev=>{ if(dragNode){ moved=true;
+    dragNode.x=(ev.clientX-tx)/sc; dragNode.y=(ev.clientY-ty)/sc; paint(); }
+  else if(dragPan && ev.buttons){ tx+=ev.clientX-sx; ty+=ev.clientY-sy; sx=ev.clientX; sy=ev.clientY; apply(); }});
+addEventListener('pointerup',()=>{dragNode=null; dragPan=false});
+svg.onclick=()=>{sel=null; paint(); document.getElementById('detail').innerHTML='<div class="empty">点击一个文件，查看它 include 了谁、被谁引用。</div>'};
+svg.onwheel=ev=>{ev.preventDefault(); const k=ev.deltaY<0?1.12:.89;
+  tx=ev.clientX-(ev.clientX-tx)*k; ty=ev.clientY-(ev.clientY-ty)*k; sc*=k; apply(); };
+function apply(){ g.setAttribute('transform','translate('+tx+','+ty+') scale('+sc+')'); }
+document.getElementById('q').oninput=ev=>{query=ev.target.value.trim().toLowerCase(); paint()};
+</script>

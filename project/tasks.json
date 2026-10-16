@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 341,
+  "revision": 351,
   "context": {
     "phase": "双人讲述与PPT逐页制作指导",
     "evidence_cutoff": "2026-10-06",
@@ -1557,7 +1557,7 @@
     {
       "id": "DOC-004",
       "title": "讲述内容充实：程序实现页与成果表述审阅",
-      "status": "ACTIVE",
+      "status": "READY",
       "priority": 1,
       "depends_on": [
         "DOC-003"
@@ -1575,8 +1575,8 @@
         "新增C程序实现与工程能力页，数字由保存的C演示数据和仓库实况导出，选定模板页并给出替换指导；时间预算重新核算。",
         "更新讲稿、时间表、演示编排、交接与taskshot，新鲜统一质量PASS后建立本地检查点，不外部推送。"
       ],
-      "owner": "root",
-      "note": "程序页数据文件按新页序命名为p5-program.csv",
+      "owner": null,
+      "note": "DOC-005报告初版已完成，报告下游可继续；原讲述材料契约恢复可领取状态。",
       "verification": null
     },
     {
@@ -1601,6 +1601,33 @@
       "owner": null,
       "note": "Created with an explicit acceptance contract",
       "verification": null
+    },
+    {
+      "id": "DOC-005",
+      "title": "课程报告Typst初版与科研图重构",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/report_typst_v1/report.typ",
+        "deliverables/report_typst_v1/report-v1.pdf",
+        "deliverables/report_typst_v1/README.md",
+        "deliverables/report_typst_v1/template-selection.md",
+        "deliverables/report_typst_v1/figures/build_figures.py",
+        "taskshot/2026-10-16_071-report-typst-scientific.md"
+      ],
+      "acceptance": [
+        "覆盖照片要求的十项内容，六人分工含何明轩和纪博闻承担主要代码工作；不编造型号参数或学校信息。",
+        "使用可追溯的在线正式Typst课程报告模板，记录提交和许可；图表由保存数据复现，模型身份、工况、单位与正文一致。",
+        "修复流程分支与数据口径错误；编译PDF并逐页视觉核对，完成统一质量与可审查本地检查点，不外部推送。"
+      ],
+      "owner": "root",
+      "note": "课程报告初版、七张科研图和逐页检查已完成；六组质量证据仍与当前工作树一致。本地检查点纳入报告产物，并带上暂存检查所要求的既有架构生成文件。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-005_943a6027a9a9.json",
+        "sha256": "753f7aa18267d06acd5d435405c976e019370947391cee4f2eceaac843c28438"
+      }
     }
   ],
   "events": [
@@ -8949,6 +8976,126 @@
       "note": "Created with an explicit acceptance contract",
       "previous_hash": "55b06099692c2f607963e3ab78a7e1e13eb8f57f2b183e9b1d97b526d8ba5c2a",
       "hash": "a8b1ad620b3b97c625a842c88ecece7e5c12cefe622d167ce179eee34c3b2891"
+    },
+    {
+      "seq": 359,
+      "at": "2026-10-16T01:14:16+00:00",
+      "task": "DOC-004",
+      "from": "ACTIVE",
+      "to": "BLOCKED",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "用户已将当前优先任务转为报告初版与科研图重构；讲述材料任务保留，报告批次结束后按原契约续接。",
+      "previous_hash": "a8b1ad620b3b97c625a842c88ecece7e5c12cefe622d167ce179eee34c3b2891",
+      "hash": "b65d945aa077ecf87dc98f8861d784180f9007e9cf9605e3c400788db2c1c9ea"
+    },
+    {
+      "seq": 360,
+      "at": "2026-10-16T01:14:19+00:00",
+      "task": "DOC-005",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "b65d945aa077ecf87dc98f8861d784180f9007e9cf9605e3c400788db2c1c9ea",
+      "hash": "118da83ff25c0d9751d81cf72a155393b53c47a8524f0b4ff931ec6405cb0f2b"
+    },
+    {
+      "seq": 361,
+      "at": "2026-10-16T01:14:23+00:00",
+      "task": "DOC-005",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "接续现有report_typst_v1，依据十项作业范围核对并完成科学图表、正式模板、内容与页面修订。",
+      "previous_hash": "118da83ff25c0d9751d81cf72a155393b53c47a8524f0b4ff931ec6405cb0f2b",
+      "hash": "254c49f92fcca19b2efaa02b98c3b55051af85cf24a692606d9a1e5bc914544c"
+    },
+    {
+      "seq": 362,
+      "at": "2026-10-16T06:34:16+00:00",
+      "task": "DOC-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "报告初版、模板、七张科研图与逐页视觉核对已完成；六组统一质量检查 PASS，证据范围与限制已记录。",
+      "previous_hash": "254c49f92fcca19b2efaa02b98c3b55051af85cf24a692606d9a1e5bc914544c",
+      "hash": "0de51b46eb31b9f7b4c515ce348c43d7328281a9c9b624d1c144bab03be4d019"
+    },
+    {
+      "seq": 363,
+      "at": "2026-10-16T06:38:45+00:00",
+      "task": "DOC-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "课程报告初版已完成并可审阅；完成状态基于 fresh 六组质量 PASS 与逐页视觉检查，明确保留型号参数与学校信息边界。",
+      "previous_hash": "0de51b46eb31b9f7b4c515ce348c43d7328281a9c9b624d1c144bab03be4d019",
+      "hash": "becb19506c238e55680e0b2f81c697d9155dbee513d05c5dbb8ba7c352d0d0cd"
+    },
+    {
+      "seq": 364,
+      "at": "2026-10-16T06:39:34+00:00",
+      "task": "DOC-004",
+      "from": "BLOCKED",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "DOC-005报告初版已完成，报告下游可继续；原讲述材料契约恢复可领取状态。",
+      "previous_hash": "becb19506c238e55680e0b2f81c697d9155dbee513d05c5dbb8ba7c352d0d0cd",
+      "hash": "cfac15f45e79816fc813520050f958ca7e7d241924005184cc263c5862946487"
+    },
+    {
+      "seq": 365,
+      "at": "2026-10-16T06:50:51+00:00",
+      "task": "DOC-005",
+      "from": "DONE",
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "本地检查点受项目暂存区完整性检查阻止：有六项既有、非报告范围的架构/可视化文件未暂存；保留报告变更在暂存区，不混入这些既有产物，待整理工作树后再完成。",
+      "previous_hash": "cfac15f45e79816fc813520050f958ca7e7d241924005184cc263c5862946487",
+      "hash": "3af04ff993e7434ec2da62d49298cbe0124eec9495da213872d7b6115d672515"
+    },
+    {
+      "seq": 366,
+      "at": "2026-10-16T06:52:18+00:00",
+      "task": "DOC-005",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "报告内容与质量验收已完成，继续整理本地检查点；暂存区检查要求的六项既有非报告文件保持隔离。",
+      "previous_hash": "3af04ff993e7434ec2da62d49298cbe0124eec9495da213872d7b6115d672515",
+      "hash": "7b27693ad8eced51fdb18ce09c76d6308e5ad0e4793694c3d1febece89f96e2c"
+    },
+    {
+      "seq": 367,
+      "at": "2026-10-16T06:52:25+00:00",
+      "task": "DOC-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "课程报告与图表初版已完成，质量六组 PASS、逐页检查通过；因暂存区守护要求六项既有非报告文件，不混入提交，现保留 REVIEW 等待本地检查点整理。",
+      "previous_hash": "7b27693ad8eced51fdb18ce09c76d6308e5ad0e4793694c3d1febece89f96e2c",
+      "hash": "0b25ec696eaec197b10aa36ef5e3fc7db86798c562b50eb400ced788f84d640d"
+    },
+    {
+      "seq": 368,
+      "at": "2026-10-16T13:49:17+00:00",
+      "task": "DOC-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "课程报告初版、七张科研图和逐页检查已完成；六组质量证据仍与当前工作树一致。本地检查点纳入报告产物，并带上暂存检查所要求的既有架构生成文件。",
+      "previous_hash": "0b25ec696eaec197b10aa36ef5e3fc7db86798c562b50eb400ced788f84d640d",
+      "hash": "6fd09c35859bcc9ba00c0cbbe0590af9be1646f462dbc8b948d2ac16138494d4"
     }
   ]
 }

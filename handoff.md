@@ -6,6 +6,16 @@
 
 ## 研究产物
 
+2026-10-16课程报告新初版入口为[Typst报告与说明](deliverables/report_typst_v1/README.md)，PDF在同目录；采用已核实、MIT许可的开源课程报告模板，正文覆盖十项作业要求，六人分工已写入。七张新科研图提供SVG、嵌字体PDF和450 dpi PNG，数据来自保存C结果，明确区分HP主线、历史给定热状态循环与定比热诊断。该目录作为本次报告的图表入口；下文070图集保留为历史整理。模板来源、适配与质量证据见[071记录](taskshot/2026-10-16_071-report-typst-scientific.md)。
+
+2026-10-16科研图表集中整理：当前取图目录为`deliverables/科研绘图整理_20261016/01_正文直接插入/`，P6架构、P7/P9曲线和P8/P10/P11原表按当前页码排列；另有8张统一科研风格PNG及SVG/PDF、原始数据/全精度推进剂归档、全部表格Excel、架构备选、历史工况原图和可视化总览。未改PPT或原素材。详见[070记录](taskshot/2026-10-16_070-scientific-figure-collection.md)。
+
+2026-10-16用户明确只改`PPT/终版ppt - 副本.pptx`第7–11页：两张曲线、三张表格PNG和对应标题/结论/页脚已插入并回写，五页渲染视觉检查及包校验通过；其他10页和原母版等包条目逐字节不变。GUI/动态讲解及结尾暂不改。原版备份及验收见[069记录](taskshot/2026-10-16_069-ppt-charts-7-11.md)。
+
+2026-10-16架构与讲稿修订：读取并渲染当前已保存的`PPT/终版ppt.pptx`（15页），未改PPTX。P6改用新增`deliverables/ppt-figures-package/architecture/components-ppt.svg`全宽简图（附2560像素PNG，已视觉检查）；P4保留两条路径，P5保留公式，不使用workflow串行表达。指南和讲稿已同步自然口语、P7–P13替换文字及当前P14参考文献/P15致谢的页码关系。原图约5900行与旧CSV6627行差异未核实，简图和口播不展示行数。详见[068记录](taskshot/2026-10-16_068-architecture-and-script.md)。
+
+图片与操作教程补充：10张官方原图已存[图片备选](deliverables/图片备选/README.md)，其中5张长边≥1600像素、5张1080像素备用；有总览、原图URL、尺寸、哈希和批次边界。两次Grok返回无检索轨迹未采信，实际通过已有官方来源页面HTTP核验并下载。制作指南已逐页补原模板文字到新内容的操作对照，P2大标题为“研究目标”，P3为两张火箭照片＋四级段条目；P4/P6等项目图由用户后续提供。详见[067记录](taskshot/2026-10-16_067-images-and-detailed-ppt-tutorial.md)。
+
 当前最终组装入口已更新为[最终PPT制作指南](deliverables/ppt-making-final.md)，配套defense-script-final.md已同步：P2任务、P3构型、P4路径、P5公式，P7–P11研究页号不变，P12核验、P13四级段结论。主讲仍14页、13:30，备答3页；默认静态图表即可完成。旧ppt-plan-solo.md仅作上一版参考。四张GUI截图已查看，其中cycle-orsc.png实际为开式，不能作补燃图。详情见[066记录](taskshot/2026-10-16_066-final-ppt-making-guide.md)。
 
 2026-10-16用户依据PPT启动脚本选择先做单人方案与讲稿。当前单人制作入口为[逐页方案](deliverables/ppt-plan-solo.md)和[单人讲稿](deliverables/defense-script-final.md)：模板31，封面＋12页正文＋致谢，共14页主讲，另3页备答，预算13:30含100秒GUI演示。搭档只答富氧补燃问题。旧双人文件保留，不再据其页码组装这版。GUI截图及控件操作尚待核验，封面人员与日期、人工计时仍待确认；未生成PPTX。本次按用户“只写文档、不改project/”范围保留任务登记和生成工作面，未流转DOC-004。过程见[065记录](taskshot/2026-10-16_065-solo-presentation-prep.md)。
