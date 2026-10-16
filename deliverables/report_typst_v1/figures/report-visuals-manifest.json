@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "architecture": {
+    "file": "fig08_dynamic_architecture.png",
+    "source": "docs/architecture/rocketperf-live-panel.html",
+    "capture_seconds": [
+      4,
+      14,
+      24
+    ],
+    "selected_frame_seconds": 24,
+    "animation_period_seconds": 30,
+    "source_sha256": "01d230700aa1d2cb2c88b06fa37b9da03b7e34903e50259e71073096ac2ce7f1",
+    "report_animation_file": "architecture-report.html",
+    "report_animation_sha256": "9a268c4cf6f393fa23cf8e767909dea786a0f07d5a364ed1c04bb2b6e60a895c",
+    "typography_adaptation": "Explicit Consolas/Microsoft YaHei fonts, 20px base, brighter secondary labels, two six-line boxes expanded to 205px, header rule below subtitle/legend; source content and animation timing retained.",
+    "layout_checks": {
+      "4": [],
+      "14": [],
+      "24": []
+    },
+    "animation_layout_samples": 121,
+    "animation_layout_issues": {},
+    "qa_frames": {
+      "4": "build/report-qa/live-panel/architecture-t04.png",
+      "14": "build/report-qa/live-panel/architecture-t14.png",
+      "24": "build/report-qa/live-panel/architecture-t24.png"
+    },
+    "sha256": "5bfb8c03b42952bbac9690c27963307e7c7b9976ae12942c14cf6839cb4e6838"
+  },
+  "gui_screens": [
+    {
+      "file": "fig09_gui_combustion.png",
+      "source": "GUI browser preview with the actual C bridge",
+      "tab": "chamber",
+      "preset": "氧燃比:0.9",
+      "viewport_css_px": [
+        1920,
+        1080
+      ],
+      "device_scale_factor": 2,
+      "reduced_motion": true,
+      "kpi_text": [
+        "燃烧室温度 Tc\n✕ C 拒算\n固体碳稳定",
+        "特征速度 c*\n✕ C 拒算\n ",
+        "石墨活度 aC\n判据 ≤ 1\n1.09\naC > 1固体碳热力学稳定",
+        "真空比冲（ε = 10）\n✕ C 拒算\n—"
+      ],
+      "width": 3840,
+      "height": 2160,
+      "sha256": "91b54e2485944704aef914f6e95c875770140f8a9634153fc8e0324790f4c1ce"
+    },
+    {
+      "file": "fig10_gui_propellant.png",
+      "source": "GUI browser preview with the actual C bridge",
+      "tab": "propellant",
+      "preset": "报告口径",
+      "viewport_css_px": [
+        1920,
+        1080
+      ],
+      "device_scale_factor": 2,
+      "reduced_motion": true,
+      "kpi_text": [
+        "比冲 Isp\n甲烷 ｜ RP-1\n324.43s\n310.57s\n甲烷 − RP-1：+13.85 s（+4.46%）",
+        "推力 F\n甲烷 ｜ RP-1\n172.64kN\n172.98kN\n甲烷 − RP-1：−0.34 kN（−0.20%）",
+        "质量流量 ṁ\n甲烷 ｜ RP-1\n54.26kg/s\n56.80kg/s\n甲烷 − RP-1：−2.53 kg/s（−4.46%）",
+        "特征速度 c*\n甲烷 ｜ RP-1\n1,842.9m/s\n1,760.7m/s\n甲烷 − RP-1：+82.2 m/s（+4.67%）"
+      ],
+      "width": 3840,
+      "height": 2160,
+      "sha256": "c0e9eab3954c0b8476ebe7559bc1ec1d40e67100b9a60d60f6541fd6b0c4bf19"
+    },
+    {
+      "file": "fig11_gui_nozzle.png",
+      "source": "GUI browser preview with the actual C bridge",
+      "tab": "nozzle",
+      "preset": "海平面 ε40",
+      "viewport_css_px": [
+        1920,
+        1080
+      ],
+      "device_scale_factor": 2,
+      "reduced_motion": true,
+      "kpi_text": [
+        "比冲 Isp\n✕ C 拒算\n同几何真空 347.74 s",
+        "推力 F\n✕ C 拒算\n附着求解不输出外推值",
+        "出口压力 pe 与背压\n17.2kPa\n过膨胀pa/pe = 5.88",
+        "该背压的匹配面积比\npe = pa\n10.91\n当前 ε40.0 大于匹配值，压力项为负"
+      ],
+      "width": 3840,
+      "height": 2160,
+      "sha256": "ee5882e770348cd1308dc0227707e45cca486f94cb2980eea7c9293f900d3916"
+    },
+    {
+      "file": "fig12_gui_cycle-orsc.png",
+      "source": "GUI browser preview with the actual C bridge",
+      "tab": "cycle",
+      "preset": "长十乙一级",
+      "viewport_css_px": [
+        1920,
+        1080
+      ],
+      "device_scale_factor": 2,
+      "reduced_motion": true,
+      "kpi_text": [
+        "整机推力\n主喷管 + 外排\n285.50kN\n主路 285.50，无外排",
+        "整机比冲\n÷ 总供给\n291.13s\n总供给 100 kg/s，海平面",
+        "涡轮功率\n= (泵 + 辅助) / η轴\n3.376MW\n泵 3.197 + 辅助 0.01，η轴 0.95",
+        "涡轮出口压力\n17.95MPa\n≥ 下限回流注入需 11.00 MPa"
+      ],
+      "width": 3840,
+      "height": 2160,
+      "sha256": "0a789b50ea48c7112598da6ecb98843c0c187a972625d0260ee0af243d26b3ec"
+    }
+  ],
+  "gui_provenance": {
+    "gui_worktree": "E:\\Work\\火发原理-gui",
+    "git_head": "0e351711db9eb6c60331f1f6e1a54e3776d9d080",
+    "assembled_html_sha256": "127261d5c000c04756453b6f9092c8c2d2c60b83c3a12b1b26051ffe7c7059de",
+    "bridge_sha256": "7991903e0bcceeb5117f3cda20eff94887094c1e949b939997826bd4b799e8bb",
+    "capture_method": "Identical desktop page resources, localhost C bridge, all replies complete, reduced motion; no numerical labels edited for capture.",
+    "raw_replies": "build/report-qa/live-panel/gui-c-replies.json"
+  },
+  "notes": [
+    "The dynamic HTML is sampled at 4, 14 and 24 seconds; the report uses the 24-second frame with complete typewriter annotations.",
+    "The cycle screenshot shows the Changzheng-10B first-stage oxygen-rich staged-combustion research scenario.",
+    "Original deliverables/gui-shots images remain unchanged. The report uses fresh, settled captures; screenshots illustrate the interface, not independent scientific validation."
+  ]
+}

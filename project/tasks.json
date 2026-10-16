@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 351,
+  "revision": 356,
   "context": {
     "phase": "双人讲述与PPT逐页制作指导",
     "evidence_cutoff": "2026-10-06",
@@ -1627,6 +1627,40 @@
         "kind": "quality",
         "path": "project/evidence/DOC-005_943a6027a9a9.json",
         "sha256": "753f7aa18267d06acd5d435405c976e019370947391cee4f2eceaac843c28438"
+      }
+    },
+    {
+      "id": "DOC-006",
+      "title": "报告补入动态架构与GUI页面并润色语言",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "DOC-005"
+      ],
+      "required_artifacts": [
+        "deliverables/report_typst_v1/report.typ",
+        "deliverables/report_typst_v1/report-v1.pdf",
+        "deliverables/report_typst_v1/figures/build_report_visuals.py",
+        "deliverables/report_typst_v1/figures/architecture-report.html",
+        "deliverables/report_typst_v1/figures/report-visuals-manifest.json",
+        "deliverables/report_typst_v1/figures/fig08_dynamic_architecture.png",
+        "deliverables/report_typst_v1/figures/fig09_gui_combustion.png",
+        "deliverables/report_typst_v1/figures/fig10_gui_propellant.png",
+        "deliverables/report_typst_v1/figures/fig11_gui_nozzle.png",
+        "deliverables/report_typst_v1/figures/fig12_gui_cycle-orsc.png",
+        "taskshot/2026-10-16_072-report-gui-architecture-polish.md"
+      ],
+      "acceptance": [
+        "正文补入动态架构取帧及四张实际GUI页面，附可播放HTML；图注与工况一致，循环页明确为长十乙一级背景的RP-1富氧补燃研究情景，取图关闭动画并核对C返回数值。",
+        "全篇语言统一润色，保留已有研究数值、输入身份、引用及模型限制，不补造结果；GUI截图与保存的科研计算证据分别说明。",
+        "重编PDF并逐页视觉检查，核对目录、图表和组员姓名，完成统一质量检查和本地检查点。"
+      ],
+      "owner": "root",
+      "note": "验收完成：报告嵌入动态架构与稳定GUI页面，工况说明与C返回一致，PDF逐页视觉检查通过，统一质量六组PASS。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-006_22faf5137d62.json",
+        "sha256": "abf8af76efdbe3fcf357142e6280e073a2ee78c69399d654a08241db3f4a5acd"
       }
     }
   ],
@@ -9096,6 +9130,121 @@
       "note": "课程报告初版、七张科研图和逐页检查已完成；六组质量证据仍与当前工作树一致。本地检查点纳入报告产物，并带上暂存检查所要求的既有架构生成文件。",
       "previous_hash": "0b25ec696eaec197b10aa36ef5e3fc7db86798c562b50eb400ced788f84d640d",
       "hash": "6fd09c35859bcc9ba00c0cbbe0590af9be1646f462dbc8b948d2ac16138494d4"
+    },
+    {
+      "seq": 369,
+      "at": "2026-10-16T14:32:07+00:00",
+      "task": "DOC-006",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "6fd09c35859bcc9ba00c0cbbe0590af9be1646f462dbc8b948d2ac16138494d4",
+      "hash": "c58e7ad82092dea7dd3c473493c143d7268d7217eb14e036c492d9f6b3128df2"
+    },
+    {
+      "seq": 370,
+      "at": "2026-10-16T14:32:10+00:00",
+      "task": "DOC-006",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "根据用户意见完善报告视觉内容与行文；以现有架构动态页及实际GUI截图为依据，保留科学结果和工况边界。",
+      "previous_hash": "c58e7ad82092dea7dd3c473493c143d7268d7217eb14e036c492d9f6b3128df2",
+      "hash": "9ef99f1724e5b6add54f7f3e74de5b6153e48067120e4cb21d475fe50cba65ab"
+    },
+    {
+      "seq": 371,
+      "at": "2026-10-16T15:33:42+00:00",
+      "task": "DOC-006",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按稳定取图复核更新验收：明确富氧补燃页面、GUI数值动画处理与配套动态HTML。",
+      "previous_hash": "9ef99f1724e5b6add54f7f3e74de5b6153e48067120e4cb21d475fe50cba65ab",
+      "details": {
+        "contract_before": {
+          "id": "DOC-006",
+          "title": "报告补入动态架构与GUI页面并润色语言",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-v1.pdf",
+            "deliverables/report_typst_v1/figures/build_report_visuals.py",
+            "taskshot/2026-10-16_072-report-gui-architecture-polish.md"
+          ],
+          "acceptance": [
+            "将动态架构运行展示与实际GUI页面截图纳入正文，图题准确标明当前界面状态，不把开式工况写成补燃。",
+            "全篇语言统一润色，保留已有研究数值、输入身份、引用及模型限制，不补造结果。",
+            "重编PDF并视觉检查全部页面，完成质量检查和本地检查点。"
+          ],
+          "owner": "root",
+          "note": "根据用户意见完善报告视觉内容与行文；以现有架构动态页及实际GUI截图为依据，保留科学结果和工况边界。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-006",
+          "title": "报告补入动态架构与GUI页面并润色语言",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-005"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-v1.pdf",
+            "deliverables/report_typst_v1/figures/build_report_visuals.py",
+            "deliverables/report_typst_v1/figures/architecture-report.html",
+            "deliverables/report_typst_v1/figures/report-visuals-manifest.json",
+            "deliverables/report_typst_v1/figures/fig08_dynamic_architecture.png",
+            "deliverables/report_typst_v1/figures/fig09_gui_combustion.png",
+            "deliverables/report_typst_v1/figures/fig10_gui_propellant.png",
+            "deliverables/report_typst_v1/figures/fig11_gui_nozzle.png",
+            "deliverables/report_typst_v1/figures/fig12_gui_cycle-orsc.png",
+            "taskshot/2026-10-16_072-report-gui-architecture-polish.md"
+          ],
+          "acceptance": [
+            "正文补入动态架构取帧及四张实际GUI页面，附可播放HTML；图注与工况一致，循环页明确为长十乙一级背景的RP-1富氧补燃研究情景，取图关闭动画并核对C返回数值。",
+            "全篇语言统一润色，保留已有研究数值、输入身份、引用及模型限制，不补造结果；GUI截图与保存的科研计算证据分别说明。",
+            "重编PDF并逐页视觉检查，核对目录、图表和组员姓名，完成统一质量检查和本地检查点。"
+          ],
+          "owner": "root",
+          "note": "按稳定取图复核更新验收：明确富氧补燃页面、GUI数值动画处理与配套动态HTML。",
+          "verification": null
+        }
+      },
+      "hash": "e92d16baa14824dd9a7b6ead9e645d6fa16c9a8dcc2a55be7863ab552ab47a46"
+    },
+    {
+      "seq": 372,
+      "at": "2026-10-16T16:08:22+00:00",
+      "task": "DOC-006",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "动态架构与四张GUI页面已嵌入报告；PDF 22页已逐页视觉检查，项目与六组统一质量检查均PASS。",
+      "previous_hash": "e92d16baa14824dd9a7b6ead9e645d6fa16c9a8dcc2a55be7863ab552ab47a46",
+      "hash": "f044fb7c65e70e2e37b7a5a3fcc8ae5b74debdf048a13b118b33715b79a80231"
+    },
+    {
+      "seq": 373,
+      "at": "2026-10-16T16:09:41+00:00",
+      "task": "DOC-006",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：报告嵌入动态架构与稳定GUI页面，工况说明与C返回一致，PDF逐页视觉检查通过，统一质量六组PASS。",
+      "previous_hash": "f044fb7c65e70e2e37b7a5a3fcc8ae5b74debdf048a13b118b33715b79a80231",
+      "hash": "f4f5e1c70ed602d9d3ff9e995261c174aa67c37e8c45dc6e80965bc624bbf0e2"
     }
   ]
 }
