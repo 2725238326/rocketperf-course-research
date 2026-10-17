@@ -72,7 +72,7 @@ def figure_flow():
         (7.75, "combustion", "入口焓与元素\nHP 绝热平衡", "组分冻结喷管\n喉部 → 出口", BLUE),
         (5.9, "cycle adiabatic", "泵 → 预燃室 HP\n涡轮 / 单轴闭合", "主室 HP → 冻结喷管\n外排或内部回流计账", ORANGE),
         (4.05, "run / nozzle", "给定总温、总压\n定比热理想气体", "临界流量 → 膨胀\n压力推力与比冲", TEAL),
-        (2.2, "cycle（历史）", "给定主室 / 发生器\n热状态与循环输入", "轴功及两路喷管\n所需热量计账", GRAY),
+        (2.2, "cycle (thermal)", "给定主室 / 发生器\n热状态与循环输入", "轴功及两路喷管\n所需热量收支", GRAY),
         (.35, "nozzle regime", "显式选择域评估\n给定气体 / HP 状态", "理想出口压力与比值\n匹配 / 经验参考几何", INK),
     ]
     for y, name, a, b, color in rows:
@@ -85,7 +85,7 @@ def figure_flow():
     ax.plot([.04,.35],[9.25,9.25],color=GRAY,lw=.8)
     for y,*_ in rows:
         arrow(ax,(.04,y+.525),(.3,y+.525),GRAY)
-    note(fig,"各入口独立选择；研究扫描重复调用相同 C API。\n所有求解均检查残差与有限值；成功输出 JSON / 中文表格，失败保持原输出并返回诊断。")
+    note(fig,"各计算入口根据输入选择相应模型；研究扫描重复调用对应求解过程。\n计算结果以 JSON 或中文表格输出，状态信息说明适用范围与求解情况。")
     save(fig,"fig01_calculation_flow",["docs/architecture/report-flow.svg", "C API model contracts"])
 
 
@@ -106,7 +106,7 @@ def figure_chamber():
     axs[0].set(ylim=(2450,3750)); axs[0].set_title("(a) 温度峰值",loc="left")
     axs[1].set(ylim=(1740,1865)); axs[1].set_title("(b) 特征速度峰值",loc="left")
     ax=axs[2]; axes(ax)
-    for success,marker,color,label in [(True,"o",TEAL,"未触发判据"),(False,"x",RED,"返回越域")]:
+    for success,marker,color,label in [(True,"o",TEAL,"稳定性判据未触发"),(False,"x",RED,"超过稳定性边界")]:
         sel=[(r,v["ac"]) for r,v in records if .5<=r<=1.5 and (v["status"]=="ok")==success]
         ax.plot([r for r,a in sel],[a for r,a in sel],linestyle="none",marker=marker,color=color,label=label,ms=4)
     ax.axhline(1,color=GRAY,ls="--",lw=.9)
@@ -118,7 +118,7 @@ def figure_chamber():
     ax.set(xlabel="质量混合比 O/F",ylabel="石墨活度 $a_C$",xlim=(.45,1.55),ylim=(0,2.65))
     ax.set_xticks([.5,1,1.5]); ax.set_title("(c) 富燃侧模型边界",loc="left")
     ax.legend(loc="upper right",fontsize=6.7,handlelength=1,borderaxespad=.1)
-    note(fig,"Pc=10 MPa；CH₄ 120 K / O₂ 100 K，入口均 10 MPa。\n(a,b) O/F=2–4 离散网格；(c) 拒绝点保留诊断活度，不连接为有效平衡曲线。")
+    note(fig,"Pc=10 MPa；CH₄ 120 K / O₂ 100 K，入口均 10 MPa。\n(a,b) O/F=2–4 离散网格；(c) 石墨活度与 a_C=1 稳定性边界。")
     save(fig,"fig02_chamber_tradeoff",["saved-demo-results.json:chamber"])
 
 
@@ -169,7 +169,7 @@ def figure_backpressure():
     for pa,label,color,ls,marker in styles:
         valid=[(e,p["isp"]) for e,p in nozzle_points(pa) if p["status"]=="ok"]
         ax.plot(*zip(*valid),color=color,ls=ls,marker=marker,markersize=3,label=label)
-    ax.set(xlabel="面积比 ε",ylabel="比冲 / s",xlim=(0,63),ylim=(260,360)); ax.set_title("(a) 附着模型的成功结果",loc="left")
+    ax.set(xlabel="面积比 ε",ylabel="比冲 / s",xlim=(0,63),ylim=(260,360)); ax.set_title("(a) 附着模型计算结果",loc="left")
     ax.legend(loc="lower right",fontsize=7)
     ax=axs[1]; axes(ax)
     points=nozzle_points(); ax.semilogy([e for e,p in points],[p["pe"]/1000 for e,p in points],"o-",color=BLUE)
@@ -177,8 +177,8 @@ def figure_backpressure():
         ax.axhline(pa/1000,color=color,ls=ls,lw=1)
         ax.text(61,pa/1000*1.07,label,ha="right",va="bottom",fontsize=7,color=color)
     ax.set(xlabel="面积比 ε",ylabel="理想出口压力 / kPa",xlim=(0,63),ylim=(4,1800)); ax.set_title("(b) 出口压力与背压比较",loc="left")
-    ax.text(.05,.08,"pₑ < pₐ：当前附着求解拒绝",transform=ax.transAxes,fontsize=7.5,color=RED)
-    note(fig,"同一 CH₄/O₂ 单室工况；仅背压与面积比变化。线连接离散计算点以辅助阅读。\n不绘制被拒绝点的比冲；拒绝表示模型越域，不能据此定位真实激波或分离。")
+    ax.text(.05,.08,"pₑ < pₐ：超出附着模型条件",transform=ax.transAxes,fontsize=7.5,color=RED)
+    note(fig,"同一 CH₄/O₂ 单室工况；仅背压与面积比变化。左图列出附着模型适用条件内的计算点，右图比较理想出口压力与背压。")
     save(fig,"fig05_backpressure_domain",["saved-demo-results.json:grid.ch4 at O/F=2.6"])
 
 
@@ -211,7 +211,7 @@ def figure_cycle():
     ax.plot([6.35,6.75,6.75],[.55,.55,1.45],color=ORANGE,lw=.9)
     arrow(ax,(6.75,1.45),(7.2,1.45),TEAL); arrow(ax,(9.45,1.45),(10.1,1.45),TEAL)
     ax.text(10.15,1.45,f"{b['total_thrust_n']/1000:.3f}\nkN",fontsize=8.5,va="center")
-    note(fig,"流量单位均为 kg/s，箭头宽度不编码流量。开式：98.0662+1.93376≈100；补燃：74.6296+25.3704=100。\n回流是内部路径，不在总消耗上重复相加。两情景燃料、O/F 与泵压不同，图不作循环性能排名。")
+    note(fig,"流量单位均为 kg/s，箭头宽度不表示流量大小。开式：98.0662+1.93376≈100；补燃：74.6296+25.3704=100。\n补燃回流是内部路径；两种情景的燃料、O/F 和泵出口压力各不相同。")
     save(fig,"fig06_cycle_comparison",["saved-demo-results.json:cycles[*].balance"])
 
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 356,
+  "revision": 362,
   "context": {
     "phase": "双人讲述与PPT逐页制作指导",
     "evidence_cutoff": "2026-10-06",
@@ -1661,6 +1661,36 @@
         "kind": "quality",
         "path": "project/evidence/DOC-006_22faf5137d62.json",
         "sha256": "abf8af76efdbe3fcf357142e6280e073a2ee78c69399d654a08241db3f4a5acd"
+      }
+    },
+    {
+      "id": "DOC-007",
+      "title": "课程报告教师展示稿语言与结构校订",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "DOC-006"
+      ],
+      "required_artifacts": [
+        "deliverables/report_typst_v1/report.typ",
+        "deliverables/report_typst_v1/report-final.pdf",
+        "deliverables/report_typst_v1/README.md",
+        "deliverables/report_typst_v1/figures/README.md",
+        "deliverables/report_typst_v1/figures/build_figures.py",
+        "deliverables/report_typst_v1/figures/figure-manifest.json",
+        "taskshot/2026-10-17_073-report-teacher-facing-final.md"
+      ],
+      "acceptance": [
+        "逐章检查正文、图注、封面、目录、参考文献与分工，删改不适合课堂提交的内部流程口吻、重复免责声明和程式化表达。",
+        "保留课程要求、来源引文、输入假设、计算结果及模型适用范围；统一术语、语气与章节衔接，不增加无来源事实。",
+        "重编最终 PDF，核对文本结构与页码，逐页视觉检查并运行项目统一质量检查，提交本地检查点。"
+      ],
+      "owner": "root",
+      "note": "验收完成：课程十项内容齐全，最终报告、参考文献、插图及分工页完成人工检查；工程质量检查通过。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-007_582238d538a9.json",
+        "sha256": "504ca750864f7d7b9b1de8a6eab20a16d77608b7383ddcf6d0ffa706951320b0"
       }
     }
   ],
@@ -9245,6 +9275,177 @@
       "note": "验收完成：报告嵌入动态架构与稳定GUI页面，工况说明与C返回一致，PDF逐页视觉检查通过，统一质量六组PASS。",
       "previous_hash": "f044fb7c65e70e2e37b7a5a3fcc8ae5b74debdf048a13b118b33715b79a80231",
       "hash": "f4f5e1c70ed602d9d3ff9e995261c174aa67c37e8c45dc6e80965bc624bbf0e2"
+    },
+    {
+      "seq": 374,
+      "at": "2026-10-17T07:37:09+00:00",
+      "task": "DOC-007",
+      "from": null,
+      "to": "READY",
+      "actor": "root",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "f4f5e1c70ed602d9d3ff9e995261c174aa67c37e8c45dc6e80965bc624bbf0e2",
+      "hash": "fc99d3dd02de4c205ac5330929f900e21a2f3e9cb69c94cf95c418330f3964f4"
+    },
+    {
+      "seq": 375,
+      "at": "2026-10-17T07:38:20+00:00",
+      "task": "DOC-007",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "按用户要求面向老师通读报告，清理防御式与AI式表达并重编最终稿。",
+      "previous_hash": "fc99d3dd02de4c205ac5330929f900e21a2f3e9cb69c94cf95c418330f3964f4",
+      "hash": "248e8e69495d249e68f7268e948018929e3d31273e136ae404b485bb2c1b1336"
+    },
+    {
+      "seq": 376,
+      "at": "2026-10-17T09:58:17+00:00",
+      "task": "DOC-007",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "最终版另存为 report-final.pdf，保留初版 PDF 及源码和 README。",
+      "previous_hash": "248e8e69495d249e68f7268e948018929e3d31273e136ae404b485bb2c1b1336",
+      "details": {
+        "contract_before": {
+          "id": "DOC-007",
+          "title": "课程报告教师展示稿语言与结构校订",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-v1.pdf",
+            "deliverables/report_typst_v1/README.md",
+            "taskshot/2026-10-17_073-report-teacher-facing-final.md"
+          ],
+          "acceptance": [
+            "逐章检查正文、图注、封面、目录、参考文献与分工，删改不适合课堂提交的内部流程口吻、重复免责声明和程式化表达。",
+            "保留课程要求、来源引文、输入假设、计算结果及模型适用范围；统一术语、语气与章节衔接，不增加无来源事实。",
+            "重编最终 PDF，核对文本结构与页码，逐页视觉检查并运行项目统一质量检查，提交本地检查点。"
+          ],
+          "owner": "root",
+          "note": "按用户要求面向老师通读报告，清理防御式与AI式表达并重编最终稿。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-007",
+          "title": "课程报告教师展示稿语言与结构校订",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-final.pdf",
+            "deliverables/report_typst_v1/README.md",
+            "taskshot/2026-10-17_073-report-teacher-facing-final.md"
+          ],
+          "acceptance": [
+            "逐章检查正文、图注、封面、目录、参考文献与分工，删改不适合课堂提交的内部流程口吻、重复免责声明和程式化表达。",
+            "保留课程要求、来源引文、输入假设、计算结果及模型适用范围；统一术语、语气与章节衔接，不增加无来源事实。",
+            "重编最终 PDF，核对文本结构与页码，逐页视觉检查并运行项目统一质量检查，提交本地检查点。"
+          ],
+          "owner": "root",
+          "note": "最终版另存为 report-final.pdf，保留初版 PDF 及源码和 README。",
+          "verification": null
+        }
+      },
+      "hash": "34a4c61953d419b1edc74922a59ed84be8c2d2b19f4ea46370b90c4741b42c4d"
+    },
+    {
+      "seq": 377,
+      "at": "2026-10-17T11:50:46+00:00",
+      "task": "DOC-007",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "最终版图例和图表索引同步优化，登记科研图源、校验清单与生成脚本。",
+      "previous_hash": "34a4c61953d419b1edc74922a59ed84be8c2d2b19f4ea46370b90c4741b42c4d",
+      "details": {
+        "contract_before": {
+          "id": "DOC-007",
+          "title": "课程报告教师展示稿语言与结构校订",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-final.pdf",
+            "deliverables/report_typst_v1/README.md",
+            "taskshot/2026-10-17_073-report-teacher-facing-final.md"
+          ],
+          "acceptance": [
+            "逐章检查正文、图注、封面、目录、参考文献与分工，删改不适合课堂提交的内部流程口吻、重复免责声明和程式化表达。",
+            "保留课程要求、来源引文、输入假设、计算结果及模型适用范围；统一术语、语气与章节衔接，不增加无来源事实。",
+            "重编最终 PDF，核对文本结构与页码，逐页视觉检查并运行项目统一质量检查，提交本地检查点。"
+          ],
+          "owner": "root",
+          "note": "最终版另存为 report-final.pdf，保留初版 PDF 及源码和 README。",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "DOC-007",
+          "title": "课程报告教师展示稿语言与结构校订",
+          "status": "ACTIVE",
+          "priority": 1,
+          "depends_on": [
+            "DOC-006"
+          ],
+          "required_artifacts": [
+            "deliverables/report_typst_v1/report.typ",
+            "deliverables/report_typst_v1/report-final.pdf",
+            "deliverables/report_typst_v1/README.md",
+            "deliverables/report_typst_v1/figures/README.md",
+            "deliverables/report_typst_v1/figures/build_figures.py",
+            "deliverables/report_typst_v1/figures/figure-manifest.json",
+            "taskshot/2026-10-17_073-report-teacher-facing-final.md"
+          ],
+          "acceptance": [
+            "逐章检查正文、图注、封面、目录、参考文献与分工，删改不适合课堂提交的内部流程口吻、重复免责声明和程式化表达。",
+            "保留课程要求、来源引文、输入假设、计算结果及模型适用范围；统一术语、语气与章节衔接，不增加无来源事实。",
+            "重编最终 PDF，核对文本结构与页码，逐页视觉检查并运行项目统一质量检查，提交本地检查点。"
+          ],
+          "owner": "root",
+          "note": "最终版图例和图表索引同步优化，登记科研图源、校验清单与生成脚本。",
+          "verification": null
+        }
+      },
+      "hash": "adcf331f2df748b007b5bf44d24e5d08a80c1bd3497f5bc143e6210844aacaa3"
+    },
+    {
+      "seq": 378,
+      "at": "2026-10-17T12:24:59+00:00",
+      "task": "DOC-007",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "报告正文、图例、参考文献和图表索引已校订，20页PDF逐页渲染核对；project check与六组统一质量检查全部PASS。",
+      "previous_hash": "adcf331f2df748b007b5bf44d24e5d08a80c1bd3497f5bc143e6210844aacaa3",
+      "hash": "12e8fe6d66cd559fd287d058d1829a9b33f01c7099095f21ecf81d3fd2492dcc"
+    },
+    {
+      "seq": 379,
+      "at": "2026-10-17T12:26:15+00:00",
+      "task": "DOC-007",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "root",
+      "owner_after": "root",
+      "note": "验收完成：课程十项内容齐全，最终报告、参考文献、插图及分工页完成人工检查；工程质量检查通过。",
+      "previous_hash": "12e8fe6d66cd559fd287d058d1829a9b33f01c7099095f21ecf81d3fd2492dcc",
+      "hash": "e8e0ab9b9192f20aa7156c96f60cb72fadc29f84ce30433326d92f65cd69717c"
     }
   ]
 }
