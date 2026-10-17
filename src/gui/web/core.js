@@ -30,7 +30,7 @@ const envName = (pa) => (ENV.find((e) => e[0] === pa) || [pa, `${kpa(pa)} kPa`])
 const plain = (v) => (Number.isInteger(v) ? String(v) : String(+v.toPrecision(10)));
 /* Equivalent CLI command for the current point, so any number can be reproduced in a terminal. */
 const CMD = {
-  ch4: (of, ar, pa) => `rocketperf.exe combustion frozen-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 1e7 ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01`,
+  ch4: (of, ar, pa, pc = PC) => `rocketperf.exe combustion frozen-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 ${plain(pc)} ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01`,
   rp1: (of, ar, pa) => `rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 ${plain(of)} 298.15 90.170 ${plain(ar)} ${plain(pa)} 0.01`,
   regime: (of, ar, pa) => `rocketperf.exe combustion regime-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 1e7 ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01 --text`,
   cycle: (file) => `rocketperf.exe cycle adiabatic ${file} --text`,
@@ -67,13 +67,13 @@ const RP = (() => {
     let busy = false, pending = null;
     async function pump() {
       if (busy || !pending) return;
-      const args = pending; pending = null; busy = true;
-      const env = await call(cmd, args);
+      const job = pending; pending = null; busy = true;
+      const env = await call(cmd, job.args);
       busy = false;
-      onResult(env, args, !pending);
+      onResult(env, job.args, !pending, job.token);
       pump();
     }
-    return (args) => { pending = args; pump(); };
+    return (args, token) => { pending = { args, token }; pump(); };
   }
   /* Memoised call for sweeps whose arguments repeat (switching back and forth). */
   const memo = new Map();
@@ -128,13 +128,20 @@ function toast(text) {
   t.textContent = text; t.classList.add("show");
   clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1500);
 }
-function copyText(text) {
+function copyText(text, message = "已复制命令，可在发布目录用 rocketperf.exe 复现") {
   const a = document.createElement("textarea");
   a.value = text; a.style.position = "fixed"; a.style.opacity = "0"; document.body.appendChild(a); a.select();
   let ok = false;
   try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
   a.remove();
-  toast(ok ? "已复制命令，可在发布目录用 rocketperf.exe 复现" : "复制失败，请手动选择");
+  toast(ok ? message : "复制失败，请手动选择");
+}
+function downloadText(filename, text) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = url; a.download = filename; a.style.display = "none";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 /* Peak of a [x, y] series, used for the optimum markers. */
 function peakOf(pts) { return pts.reduce((a, p) => (p[1] > a[1] ? p : a), pts[0]); }

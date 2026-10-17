@@ -7,6 +7,7 @@ import argparse
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -16,7 +17,7 @@ CLI = ROOT / "build/release/rocketperf.exe"
 CH4 = ["coolprop710-cea334-liquid-molar-v1", "heos710-cea334-ideal-zero-298.15-v1", "liquid"]
 RP1 = ["cea-v3.3.4-rp1-o2l-assigned-v1", "liquid", "RP-1", "O2(L)", "10000000"]
 CASES = ["zq3_y1_stage1", "zq3_y1_stage2", "cz10b_first_stage1", "cz10b_first_stage2", "cz10b_first_stage2_orsc"]
-REL = 2e-9  # bridge prints %.10g; CLI prints %.17g
+REL = 2e-12  # both frontends preserve double precision with %.17g
 
 
 def bridge(*requests):
@@ -105,6 +106,30 @@ class GuiBridgeTests(unittest.TestCase):
         self.assertEqual(code, 0, err)
         self.close(env["result"]["balance"]["isp"], ref["balance"]["engine_specific_impulse_s"], "edited Isp")
 
+    def test_exported_cycle_ini_reproduces_overrides(self):
+        env, = bridge({"cmd": "cycle", "args": {
+            "case": "cases/vehicles/cz10b_first_stage1.ini",
+            "preburner_oxidizer_fuel_ratio": 31.0,
+            "chamber_pressure_pa": 9.5e6,
+        }})
+        self.assertTrue(env["ok"], env)
+        exported = env["result"].get("ini")
+        self.assertIsInstance(exported, str)
+        self.assertIn("preburner_oxidizer_fuel_ratio=31", exported)
+        with tempfile.NamedTemporaryFile("w", suffix=".ini", dir=ROOT / "build/gui", delete=False, encoding="utf-8") as handle:
+            path = Path(handle.name)
+            handle.write(exported)
+        try:
+            code, ref, err = cli("cycle", "adiabatic", path)
+        finally:
+            path.unlink(missing_ok=True)
+        self.assertEqual(code, 0, err)
+        b = env["result"]["balance"]
+        rb = ref["balance"]
+        self.close(b["isp"], rb["engine_specific_impulse_s"], "exported Isp")
+        self.close(b["total_thrust"], rb["total_thrust_n"], "exported thrust")
+        self.close(b["branch_flow"], rb["branch_mass_flow_kg_per_s"], "exported branch flow")
+
     def test_rejections_keep_c_status(self):
         carbon, rp1_pc, sweep = bridge({"cmd": "chamber", "args": {"fuel": "ch4", "of": 0.8}},
                                        {"cmd": "chamber", "args": {"fuel": "rp1", "pc": 5e6, "of": 2.6}},
@@ -135,6 +160,30 @@ class GuiBridgeTests(unittest.TestCase):
                              capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
         for line in raw.stdout.splitlines():
             self.assertEqual(json.loads(line)["status"], "parse_error")
+        strict_lines = [
+            '{"cmd":"chamber","args":{"of":1.e1}}',
+            '{"cmd":"chamber","args":{"of":01}}',
+            '{"cmd":"chamber","args":{"of":1.}}',
+            '{"cmd":"chamber","args":{"of":1e}}',
+            '{"cmd":"chamber","args":{"of":2.6},"args":{}}',
+            '{"cmd":"info",}',
+            '{"cmd":"info","cmd":"info"}',
+            '{"cmd":"chamber","args":{"of":1e+}}',
+            '{"cmd":"chamber","args":{"of":-01}}',
+            r'{"cmd":"chamber","args":{"fuel":"\u1',
+        ]
+        malformed_run = subprocess.run([str(BRIDGE)], input="\n".join(strict_lines) + "\n",
+                                       capture_output=True, text=True, encoding="utf-8", cwd=ROOT)
+        malformed = [json.loads(line) for line in malformed_run.stdout.splitlines()]
+        self.assertEqual(malformed_run.returncode, 0, malformed_run.stderr)
+        self.assertEqual(len(malformed), len(strict_lines))
+        self.assertTrue(all(e["status"] == "parse_error" for e in malformed), malformed)
+        fractional, = bridge({"cmd": "chamber_sweep", "args": {
+            "fuel": "ch4", "of_min": 0.5, "of_max": 4.0, "n": 12.5,
+        }})
+        self.assertEqual(fractional["status"], "invalid_argument")
+        fractional_compare, = bridge({"cmd": "compare", "args": {"n": 19.5}})
+        self.assertEqual(fractional_compare["status"], "invalid_argument")
 
 
 if __name__ == "__main__":

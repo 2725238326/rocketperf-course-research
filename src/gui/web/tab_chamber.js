@@ -110,7 +110,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
       P.ev.set(c ? [["HP 外层 / 末次 Newton", `${c.hp_iterations} / ${c.eq_iterations}`], ["元素守恒最大相对残差", sci(c.element_residual)],
         ["焓残差", `${sci(c.enthalpy_residual)} J/kg`], ["喷管连续性残差", vac ? sci(vac.continuity_residual) : "—"]]
         : [["状态", point.status], ["说明", "求解收敛后被判据拒绝"], ["C 消息", `<span style="font-family:var(--ff);white-space:normal">${esc(point.message)}</span>`]],
-        CMD.ch4(of, 10, 0) + (P.pc.get() !== 10 ? `   # 界面室压 ${P.pc.get()} MPa` : ""));
+        CMD.ch4(of, 10, 0, P.pc.get() * 1e6));
     }
     if (sweep) {
       const pc = peakC(), pt = peakT();

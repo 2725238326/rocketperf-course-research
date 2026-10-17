@@ -56,7 +56,7 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
   const inputs = card(V.rail, "可编辑输入", `<p class="muted" style="font-size:0.84rem">改值后回车即重解整机；改过的项变蓝。</p><div class="fields"></div><button type="button" class="linkbtn">恢复算例原值</button>`);
   P.form = inputs.querySelector(".fields"); P.reset = inputs.querySelector(".linkbtn");
   P.reset.addEventListener("click", () => { P.over = {}; buildForm(); solve(); });
-  P.ev = evidence(V.rail);
+  P.ev = evidence(V.rail, "求解器证据", { downloadIni: true });
   P.chain = chain(V.stage, "C 调用链");
   const row = kpiRow(V.stage, 4);
   P.k = [kpi(row, "整机推力", "主喷管 + 外排"), kpi(row, "整机比冲", "÷ 总供给"), kpi(row, "涡轮功率", "= (泵 + 辅助) / η轴"), kpi(row, "涡轮出口压力")];
@@ -133,6 +133,7 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
         const wrap = h("div", key in P.over ? "changed" : ""); wrap.style.display = "contents"; wrap.append(lab, box);
         const input = box.querySelector("input");
         input.value = +((P.over[key] ?? base[key]) / scale).toPrecision(6);
+        let dirty = false;
         const commit = () => {
           const x = +input.value;
           if (input.value === "" || !Number.isFinite(x)) { box.classList.add("invalid"); return; }
@@ -142,8 +143,12 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
           wrap.classList.toggle("changed", key in P.over);
           solve();
         };
-        input.addEventListener("change", commit);
-        input.addEventListener("keydown", (e) => { if (e.key === "Enter") input.blur(); });
+        input.addEventListener("input", () => { dirty = true; });
+        input.addEventListener("change", () => { if (dirty) { dirty = false; commit(); } });
+        input.addEventListener("blur", () => { if (dirty) { dirty = false; commit(); } });
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") { dirty = false; commit(); input.blur(); }
+        });
         P.form.append(wrap);
       });
     });
@@ -158,7 +163,7 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
       fig.body.innerHTML = `<div style="position:absolute;inset:1rem">${failure(env, "输入组合不满足功率、压力或成分约束（例如涡轮出口压力不足以回流主室），C 核心不给近似解。点“恢复算例原值”回到文件输入。")}</div>`;
       ledgers.innerHTML = ""; detail.innerHTML = "";
       P.chain.set([{ name: "整机联立", val: env.status, state: "bad" }]);
-      P.ev.set([["状态", env.status], ["C 消息", `<span style="font-family:var(--ff);white-space:normal">${esc(env.message)}</span>`]], CMD.cycle(P.file));
+      P.ev.set([["状态", env.status], ["C 消息", `<span style="font-family:var(--ff);white-space:normal">${esc(env.message)}</span>`]], "");
       return;
     }
     const c = cycleModel(env.result), B = c.balance, gg = !c.staged, name = CYCLE_CASES.find((x) => x[0] === P.file);
@@ -188,8 +193,13 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
     P.key.innerHTML = `<h2>关键核对</h2><p>` + (gg
       ? `外排 <b>${fx(B.external_mass_flow_kg_per_s, 3)} kg/s</b> 经独立喷管仍贡献 <b>${fx(B.branch_thrust_n / 1e3, 3)} kN</b>，占整机 ${fx((B.branch_thrust_n / B.total_thrust_n) * 100, 2)}%，漏记即低估推力和比冲。发生器 O/F ${fx(c.inputs.preburner_oxidizer_fuel_ratio, 2)}，石墨活度 ${sci(c.preburner.ac, 3)}${c.preburner.ac < 1 ? " &lt; 1，仍在气相域内" : ""}。`
       : `轴功平衡反解涡轮出口 <b>${fx(c.turbine.out_pa / 1e6, 2)} MPa</b>，高于回流注入主室所需 <b>${fx(minP / 1e6, 2)} MPa</b>：功率账在注入约束内成立。${c.feed === "rp1_assigned" ? "RP-1 为指定替代物，燃料密度为假设值。" : ""}`) + "</p>";
+    const file = `rocketperf-${env.result.case.id.replace(/[^A-Za-z0-9_-]/g, "_")}.ini`;
+    const command = `rocketperf.exe cycle adiabatic ${file} --text`;
     P.ev.set([["轴功残差", `${sci(B.shaft_residual_w)} W`], ["焓残差", `${fx(B.energy_residual_w, 3)} W`], ["质量相对残差", sci(B.mass_relative_residual)],
-      ["元素最大残差", sci(Math.max(...c.element_residual.map(Math.abs)))]], CMD.cycle(P.file) + (Object.keys(P.over).length ? `   # 界面改了 ${Object.keys(P.over).length} 项输入` : ""));
+      ["元素最大残差", sci(Math.max(...c.element_residual.map(Math.abs)))]], command, {
+        ini: env.result.ini, filename: file,
+        copyMessage: "命令已复制；先下载 INI，再放到 rocketperf.exe 所在目录运行",
+      });
   }
   function paintSweep() {
     P.swApi.redraw();
@@ -211,27 +221,40 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
       tip: (x) => { const i = xs.indexOf(x); return i >= 0 && finite(r.preburner_t[i]) ? `<b>预燃/发生器 ${fx(r.preburner_t[i], 0)} K · 推力 ${fx(r.thrust[i] / 1e3, 1)} kN</b><br>` : ""; } });
   });
 
-  const run = RP.channel("cycle", (e) => {
+  const run = RP.channel("cycle", (e, _args, settled, token) => {
+    if (token !== P.caseToken || !settled) return;
     P.env = e;
-    if (e.ok && !P.base) { P.base = e.result.inputs; buildForm(); }
+    if (e.ok && !P.base) { P.base = e.result.inputs; buildForm(); sweep(); }
     P.reset.disabled = !Object.keys(P.over).length;
     render();
   });
-  const runSweep = RP.channel("cycle_sweep", (e) => { P.sweep = e; paintSweep(); });
+  const runSweep = RP.channel("cycle_sweep", (e, _args, settled, token) => {
+    if (token !== P.caseToken || !settled) return;
+    P.sweep = e; paintSweep();
+  });
   function sweep() {
     if (!P.base) return;
     const def = CYCLE_SWEEPS.find((d) => d[0] === P.sweepField), cur = P.over[def[0]] ?? P.base[def[0]];
     const hi = def[0] === "turbine_efficiency" ? Math.min(cur * def[3], 1) : cur * def[3];
     const lo = cur * def[2], n = 13;
-    runSweep({ case: P.file, ...P.over, field: def[0], values: Array.from({ length: n }, (_, i) => +(lo + (hi - lo) * i / (n - 1)).toPrecision(6)) });
+    runSweep({ case: P.file, ...P.over, field: def[0], values: Array.from({ length: n }, (_, i) => +(lo + (hi - lo) * i / (n - 1)).toPrecision(6)) }, P.caseToken);
   }
-  function solve() { run({ case: P.file, ...P.over }); sweep(); }
+  function solve() { run({ case: P.file, ...P.over }, P.caseToken); sweep(); }
   function select(file) {
-    P.file = file; P.over = {}; P.base = null; P.sweep = null;
+    P.caseToken = (P.caseToken || 0) + 1;
+    P.file = file; P.over = {}; P.base = null; P.env = null; P.sweep = null;
     list.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.file === file)));
-    RP.call("cycle", { case: file }).then((e) => {
-      P.env = e; P.base = e.ok ? e.result.inputs : null; buildForm(); render(); sweep();
-    });
+    P.form.innerHTML = '<p class="muted">正在调用 C 核心计算所选算例…</p>';
+    P.reset.disabled = true;
+    P.key.innerHTML = "<h2>关键核对</h2><p>算例切换后正在重新求解。</p>";
+    fig.el.querySelector("h3").textContent = "循环求解中";
+    fig.body.innerHTML = '<div class="plot-message">正在调用 C 核心…</div>';
+    ledgers.innerHTML = ""; detail.innerHTML = "";
+    P.k.forEach((k) => k.set({ html: '<div class="v">计算中…</div>' }));
+    P.chain.set([{ name: "整机联立", val: "等待 C 核心返回" }]);
+    P.ev.set([["状态", "计算中"]], "");
+    paintSweep();
+    run({ case: file }, P.caseToken);
   }
   select(P.file);
 } });

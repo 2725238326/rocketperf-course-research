@@ -29,11 +29,22 @@ def main():
         for name,command in steps:
             print(f'Quality: {name}',flush=True)
             completed=subprocess.run(command,cwd=ROOT,capture_output=True,encoding='utf-8',errors='replace',timeout=900,check=False,env=subprocess_env())
+            extra_commands=[]
+            if name == 'release' and completed.returncode == 0:
+                extra_commands=[[sys.executable,'tools/gui_build.py','--dist'],[sys.executable,'tests/test_gui.py']]
+                output=completed.stdout+completed.stderr
+                for extra in extra_commands:
+                    print('Quality: release / '+Path(extra[1]).name,flush=True)
+                    done=subprocess.run(extra,cwd=ROOT,capture_output=True,encoding='utf-8',errors='replace',timeout=900,check=False,env=subprocess_env())
+                    output+='\n'+' '.join(extra)+'\n'+done.stdout+done.stderr
+                    completed=subprocess.CompletedProcess(command,done.returncode,output,'')
+                    if done.returncode: break
             atomic_text(folder/(name+'.log'),completed.stdout+completed.stderr)
             if name in {'governance','runner','handoff'} and completed.returncode == 0:
                 from pipeline import cli_test_count
                 cli_test_count(completed.stdout+completed.stderr)
             report['checks'].append({'name':name,'status':'PASS' if completed.returncode==0 else 'FAIL','command':command,'log':(folder/(name+'.log')).relative_to(ROOT).as_posix()})
+            if extra_commands: report['checks'][-1]['additional_commands']=extra_commands
             atomic_json(path,report)
             if completed.returncode:
                 raise ValueError(f'{name} failed; see {folder/(name+".log")}\n'+(completed.stdout+completed.stderr)[-2500:])

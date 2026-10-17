@@ -1,7 +1,9 @@
 #include "gui_json.h"
 #include "rocketperf/numeric.h"
 
+#include <errno.h>
 #include <math.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -63,12 +65,15 @@ static int parse_string(Cursor *c, char *output, size_t capacity)
             case 'f': encoded[0] = '\f'; break;
             case 'u': {
                 unsigned int code = 0U;
-                for (int i = 1; i <= 4; ++i) {
-                    const int digit = hex_digit(c->at[i]);
+                const char *digit_at = c->at + 1;
+                for (int i = 0; i < 4; ++i, ++digit_at) {
+                    int digit;
+                    if (*digit_at == '\0') { return fail(c, "truncated unicode escape"); }
+                    digit = hex_digit(*digit_at);
                     if (digit < 0) { return fail(c, "bad unicode escape"); }
                     code = code * 16U + (unsigned int)digit;
                 }
-                c->at += 4;
+                c->at = digit_at - 1;
                 if (code == 0U || (code >= 0xD800U && code <= 0xDFFFU)) { return fail(c, "unsupported unicode escape"); }
                 if (code < 0x80U) { encoded[0] = (char)code; }
                 else if (code < 0x800U) {
@@ -94,19 +99,45 @@ static int parse_string(Cursor *c, char *output, size_t capacity)
     return 1;
 }
 
-/* JSON number grammar start; strtod then rejects hex/inf/nan forms. */
+/* Scan the JSON number grammar before converting.  strtod accepts useful C
+ * spellings such as 1.e3 and 01 which are not JSON numbers; the bridge is an
+ * IPC boundary, so accepting those spellings would make the browser and CLI
+ * contracts disagree. */
 static int parse_number(Cursor *c, double *output)
 {
+    const char *start;
+    const char *cursor;
     char *end;
     double value;
     skip(c);
-    if (!(*c->at == '-' || (*c->at >= '0' && *c->at <= '9'))) { return fail(c, "expected number"); }
-    value = strtod(c->at, &end);
-    for (const char *p = c->at; p < end; ++p) {
-        if (*p == 'x' || *p == 'X' || *p == 'n' || *p == 'N' || *p == 'i' || *p == 'I') { return fail(c, "invalid number"); }
+    start = c->at;
+    cursor = start;
+    if (*cursor == '-') { ++cursor; }
+    if (*cursor == '0') {
+        ++cursor;
+        if (*cursor >= '0' && *cursor <= '9') { return fail(c, "invalid number"); }
+    } else if (*cursor >= '1' && *cursor <= '9') {
+        do { ++cursor; } while (*cursor >= '0' && *cursor <= '9');
+    } else {
+        return fail(c, "expected number");
     }
-    if (end == c->at || !rp_isfinite(value)) { return fail(c, "invalid number"); }
-    c->at = end;
+    if (*cursor == '.') {
+        const char *fraction = ++cursor;
+        while (*cursor >= '0' && *cursor <= '9') { ++cursor; }
+        if (cursor == fraction) { return fail(c, "invalid number"); }
+    }
+    if (*cursor == 'e' || *cursor == 'E') {
+        const char *exponent;
+        ++cursor;
+        if (*cursor == '+' || *cursor == '-') { ++cursor; }
+        exponent = cursor;
+        while (*cursor >= '0' && *cursor <= '9') { ++cursor; }
+        if (cursor == exponent) { return fail(c, "invalid number"); }
+    }
+    errno = 0;
+    value = strtod(start, &end);
+    if (errno == ERANGE || end != cursor || !rp_isfinite(value)) { return fail(c, "invalid number"); }
+    c->at = cursor;
     *output = value;
     return 1;
 }
@@ -172,6 +203,7 @@ int rp_gui_parse(const char *text, RpGuiRequest *output, char *reason, size_t ca
     Cursor c = {text, NULL};
     int wrapped = 0;
     int seen_cmd = 0;
+    int seen_args = 0;
     int ok = 1;
     if (text == NULL || output == NULL) { return 0; }
     memset(output, 0, sizeof(*output));
@@ -186,14 +218,20 @@ int rp_gui_parse(const char *text, RpGuiRequest *output, char *reason, size_t ca
         if (strcmp(key, "cmd") == 0 && !seen_cmd) {
             ok = parse_string(&c, output->cmd, sizeof(output->cmd));
             seen_cmd = 1;
-        } else if (strcmp(key, "args") == 0) {
+        } else if (strcmp(key, "args") == 0 && !seen_args) {
             ok = parse_args(&c, output);
+            seen_args = 1;
         } else {
             ok = fail(&c, "unknown request key");
         }
         if (!ok) { break; }
         skip(&c);
-        if (*c.at == ',') { ++c.at; continue; }
+        if (*c.at == ',') {
+            ++c.at;
+            skip(&c);
+            if (*c.at == '}') { ok = fail(&c, "trailing comma in request"); break; }
+            continue;
+        }
         if (*c.at == '}') { ++c.at; break; }
         ok = fail(&c, "expected , or } in request");
     }
@@ -223,11 +261,17 @@ void rp_gui_buffer_free(RpGuiBuffer *buffer)
 
 static void append(RpGuiBuffer *buffer, const char *text, size_t length)
 {
+    size_t needed;
     if (buffer->failed) { return; }
-    if (buffer->length + length + 1U > buffer->capacity) {
+    if (buffer->length == SIZE_MAX || length > SIZE_MAX - buffer->length - 1U) { buffer->failed = 1; return; }
+    needed = buffer->length + length + 1U;
+    if (needed > buffer->capacity) {
         size_t capacity = buffer->capacity == 0U ? 4096U : buffer->capacity;
         char *grown;
-        while (buffer->length + length + 1U > capacity) { capacity *= 2U; }
+        while (needed > capacity) {
+            if (capacity > SIZE_MAX / 2U) { capacity = needed; break; }
+            capacity *= 2U;
+        }
         grown = realloc(buffer->data, capacity);
         if (grown == NULL) { buffer->failed = 1; return; }
         buffer->data = grown;
@@ -280,7 +324,7 @@ void rp_gui_number(RpGuiBuffer *buffer, double value)
     char text[40];
     int written;
     if (!rp_isfinite(value)) { append(buffer, "null,", 5U); return; }
-    written = snprintf(text, sizeof(text), "%.10g,", value);
+    written = snprintf(text, sizeof(text), "%.17g,", value);
     if (written <= 0 || (size_t)written >= sizeof(text)) { buffer->failed = 1; return; }
     append(buffer, text, (size_t)written);
 }

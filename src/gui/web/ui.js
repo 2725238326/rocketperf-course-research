@@ -123,13 +123,32 @@ function chain(parent, label) {
       `<span class="step ${s.state || "ok"}"><b>${s.name}</b>${s.val ? `<em>${s.val}</em>` : ""}</span>`).join('<span class="arrow">→</span>');
   } };
 }
-function evidence(parent, title = "求解器证据") {
-  const c = card(parent, "", `<h3>${title}</h3><table></table><div class="cmd"><button type="button">复制</button><span></span></div>`, "ev");
-  const table = c.querySelector("table"), cmd = c.querySelector(".cmd span");
-  c.querySelector("button").addEventListener("click", () => copyText(cmd.textContent));
-  return { set(rows, text) {
+function evidence(parent, title = "求解器证据", options = {}) {
+  const exportButton = options.downloadIni ? `<button class="cmd-export" type="button" hidden>下载 INI</button>` : "";
+  const c = card(parent, "", `<h3>${title}</h3><table></table><div class="cmd"><span></span>${exportButton}<button class="cmd-copy" type="button">复制</button></div>`, "ev");
+  const table = c.querySelector("table"), cmd = c.querySelector(".cmd span"), box = c.querySelector(".cmd");
+  const copy = c.querySelector(".cmd-copy"), exportIni = c.querySelector(".cmd-export");
+  copy.addEventListener("click", () => copyText(cmd.textContent, copy.dataset.message || undefined));
+  if (exportIni) {
+    exportIni.addEventListener("click", () => {
+      const content = exportIni._content;
+      if (typeof content !== "string") return;
+      downloadText(exportIni.dataset.filename, content);
+      toast("已下载完整循环输入；将文件放到 rocketperf.exe 目录后复算");
+    });
+  }
+  return { set(rows, text, extra = {}) {
     table.innerHTML = rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("");
     cmd.textContent = text;
+    copy.dataset.message = extra.copyMessage || "";
+    if (exportIni) {
+      const ready = typeof extra.ini === "string" && extra.ini.length > 0;
+      exportIni.hidden = !ready;
+      exportIni.disabled = !ready;
+      exportIni._content = ready ? extra.ini : null;
+      exportIni.dataset.filename = extra.filename || "rocketperf-cycle.ini";
+      box.classList.toggle("has-export", ready);
+    }
   } };
 }
 function figure(parent, o) {

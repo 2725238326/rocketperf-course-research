@@ -62,7 +62,8 @@ def run(cmd: list[str], log: list[str]) -> None:
 
 
 def imports(exe: Path) -> list[str]:
-    text = subprocess.run(["objdump", "-p", str(exe)], capture_output=True, text=True, check=True).stdout
+    text = subprocess.run(["objdump", "-p", str(exe)], capture_output=True, text=True,
+                          encoding="utf-8", errors="replace", check=True).stdout
     return re.findall(r"DLL Name:\s+(\S+)", text)
 
 

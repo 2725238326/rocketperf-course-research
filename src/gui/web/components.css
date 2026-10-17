@@ -79,8 +79,12 @@ input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; border-radius
 .ev td:last-child { text-align: right; font-family: var(--mono); color: var(--ink); white-space: nowrap; padding-left: 0.6rem; }
 .cmd { position: relative; margin-top: 0.55rem; background: #0E1A33; color: #CFE0FF; border-radius: 8px; padding: 0.5rem 2.6rem 0.5rem 0.6rem;
   font-family: var(--mono); font-size: 0.88rem; line-height: 1.5; word-break: break-all; }
-.cmd button { position: absolute; top: 0.35rem; right: 0.35rem; font: inherit; font-family: var(--ff); font-size: 0.7rem; color: #CFE0FF;
+.cmd button { position: absolute; top: 0.35rem; font: inherit; font-family: var(--ff); font-size: 0.7rem; color: #CFE0FF;
   background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 5px; padding: 0.1rem 0.4rem; cursor: pointer; }
+.cmd-copy { right: 0.35rem; }
+.cmd.has-export { padding-right: 7.5rem; }
+.cmd-export { right: 3.3rem; }
+.cmd-export:disabled { opacity: 0.45; cursor: default; }
 
 /* tooltip & toast */
 #tip { position: fixed; z-index: 50; pointer-events: none; background: rgba(14,26,51,0.95); color: #E8EEF9; border-radius: 8px; padding: 0.45rem 0.65rem;

@@ -92,6 +92,19 @@ static int array_arg(Call *call, const char *key, size_t limit, double lo, doubl
     return 1;
 }
 
+static int integer_arg(Call *call, const char *key, double fallback, size_t lo, size_t hi, size_t *output)
+{
+    double value;
+    if (!number_arg(call, key, fallback, (double)lo, (double)hi, &value)) { return 0; }
+    if (value != floor(value)) {
+        char message[96];
+        (void)snprintf(message, sizeof(message), "Argument %s must be an integer.", key);
+        return reject(call, RP_INVALID_ARGUMENT, "arguments", message);
+    }
+    *output = (size_t)value;
+    return 1;
+}
+
 /* ---- chamber state shared by every command ------------------------------- */
 
 typedef struct {
@@ -342,16 +355,15 @@ static int command_chamber_sweep(Call *call)
     static const char *const keys[] = {"fuel", "pc", "tf", "pf", "to", "po", "of_min", "of_max", "n"};
     RpGuiBuffer *out = call->out;
     Point point;
-    double lo, hi, count_value;
+    double lo, hi;
     size_t count;
     RpGuiBuffer status_column = {0}, message_column = {0};
     double *columns;
     enum { OF, T, CSTAR, MW, GAMMA, AC, H, FIXED };
     if (!only_keys(call, keys, sizeof(keys) / sizeof(keys[0])) || !read_point(call, &point) ||
         !number_arg(call, "of_min", 0.5, 0.01, 100.0, &lo) || !number_arg(call, "of_max", 4.0, 0.01, 100.0, &hi) ||
-        !number_arg(call, "n", 36.0, 2.0, (double)RP_GUI_SWEEP_MAX, &count_value)) { return 0; }
+        !integer_arg(call, "n", 36.0, 2U, RP_GUI_SWEEP_MAX, &count)) { return 0; }
     if (!(hi > lo)) { return reject(call, RP_INVALID_ARGUMENT, "arguments", "of_max must exceed of_min."); }
-    count = (size_t)count_value;
     columns = calloc(count * (FIXED + RP_CHO_SPECIES_COUNT), sizeof(double));
     if (columns == NULL) { return reject(call, RP_IO_ERROR, "memory", "Cannot allocate sweep columns."); }
     rp_gui_open(&status_column, '[');
@@ -620,7 +632,7 @@ static int command_compare(Call *call)
 {
     static const char *const keys[] = {"ch4_of", "rp1_of", "ar", "pa", "at", "of_min", "of_max", "n"};
     RpGuiBuffer *out = call->out;
-    double ch4_of, rp1_of, area_ratio, ambient, throat, lo, hi, count_value;
+    double ch4_of, rp1_of, area_ratio, ambient, throat, lo, hi;
     RpPropellantComparisonInput input;
     RpPropellantComparisonResult result;
     RpStatus status;
@@ -631,12 +643,11 @@ static int command_compare(Call *call)
         !number_arg(call, "ar", 10.0, 1.0, 1e4, &area_ratio) || !number_arg(call, "pa", 0.0, 0.0, 1e8, &ambient) ||
         !number_arg(call, "at", 0.01, 1e-8, 100.0, &throat) ||
         !number_arg(call, "of_min", 2.2, 0.01, 100.0, &lo) || !number_arg(call, "of_max", 4.0, 0.01, 100.0, &hi) ||
-        !number_arg(call, "n", 19.0, 2.0, (double)RP_GUI_SWEEP_MAX, &count_value)) { return 0; }
+        !integer_arg(call, "n", 19.0, 2U, RP_GUI_SWEEP_MAX, &count)) { return 0; }
     if (!(hi > lo)) { return reject(call, RP_INVALID_ARGUMENT, "arguments", "of_max must exceed of_min."); }
     input = comparison_input(ch4_of, rp1_of, area_ratio, ambient, throat);
     status = rp_propellant_compare_fixed(&input, NULL, NULL, &result, &call->error);
     if (status != RP_OK) { return solver_failed(call, status, "comparison"); }
-    count = (size_t)count_value;
     for (size_t i = 0U; i < count; ++i) {
         RpPropellantComparisonResult swept;
         RpError ignored = {0};
@@ -810,6 +821,41 @@ static void write_cycle_case(RpGuiBuffer *out, const RpEngineCycleCase *study)
     rp_gui_close(out, '}');
 }
 
+/* Export the actual parsed/overridden SI inputs, including the read-only feed
+ * identity.  The exported file is accepted unchanged by the CLI case loader. */
+static int write_cycle_ini(Call *call, const RpEngineCycleCase *study)
+{
+    const RpEngineCycleInput *i = &study->input;
+    char text[4096];
+    const int written = snprintf(text, sizeof(text),
+        "# Exported GUI research inputs (SI units).\n"
+        "schema_version=1\ncase_id=%s\ncase_kind=research_scenario\nmodel=%s\n"
+        "object_ref=%s\nsource_ref=%s\ncycle_evidence=%s\nfeed_model=%s\nstaged_combustion=%s\n"
+        "total_mass_flow_kg_per_s=%.17g\noverall_oxidizer_fuel_ratio=%.17g\n"
+        "fuel_pump_inlet_pressure_pa=%.17g\nfuel_pump_outlet_pressure_pa=%.17g\nfuel_pump_efficiency=%.17g\n"
+        "oxidizer_pump_inlet_pressure_pa=%.17g\noxidizer_pump_outlet_pressure_pa=%.17g\noxidizer_pump_efficiency=%.17g\n"
+        "fuel_temperature_k=%.17g\noxidizer_temperature_k=%.17g\nfuel_density_override_kg_per_m3=%.17g\n"
+        "chamber_pressure_pa=%.17g\nmain_area_ratio=%.17g\npreburner_pressure_pa=%.17g\npreburner_oxidizer_fuel_ratio=%.17g\n"
+        "turbine_outlet_pressure_pa=%.17g\nturbine_efficiency=%.17g\nshaft_efficiency=%.17g\nauxiliary_power_w=%.17g\n"
+        "maximum_branch_fraction=%.17g\npump_to_chamber_drop_pa=%.17g\npump_to_preburner_drop_pa=%.17g\n"
+        "return_pressure_drop_pa=%.17g\nbranch_area_ratio=%.17g\nbranch_axial_projection=%.17g\nambient_pressure_pa=%.17g\n",
+        study->id, RP_ADIABATIC_CYCLE_MODEL, study->object_ref, study->source_ref,
+        study->cycle_evidence, study->feed_model, i->staged_combustion ? "true" : "false",
+        i->total_mass_flow_kg_per_s, i->overall_oxidizer_fuel_ratio,
+        i->fuel.pump.inlet_pressure_pa, i->fuel.pump.outlet_pressure_pa, i->fuel.pump.efficiency,
+        i->oxidizer.pump.inlet_pressure_pa, i->oxidizer.pump.outlet_pressure_pa, i->oxidizer.pump.efficiency,
+        study->fuel_temperature_k, study->oxidizer_temperature_k, study->fuel_density_override_kg_per_m3,
+        i->chamber_pressure_pa, i->main_area_ratio, i->preburner_pressure_pa, i->preburner_oxidizer_fuel_ratio,
+        i->turbine_outlet_pressure_pa, i->turbine_efficiency, i->shaft_efficiency, i->auxiliary_power_w,
+        i->maximum_branch_fraction, i->pump_to_chamber_drop_pa, i->pump_to_preburner_drop_pa,
+        i->return_pressure_drop_pa, i->branch_area_ratio, i->branch_axial_projection, i->ambient_pressure_pa);
+    if (written < 0 || (size_t)written >= sizeof(text)) {
+        return reject(call, RP_IO_ERROR, "export", "Cannot serialize the complete cycle input file.");
+    }
+    rp_gui_text(call->out, "ini", text);
+    return 1;
+}
+
 static void write_nozzle_summary(RpGuiBuffer *out, const char *key, const RpFrozenNozzleResult *nozzle)
 {
     rp_gui_key(out, key);
@@ -910,6 +956,7 @@ static int command_cycle(Call *call)
     rp_gui_open(out, '{');
     write_cycle_case(out, &study);
     write_cycle_inputs(out, &study);
+    if (!write_cycle_ini(call, &study)) { return 0; }
     write_cycle_result(out, &result);
     rp_gui_close(out, '}');
     return 1;
