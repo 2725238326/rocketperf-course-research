@@ -1,0 +1,21 @@
+/* Page assets embedded into rocketperf-gui.exe, in assembly order.
+ * 100: page shell; 101..199: stylesheets; 201..299: scripts (contiguous IDs).
+ * gui_main.c and tools/gui_dev.py both read this order; paths are relative to src/gui. */
+100 RCDATA "web/index.html"
+101 RCDATA "web/base.css"
+102 RCDATA "web/components.css"
+103 RCDATA "web/schematic.css"
+104 RCDATA "web/extra.css"
+201 RCDATA "web/core.js"
+202 RCDATA "web/archive.js"
+203 RCDATA "web/charts.js"
+204 RCDATA "web/ui.js"
+205 RCDATA "web/schematic_parts.js"
+206 RCDATA "web/schematic_cycle.js"
+207 RCDATA "web/tab_chamber.js"
+208 RCDATA "web/tab_propellant.js"
+209 RCDATA "web/tab_nozzle.js"
+210 RCDATA "web/tab_cycle.js"
+211 RCDATA "web/tab_validation.js"
+212 RCDATA "web/tab_engineering.js"
+213 RCDATA "web/main.js"

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560">
+<title>P6模块协作简图</title>
+<desc>根据components.svg整理的演示版，箭头表示调用而非计算时间顺序。入口调用三个计算模块；循环调用喷管和热化学，喷管调用热化学。所有模块共用数值与错误处理。</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#23649b"/></marker></defs>
+<rect width="1280" height="560" fill="white"/>
+<g font-family="Microsoft YaHei, sans-serif" text-anchor="middle" fill="#163b60">
+<g fill="#edf4fb" stroke="#9cbbd8" stroke-width="2">
+<rect x="30" y="18" width="590" height="92" rx="12"/><rect x="660" y="18" width="590" height="92" rx="12"/>
+<rect x="30" y="210" width="380" height="126" rx="12"/><rect x="450" y="210" width="380" height="126" rx="12"/><rect x="870" y="210" width="380" height="126" rx="12"/>
+<rect x="30" y="446" width="1220" height="88" rx="12"/>
+</g>
+<g font-size="29" font-weight="700"><text x="325" y="55">命令行与算例入口</text><text x="955" y="55">输入输出与平台</text><text x="220" y="253">热化学与物性</text><text x="640" y="253">喷管计算</text><text x="1060" y="253">整机循环（研究原型）</text><text x="640" y="482">公共基础：数值求解与错误处理</text></g>
+<g font-size="25"><text x="325" y="90">单点计算 · 参数扫描 · 方法比较</text><text x="955" y="90">读取与校验输入 · 保存成功结果</text><text x="220" y="292">入口焓 · HP平衡 · 碳判据</text><text x="640" y="292">喉部流量 · 推力 · 比冲</text><text x="1060" y="292">泵与涡轮 · 分流与回流</text><text x="640" y="518">所有模块共用；越域或不收敛时返回失败状态</text></g>
+<g fill="none" stroke="#23649b" stroke-width="2.5" marker-end="url(#arrow)">
+<path d="M620 65H656"/><path d="M325 110V155H220V205"/><path d="M325 155H640V205"/><path d="M640 155H1060V205"/>
+<path d="M870 275H834"/><path d="M450 275H414"/><path d="M1060 336V397H220V341"/>
+</g>
+<g font-size="23" fill="#526b82"><text x="750" y="142">入口调用计算模块</text><text x="640" y="383">循环也直接调用热化学</text><text x="640" y="430">箭头表示模块调用，不表示单向计算顺序</text></g>
+</g></svg>

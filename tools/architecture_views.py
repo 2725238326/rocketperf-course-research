@@ -48,10 +48,10 @@ def components(modules):
     body += band(60, 576, 1160, 146, "基础层", BASE)
     body += card(84, 604, 1120, 102, BASE, m["core"]["name"], "src/core",
                  ["夹逼求根 · 有限数检查 · 状态码；无 I/O、无堆分配"], footer("core", m["core"]["state"]))
-    body += edge([(644, 536), (644, 604)], "call")
-    body += edge([(84, 222), (46, 222), (46, 650), (84, 650)], "call")
+    body += edge([(644, 536), (644, 604)], "call") + chip(644, 570, "全部模块依赖")
+    body += edge([(84, 222), (36, 222), (36, 650), (84, 650)], "call")
     body += legend_swatch(84, 748, CYCLE, "研究原型", "5 4") + legend_edge(190, 748, "main", "调用")
-    body += legend_edge(290, 748, "call", "公共依赖")
+    body += legend_edge(290, 748, "call", "公共依赖（入口层同样依赖基础层）")
     return document("components", W, H, "模块架构",
                     "入口层调用热化学、喷管、循环三个计算模块；循环调用喷管与热化学，喷管调用热化学；所有模块共用数值与错误契约。", body)
 

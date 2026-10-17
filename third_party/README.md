@@ -14,4 +14,13 @@ ANA-004的[frozen_v1](../results/research/reference-coverage/frozen_v1/manifest.
 
 RES-007 的[连续液体参考](../results/research/liquid_feed_reference_v1/manifest.json)包含 CoolProp 7.1.0 HEOS 的导出流体JSON和计算数据；它是参考侧依赖。保留官方 [MIT LICENSE](../调研/原始来源/F04_coolprop_license_7_1_0.txt)和 [BibTeX](../调研/原始来源/F07_coolprop_bibliography_7_1_0.txt)，生成数据由 CEA 理想零点对齐、参考域与插值规则派生，修改范围见[契约](../docs/liquid-feed-contract.md)。Python 系数复核按 Helmholtz 数学关系实现，没有复制上游求解器代码；后续生成 C 数据仍须携带这些来源和许可。
 
+GUI-001 的桌面界面使用两项界面层第三方代码，均只进入 `rocketperf-gui.exe`，不进入 C17 计算核心与 `rocketperf.exe`：
+
+| 目录 | 来源 | 版本 | 许可 | 用途 |
+|---|---|---|---|---|
+| `webview/` | github.com/webview/webview 标签 0.12.0（commit 3ab4b5d722438fc8a13e6ca830c5e2372d19a01d） | 0.12.0 | MIT，见 [LICENSE](webview/LICENSE) | C API 窗口与 WebView2 宿主，静态链接；`compat/EventToken.h` 为其 MinGW 兼容头 |
+| `webview2/` | NuGet Microsoft.Web.WebView2 1.0.1150.38 的 `build/native/include` 头文件 | 1.0.1150.38 | BSD 式，见 [LICENSE.txt](webview2/LICENSE.txt) | 编译期接口声明；运行时由系统 WebView2 Runtime 提供，未分发 `WebView2Loader.dll`（webview 内置加载实现） |
+
+文件按原字节保存，SHA-256：`webview.h` b1ff6e11…7f7b，`webview.cc` 37b3381f…eaf，`EventToken.h` d6305bb8…d506，`WebView2.h` 557d5c75…4cf4，`WebView2EnvironmentOptions.h` 12576149…be5；NuGet 包 921c004b…ebd5。发布目录随程序附 `licenses/` 两份许可原文。
+
 ANA-009 的 `src/thermo/liquid_feed_generated.h`从上述固定参考提取407对密度/摩尔焓；`tests/reference/liquid_feed.h`另提取700内部软件参考及全部节点，用于核对C插值误差。只作数据提取与质量焓换算，没有移植HEOS求解器；MIT原文和CEA LICENSE/NOTICE继续随完整源码交接保留。

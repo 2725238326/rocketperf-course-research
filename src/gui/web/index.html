@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RocketPerf · 两型火箭动力系统性能计算</title>
+<style>/*STYLE*/</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 3h10v6l-2 4h-6l-2-4z" fill="#BBD0EE"/><path d="M13 13h6l3 9q-6 3-12 0z" fill="#fff"/><path d="M13 23q3 7 6 0" fill="#F2A65A"/></svg>
+    <div><b>RocketPerf</b><span>朱雀三号 · 长征十号乙 动力系统性能计算</span></div>
+  </div>
+  <nav role="tablist" aria-label="模块" id="tabs"></nav>
+  <div class="tools">
+    <span class="tool calc" id="calc" title="最近一次 C 计算用时与累计调用次数"><i></i><span>C 核心就绪</span></span>
+    <button type="button" id="motion" class="tool" aria-pressed="true" title="流动/转动动画（快捷键 A）">动画</button>
+    <button type="button" id="full" class="tool" title="全屏（F11）">全屏</button>
+  </div>
+</header>
+<main id="main"></main>
+<footer class="foot"><span id="prov"></span><span id="keys">1–6 切换页面 · A 动画 · F11 全屏 · 拖动滑块或输入数值后回车即由 C 重算</span></footer>
+<svg id="defs" width="0" height="0" style="position:absolute" aria-hidden="true"></svg>
+<div id="tip" role="tooltip" hidden></div>
+<div id="toast" aria-live="polite"></div>
+<script>/*SCRIPT*/</script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # 汇报准备与制作入口
 
+最终课程报告、17页答辩稿、C17源码包、Windows命令行包和GUI便携包的清单与复现说明见[大作业最终交付](FINAL-DELIVERY.md)。终稿文件：[报告PDF](report_typst_v1/report-final.pdf)、[答辩PPTX](presentation-final/两型火箭动力系统_答辩终稿.pptx)。
+
 展示15分钟，提问另计5分钟。两人分段主讲：A讲P1–P7，B讲P8–P13，P7后交接一次。PPT由小组用模板5组合。组号、姓名与实际贡献由本人填写。
 
 做PPT时只需要打开这三个：

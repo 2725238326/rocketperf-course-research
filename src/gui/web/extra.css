@@ -1,0 +1,46 @@
+/* Pieces the live GUI adds on top of the demo components: value entry next to
+ * sliders, the C-busy shimmer, refusal cards and the editable cycle inputs. */
+.ctl-head .val { display: flex; align-items: baseline; gap: 0.25rem; }
+.ctl-head input.num { width: 5.2rem; text-align: right; font-family: var(--mono); font-weight: 650; font-size: 1.15rem; color: var(--ink);
+  border: 1px solid transparent; border-radius: 6px; background: none; padding: 0 0.25rem; }
+.ctl-head input.num:hover { border-color: var(--line); }
+.ctl-head input.num:focus { outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px var(--blue-bg); }
+.ctl-head input.num.invalid { border-color: var(--bad); background: var(--bad-bg); }
+.ctl-head .unit { font-size: 0.84rem; color: var(--ink-3); }
+.ctl.locked input[type="range"] { opacity: 0.4; pointer-events: none; }
+.ctl .lock { font-size: 0.74rem; color: var(--warn); background: var(--warn-bg); border-radius: 5px; padding: 0.05rem 0.4rem; margin-left: 0.4rem; }
+input::-webkit-inner-spin-button { display: none; }
+
+.stage.busy .kpi .v, .stage.busy .plot { transition: opacity 0.2s 0.15s; opacity: 0.72; }
+
+.fail { display: flex; gap: 0.7rem; align-items: flex-start; background: var(--bad-bg); border: 1px solid #F1C2BC; border-radius: var(--r); padding: 0.7rem 0.9rem; }
+.fail b { color: var(--bad); }
+.fail p { margin: 0.15rem 0 0; font-size: 0.86rem; color: var(--ink-2); line-height: 1.55; }
+.fail code { display: block; margin-top: 0.3rem; font-size: 0.74rem; color: var(--ink-3); word-break: break-word; }
+
+.cases { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.6rem; }
+.cases button { display: flex; align-items: center; gap: 0.5rem; text-align: left; padding: 0.42rem 0.6rem; border-radius: 8px;
+  border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 0.92rem; color: var(--ink-2); }
+.cases button:hover { border-color: var(--blue-3); background: var(--blue-bg); }
+.cases button[aria-pressed="true"] { border-color: var(--blue); background: var(--blue-bg); color: var(--navy); font-weight: 650; }
+.cases button span { flex: 1; }
+
+.fields { display: grid; grid-template-columns: 1fr auto; gap: 0.3rem 0.6rem; align-items: center; margin-top: 0.4rem; }
+.fields .g { grid-column: 1 / -1; font-size: 0.78rem; font-weight: 650; color: var(--navy); margin-top: 0.5rem; }
+.fields label { font-size: 0.88rem; color: var(--ink-2); }
+.fields label small { display: block; font-size: 0.72rem; color: var(--ink-3); }
+.fields .box { display: flex; align-items: center; border: 1px solid var(--line); border-radius: 7px; background: #fff; height: 1.85rem; }
+.fields .box:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-bg); }
+.fields .box.invalid { border-color: var(--bad); background: var(--bad-bg); }
+.fields .box input { width: 5.6rem; border: 0; background: none; text-align: right; padding: 0 0.3rem 0 0.5rem; outline: none; font-family: var(--mono); font-weight: 600; font-size: 0.9rem; }
+.fields .box input:disabled { color: var(--ink-3); }
+.fields .box span { padding-right: 0.5rem; color: var(--ink-3); font-size: 0.76rem; min-width: 2.2rem; }
+.fields .changed label { color: var(--blue); font-weight: 650; }
+.fields .changed .box { border-color: var(--blue-3); background: var(--blue-bg); }
+.linkbtn { font-size: 0.84rem; color: var(--blue); background: none; border: 0; padding: 0; cursor: pointer; margin-top: 0.6rem; }
+.linkbtn:hover { text-decoration: underline; }
+.linkbtn:disabled { color: var(--ink-3); cursor: default; text-decoration: none; }
+
+.sweep-pick { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.sweep-pick button { font-size: 0.78rem; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 0.1rem 0.55rem; color: var(--ink-2); cursor: pointer; }
+.sweep-pick button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); background: var(--blue-bg); font-weight: 650; }

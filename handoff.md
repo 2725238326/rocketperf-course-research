@@ -89,6 +89,8 @@ python tools/pipeline.py run --model prescribed-cycle --case cases/benchmarks/pr
 
 ## 收尾总览与组员代码接收
 
+2026-10-18课程报告与答辩终稿入口见[最终交付清单](deliverables/FINAL-DELIVERY.md)：20页报告 PDF 与 Typst 源码、17页答辩 PPTX、C17源码/Windows运行包以及 GUI 便携包。交付清单同时列明复现命令、SHA256、研究输入边界与 GUI/C 体系后续工作。当前统一质量入口已在主工作区完成一次六组 PASS；GUI 浏览器预览和桥接测试通过，原生窗口视觉截图仍待单独留证。最终包生成后应以其 manifest 与校验文件记录的固定源码提交为准。
+
 2026-10-13的 `代码.zip`已按字节保存于[接收原件](调研/原始来源/20261013_classmate_code/)，交接与两份 `model-data`分别有哈希身份。实际启动、源码重建、模型差别和参数线索见[代码包审阅](docs/incoming-code-review.md)，研究/展示/最终交付缺口集中在[收尾总览](docs/final-overview.md)。同学的给定温度补燃模型与甲烷代理YF算例没有覆盖当前绝热求解器，也没有更新型号事实截止日期。
 
 无参数闪退来自同学旧命令行exe的退出码2；其bat正常交互可用。当前交付工具v3收齐菜单8的五个研究情景，并提供定位包目录后调用C菜单的 `rocketperf-run.bat`；源码和运行包分别复核17项演示。使用前核验对应本地包manifest为PASS，不把原包中绑定旧exe的测试报告当新exe证据。最终报告、PPT、真实贡献及演练仍按任务契约完成。答辩演示页`deliverables/demo/index.html`为离线单文件（六页），由`tools/demo_data.py`用已测Release exe生成数据并从`deliverables/demo/src`组装；只改页面源码用`--assemble`，改C或输入后重跑并`--check`。九气相平衡在收敛后计算石墨活度，`a_C>1`返回越域（凝聚碳区）；石墨拟合在`src/thermo/graphite_generated.h`，固定气相数据集不变。

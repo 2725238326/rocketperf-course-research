@@ -6,6 +6,7 @@ flowchart TD
   tooling[任务 / 质量 / 运行追溯 · implemented]
   thermo[热化学与物性 · implemented]
   cycle[部件与整机边界 · prototype]
+  gui[桌面图形界面 · implemented]
   nozzle --> core
   nozzle --> thermo
   adapters --> core
@@ -21,3 +22,8 @@ flowchart TD
   cycle --> core
   cycle --> nozzle
   cycle --> thermo
+  gui --> core
+  gui --> nozzle
+  gui --> thermo
+  gui --> cycle
+  gui --> adapters

@@ -146,11 +146,11 @@
     "c": "cy",
     "msgs": [
      [
-      "quality gate 6/6 PASS",
+      "mass|elements|enthalpy|shaft closed",
       ""
      ],
      [
-      "CEA |dT|<=0.0044K",
+      "CEA |dT| <= 0.0044 K (HP)",
       ""
      ]
     ]
@@ -203,6 +203,51 @@
      "m": "{name} · 完成，回到待命"
     }
    }
+  },
+  "cycle_mode": {
+   "type": "cycle",
+   "period": 12.0,
+   "t0": 0.0,
+   "values": [
+    {
+     "m": "GG 外排  F=290.5kN  Isp=296.3s",
+     "who": "cycle",
+     "c": "ye",
+     "g": ""
+    },
+    {
+     "m": "ORSC 补燃  F=285.5kN  Isp=291.1s",
+     "who": "cycle",
+     "c": "bl",
+     "g": ""
+    }
+   ],
+   "log": {
+    "who": "cycle",
+    "c": "ye"
+   }
+  },
+  "isp_gauge": {
+   "type": "gauge",
+   "period": 6.0,
+   "threshold": 318.0,
+   "decimals": 1,
+   "t0": 1.2,
+   "values": [
+    324.4,
+    310.6,
+    296.3,
+    291.1
+   ],
+   "low": {
+    "label": "RP-1 口径"
+   },
+   "high": {
+    "label": "甲烷口径"
+   },
+   "lowColor": "ye",
+   "highColor": "gr",
+   "log": null
   }
  },
  "elements": [
@@ -411,7 +456,7 @@
    "y": 1458,
    "runs": [
     {
-     "t": "C checks ",
+     "t": "守恒账  ",
      "c": "dim"
     },
     {
@@ -420,7 +465,7 @@
      "b": 1
     },
     {
-     "v": "checks",
+     "t": "质量·元素·焓·轴功",
      "c": "gr",
      "b": 1
     },
@@ -430,23 +475,8 @@
      "b": 1
     },
     {
-     "t": "   CEA cards ",
+     "t": "   越域拒算不外推  ·  失败不写结果",
      "c": "dim"
-    },
-    {
-     "t": "[",
-     "c": "gr",
-     "b": 1
-    },
-    {
-     "v": "cea",
-     "c": "gr",
-     "b": 1
-    },
-    {
-     "t": "]",
-     "c": "gr",
-     "b": 1
     }
    ]
   },
@@ -709,6 +739,41 @@
        "v": "nozzle喷管_l"
       }
      ]
+    },
+    {
+     "items": [
+      {
+       "w": 40,
+       "runs": [
+        {
+         "t": "Isp",
+         "c": "dim"
+        }
+       ]
+      },
+      {
+       "w": 140,
+       "bar": {
+        "gauge": "isp_gauge",
+        "w": 140,
+        "h": 18,
+        "max": 340
+       }
+      },
+      {
+       "w": 90,
+       "align": "right",
+       "runs": [
+        {
+         "v": "isp_gauge",
+         "c": "gr",
+         "b": 1
+        }
+       ]
+      }
+     ],
+     "indent": 8,
+     "gap": 8
     }
    ]
   },
@@ -747,6 +812,15 @@
        "v": "cycle循环原型_l"
       }
      ]
+    },
+    {
+     "runs": [
+      {
+       "v": "cycle_mode",
+       "b": 1
+      }
+     ],
+     "indent": 8
     }
    ]
   },
@@ -772,11 +846,11 @@
      "c": "mute"
     },
     {
-     "t": "13722项C检查 · CEA对照",
+     "t": "守恒残差全量核对",
      "c": "mute"
     },
     {
-     "t": "温度差≈0.004K(HP口径)",
+     "t": "CEA同源对照",
      "c": "mute"
     },
     {
@@ -917,7 +991,7 @@
   "text": "~/rocketperf — C17 热化学计算核心"
  },
  "credit": {
-  "text": "循环为条件性研究原型 · 数据来源: rocketperf 归档 results/validation · 13722项C检查另50组CLI与CEA对照",
+  "text": "循环为条件性研究原型 · 数值为归档算例结果 · 失败与越域显式拒绝，不外推",
   "y": 1490
  }
 }

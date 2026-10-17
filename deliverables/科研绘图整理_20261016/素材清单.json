@@ -1,0 +1,445 @@
+[
+  {
+    "file": "01_正文直接插入/P07_燃烧特征速度.png",
+    "sha256": "29c51b7d87abfd3aa2f4af866e87eca37599d21a6a84040fd7c54b12dea3ade0",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/P07_燃烧特征速度.svg",
+    "sha256": "03b43c626efae1569b2f8026fca68a9d19dbafc905a66c216dc2f8a5a8ef948c",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/P07_燃烧特征速度.pdf",
+    "sha256": "323a1ffc283c60b8419ab68fae64065368404b9834fd5b913e0d429dfd78a547",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "02_补充科研图/补充01_燃烧温度.png",
+    "sha256": "d9cbf2e72de7f7ebed7b87d1cc1ffd7ac290e968859677860a46ea08556dc2c0",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充01_燃烧温度.svg",
+    "sha256": "6ce13f776a19bd0170fd0effb584ac098e52ed3140da34b2fc5000615bf545fc",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充01_燃烧温度.pdf",
+    "sha256": "2a877854b47d4efc3d3ca71a1b5710e14d45d7830d97bad7df9452cd3600b2a1",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "点为保存的离散计算结果，连线仅作引导；采样峰不代表连续全局最优。"
+  },
+  {
+    "file": "02_补充科研图/补充02_推进剂三指标.png",
+    "sha256": "ec3d963b83188ea4bee2f4add569f990e63c58e51ecac65a06f6a0c0a5b77d89",
+    "sources": [
+      "results/research/propellant_comparison_v1/common_2_6_A10_p0_pair-stdout.json"
+    ],
+    "note": "各子图使用独立单位，柱图从零起画；由归档完整精度计算，ΔIsp≈13.85 s、质量流量约低4.46%、甲烷推力约低0.20%。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充02_推进剂三指标.svg",
+    "sha256": "f81aa27b08b0545d3f7f676e0c63c2dd02b9001792ed3a9fd6f41c463c1ca519",
+    "sources": [
+      "results/research/propellant_comparison_v1/common_2_6_A10_p0_pair-stdout.json"
+    ],
+    "note": "各子图使用独立单位，柱图从零起画；由归档完整精度计算，ΔIsp≈13.85 s、质量流量约低4.46%、甲烷推力约低0.20%。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充02_推进剂三指标.pdf",
+    "sha256": "16122ba48322ffed5471324349f1357ba143da140bf620ac3f68a49a2bd127d6",
+    "sources": [
+      "results/research/propellant_comparison_v1/common_2_6_A10_p0_pair-stdout.json"
+    ],
+    "note": "各子图使用独立单位，柱图从零起画；由归档完整精度计算，ΔIsp≈13.85 s、质量流量约低4.46%、甲烷推力约低0.20%。"
+  },
+  {
+    "file": "01_正文直接插入/P09_喷管面积比与比冲.png",
+    "sha256": "707acbd99bb60260f2749c0bb9f0651acc17c34071b2e56eb179cf353416900c",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "离散点之间不增加计算数据；尚未计算结构质量、冷却、长度及流动分离代价。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/P09_喷管面积比与比冲.svg",
+    "sha256": "eb01dabf57bdf52ac81e0094822d78d1694b1db6ecb3844a95a21e6bcfcfac60",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "离散点之间不增加计算数据；尚未计算结构质量、冷却、长度及流动分离代价。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/P09_喷管面积比与比冲.pdf",
+    "sha256": "5847009f8ff4c3220f45db059958245a3db35c3d933264986048b617e440cdb8",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "离散点之间不增加计算数据；尚未计算结构质量、冷却、长度及流动分离代价。"
+  },
+  {
+    "file": "02_补充科研图/补充03_喷管单位面积收益.png",
+    "sha256": "dc4ff9e8da637ca36b74e01e1c8e90634224c242fe7c36aa1341a2eafe6b6e39",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "前段 ΔAe＝0.10 m²，后段 ΔAe＝0.20 m²；由归档CSV显示精度计算，末位可能有圆整差异。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充03_喷管单位面积收益.svg",
+    "sha256": "365121ccb3b6b96792e1a63e95da19a0cc84f08e018779ae5fe4eefa79d677de",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "前段 ΔAe＝0.10 m²，后段 ΔAe＝0.20 m²；由归档CSV显示精度计算，末位可能有圆整差异。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充03_喷管单位面积收益.pdf",
+    "sha256": "2e7edace39e9e19e4db7007a4c8a9d1108eb8f9bca19de31110f35c159b64c4d",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "前段 ΔAe＝0.10 m²，后段 ΔAe＝0.20 m²；由归档CSV显示精度计算，末位可能有圆整差异。"
+  },
+  {
+    "file": "02_补充科研图/补充04_多背压比冲曲线.png",
+    "sha256": "fe38c0105975d9e68990a4803ff871518818d28b4a82a7e3811535e04695fad5",
+    "sources": [
+      "deliverables/ppt-materials/backup-backpressures.csv"
+    ],
+    "note": "曲线空缺表示当前模型未给出可用结果，不能补零或跨空缺连线；未预测实际分离位置。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充04_多背压比冲曲线.svg",
+    "sha256": "e1a350a771cd1d7e4b21eb0ce5f3f154aa0e106f39b782f12f0c024ade79e927",
+    "sources": [
+      "deliverables/ppt-materials/backup-backpressures.csv"
+    ],
+    "note": "曲线空缺表示当前模型未给出可用结果，不能补零或跨空缺连线；未预测实际分离位置。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充04_多背压比冲曲线.pdf",
+    "sha256": "256e6a75cb3d7b1428ba5cc0d44c62df5a9da52b89e35350a86784bb816e2165",
+    "sources": [
+      "deliverables/ppt-materials/backup-backpressures.csv"
+    ],
+    "note": "曲线空缺表示当前模型未给出可用结果，不能补零或跨空缺连线；未预测实际分离位置。"
+  },
+  {
+    "file": "02_补充科研图/补充05_真空与海平面比冲.png",
+    "sha256": "e39f7b738ed5eec869c2eeef48a5d7daca0d7317a73e4bd6ea6d29ac7e392195",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv"
+    ],
+    "note": "仅比较 ε＝10 的两个有效结果；ε＝40海平面工况没有可用比冲。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充05_真空与海平面比冲.svg",
+    "sha256": "d809acd18240e8f9627ff4bf05d012debc17a8e760795e15f535cdc5e6409e96",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv"
+    ],
+    "note": "仅比较 ε＝10 的两个有效结果；ε＝40海平面工况没有可用比冲。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充05_真空与海平面比冲.pdf",
+    "sha256": "af8beec8f56a16b735980c36ea444bc0d88b02d8626c90ec6c58de777645e708",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv"
+    ],
+    "note": "仅比较 ε＝10 的两个有效结果；ε＝40海平面工况没有可用比冲。"
+  },
+  {
+    "file": "02_补充科研图/补充06_海平面过膨胀压力.png",
+    "sha256": "6f4e92b6ed42e7cd811a14de76ba8ba9f59bf660f1968763872e555bdf57bcaf",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv",
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "pe＜pa提示过膨胀，需进一步考虑流动分离；此图不预测实际分离位置。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充06_海平面过膨胀压力.svg",
+    "sha256": "42fc33e6ff68eb28b17c088e2b32ba76f35c250c25382f8c56709f56431d142f",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv",
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "pe＜pa提示过膨胀，需进一步考虑流动分离；此图不预测实际分离位置。"
+  },
+  {
+    "file": "03_矢量版_SVG_PDF/补充06_海平面过膨胀压力.pdf",
+    "sha256": "3ee516b4595daf2533cfc812f0541576c714550da9fbe74392d371f6d724d983",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv",
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "pe＜pa提示过膨胀，需进一步考虑流动分离；此图不预测实际分离位置。"
+  },
+  {
+    "file": "05_全部表格及可编辑源/B1_循环输入.png",
+    "sha256": "ea7b5a70d9c228bba712abbc69f3ff5206e4f549b90f961358392c15d1364ca2",
+    "sources": [
+      "deliverables/表格素材/B1_循环输入.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/B3_CEA对照.png",
+    "sha256": "43f5680c5a2232c07bb1b6d307d61acff7304237e25814842d9d89669fd5b130",
+    "sources": [
+      "deliverables/表格素材/B3_CEA对照.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/P06_程序职责.png",
+    "sha256": "b96dd9ad4aad8c9720f486de6c3c0a83442a07668d8703ad21b2c92fefce3702",
+    "sources": [
+      "deliverables/表格素材/P06_程序职责.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/P08_推进剂对比.png",
+    "sha256": "991cef1d496258ed402151b1f3ef0a2ba4d63b0c6125aebc31f074e2aa8600c4",
+    "sources": [
+      "deliverables/表格素材/P08_推进剂对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "01_正文直接插入/P08_推进剂对比.png",
+    "sha256": "991cef1d496258ed402151b1f3ef0a2ba4d63b0c6125aebc31f074e2aa8600c4",
+    "sources": [
+      "deliverables/表格素材/P08_推进剂对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/P10_背压对比.png",
+    "sha256": "ab80bcf43c01f93ffa292c45f06e7ef53bc5a81b81e8966b137226114941864d",
+    "sources": [
+      "deliverables/表格素材/P10_背压对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "01_正文直接插入/P10_背压对比.png",
+    "sha256": "ab80bcf43c01f93ffa292c45f06e7ef53bc5a81b81e8966b137226114941864d",
+    "sources": [
+      "deliverables/表格素材/P10_背压对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/P11_循环对比.png",
+    "sha256": "be1b22df0684898641dcdd5ff3c7e6da01e028b29e4113cb0792d82267a3868d",
+    "sources": [
+      "deliverables/表格素材/P11_循环对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "01_正文直接插入/P11_循环对比.png",
+    "sha256": "be1b22df0684898641dcdd5ff3c7e6da01e028b29e4113cb0792d82267a3868d",
+    "sources": [
+      "deliverables/表格素材/P11_循环对比.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/P13_四级段研究落点.png",
+    "sha256": "55898f86fa1bed9d862c59151e4c10a2328e2f71cbfb678a2a118db0b3b5336b",
+    "sources": [
+      "deliverables/表格素材/P13_四级段研究落点.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "05_全部表格及可编辑源/PPT可复制表格.xlsx",
+    "sha256": "c0c6274e88b0d9311db084cffcf5b758e52b710b57d2d4a8b8307ac372f8e0ed",
+    "sources": [
+      "deliverables/表格素材/PPT可复制表格.xlsx"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "04_架构与流程图/assignment.svg",
+    "sha256": "81f9b60f4d4c98e975d33379d7f86a722d04ffe1badda8d1ce68fd9e442de75a",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/assignment.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "04_架构与流程图/business.svg",
+    "sha256": "93f1ecd0c7f27e389db94ff0be9a01298d55756fc9a9937666e695eae379d3bb",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/business.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "04_架构与流程图/components-ppt.png",
+    "sha256": "9b97616e032b9f3e8d2d5f670a575609d52bff5aa63fd1e92ba56c70a2c623c2",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/components-ppt.png"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "01_正文直接插入/P06_程序架构.png",
+    "sha256": "9b97616e032b9f3e8d2d5f670a575609d52bff5aa63fd1e92ba56c70a2c623c2",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/components-ppt.png"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "04_架构与流程图/components-ppt.svg",
+    "sha256": "686c885d8b24cc8d7c28f4f191475fbc063c5994ceb05ee90a329813dffb97dc",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/components-ppt.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "04_架构与流程图/components.svg",
+    "sha256": "e6b5974e33fa9401db5344f2ac966c3da7226b255a770dad72feb9eba913ea3d",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/components.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "04_架构与流程图/report-flow.svg",
+    "sha256": "dbd8925ec6585dba17c4f483cd2c7b48b392d09029f57508fc9c03fea6fcb55a",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/report-flow.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "04_架构与流程图/workflow.svg",
+    "sha256": "793b35fed73af443e4277fc06c2412c96e68d5404e4eeecae51b07f614ee3f2f",
+    "sources": [
+      "deliverables/ppt-figures-package/architecture/workflow.svg"
+    ],
+    "note": "components-ppt为当前P6简图；其他旧架构图仅供参考，行数未重新核对，workflow不可解释为全部任务串行调用。"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/backup-backpressures.csv",
+    "sha256": "b3ad4b26f08d9f9807081bc01cb575076ba91b510b495c1edf3e3343c06fdf06",
+    "sources": [
+      "deliverables/ppt-materials/backup-backpressures.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p10-cycle.csv",
+    "sha256": "97993ccdc6c9228a744301e29996815deeb0d4a62c60376cfd26a18e10a6916d",
+    "sources": [
+      "deliverables/ppt-materials/p10-cycle.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p5-program.csv",
+    "sha256": "85187a300e06d4d0366804ee7708719391369d93c904cd0e36f87e71bd0383f6",
+    "sources": [
+      "deliverables/ppt-materials/p5-program.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p6-chamber.csv",
+    "sha256": "c026680c62620fb2baab0924c6d4030a53d9154e71117b92ca7351872b554626",
+    "sources": [
+      "deliverables/ppt-materials/p6-chamber.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p7-propellants.csv",
+    "sha256": "e215a7f956686609df497162e5a7df68915b551686063cd38ac3d51d2482901c",
+    "sources": [
+      "deliverables/ppt-materials/p7-propellants.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p8-nozzle-vacuum.csv",
+    "sha256": "51a7823960c3d97875fbb9507d6a20a625e18fdf972bdc4d226aabba5a3c0ac1",
+    "sources": [
+      "deliverables/ppt-materials/p8-nozzle-vacuum.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/p9-ambient.csv",
+    "sha256": "3ffcafe37b0f2a5fbbf202c077a8936e275fe45db9a8c54e50cee9cfe84a2b41",
+    "sources": [
+      "deliverables/ppt-materials/p9-ambient.csv"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/common_2_6_A10_p0_pair-stdout.json",
+    "sha256": "f9b3265fca0a9bfe6a611e8d35e56030de5be956725db3685c4e037969189ea8",
+    "sources": [
+      "results/research/propellant_comparison_v1/common_2_6_A10_p0_pair-stdout.json"
+    ],
+    "note": "原文件逐字节复制"
+  },
+  {
+    "file": "07_其他研究工况_勿混用/adiabatic-inlet-response.svg",
+    "sha256": "2a73a1dea4ed6cdc984370d02916514a65c7fe6364212733a78c0721d16e3ac7",
+    "sources": [
+      "docs/adiabatic-inlet-response.svg"
+    ],
+    "note": "历史研究图，保留图内工况。气态入口或给定热状态算例不能与当前液态主线数值混用。"
+  },
+  {
+    "file": "07_其他研究工况_勿混用/area-ratio-tradeoff.svg",
+    "sha256": "29762dacf7ffb2bfbb4c5c592ed59a3781622f3cdbe84f0ffa5f78e80a3eb209",
+    "sources": [
+      "docs/area-ratio-tradeoff.svg"
+    ],
+    "note": "历史研究图，保留图内工况。气态入口或给定热状态算例不能与当前液态主线数值混用。"
+  },
+  {
+    "file": "07_其他研究工况_勿混用/propellant-comparison.svg",
+    "sha256": "910170e03eaf49c66464cd1de153f410f3ef37736995d3f13d5f00df061628a9",
+    "sources": [
+      "docs/propellant-comparison.svg"
+    ],
+    "note": "历史研究图，保留图内工况。气态入口或给定热状态算例不能与当前液态主线数值混用。"
+  },
+  {
+    "file": "06_原始数据与重绘脚本/整理与重绘.py",
+    "sha256": "96507db7a22c37ed2ba5f416fdf98a84daaa616c510c12cd96aca5e9b619ee9c",
+    "sources": [
+      "build/collect_scientific_figures.py"
+    ],
+    "note": "重绘和整理脚本；ROOT指向原工作区，复跑时使用原CSV。"
+  }
+]

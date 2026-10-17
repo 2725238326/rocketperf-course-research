@@ -27,9 +27,11 @@ def entry():
     out += edge([(780, 197), (780, 214)], "fail") + connector(780, 225, "E") + chip(798, 206, "否", FAIL)
     # combustion drops into the compute layer; cycle adiabatic runs down the left margin to the pump
     out += edge([(965, 197), (965, 267), (145, 267), (145, 352)]) + chip(330, 267, "combustion", mono=True)
-    out += edge([(145, 267), (40, 267), (40, Y_ROW), (80, Y_ROW)]) + dot(145, 267)
-    out += f'<g transform="rotate(-90 40 450)">{chip(40, 450, "cycle adiabatic", mono=True)}</g>'
-    out += edge([(1020, y), (1100, y)], "sub") + chip(1060, y - 12, "其他命令")
+    # cycle adiabatic: channel below the cycle lane (y=715, in the gap before the output lane),
+    # rising into the pump from the left so it crosses no other edge
+    out += edge([(965, 231), (995, 231), (995, 715), (40, 715), (40, Y_ROW), (80, Y_ROW)], "sub")
+    out += dot(965, 231) + chip(523, 231, "cycle adiabatic", mono=True)
+    out += edge([(1020, y), (1096, y)], "sub") + chip(1058, y - 14, "其他命令", VERIFY)
     return out
 
 

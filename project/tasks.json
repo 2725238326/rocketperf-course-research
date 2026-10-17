@@ -1,19 +1,16 @@
 {
   "schema_version": 1,
-  "revision": 362,
+  "revision": 364,
   "context": {
-    "phase": "双人讲述与PPT逐页制作指导",
+    "phase": "课程终稿与本地交付",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-001",
       "REL-001"
     ],
     "facts": [
-      "当前交付为讲稿、讲解思路、模板具体选页、逐页图文替换指导及C结果图表数据，不代做最终PPT。",
-      "建议小组先组合12页正文，A讲P1至P6，B讲P7至P12，仅交接一次；组合后共同优化页面。",
-      "展示15分钟，提问另计5分钟；讲述预算13分45秒含100秒演示，人工计时与实际贡献待本人完成。",
-      "四项P1已在报告与讲述中整改，算例身份、残差单位、循环输入输出与理论条件分别说明。",
-      "旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验；在线证据截止保持2026-10-06。"
+      "报告终稿为20页PDF，答辩终稿为17页PPT；最终入口见deliverables/FINAL-DELIVERY.md。",
+      "GUI桥接测试和统一质量入口已有PASS记录；因桌面图像被遮挡，本轮不将自动采集图作为原生窗口截图验收。"
     ]
   },
   "tasks": [
@@ -1582,7 +1579,7 @@
     {
       "id": "GUI-001",
       "title": "桌面图形界面：WebView2窗口与C桥接",
-      "status": "READY",
+      "status": "ACTIVE",
       "priority": 2,
       "depends_on": [],
       "required_artifacts": [
@@ -1598,8 +1595,8 @@
         "燃烧室、喷管、推进剂对比、循环四个模块实时调用C；同输入下与已测CLI数值一致（tests/test_gui.py逐项比对），拒算保留C状态与原文消息。",
         "第三方webview 0.12.0与WebView2 SDK头文件记录来源、版本、许可与哈希；模块登记、架构重生成并视觉检查；浏览器预览与原生窗口实际截图核验。"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "owner": "Codex",
+      "note": "继续完善已实现桌面GUI：修复输入复现、循环请求竞态和JSON数字语法，并接入统一质量门禁。",
       "verification": null
     },
     {
@@ -9446,6 +9443,59 @@
       "note": "验收完成：课程十项内容齐全，最终报告、参考文献、插图及分工页完成人工检查；工程质量检查通过。",
       "previous_hash": "12e8fe6d66cd559fd287d058d1829a9b33f01c7099095f21ecf81d3fd2492dcc",
       "hash": "e8e0ab9b9192f20aa7156c96f60cb72fadc29f84ce30433326d92f65cd69717c"
+    },
+    {
+      "seq": 380,
+      "at": "2026-10-17T16:42:36+00:00",
+      "task": "GUI-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "继续完善已实现桌面GUI：修复输入复现、循环请求竞态和JSON数字语法，并接入统一质量门禁。",
+      "previous_hash": "e8e0ab9b9192f20aa7156c96f60cb72fadc29f84ce30433326d92f65cd69717c",
+      "hash": "c153cc32d3cc58ca780aa14e24db9098f238ed4d0189d0f7ba8be3772877684e"
+    },
+    {
+      "seq": 381,
+      "at": "2026-10-17T20:22:30+00:00",
+      "task": "GUI-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "报告终稿、答辩稿和本地软件交付清单已完成；GUI桥接/Release通过，原生窗口截图仍待可控桌面留证。",
+      "previous_hash": "c153cc32d3cc58ca780aa14e24db9098f238ed4d0189d0f7ba8be3772877684e",
+      "details": {
+        "context_before": {
+          "phase": "双人讲述与PPT逐页制作指导",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "当前交付为讲稿、讲解思路、模板具体选页、逐页图文替换指导及C结果图表数据，不代做最终PPT。",
+            "建议小组先组合12页正文，A讲P1至P6，B讲P7至P12，仅交接一次；组合后共同优化页面。",
+            "展示15分钟，提问另计5分钟；讲述预算13分45秒含100秒演示，人工计时与实际贡献待本人完成。",
+            "四项P1已在报告与讲述中整改，算例身份、残差单位、循环输入输出与理论条件分别说明。",
+            "旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验；在线证据截止保持2026-10-06。"
+          ]
+        },
+        "context_after": {
+          "phase": "课程终稿与本地交付",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "报告终稿为20页PDF，答辩终稿为17页PPT；最终入口见deliverables/FINAL-DELIVERY.md。",
+            "GUI桥接测试和统一质量入口已有PASS记录；因桌面图像被遮挡，本轮不将自动采集图作为原生窗口截图验收。"
+          ]
+        }
+      },
+      "hash": "960eac0415cf24b7e4fb45f1491543d9da446b512da58aef8413ed94239037c8"
     }
   ]
 }

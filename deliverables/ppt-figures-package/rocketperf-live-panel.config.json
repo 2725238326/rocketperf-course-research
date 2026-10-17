@@ -1,0 +1,997 @@
+{
+ "meta": {
+  "title": "ROCKETPERF · 火箭发动机性能计算",
+  "lang": "zh"
+ },
+ "canvas": {
+  "preset": "4:5",
+  "duration": 30,
+  "fps": 30,
+  "preroll": 12
+ },
+ "theme": {
+  "preset": "terminal-dark",
+  "fontSize": 21,
+  "lineHeight": 30,
+  "colors": {
+   "mute": "#aab1c0",
+   "rd": "#f07178"
+  }
+ },
+ "machines": {
+  "checks": {
+   "type": "counter",
+   "start": 13722,
+   "rate": 0,
+   "format": "comma"
+  },
+  "cea": {
+   "type": "counter",
+   "start": 57,
+   "rate": 0,
+   "format": "comma"
+  },
+  "r00_入口层_l": {
+   "type": "lane",
+   "period": 7.0,
+   "run": 4.8,
+   "off": 0.0,
+   "busy": "parsing",
+   "done": [
+    "ok"
+   ],
+   "phase": 0,
+   "log": {
+    "who": "入口层",
+    "c": "cy",
+    "msgs": [
+     [
+      "read case ini",
+      ""
+     ],
+     [
+      "inputs validated",
+      ""
+     ]
+    ]
+   }
+  },
+  "thermo热化学_l": {
+   "type": "lane",
+   "period": 7.5,
+   "run": 5.1,
+   "off": 0.3,
+   "busy": "solving HP",
+   "done": [
+    "equilibrium"
+   ],
+   "phase": 0,
+   "log": {
+    "who": "thermo",
+    "c": "gr",
+    "msgs": [
+     [
+      "HP converged T=3602.8K (O/F 3.4)",
+      ""
+     ],
+     [
+      "9-species equilibrium, a_C<1",
+      ""
+     ]
+    ]
+   }
+  },
+  "nozzle喷管_l": {
+   "type": "lane",
+   "period": 8.5,
+   "run": 5.8,
+   "off": 1.0,
+   "busy": "expanding",
+   "done": [
+    "exit solved"
+   ],
+   "phase": 1,
+   "log": {
+    "who": "nozzle",
+    "c": "pu",
+    "msgs": [
+     [
+      "throat choked mdot=55.22kg/s",
+      ""
+     ],
+     [
+      "eps=10 vacuum Isp=320.8s",
+      ""
+     ]
+    ]
+   }
+  },
+  "cycle循环原型_l": {
+   "type": "lane",
+   "period": 8.0,
+   "run": 5.4,
+   "off": 0.6,
+   "busy": "closing balance",
+   "done": [
+    "balanced"
+   ],
+   "phase": 0,
+   "log": {
+    "who": "cycle",
+    "c": "ye",
+    "msgs": [
+     [
+      "ORSC turbine p_out=17.95MPa",
+      ""
+     ],
+     [
+      "mass/shaft/enthalpy closed",
+      ""
+     ]
+    ]
+   }
+  },
+  "r30_输出与验证_l": {
+   "type": "lane",
+   "period": 8.5,
+   "run": 5.8,
+   "off": 0.9,
+   "busy": "verifying",
+   "done": [
+    "PASS"
+   ],
+   "phase": 0,
+   "log": {
+    "who": "输出与验证",
+    "c": "cy",
+    "msgs": [
+     [
+      "mass|elements|enthalpy|shaft closed",
+      ""
+     ],
+     [
+      "CEA |dT| <= 0.0044 K (HP)",
+      ""
+     ]
+    ]
+   }
+  },
+  "rail": {
+   "type": "triggers",
+   "color": "pu",
+   "period": 4.5,
+   "on": 3.0,
+   "t0": -1.6,
+   "callsStart": 1,
+   "tokens": {
+    "start": 129,
+    "step": 93,
+    "unit": "k"
+   },
+   "items": [
+    {
+     "name": "regime 域评估",
+     "adv": [
+      "» pe/pa/0.4pa 参考线",
+      "» 不预测分离位置"
+     ]
+    },
+    {
+     "name": "study 参数扫描",
+     "adv": [
+      "» 面积比×背压网格",
+      "» 甲烷/RP-1成对比较"
+     ]
+    },
+    {
+     "name": "治理与归档",
+     "adv": [
+      "» 输入输出哈希归档",
+      "» 失败记录保留"
+     ]
+    }
+   ],
+   "onText": "介入中",
+   "offText": "待命",
+   "log": {
+    "who": "验证支路",
+    "c": "pu",
+    "start": {
+     "m": "{name} · 唤起"
+    },
+    "end": {
+     "m": "{name} · 完成，回到待命"
+    }
+   }
+  },
+  "cycle_mode": {
+   "type": "cycle",
+   "period": 12.0,
+   "t0": 0.0,
+   "values": [
+    {
+     "m": "GG 外排  F=290.5kN  Isp=296.3s",
+     "who": "cycle",
+     "c": "ye",
+     "g": ""
+    },
+    {
+     "m": "ORSC 补燃  F=285.5kN  Isp=291.1s",
+     "who": "cycle",
+     "c": "bl",
+     "g": ""
+    }
+   ],
+   "log": {
+    "who": "cycle",
+    "c": "ye"
+   }
+  },
+  "isp_gauge": {
+   "type": "gauge",
+   "period": 6.0,
+   "threshold": 318.0,
+   "decimals": 1,
+   "t0": 1.2,
+   "values": [
+    324.4,
+    310.6,
+    296.3,
+    291.1
+   ],
+   "low": {
+    "label": "RP-1 口径"
+   },
+   "high": {
+    "label": "甲烷口径"
+   },
+   "lowColor": "ye",
+   "highColor": "gr",
+   "log": null
+  }
+ },
+ "elements": [
+  {
+   "type": "text",
+   "x": 0,
+   "w": 1200,
+   "y": 108,
+   "align": "center",
+   "size": 15,
+   "c": "dim",
+   "t": "C17纯计算核心 · 入口 → HP平衡 → 冻结喷管 → 循环闭合 → 验证归档"
+  },
+  {
+   "type": "text",
+   "x": 0,
+   "w": 1200,
+   "y": 126,
+   "align": "center",
+   "size": 12,
+   "c": "dim",
+   "runs": [
+    {
+     "t": "■ ",
+     "c": "cy"
+    },
+    {
+     "t": "入口  ",
+     "c": "dim"
+    },
+    {
+     "t": "■ ",
+     "c": "gr"
+    },
+    {
+     "t": "热化学  ",
+     "c": "dim"
+    },
+    {
+     "t": "■ ",
+     "c": "pu"
+    },
+    {
+     "t": "喷管  ",
+     "c": "dim"
+    },
+    {
+     "t": "■ ",
+     "c": "ye"
+    },
+    {
+     "t": "循环  ",
+     "c": "dim"
+    },
+    {
+     "t": "■ ",
+     "c": "bl"
+    },
+    {
+     "t": "输出/验证",
+     "c": "dim"
+    }
+   ]
+  },
+  {
+   "type": "box",
+   "x": 836,
+   "y": 146,
+   "w": 324,
+   "h": 1097,
+   "color": "pu",
+   "pad": [
+    13,
+    7,
+    7
+   ],
+   "lines": [
+    {
+     "t": "验证支路",
+     "c": "pu",
+     "b": 1
+    },
+    {
+     "t": "independent entry",
+     "c": "pu"
+    },
+    "",
+    {
+     "t": "最近建议：",
+     "c": "dim",
+     "align": "left",
+     "indent": 8
+    },
+    {
+     "runs": [
+      {
+       "v": "rail.adv0",
+       "c": "pu",
+       "b": 1
+      }
+     ],
+     "align": "left",
+     "indent": 8
+    },
+    {
+     "runs": [
+      {
+       "v": "rail.adv1",
+       "c": "pu",
+       "b": 1
+      }
+     ],
+     "align": "left",
+     "indent": 8
+    },
+    {
+     "items": [
+      {
+       "w": 182,
+       "runs": [
+        {
+         "t": "调用",
+         "c": "dim"
+        }
+       ]
+      },
+      {
+       "w": 91,
+       "align": "right",
+       "runs": [
+        {
+         "v": "rail.calls",
+         "c": "pu",
+         "b": 1
+        }
+       ]
+      }
+     ],
+     "indent": 8
+    },
+    "",
+    "",
+    "",
+    "",
+    "",
+    {
+     "trigger": [
+      "rail",
+      0
+     ]
+    },
+    {
+     "trigger": [
+      "rail",
+      1
+     ]
+    },
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    {
+     "trigger": [
+      "rail",
+      2
+     ]
+    }
+   ]
+  },
+  {
+   "type": "text",
+   "x": 0,
+   "w": 1200,
+   "y": 70,
+   "align": "center",
+   "size": 30,
+   "c": "wh",
+   "b": 1,
+   "t": "ROCKETPERF · 火箭发动机性能计算"
+  },
+  {
+   "type": "rule",
+   "x": 34,
+   "y": 112,
+   "w": 1132
+  },
+  {
+   "type": "text",
+   "x": 34,
+   "w": 1132,
+   "y": 1458,
+   "runs": [
+    {
+     "t": "守恒账  ",
+     "c": "dim"
+    },
+    {
+     "t": "[",
+     "c": "gr",
+     "b": 1
+    },
+    {
+     "t": "质量·元素·焓·轴功",
+     "c": "gr",
+     "b": 1
+    },
+    {
+     "t": "]",
+     "c": "gr",
+     "b": 1
+    },
+    {
+     "t": "   越域拒算不外推  ·  失败不写结果",
+     "c": "dim"
+    }
+   ]
+  },
+  {
+   "type": "path",
+   "points": [
+    [
+     416,
+     291
+    ],
+    [
+     416,
+     362
+    ],
+    [
+     222,
+     362
+    ],
+    [
+     222,
+     431
+    ]
+   ],
+   "color": "line",
+   "r": 0,
+   "width": 2,
+   "flow": {
+    "period": 1.8,
+    "offsets": [
+     0,
+     0.9
+    ],
+    "color": "bl"
+   }
+  },
+  {
+   "type": "path",
+   "points": [
+    [
+     416,
+     291
+    ],
+    [
+     416,
+     362
+    ],
+    [
+     610,
+     362
+    ],
+    [
+     610,
+     431
+    ]
+   ],
+   "color": "line",
+   "r": 0,
+   "width": 2,
+   "flow": {
+    "period": 2.1,
+    "offsets": [
+     0,
+     0.9
+    ],
+    "color": "bl"
+   }
+  },
+  {
+   "type": "path",
+   "points": [
+    [
+     222,
+     608
+    ],
+    [
+     222,
+     680
+    ],
+    [
+     416,
+     680
+    ],
+    [
+     416,
+     749
+    ]
+   ],
+   "color": "line",
+   "r": 0,
+   "width": 2,
+   "flow": {
+    "period": 2.4,
+    "offsets": [
+     0,
+     0.9
+    ],
+    "color": "bl"
+   }
+  },
+  {
+   "type": "path",
+   "points": [
+    [
+     610,
+     608
+    ],
+    [
+     610,
+     680
+    ],
+    [
+     416,
+     680
+    ],
+    [
+     416,
+     749
+    ]
+   ],
+   "color": "line",
+   "r": 0,
+   "width": 2,
+   "flow": {
+    "period": 2.7,
+    "offsets": [
+     0,
+     0.9
+    ],
+    "color": "bl"
+   }
+  },
+  {
+   "type": "path",
+   "points": [
+    [
+     416,
+     926
+    ],
+    [
+     416,
+     1066
+    ]
+   ],
+   "color": "line",
+   "r": 0,
+   "width": 2,
+   "flow": {
+    "period": 1.8,
+    "offsets": [
+     0,
+     0.9
+    ],
+    "color": "bl"
+   }
+  },
+  {
+   "type": "box",
+   "x": 228,
+   "y": 146,
+   "w": 376,
+   "h": 145,
+   "color": "cy",
+   "pad": [
+    13,
+    14
+   ],
+   "lines": [
+    {
+     "t": "入口层",
+     "c": "cy",
+     "b": 1
+    },
+    {
+     "t": "CLI / 交互菜单 / INI",
+     "c": "mute"
+    },
+    {
+     "t": "解析单位·范围·模型",
+     "c": "mute"
+    },
+    {
+     "runs": [
+      {
+       "v": "r00_入口层_l"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "box",
+   "x": 40,
+   "y": 433,
+   "w": 365,
+   "h": 175,
+   "color": "gr",
+   "pad": [
+    13,
+    14
+   ],
+   "lines": [
+    {
+     "t": "thermo · 热化学",
+     "c": "fg",
+     "b": 1
+    },
+    {
+     "t": "NASA9 十物种物性",
+     "c": "mute"
+    },
+    {
+     "t": "九气相 TP/HP 平衡",
+     "c": "mute"
+    },
+    {
+     "t": "Newton+解析Jacobian",
+     "c": "mute"
+    },
+    {
+     "runs": [
+      {
+       "v": "thermo热化学_l"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "box",
+   "x": 427,
+   "y": 433,
+   "w": 365,
+   "h": 175,
+   "color": "pu",
+   "pad": [
+    13,
+    14
+   ],
+   "lines": [
+    {
+     "t": "nozzle · 喷管",
+     "c": "fg",
+     "b": 1
+    },
+    {
+     "t": "定比热L0 / 温变冻结",
+     "c": "mute"
+    },
+    {
+     "t": "声速喉部→面积比求出口",
+     "c": "mute"
+    },
+    {
+     "t": "pa>pe 显式越域",
+     "c": "mute"
+    },
+    {
+     "runs": [
+      {
+       "v": "nozzle喷管_l"
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "w": 40,
+       "runs": [
+        {
+         "t": "Isp",
+         "c": "dim"
+        }
+       ]
+      },
+      {
+       "w": 140,
+       "bar": {
+        "gauge": "isp_gauge",
+        "w": 140,
+        "h": 18,
+        "max": 340
+       }
+      },
+      {
+       "w": 90,
+       "align": "right",
+       "runs": [
+        {
+         "v": "isp_gauge",
+         "c": "gr",
+         "b": 1
+        }
+       ]
+      }
+     ],
+     "indent": 8,
+     "gap": 8
+    }
+   ]
+  },
+  {
+   "type": "box",
+   "x": 228,
+   "y": 751,
+   "w": 376,
+   "h": 175,
+   "color": "ye",
+   "pad": [
+    13,
+    14
+   ],
+   "lines": [
+    {
+     "t": "cycle · 循环原型",
+     "c": "ye",
+     "b": 1
+    },
+    {
+     "t": "开式外排 / 富氧补燃",
+     "c": "mute"
+    },
+    {
+     "t": "质量·轴功·焓三账闭合",
+     "c": "mute"
+    },
+    {
+     "t": "Q=0 从入口焓求温度",
+     "c": "mute"
+    },
+    {
+     "runs": [
+      {
+       "v": "cycle循环原型_l"
+      }
+     ]
+    },
+    {
+     "runs": [
+      {
+       "v": "cycle_mode",
+       "b": 1
+      }
+     ],
+     "indent": 8
+    }
+   ]
+  },
+  {
+   "type": "box",
+   "x": 228,
+   "y": 1068,
+   "w": 376,
+   "h": 175,
+   "color": "cy",
+   "pad": [
+    13,
+    14
+   ],
+   "lines": [
+    {
+     "t": "输出与验证",
+     "c": "cy",
+     "b": 1
+    },
+    {
+     "t": "成功才写回 JSON/表格",
+     "c": "mute"
+    },
+    {
+     "t": "守恒残差全量核对",
+     "c": "mute"
+    },
+    {
+     "t": "CEA同源对照",
+     "c": "mute"
+    },
+    {
+     "runs": [
+      {
+       "v": "r30_输出与验证_l"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "tarrow",
+   "machine": "rail",
+   "i": 0,
+   "from": [
+    796,
+    534
+   ],
+   "to": [
+    832,
+    534
+   ]
+  },
+  {
+   "type": "tarrow",
+   "machine": "rail",
+   "i": 1,
+   "from": [
+    796,
+    564
+   ],
+   "to": [
+    832,
+    564
+   ]
+  },
+  {
+   "type": "tarrow",
+   "machine": "rail",
+   "i": 2,
+   "from": [
+    608,
+    1164
+   ],
+   "to": [
+    832,
+    1164
+   ]
+  },
+  {
+   "type": "log",
+   "x": 40,
+   "y": 1277,
+   "w": 1120,
+   "rows": 4,
+   "padTop": 16,
+   "padBottom": 29,
+   "padLeft": 20,
+   "title": "run log",
+   "titleX": 38,
+   "titleW": 128,
+   "cols": [
+    {
+     "key": "time",
+     "x": 0
+    },
+    {
+     "key": "who",
+     "x": 130
+    },
+    {
+     "key": "m",
+     "x": 240
+    },
+    {
+     "key": "g",
+     "x": 800
+    }
+   ]
+  },
+  {
+   "type": "text",
+   "x": 291,
+   "w": 120,
+   "y": 326.5,
+   "align": "right",
+   "size": 12,
+   "c": "dim",
+   "t": "h·元素库存"
+  },
+  {
+   "type": "text",
+   "x": 424,
+   "w": 115,
+   "y": 326.5,
+   "align": "left",
+   "size": 12,
+   "c": "dim",
+   "t": "T0·P0·几何"
+  },
+  {
+   "type": "text",
+   "x": 97,
+   "w": 120,
+   "y": 644.0,
+   "align": "right",
+   "size": 12,
+   "c": "dim",
+   "t": "平衡态"
+  },
+  {
+   "type": "text",
+   "x": 618,
+   "w": 115,
+   "y": 644.0,
+   "align": "left",
+   "size": 12,
+   "c": "dim",
+   "t": "出口流"
+  },
+  {
+   "type": "text",
+   "x": 428,
+   "w": 120,
+   "y": 996.0,
+   "align": "left",
+   "size": 12,
+   "c": "dim",
+   "t": "F·Isp·残差"
+  }
+ ],
+ "clock": {
+  "start": "23:48:04",
+  "rate": 3
+ },
+ "titlebar": {
+  "text": "~/rocketperf — C17 热化学计算核心"
+ },
+ "credit": {
+  "text": "循环为条件性研究原型 · 数值为归档算例结果 · 失败与越域显式拒绝，不外推",
+  "y": 1490
+ }
+}

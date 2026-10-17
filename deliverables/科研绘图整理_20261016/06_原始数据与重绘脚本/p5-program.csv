@@ -1,0 +1,14 @@
+﻿item,value,unit,note
+module_thermo,1408,lines,热化学与物性; files=12; generated=518
+module_nozzle,922,lines,喷管模型; files=8; generated=0
+module_cycle,962,lines,部件与整机循环; files=7; generated=0
+module_adapters,1686,lines,输入/输出/平台; files=16; generated=0
+module_cli,1484,lines,命令行与菜单; files=7; generated=0
+module_core,165,lines,数值与错误契约; files=6; generated=0
+handwritten_c_total,6627,lines,non-blank C/H lines registered to production modules
+c_checks,13722,count,core+adapter+thermo+combustion+cycle
+cli_groups,50,count,separate from C checks
+analyzer_units,30,count,GCC -fanalyzer PASS
+hp_speedup,6.42857,x,"310 archived HP inputs, this host; iterations 29.7->8.2"
+demo_c_runs,2501,count,C runs embedded in offline demo
+compiler_flags,-std=c17 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wshadow -Wstrict-prototypes -Wmissing-prototypes -fno-common,text,-Werror: warnings fail the build
