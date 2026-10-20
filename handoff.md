@@ -2,6 +2,8 @@
 
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
+2026-10-20 DOC-008按用户明确确认调整报告分工：报告撰写和核心算法归纪博闻，何明轩改为补燃循环介绍与分析，宋俊辉保留结构整理和校对。表后总结同步，当前提交入口为[分工更新版](deliverables/submission-20261020-v3/README.md)，旧包保留。仅报告第20页文字变化，前19页渲染一致，其他材料保持字节。记录见[076](taskshot/2026-10-20_076-contributions-update.md)。
+
 2026-10-20 SUB-002按用户要求审查报告与全部提交材料，[修订版入口](deliverables/submission-20261020-v2/README.md)为新的上传依据，上一版保留。报告用`report-reviewed.typ/pdf`新增修订，组员分工原文未改；GUI自检修正残差字段、扫描计数及复制命令，核心方程与物性身份未改。检查范围与过程见[075记录](taskshot/2026-10-20_075-report-and-gui-review.md)。不得把文字清理说成作者身份鉴定或删除必要来源。原生桌面视觉证据仍单独待补。
 
 2026-10-20按用户通知整理第一次大作业四项提交材料，入口为[提交目录说明](deliverables/submission-20261020/README.md)。SUB-001负责新增提交副本、源码重建与发布核验；报告、PPT原件及研究档案保留。GUI-001仍缺原生窗口视觉记录，单独保持未完成，不阻挡已满足教师形式要求的控制台发布版。最终压缩包与逐文件哈希以提交目录manifest为准，未上传课程平台。过程见[074记录](taskshot/2026-10-20_074-course-submission.md)。

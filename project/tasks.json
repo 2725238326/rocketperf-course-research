@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 375,
+  "revision": 380,
   "context": {
-    "phase": "报告审查修订与本地提交",
+    "phase": "报告分工确认与本地提交",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-004"
     ],
     "facts": [
-      "当前上传入口为deliverables/submission-20261020-v2/README.md；20页修订报告、17页PPT、源码与发布版。",
-      "报告分工原文保留；修正可复现的技术/操作问题，保留来源、许可与模型边界。",
-      "独立源码5项C测试、9项GUI桥接测试与前端检查通过；源码重建/控制台各17项演示及162项材料哈希核验通过。",
-      "GUI原生窗口视觉仍由GUI-001单独补证；本轮未上传平台、推送远端或刷新在线事实。"
+      "当前提交入口为deliverables/submission-20261020-v3/README.md；报告20页，更新宋俊辉、何明轩和纪博闻分工。",
+      "仅报告第20页变化，前19页渲染一致；源码、程序、PPT及许可保持v2字节，继承此前已验测试。",
+      "新包162项材料哈希与ZIP完整性核验通过；旧包保留，未上传平台或推送远端。",
+      "GUI原生窗口视觉仍由GUI-001单独补证；本轮不刷新在线事实。"
     ]
   },
   "tasks": [
@@ -1731,6 +1731,27 @@
         "kind": "quality",
         "path": "project/evidence/SUB-002_3cc76b2da3f5.json",
         "sha256": "34631384b4af397b19fd816738909136625a8ccd492df940dadeaf7d349ce117"
+      }
+    },
+    {
+      "id": "DOC-008",
+      "title": "按组员确认调整报告分工",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/submission-20261020-v3/manifest.json",
+        "deliverables/submission-20261020-v3/README.md"
+      ],
+      "acceptance": [
+        "宋俊辉去除报告撰写，纪博闻增加报告撰写与核心算法，何明轩改补燃相关工作；报告20页、分工总结一致，原提交包保留，新包仅报告变化且哈希核对。"
+      ],
+      "owner": "Codex",
+      "note": "分工表、总结、报告说明和当前提交入口一致；PDF和四项材料包已核验，未上传或推送。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/DOC-008_a3c2b096f5d9.json",
+        "sha256": "7842b14d25a0971334eae9563fc65dbbdb712c61dd52b3e9e875a3d1d927ea8e"
       }
     }
   ],
@@ -9726,6 +9747,94 @@
       "note": "按验收契约完成报告及提交材料审查修订，所有已声明检查有新鲜证据；原报告、旧ZIP和分工保留，外部上传与GUI原生视觉不在本次完成范围。",
       "previous_hash": "4824f9897238ed757c1ae5a406e03f73921098b774b3e50947e819971478f73d",
       "hash": "c2cec496816e287b07c3131ec6bc6e741b3cc3b4ebd1e38fb4c84cc17f52a871"
+    },
+    {
+      "seq": 393,
+      "at": "2026-10-20T05:51:29+00:00",
+      "task": "DOC-008",
+      "from": null,
+      "to": "READY",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "c2cec496816e287b07c3131ec6bc6e741b3cc3b4ebd1e38fb4c84cc17f52a871",
+      "hash": "200e674525663ffb9f57fa3ed973fed1cc2146c4d05ca8c63fa277502ed8b21b"
+    },
+    {
+      "seq": 394,
+      "at": "2026-10-20T05:51:31+00:00",
+      "task": "DOC-008",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "按用户明确确认调整三位组员分工，同步报告和新版四项材料包，源码程序PPT保持前版字节。",
+      "previous_hash": "200e674525663ffb9f57fa3ed973fed1cc2146c4d05ca8c63fa277502ed8b21b",
+      "hash": "9ad0e41889f512634c3fa7ce0bdae0e7d830b7b25d15d07606db51dc4b927197"
+    },
+    {
+      "seq": 395,
+      "at": "2026-10-20T05:54:33+00:00",
+      "task": "DOC-008",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "按用户确认完成分工更新并生成v3包。",
+      "previous_hash": "9ad0e41889f512634c3fa7ce0bdae0e7d830b7b25d15d07606db51dc4b927197",
+      "details": {
+        "context_before": {
+          "phase": "报告审查修订与本地提交",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "当前上传入口为deliverables/submission-20261020-v2/README.md；20页修订报告、17页PPT、源码与发布版。",
+            "报告分工原文保留；修正可复现的技术/操作问题，保留来源、许可与模型边界。",
+            "独立源码5项C测试、9项GUI桥接测试与前端检查通过；源码重建/控制台各17项演示及162项材料哈希核验通过。",
+            "GUI原生窗口视觉仍由GUI-001单独补证；本轮未上传平台、推送远端或刷新在线事实。"
+          ]
+        },
+        "context_after": {
+          "phase": "报告分工确认与本地提交",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "当前提交入口为deliverables/submission-20261020-v3/README.md；报告20页，更新宋俊辉、何明轩和纪博闻分工。",
+            "仅报告第20页变化，前19页渲染一致；源码、程序、PPT及许可保持v2字节，继承此前已验测试。",
+            "新包162项材料哈希与ZIP完整性核验通过；旧包保留，未上传平台或推送远端。",
+            "GUI原生窗口视觉仍由GUI-001单独补证；本轮不刷新在线事实。"
+          ]
+        }
+      },
+      "hash": "f137af978a5965c2dd18c64dbc79c8aa1a63451e6d9e4cd7fc364bbfce500cd8"
+    },
+    {
+      "seq": 396,
+      "at": "2026-10-20T06:09:32+00:00",
+      "task": "DOC-008",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "已按用户确认调整三人分工及表后总结，同步当前报告与v3包；20页中仅第20页文字变化，前19页文字和渲染一致。第20页视觉核对通过，新包162项文件哈希及CRC通过，源码程序PPT继承v2已验字节，旧包保留。",
+      "previous_hash": "f137af978a5965c2dd18c64dbc79c8aa1a63451e6d9e4cd7fc364bbfce500cd8",
+      "hash": "27cc4ee298bdf5c15ca0c13cbb7b25bf8c3175c29877779b604f018b8dd3eb3e"
+    },
+    {
+      "seq": 397,
+      "at": "2026-10-20T06:09:36+00:00",
+      "task": "DOC-008",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "分工表、总结、报告说明和当前提交入口一致；PDF和四项材料包已核验，未上传或推送。",
+      "previous_hash": "27cc4ee298bdf5c15ca0c13cbb7b25bf8c3175c29877779b604f018b8dd3eb3e",
+      "hash": "e2d31bf43ad8d7c58857e6390071dc2fa765d00ca69f83812b8973ea06fccfa5"
     }
   ]
 }
