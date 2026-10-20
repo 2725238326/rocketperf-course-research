@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 372,
+  "revision": 375,
   "context": {
-    "phase": "第一次大作业本地提交材料",
+    "phase": "报告审查修订与本地提交",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "DOC-004"
     ],
     "facts": [
-      "第五组四项提交材料见deliverables/submission-20261020/README.md；报告20页，PPT17页，保留原定稿。",
-      "固定提交源码重建和控制台各17项演示通过；提交源码5项C测试、GUI9项桥接测试和ZIP逐文件核验通过。",
-      "GUI原生窗口视觉验收仍待GUI-001补证；本轮未上传课程平台或推送远端。",
-      "在线证据截止2026-10-06；文档和打包不刷新型号事实。"
+      "当前上传入口为deliverables/submission-20261020-v2/README.md；20页修订报告、17页PPT、源码与发布版。",
+      "报告分工原文保留；修正可复现的技术/操作问题，保留来源、许可与模型边界。",
+      "独立源码5项C测试、9项GUI桥接测试与前端检查通过；源码重建/控制台各17项演示及162项材料哈希核验通过。",
+      "GUI原生窗口视觉仍由GUI-001单独补证；本轮未上传平台、推送远端或刷新在线事实。"
     ]
   },
   "tasks": [
@@ -1715,7 +1715,7 @@
     {
       "id": "SUB-002",
       "title": "报告技术审查与提交材料修订",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -1726,8 +1726,12 @@
         "报告修正可复现的论证和操作问题，分工原文保留；C与GUI清理无关文字且不删除来源许可或物性身份；重新构建和核验四项提交材料并保留上一版。"
       ],
       "owner": "Codex",
-      "note": "按用户要求审查报告和交付源码/GUI，分工本轮不改，新版保留旧包。",
-      "verification": null
+      "note": "按验收契约完成报告及提交材料审查修订，所有已声明检查有新鲜证据；原报告、旧ZIP和分工保留，外部上传与GUI原生视觉不在本次完成范围。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/SUB-002_3cc76b2da3f5.json",
+        "sha256": "34631384b4af397b19fd816738909136625a8ccd492df940dadeaf7d349ce117"
+      }
     }
   ],
   "events": [
@@ -9658,6 +9662,70 @@
       "note": "按用户要求审查报告和交付源码/GUI，分工本轮不改，新版保留旧包。",
       "previous_hash": "f5482ce694df519fd362e448691088528c79788fcfb483340597adb2a9ed06b8",
       "hash": "7284a0f7ebc747c030455907d740dc614cfd1460ddfd7df805c95b719936ebc1"
+    },
+    {
+      "seq": 390,
+      "at": "2026-10-20T05:36:21+00:00",
+      "task": "SUB-002",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "报告及GUI审查修订已组包核验，完成本地交付收尾。",
+      "previous_hash": "7284a0f7ebc747c030455907d740dc614cfd1460ddfd7df805c95b719936ebc1",
+      "details": {
+        "context_before": {
+          "phase": "第一次大作业本地提交材料",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "第五组四项提交材料见deliverables/submission-20261020/README.md；报告20页，PPT17页，保留原定稿。",
+            "固定提交源码重建和控制台各17项演示通过；提交源码5项C测试、GUI9项桥接测试和ZIP逐文件核验通过。",
+            "GUI原生窗口视觉验收仍待GUI-001补证；本轮未上传课程平台或推送远端。",
+            "在线证据截止2026-10-06；文档和打包不刷新型号事实。"
+          ]
+        },
+        "context_after": {
+          "phase": "报告审查修订与本地提交",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "当前上传入口为deliverables/submission-20261020-v2/README.md；20页修订报告、17页PPT、源码与发布版。",
+            "报告分工原文保留；修正可复现的技术/操作问题，保留来源、许可与模型边界。",
+            "独立源码5项C测试、9项GUI桥接测试与前端检查通过；源码重建/控制台各17项演示及162项材料哈希核验通过。",
+            "GUI原生窗口视觉仍由GUI-001单独补证；本轮未上传平台、推送远端或刷新在线事实。"
+          ]
+        }
+      },
+      "hash": "c74faa0efb8e8450087500181cec19a72fc09eca169e32bcbc00508613eafb83"
+    },
+    {
+      "seq": 391,
+      "at": "2026-10-20T05:44:50+00:00",
+      "task": "SUB-002",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "报告20页新增修订并完整渲染审阅，技术数值复算、命令、单位、模型边界修正，分工与旧版逐字一致。GUI修正自检字段和计数、九物种表述及PowerShell复制命令，移除历史内部工程宣传材料，保留来源许可和数据生成身份。固定源码独立重建5项C测试、9项GUI桥接测试及前端真实C检查通过，源码/控制台各17项演示通过；修订ZIP162项材料哈希与内容检查通过。原生窗口视觉仍待补，本次不声称作者身份鉴定。",
+      "previous_hash": "c74faa0efb8e8450087500181cec19a72fc09eca169e32bcbc00508613eafb83",
+      "hash": "4824f9897238ed757c1ae5a406e03f73921098b774b3e50947e819971478f73d"
+    },
+    {
+      "seq": 392,
+      "at": "2026-10-20T05:44:55+00:00",
+      "task": "SUB-002",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "按验收契约完成报告及提交材料审查修订，所有已声明检查有新鲜证据；原报告、旧ZIP和分工保留，外部上传与GUI原生视觉不在本次完成范围。",
+      "previous_hash": "4824f9897238ed757c1ae5a406e03f73921098b774b3e50947e819971478f73d",
+      "hash": "c2cec496816e287b07c3131ec6bc6e741b3cc3b4ebd1e38fb4c84cc17f52a871"
     }
   ]
 }
