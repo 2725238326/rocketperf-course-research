@@ -44,9 +44,9 @@ function cycleModel(r) {
   };
 }
 
-TABS.push({ id: "cycle", title: "循环三本账", init() {
+TABS.push({ id: "cycle", title: "循环收支", init() {
   const V = view("cycle"), P = { file: CYCLE_CASES[0][0], over: {}, base: null, env: null, sweepField: CYCLE_SWEEPS[0][0], sweep: null, pinned: "engine" };
-  const c1 = card(V.rail, "循环三本账", `<p>泵、预燃室/发生器、涡轮、主室在一次 C 调用里同时闭合质量、轴功、焓与元素。算例输入为研究假设，型号名称只表示构型背景。</p>`);
+  const c1 = card(V.rail, "循环收支", `<p>联立泵、预燃室或发生器、涡轮与主室，核算质量、轴功、能量与元素收支。算例输入为研究假设，型号名称表示构型背景。</p>`);
   const list = h("div", "cases"); c1.append(list);
   CYCLE_CASES.forEach(([file, name, kind]) => {
     const b = h("button", "", `<span>${name}</span>${badge(kind.includes("待判") ? "warn" : "ok", kind)}`); b.type = "button"; b.dataset.file = file;
@@ -189,12 +189,12 @@ TABS.push({ id: "cycle", title: "循环三本账", init() {
       { name: "涡轮冻结膨胀", val: gg ? "给定出口" : `出口压力二分 ${c.turbine_pressure_iterations} 次` },
       { name: gg ? "外排喷管" : "回流混合", val: gg ? `${fx(B.external_mass_flow_kg_per_s, 2)} kg/s` : `${fx(B.returned_mass_flow_kg_per_s, 1)} kg/s` },
       { name: "主室 HP", val: `${fx(c.chamber.t, 0)} K` }, { name: "主喷管", val: `喉 ${fx(B.main_throat_area_m2 * 1e4, 1)} cm²` },
-      { name: "三本账闭合", val: `|ΔQ| ${fx(Math.abs(B.energy_residual_w), 2)} W` }]);
+      { name: "能量收支", val: `残差 ${fx(Math.abs(B.energy_residual_w), 2)} W` }]);
     P.key.innerHTML = `<h2>关键核对</h2><p>` + (gg
       ? `外排 <b>${fx(B.external_mass_flow_kg_per_s, 3)} kg/s</b> 经独立喷管仍贡献 <b>${fx(B.branch_thrust_n / 1e3, 3)} kN</b>，占整机 ${fx((B.branch_thrust_n / B.total_thrust_n) * 100, 2)}%，漏记即低估推力和比冲。发生器 O/F ${fx(c.inputs.preburner_oxidizer_fuel_ratio, 2)}，石墨活度 ${sci(c.preburner.ac, 3)}${c.preburner.ac < 1 ? " &lt; 1，仍在气相域内" : ""}。`
       : `轴功平衡反解涡轮出口 <b>${fx(c.turbine.out_pa / 1e6, 2)} MPa</b>，高于回流注入主室所需 <b>${fx(minP / 1e6, 2)} MPa</b>：功率账在注入约束内成立。${c.feed === "rp1_assigned" ? "RP-1 为指定替代物，燃料密度为假设值。" : ""}`) + "</p>";
     const file = `rocketperf-${env.result.case.id.replace(/[^A-Za-z0-9_-]/g, "_")}.ini`;
-    const command = `rocketperf.exe cycle adiabatic ${file} --text`;
+    const command = `./rocketperf.exe cycle adiabatic '${file}' --text`;
     P.ev.set([["轴功残差", `${sci(B.shaft_residual_w)} W`], ["焓残差", `${fx(B.energy_residual_w, 3)} W`], ["质量相对残差", sci(B.mass_relative_residual)],
       ["元素最大残差", sci(Math.max(...c.element_residual.map(Math.abs)))]], command, {
         ini: env.result.ini, filename: file,

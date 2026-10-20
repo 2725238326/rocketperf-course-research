@@ -1,7 +1,7 @@
 "use strict";
 /* Tab: liquid CH4/O2 chamber equilibrium versus O/F, with the graphite-activity boundary.
  * The O/F sweep is one chamber_sweep call; the selected point adds a nozzle call (ε10 vacuum). */
-TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
+TABS.push({ id: "chamber", title: "燃烧室与石墨判据", init() {
   const V = view("chamber"), P = {}, OF = { lo: 0.5, hi: 4.0, n: 36 };
   let sweep = null, point = null, gen = null;
   const c1 = card(V.rail, "液甲烷 / 液氧燃烧室", `<p>CoolProp 单相表 CH₄ 120 K / O₂ 100 K 入口；九气相 HP 平衡；c* 与比冲取面积比 10 真空冻结喷管。</p>`);
@@ -9,7 +9,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
   P.of = slider(c1, { label: `<span class="dot" style="background:var(--ch4)"></span>氧燃比 O/F`, name: "O/F", min: OF.lo, max: OF.hi, step: 0.01, value: 2.6, ticks: [0.5, 4], color: "var(--ch4)" });
   presets(c1, [["c* 峰值", () => sweep && P.of.set(peakC()[0])], ["比冲峰值", () => P.of.set(3.2)], ["基线 3.4", () => P.of.set(3.4)],
     ["发生器 1.0", () => P.of.set(1.0), "朱雀三号一级开式情景的发生器混合比"], ["凝聚碳区 0.8", () => P.of.set(0.8), "演示 C 的显式拒算"]]);
-  card(V.rail, "凝聚碳判据", `<p>九气相模型里没有固体碳。平衡解给出碳的元素化学势 π<sub>C</sub>，石墨活度 <b>a<sub>C</sub> = exp(π<sub>C</sub> − g°<sub>C(gr)</sub>/RT)</b>。` +
+  card(V.rail, "石墨稳定性判据", `<p>九气相模型不求解固体碳。π<sub>C</sub> 为无量纲碳元素势，石墨活度 <b>a<sub>C</sub> = exp(π<sub>C</sub> − g°<sub>C(gr)</sub>/RT)</b>。` +
     `a<sub>C</sub> &gt; 1 时固体碳更稳定，九气相平衡假设失效，程序拒算。</p>` +
     `<p class="muted">核对：Boudouard 平衡 2CO = C(gr) + CO₂ 独立重算一致；归档 CEA 扩展产物中 RP-1 O/F 1.0 析出石墨。</p>`);
   P.ev = evidence(V.rail);
@@ -91,7 +91,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
       const c = r.chamber, gas = c.gas, pc = sweep ? peakC() : null;
       P.k[0].set({ v: gas.t, d: 1, unit: "K", foot: `M̄ <b>${fx(gas.mw, 2)}</b> kg/kmol · γ<sub>冻结</sub> <b>${fx(gas.gamma, 3)}</b>` });
       P.k[1].set({ v: r.ideal.cstar, d: 1, unit: "m/s", foot: pc ? `峰值 <b>${fx(pc[1], 1)}</b> @ O/F ${fx(pc[0], 2)}` : "" });
-      P.k[2].set({ html: `<div class="v">${sci(c.graphite_activity, 3)}</div>`, foot: c.graphite_activity > 0.1 ? `${badge("warn", "接近边界")}仍为气相平衡解` : `${badge("ok", "气相解有效")}远离凝聚碳` });
+      P.k[2].set({ html: `<div class="v">${sci(c.graphite_activity, 3)}</div>`, foot: `${badge("ok", "判据未触发")}不预测积碳速率与位置` });
       P.k[3].set(vac ? { v: vac.isp, d: 2, unit: "s", foot: `C<sub>F</sub> <b>${fx(vac.cf, 4)}</b> · F <b>${fx(vac.thrust / 1e3, 1)}</b> kN` } : { refused: "C 拒算" });
     } else if (refused) {
       const m = /graphite activity ([\d.eE+-]+)/.exec(point.message || "");
@@ -116,7 +116,7 @@ TABS.push({ id: "chamber", title: "燃烧室与积碳边界", init() {
       const pc = peakC(), pt = peakT();
       P.take.innerHTML = `当前采样中 c* 在 O/F ≈ <b>${fx(pc[0], 1)}</b> 达峰，燃温到 <b>${fx(pt[0], 1)}</b> 才达峰。c* 同时受 T、平均摩尔质量 M̄ 与 γ 影响，富燃侧 M̄ 更小，c* 峰因此偏向富燃。` +
         (edge() > OF.lo ? ` O/F 降到 <b>${fx(edge(), 1)}</b> 以下 a<sub>C</sub> 越过 1，C 拒算。` : "") +
-        (gen ? ` 朱雀三号一级开式发生器（O/F ${fx(gen.of, 1)}）a<sub>C</sub> = <b>${fx(gen.ac, 3)}</b>，在边界内但余量不大。` : "");
+        (gen ? ` 朱雀三号一级背景的开式研究情景中，发生器 O/F ${fx(gen.of, 1)}，a<sub>C</sub> = <b>${fx(gen.ac, 3)}</b>，该判据未触发。` : "");
     }
     P.comp.redraw(); P.peak.redraw(); P.ac.redraw();
   }

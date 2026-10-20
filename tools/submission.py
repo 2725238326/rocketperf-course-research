@@ -50,6 +50,10 @@ ctest --test-dir build/cmake --output-on-failure
 组件及 WebView2 SDK 头文件在 `third_party/`，许可文件随源码提供。
 Python 仅用于组织编译，不参与发布程序的性能计算。
 
+图形界面核验可运行 `python tests/test_gui.py --bridge build/gui/gui_bridge_stdio.exe --cli build/cmake/rocketperf.exe`。
+安装 Node.js 后，还可运行 `node tests/test_gui_frontend.mjs --cli build/cmake/rocketperf.exe`，
+核对真实 C 回复的前端计数及 PowerShell 复制命令。
+
 ## 算例与适用范围
 
 控制台菜单 8 提供五个两型火箭级段背景的循环研究情景，也可运行：
@@ -78,7 +82,8 @@ RUNTIME_README = """火箭动力系统性能计算程序（Windows x64）
    控制台版，或安装微软官方 WebView2 Runtime 后再启动图形界面。
 3. 请先完整解压，保留各程序旁的 cases 目录。运行不需要 Python、
    编译器、CEA 或联网计算。
-4. 压力输入为 Pa（绝对压力），温度为 K，面积为 m²，混合比为质量比。
+4. 算例文件的压力为 Pa（绝对压力），温度为 K，面积为 m²，混合比为质量比。
+   交互菜单和图形界面中的 MPa、kPa 等单位以输入标签为准。
    计算失败时请检查输入与提示，不能将失败点解释为零性能。
 5. 程序输出适用于报告所列的研究输入和模型条件。循环工作点为研究
    假设，RP-1 为指定替代物，不代表真实发动机实测性能和寿命。
@@ -117,22 +122,31 @@ def checked_run(args: list[str], cwd: Path, log: Path, expected: int = 0) -> str
     return run.stdout
 
 
-def create(delivery: Path, ppt: Path) -> None:
+def create(delivery: Path, ppt: Path, destination: Path = DEST, archive: Path = ARCHIVE,
+           report: Path | None = None, report_pages: int = 20) -> None:
+    report = report or ROOT / "deliverables/report_typst_v1/report-final.pdf"
+    include_animation = report.name == "report-final.pdf"
+    if not destination.resolve().is_relative_to((ROOT / "deliverables").resolve()):
+        raise ValueError("Submission directory belongs under deliverables/")
+    if archive.parent.resolve() != (ROOT / "deliverables").resolve() or archive.suffix != ".zip":
+        raise ValueError("Submission archive belongs directly under deliverables/")
+    if report_pages < 1 or not report.is_file():
+        raise ValueError("A compiled report and its verified page count are required")
     verify(delivery)
     upstream = read_json(delivery / "delivery-manifest.json")
     if git(ROOT, "status", "--porcelain", check=True).stdout.strip():
         raise ValueError("Commit reviewed source and tooling before assembly")
     if upstream["source_head"] != git(ROOT, "rev-parse", "HEAD", check=True).stdout.strip():
         raise ValueError("Delivery and current source commit differ")
-    if ARCHIVE.exists() or any((DEST / name).exists() for name in FOLDERS):
+    if archive.exists() or any((destination / name).exists() for name in FOLDERS):
         raise FileExistsError("Submission already exists; choose a new dated version")
-    proof = ROOT / "build/submission-checks-20261020"
+    proof = ROOT / "build" / ("submission-checks-20261020" if destination == DEST else destination.name + "-checks")
     if proof.exists():
         raise FileExistsError("Submission check directory already exists")
     proof.mkdir(parents=True)
-    source = DEST / FOLDERS[0]
-    cli = DEST / FOLDERS[1] / "控制台版"
-    gui = DEST / FOLDERS[1] / "图形界面版"
+    source = destination / FOLDERS[0]
+    cli = destination / FOLDERS[1] / "控制台版"
+    gui = destination / FOLDERS[1] / "图形界面版"
     with zipfile.ZipFile(delivery / "rocketperf-c-source.zip") as z:
         for name in z.namelist():
             if name.startswith(("src/", "include/", "tests/", "cases/", "third_party/")) or name in {"CMakeLists.txt", "project/modules.json", "rocketperf-run.bat"}:
@@ -143,7 +157,7 @@ def create(delivery: Path, ppt: Path) -> None:
         for item in (ROOT / folder).rglob("*"):
             if item.is_file():
                 copy_file(item, source / item.relative_to(ROOT))
-    for name in ("tools/gui_build.py", "tools/gui_bridge_stdio.c", "tests/test_gui.py"):
+    for name in ("tools/gui_build.py", "tools/gui_bridge_stdio.c", "tests/test_gui.py", "tests/test_gui_frontend.mjs"):
         copy_file(ROOT / name, source / name)
     write(source / "README.md", SOURCE_README)
     write(source / "数据与许可.txt", LICENSE_TEXT)
@@ -171,40 +185,46 @@ def create(delivery: Path, ppt: Path) -> None:
         raise ValueError("Expected five executed C tests")
     checked_run([sys.executable, "tools/gui_build.py", "--dist"], isolated, proof / "gui-build")
     checked_run([sys.executable, "tests/test_gui.py", "--bridge", str(isolated / "build/gui/gui_bridge_stdio.exe"), "--cli", str(cli / "rocketperf.exe")], isolated, proof / "gui-tests")
+    node = shutil.which("node")
+    if node is None:
+        raise ValueError("Node.js is required for the frontend delivery check")
+    checked_run([node, "tests/test_gui_frontend.mjs", "--cli", str(cli / "rocketperf.exe")], isolated, proof / "frontend-tests")
     shutil.copytree(isolated / "build/gui/dist/RocketPerf-GUI", gui)
     # The GUI also embeds core data, so ship their notices alongside UI notices.
     shutil.copytree(cli / "third_party", gui / "third_party")
     write(gui / "数据与许可.txt", LICENSE_TEXT)
-    write(DEST / FOLDERS[1] / "使用说明.txt", RUNTIME_README)
+    write(destination / FOLDERS[1] / "使用说明.txt", RUNTIME_README)
     exe = cli / "rocketperf.exe"
     for label, args, expected in (
         ("success", ["cycle", "adiabatic", "cases/vehicles/zq3_y1_stage1.ini", "--text"], 0),
         ("rejection", ["run", "tests/fixtures/overexpanded.ini"], 4),
     ):
         checked_run([str(exe), *args], cli, proof / label, expected)
-    copy_file(ppt, DEST / FOLDERS[2] / "第五组_两型火箭动力系统性能研究.pptx")
-    copy_file(ROOT / "deliverables/report_typst_v1/report-final.pdf", DEST / FOLDERS[3] / "第五组_两型火箭动力系统性能研究报告.pdf")
-    copy_file(ROOT / "deliverables/report_typst_v1/figures/architecture-report.html", DEST / FOLDERS[3] / "figures/architecture-report.html")
-    write(DEST / "提交说明.txt", "火箭发动机原理 第一次大作业\n第五组\n\n题目：两型运载火箭动力系统性能研究\n组员：崔笑睿、谢宝钦、李星辰、宋俊辉、何明轩、纪博闻\n\n01_程序源代码：C17计算核心、命令行、图形界面及编译说明。\n02_程序发布版：Windows x64控制台版与图形界面版。\n03_展示PPT：17页演示稿。\n04_作业报告：20页PDF，附报告所引用的架构动画。\n\n请先完整解压。程序启动方法见02_程序发布版/使用说明.txt。\n")
-    files = {p.relative_to(DEST).as_posix(): digest(p) for name in (*FOLDERS, "提交说明.txt") for p in ([DEST / name] if (DEST / name).is_file() else sorted((DEST / name).rglob("*"))) if p.is_file()}
+    copy_file(ppt, destination / FOLDERS[2] / "第五组_两型火箭动力系统性能研究.pptx")
+    copy_file(report, destination / FOLDERS[3] / "第五组_两型火箭动力系统性能研究报告.pdf")
+    if include_animation:
+        copy_file(ROOT / "deliverables/report_typst_v1/figures/architecture-report.html", destination / FOLDERS[3] / "figures/architecture-report.html")
+    appendix = "，附报告所引用的架构动画" if include_animation else ""
+    write(destination / "提交说明.txt", "火箭发动机原理 第一次大作业\n第五组\n\n题目：两型运载火箭动力系统性能研究\n组员：崔笑睿、谢宝钦、李星辰、宋俊辉、何明轩、纪博闻\n\n01_程序源代码：C17计算核心、命令行、图形界面及编译说明。\n02_程序发布版：Windows x64控制台版与图形界面版。\n03_展示PPT：17页演示稿。\n04_作业报告：" + str(report_pages) + "页PDF" + appendix + "。\n\n请先完整解压。程序启动方法见02_程序发布版/使用说明.txt。\n")
+    files = {p.relative_to(destination).as_posix(): digest(p) for name in (*FOLDERS, "提交说明.txt") for p in ([destination / name] if (destination / name).is_file() else sorted((destination / name).rglob("*"))) if p.is_file()}
     record = {"schema_version": 1, "status": "PASS", "source_commit": upstream["source_head"],
-              "report_pages": 20, "slides": 17, "source_c_tests": 5,
+              "report_pages": report_pages, "slides": 17, "source_c_tests": 5,
               "cli_demonstrations_per_build": len(upstream["runtime_demonstrations"]),
-              "gui_source_build": "PASS", "gui_bridge_tests": "PASS", "gui_native_window_visual_check": "pending",
+              "gui_source_build": "PASS", "gui_bridge_tests": "PASS", "gui_frontend_checks": "PASS", "gui_native_window_visual_check": "pending",
               "files": files}
-    write(DEST / "manifest.json", json.dumps(record, ensure_ascii=False, indent=2) + "\n")
-    write(DEST / "SHA256SUMS.txt", "\n".join(f"{v}  {k}" for k, v in sorted(files.items())) + "\n")
-    with zipfile.ZipFile(ARCHIVE, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+    write(destination / "manifest.json", json.dumps(record, ensure_ascii=False, indent=2) + "\n")
+    write(destination / "SHA256SUMS.txt", "\n".join(f"{v}  {k}" for k, v in sorted(files.items())) + "\n")
+    with zipfile.ZipFile(archive, "x", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for name in (*files, "SHA256SUMS.txt"):
-            z.write(DEST / name, "第五组_第一次大作业/" + name)
-    with zipfile.ZipFile(ARCHIVE) as z:
+            z.write(destination / name, "第五组_第一次大作业/" + name)
+    with zipfile.ZipFile(archive) as z:
         if z.testzip() is not None:
             raise ValueError("Submission ZIP CRC failure")
         for name, expected in files.items():
             if hashlib.sha256(z.read("第五组_第一次大作业/" + name)).hexdigest() != expected:
                 raise ValueError("Submission ZIP file mismatch")
-    record["archive"] = {"path": ARCHIVE.name, "sha256": digest(ARCHIVE), "bytes": ARCHIVE.stat().st_size}
-    write(DEST / "manifest.json", json.dumps(record, ensure_ascii=False, indent=2) + "\n")
+    record["archive"] = {"path": archive.name, "sha256": digest(archive), "bytes": archive.stat().st_size}
+    write(destination / "manifest.json", json.dumps(record, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"status": "PASS", "files": len(files), "archive": record["archive"]}, ensure_ascii=False))
 
 
@@ -212,5 +232,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--delivery", required=True, type=Path)
     parser.add_argument("--ppt", required=True, type=Path)
+    parser.add_argument("--destination", type=Path, default=DEST)
+    parser.add_argument("--archive", type=Path, default=ARCHIVE)
+    parser.add_argument("--report", type=Path)
+    parser.add_argument("--report-pages", type=int, default=20)
     args = parser.parse_args()
-    create(args.delivery.resolve(strict=True), args.ppt.resolve(strict=True))
+    create(args.delivery.resolve(strict=True), args.ppt.resolve(strict=True),
+           args.destination.resolve(), args.archive.resolve(),
+           args.report.resolve(strict=True) if args.report else None, args.report_pages)

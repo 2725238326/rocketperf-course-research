@@ -2,6 +2,8 @@
 
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
+2026-10-20 SUB-002按用户要求审查报告与全部提交材料，[修订版入口](deliverables/submission-20261020-v2/README.md)为新的上传依据，上一版保留。报告用`report-reviewed.typ/pdf`新增修订，组员分工原文未改；GUI自检修正残差字段、扫描计数及复制命令，核心方程与物性身份未改。检查范围与过程见[075记录](taskshot/2026-10-20_075-report-and-gui-review.md)。不得把文字清理说成作者身份鉴定或删除必要来源。原生桌面视觉证据仍单独待补。
+
 2026-10-20按用户通知整理第一次大作业四项提交材料，入口为[提交目录说明](deliverables/submission-20261020/README.md)。SUB-001负责新增提交副本、源码重建与发布核验；报告、PPT原件及研究档案保留。GUI-001仍缺原生窗口视觉记录，单独保持未完成，不阻挡已满足教师形式要求的控制台发布版。最终压缩包与逐文件哈希以提交目录manifest为准，未上传课程平台。过程见[074记录](taskshot/2026-10-20_074-course-submission.md)。
 
 2026-10-15用户明确当前需要讲稿、讲解思路、模板具体选页和逐页图文替换指导，由小组组合PPT后再共同优化，不要求代做PPT。展示15分钟、提问另计5分钟，两人分段主讲，姓名与贡献稍后本人填写。制作前审核见[审核清单](docs/preproduction-audit-20261015.md)和[062记录](taskshot/2026-10-15_062-preproduction-audit.md)，本轮整改与指导见[063记录](taskshot/2026-10-15_063-two-speaker-presentation.md)。正文建议13页（[064记录](taskshot/2026-10-15_064-presentation-enrichment.md)新增P5程序实现页，正文改用模板5），A讲1–7、B讲8–13，备答P14–P20，预算13:55含100秒演示，未人工实测。旧阶段包本地缺失，最终定稿后由REL-001重新冻结核验。

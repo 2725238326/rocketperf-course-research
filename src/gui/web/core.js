@@ -2,7 +2,8 @@
 /* Bridge to the C core, formatting and small helpers. In the desktop program
  * window.rp is a WebView2 binding that runs rp_gui_handle on a worker thread;
  * the browser preview posts the same JSON to tools/gui_dev.py, which pipes it
- * to the identical C bridge. Every number on screen comes from those replies. */
+ * to the identical C bridge. Solver pages render these replies; the CEA tab
+ * separately displays saved reference comparisons. */
 const $ = (id) => document.getElementById(id);
 const TABS = [];
 const ENV = [[0, "真空"], [5000, "5 kPa"], [50000, "50 kPa"], [101325, "海平面"]];
@@ -30,10 +31,10 @@ const envName = (pa) => (ENV.find((e) => e[0] === pa) || [pa, `${kpa(pa)} kPa`])
 const plain = (v) => (Number.isInteger(v) ? String(v) : String(+v.toPrecision(10)));
 /* Equivalent CLI command for the current point, so any number can be reproduced in a terminal. */
 const CMD = {
-  ch4: (of, ar, pa, pc = PC) => `rocketperf.exe combustion frozen-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 ${plain(pc)} ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01`,
-  rp1: (of, ar, pa) => `rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 O2(L) 10000000 ${plain(of)} 298.15 90.170 ${plain(ar)} ${plain(pa)} 0.01`,
-  regime: (of, ar, pa) => `rocketperf.exe combustion regime-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 1e7 ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01 --text`,
-  cycle: (file) => `rocketperf.exe cycle adiabatic ${file} --text`,
+  ch4: (of, ar, pa, pc = PC) => `./rocketperf.exe combustion frozen-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 ${plain(pc)} ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01`,
+  rp1: (of, ar, pa) => `./rocketperf.exe combustion frozen-rp1 cea-v3.3.4-rp1-o2l-assigned-v1 liquid RP-1 'O2(L)' 10000000 ${plain(of)} 298.15 90.170 ${plain(ar)} ${plain(pa)} 0.01`,
+  regime: (of, ar, pa) => `./rocketperf.exe combustion regime-liquid-state coolprop710-cea334-liquid-molar-v1 heos710-cea334-ideal-zero-298.15-v1 liquid 120 1e7 100 1e7 1e7 ${plain(of)} ${plain(ar)} ${plain(pa)} 0.01 --text`,
+  cycle: (file) => `./rocketperf.exe cycle adiabatic '${file}' --text`,
 };
 
 const RP = (() => {
@@ -91,7 +92,7 @@ const STATUS_ZH = { out_of_domain: "超出模型适用域", invalid_argument: "�
   no_convergence: "迭代未收敛", numeric_error: "数值错误", io_error: "读写错误", parse_error: "请求格式错误" };
 function failure(env, hint) {
   return `<div class="fail"><div><b>C 拒算：${esc(STATUS_ZH[env.status] || env.status)}</b>` +
-    `<p>${hint || "C 核心按显式失败契约拒绝这组输入，不输出外推结果。"}</p><code>${esc(env.status)}: ${esc(env.message || "")}</code></div></div>`;
+    `<p>${hint || "当前输入无法完成计算，请检查参数与模型适用范围。"}</p><code>${esc(env.status)}: ${esc(env.message || "")}</code></div></div>`;
 }
 
 /* Smooth numeric change for KPI values; honours reduced motion. */

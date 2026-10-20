@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 370,
+  "revision": 372,
   "context": {
     "phase": "第一次大作业本地提交材料",
     "evidence_cutoff": "2026-10-06",
@@ -1711,6 +1711,23 @@
         "path": "project/evidence/SUB-001_1f16814e6ff0.json",
         "sha256": "76e87bf51b34b25d5ead2960316952a2124614d8cfb9c2291db2a459a20e6a44"
       }
+    },
+    {
+      "id": "SUB-002",
+      "title": "报告技术审查与提交材料修订",
+      "status": "ACTIVE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/submission-20261020-v2/README.md",
+        "deliverables/submission-20261020-v2/manifest.json"
+      ],
+      "acceptance": [
+        "报告修正可复现的论证和操作问题，分工原文保留；C与GUI清理无关文字且不删除来源许可或物性身份；重新构建和核验四项提交材料并保留上一版。"
+      ],
+      "owner": "Codex",
+      "note": "按用户要求审查报告和交付源码/GUI，分工本轮不改，新版保留旧包。",
+      "verification": null
     }
   ],
   "events": [
@@ -9617,6 +9634,30 @@
       "note": "已按教师四项要求逐项核对产物及新鲜完整质量证据，完成本地提交材料整理；未上传平台或外部推送。GUI-001原生窗口视觉记录继续单独待补。",
       "previous_hash": "34102aa47059966f5a7b957650541c850de4a9c3e1a335e66cea28fde741d093",
       "hash": "5ef57876ea600f86845d8a0578bf92ef4e0750a2930b1eb42869658db2efbe98"
+    },
+    {
+      "seq": 388,
+      "at": "2026-10-20T04:47:14+00:00",
+      "task": "SUB-002",
+      "from": null,
+      "to": "READY",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "5ef57876ea600f86845d8a0578bf92ef4e0750a2930b1eb42869658db2efbe98",
+      "hash": "f5482ce694df519fd362e448691088528c79788fcfb483340597adb2a9ed06b8"
+    },
+    {
+      "seq": 389,
+      "at": "2026-10-20T04:47:16+00:00",
+      "task": "SUB-002",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "按用户要求审查报告和交付源码/GUI，分工本轮不改，新版保留旧包。",
+      "previous_hash": "f5482ce694df519fd362e448691088528c79788fcfb483340597adb2a9ed06b8",
+      "hash": "7284a0f7ebc747c030455907d740dc614cfd1460ddfd7df805c95b719936ebc1"
     }
   ]
 }

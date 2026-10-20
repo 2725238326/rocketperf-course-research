@@ -10,7 +10,7 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
   P.lock = checkbox(c1, "两者取相同 O/F", true);
   P.ar = slider(c1, { label: "喷管面积比 A<sub>e</sub>/A<sub>t</sub>", name: "面积比", min: 2, max: 60, step: 1, value: 10, digits: 0, ticks: [2, 60] });
   P.env = seg(c1, "环境背压", ENV, 0);
-  presets(c1, [["报告口径 2.6/2.6", () => { P.lock.checked = true; P.ar.set(10, true); P.env.set(0, true); P.rp1.set(2.6, true); P.ch4.set(2.6); }],
+  presets(c1, [["报告算例 2.6/2.6", () => { P.lock.checked = true; P.ar.set(10, true); P.env.set(0, true); P.rp1.set(2.6, true); P.ch4.set(2.6); }],
     ["各自比冲峰值", () => { if (!env || !env.ok) return; P.lock.checked = false; P.ch4.set(peak("ch4_isp")[0], true); P.rp1.set(peak("rp1_isp")[0]); }],
     ["推力差变号 2.9", () => { P.lock.checked = true; P.rp1.set(2.9, true); P.ch4.set(2.9); }]]);
   card(V.rail, "", `<p><b>入口</b>：CoolProp 7.1.0 单相表 CH₄ 120 K / O₂ 100 K；CEA 指定 RP-1 298.15 K / O₂(L) 90.170 K。</p>` +
@@ -21,7 +21,7 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
   P.k = [kpi(row, "比冲 I<sub>sp</sub>", "甲烷 ｜ RP-1"), kpi(row, "推力 F", "甲烷 ｜ RP-1"), kpi(row, "质量流量 ṁ", "甲烷 ｜ RP-1"), kpi(row, "特征速度 c*", "甲烷 ｜ RP-1")];
   const g = figs(V.stage, "1.15fr 1fr");
   const f1 = figure(g, { title: "比冲随 O/F", sub: "当前面积比与背压 · ▼ 为各自峰值 · 点击或拖动选 O/F" });
-  const f2 = figure(g, { title: "甲烷相对 RP-1：比冲涨在流量上，不在推力上", sub: "同 O/F 逐点 (CH₄ − RP-1)/RP-1 · 推力线即 C<sub>F</sub> 之差（Pc、At 相同）" });
+  const f2 = figure(g, { title: "甲烷相对 RP-1 的性能差值", sub: "同 O/F 逐点 (CH₄ − RP-1)/RP-1 · Pc、At 相同，推力相对差等于 C<sub>F</sub> 相对差" });
   P.take = takeaway(V.stage);
   const sw = () => env.result.sweep;
   const curve = (key) => sw().of.map((x, i) => [+x.toFixed(4), sw()[key][i]]).filter((p) => finite(p[1]));
@@ -71,9 +71,9 @@ TABS.push({ id: "propellant", title: "推进剂取舍", init() {
         { name: `冻结喷管 ε${ar}`, val: `背压 ${kpa(pa)} kPa` }, { name: "同几何成对相减", val: `ΔIsp ${sgn(r.delta.isp, 2)} s` }]);
       const rows = (s) => [["燃烧室温度", `${fx(s.tc, 1)} K`], ["推力系数 C<sub>F</sub>", fx(s.cf, 4)], ["出口压力", `${kpa(s.pe)} kPa`], ["石墨活度", sci(s.graphite_activity, 2)]];
       P.ev1.set(rows(a), CMD.ch4(r.ch4_of, ar, pa)); P.ev2.set(rows(b), CMD.rp1(r.rp1_of, ar, pa));
-      P.take.innerHTML = `同 P<sub>c</sub>、A<sub>t</sub> 时 <b>F = C<sub>F</sub>·P<sub>c</sub>·A<sub>t</sub></b>，c* 不进入推力：C<sub>F</sub> ${fx(a.cf, 4)} 对 ${fx(b.cf, 4)}，推力只差 <b>${sgn(pct(a.thrust, b.thrust), 2)}%</b>。` +
-        `甲烷 c* 高 ${sgn(r.delta.cstar, 1)} m/s，由 <b>ṁ = P<sub>c</sub>A<sub>t</sub>/c*</b> 少用 <b>${fx(Math.abs(pct(a.mdot, b.mdot)), 2)}%</b> 推进剂，这就是比冲 ${sgn(r.delta.isp, 2)} s 的来源。` +
-        (r.ch4_of === r.rp1_of ? " 同 O/F 下推力差随 O/F 变号。" : "");
+      P.take.innerHTML = `同 P<sub>c</sub>、A<sub>t</sub> 时，<b>F = C<sub>F</sub>·P<sub>c</sub>·A<sub>t</sub></b>。两方法的 C<sub>F</sub> 为 ${fx(a.cf, 4)} 与 ${fx(b.cf, 4)}，甲烷推力相对差为 <b>${sgn(pct(a.thrust, b.thrust), 2)}%</b>。` +
+        `由 <b>ṁ = P<sub>c</sub>A<sub>t</sub>/c*</b>，甲烷流量相对差为 <b>${sgn(pct(a.mdot, b.mdot), 2)}%</b>，比冲差为 <b>${sgn(r.delta.isp, 2)} s</b>。` +
+        "结果对应当前输入；同一质量 O/F 不表示相同当量比，也不表示各自最优工况。";
     } else {
       P.k.forEach((k) => k.set({ refused: "C 拒算", foot: "成对比较整对拒绝" }));
       P.chain.set([{ name: "CH₄ / RP-1 HP", val: "" }, { name: `冻结喷管 ε${ar}`, val: `背压 ${kpa(pa)} kPa`, state: "bad" }, { name: "同几何成对相减", val: "不可比", state: "skip" }]);

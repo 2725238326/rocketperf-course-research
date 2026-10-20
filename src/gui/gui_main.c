@@ -1,7 +1,7 @@
 /* Desktop window: WebView2 page + C bridge. Every calculation runs in
  * rp_gui_handle on a worker thread; the page only renders C results.
  * webview (MIT, third_party/webview) is the only non-system dependency and is
- * linked statically; the WebView2 runtime ships with Windows 10/11. */
+ * linked statically. Microsoft Edge WebView2 Runtime must be installed. */
 #include "gui_bridge.h"
 
 #include <webview/webview.h>

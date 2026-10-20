@@ -13,10 +13,10 @@ TABS.push({ id: "validation", title: "CEA 对照", init() {
   P.fuel = seg(c1, "显示", [["all", "全部"], ["ch4", "液甲烷"], ["rp1", "RP-1"]], "all");
   card(V.rail, "", `<div class="ev"><table>` + [["液甲烷：C 运行 / CEA 卡", `${VD.ch4.c_runs} / ${VD.ch4.cea_cards}`], ["RP-1：C 运行 / CEA 卡", `${VD.rp1.c_runs} / ${VD.rp1.cea_cards}`],
     ["对照字段", fx(all.length, 0)], ["超出容差", all.filter((p) => p.q > 1).length], ["最紧一项", `${fx(worst.q * 100, 1)}% 容差`]].map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join("") + `</table></div>`);
-  card(V.rail, "CEA 对照", `<p>相同物性与输入下，C 实现的平衡态和喷管解与 CEA v3.3.4 一致。</p><p class="muted">对照范围：两者共同的九气相冻结口径。</p>` +
+  card(V.rail, "CEA 对照", `<p>在保存的共同输入与物种范围内，各字段偏差均在所设容差内。部分物性数据同源，这些对照不构成独立试验验证。</p><p class="muted">对照范围：九气相平衡与组分冻结喷管。</p>` +
     `<p class="muted">来源：${VD.ch4.archive}、${VD.rp1.archive}（保存的 manifest），页面不重新运行 CEA。</p>`);
   P.chain = chain(V.stage, "对照流程");
-  P.chain.set([{ name: "同一 thermo.inp", val: "NASA9 · 十物种" }, { name: "同一入口焓 / 库存", val: "显式焓卡" }, { name: "C 程序", val: `${VD.ch4.c_runs + VD.rp1.c_runs} 次运行` },
+  P.chain.set([{ name: "同一 thermo.inp", val: "NASA9 · 九气相物种" }, { name: "同一入口焓 / 库存", val: "显式焓卡" }, { name: "C 程序", val: `${VD.ch4.c_runs + VD.rp1.c_runs} 次运行` },
     { name: "NASA CEA v3.3.4", val: `${VD.ch4.cea_cards + VD.rp1.cea_cards} 张卡` }, { name: "逐字段差值 ÷ 容差", val: `${fx(all.length, 0)} 项 ≤ 1` }]);
   const row = kpiRow(V.stage, 4), maxAbs = (fuel, field) => VD[fuel].rows.filter((r) => r[1] === field).reduce((a, r) => Math.max(a, Math.abs(r[2])), 0);
   const tolOf = (field) => (VD.ch4.rows.find((r) => r[1] === field) || [])[3];

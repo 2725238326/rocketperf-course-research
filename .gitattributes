@@ -1,7 +1,7 @@
 * text=auto eol=lf
 *.png -text
 *.jpg -text
-*.pdf -text
+*.pdf -text -diff -whitespace
 *.pptx -text
 # Archived byte hashes must survive checkout without newline conversion.
 调研/原始来源/** -text -whitespace
