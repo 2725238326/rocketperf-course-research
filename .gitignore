@@ -15,6 +15,10 @@ __pycache__/
 /deliverables/*.zip
 /deliverables/*.exe
 /deliverables/*.bundle
+# Reproducible course submission payload; inventory and instructions are tracked.
+/deliverables/submission-20261020/0*/
+/deliverables/submission-20261020/提交说明.txt
+/deliverables/submission-20261020/SHA256SUMS.txt
 # Received original remains here; its byte-identical dated evidence copy is tracked.
 /代码.zip
 # PPT template pack: local material, not versioned

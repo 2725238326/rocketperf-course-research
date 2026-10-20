@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "revision": 364,
+  "revision": 367,
   "context": {
     "phase": "课程终稿与本地交付",
     "evidence_cutoff": "2026-10-06",
@@ -1579,7 +1579,7 @@
     {
       "id": "GUI-001",
       "title": "桌面图形界面：WebView2窗口与C桥接",
-      "status": "ACTIVE",
+      "status": "BLOCKED",
       "priority": 2,
       "depends_on": [],
       "required_artifacts": [
@@ -1596,7 +1596,7 @@
         "第三方webview 0.12.0与WebView2 SDK头文件记录来源、版本、许可与哈希；模块登记、架构重生成并视觉检查；浏览器预览与原生窗口实际截图核验。"
       ],
       "owner": "Codex",
-      "note": "继续完善已实现桌面GUI：修复输入复现、循环请求竞态和JSON数字语法，并接入统一质量门禁。",
+      "note": "GUI原生窗口视觉验收证据尚缺；按用户当前提交整理要求先完成独立四件套，不将GUI任务冒称完成。解除条件为取得原生窗口核验记录并继续GUI验收。",
       "verification": null
     },
     {
@@ -1689,6 +1689,23 @@
         "path": "project/evidence/DOC-007_582238d538a9.json",
         "sha256": "504ca750864f7d7b9b1de8a6eab20a16d77608b7383ddcf6d0ffa706951320b0"
       }
+    },
+    {
+      "id": "SUB-001",
+      "title": "第一次大作业四项提交材料整理与核验",
+      "status": "ACTIVE",
+      "priority": 1,
+      "depends_on": [],
+      "required_artifacts": [
+        "deliverables/submission-20261020/README.md",
+        "deliverables/submission-20261020/manifest.json"
+      ],
+      "acceptance": [
+        "新建四类提交目录，源码可在干净目录重建、发布版运行核验，报告PPT内容与格式复核；保留来源许可与模型边界，不夹带内部协作记录或凭据。"
+      ],
+      "owner": "Codex",
+      "note": "读取教师要求和终稿入口后，按四项材料整理提交副本，原件与历史证据保留。",
+      "verification": null
     }
   ],
   "events": [
@@ -9496,6 +9513,42 @@
         }
       },
       "hash": "960eac0415cf24b7e4fb45f1491543d9da446b512da58aef8413ed94239037c8"
+    },
+    {
+      "seq": 382,
+      "at": "2026-10-20T02:47:07+00:00",
+      "task": "GUI-001",
+      "from": "ACTIVE",
+      "to": "BLOCKED",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "GUI原生窗口视觉验收证据尚缺；按用户当前提交整理要求先完成独立四件套，不将GUI任务冒称完成。解除条件为取得原生窗口核验记录并继续GUI验收。",
+      "previous_hash": "960eac0415cf24b7e4fb45f1491543d9da446b512da58aef8413ed94239037c8",
+      "hash": "42f770d40e0e9f60dea74ec0ef26b215b80f4e717ca789521ac7ecbd80957a13"
+    },
+    {
+      "seq": 383,
+      "at": "2026-10-20T02:47:08+00:00",
+      "task": "SUB-001",
+      "from": null,
+      "to": "READY",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "42f770d40e0e9f60dea74ec0ef26b215b80f4e717ca789521ac7ecbd80957a13",
+      "hash": "0fb8eafb7986322ac1f6ee5714b228785acdb49de02f00255eda8d4bcc6175df"
+    },
+    {
+      "seq": 384,
+      "at": "2026-10-20T02:47:09+00:00",
+      "task": "SUB-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "读取教师要求和终稿入口后，按四项材料整理提交副本，原件与历史证据保留。",
+      "previous_hash": "0fb8eafb7986322ac1f6ee5714b228785acdb49de02f00255eda8d4bcc6175df",
+      "hash": "11d02523416682377d84e94f5f7d902f09adbe79609f67f8c71bb6b75630f6b7"
     }
   ]
 }
