@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
-  "revision": 367,
+  "revision": 370,
   "context": {
-    "phase": "课程终稿与本地交付",
+    "phase": "第一次大作业本地提交材料",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
-      "DOC-001",
-      "REL-001"
+      "DOC-004"
     ],
     "facts": [
-      "报告终稿为20页PDF，答辩终稿为17页PPT；最终入口见deliverables/FINAL-DELIVERY.md。",
-      "GUI桥接测试和统一质量入口已有PASS记录；因桌面图像被遮挡，本轮不将自动采集图作为原生窗口截图验收。"
+      "第五组四项提交材料见deliverables/submission-20261020/README.md；报告20页，PPT17页，保留原定稿。",
+      "固定提交源码重建和控制台各17项演示通过；提交源码5项C测试、GUI9项桥接测试和ZIP逐文件核验通过。",
+      "GUI原生窗口视觉验收仍待GUI-001补证；本轮未上传课程平台或推送远端。",
+      "在线证据截止2026-10-06；文档和打包不刷新型号事实。"
     ]
   },
   "tasks": [
@@ -1693,7 +1694,7 @@
     {
       "id": "SUB-001",
       "title": "第一次大作业四项提交材料整理与核验",
-      "status": "ACTIVE",
+      "status": "DONE",
       "priority": 1,
       "depends_on": [],
       "required_artifacts": [
@@ -1704,8 +1705,12 @@
         "新建四类提交目录，源码可在干净目录重建、发布版运行核验，报告PPT内容与格式复核；保留来源许可与模型边界，不夹带内部协作记录或凭据。"
       ],
       "owner": "Codex",
-      "note": "读取教师要求和终稿入口后，按四项材料整理提交副本，原件与历史证据保留。",
-      "verification": null
+      "note": "已按教师四项要求逐项核对产物及新鲜完整质量证据，完成本地提交材料整理；未上传平台或外部推送。GUI-001原生窗口视觉记录继续单独待补。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/SUB-001_1f16814e6ff0.json",
+        "sha256": "76e87bf51b34b25d5ead2960316952a2124614d8cfb9c2291db2a459a20e6a44"
+      }
     }
   ],
   "events": [
@@ -9549,6 +9554,69 @@
       "note": "读取教师要求和终稿入口后，按四项材料整理提交副本，原件与历史证据保留。",
       "previous_hash": "0fb8eafb7986322ac1f6ee5714b228785acdb49de02f00255eda8d4bcc6175df",
       "hash": "11d02523416682377d84e94f5f7d902f09adbe79609f67f8c71bb6b75630f6b7"
+    },
+    {
+      "seq": 385,
+      "at": "2026-10-20T03:29:23+00:00",
+      "task": "SUB-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "四项本地提交材料已组装核验，进入统一质量与验收收尾。",
+      "previous_hash": "11d02523416682377d84e94f5f7d902f09adbe79609f67f8c71bb6b75630f6b7",
+      "details": {
+        "context_before": {
+          "phase": "课程终稿与本地交付",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-001",
+            "REL-001"
+          ],
+          "facts": [
+            "报告终稿为20页PDF，答辩终稿为17页PPT；最终入口见deliverables/FINAL-DELIVERY.md。",
+            "GUI桥接测试和统一质量入口已有PASS记录；因桌面图像被遮挡，本轮不将自动采集图作为原生窗口截图验收。"
+          ]
+        },
+        "context_after": {
+          "phase": "第一次大作业本地提交材料",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "第五组四项提交材料见deliverables/submission-20261020/README.md；报告20页，PPT17页，保留原定稿。",
+            "固定提交源码重建和控制台各17项演示通过；提交源码5项C测试、GUI9项桥接测试和ZIP逐文件核验通过。",
+            "GUI原生窗口视觉验收仍待GUI-001补证；本轮未上传课程平台或推送远端。",
+            "在线证据截止2026-10-06；文档和打包不刷新型号事实。"
+          ]
+        }
+      },
+      "hash": "aa2ed89a53c9d2db5a27ab7937b727ae0d406bfaf6ccda59d35f45f1e6c3e2cb"
+    },
+    {
+      "seq": 386,
+      "at": "2026-10-20T03:35:33+00:00",
+      "task": "SUB-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "四项材料已形成可上传目录和13.8MB总ZIP；162项文件哈希和CRC一致。提交源码独立重建5项C测试、9项GUI桥接测试通过，固定提交源码版/运行版各17项演示通过；20页报告与17页PPT已内容及视觉复核，保留来源许可和模型边界，排除内部协作文件。GUI原生窗口视觉仍未验收，不扩大本次结论。",
+      "previous_hash": "aa2ed89a53c9d2db5a27ab7937b727ae0d406bfaf6ccda59d35f45f1e6c3e2cb",
+      "hash": "34102aa47059966f5a7b957650541c850de4a9c3e1a335e66cea28fde741d093"
+    },
+    {
+      "seq": 387,
+      "at": "2026-10-20T03:35:36+00:00",
+      "task": "SUB-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "已按教师四项要求逐项核对产物及新鲜完整质量证据，完成本地提交材料整理；未上传平台或外部推送。GUI-001原生窗口视觉记录继续单独待补。",
+      "previous_hash": "34102aa47059966f5a7b957650541c850de4a9c3e1a335e66cea28fde741d093",
+      "hash": "5ef57876ea600f86845d8a0578bf92ef4e0750a2930b1eb42869658db2efbe98"
     }
   ]
 }
