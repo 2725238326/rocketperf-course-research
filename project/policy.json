@@ -6,7 +6,8 @@
     "调研/原始来源/",
     "调研/文献/",
     "调研/检索记录/",
-    "作业要求/"
+    "作业要求/",
+    "Work2/"
   ],
   "protected_file": "第2章推力室和发动机的主要参数20260911.pptx",
   "allowed_roots": [
@@ -19,6 +20,7 @@
     "CMakeLists.txt",
     "CONTRIBUTING.md",
     "PPT",
+    "Work2",
     "README.md",
     "cases",
     "data",
@@ -178,7 +180,7 @@
     },
     {
       "path": "docs/final-overview.md",
-      "role": "课程收尾的研究、计算、演示入口与最终交付缺口总览",
+      "role": "第一阶段收官成果、冻结提交身份、历史任务对应与后续条件总览",
       "owner": "tooling"
     },
     {

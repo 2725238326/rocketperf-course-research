@@ -1,17 +1,16 @@
 {
   "schema_version": 1,
-  "revision": 380,
+  "revision": 387,
   "context": {
-    "phase": "报告分工确认与本地提交",
+    "phase": "第一阶段已收官；成果归档与后续待定",
     "evidence_cutoff": "2026-10-06",
-    "next_tasks": [
-      "DOC-004"
-    ],
+    "next_tasks": [],
     "facts": [
-      "当前提交入口为deliverables/submission-20261020-v3/README.md；报告20页，更新宋俊辉、何明轩和纪博闻分工。",
-      "仅报告第20页变化，前19页渲染一致；源码、程序、PPT及许可保持v2字节，继承此前已验测试。",
-      "新包162项材料哈希与ZIP完整性核验通过；旧包保留，未上传平台或推送远端。",
-      "GUI原生窗口视觉仍由GUI-001单独补证；本轮不刷新在线事实。"
+      "用户于2026-10-23确认第一阶段收官；当前归档入口为docs/final-overview.md。",
+      "四项冻结交付以deliverables/submission-20261020-v3/README.md及manifest为准：20页报告、17页PPT、C17源码与Windows发布版。",
+      "本轮复核162项材料哈希和ZIP完整性通过；固定源码为3d4130c，未重写旧提交包或研究档案。",
+      "DOC-004与REL-001旧计划已取消并注明替代产物；DOC-001保留原负责人及历史未验收记录，不再作为阶段接续入口。",
+      "GUI-001原生窗口视觉仍待补；平台上传、接收者签收及人工演练没有新增证据。后续范围由用户另行确定。"
     ]
   },
   "tasks": [
@@ -375,7 +374,7 @@
     {
       "id": "REL-001",
       "title": "发布和提交检查",
-      "status": "PLANNED",
+      "status": "CANCELLED",
       "priority": 2,
       "depends_on": [
         "IMP-001",
@@ -389,7 +388,7 @@
         "干净环境下可运行，报告算例可复现，源代码/发布版一致"
       ],
       "owner": null,
-      "note": "从已审阅手工任务板迁移；不是重新执行任务。",
+      "note": "用户2026-10-23确认第一阶段收官；旧release-manifest路径计划由SUB-001/SUB-002及v3提交manifest替代，停止重复组包；不把取消记成原REL-001验收通过，不推断平台上传或接收者签收。",
       "verification": null
     },
     {
@@ -1555,7 +1554,7 @@
     {
       "id": "DOC-004",
       "title": "讲述内容充实：程序实现页与成果表述审阅",
-      "status": "READY",
+      "status": "CANCELLED",
       "priority": 1,
       "depends_on": [
         "DOC-003"
@@ -1574,7 +1573,7 @@
         "更新讲稿、时间表、演示编排、交接与taskshot，新鲜统一质量PASS后建立本地检查点，不外部推送。"
       ],
       "owner": null,
-      "note": "DOC-005报告初版已完成，报告下游可继续；原讲述材料契约恢复可领取状态。",
+      "note": "用户2026-10-23确认第一阶段收官；旧讲稿充实工作已被后续单人讲述、17页终稿及SUB-001/SUB-002/DOC-008提交版本替代，不再执行旧页码方案；取消不等于补验原契约或人工演练。",
       "verification": null
     },
     {
@@ -1752,6 +1751,32 @@
         "kind": "quality",
         "path": "project/evidence/DOC-008_a3c2b096f5d9.json",
         "sha256": "7842b14d25a0971334eae9563fc65dbbdb712c61dd52b3e9e875a3d1d927ea8e"
+      }
+    },
+    {
+      "id": "GOV-005",
+      "title": "第一阶段收官与现行文档入口整顿",
+      "status": "DONE",
+      "priority": 1,
+      "depends_on": [
+        "DOC-008"
+      ],
+      "required_artifacts": [
+        "docs/final-overview.md",
+        "handoff.md",
+        "taskshot/2026-10-23_077-phase-one-closeout.md"
+      ],
+      "acceptance": [
+        "依据用户收官确认整理第一阶段成果、冻结提交入口与证据边界，核对v3材料哈希和ZIP完整性，不修改原包。",
+        "统一README、文档导航、要求映射、分工与交接，处理失效接续建议，旧负责人任务与GUI未验项保持真实记录。",
+        "通过新鲜统一质量检查，审查本轮暂存区并建立本地检查点；不推送或上传。"
+      ],
+      "owner": "Codex",
+      "note": "第一阶段收官文档与工作面整理完成，终稿归档与历史制作方案已区分；后续范围待用户说明。质量六组PASS，原包/原始资料未改，暂存范围经审阅；本地检查点随后建立，不外部推送。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/GOV-005_be4f02e1cdc4.json",
+        "sha256": "0bb167b79059194e41547eccbe24f2c3e473dbdc0ce0fd3d892685affb027d21"
       }
     }
   ],
@@ -9835,6 +9860,117 @@
       "note": "分工表、总结、报告说明和当前提交入口一致；PDF和四项材料包已核验，未上传或推送。",
       "previous_hash": "27cc4ee298bdf5c15ca0c13cbb7b25bf8c3175c29877779b604f018b8dd3eb3e",
       "hash": "e2d31bf43ad8d7c58857e6390071dc2fa765d00ca69f83812b8973ea06fccfa5"
+    },
+    {
+      "seq": 398,
+      "at": "2026-10-23T12:06:27+00:00",
+      "task": "GOV-005",
+      "from": null,
+      "to": "READY",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "e2d31bf43ad8d7c58857e6390071dc2fa765d00ca69f83812b8973ea06fccfa5",
+      "hash": "c53e5b88d77b535e1f1e51080bb6d69ad9a0a13670d8c871afa640ba5d693140"
+    },
+    {
+      "seq": 399,
+      "at": "2026-10-23T12:06:30+00:00",
+      "task": "GOV-005",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "用户确认第一阶段收官；整理现行文档、任务接续及冻结交付证据。",
+      "previous_hash": "c53e5b88d77b535e1f1e51080bb6d69ad9a0a13670d8c871afa640ba5d693140",
+      "hash": "aac3dea9defaeb0ecd3f2d55347dad445f926b46bb40a1a3dd9e81a3073cb255"
+    },
+    {
+      "seq": 400,
+      "at": "2026-10-23T12:07:57+00:00",
+      "task": "DOC-004",
+      "from": "READY",
+      "to": "CANCELLED",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "用户2026-10-23确认第一阶段收官；旧讲稿充实工作已被后续单人讲述、17页终稿及SUB-001/SUB-002/DOC-008提交版本替代，不再执行旧页码方案；取消不等于补验原契约或人工演练。",
+      "previous_hash": "aac3dea9defaeb0ecd3f2d55347dad445f926b46bb40a1a3dd9e81a3073cb255",
+      "hash": "3ef0f9b1f2f2061de5c03009b96fdf46a7f246b2a42c4f59f8ba47dcac14112c"
+    },
+    {
+      "seq": 401,
+      "at": "2026-10-23T12:07:59+00:00",
+      "task": "REL-001",
+      "from": "PLANNED",
+      "to": "CANCELLED",
+      "actor": "Codex",
+      "owner_after": null,
+      "note": "用户2026-10-23确认第一阶段收官；旧release-manifest路径计划由SUB-001/SUB-002及v3提交manifest替代，停止重复组包；不把取消记成原REL-001验收通过，不推断平台上传或接收者签收。",
+      "previous_hash": "3ef0f9b1f2f2061de5c03009b96fdf46a7f246b2a42c4f59f8ba47dcac14112c",
+      "hash": "bcb4eab8fd51221a6f6992adad087a6413900bef07306e3ae179f5eb67ae2128"
+    },
+    {
+      "seq": 402,
+      "at": "2026-10-23T12:08:01+00:00",
+      "task": "GOV-005",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "按用户第一阶段收官确认清空旧接续建议，保留独立未验项。",
+      "previous_hash": "bcb4eab8fd51221a6f6992adad087a6413900bef07306e3ae179f5eb67ae2128",
+      "details": {
+        "context_before": {
+          "phase": "报告分工确认与本地提交",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "DOC-004"
+          ],
+          "facts": [
+            "当前提交入口为deliverables/submission-20261020-v3/README.md；报告20页，更新宋俊辉、何明轩和纪博闻分工。",
+            "仅报告第20页变化，前19页渲染一致；源码、程序、PPT及许可保持v2字节，继承此前已验测试。",
+            "新包162项材料哈希与ZIP完整性核验通过；旧包保留，未上传平台或推送远端。",
+            "GUI原生窗口视觉仍由GUI-001单独补证；本轮不刷新在线事实。"
+          ]
+        },
+        "context_after": {
+          "phase": "第一阶段已收官；成果归档与后续待定",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [],
+          "facts": [
+            "用户于2026-10-23确认第一阶段收官；当前归档入口为docs/final-overview.md。",
+            "四项冻结交付以deliverables/submission-20261020-v3/README.md及manifest为准：20页报告、17页PPT、C17源码与Windows发布版。",
+            "本轮复核162项材料哈希和ZIP完整性通过；固定源码为3d4130c，未重写旧提交包或研究档案。",
+            "DOC-004与REL-001旧计划已取消并注明替代产物；DOC-001保留原负责人及历史未验收记录，不再作为阶段接续入口。",
+            "GUI-001原生窗口视觉仍待补；平台上传、接收者签收及人工演练没有新增证据。后续范围由用户另行确定。"
+          ]
+        }
+      },
+      "hash": "d5b5987731c0518343fb78b9096a077eae029a91a89989f3567e9c26f4269e76"
+    },
+    {
+      "seq": 403,
+      "at": "2026-10-23T12:34:06+00:00",
+      "task": "GOV-005",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "收官入口、冻结交付身份、要求映射及分工已一致；v3的162项哈希与ZIP复核通过；旧任务取消注明替代关系，DOC-001原负责人及GUI未验项保持；最终六组新鲜质量PASS。检查为工程与文档验收，不构成独立科学审查。",
+      "previous_hash": "d5b5987731c0518343fb78b9096a077eae029a91a89989f3567e9c26f4269e76",
+      "hash": "0d5c202dd7a00aa54c075828f7d67b93583828b7ae7d2492818e0a0389e07b5e"
+    },
+    {
+      "seq": 404,
+      "at": "2026-10-23T12:34:10+00:00",
+      "task": "GOV-005",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "Codex",
+      "owner_after": "Codex",
+      "note": "第一阶段收官文档与工作面整理完成，终稿归档与历史制作方案已区分；后续范围待用户说明。质量六组PASS，原包/原始资料未改，暂存范围经审阅；本地检查点随后建立，不外部推送。",
+      "previous_hash": "0d5c202dd7a00aa54c075828f7d67b93583828b7ae7d2492818e0a0389e07b5e",
+      "hash": "3059cc6f8d09f8762d0a710f07afd438a52fc895f6333b69594bd8c6ed3c8499"
     }
   ]
 }

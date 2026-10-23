@@ -2,7 +2,9 @@
 
 本项目研究朱雀三号与长征十号乙动力系统，用C17程序做热化学、喷管和条件性循环分析。公开资料不足以组成四级段真实性能卡；凡带型号名称的可运行输入都是研究情景，不能据此声称飞行实测性能。
 
-**第一次接手：**[当前进度](worknow.md) → [四级段研究](docs/two-vehicle-study.md) → [文档导航](docs/README.md) → [项目解读](docs/project-guide.md)。
+**第一阶段已收官（2026-10-23用户确认）。** 成果、冻结版本与遗留边界见[收官总览](docs/final-overview.md)，四项材料见[当前提交归档](deliverables/submission-20261020-v3/README.md)。
+
+**第一次接手：**[当前工作面](worknow.md) → [收官总览](docs/final-overview.md) → [文档导航](docs/README.md) → [四级段研究](docs/two-vehicle-study.md)。
 
 任务、代码、来源和算例职责见[项目地图](docs/project-map.md)；构建/任务/交付规范见[治理说明](docs/governance.md)。
 
@@ -33,4 +35,4 @@ python tools/pipeline.py run --case cases/benchmarks/air_mach2_vacuum.ini
 
 ## 源码与交付
 
-生产物理解算由C17直接运行。Python仅用于构建编排、归档和独立复算。完整阶段包的生成与核对见[交付说明](docs/delivery.md)；生成阶段包要求干净版本和完整新鲜质量证据。项目工程通过不等于两型真实性能验证，也不等于课程最终报告/PPT已完成。
+生产物理解算由C17直接运行。Python仅用于构建编排、归档和独立复算。第一阶段已形成20页报告、17页PPT、源码与Windows发布版；冻结身份以提交目录manifest为准。另行生成接收包时按[交付说明](docs/delivery.md)使用干净版本和新鲜质量证据。工程检查与课程材料完成不代表两型真实性能已验证。

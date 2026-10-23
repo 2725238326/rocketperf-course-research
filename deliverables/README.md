@@ -1,10 +1,12 @@
-# 汇报准备与制作入口
+# 第一阶段交付归档
 
-最终课程报告、17页答辩稿、C17源码包、Windows命令行包和GUI便携包的清单与复现说明见[大作业最终交付](FINAL-DELIVERY.md)。终稿文件：[报告PDF](report_typst_v1/report-final.pdf)、[答辩PPTX](presentation-final/两型火箭动力系统_答辩终稿.pptx)。
+第一阶段已按用户2026-10-23确认收官。当前四项材料为[v3分工更新版](submission-20261020-v3/README.md)，含20页报告、17页PPT、C17源码及Windows发布版；文件身份以[manifest](submission-20261020-v3/manifest.json)为准。阶段成果、旧任务对应和后续条件见[收官总览](../docs/final-overview.md)，制作源及原定稿追溯见[大作业最终交付](FINAL-DELIVERY.md)。
 
-展示15分钟，提问另计5分钟。两人分段主讲：A讲P1–P7，B讲P8–P13，P7后交接一次。PPT由小组用模板5组合。组号、姓名与实际贡献由本人填写。
+已确认分工见[贡献表](contributions.md)，报告第10节已同步；GUI原生窗口视觉仍单列待补。展示时限按15分钟、提问另计5分钟保留，人工计时及现场执行没有新增记录。
 
-做PPT时只需要打开这三个：
+## 制作过程与备查材料
+
+以下保留旧双人制作方案和素材入口，页码与时间预算按当时版本理解，不替代v3终稿，也不再作为待制作任务：
 
 1. [50分钟制作步骤](ppt-quickstart.md)：两人分工、逐步操作、合并检查、时间不够时砍什么。
 2. [逐页制作指南](ppt-structure.md)：模板5选页、每页要粘贴的文字和数字、配图清单。对照[选页示意图](ppt-materials/template5-plan.jpg)。
@@ -18,4 +20,4 @@
 
 讲之前再看：[时间表](timing-chart.md)（13:55预算、65秒机动、待填实测）、[演示编排](demo-choreography.md)（谁操作、失败时怎么办）、[讲解思路](presentation.md)（为什么这样排页）。
 
-研究依据：[报告](report.md)、[真实贡献待填表](contributions.md)。最终PPT、人员贡献和四件套验收仍在DOC-001/REL-001。
+研究过程见[报告草稿](report.md)，最终文件使用上方v3入口。DOC-001保留历史验收边界，REL-001旧发布计划已由后续提交产物替代并取消；详情见收官总览和生成任务板。
