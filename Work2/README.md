@@ -19,6 +19,7 @@
 | 判断什么算高质量 | [质量标准](docs/quality-standard.md)、[实验模板](templates/experiment.md) |
 | 了解先做什么、怎样收敛 | [研究规划](docs/research-plan.md)、[知识地图](docs/knowledge-map.md) |
 | 查依据与未解决问题 | [来源台账](research/evidence.md)、[审查与不确定性](docs/review.md) |
+| 阅读首轮调查与已采数据 | [调研入口](research/README.md)、[调查协议](research/survey-protocol.md)、[数据说明](research/data/README.md) |
 | 理解组织决定与提示词取舍 | [决策记录](docs/decisions.md)、[启动词审阅](docs/prompt-review.md) |
 | 找作业一正式成果与未完成责任 | [作业一就地归档](archive/work1/README.md) |
 | 新增资料、结果、交付与执行快照 | [调研规范](research/README.md)、[结果规则](results/README.md)、[交付规则](deliverables/README.md)、[执行记录](taskshot/README.md) |
@@ -29,4 +30,4 @@
 
 教师允许化学平衡常数法或最小Gibbs自由能法；要求C语言、两型研究衔接、报告和四项电子交付。展示为10分钟、提问5分钟。“12月5日（周五）”与2026日历不符，需核对通知；不沿用作业一展示时长。
 
-本轮建立治理并开展本地资料初读；新数值基准、AI收益和创新性尚待后续任务验证。指定Grok接口本次返回HTTP 403，详见[检索失败记录](research/search/20261023_w2_methods_a.failed.json)，不能称已完成最新文献综述。
+2026-10-24已开展五条主线首轮调研和原文采集，形成[方法](research/method-review.md)、[C引擎](research/c-engine-review.md)、[AI](research/ai-review.md)、[参数](research/parameter-review.md)和[基准契约](research/benchmark-contract.md)。新数值基准、AI收益和创新性仍待实验验证。Grok初始403后修正地址拼接，后续两主题返回结构化搜索轨迹，另一个请求仍无轨迹；逐次状态保留，原文另行核验，不把接口可返回当结论已验证。

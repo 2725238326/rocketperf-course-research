@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "id": "M001",
+      "classification": "verified_fact",
+      "statement": "NASA I将平衡常数与自由能最小化表述为两种等价的化学平衡形式；等价比较必须保持相同约束和物理模型。",
+      "source_ids": [
+        "W2-N05"
+      ],
+      "locator": "Part I chapter 2 printed p3",
+      "short_quote": "two equivalent formulations",
+      "limitation": "",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "M002",
+      "classification": "verified_fact",
+      "statement": "NASA9资料在cp/R中使用七项温度函数，焓/熵再有两个积分常数；不是七系数旧形式。",
+      "source_ids": [
+        "W2-N04"
+      ],
+      "locator": "Printed p2 equations 1-3",
+      "short_quote": "",
+      "limitation": "Use each species own fit ranges; database-wide bounds are not every-species guarantees",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "M003",
+      "classification": "verified_fact",
+      "statement": "NASA给定焓包含参考形成贡献和显焓；不能再重复加一次形成焓。",
+      "source_ids": [
+        "W2-N04"
+      ],
+      "locator": "Printed p2 Assigned Enthalpy Values equations 4-6",
+      "short_quote": "",
+      "limitation": "Exact inlet phase and reference basis still required",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "M004",
+      "classification": "verified_fact",
+      "statement": "Cantera固定源码的auto先试元素势，失败恢复初态后进入多相求解路径。",
+      "source_ids": [
+        "W2-C05"
+      ],
+      "locator": "ThermoPhase.cpp:1167-1208",
+      "short_quote": "restoreState(initial_state);",
+      "limitation": "Source reading only; no new Cantera run",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "M005",
+      "classification": "verified_fact",
+      "statement": "Cantera ChemEquil对HP使用质量比焓和压力为约束；并非单纯固定组分setState_HP。",
+      "source_ids": [
+        "W2-C07"
+      ],
+      "locator": "ChemEquil.cpp:301-330",
+      "short_quote": "case HP:",
+      "limitation": "Source/API scope only",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C001",
+      "classification": "verified_fact",
+      "statement": "CEA core-c预设构建Fortran+C，不能据名称称核心纯C。",
+      "source_ids": [
+        "W2-C08"
+      ],
+      "locator": "README Minimal Builds",
+      "short_quote": "Fortran + C (no Python bindings):",
+      "limitation": "",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C002",
+      "classification": "verified_fact",
+      "statement": "KINSOL提供问题残差/Jacobian回调，并将数值求解与物理方程分离。",
+      "source_ids": [
+        "W2-S04"
+      ],
+      "locator": "Usage 7.4.4.1-2",
+      "short_quote": "typedef int (*KINSysFn)",
+      "limitation": "General nonlinear solver; not thermodynamic database or complete equilibrium model",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C003",
+      "classification": "verified_fact",
+      "statement": "KINSOL文档明确步长停止可能是无效解附近停滞，不能等同残差收敛。",
+      "source_ids": [
+        "W2-S04"
+      ],
+      "locator": "Usage KINSol return flag KIN_STEP_LT_STPTOL",
+      "short_quote": "stalled",
+      "limitation": "Project must independently evaluate physical residuals",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C004",
+      "classification": "verified_fact",
+      "statement": "KINSOL有累计函数评估、非线性迭代和回溯次数等诊断接口。",
+      "source_ids": [
+        "W2-S04"
+      ],
+      "locator": "Usage optional output functions",
+      "short_quote": "KINGetNumFuncEvals",
+      "limitation": "Different counting conventions must be aligned before comparing engines",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C005",
+      "classification": "verified_fact",
+      "statement": "SUNDIALS v7.2.1发行许可为BSD三条款。",
+      "source_ids": [
+        "W2-S07"
+      ],
+      "locator": "LICENSE first line and redistribution conditions",
+      "short_quote": "BSD 3-Clause License",
+      "limitation": "No SUNDIALS code adopted or linked this batch",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "C006",
+      "classification": "verified_fact",
+      "statement": "Reaktoro固定API为C++类和方法；README为LGPL-2.1-or-later声明。",
+      "source_ids": [
+        "W2-R02",
+        "W2-R04"
+      ],
+      "locator": "README License and SmartEquilibriumSolver declaration",
+      "short_quote": "",
+      "limitation": "Language port does not erase license obligations; candidate reference only",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "A001",
+      "classification": "verified_fact",
+      "statement": "Reaktoro ODML以灵敏度一阶预测，预测未达接受要求时完整求解并补充知识记录。",
+      "source_ids": [
+        "W2-A01",
+        "W2-A02"
+      ],
+      "locator": "Tutorial ODML; paper sections 3.1-3.3",
+      "short_quote": "first-order Taylor approximation",
+      "limitation": "Existing prior art; not a neural-network requirement or demonstrated gas-HP gain",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "A002",
+      "classification": "verified_fact",
+      "statement": "2017原始论文展示的是60°C、100bar流体/矿物反应输运例，不是高温火箭HP验证。",
+      "source_ids": [
+        "W2-A02"
+      ],
+      "locator": "Section 4 reactive-transport setup",
+      "short_quote": "",
+      "limitation": "Its reported speedup cannot be imported as a project forecast",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "A003",
+      "classification": "verified_fact",
+      "statement": "DISCOMAX v4评估二元液液平衡的合成数据；作者明确合成判据不证明真实混合物必然出现实验LLE。",
+      "source_ids": [
+        "W2-A06"
+      ],
+      "locator": "Dataset section",
+      "short_quote": "The published dataset should therefore be interpreted as a synthetic benchmark.",
+      "limitation": "Conceptual cross-domain reference, not gas combustion data",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "A004",
+      "classification": "verified_fact",
+      "statement": "DISCOMAX论文用按二元体系隔离的80/10/10划分，并披露只含两相正样本和多组分组合成本限制。",
+      "source_ids": [
+        "W2-A06"
+      ],
+      "locator": "Generalizing to new systems; Limitations & Future Steps",
+      "short_quote": "system-wise split",
+      "limitation": "Does not demonstrate reliable single-phase classification or general CHO HP solver",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "X001",
+      "classification": "verified_fact",
+      "statement": "旧无轨迹返回的arXiv:1805.07762实际为Selfishness need not be bad: a general proof，化学平衡论文归属错误。",
+      "source_ids": [
+        "W2-X01"
+      ],
+      "locator": "arXiv title/authors/abstract",
+      "short_quote": "Selfishness need not be bad: a general proof",
+      "limitation": "Reject earlier generated title/quote/performance; retained as negative provenance evidence",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "P001",
+      "classification": "verified_fact",
+      "statement": "蓝箭英文TQ-12A产品栏直接列Nozzle area ratio 20.5，不能据此补TQ-12B/15A或遥一具体飞行工况。",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "locator": "TQ-12A product section",
+      "short_quote": "Nozzle area ratio",
+      "limitation": "Reported product parameter only, not independently measured or a complete chamber input set",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "D001",
+      "classification": "derived",
+      "statement": "课程与固定CEA两完整物性文件不同，选定10种中性气体的比较字段一致，不能视作独立物性验证。",
+      "source_ids": [
+        "W2-L01",
+        "W2-L02"
+      ],
+      "locator": "thermo-comparison.json; tools/work2_research.py compare-thermo",
+      "short_quote": "",
+      "limitation": "Only selected records; transport, condensed species and full database not compared",
+      "verified_on": "2026-10-24"
+    },
+    {
+      "id": "H001",
+      "classification": "hypothesis",
+      "statement": "灵敏度预测+真实残差校正/回退可作为C引擎候选，收益必须相对热启动等简单基线证明。",
+      "source_ids": [
+        "W2-A01",
+        "W2-A02",
+        "W2-S04"
+      ],
+      "locator": "Proposed adaptation, not an implemented or validated result",
+      "short_quote": "",
+      "limitation": "Near-singular derivatives, phase changes, memory search and HP outer tolerance remain research questions",
+      "verified_on": "2026-10-24"
+    }
+  ]
+}

@@ -222,6 +222,53 @@ class GovernanceTests(unittest.TestCase):
         (self.root/work2_sources.RAW_PATHS[1]).unlink()
         self.assertTrue(any('missing' in issue for issue in work2_sources.check_sources(self.root)['issues']))
 
+    def test_research_provenance_rejects_tamper_missing_source_and_unknown_value(self):
+        import work2_research
+        raw=self.root/'Work2/research/raw/fixture.txt'
+        raw.parent.mkdir(parents=True);raw.write_bytes(b'original')
+        record={'id':'W2-T01','available':True,'path':raw.relative_to(self.root).as_posix(),
+                'bytes':8,'sha256':hashlib.sha256(b'original').hexdigest(),'read_scope':'read fixture'}
+        atomic_json(self.root/work2_research.INDEX,{'sources':[record]})
+        self.assertEqual(work2_research.verify(self.root)['issues'],[])
+        raw.write_bytes(b'modified')
+        self.assertTrue(work2_research.verify(self.root)['issues'])
+        raw.write_bytes(b'original')
+        atomic_json(self.root/'Work2/research/data/claims.json',{'claims':[{'id':'C1','classification':'verified_fact','source_ids':['absent']}]})
+        atomic_json(self.root/'Work2/research/data/parameter-observations.json',{'observations':[{'id':'P1','classification':'unknown','value':42,'source_ids':[]}]})
+        issues=work2_research.verify(self.root)['issues']
+        self.assertTrue(any('Unknown source' in issue for issue in issues))
+        self.assertTrue(any('contains a value' in issue for issue in issues))
+
+    def test_grok_path_normalization_and_trace_gate_without_network(self):
+        import subprocess
+        pwsh=shutil.which('pwsh')
+        self.assertIsNotNone(pwsh,'Project requires PowerShell syntax/entry checks')
+        config=self.root/'fixture-config.txt'
+        script=ROOT/'调研/scripts/research.ps1'
+        for index,base in enumerate(['https://example.invalid','https://example.invalid/v1','https://example.invalid/v1/responses']):
+            config.write_text(base+'\n'+'sk-'+'x'*32,encoding='utf-8')
+            wrapper="""
+param($ScriptPath,$Config,$Destination,$Trace)
+function Invoke-RestMethod {
+  param($Uri,$Method,$Headers,$ContentType,$Body,$TimeoutSec)
+  if ($Uri -ne 'https://example.invalid/v1/responses') { throw 'Unexpected normalized route' }
+  $output = @(@{type='message';content=@(@{type='output_text';text='fixture answer'})})
+  if ($Trace -eq 'yes') { $output += @{type='web_search_call';status='completed'} }
+  return @{model='fixture';status='completed';output=$output;usage=@{}}
+}
+& $ScriptPath -Topic fixture -PromptFile $Config -OutputDirectory $Destination -ConfigPath $Config -CutoffDate 2026-10-24 -RequireSearchTrace
+"""
+            wrapper_path=self.root/'wrapper.ps1';wrapper_path.write_text(wrapper,encoding='utf-8')
+            out=self.root/f'output-{index}'
+            done=subprocess.run([pwsh,'-NoProfile','-File',str(wrapper_path),str(script),str(config),str(out),'yes'],capture_output=True,text=True,encoding='utf-8')
+            self.assertEqual(done.returncode,0,done.stderr)
+            data=read_json(out/'fixture.json')
+            self.assertEqual(data['evidence_class'],'search_trace_and_answer')
+        failed=self.root/'no-trace'
+        done=subprocess.run([pwsh,'-NoProfile','-File',str(wrapper_path),str(script),str(config),str(failed),'no'],capture_output=True,text=True,encoding='utf-8')
+        self.assertNotEqual(done.returncode,0)
+        self.assertEqual(read_json(failed/'fixture.json')['evidence_class'],'process_only')
+
     def test_missing_proof_snapshot_detected(self):
         self.change('start');self.change('submit',evidence=self.proof())
         proof_path=self.task('WORK-001')['verification']['path']

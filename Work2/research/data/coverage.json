@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-24",
+  "scope": "First-round evidence collection; not exhaustive systematic review or new numerical benchmark",
+  "source_records": 46,
+  "available_records": 40,
+  "failed_records": 6,
+  "usable_read_records": 39,
+  "claim_count": 19,
+  "parameter_observations": 43,
+  "unknown_parameters": 30,
+  "new_solver_runs": 0,
+  "new_training_samples": 0,
+  "new_gpu_runs": 0,
+  "tracks": [
+    {
+      "id": "M",
+      "done": "Official NASA report, pinned CEA/Cantera sources and selected data comparison",
+      "gap": "New WBASE solver audit and full species/phase reference coverage"
+    },
+    {
+      "id": "V",
+      "done": "Benchmark hierarchy, source/data identity and planned dataset contract",
+      "gap": "Threshold justification and fresh numerical runs belong to WBASE/WREF"
+    },
+    {
+      "id": "C",
+      "done": "Four libraries with pinned versions/source language/license and interface comparison",
+      "gap": "No new library compiled or timing claim; thread safety/reentrancy not established"
+    },
+    {
+      "id": "A",
+      "done": "ODML original, official tutorial and 2026 differentiable LLE paper read with limitations",
+      "gap": "2020 Springer full text blocked; no exhaustive frontier ranking or gas-HP speed benefit"
+    },
+    {
+      "id": "P",
+      "done": "Seven primary manufacturer/group pages read; English TQ-12A product area-ratio observation separated from flight inputs",
+      "gap": "Same-batch Pc/main O-F/inlet/throat area still absent in inspected pages; product geometry not transplanted into flight cards"
+    }
+  ],
+  "search_limit": "At least one structured trace returned; other requests lacked traces. Tool metadata is not independent original-source verification."
+}

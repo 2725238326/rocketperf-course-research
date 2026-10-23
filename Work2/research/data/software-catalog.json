@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "software": [
+    {
+      "id": "SW01",
+      "name": "NASA CEA",
+      "version": "v3.3.4",
+      "commit": "4c5c612efa2002a94e3a5a1f33b1674d55c65340",
+      "core_language": "Fortran",
+      "c_interface_is_c_core": false,
+      "license": "Apache-2.0",
+      "source_ids": [
+        "W2-C08",
+        "W2-C09",
+        "W2-C10"
+      ],
+      "role": "Pinned thermodynamic reference; not production solver dependency",
+      "tested_here": false
+    },
+    {
+      "id": "SW02",
+      "name": "Cantera",
+      "version": "3.1.0",
+      "commit": "6e0027548cf295bd478b8acfe34816f2db6dd58b",
+      "core_language": "C++",
+      "c_interface_is_c_core": false,
+      "license": "BSD-3-Clause",
+      "source_ids": [
+        "W2-C01",
+        "W2-C02",
+        "W2-C05",
+        "W2-C07"
+      ],
+      "role": "Reference implementations, solver/state-recovery comparison",
+      "tested_here": false
+    },
+    {
+      "id": "SW03",
+      "name": "SUNDIALS KINSOL",
+      "version": "7.2.1",
+      "commit": null,
+      "version_pin": "official v7.2.1 tag, byte hashes retained; API commit lookup failed",
+      "core_language": "C",
+      "c_interface_is_c_core": true,
+      "license": "BSD-3-Clause",
+      "source_ids": [
+        "W2-S01",
+        "W2-S04",
+        "W2-S07",
+        "W2-S08"
+      ],
+      "role": "Algorithm/backend/interface reference; linking only after small-system cost comparison",
+      "tested_here": false
+    },
+    {
+      "id": "SW04",
+      "name": "Reaktoro",
+      "version": null,
+      "commit": "f587235e692b7168faa272c8892a4c079a1f7dd9",
+      "commit_date": "2026-02-02",
+      "core_language": "C++",
+      "c_interface_is_c_core": false,
+      "license": "LGPL-2.1-or-later (README); LGPL2.1 text retained",
+      "source_ids": [
+        "W2-R01",
+        "W2-R02",
+        "W2-R03",
+        "W2-R04",
+        "W2-A01"
+      ],
+      "role": "Prior art and ODML reference; not a promised whole-library C port",
+      "tested_here": false
+    }
+  ]
+}

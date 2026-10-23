@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "scope": "Course context observations, not a performance card",
+  "observations": [
+    {
+      "id": "P001",
+      "object": "ZQ-3 Y1 flight / stage1",
+      "field": "engine_configuration",
+      "value": "9 x TQ-12A",
+      "original_unit": null,
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "一级采用九台天鹊12A发动机并联",
+      "boundary": "2025-12-03 flight configuration",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P002",
+      "object": "ZQ-3 Y1 flight / stage2",
+      "field": "engine_configuration",
+      "value": "1 x TQ-15A",
+      "original_unit": null,
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "二级采用一台天鹊15A真空型发动机",
+      "boundary": "2025-12-03 flight configuration",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P003",
+      "object": "ZQ-3 Y1 flight / vehicle",
+      "field": "liftoff_thrust",
+      "value": 7542,
+      "original_unit": "kN",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "起飞推力7542kN",
+      "boundary": "Vehicle parallel propulsion; not one main chamber",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P004",
+      "object": "ZQ-3 product at retrieval",
+      "field": "engine_configuration",
+      "value": "9 x TQ-12B + 1 x TQ-15B",
+      "original_unit": null,
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "一子级采用9台TQ-12B发动机，二子级配置1台TQ-15B真空发动机",
+      "boundary": "Undated current product description; not Y1 or inferred Y2 fit",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P005",
+      "object": "TQ-12A product section",
+      "field": "sea_level_thrust",
+      "value": 84.6,
+      "original_unit": "t (manufacturer thrust notation)",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "海平面推力",
+      "boundary": "Engine product field; interpretation as tf would be a separate derivation",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P006",
+      "object": "TQ-12A product section",
+      "field": "sea_level_specific_impulse",
+      "value": 293,
+      "original_unit": "s",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "海平面比冲",
+      "boundary": "Product field; measured batch/uncertainty not stated",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P007",
+      "object": "TQ-12A product section",
+      "field": "mixture_ratio",
+      "value": 2.9,
+      "original_unit": "dimensionless",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "混合比",
+      "boundary": "Page does not explicitly resolve main-chamber vs whole-engine definition",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P008",
+      "object": "CZ-10B first flight stage1",
+      "field": "propellants",
+      "value": "LOX/kerosene",
+      "original_unit": null,
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "short_quote": "火箭芯一级采用液氧煤油推进剂",
+      "boundary": "Fuel grade/composition/enthalpy not stated",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P009",
+      "object": "CZ-10B first flight stage2",
+      "field": "propellants",
+      "value": "LOX/methane",
+      "original_unit": null,
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "short_quote": "芯二级采用液氧甲烷推进剂",
+      "boundary": "Subtype/cycle not specified by this page",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P010",
+      "object": "CZ-10B first flight vehicle",
+      "field": "approx_liftoff_thrust",
+      "value": 890,
+      "original_unit": "吨 (approximate thrust statement)",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "short_quote": "全箭起飞推力约890吨",
+      "boundary": "Vehicle total, approximate; not independent engine operating point",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P011",
+      "object": "CZ-10B first flight stage1 engine description",
+      "field": "thrust_class",
+      "value": 130,
+      "original_unit": "吨级",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P04"
+      ],
+      "short_quote": "一子级130吨级泵后摆液氧煤油发动机",
+      "boundary": "Class label only, not exact sea-level/vacuum performance",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P012",
+      "object": "CZ-10B first flight stage2 engine description",
+      "field": "thrust_class",
+      "value": 140,
+      "original_unit": "吨级",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P04"
+      ],
+      "short_quote": "二子级140吨级液氧甲烷发动机",
+      "boundary": "Class label only; exact subtype/operating state remains unknown",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P013",
+      "object": "TQ-12A English product section",
+      "field": "reported_nozzle_area_ratio",
+      "value": 20.5,
+      "original_unit": "dimensionless",
+      "classification": "verified_fact",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "short_quote": "Nozzle area ratio",
+      "boundary": "Manufacturer product label; exact flight batch, operating-state identity and throat area not supplied",
+      "missing_reason": null,
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P014",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P015",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P016",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "fuel_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P017",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "oxidizer_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P018",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P019",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P020",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P021",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P022",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "fuel_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P023",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "oxidizer_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P024",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P025",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P026",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P027",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P028",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "fuel_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P029",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "oxidizer_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P030",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P031",
+      "object": "ZQ-3 current TQ-12B/TQ-15B",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P032",
+      "object": "CZ-10B first-flight stage1",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P033",
+      "object": "CZ-10B first-flight stage1",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P034",
+      "object": "CZ-10B first-flight stage1",
+      "field": "fuel_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P035",
+      "object": "CZ-10B first-flight stage1",
+      "field": "oxidizer_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P036",
+      "object": "CZ-10B first-flight stage1",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P037",
+      "object": "CZ-10B first-flight stage1",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P038",
+      "object": "CZ-10B first-flight stage2",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P039",
+      "object": "CZ-10B first-flight stage2",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P040",
+      "object": "CZ-10B first-flight stage2",
+      "field": "fuel_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P041",
+      "object": "CZ-10B first-flight stage2",
+      "field": "oxidizer_inlet_temperature",
+      "value": null,
+      "original_unit": "K",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P042",
+      "object": "CZ-10B first-flight stage2",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": "dimensionless",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    },
+    {
+      "id": "P043",
+      "object": "CZ-10B first-flight stage2",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "short_quote": "",
+      "boundary": "Same subtype/batch/condition required",
+      "missing_reason": "Not disclosed in the inspected primary pages; not a claim of absence from all public literature",
+      "verified_on": "2026-10-24",
+      "use": "context_only_not_validated_solver_input"
+    }
+  ]
+}

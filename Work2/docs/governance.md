@@ -40,6 +40,10 @@ pwsh -NoProfile -File ./调研/scripts/research.ps1 -Topic 20261023_w2_methods_a
 
 有真实检索轨迹仍只代表找到线索；关键原文通过HTTP读取核验，并保存题名、版本、适用范围和定位。HTTP403、502或无轨迹返回如实记录，不能当已核来源。
 
+2026-10-24脚本已兼容主机根、`/v1`或`/v1/responses`地址，固定只构造一次`/v1/responses`，不改凭据文件。研究请求可加`-RequireSearchTrace`：同时请求必需工具调用并在缺轨迹/正文时保存process_only且失败退出；路由不支持该选项时仍可用默认请求，但无轨迹内容不得升级为检索证据。HTTP失败仅保存脱敏状态，不回显地址/头/密钥。
+
+新增原文通过根`tools/work2_research.py`保存并登记哈希/阅读范围，调查精选数据通过`tools/work2_survey_data.py`生成；[数据说明](../research/data/README.md)列出命令和身份层次。统一项目检查验证原件、引用、未知值和精选数据漂移；缺全文和挑战页保留而不伪装可用正文。
+
 ## 批次收尾
 
 检查 `git diff --check`、完整diff、原件核验和 `python tools/project.py check --staged`，只暂存本批审阅的完整文件，建立本地提交。原始资料本批首次纳入Git；用户已有的无关解压目录保持原样，不用 `git add -A`混入。不自动推送、发布或上传。

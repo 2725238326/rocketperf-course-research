@@ -1,0 +1,830 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Machine Learning</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/customized_mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/customize.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://reaktoro.org/tutorials/machine-learning/index.html" />
+    <link rel="shortcut icon" href="../../_static/reaktoro-logo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Machine learning: the basics" href="machine-learning-basics.html" />
+    <link rel="prev" title="Chemical kinetics for mineral reactions using custom surface area models" href="../kinetics/kinetics-minerals-custom-surface-area-models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-PK3LGVLSKH"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-PK3LGVLSKH');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint">🚀 Reaktoro v2 is finally out, after so many release candidates! This is the result of intense work over the last three years. Please let us know how to improve Reaktoro!</div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/reaktoro-for-python-and-cpp.svg" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Reaktoro
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../installation/index.html">
+   Installation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../installation/installation-using-conda.html">
+     Installation using Conda
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../installation/installation-using-cmake.html">
+     Installation using CMake
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../installation/installation-in-google-colab.html">
+     Installation in Google Colab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://reaktoro.org/api">
+   API Reference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://reaktoro.org/v1">
+   Reaktoro v1
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../basics/index.html">
+   Basics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/importing-reaktoro.html">
+     Importing Reaktoro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/loading-databases.html">
+     Loading thermodynamic databases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/inspecting-databases.html">
+     Inspecting thermodynamic databases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/defining-chemical-systems.html">
+     Defining chemical systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/creating-chemical-states.html">
+     Creating chemical states
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/computing-chemical-properties.html">
+     Computing chemical properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/computing-aqueous-properties.html">
+     Computing aqueous properties
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/computing-thermo-props-of-species.html">
+     Computing standard thermodynamic properties of species
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/computing-thermo-props-of-reactions.html">
+     Computing standard thermodynamic properties of reactions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/specifying-activity-models.html">
+     Specifying activity models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../basics/defining-materials.html">
+     Defining materials
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../equilibrium/index.html">
+   Chemical Equilibrium
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-basics.html">
+     Chemical equilibrium: the basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-specifying-constraints.html">
+     Chemical equilibrium with constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph.html">
+     Chemical equilibrium with fixed pH
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-fixed-ph-charge-balance.html">
+     Chemical equilibrium with fixed pH and charge balance
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-fixed-phase-amount.html">
+     Chemical equilibrium with fixed phase amount
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-fixed-fugacity.html">
+     Chemical equilibrium with fixed fugacity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-fixed-volume-internal-energy.html">
+     Chemical equilibrium with fixed volume and internal energy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-custom-constraints.html">
+     Chemical equilibrium with custom constraints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../equilibrium/equilibrium-with-given-component-amounts.html">
+     Chemical equilibrium with given element and charge amounts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../kinetics/index.html">
+   Chemical Kinetics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kinetics/kinetics-basics.html">
+     Chemical kinetics: the basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kinetics/kinetics-minerals-using-palandri-kharaka-model.html">
+     Chemical kinetics for mineral reactions using Palandri-Kharaka model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../kinetics/kinetics-minerals-custom-surface-area-models.html">
+     Chemical kinetics for mineral reactions using custom surface area models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   Machine Learning
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="machine-learning-basics.html">
+     Machine learning: the basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../advanced/index.html">
+   Advanced
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../advanced/creating-custom-databases.html">
+     Creating thermodynamic databases
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../applications/solubility/index.html">
+   Solubility
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/solubility/solubility-calcite-on-acidity-and-temperature.html">
+     Calcite solubility in water, rainwater, and seawater
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/solubility/solubility-co2-on-salinity-and-temperature.html">
+     Carbon-dioxide solubility in brines with different salinity and temperature
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../applications/geochemistry/index.html">
+   Geochemistry
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-co2-addition-in-seawater.html">
+     Carbon dioxide (CO₂) dissolution in seawater
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ph-dependence-on-contaminants-in-water.html">
+     pH-dependence on added contaminants in water
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/evian-water-analysis.html">
+     Analysis of the Evian water
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/opening-bottle-with-sparkling-water.html">
+     Opening bottle with sparkling water
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/uraniun-speciation-vs-pH.html">
+     Uranium (VI) speciation as a function of pH at fixed CO
+     <sub>
+      2
+     </sub>
+     partial pressure
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/cement-simulation-with-solid-solutions.html">
+     The effect of limestone addition on a hydrated cement mix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ion-exchange-dune-sand.html">
+     Ion exchange in dune sand and groundwater
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ion-exchange-mix-porewater-extractant.html">
+     Extraction of exchangeable cations in dune sand
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ion-exchange-cax2-nax-kx-vs-changing-ca-k.html">
+     Cation exchange competition among Na
+     <sup>
+      +
+     </sup>
+     , K
+     <sup>
+      +
+     </sup>
+     and Ca
+     <sup>
+      2+
+     </sup>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geochemistry/ion-exchange-calcite-cax-vs-ph.html">
+     Effect of calcite dissolution on exchangeable cations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../applications/geobiology/index.html">
+   Geobiology
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geobiology/geobiology-streammodel-fixed-fugacity.html">
+     Carbonate-rich lakes modeling on the early Earth
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/geobiology/geobiology-phreeqc-fixed-fugacity.html">
+     Phosphate accumulation in carbonate-rich brines
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../applications/biomass-gasification/index.html">
+   Biomass Gasification
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../applications/biomass-gasification/biomass-gasification.html">
+     Biomass Gasification
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/citing.html">
+   Citing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/faq.html">
+   FAQ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/troubleshooting.html">
+   Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/contributing.html">
+   Contributing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/license.html">
+   License
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../general/development.html">
+   Development
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/reaktoro/reaktoro-jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/reaktoro/reaktoro-jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftutorials/machine-learning/index.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/reaktoro/reaktoro-jupyter-book/edit/main/tutorials/machine-learning/index.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/tutorials/machine-learning/index.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Machine Learning</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning">
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this headline">#</a></h1>
+<p class="acknowledgement">Written by Allan Leal (ETH Zurich) on Nov 16th, 2022</p>
+<p>Reaktoro implements machine learning accelerated solvers for chemical equilibrium and chemical kinetics computations. They are available through the solver classes <a class="reference external" href="https://reaktoro.org/api/structReaktoro_1_1SmartEquilibriumSolver.html"><code class="docutils literal notranslate"><span class="pre">SmartEquilibriumSolver</span></code></a> and <a class="reference external" href="https://reaktoro.org/api/structReaktoro_1_1SmartKineticsSolver.html"><code class="docutils literal notranslate"><span class="pre">SmartKineticsSolver</span></code></a>, whose usage is very similar to that of <a class="reference external" href="https://reaktoro.org/api/classReaktoro_1_1EquilibriumSolver.html"><code class="docutils literal notranslate"><span class="pre">EquilibriumSolver</span></code></a> and <a class="reference external" href="https://reaktoro.org/api/structReaktoro_1_1KineticsSolver.html"><code class="docutils literal notranslate"><span class="pre">KineticsSolver</span></code></a> for conventional equilibrium and kinetics computations, in which iterative algorithms are used and each iteration can be very expensive.</p>
+<p>These smart solvers rely on the <em><strong>on-demand machine learning</strong></em> (ODML) algorithm first introduced in <span id="id1">Leal <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id136" title="Allan M. M. Leal, Dmitrii A. Kulik, and Martin O. Saar. Ultra-Fast Reactive Transport Simulations When Chemical Reactions Meet Machine Learning: Chemical Equilibrium. arXiv, pages 1–25, aug 2017. URL: http://arxiv.org/abs/1708.04825, arXiv:1708.04825, doi:http://arxiv.org/abs/1708.04825.">2017</a>]</span>, then improved in <span id="id2">Leal <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id213" title="Allan M M Leal, Svetlana Kyas, Dmitrii A. Kulik, and Martin O. Saar. Accelerating Reactive Transport Modeling: On-Demand Machine Learning Algorithm for Chemical Equilibrium Calculations. Transport in Porous Media, 133(2):161–204, jun 2020. URL: http://link.springer.com/10.1007/s11242-020-01412-1, doi:10.1007/s11242-020-01412-1.">2020</a>]</span> and finally extensively tested in <span id="id3">Kyas <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id4" title="Svetlana Kyas, Diego Volpatto, Martin O. Saar, and Allan M. M. Leal. Accelerated reactive transport simulations in heterogeneous porous media using Reaktoro and Firedrake. Computational Geosciences, 26(2):295–327, apr 2022. URL: http://arxiv.org/abs/2009.01194 https://link.springer.com/10.1007/s10596-021-10126-2, arXiv:2009.01194, doi:10.1007/s10596-021-10126-2.">2022</a>]</span>. ODML enables these solvers to bypass all expensive iterative computations when equilibrium and/or kinetics calculations are to be performed with <em>inputs that are similar to previous ones</em>. When this is possible, a quick <em>first-order Taylor approximation</em> of the solution is computed (<em>the predicted solution</em>), instead of fully computing it iteratively (which can be very expensive for complex chemical systems). If the prediction is not accurate enough, the full calculation is performed, and <em>sensitivity derivatives</em> of the computed solution with respect to input conditions are determined next, using automatic differentiation (Reaktoro relies on the <code class="docutils literal notranslate"><span class="pre">autodiff</span></code> library for this - see <a class="reference external" href="https://autodiff.github.io">autodiff.github.io</a>). And this is what constitutes the <em>on-demand learning operation</em> in the ODML algorithm!</p>
+<p>ODML has several advantages over machine learning algorithms based on neural networks as detailed below (taken from <span id="id4">Leal <em>et al.</em> [<a class="reference internal" href="../bibliography.html#id213" title="Allan M M Leal, Svetlana Kyas, Dmitrii A. Kulik, and Martin O. Saar. Accelerating Reactive Transport Modeling: On-Demand Machine Learning Algorithm for Chemical Equilibrium Calculations. Transport in Porous Media, 133(2):161–204, jun 2020. URL: http://link.springer.com/10.1007/s11242-020-01412-1, doi:10.1007/s11242-020-01412-1.">2020</a>]</span>):</p>
+<p><strong>Accuracy.</strong> The use of sensitivity derivatives permits the behavior of a chemical system with multiple phases and species to be accurately predicted in the vicinity of a known chemical state, previously computed via chemical equilibrium and/or kinetics. Error control can be employed to estimate the actual accuracy of the predictions. It can respond, if necessary, with a rapid on-demand learning operation that will fully solve the equilibrium/kinetics problem and compute the associated sensitivity derivatives with the hope to be used for subsequent prediction tentatives. The proposed smart chemical equilibrium/kinetics algorithm, relying on ODML, avoids thus the acceptance of a predicted chemical state that potentially deviates too much from required equilibrium/kinetic conditions (e.g. mass action equilibrium conditions). Estimating these errors with artificial neural networks and interpolation-based algorithms is generally not possible, implying that these algorithms may accept predicted chemical states that violate both mass balance and mass action equations by an unacceptable margin of errors.</p>
+<p><strong>Mass conservation.</strong> Chemical equilibrium and kinetics calculations contain mass balance constraints for chemical elements and electric charge. The prediction of chemical states using first-order sensitivity derivatives is intrinsically mass conservative because mass balance equations are linear (mathematical demonstration in Appendix C of <span id="id5">[<a class="reference internal" href="../bibliography.html#id213" title="Allan M M Leal, Svetlana Kyas, Dmitrii A. Kulik, and Martin O. Saar. Accelerating Reactive Transport Modeling: On-Demand Machine Learning Algorithm for Chemical Equilibrium Calculations. Transport in Porous Media, 133(2):161–204, jun 2020. URL: http://link.springer.com/10.1007/s11242-020-01412-1, doi:10.1007/s11242-020-01412-1.">Leal <em>et al.</em>, 2020</a>]</span>). Achieving exact accuracy with artificial neural networks and surrogate models, however, is a nontrivial problem, either requiring special treatment and/or exhaustive training because these methods lack “understanding” of the inherent conservation laws of the problems being emulated. Deficient mass conservative capabilities can be more easily understood for regression models that are not exact interpolators, i.e., regression models that do not produce an exact output for an input that was previously used for its construction/training. The output, in this case, has to be mathematically exact, and not a sufficiently accurate approximation. These classes of regression models, therefore, do not honor the existing mass balance relationship between input and output data.</p>
+<p><strong>No need for a priori training.</strong> With fast on-demand learning operations, there is no need to artificially generate a large collection of input-output data for training before the simulation. This permits the deployment of a reactive transport simulation that wants to take advantage of machine learning accelerated chemical solvers in a more straightforward way, without concerns whether the trained input-output data has proper coverage for all possible chemical conditions that will arise during the simulation using fine resolution meshes and stricter time step lengths. With surrogate models and artificial neural networks, the produced regression models can only get more accurate the more it trains in advance, requiring a comprehensive dataset whose size is not known beforehand in most cases. This can, in turn, accidentally result in overfitting (or overtraining), a common condition in statistics and machine learning that impairs the predictive capacity of the regression model instead of enhancing it.</p>
+<p><strong>Optimal and compact dataset.</strong> Spontaneous learning, only needed occasionally during the reactive transport simulation to keep new predictions accurate enough, produces data that need to be recorded in a data structure. The sensitivity data obtained at the end of each full equilibrium/kinetics calculation is generally small compared to that needed by approximation methodologies based on interpolation or statistical training at high-dimension input space. For the latter cases, a dense cloud of points may be needed for accurate interpolation or learning (e.g. k-NN regression). Whereas for the on-demand machine learning approach, it suffices to store, for each learned chemical state, a matrix of sensitivity derivatives with roughly the number of rows and columns equal to the number of species and elements respectively. If temperature and pressure derivatives are also considered, then two more columns are appended.</p>
+<p><strong>Reliability.</strong> Throughout a reactive transport simulation, a sheer number of distinct chemical conditions/features may occur. In the majority of cases, these cannot be foreseen, especially when processes occur under different space/time scales. Performing these simulations using conventional chemical equilibrium/kinetics algorithms, rigorously tested for robustness, may have prohibitive computing costs in complicated scenarios. However, they have an undisputed advantage compared to most unconventional predictive algorithms so far mentioned here: they are reliable and they are our benchmark for any acceleration strategy. Because the smart chemical equilibrium/kinetics algorithm used in Reaktoro either performs a sufficiently accurate prediction or resorts to the conventional algorithm for the exact computation, it could be considered equally reliable. This is true as long as tolerance values for estimated errors are not overly relaxed. Therefore, a modeler using the smart equilibrium/kinetics algorithm accelerated with ODML can remain confident throughout the reactive transport simulation that any newly arising chemical condition and reactivity behavior from the millions to billions of equilibrium/kinetics problems will be met with either an accurate estimate or an exact solution.</p>
+<p>Continue reading to learn more on how to use the solver classes <a class="reference external" href="https://reaktoro.org/api/structReaktoro_1_1SmartEquilibriumSolver.html"><code class="docutils literal notranslate"><span class="pre">SmartEquilibriumSolver</span></code></a> and <a class="reference external" href="https://reaktoro.org/api/structReaktoro_1_1SmartKineticsSolver.html"><code class="docutils literal notranslate"><span class="pre">SmartKineticsSolver</span></code></a> and how to take advantage of ODML for machine learning accelerated chemical equilibrium and kinetics calculations.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="machine-learning-basics.html">Machine learning: the basics</a></li>
+</ul>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tutorials/machine-learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../kinetics/kinetics-minerals-custom-surface-area-models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chemical kinetics for mineral reactions using custom surface area models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="machine-learning-basics.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Machine learning: the basics</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+      &copy; Copyright 2024.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,831 @@
+{
+  "topic": "20261024_w2_vehicle_evidence_a",
+  "retrieved_at": "2026-10-24T02:41:34.7432953+08:00",
+  "cutoff": "2026-10-24",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "evidence_class": "search_trace_and_answer",
+  "prompt": "截止2026-10-24。实际使用web_search并保留检索轨迹。只核公开课程研究需要的参数出处，不设计或优化发动机。\n对象分开：朱雀三号遥一TQ-12A/TQ-15A、当前产品TQ-12B/TQ-15B、长征十号乙首飞一/二级。已知官方入口landspace.com/product.html、news-detail.html?itemid=66/76，calt.com长征十号乙，spacechina.com相关首飞通稿。\n请查是否有一手原文能够对应同一子型/批次/工况，公开列出主室室压、主室O/F、入口温度/相态、喷管面积比/喉面积、主室/整机边界及误差或验证数据。不要用推力/比冲反算或不同批次拼表，不把130/140吨级当精确性能卡。没有公开就明确“本次未检出”，不能断言互联网上不存在。\n最多5条具有实质增量的原始URL，附准确题名、日期、支持的短原文及缺失字段。若只重复上述新闻，也明确未补齐求解输入。不要输出发动机设计建议、数值优化或推理过程。搜索工具调用目标3次，非硬限额。\n",
+  "search_calls": [
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:landspace.com TQ-12B OR TQ-12A OR TQ-15A OR TQ-15B 燃烧室 室压 OR 混合比 OR 面积比 OR 喉部 OR 入口",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=59"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=74"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758968/n6758973/c6811436/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758823/n6758838/c10559980/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98778"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html?ref=spacerealm.live"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202210/19/WS634fe737a310817f312f290c.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=50"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.jiemian.com/article/8235458.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "http://zhuanti.spacechina.com/n2724526/n2725216/c2727879/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=63"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?mao=1"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.toutiao.com/article/7358033873735008783/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://web.shobserver.com/sgh/detail?id=1572137"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 遥一 TQ-12A TQ-15A 发动机 室压 OR 燃烧室压力 OR 混合比 OR 喷管面积比",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=59"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=74"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758968/n6758973/c6811436/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758823/n6758838/c10559980/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98778"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html?ref=spacerealm.live"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202210/19/WS634fe737a310817f312f290c.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=50"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.jiemian.com/article/8235458.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "http://zhuanti.spacechina.com/n2724526/n2725216/c2727879/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=63"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?mao=1"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.toutiao.com/article/7358033873735008783/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://web.shobserver.com/sgh/detail?id=1572137"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 一级 二级 发动机 室压 OR 燃烧室 OR 混合比 site:calt.com OR site:spacechina.com OR site:cnsa.gov.cn",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=59"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=74"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758968/n6758973/c6811436/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758823/n6758838/c10559980/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98778"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html?ref=spacerealm.live"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202210/19/WS634fe737a310817f312f290c.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=50"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.jiemian.com/article/8235458.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "http://zhuanti.spacechina.com/n2724526/n2725216/c2727879/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=63"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?mao=1"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.toutiao.com/article/7358033873735008783/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://web.shobserver.com/sgh/detail?id=1572137"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/en/product.html"
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:landspace.com news-detail.html?itemid=66 OR itemid=76 OR 朱雀三号遥一 TQ-12A OR TQ-12B 室压 OR 燃烧室压力 OR 混合比 OR 面积比",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.ncsti.gov.cn/kjdt/ztbd/2023kjz/jingcaizhanxiang/202305/t20230514_120232.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=20"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=59"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=74"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758968/n6758973/c6811436/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=22"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cnsa.gov.cn/n6758823/n6758838/c10559980/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4146965/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=76"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=55"
+          },
+          {
+            "type": "url",
+            "url": "https://www.taibo.cn/p/98778"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4405461/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html?ref=spacerealm.live"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=19"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://cn.chinadaily.com.cn/a/202210/19/WS634fe737a310817f312f290c.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.csat.spacechina.com/n782724/n3338836/c4403106/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=3"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=50"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.jiemian.com/article/8235458.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=5"
+          },
+          {
+            "type": "url",
+            "url": "http://zhuanti.spacechina.com/n2724526/n2725216/c2727879/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=63"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?mao=1"
+          },
+          {
+            "type": "url",
+            "url": "http://www.sast.spacechina.com/n1323881/n1323961/c3969385/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.toutiao.com/article/7358033873735008783/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://web.shobserver.com/sgh/detail?id=1572137"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=65"
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+      }
+    },
+    {
+      "id": "ws_df77662d-7c24-91c7-9890-60a9d8da670d_call-ddfa6ddc-8cd1-40b3-b800-61ac6911493f-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=76"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "\n**朱雀三号遥一（TQ-12A/TQ-15A）**  \n本次检索官方入口及对应新闻：遥一使用9台TQ-12A（一子级），二子级为真空型（上下文为TQ-15A）。产品页列出的TQ-12A参数对应A型（与ZQ-2E共用表述）。  \n\n**当前产品（TQ-12B/TQ-15B）**  \n官网产品页现列为ZQ-3一子级9台TQ-12B + 二子级1台TQ-15B。无单独B型室压/O/F/面积比等表。  \n\n**长征十号乙首飞一/二级**  \n官方通稿对应首飞批次：一子级液氧煤油（130吨级泵后摆）、二子级液氧甲烷（140吨级）。  \n\n以下为具有实质增量的原始官方页（最多5条）。均已实际检索原文。主室室压、主室O/F（除下述2.9外）、入口温度/相态具体值、喷管面积比/喉面积（除下述20.5外）、主室/整机边界及误差或验证数据：本次未检出对应同一子型/批次/工况的一手公开原文（未用推力/比冲反算，未拼不同批次）。不能断言互联网上不存在其他来源。已知入口新闻若仅重复构型/推力级，未补齐上述求解输入。  \n\n**1. LANDSPACE 产品与服务（中文）**  \n日期：当前官网页（检索时有效）  \nURL: https://www.landspace.com/product.html  \n短原文：朱雀三号(ZQ-3)…一子级采用9台TQ-12B发动机，二子级配置1台TQ-15B真空发动机…起飞推力900t。天鹊（TQ-12A）80吨级…海平面推力84.6t…海平面比冲293s…混合比2.9…轮廓直径2.03m…高度2.2m。  \n缺失：主室室压、入口温度/相态、喷管面积比/喉面积、B型及15A/B对应工况边界/误差/验证数据。TQ-12A混合比2.9为公开列出项。[[1]](https://www.landspace.com/product.html)\n\n**2. LANDSPACE Products & Services（英文）**  \n日期：当前官网页  \nURL: https://www.landspace.com/en/product.html  \n短原文：TQ-12A 80-ton LOX/LCH4 engine…Sea Level Thrust 84.6t…Sea Level Specific Impulse 293s…Mixture Ratio 2.9…Nozzle area ratio 20.5…Diameter 2.03 m…Height 2.2 m。  \n缺失：同上；面积比20.5仅对应所列TQ-12A海平面喷管状态，无喉面积、无室压、无入口状态、无B型/真空型对应值。[[2]](https://www.landspace.com/en/product.html)\n\n**3. 朱雀三号遥一运载火箭飞行试验任务完成第一阶段工作**  \n日期：2025-10-20  \nURL: https://www.landspace.com/news-detail.html?itemid=65  \n短原文：…一子级配备九台天鹊-12A液氧甲烷发动机…推进剂全过冷加注…九机点火及牵制…起飞质量约570吨，起飞推力超过750吨。  \n缺失：主室室压、O/F、入口温度/相态具体值、面积比/喉面积、边界/误差/验证数据（仅一般流程与点火成功表述）。二子级发动机型号本页未点名。[[3]](https://www.landspace.com/news-detail.html?itemid=65)\n\n**4. 长征十号乙（中国运载火箭技术研究院）**  \n日期：2026-07-10  \nURL: http://www.calt.com/n482/n498/c2579124/content.html  \n短原文：长征十号乙运载火箭…5米直径两级串联构型…芯一级采用液氧煤油推进剂，芯二级采用液氧甲烷推进剂，全箭起飞推力约890吨，起飞重量约760吨…2026年7月10日，成功首飞，一子级在海上回收平台通过网系捕获方式成功回收。  \n缺失：主室室压、O/F、入口温度/相态、喷管面积比/喉面积、主室/整机边界及误差或验证数据。未列具体发动机型号。[[4]](http://www.calt.com/n482/n498/c2579124/content.html)\n\n**5. 雄关漫道真如铁 而今迈步从头越——航天科技集团长十乙火箭团队…（中国航天报/航天科技集团）**  \n日期：2026-07-15  \nURL: https://m.spacechina.com/n2014703/n3482528/c4651819/content.html  \n短原文：…长十乙火箭一子级130吨级泵后摆液氧煤油发动机…二子级140吨级液氧甲烷发动机的研制也在同步加速。  \n缺失：同上全部细项（130/140吨级按要求不作为精确性能卡；无室压、混合比、入口状态、面积/喉部、误差数据）。对应首飞批次表述。[[5]](https://m.spacechina.com/n2014703/n3482528/c4651819/content.html)\n\n朱雀三号遥二相关页（如itemid=76，2026-08-19）仅重复入轨/回收成功及基于遥一数据的优化，无补齐上述参数。其他已知入口新闻同样未检出主室室压等一手对应值。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/product.html",
+              "start_index": 740,
+              "end_index": 785,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/en/product.html",
+              "start_index": 1110,
+              "end_index": 1158,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=65",
+              "start_index": 1407,
+              "end_index": 1466,
+              "title": "3"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n482/n498/c2579124/content.html",
+              "start_index": 1742,
+              "end_index": 1800,
+              "title": "4"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html",
+              "start_index": 2067,
+              "end_index": 2138,
+              "title": "5"
+            }
+          ]
+        }
+      ],
+      "id": "msg_df77662d-7c24-91c7-9890-60a9d8da670d",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 111240,
+    "input_tokens_details": {
+      "cached_tokens": 69120
+    },
+    "output_tokens": 6498,
+    "output_tokens_details": {
+      "reasoning_tokens": 4851
+    },
+    "total_tokens": 117738,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 10,
+    "cost_in_usd_ticks": 1036479200,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 10,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 42006,
+      "output_tokens": 2181
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

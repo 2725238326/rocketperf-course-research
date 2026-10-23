@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="readthedocs-addons-api-version" content="1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.1. Introduction &mdash; User Documentation for SUNDIALS  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=04ee5843" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/versions.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.2. Mathematical Considerations" href="Mathematics_link.html" />
+    <link rel="prev" title="7. KINSOL Documentation" href="index.html" /> 
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="sundials" /><meta name="readthedocs-version-slug" content="v7.2.1" /><meta name="readthedocs-resolver-filename" content="/kinsol/Introduction_link.html" /><meta name="readthedocs-http-status" content="200" /></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            User Documentation for SUNDIALS
+              <img src="../_static/sundials_logo_blue.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="switch-menus">
+                <div class="version-switch"></div>
+                <div class="language-switch"></div>
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">USAGE</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../sundials/index.html">1. Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arkode/index.html">2. ARKODE Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cvode/index.html">3. CVODE Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cvodes/index.html">4. CVODES Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ida/index.html">5. IDA Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../idas/index.html">6. IDAS Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. KINSOL Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.1. Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#historical-background">7.1.1. Historical Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-to-sundials-in-release-7-2-1">7.1.2. Changes to SUNDIALS in release 7.2.1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-this-user-guide">7.1.3. Reading this User Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sundials-license-and-notices">7.1.4. SUNDIALS License and Notices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acknowledgments">7.1.5. Acknowledgments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Mathematics_link.html">7.2. Mathematical Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Organization_link.html">7.3. Code Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Usage/index.html">7.4. Using KINSOL for the Solution of Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Constants_link.html">7.5. KINSOL Constants</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nvectors/index.html">8. Vector Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunmatrix/index.html">9. Matrix Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunlinsol/index.html">10. Linear Algebraic Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunnonlinsol/index.html">11. Nonlinear Algebraic Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunadaptcontroller/index.html">12. Time Step Adaptivity Controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunstepper/index.html">13. Stepper Data Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sunmemory/index.html">14. Tools for Memory Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../History_link.html">15. Release History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Changelog_link.html">16. Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ_link.html">17. Frequently Asked Questions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">DEVELOPMENT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developer Guide</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../References.html">Bibliography</a></li>
+</ul>
+
+    <li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">User Documentation for SUNDIALS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>KINSOL Documentation</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.1. </span>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<span id="kinsol-introduction"></span><h1><span class="section-number">7.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>KINSOL is part of a software family called SUNDIALS: SUite of Nonlinear and DIfferential/ALgebraic equation
+Solvers <span id="id1">[<a class="reference internal" href="../References.html#id18" title="A. C. Hindmarsh, P. N. Brown, K. E. Grant, S. L. Lee, R. Serban, D. E. Shumaker, and C. S. Woodward. SUNDIALS: Suite of nonlinear and differential/algebraic equation solvers. ACM Trans. Math. Softw., pages 363–396, 2005. doi:10.1145/1089014.1089020.">75</a>]</span>. This suite consists of CVODE, ARKODE, KINSOL, and IDA,
+and variants of these with sensitivity analysis capabilities.</p>
+<p>KINSOL is a general-purpose nonlinear system solver based on Newton-Krylov solver technology. A fixed point
+iteration is also included with the release of KINSOL v.2.8.0 and higher.</p>
+<section id="historical-background">
+<span id="kinsol-introduction-historical"></span><h2><span class="section-number">7.1.1. </span>Historical Background<a class="headerlink" href="#historical-background" title="Link to this heading"></a></h2>
+<p>The first nonlinear solver packages based on Newton-Krylov methods were written in Fortran. In particular, the NKSOL
+package, written at LLNL, was the first Newton-Krylov solver package written for solution of systems arising in the
+solution of partial differential equations <span id="id2">[<a class="reference internal" href="../References.html#id34" title="P. N. Brown and Y. Saad. Hybrid Krylov Methods for Nonlinear Systems of Equations. SIAM J. Sci. Stat. Comput., 11:450–481, 1990. doi:10.1137/0911026.">27</a>]</span>. This Fortran code made use of Newton’s method to
+solve the discrete nonlinear systems and applied a preconditioned Krylov linear solver for solution of the Jacobian
+system at each nonlinear iteration. The key to the Newton-Krylov method was that the matrix-vector multiplies required
+by the Krylov method could effectively be approximated by a finite difference of the nonlinear system-defining function,
+avoiding a requirement for the formation of the actual Jacobian matrix. Significantly less memory was required for the
+solver as a result.</p>
+<p>In the late 1990s, there was a push at LLNL to rewrite the nonlinear solver in C and port it to distributed
+memory parallel machines. Both Newton and Krylov methods are easily implemented in parallel, and this effort gave rise
+to the KINSOL package. KINSOL is similar to NKSOL in functionality, except that it provides for more options
+in the choice of linear system methods and tolerances, and has a more modular design to provide flexibility for future
+enhancements.</p>
+<p>At present, KINSOL may utilize a variety of Krylov methods provided in SUNDIALS. These methods include the
+GMRES (Generalized Minimal RESidual) <span id="id3">[<a class="reference internal" href="../References.html#id57" title="Y. Saad and M. H. Schultz. GMRES: A Generalized Minimal Residual Algorithm for Solving Nonsymmetric Linear Systems. SIAM J. Sci. Stat. Comp., 7(3):856–869, 1986. doi:10.1137/0907058.">115</a>]</span>, FGMRES (Flexible Generalized Minimum
+RESidual) <span id="id4">[<a class="reference internal" href="../References.html#id58" title="Y. Saad. A flexible inner-outer preconditioned GMRES algorithm. SIAM J. Sci. Comput., 14(2):461–469, 1993. doi:10.1137/0914028.">114</a>]</span>, Bi-CGStab (Bi-Conjugate Gradient Stabilized) <span id="id5">[<a class="reference internal" href="../References.html#id59" title="H. A. Van Der Vorst. Bi-CGSTAB: A Fast and Smoothly Converging Variant of Bi-CG for the Solution of Nonsymmetric Linear Systems. SIAM J. Sci. Stat. Comp., 13(2):631–644, 1992. doi:10.1137/0913035.">146</a>]</span>, TFQMR
+(Transpose-Free Quasi-Minimal Residual) <span id="id6">[<a class="reference internal" href="../References.html#id60" title="R. W. Freund. A Transpose-Free Quasi-Minimal Residual Algorithm for Non-Hermitian Linear Systems. SIAM J. Sci. Comp., 14(2):470–482, 1993. doi:10.1137/0914029.">61</a>]</span>, and PCG (Preconditioned Conjugate
+Gradient) <span id="id7">[<a class="reference internal" href="../References.html#id61" title="M. R. Hestenes and E. Stiefel. Methods of Conjugate Gradients for Solving Linear Systems. J. Research of the National Bureau of Standards, 49(6):409–436, 1952. doi:10.6028/jres.049.044.">70</a>]</span> linear iterative methods. As Krylov methods, these require little matrix storage
+for solving the Newton equations as compared to direct methods. However, the algorithms allow for a user-supplied
+preconditioner, and, for most problems, preconditioning is essential for an efficient solution. For very large
+nonlinear algebraic systems, the Krylov methods are preferable over direct linear solver methods, and are often the only
+feasible choice. Among the Krylov methods in SUNDIALS, we recommend GMRES as the best overall choice. However,
+users are encouraged to compare all options, especially if encountering convergence failures with GMRES. Bi-CGStab and
+TFQMR have an advantage in storage requirements, in that the number of workspace vectors they require is fixed, while
+that number for GMRES depends on the desired Krylov subspace size. FGMRES has an advantage in that it is designed to
+support preconditioners that vary between iterations (e.g., iterative methods). PCG exhibits rapid convergence and
+minimal workspace vectors, but only works for symmetric linear systems.</p>
+<p>For the sake of completeness in functionality, direct linear system solvers are included in KINSOL. These include
+methods for both dense and banded linear systems, with Jacobians that are either user-supplied or generated internally
+by difference quotients. KINSOL also includes interfaces to sparse direct solvers, including
+KLU <span id="id8">[<a class="reference internal" href="../References.html#id64" title="KLU Sparse Matrix Factorization Library. http://faculty.cse.tamu.edu/davis/suitesparse.html.">4</a>, <a class="reference internal" href="../References.html#id63" title="T. A. Davis and P. N. Ekanathan. Algorithm 907: KLU, a direct sparse solver for circuit simulation problems. ACM Trans. Math. Softw., 37(3):1-17, 2010. doi:10.1145/1824801.1824814.">43</a>]</span> and the threaded sparse direct solver,
+SuperLU_MT <span id="id9">[<a class="reference internal" href="../References.html#id67" title="SuperLU_MT Threaded Sparse Matrix Factorization Library. https://portal.nersc.gov/project/sparse/superlu/#superlu_mt.">9</a>, <a class="reference internal" href="../References.html#id66" title="J. W. Demmel, J. R. Gilbert, and X. S. Li. An Asynchronous Parallel Supernodal Algorithm for Sparse Gaussian Elimination. SIAM J. Matrix Analysis and Applications, 20(4):915–952, 1999. doi:10.1137/S0895479897317685.">45</a>, <a class="reference internal" href="../References.html#id65" title="X. S. Li. An overview of SuperLU: algorithms, implementation, and user interface. ACM Trans. Math. Softw., 31(3):302–325, September 2005. doi:10.1145/1089014.1089017.">96</a>]</span>, among others (see Chapter <a class="reference internal" href="../sunlinsol/index.html#sunlinsol"><span class="std std-numref">§10</span></a> for further details).</p>
+<p>In the process of translating NKSOL into C, the overall KINSOL organization has been changed considerably.
+One key feature of the KINSOL organization is that a separate module devoted to vector operations was created.
+This module facilitated extension to multiprosessor environments with minimal impact on the rest of the solver. The
+vector module design is shared across the SUNDIALS suite. This <a class="reference internal" href="../nvectors/NVector_API_link.html#c.N_Vector" title="N_Vector"><code class="xref c c-type docutils literal notranslate"><span class="pre">N_Vector</span></code></a> module is written in terms of
+abstract vector operations with the actual routines attached by a particular implementation (such as serial or parallel)
+of <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code>. This abstraction allows writing the SUNDIALS solvers in a manner independent of the actual
+<code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> implementation (which can be user-supplied), as well as allowing more than one <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> module linked
+into an executable file. SUNDIALS (and thus KINSOL) is supplied with serial, MPI-parallel, OpenMP
+and Pthreads thread-parallel <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> implementations, as well as multiple <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code>
+implementations designed to leverage GPU architectures (see Chapter <a class="reference internal" href="../nvectors/index.html#nvectors"><span class="std std-numref">§8</span></a> for
+further details).</p>
+<p>There are several motivations for choosing the C language for KINSOL. First, a general movement away from
+Fortran and toward C in scientific computing was apparent. Second, the pointer, structure, and dynamic memory
+allocation features in C are extremely useful in software of this complexity, with the great variety of method options
+offered. Finally, we prefer C over C++ for KINSOL because of the wider availability of C
+compilers, the potentially greater efficiency of C, and the greater ease of interfacing the solver to
+applications written in Fortran.</p>
+</section>
+<section id="changes-to-sundials-in-release-7-2-1">
+<span id="kinsol-introduction-changes"></span><h2><span class="section-number">7.1.2. </span>Changes to SUNDIALS in release 7.2.1<a class="headerlink" href="#changes-to-sundials-in-release-7-2-1" title="Link to this heading"></a></h2>
+<p>** New Features and Enhancements **</p>
+<p>Unit tests were separated from examples. To that end, the following directories
+were moved out of the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> directory to the <code class="docutils literal notranslate"><span class="pre">test/unit_tests</span></code> directory:
+<code class="docutils literal notranslate"><span class="pre">nvector</span></code>, <code class="docutils literal notranslate"><span class="pre">sunmatrix</span></code>, <code class="docutils literal notranslate"><span class="pre">sunlinsol</span></code>, and <code class="docutils literal notranslate"><span class="pre">sunnonlinsol</span></code>.</p>
+<p><strong>Bug Fixes</strong></p>
+<p>Fixed a bug in ARKStep where an extra right-hand side evaluation would occur
+each time step when enabling the <a class="reference internal" href="../arkode/Usage/User_callable.html#c.ARKodeSetAutonomous" title="ARKodeSetAutonomous"><code class="xref c c-func docutils literal notranslate"><span class="pre">ARKodeSetAutonomous()</span></code></a> option and using
+an IMEX method where the DIRK table has an implicit first stage and is not stiffly
+accurate.</p>
+<p>For changes in prior versions of SUNDIALS see <a class="reference internal" href="../Changelog_link.html#changelog"><span class="std std-numref">§16</span></a>.</p>
+</section>
+<section id="reading-this-user-guide">
+<span id="kinsol-introduction-reading"></span><h2><span class="section-number">7.1.3. </span>Reading this User Guide<a class="headerlink" href="#reading-this-user-guide" title="Link to this heading"></a></h2>
+<p>This user guide is a combination of general usage instructions and specific examples. We expect that some readers will
+want to concentrate on the general instructions, while others will refer mostly to the examples, and the organization is
+intended to accommodate both styles.</p>
+<p>There are different possible levels of usage of KINSOL. The most casual user, with a small nonlinear system, can
+get by with reading all of Chapter <a class="reference internal" href="Mathematics_link.html#kinsol-mathematics"><span class="std std-numref">§7.2</span></a>, then Chapter :numref:KINSOL.Usage.CC through
+<a class="reference internal" href="Usage/index.html#kinsol-usage-cc"><span class="std std-numref">§7.4</span></a> only, and looking at examples in <span id="id10">[<a class="reference internal" href="../References.html#id13" title="Aaron M. Collier and Radu Serban. Example Programs for KINSOL v7.2.1. Technical Report UCRL-SM-208114, LLNL, 2024.">41</a>]</span>. In a different
+direction, a more expert user with a nonlinear system may want to (a) use a package preconditioner
+(<a class="reference internal" href="Usage/index.html#kinsol-usage-cc-kin-bbdpre"><span class="std std-numref">§7.4.5</span></a>), (b) supply his/her own Jacobian or preconditioner routines
+(<a class="reference internal" href="Usage/index.html#kinsol-usage-cc-user-fct-sim"><span class="std std-numref">§7.4.4</span></a>), (c) supply a new <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> module
+(Chapter <a class="reference internal" href="../nvectors/index.html#nvectors"><span class="std std-numref">§8</span></a>), or even (d) supply a different linear solver module
+(<a class="reference internal" href="Usage/index.html#kinsol-usage-cc-callable-fct-sim-lin-solv-init"><span class="std std-numref">§7.4.3.2</span></a> and Chapter <a class="reference internal" href="../sunlinsol/index.html#sunlinsol"><span class="std std-numref">§10</span></a>).</p>
+<p>The structure of this document is as follows:</p>
+<ul class="simple">
+<li><p>In Chapter <a class="reference internal" href="Mathematics_link.html#kinsol-mathematics"><span class="std std-numref">§7.2</span></a>, we provide short descriptions of the numerical methods implemented by KINSOL
+for the solution of nonlinear systems.</p></li>
+<li><p>The following chapter describes the software organization of the KINSOL
+solver (<a class="reference internal" href="Organization_link.html#kinsol-organization"><span class="std std-numref">§7.3</span></a>).</p></li>
+<li><p>Chapter :numref:KINSOL.Usage.CC is the main usage document for KINSOL for C applications. It includes a
+complete description of the user interface for the solution of nonlinear algebraic systems.</p></li>
+<li><p>Chapter <a class="reference internal" href="../nvectors/index.html#nvectors"><span class="std std-numref">§8</span></a> gives a brief overview of the generic <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> module shared among the
+various components of SUNDIALS, and details on the four <code class="docutils literal notranslate"><span class="pre">N_Vector</span></code> implementations provided with
+SUNDIALS.</p></li>
+<li><p>Chapter <a class="reference internal" href="../sunmatrix/index.html#sunmatrix"><span class="std std-numref">§9</span></a> gives a brief overview of the generic <code class="docutils literal notranslate"><span class="pre">SUNMatrix</span></code> module shared among
+the various components of SUNDIALS, and details on the <code class="docutils literal notranslate"><span class="pre">SUNMatrix</span></code> implementations provided with
+SUNDIALS.</p></li>
+<li><p>Chapter <a class="reference internal" href="../sunlinsol/index.html#sunlinsol"><span class="std std-numref">§10</span></a> gives a brief overview of the generic <code class="docutils literal notranslate"><span class="pre">SUNLinearSolver</span></code> module shared among
+the various components of SUNDIALS. This chapter contains details on the <code class="docutils literal notranslate"><span class="pre">SUNLinearSolver</span></code> implementations
+provided with SUNDIALS. The chapter also contains details on the <code class="docutils literal notranslate"><span class="pre">SUNLinearSolver</span></code> implementations provided with
+SUNDIALS that interface with external linear solver libraries.</p></li>
+<li><p>Finally, in the appendices, we provide detailed instructions for the installation of KINSOL, within the
+structure of SUNDIALS (Appendix <a class="reference internal" href="../sundials/Install_link.html#installation"><span class="std std-numref">§1.1</span></a>), as well as a list of all the constants used for
+input to and output from KINSOL functions (Appendix <a class="reference internal" href="Constants_link.html#kinsol-constants"><span class="std std-numref">§7.5</span></a>).</p></li>
+</ul>
+<p>Finally, the reader should be aware of the following notational conventions in this user guide: program listings and
+identifiers (such as <code class="docutils literal notranslate"><span class="pre">KINInit</span></code>) within textual explanations appear in typewriter type style; fields in C
+structures (such as <em>content</em>) appear in italics; and packages or modules are written in all capitals. Usage and</p>
+</section>
+<section id="sundials-license-and-notices">
+<h2><span class="section-number">7.1.4. </span>SUNDIALS License and Notices<a class="headerlink" href="#sundials-license-and-notices" title="Link to this heading"></a></h2>
+<p>All SUNDIALS packages are released open source, under the BSD 3-Clause
+license for more details see the LICENSE and NOTICE files provided with all
+SUNDIALS packages.</p>
+</section>
+<section id="acknowledgments">
+<h2><span class="section-number">7.1.5. </span>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Link to this heading"></a></h2>
+<p>We wish to acknowledge the contributions to previous versions of the KINSOL code and user guide by Allan G.
+Taylor.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="7. KINSOL Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Mathematics_link.html" class="btn btn-neutral float-right" title="7.2. Mathematical Considerations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2002-2024, Lawrence Livermore National Security and Southern Methodist University.
+      <span class="lastupdated">Last updated on Dec 20, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

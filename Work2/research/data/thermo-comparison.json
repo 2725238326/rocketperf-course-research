@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "kind": "source_data_comparison",
+  "created_on": "2026-10-24",
+  "parser": "tools/thermo_data.py:parse_selected",
+  "scope": "10 selected neutral gases only; no full-database or transport equivalence claim",
+  "inputs": [
+    {
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/NASA关于热力学性质的九系数新形式数据库/thermo.inp",
+      "sha256": "b1bc0707ec76c569b53aaa9fd0914538f37e261884105c2ba601c9e2e6ec5e27",
+      "bytes": 1282336
+    },
+    {
+      "path": "调研/原始来源/20261003_cea_v3.3.4/thermo.inp",
+      "sha256": "fa7746572952d74e249e818a82a35c113829742fb421a308e167185528884363",
+      "bytes": 1234323
+    }
+  ],
+  "byte_identical": false,
+  "species": [
+    {
+      "species": "H2",
+      "original_line": 5625,
+      "pinned_line": 5682,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "O2",
+      "original_line": 7939,
+      "pinned_line": 8018,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "N2",
+      "original_line": 7316,
+      "pinned_line": 7384,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "H2O",
+      "original_line": 5687,
+      "pinned_line": 5755,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "CO",
+      "original_line": 2593,
+      "pinned_line": 2623,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "CO2",
+      "original_line": 2671,
+      "pinned_line": 2701,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "CH4",
+      "original_line": 2499,
+      "pinned_line": 2521,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "H",
+      "original_line": 5326,
+      "pinned_line": 5372,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "O",
+      "original_line": 7860,
+      "pinned_line": 7928,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    },
+    {
+      "species": "OH",
+      "original_line": 7909,
+      "pinned_line": 7988,
+      "different_fields": [],
+      "source_note_equal": true,
+      "data_equal": true
+    }
+  ]
+}

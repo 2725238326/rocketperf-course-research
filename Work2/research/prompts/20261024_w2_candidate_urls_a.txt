@@ -1,0 +1,5 @@
+截止2026-10-24。请通过实际web_search查找以下直接相关主题的原始来源URL，不能模拟工具轨迹：
+1. Reaktoro、smart chemical equilibrium / on-demand machine learning chemical equilibrium，Allan Leal等原始论文和作者项目文档。
+2. C语言非线性求解库SUNDIALS KINSOL：官方说明、用户提供的residual/Jacobian、向量后端/线程安全、许可证。
+3. 物理约束/守恒的化学平衡学习或学习初值，优先与TP/HP等代数平衡直接相关，区分有限速率化学积分/PDE代理。
+最多给8个URL，每个只标题名/作者年份、官方URL、实际检索和原文可得状态。若当前路由不提供web_search，先明确说明，然后仅给你记忆中的少量候选原始URL，逐一标“未检索、未核实、仅供HTTP验证”，不要给任何引文、性能数值、创新或SOTA判断。不要给聚合搜索页，不输出推理过程，不向用户索取凭据。

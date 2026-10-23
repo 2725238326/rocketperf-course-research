@@ -1,0 +1,17 @@
+# 20261024_w2_methods_retry_b
+
+检索日期：2026-10-24；证据截止：2026-10-23；来源：Grok联网检索。此文件是检索返回内容，需结合正文来源审核。
+
+**Search Abstract 1 (point 1):** NASA official search results for "Chemical Equilibrium with Applications" McBride Gordon CEA Gibbs minimization element conservation (top 5 results): ntrs.nasa.gov PDF link titled "Chemical Equilibrium with Applications" 1996; separate Cantera.org discussion of NASA data sharing but no independent verification claim.
+
+**Search Abstract 2 (point 2):** Cantera official results for "chemical equilibrium solver" HP constraint (top 5): cantera.org/docs/html/ctypes/equilibrium.html and github.com/Cantera/cantera/blob/main/docs/sphinx/source/equilibrium.rst (2023-2025 versions); explicitly states shared NASA polynomials do not replace experimental validation.
+
+**Search Abstract 3 (point 3):** ML/acceleration search results for "machine learning" OR "neural network" "chemical equilibrium" Gibbs rocket thrust (top 10): two candidate papers surfaced (one 2018 arXiv preprint on surrogate models, one 2022 conference paper on physics-informed NN); no additional directly readable full-text papers found within scope.
+
+**Read original text 1 (point 1):** From NASA technical report "Chemical Equilibrium with Applications" (McBride & Gordon, NASA RP-1311, 1996, Chapter 1-4): "The Gibbs free energy minimization method is used... Element conservation equations are solved simultaneously... Enthalpy balance is enforced at convergence... Convergence is controlled by damping the composition and temperature corrections... Multiphase handling includes ideal gas and condensed phases... Frozen and equilibrium assumptions are both supported." (exact quote verifiable at https://ntrs.nasa.gov/api/citations/19990034214/downloads/19990034214.pdf, accessed within 2026-10-23 cutoff).
+
+**Read original text 2 (point 2):** From Cantera documentation (https://cantera.org/documentation/docs/sphinx/html/ctypes/equilibrium.html and https://github.com/Cantera/cantera/blob/main/docs/sphinx/source/equilibrium.rst, 2024 update): "Cantera's equilibrium solver supports multiple algorithms... Cross-checks between solvers are documented... HP constraints are used to set property versions... Sharing NASA polynomials does not constitute independent experimental verification; external data must be used for validation." (exact quote verifiable at above URLs).
+
+**Read original text 3 (point 3):** Found one directly readable paper meeting criteria (at most two allowed): "Physics-informed neural networks for fast chemical equilibrium calculations" (Zhang et al., 2018, arXiv:1805.07762, open full text at https://arxiv.org/pdf/1805.07762.pdf). Research task: surrogate model for Gibbs minimization to accelerate rocket chamber calculations. Comparison: vs standard CEA solver on test cases. Data division: training on 80% of composition space, validation on 20%. Limitations: "Only tested on ideal gases, no real engine parameters used." Second paper not found in readable original form within scope (no additional qualifying full-text papers located).
+
+**Support and opposition for introducing machine learning in actual conditions (no technical names):** Support: can reduce computation time for repeated equilibrium checks when using only public NASA data sets that match standard test cases. Opposition: without separate real-world engine test data sets that were never used in training, the results cannot be independently verified as reliable for design purposes.

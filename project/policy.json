@@ -73,6 +73,13 @@
     {"path":"Work2/docs/prompt-review.md","role":"启动提示词适用性审阅及可执行收敛","owner":"tooling"},
     {"path":"Work2/research/README.md","role":"作业二来源、原文、检索和笔记维护方式","owner":"tooling"},
     {"path":"Work2/research/evidence.md","role":"作业二来源核验与主张边界台账","owner":"thermo"},
+    {"path":"Work2/research/survey-protocol.md","role":"首轮调研问题、采集字段、纳排和停止规则","owner":"tooling"},
+    {"path":"Work2/research/method-review.md","role":"化学平衡、物性及参考实现原文调查","owner":"thermo"},
+    {"path":"Work2/research/benchmark-contract.md","role":"比较与数据集契约、证据独立性和后续验证门槛","owner":"thermo"},
+    {"path":"Work2/research/c-engine-review.md","role":"C算子和引擎边界、软件版本许可与工程建议","owner":"tooling"},
+    {"path":"Work2/research/ai-review.md","role":"AI相关原始工作、反证与可证伪候选问题","owner":"thermo"},
+    {"path":"Work2/research/parameter-review.md","role":"两型公开参数观察、版本边界和关键缺口","owner":"tooling"},
+    {"path":"Work2/research/data/README.md","role":"结构化调查数据职责、生成与复核说明","owner":"tooling"},
     {"path":"Work2/archive/work1/README.md","role":"作业一就地归档、成果和遗留责任入口","owner":"tooling"},
     {
       "path": "docs/review.md",

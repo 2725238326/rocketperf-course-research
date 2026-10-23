@@ -1,24 +1,26 @@
 {
   "schema_version": 1,
-  "revision": 400,
+  "revision": 409,
   "context": {
-    "phase": "作业二启动与基线准备",
+    "phase": "作业二首轮证据采集与基线审查准备",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "WBASE-001",
-      "WRES-001",
       "WREF-001",
+      "WRES-002",
       "WEXP-001",
       "WDEV-001",
       "WDEL-001"
     ],
     "facts": [
-      "活动入口为Work2/README.md；教师要求以Work2/作业要求.png及需求矩阵为准，核心C编程，两型研究衔接作业一。",
-      "作业一原址归档见Work2/archive/work1/README.md；162项固定交付与ZIP已复核，旧包和原始资料未改写，遗留责任保留。",
-      "Work2九份启动原件有路径/大小/SHA256清单；专属工作面和任务板由本登记筛选生成，无第二套任务数据库。",
-      "教师要求10分钟展示、5分钟提问；12月5日周五与2026日历冲突，正式日期待核。",
-      "已做本地课程/NASA相关页初读和Illinois源码定位；新科学基准、AI收益与创新性仍待验证。",
-      "指定Grok请求HTTP403，无新增可采信在线综述；本地基线与协议准备继续，历史型号证据截止未刷新。"
+      "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
+      "本批登记46条来源记录、40条已保存或原址复用记录（其中1条仅为挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
+      "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
+      "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
+      "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
+      "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
+      "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+      "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
     ]
   },
   "tasks": [
@@ -1843,24 +1845,42 @@
     },
     {
       "id": "WRES-001",
-      "title": "权威方法与公开评价基准调研",
-      "status": "READY",
+      "title": "方法、C引擎、AI与参数证据首轮调研采集",
+      "status": "DONE",
       "priority": 0,
       "depends_on": [
         "WORG-001"
       ],
       "required_artifacts": [
+        "Work2/research/survey-protocol.md",
         "Work2/research/method-review.md",
-        "Work2/research/benchmark-contract.md"
+        "Work2/research/benchmark-contract.md",
+        "Work2/research/c-engine-review.md",
+        "Work2/research/ai-review.md",
+        "Work2/research/parameter-review.md",
+        "Work2/research/data/README.md",
+        "Work2/research/data/source-index.json",
+        "Work2/research/data/claims.json",
+        "Work2/research/data/software-catalog.json",
+        "Work2/research/data/parameter-observations.json",
+        "Work2/research/data/coverage.json",
+        "Work2/research/data/thermo-comparison.json",
+        "Work2/taskshot/2026-10-24_002-research-campaign.md"
       ],
       "acceptance": [
-        "指定Grok检索与原文核验分别记录，失败或仅摘要保持未验证；支持与反证并列",
-        "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种及完整物种两类比较，核实版本许可",
-        "机器学习至少形成可证伪问题、简单基线、独立测试划分、回退和投入产出条件；无证据不称创新或SOTA"
+        "指定Grok检索与原文核验分别记录；修正接口拼接并实查轨迹，失败/仅摘要不升级为证据；支持与反证并列",
+        "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种与扩物种比较，核实所读软件版本/许可及C部署边界",
+        "AI形成可证伪问题、简单基线、隔离测试、回退、总成本与停止条件；核验直接相关原文或明确获取缺口，不称创新/SOTA已成立",
+        "五条调研主线有问题/采集字段/纳排/停止条件；原文逐项保存URL、日期、哈希、核读定位及主张，数据与缺口可追踪",
+        "两型参数保留对象/批次/单位/工况/来源与未知，不拼批次补数；基准与训练数据明确区分，未生成数值数据不称已运行"
       ],
-      "owner": null,
-      "note": "Created with an explicit acceptance contract",
-      "verification": null
+      "owner": "codex",
+      "note": "首轮调研与采集契约完成；方法/C/AI/参数各有可定位原文、反证和缺口，基准与数据采集协议可交WBASE/WREF实例化。DONE只代表此首轮调查及机械验收，不代表穷尽综述、外部库运行通过、真实发动机验证或创新成立；未取得全文/版本/同批参数继续WRES-002。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/WRES-001_91cb9482c066.json",
+        "sha256": "6b0a85f2c0e2641ea6994cdad96a7eefd0b23f3a8d3af9a0096d7fd3db6636d0"
+      }
     },
     {
       "id": "WREF-001",
@@ -1944,6 +1964,28 @@
         "需求矩阵逐项核验；报告覆盖教师列明内容；分工来自成员真实贡献",
         "展示按10分钟、提问5分钟准备并记录人工演练；日期矛盾未确认不擅改原通知",
         "独立重建/运行和图表视觉检查留证，完整性审核与实际上传/签收分开"
+      ],
+      "owner": null,
+      "note": "Created with an explicit acceptance contract",
+      "verification": null
+    },
+    {
+      "id": "WRES-002",
+      "title": "原文与版本补核：ODML全文、C库部署及同批参数增量",
+      "status": "READY",
+      "priority": 1,
+      "depends_on": [
+        "WRES-001"
+      ],
+      "required_artifacts": [
+        "Work2/research/supplemental-review.md",
+        "Work2/research/data/supplemental-claims.json"
+      ],
+      "acceptance": [
+        "2020 ODML期刊元数据/作者开放稿取得或明确记录不可得；不把2017方法和2026二元LLE当同一任务实证",
+        "KINSOL精确源码版本、Windows部署依赖及同实例并发语义有证据；无证据保持未知，不把向量后端等同线程安全",
+        "追踪能改变模型可用性的同批主室/入口/几何原文，保留单位/批次/边界；无增量时说明已查范围和停止理由",
+        "新来源/失败和主张有日期与哈希，原始资料不覆盖；不得以补核任务阻塞独立基线/验证工作"
       ],
       "owner": null,
       "note": "Created with an explicit acceptance contract",
@@ -10331,6 +10373,328 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "2d7e9aac786bda1717b3678aacd8dc2e6f3fbbe7a83de8fa2e1bb9b43c9ac88a",
       "hash": "b6a7715c082cf7a345d930a021a3e597625d9a338d9e2ee3954682aa0a3d7b4f"
+    },
+    {
+      "seq": 418,
+      "at": "2026-10-23T18:26:19+00:00",
+      "task": "WRES-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "用户授权全面调研与数据采集；顺序开展五条主线，先核查指定Grok接口/检索轨迹，再采集原文、版本许可、参数身份与基准，保留未知和失败",
+      "previous_hash": "b6a7715c082cf7a345d930a021a3e597625d9a338d9e2ee3954682aa0a3d7b4f",
+      "hash": "91329235ab540c03a0d9b83f6fef69af9a06fe1819f81a1aedac9a553a29d011"
+    },
+    {
+      "seq": 419,
+      "at": "2026-10-23T18:26:20+00:00",
+      "task": "WRES-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "承接用户新增C算子/引擎和全面调研数据采集授权；保留原验收，增加调查协议与有来源的数据交付",
+      "previous_hash": "91329235ab540c03a0d9b83f6fef69af9a06fe1819f81a1aedac9a553a29d011",
+      "details": {
+        "contract_before": {
+          "id": "WRES-001",
+          "title": "权威方法与公开评价基准调研",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/method-review.md",
+            "Work2/research/benchmark-contract.md"
+          ],
+          "acceptance": [
+            "指定Grok检索与原文核验分别记录，失败或仅摘要保持未验证；支持与反证并列",
+            "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种及完整物种两类比较，核实版本许可",
+            "机器学习至少形成可证伪问题、简单基线、独立测试划分、回退和投入产出条件；无证据不称创新或SOTA"
+          ],
+          "owner": "codex",
+          "note": "用户授权全面调研与数据采集；顺序开展五条主线，先核查指定Grok接口/检索轨迹，再采集原文、版本许可、参数身份与基准，保留未知和失败",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WRES-001",
+          "title": "方法、C引擎、AI与参数证据首轮调研采集",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/survey-protocol.md",
+            "Work2/research/method-review.md",
+            "Work2/research/benchmark-contract.md",
+            "Work2/research/c-engine-review.md",
+            "Work2/research/ai-review.md",
+            "Work2/research/data/source-index.json",
+            "Work2/research/data/claims.json",
+            "Work2/research/data/software-catalog.json",
+            "Work2/research/data/parameter-observations.json",
+            "Work2/research/data/coverage.json",
+            "Work2/taskshot/2026-10-24_002-research-campaign.md"
+          ],
+          "acceptance": [
+            "指定Grok检索与原文核验分别记录；修正接口拼接并实查轨迹，失败/仅摘要不升级为证据；支持与反证并列",
+            "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种与扩物种比较，核实所读软件版本/许可及C部署边界",
+            "AI形成可证伪问题、简单基线、隔离测试、回退、总成本与停止条件；核验直接相关原文或明确获取缺口，不称创新/SOTA已成立",
+            "五条调研主线有问题/采集字段/纳排/停止条件；原文逐项保存URL、日期、哈希、核读定位及主张，数据与缺口可追踪",
+            "两型参数保留对象/批次/单位/工况/来源与未知，不拼批次补数；基准与训练数据明确区分，未生成数值数据不称已运行"
+          ],
+          "owner": "codex",
+          "note": "承接用户新增C算子/引擎和全面调研数据采集授权；保留原验收，增加调查协议与有来源的数据交付",
+          "verification": null
+        }
+      },
+      "hash": "bbf261d34cc14d27f65fde650733094cf4cb002b27df2f02388b43b27c06cba5"
+    },
+    {
+      "seq": 420,
+      "at": "2026-10-23T18:54:22+00:00",
+      "task": "WRES-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "补入实际参数报告及精选数据说明，验收标准保持；按原文核验完成首轮而非宣称穷尽综述",
+      "previous_hash": "bbf261d34cc14d27f65fde650733094cf4cb002b27df2f02388b43b27c06cba5",
+      "details": {
+        "contract_before": {
+          "id": "WRES-001",
+          "title": "方法、C引擎、AI与参数证据首轮调研采集",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/survey-protocol.md",
+            "Work2/research/method-review.md",
+            "Work2/research/benchmark-contract.md",
+            "Work2/research/c-engine-review.md",
+            "Work2/research/ai-review.md",
+            "Work2/research/data/source-index.json",
+            "Work2/research/data/claims.json",
+            "Work2/research/data/software-catalog.json",
+            "Work2/research/data/parameter-observations.json",
+            "Work2/research/data/coverage.json",
+            "Work2/taskshot/2026-10-24_002-research-campaign.md"
+          ],
+          "acceptance": [
+            "指定Grok检索与原文核验分别记录；修正接口拼接并实查轨迹，失败/仅摘要不升级为证据；支持与反证并列",
+            "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种与扩物种比较，核实所读软件版本/许可及C部署边界",
+            "AI形成可证伪问题、简单基线、隔离测试、回退、总成本与停止条件；核验直接相关原文或明确获取缺口，不称创新/SOTA已成立",
+            "五条调研主线有问题/采集字段/纳排/停止条件；原文逐项保存URL、日期、哈希、核读定位及主张，数据与缺口可追踪",
+            "两型参数保留对象/批次/单位/工况/来源与未知，不拼批次补数；基准与训练数据明确区分，未生成数值数据不称已运行"
+          ],
+          "owner": "codex",
+          "note": "承接用户新增C算子/引擎和全面调研数据采集授权；保留原验收，增加调查协议与有来源的数据交付",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WRES-001",
+          "title": "方法、C引擎、AI与参数证据首轮调研采集",
+          "status": "ACTIVE",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/survey-protocol.md",
+            "Work2/research/method-review.md",
+            "Work2/research/benchmark-contract.md",
+            "Work2/research/c-engine-review.md",
+            "Work2/research/ai-review.md",
+            "Work2/research/parameter-review.md",
+            "Work2/research/data/README.md",
+            "Work2/research/data/source-index.json",
+            "Work2/research/data/claims.json",
+            "Work2/research/data/software-catalog.json",
+            "Work2/research/data/parameter-observations.json",
+            "Work2/research/data/coverage.json",
+            "Work2/research/data/thermo-comparison.json",
+            "Work2/taskshot/2026-10-24_002-research-campaign.md"
+          ],
+          "acceptance": [
+            "指定Grok检索与原文核验分别记录；修正接口拼接并实查轨迹，失败/仅摘要不升级为证据；支持与反证并列",
+            "比较常数法、Gibbs/元素势路线和可用实现，定义同输入/同物种与扩物种比较，核实所读软件版本/许可及C部署边界",
+            "AI形成可证伪问题、简单基线、隔离测试、回退、总成本与停止条件；核验直接相关原文或明确获取缺口，不称创新/SOTA已成立",
+            "五条调研主线有问题/采集字段/纳排/停止条件；原文逐项保存URL、日期、哈希、核读定位及主张，数据与缺口可追踪",
+            "两型参数保留对象/批次/单位/工况/来源与未知，不拼批次补数；基准与训练数据明确区分，未生成数值数据不称已运行"
+          ],
+          "owner": "codex",
+          "note": "补入实际参数报告及精选数据说明，验收标准保持；按原文核验完成首轮而非宣称穷尽综述",
+          "verification": null
+        }
+      },
+      "hash": "c6fe988f00b7267a29968aef3b121796a414594df822e5219ecda3400938d592"
+    },
+    {
+      "seq": 421,
+      "at": "2026-10-23T18:54:24+00:00",
+      "task": "WRES-002",
+      "from": null,
+      "to": "PLANNED",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "c6fe988f00b7267a29968aef3b121796a414594df822e5219ecda3400938d592",
+      "hash": "da02f49d0e465dceee8ee70fa8c9d334da97303f37ada004b1a6b22ffa4e06b0"
+    },
+    {
+      "seq": 422,
+      "at": "2026-10-23T18:54:26+00:00",
+      "task": "WRES-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "五条主线首轮原文与结构化采集已有产物，更新工作面边界；下一步先基线和协议，补核另有任务",
+      "previous_hash": "da02f49d0e465dceee8ee70fa8c9d334da97303f37ada004b1a6b22ffa4e06b0",
+      "details": {
+        "context_before": {
+          "phase": "作业二启动与基线准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WRES-001",
+            "WREF-001",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "活动入口为Work2/README.md；教师要求以Work2/作业要求.png及需求矩阵为准，核心C编程，两型研究衔接作业一。",
+            "作业一原址归档见Work2/archive/work1/README.md；162项固定交付与ZIP已复核，旧包和原始资料未改写，遗留责任保留。",
+            "Work2九份启动原件有路径/大小/SHA256清单；专属工作面和任务板由本登记筛选生成，无第二套任务数据库。",
+            "教师要求10分钟展示、5分钟提问；12月5日周五与2026日历冲突，正式日期待核。",
+            "已做本地课程/NASA相关页初读和Illinois源码定位；新科学基准、AI收益与创新性仍待验证。",
+            "指定Grok请求HTTP403，无新增可采信在线综述；本地基线与协议准备继续，历史型号证据截止未刷新。"
+          ]
+        },
+        "context_after": {
+          "phase": "作业二首轮证据采集与基线审查准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WREF-001",
+            "WRES-002",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
+            "本批登记46条来源记录、40份可用字节身份（含2份原址复用及1份挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
+            "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
+            "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
+            "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
+            "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
+            "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+            "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
+          ]
+        }
+      },
+      "hash": "8a167c415b3b5ebcd7742c2cb05df4f829629bf90e9e83e03aa72cffd573cf53"
+    },
+    {
+      "seq": 423,
+      "at": "2026-10-23T18:56:45+00:00",
+      "task": "WRES-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "将保存字节身份与可用科学正文的措辞分开，挑战页明确不可用",
+      "previous_hash": "8a167c415b3b5ebcd7742c2cb05df4f829629bf90e9e83e03aa72cffd573cf53",
+      "details": {
+        "context_before": {
+          "phase": "作业二首轮证据采集与基线审查准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WREF-001",
+            "WRES-002",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
+            "本批登记46条来源记录、40份可用字节身份（含2份原址复用及1份挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
+            "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
+            "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
+            "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
+            "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
+            "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+            "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
+          ]
+        },
+        "context_after": {
+          "phase": "作业二首轮证据采集与基线审查准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WREF-001",
+            "WRES-002",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
+            "本批登记46条来源记录、40条已保存或原址复用记录（其中1条仅为挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
+            "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
+            "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
+            "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
+            "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
+            "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+            "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
+          ]
+        }
+      },
+      "hash": "7fa2302b307d2a75fdb2b56f710bf8ebcb8e6c2459aef50bf7685a689c9cdb73"
+    },
+    {
+      "seq": 424,
+      "at": "2026-10-23T19:04:08+00:00",
+      "task": "WRES-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "首轮验收逐项说明：五条调查协议/字段/纳排/停止与五份报告齐备；指定Grok三次请求0/17/10轨迹分类，原文另核；46来源记录40份字节身份含失败/挑战边界、19分级主张/43参数观察30未知，4软件语言版本许可与C边界；同物种/模型差异基准和AI隔离/回退/总成本契约已定义；10物种实际解析对齐、错引反证保留；24治理回归与统一六组PASS。没有新TP/HP、训练或GPU结果，2020全文及精确版本/同批输入缺口由WRES-002承接。",
+      "previous_hash": "7fa2302b307d2a75fdb2b56f710bf8ebcb8e6c2459aef50bf7685a689c9cdb73",
+      "hash": "d375e2cd7c6e73e12eb26a6978d546094d74ace63fb4889000c716a8bcf1884e"
+    },
+    {
+      "seq": 425,
+      "at": "2026-10-23T19:04:13+00:00",
+      "task": "WRES-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "首轮调研与采集契约完成；方法/C/AI/参数各有可定位原文、反证和缺口，基准与数据采集协议可交WBASE/WREF实例化。DONE只代表此首轮调查及机械验收，不代表穷尽综述、外部库运行通过、真实发动机验证或创新成立；未取得全文/版本/同批参数继续WRES-002。",
+      "previous_hash": "d375e2cd7c6e73e12eb26a6978d546094d74ace63fb4889000c716a8bcf1884e",
+      "hash": "dd075addb3bef66849fe79ea1d0cfe893e5ad3e34d94352610fd4f778751f717"
+    },
+    {
+      "seq": 426,
+      "at": "2026-10-23T19:04:13+00:00",
+      "task": "WRES-002",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "dd075addb3bef66849fe79ea1d0cfe893e5ad3e34d94352610fd4f778751f717",
+      "hash": "eb79f1feb1959111747ec7a9d51bc81562ebc14e7d63f465e54b42618ec6ee80"
     }
   ]
 }

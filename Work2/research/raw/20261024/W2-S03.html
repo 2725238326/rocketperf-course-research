@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script>var _paq = _paq || [];(function(){var u=(("https:" == document.location.protocol) ? "https://analytics.llnl.gov/" : "http://analytics.llnl.gov/");_paq.push(["setSiteId", "148"]);_paq.push(["setTrackerUrl", u+"matomo.php"]);_paq.push(["setDoNotTrack", 1]);pingUserType('https://osc.llnl.gov/ping/');
+
+function pingUserType(url, callbackFn) {
+    /**
+     * pings the specified URL, and stores last result in localStorage, if possible
+     * if localStorage cache is marked as an internal user, will send to Matomo
+     * without ping re-verification.
+     *  */
+    var pingKey = 'userType',
+        defaultUserType = 'Anonymous',
+        internalUserType = 'Internal',
+        userType = defaultUserType;
+
+    // check localStorage cache (previous pings) for userType, if possible
+    if ("localStorage" in window) {
+        userType = localStorage.getItem(pingKey) || defaultUserType;
+    }
+
+    // if identified as internal from localStorage cache, record as internal
+    if (userType === internalUserType) {
+        recordUserType(userType);
+        return;
+    }
+
+    // use ping URL to attempt to determine user type
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            var isSuccess = this.status >= 200 && this.status < 400;
+            if (isSuccess) {
+                userType = internalUserType;
+            }
+            recordUserType(userType);
+        }
+    };
+
+    // consider a timeout to be an unsuccessful attempt
+    xhr.ontimeout = function() {
+        recordUserType(userType);
+        callbackFn();
+    };
+    xhr.timeout = 500;
+    xhr.open('GET', url, true);
+    xhr.send();
+
+    function recordUserType(userType) {
+        if (typeof _paq !== 'undefined') {
+            _paq.push(['setCustomDimension', 1, userType, 'visit']);
+            // ensures the custom Dimension is recorded in the page view in Matomo
+            _paq.push(["trackPageView"]);
+        }
+        if ("localStorage" in window) {
+            localStorage.setItem(pingKey, userType);
+        }
+    }
+}if (!window.matomo_search_results_active) {_paq.push(["trackPageView"]);}_paq.push(["setIgnoreClasses", ["no-tracking","colorbox"]]);_paq.push(["enableLinkTracking"]);var d=document,g=d.createElement("script"),s=d.getElementsByTagName("script")[0];g.type="text/javascript";g.defer=true;g.async=true;g.src=u+"matomo.js";s.parentNode.insertBefore(g,s);})();</script>
+<meta name="description" content="All SUNDIALS packages are licensed under the BSD 3-Clause and are subject to the following Copyright notice. The text from this page is included as part of the SUNDIALS source code in the files LICENSE and NOTICE." />
+<link rel="canonical" href="https://computing.llnl.gov/projects/sundials/license" />
+<meta name="Generator" content="Drupal 11 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<link rel="icon" href="/themes/contrib/lwds-drupal/images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <title>SUNDIALS: License | Computing</title>
+    <link rel="stylesheet" media="all" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" media="all" href="/core/modules/system/css/components/align.module.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/core/modules/system/css/components/container-inline.module.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/core/modules/system/css/components/clearfix.module.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/core/modules/system/css/components/hidden.module.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/core/modules/system/css/components/js.module.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/modules/contrib/antibot/css/antibot.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/modules/contrib/back_to_top/css/back_to_top.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/modules/contrib/ckeditor_accordion/css/accordion.frontend.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/modules/contrib/extlink/css/extlink.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/libraries/mmenu/dist/mmenu.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/libraries/mmenu/dist/wrappers/bootstrap/mmenu.bootstrap.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/sites/default/files/css/responsive_menu_breakpoint.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/modules/contrib/responsive_menu/css/responsive_menu.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/variables.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/user.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/progress.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/node.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/breadcrumb.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/affix.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/book.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/contextual.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/feed-icon.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/field.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/header.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/help.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/icons.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/image-button.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/item-list.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/list-group.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/media.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/page.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/search-form.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/shortcut.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/sidebar.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/site-footer.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/skip-link.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/table.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/tabledrag.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/tableselect.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/tablesort-indicator.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/ui.widget.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/tabs.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/toolbar.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/vertical-tabs.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/views.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/webform.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/contrib/bootstrap_barrio/css/components/ui-dialog.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/custom/computing/css/messages.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/core/../themes/contrib/bootstrap_barrio/components/menu/menu.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="//use.fontawesome.com/releases/v5.13.0/css/all.css" />
+<link rel="stylesheet" media="all" href="/themes/contrib/lwds-drupal/css/llnl.min.css?tnc3i2" />
+<link rel="stylesheet" media="print" href="/themes/contrib/bootstrap_barrio/css/print.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="/themes/custom/computing/css/style.css?tnc3i2" />
+<link rel="stylesheet" media="all" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700,800,800i&amp;display=swap" />
+
+    <script src="https://kit.fontawesome.com/ab1e0f821a.js" defer crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.13.1/js/v4-shims.js" defer crossorigin="anonymous"></script>
+
+  </head>
+  <body class="layout-one-sidebar layout-sidebar-first page-node-1088 path-node node--type-project-sub-page">
+    <a href="#main-content" class="visually-hidden-focusable">
+      Skip to main content
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
+    
+<div id="page-wrapper">
+  <div id="page">
+
+    <header id="header" class="header" role="banner" aria-label="Site header">
+                                  
+<header class="navbar navbar-expand-lg navbar-default navbar-fixed-top" id="navbar-main" id="navbar" role="banner" aria-label="Site header">
+  <section class="usa-banner" aria-label="Official website of the United States government"">
+    <div class="usa-accordion container">
+      <div class="usa-banner__inner">
+        <img aria-hidden="true" class="usa-banner__header-flag" src="/themes/contrib/lwds-drupal/images/flag.png" alt="" />
+        <p class="usa-banner__header-text">An official website of the United States government</p>
+        <p class="usa-banner__header-action" aria-hidden="true">Here's how you know</p>
+        <button type="button" class="usa-accordion__button usa-banner__button" data-bs-toggle="collapse" data-bs-target="#gov-banner" aria-expanded="false" aria-controls="gov-banner">
+            <span class="usa-banner__button-text">Here’s how you know</span>
+        </button>
+      </div>
+      <div id="gov-banner" class="usa-banner__content usa-accordion__content row collapse" id="gov-banner">
+        <div class="usa-media-block__body col-12 col-md-6 col-lg-5">
+          <img class="usa-banner__icon usa-media-block__img" src="/themes/contrib/lwds-drupal/images/icon-dot-gov.svg" role="img" alt="" aria-hidden="true"/>
+          <p><strong>Official websites use .gov</strong><br />A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+        </div>
+        <div class="usa-media-block__body col-12 col-md-6 col-lg-5">
+          <img class="usa-banner__icon usa-media-block__img" src="/themes/contrib/lwds-drupal/images/icon-https.svg" role="img" alt="" aria-hidden="true" />
+          <p><strong>Secure .gov websites use HTTPS</strong><br />A <strong>lock</strong> (<span class="icon-lock">
+          <svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-description-default" focusable="false">
+            <title id="banner-lock-title-default">Lock</title>
+            <desc id="banner-lock-description-default">Locked padlock icon</desc>
+            <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z" />
+          </svg>
+          </span>) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div id="llnl-menu">
+    <div class="container">
+      <ul class="llnl-nav">
+        <li><a href="https://www.llnl.gov/purpose">Our Purpose</a></li>
+        <li><a href="https://www.llnl.gov/science-technology">Our Science and Technology</a></li>
+        <li><a href="https://www.llnl.gov/join-our-team">Join Our Team</a></li>
+        <li><a href="https://www.llnl.gov/partner">Partner with Us</a></li>
+        <li><a href="https://www.llnl.gov/news">News</a></li>
+        <li><a href="https://www.llnl.gov/community-education">Community and Education</a></li>
+        <li><a href="https://www.llnl.gov/about">About</a></li>
+      </ul>
+    </div>
+  </div>
+
+    <div class="container menu-wrap">
+    
+    <div class="llnl-logo-wrap">
+      <div id="llnl-logo">
+        <a href="https://www.llnl.gov"><img src="/themes/contrib/lwds-drupal/images/llnl-logo.png" alt="LLNL Logo" /></a>
+      </div>
+    </div>
+    <div class="nav-wrap">
+      <div id="llnl-org">
+        <div class="site-text-container">
+          <div class="site-text">
+            <a href="https://computing.llnl.gov/" title="Home" rel="home">Computing</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-header">
+          <nav role="navigation" aria-labelledby="block-computing-main-menu-menu" id="block-computing-main-menu">
+            <h2 class="sr-only" id="block-computing-main-menu-menu">Main navigation</h2>
+
+      
+              <ul id="block-computing-main-menu" class="clearfix nav navbar-nav">
+                    <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/focus-areas" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/1988">Focus Areas</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                          <a href="/topic?name=29&amp;project=29&amp;people=29&amp;news=29" aria-label="Computational Math Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;29&quot;,&quot;news&quot;:&quot;29&quot;,&quot;people&quot;:&quot;29&quot;,&quot;project&quot;:&quot;29&quot;}" data-drupal-link-system-path="node/1949">Computational Math</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=37&amp;project=37&amp;people=37&amp;news=37" aria-label="Computational Science Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;37&quot;,&quot;news&quot;:&quot;37&quot;,&quot;people&quot;:&quot;37&quot;,&quot;project&quot;:&quot;37&quot;}" data-drupal-link-system-path="node/1949">Computational Science</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=47&amp;project=47&amp;people=47&amp;news=47" aria-label="Cyber Security Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;47&quot;,&quot;news&quot;:&quot;47&quot;,&quot;people&quot;:&quot;47&quot;,&quot;project&quot;:&quot;47&quot;}" data-drupal-link-system-path="node/1949">Cyber Security</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=52&amp;project=52&amp;people=52&amp;news=52" aria-label="Data Science Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;52&quot;,&quot;news&quot;:&quot;52&quot;,&quot;people&quot;:&quot;52&quot;,&quot;project&quot;:&quot;52&quot;}" data-drupal-link-system-path="node/1949">Data Science</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=63&amp;project=63&amp;people=63&amp;news=63" aria-label="Emerging Architectures Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;63&quot;,&quot;news&quot;:&quot;63&quot;,&quot;people&quot;:&quot;63&quot;,&quot;project&quot;:&quot;63&quot;}" data-drupal-link-system-path="node/1949">Emerging Architectures</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=70&amp;project=70&amp;people=70&amp;news=70" aria-label="HPC Systems and Software Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;70&quot;,&quot;news&quot;:&quot;70&quot;,&quot;people&quot;:&quot;70&quot;,&quot;project&quot;:&quot;70&quot;}" data-drupal-link-system-path="node/1949">HPC Systems and Software</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=87&amp;project=87&amp;people=87&amp;news=87" aria-label="Information Technology Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;87&quot;,&quot;news&quot;:&quot;87&quot;,&quot;people&quot;:&quot;87&quot;,&quot;project&quot;:&quot;87&quot;}" data-drupal-link-system-path="node/1949">Information Technology</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/topic?name=88&amp;project=88&amp;people=88&amp;news=88" aria-label="Software Engineering Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;88&quot;,&quot;news&quot;:&quot;88&quot;,&quot;people&quot;:&quot;88&quot;,&quot;project&quot;:&quot;88&quot;}" data-drupal-link-system-path="node/1949">Software Engineering </a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/projects" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/956">Projects</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                          <a href="/projects" data-drupal-link-system-path="node/956">Active</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/projects/alphabetical" data-drupal-link-system-path="node/2033">A-Z</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/projects/legacy" data-drupal-link-system-path="node/2032">Legacy</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/centers-institutes" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/1846">Centers &amp; Institutes</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item menu-item--collapsed">
+                          <a href="/casc" data-drupal-link-system-path="node/456">Center for Applied Scientific Computing</a>
+              </li>
+                <li class="dropdown-item menu-item--collapsed">
+                          <a href="/livermore-computing" data-drupal-link-system-path="node/1993">Livermore Computing (HPC + Machines)</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="https://data-science.llnl.gov/">Data Science Institute</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="https://hpcic.llnl.gov/">High Performance Computing Innovation Center</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/collaborations" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/1845">Collaborations</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                          <a href="https://asc.llnl.gov/">Advanced Simulation and Computing Program</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="https://atomscience.org/">Accelerating Therapeutics for Opportunities in Medicine</a>
+              </li>
+                <li class="dropdown-item menu-item--collapsed">
+                          <a href="/collaborations/co-design" data-drupal-link-system-path="node/1880">Co-Design</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/about" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/17">About</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                          <a href="/about/newsroom" data-drupal-link-system-path="node/1947">News and Press</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/about/people-highlights" data-drupal-link-system-path="node/1948">People Highlights</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/about/outreach" data-drupal-link-system-path="node/1987">Outreach</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="https://hpc.llnl.gov/hardware/platforms">Our Machines</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/about/machine-history" data-drupal-link-system-path="node/910">Machine History</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/contact" data-drupal-link-system-path="webform/contact">Contact Us</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="nav-item menu-item--expanded dropdown">
+                          <a href="/careers" class="nav-link" aria-expanded="false" data-drupal-link-system-path="node/21">Careers</a>
+                        <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                          <a href="https://www.llnl.gov/join-our-team/careers/find-your-job/computing">Search Jobs</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/careers/researchers" data-drupal-link-system-path="node/135">Researchers</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/careers/developers" data-drupal-link-system-path="node/141">Developers</a>
+              </li>
+                <li class="dropdown-item">
+                          <a href="/careers/technologists" data-drupal-link-system-path="node/134">Technologists</a>
+              </li>
+                <li class="dropdown-item menu-item--collapsed">
+                          <a href="/careers/postdocs" data-drupal-link-system-path="node/91">Postdocs</a>
+              </li>
+                <li class="dropdown-item menu-item--collapsed">
+                          <a href="/careers/interns" data-drupal-link-system-path="node/2644">Interns</a>
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+
+
+  </nav>
+
+
+                <div id="llnl-header-search-form" class="block-llnl-search-mobile d-print-none">
+          <div class="search-form">
+            <div class="form-group form-group-search has-feedback">
+              <div class="sr-only">Search</div>
+              <div class="form-item">
+                <form class="search-block-form antibot search-form form-row" data-drupal-selector="search-block-form" data-action="/search/card" action="/antibot" method="get" id="search-block-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">You must have JavaScript enabled to use this form.</div>
+</noscript>
+
+
+
+
+
+        
+  <div class="js-form-item js-form-type-search form-type-search js-form-item-keys form-item-keys form-no-label mb-3">
+          <label for="edit-keys" class="visually-hidden">Search</label>
+                    <input title="Enter the terms you wish to search for." placeholder="Search this site" data-drupal-selector="edit-keys" type="search" id="edit-keys" name="keys" value="" size="15" maxlength="128" class="form-search form-control" />
+
+                      </div>
+<input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value="" class="form-control" />
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper mb-3" id="edit-actions"><input class="pull-right button js-form-submit form-submit btn btn-primary form-control" data-drupal-selector="edit-submit" type="submit" id="edit-submit" value="Search" />
+</div>
+
+</form>
+
+                <span class="fa fa-search form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section id="block-responsivemenumobileicon" data-block-plugin-id="responsive_menu_toggle" class="responsive-menu-toggle-wrapper responsive-menu-toggle block block-responsive-menu block-responsive-menu-toggle clearfix">
+          <a id="toggle-icon" class="toggle responsive-menu-toggle-icon" title="Menu" href="#off-canvas">
+            <span class="icon"></span>
+          </a>
+        </section>
+      </div>
+      <div id="navbar-collapse" class="navbar-collapse collapse">
+        <div id="search-button">
+          <form class="search-block-form antibot search-form form-row" data-drupal-selector="search-block-form-2" data-action="/search/card" action="/antibot" method="get" id="search-block-form--2" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">You must have JavaScript enabled to use this form.</div>
+</noscript>
+
+
+
+
+
+        
+  <div class="js-form-item js-form-type-search form-type-search js-form-item-keys form-item-keys form-no-label mb-3">
+          <label for="edit-keys--2" class="visually-hidden">Search</label>
+                    <input title="Enter the terms you wish to search for." placeholder="Search this site" data-drupal-selector="edit-keys" type="search" id="edit-keys--2" name="keys" value="" size="15" maxlength="128" class="form-search form-control" />
+
+                      </div>
+<input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value="" class="form-control" />
+<div data-drupal-selector="edit-actions" class="form-actions js-form-wrapper form-wrapper mb-3" id="edit-actions--2"><input class="pull-right button js-form-submit form-submit btn btn-primary form-control" data-drupal-selector="edit-submit" type="submit" id="edit-submit--2" value="Search" />
+</div>
+
+</form>
+
+          <span class="fa fa-search form-control-feedback"></span>
+        </div>
+      </div>
+          </div>
+  </div>
+
+  
+</header>
+                  </header>
+
+          <div class="highlighted">
+        <aside aria-label="Alert Area" class="container section clearfix">
+            <div data-drupal-messages-fallback class="hidden"></div>
+
+
+        </aside>
+      </div>
+    
+    
+                  <div class="title-area">
+          <aside aria-label="Title Area" class="title-area__inner section container clearfix">
+                                                        <div class="container title-area-container">
+    <div class="row">
+        <div class="title-area-text> col-md-7 col-sm-12 ">
+            <div class="title-area-inner">                                <h1>SUNDIALS: License</h1>
+                                    <div class="caption-area">
+                        <p class="lead-caption">SUNDIALS: An open-source software library of time integrators and nonlinear solvers used in industry and research
+
+                                                                                </div>
+                            </div>
+        </div>
+                <div class="col-md-5 col-sm-12 title-image">
+            
+            <div class="field field--name-field-lead-photo field--type-image field--label-hidden field__item">  <img loading="lazy" src="/sites/default/files/styles/leaderboard_image/public/2025-05/sundials-leaderboard_7.png?itok=LDPl3UyD" width="432" height="285" alt="Sundials logo" class="image-style-leaderboard-image" />
+
+
+</div>
+      
+        </div>
+            </div>
+</div>
+
+          </aside>
+        </div>
+          
+    
+    <div id="main-wrapper" class="layout-main-wrapper clearfix">
+              <div id="main" class="container">
+          
+
+          <div class="row clearfix">
+
+            <main class="main-content col" id="content">
+              <section class="section">
+                <a id="main-content" tabindex="-1"></a>
+                  <div id="block-computing-breadcrumbs" class="block block-system block-system-breadcrumb-block">
+  
+    
+      <div class="content">
+      
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+          <a href="/">Home</a>
+        </li>
+                        <li class="breadcrumb-item">
+          <a href="/projects">Projects: Inspired R&amp;D at the Heart of LLNL Computing</a>
+        </li>
+                        <li class="breadcrumb-item">
+          <a href="/projects/sundials">SUNDIALS</a>
+        </li>
+              </ol>
+  </nav>
+
+    </div>
+  </div>
+<div id="block-computing-content" class="block block-system block-system-main-block">
+  
+    
+      <div class="content">
+      
+
+<article data-history-node-id="1088" class="node node--type-project-sub-page node--view-mode-full clearfix">
+  <header>
+    
+        
+      </header>
+  <div class="node__content clearfix">
+    
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item"><p>All SUNDIALS packages are licensed under the BSD 3-Clause and are subject to the following Copyright notice. The text from this page is included as part of the SUNDIALS source code in the files LICENSE and NOTICE.</p><p>BSD 3-Clause License Copyright (c) 2002-2025, Lawrence Livermore National Security and Southern Methodist University. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. * Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p><p>This work was produced under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344. This work was prepared as an account of work sponsored by an agency of the United States Government. Neither the United States Government nor Lawrence Livermore National Security, LLC, nor any of their employees makes any warranty, expressed or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe privately owned rights. Reference herein to any specific commercial product, process, or service by trade name, trademark, manufacturer, or otherwise does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or Lawrence Livermore National Security, LLC. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or Lawrence Livermore National Security, LLC, and shall not be used for advertising or product endorsement purposes.</p></div>
+      
+  </div>
+</article>
+
+    </div>
+  </div>
+
+
+              </section>
+            </main>
+
+                          <div class="sidebar_first sidebar col-md-3 order-first" id="sidebar_first">
+                <aside aria-label="Sidebar" class="section">
+                    <nav aria-labelledby="block-projects-2-menu" id="block-projects-2" class="block block-menu navigation menu--projects">
+      
+  <h2 id="block-projects-2-menu"><a href="/projects/sundials/sundials-software" class="menu-item--active-trail" data-drupal-link-system-path="node/1087">Download SUNDIALS Software</a></h2>
+  
+
+        
+                  <ul class="clearfix nav" data-component-id="bootstrap_barrio:menu">
+                    <li class="nav-item active">
+                <a href="/projects/sundials/license" class="nav-link active nav-link--projects-sundials-license is-active" data-drupal-link-system-path="node/1088" aria-current="page">License</a>
+              </li>
+                <li class="nav-item">
+                <a href="https://sundials.readthedocs.io/en/latest/Changelog_link.html" class="nav-link nav-link-https--sundialsreadthedocsio-en-latest-changelog-linkhtml">Release History</a>
+              </li>
+        </ul>
+  
+
+
+
+  </nav>
+
+
+                </aside>
+              </div>
+            
+            
+          </div>
+        </div>
+          </div>
+
+    
+  </div>
+</div>
+
+<footer class="site-footer">
+      <div id="footer-wrapper">
+      
+      <div class="site-footer__bottom">
+        
+                            <div class="footer-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-2 col-lg-4 col-md-3 col-12" id="footer-logo-wrapper">
+        <div id="footer-logo">
+          <a class="llnl" href="http://www.llnl.gov/" target="_blank"><img src="/themes/contrib/lwds-drupal/images/llnl-logo-dark.png" alt="LLNL"></a>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-8 col-md-9 col-12" id="footer-text-wrapper">
+        <div id="footer-text">
+          <div id="footer-text-name">Lawrence Livermore National Laboratory </div>
+          <div id="footer-text-address">
+            <span class="hidden-xs">&nbsp;|</span>
+            7000 East Avenue • Livermore, CA 94550 | 
+          </div>
+          <div id="footer-text-info">
+            Operated by the Lawrence Livermore National Security, LLC for the
+            Department of Energy's National Nuclear Security Administration
+            Learn about the Department of Energy's <a href="http://www.energy.gov/vulnerability-disclosure-policy" target="_blank" rel="noopener noreferrer">Vulnerability Disclosure Program</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6 col-12"  id="footer-affiliates">
+        <a class="llns" href="http://www.llnsllc.com/" target="_blank" rel="noopener noreferrer"><img src="/themes/contrib/lwds-drupal/images/llns.png" alt="LLNS"></a>
+        <a class="doe" href="https://www.energy.gov/" target="_blank" rel="noopener noreferrer"><img src="/themes/contrib/lwds-drupal/images/doe_small.svg" alt="U.S. DOE"></a>
+        <a class="nnsa" href="https://www.energy.gov/nnsa/national-nuclear-security-administration/" target="_blank" rel="noopener noreferrer"><img src="/themes/contrib/lwds-drupal/images/nnsa.png" alt="NNSA"></a>
+      </div>
+
+      <div class="col-xl-3 col-md-6 col-12" id="footer-links">
+        <div class="disclaimer">
+          <a href="https://computing.llnl.gov/">Home</a>
+          <a href="https://www.llnl.gov/disclaimer" target="_blank">Disclaimer</a>
+          <a href="https://www.llnl.gov/website-privacy-notice" target="_blank">Privacy Notice</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+              </div>
+    </div>
+  </footer>
+
+  </div>
+
+    <div class="off-canvas-wrapper"><div id="off-canvas">
+              <ul>
+                    <li class="menu-item--ea521330-4c64-472b-80f4-d4ab695bb969 menu-name--main">
+        <a href="/focus-areas" data-drupal-link-system-path="node/1988">Focus Areas</a>
+                                <ul>
+                    <li class="menu-item--_5788800-6646-4ca2-9ad2-29b0df83e3ba menu-name--main">
+        <a href="/topic?name=29&amp;project=29&amp;people=29&amp;news=29" aria-label="Computational Math Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;29&quot;,&quot;news&quot;:&quot;29&quot;,&quot;people&quot;:&quot;29&quot;,&quot;project&quot;:&quot;29&quot;}" data-drupal-link-system-path="node/1949">Computational Math</a>
+              </li>
+                <li class="menu-item--_59e453b-b973-4db3-8250-a24b17b5733e menu-name--main">
+        <a href="/topic?name=37&amp;project=37&amp;people=37&amp;news=37" aria-label="Computational Science Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;37&quot;,&quot;news&quot;:&quot;37&quot;,&quot;people&quot;:&quot;37&quot;,&quot;project&quot;:&quot;37&quot;}" data-drupal-link-system-path="node/1949">Computational Science</a>
+              </li>
+                <li class="menu-item--_2db750b-e920-4963-81d5-f5c41f55e96d menu-name--main">
+        <a href="/topic?name=47&amp;project=47&amp;people=47&amp;news=47" aria-label="Cyber Security Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;47&quot;,&quot;news&quot;:&quot;47&quot;,&quot;people&quot;:&quot;47&quot;,&quot;project&quot;:&quot;47&quot;}" data-drupal-link-system-path="node/1949">Cyber Security</a>
+              </li>
+                <li class="menu-item--_35af46a-7e50-4cba-af94-397704e7df9f menu-name--main">
+        <a href="/topic?name=52&amp;project=52&amp;people=52&amp;news=52" aria-label="Data Science Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;52&quot;,&quot;news&quot;:&quot;52&quot;,&quot;people&quot;:&quot;52&quot;,&quot;project&quot;:&quot;52&quot;}" data-drupal-link-system-path="node/1949">Data Science</a>
+              </li>
+                <li class="menu-item--fff7486f-b905-4c72-8963-916bec1130cc menu-name--main">
+        <a href="/topic?name=63&amp;project=63&amp;people=63&amp;news=63" aria-label="Emerging Architectures Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;63&quot;,&quot;news&quot;:&quot;63&quot;,&quot;people&quot;:&quot;63&quot;,&quot;project&quot;:&quot;63&quot;}" data-drupal-link-system-path="node/1949">Emerging Architectures</a>
+              </li>
+                <li class="menu-item--_4d148c2-2405-4e45-a937-a1b6b3733953 menu-name--main">
+        <a href="/topic?name=70&amp;project=70&amp;people=70&amp;news=70" aria-label="HPC Systems and Software Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;70&quot;,&quot;news&quot;:&quot;70&quot;,&quot;people&quot;:&quot;70&quot;,&quot;project&quot;:&quot;70&quot;}" data-drupal-link-system-path="node/1949">HPC Systems and Software</a>
+              </li>
+                <li class="menu-item--_bb953bb-8c03-42e1-80b5-e42a489415f5 menu-name--main">
+        <a href="/topic?name=87&amp;project=87&amp;people=87&amp;news=87" aria-label="Information Technology Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;87&quot;,&quot;news&quot;:&quot;87&quot;,&quot;people&quot;:&quot;87&quot;,&quot;project&quot;:&quot;87&quot;}" data-drupal-link-system-path="node/1949">Information Technology</a>
+              </li>
+                <li class="menu-item--_37305d3-0af3-479f-91a2-e9f78ce6c6e9 menu-name--main">
+        <a href="/topic?name=88&amp;project=88&amp;people=88&amp;news=88" aria-label="Software Engineering Topic Browse" data-drupal-link-query="{&quot;name&quot;:&quot;88&quot;,&quot;news&quot;:&quot;88&quot;,&quot;people&quot;:&quot;88&quot;,&quot;project&quot;:&quot;88&quot;}" data-drupal-link-system-path="node/1949">Software Engineering </a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--fcf9ad16-14aa-451f-bdb9-f6539c53c414 menu-name--main">
+        <a href="/projects" data-drupal-link-system-path="node/956">Projects</a>
+                                <ul>
+                    <li class="menu-item--_93371bd-8d43-4faa-854c-b87e1b1cc556 menu-name--main">
+        <a href="/projects" data-drupal-link-system-path="node/956">Active</a>
+              </li>
+                <li class="menu-item--_e53d41d-ed02-4ff7-b5f5-e3a413f9c039 menu-name--main">
+        <a href="/projects/alphabetical" data-drupal-link-system-path="node/2033">A-Z</a>
+              </li>
+                <li class="menu-item--_7949f29-6399-470d-a6d1-04c9730d8a43 menu-name--main">
+        <a href="/projects/legacy" data-drupal-link-system-path="node/2032">Legacy</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_62b025f-4648-4f78-9b45-582f805ee4de menu-name--main">
+        <a href="/centers-institutes" data-drupal-link-system-path="node/1846">Centers &amp; Institutes</a>
+                                <ul>
+                    <li class="menu-item--bc58217f-0651-432c-9ddc-bc34249a30bd menu-name--main">
+        <a href="/casc" data-drupal-link-system-path="node/456">Center for Applied Scientific Computing</a>
+                                <ul>
+                    <li class="menu-item--_e0414c8-21e7-42d9-a36b-3c70db97c9cf menu-name--main">
+        <a href="/casc/groups" data-drupal-link-system-path="node/1992">CASC Groups</a>
+                                <ul>
+                    <li class="menu-item--_f2d4336-3c39-43e4-b769-239f4693bd0b menu-name--main">
+        <a href="/casc/computational-physics-group" data-drupal-link-system-path="node/935">Computational Physics Group</a>
+              </li>
+                <li class="menu-item--_4e5aecf-9eeb-4b9c-b4f8-812d9a1680b5 menu-name--main">
+        <a href="/casc/data-science-analytics-group" data-drupal-link-system-path="node/937">Data Science &amp; Analytics Group</a>
+              </li>
+                <li class="menu-item--d4d07c32-1000-4f8b-a491-d7b8195775b6 menu-name--main">
+        <a href="/casc/graphs-irregular-computing-group" data-drupal-link-system-path="node/2614">Graph Science &amp; Irregular Computing Group</a>
+              </li>
+                <li class="menu-item--d67b34e9-4750-42e9-8e30-1d7f368d57c8 menu-name--main">
+        <a href="/casc/informatics-group" data-drupal-link-system-path="node/938">Informatics Group</a>
+              </li>
+                <li class="menu-item--_07853e0-2c2f-4f45-a508-cdb5d880f321 menu-name--main">
+        <a href="/casc/machine-intelligence-group" data-drupal-link-system-path="node/1935">Machine Intelligence Group</a>
+              </li>
+                <li class="menu-item--_4980588-5caf-4300-bb02-ff91dc6210da menu-name--main">
+        <a href="/casc/mathematical-algorithms-computing-group" data-drupal-link-system-path="node/925">Mathematical Algorithms &amp; Computing Group</a>
+              </li>
+                <li class="menu-item--_e1689ac-63e7-41a5-933a-ad8f14b4ec03 menu-name--main">
+        <a href="/casc/numerical-analysis-simulations-group" data-drupal-link-system-path="node/1907">Numerical Analysis &amp; Simulations Group</a>
+              </li>
+                <li class="menu-item--_3075737-e842-4804-b18b-fa09e499138f menu-name--main">
+        <a href="/casc/parallel-systems-group" data-drupal-link-system-path="node/936">Parallel Systems Group</a>
+              </li>
+                <li class="menu-item--_2a67ae7-c4b7-4148-ae06-de008988a58f menu-name--main">
+        <a href="/casc/rse-group" data-drupal-link-system-path="node/2276">Research Software Engineering Group</a>
+              </li>
+                <li class="menu-item--ef4afef1-df43-4f5a-bea2-b50df9525a64 menu-name--main">
+        <a href="/casc/scientific-computing-group" data-drupal-link-system-path="node/939">Scientific Computing Group</a>
+              </li>
+                <li class="menu-item--_09f2622-dbeb-4b63-8def-5ef192226a93 menu-name--main">
+        <a href="/casc/software-analysis-transformation-group" data-drupal-link-system-path="node/944">Software Analysis &amp; Transformation Group</a>
+              </li>
+                <li class="menu-item--_9ea1420-9346-43ab-abd6-125c691ddcd6 menu-name--main">
+        <a href="/casc/uq-optimization-group" data-drupal-link-system-path="node/1936">UQ &amp; Optimization Group</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--ad15f61b-fbf8-409e-94c9-4a2238c226c9 menu-name--main">
+        <a href="/casc/newsletter" data-drupal-link-system-path="node/1885">CASC Newsletter</a>
+                                <ul>
+                    <li class="menu-item--a17b2829-de56-43ad-863b-81614a2a2968 menu-name--main">
+        <a href="/casc/newsletter/vol-18" data-drupal-link-system-path="node/2739">Volume 18, September 2026</a>
+              </li>
+                <li class="menu-item--_2f171b0-a7b8-411f-8b24-5f9f28855d54 menu-name--main">
+        <a href="/casc/newsletter/vol-17" data-drupal-link-system-path="node/2701">Volume 17, May 2026</a>
+              </li>
+                <li class="menu-item--e285c4da-455c-4179-bf33-0a79216b529d menu-name--main">
+        <a href="/casc/newsletter/vol-16" data-drupal-link-system-path="node/2596">Volume 16, December 2025</a>
+              </li>
+                <li class="menu-item--_bdc1c9a-90b2-4b5f-8b24-5cfdfc6733e8 menu-name--main">
+        <a href="/casc/newsletter/vol-15" data-drupal-link-system-path="node/2504">Volume 15, March 2025</a>
+              </li>
+                <li class="menu-item--_ef0be19-7c25-416a-b2f7-d4a99d75aa5f menu-name--main">
+        <a href="/casc/newsletter/vol-14" data-drupal-link-system-path="node/2451">Volume 14, June 2024</a>
+              </li>
+                <li class="menu-item--_e5b6092-c297-40d7-a6b6-28a16dc1f9e0 menu-name--main">
+        <a href="/casc/newsletter/vol-13" data-drupal-link-system-path="node/2331">Volume 13, July 2023</a>
+              </li>
+                <li class="menu-item--c013ebb4-4131-43f9-9e87-0a6dba53fbab menu-name--main">
+        <a href="/casc/newsletter/vol-12" data-drupal-link-system-path="node/2262">Volume 12, November 2022</a>
+              </li>
+                <li class="menu-item--_e259650-0174-487c-a523-957604eef087 menu-name--main">
+        <a href="/casc/newsletter/vol-11" data-drupal-link-system-path="node/2145">Volume 11, December 2021</a>
+              </li>
+                <li class="menu-item--_1987c1c-4964-45d4-be68-4a557a15e604 menu-name--main">
+        <a href="/casc/newsletter/vol-10" data-drupal-link-system-path="node/2063">Volume 10, April 2021</a>
+              </li>
+                <li class="menu-item--_29f4071-21ad-4474-abda-6cbe662ee55c menu-name--main">
+        <a href="/casc/newsletter/vol-9" data-drupal-link-system-path="node/1910">Volume 9, June 2020</a>
+              </li>
+                <li class="menu-item--d711151f-2672-46d5-8b7b-edf0bcdbdcf3 menu-name--main">
+        <a href="/casc/newsletter/vol-8" data-drupal-link-system-path="node/1909">Volume 8, August 2019</a>
+              </li>
+                <li class="menu-item--_3f10643-fbc9-411c-8432-4c2ce92c1648 menu-name--main">
+        <a href="/casc/newsletter/vol-7" data-drupal-link-system-path="node/1908">Volume 7, December 2018</a>
+              </li>
+                <li class="menu-item--_c93121c-ce99-470e-b522-6f0cbcc1ad6f menu-name--main">
+        <a href="/casc/newsletter/vol-6" data-drupal-link-system-path="node/1899">Volume 6, August 2018</a>
+              </li>
+                <li class="menu-item--_03fe35b-d772-4cc1-8dbe-a3e47482af8d menu-name--main">
+        <a href="/casc/newsletter/vol-5" data-drupal-link-system-path="node/1898">Volume 5, April 2018</a>
+              </li>
+                <li class="menu-item--c89fc8a0-6867-42e7-a1f5-db2ccf6c6c5c menu-name--main">
+        <a href="/casc/newsletter/vol-4" data-drupal-link-system-path="node/1897">Volume 4, January 2018</a>
+              </li>
+                <li class="menu-item--_b158d69-1b2d-4704-928a-66ba4116ef65 menu-name--main">
+        <a href="/casc/newsletter/vol-3" data-drupal-link-system-path="node/1896">Volume 3, October 2017</a>
+              </li>
+                <li class="menu-item--_8140a0b-6814-4c09-82c8-9c3f1444b1c6 menu-name--main">
+        <a href="/casc/newsletter/vol-2" data-drupal-link-system-path="node/1895">Volume 2, July 2017</a>
+              </li>
+                <li class="menu-item--db2a5ff1-d2ad-4e34-8134-1df3cbdb630f menu-name--main">
+        <a href="/casc/newsletter/vol-1" data-drupal-link-system-path="node/1891">Volume 1, April 2017</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--ac0ab89d-cc44-4e7d-8580-0e7e171eabac menu-name--main">
+        <a href="/casc/publications" data-drupal-link-system-path="node/2101">CASC Publications</a>
+              </li>
+                <li class="menu-item--c5a8dd58-4b26-47fc-ae0d-a484e45b1dc2 menu-name--main">
+        <a href="/casc/academic-engagement-program" data-drupal-link-system-path="node/1989">Academic Engagement Program</a>
+                                <ul>
+                    <li class="menu-item--_44f434f-4742-4075-8f58-a1b8a4962518 menu-name--main">
+        <a href="/casc/academic-engagement-program/masterworks" data-drupal-link-system-path="node/2430">Computing Masterworks Series</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--be1dd15a-fb40-49cc-a23f-0ccbe9acb6ac menu-name--main">
+        <a href="/casc/ml" data-drupal-link-system-path="node/1914">Machine Learning at CASC</a>
+                                <ul>
+                    <li class="menu-item--_40b1736-f0f8-4de0-b160-247707f862ea menu-name--main">
+        <a href="/casc/ml/robust" data-drupal-link-system-path="node/1921">Robust ML</a>
+              </li>
+                <li class="menu-item--e6fc50bd-6283-4030-a058-f28c0765357b menu-name--main">
+        <a href="/casc/ml/ai" data-drupal-link-system-path="node/1920">Explainable AI</a>
+              </li>
+                <li class="menu-item--_31e2c5c-b4a9-401e-b758-295443376f8d menu-name--main">
+        <a href="/casc/ml/complex-systems" data-drupal-link-system-path="node/1922">Complex Multiscale Systems</a>
+              </li>
+                <li class="menu-item--_b40b516-4e42-480f-ad14-3e56f703c10f menu-name--main">
+        <a href="/casc/ml/apps" data-drupal-link-system-path="node/1919">Application Areas</a>
+                                <ul>
+                    <li class="menu-item--ed9a4d7f-eb79-41de-8565-52853ee053a3 menu-name--main">
+        <a href="/casc/ml/apps/brain" data-drupal-link-system-path="node/1918">Brain-Inspired ML</a>
+              </li>
+                <li class="menu-item--_ebe920e-6a88-4b7a-9ad0-57238d5465c1 menu-name--main">
+        <a href="/casc/ml/apps/cancer" data-drupal-link-system-path="node/1917">Cancer (Pilot 2)</a>
+              </li>
+                <li class="menu-item--_bec4b38-0599-4c9f-a479-fb3cfd2d759d menu-name--main">
+        <a href="/casc/ml/apps/hed" data-drupal-link-system-path="node/1915">HED Science</a>
+              </li>
+                <li class="menu-item--_aedbec5-85ee-49e6-8ed6-08f8c0b3c7d9 menu-name--main">
+        <a href="/casc/ml/apps/tbi" data-drupal-link-system-path="node/1916">Traumatic Brain Injury</a>
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--bb9b189c-849e-4582-a162-c9536feb033b menu-name--main">
+        <a href="/livermore-computing" data-drupal-link-system-path="node/1993">Livermore Computing (HPC + Machines)</a>
+                                <ul>
+                    <li class="menu-item--_342c77d-820a-4546-bc36-f6addca92f9b menu-name--main">
+        <a href="https://hpc.llnl.gov/hardware/platforms">Compute Platforms Overview</a>
+                                <ul>
+                    <li class="menu-item--_759c84e-9d2e-46df-b179-20396213aceb menu-name--main">
+        <a href="https://asc.llnl.gov/exascale/el-capitan">El Capitan</a>
+              </li>
+                <li class="menu-item--b2055a5e-feae-43f7-9fdf-5f7f070640a5 menu-name--main">
+        <a href="https://hpc.llnl.gov/hardware/compute-platforms/tuolumne">Tuolumne</a>
+              </li>
+                <li class="menu-item--c30c1ac7-8c15-4945-80f1-4f8cc8fcaabd menu-name--main">
+        <a href="https://hpc.llnl.gov/hardware/compute-platforms/dane">Dane</a>
+              </li>
+                <li class="menu-item--ed67f740-1643-466d-b9b6-42f749e32ae3 menu-name--main">
+        <a href="https://hpc.llnl.gov/hardware/compute-platforms/bengal">Bengal</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_51769f4-76a3-4b48-b189-7bbb463182eb menu-name--main">
+        <a href="/livermore-computing/road-to-el-capitan" data-drupal-link-system-path="node/2382">Road to El Capitan</a>
+              </li>
+                <li class="menu-item--_f4185ba-71f7-431a-b5ef-cfedb98ed4ad menu-name--main">
+        <a href="/livermore-computing/advanced-technology-office" data-drupal-link-system-path="node/2048">Advanced Technology Office</a>
+              </li>
+                <li class="menu-item--_93a342a-5bb0-4122-8e71-65fd02da2ecd menu-name--main">
+        <a href="/livermore-computing/development-environment-group" data-drupal-link-system-path="node/2011">Development Environment Group</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_72dc9b4-c330-44f0-baf4-76c16835a017 menu-name--main">
+        <a href="https://data-science.llnl.gov/">Data Science Institute</a>
+              </li>
+                <li class="menu-item--b31a35db-e681-44c7-942f-e2a35cbfc10b menu-name--main">
+        <a href="https://hpcic.llnl.gov/">High Performance Computing Innovation Center</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_48131d1-5fe4-48f2-8859-451738b18e03 menu-name--main">
+        <a href="/collaborations" data-drupal-link-system-path="node/1845">Collaborations</a>
+                                <ul>
+                    <li class="menu-item--_52f8f51-e8b5-4d75-bef0-4170860a0507 menu-name--main">
+        <a href="https://asc.llnl.gov/">Advanced Simulation and Computing Program</a>
+              </li>
+                <li class="menu-item--_816a59b-bb26-41fe-bed6-b2c90a65d529 menu-name--main">
+        <a href="https://atomscience.org/">Accelerating Therapeutics for Opportunities in Medicine</a>
+              </li>
+                <li class="menu-item--_ee0954a-18a7-44b4-b3a4-05a01ee00126 menu-name--main">
+        <a href="/collaborations/co-design" data-drupal-link-system-path="node/1880">Co-Design</a>
+                                <ul>
+                    <li class="menu-item--db240605-7bcf-458d-a8e9-ea7c262eae9e menu-name--main">
+        <a href="/collaborations/co-design/activities" data-drupal-link-system-path="node/1882">Co-Design: Activities</a>
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--c74f6dbb-93f8-44e0-abd6-5129e91d7381 menu-name--main">
+        <a href="/about" data-drupal-link-system-path="node/17">About</a>
+                                <ul>
+                    <li class="menu-item--d044a31d-3f7b-4183-b985-51effda5f428 menu-name--main">
+        <a href="/about/newsroom" data-drupal-link-system-path="node/1947">News and Press</a>
+              </li>
+                <li class="menu-item--_5889f1e-7bb3-4d33-a9dd-4e3323465150 menu-name--main">
+        <a href="/about/people-highlights" data-drupal-link-system-path="node/1948">People Highlights</a>
+              </li>
+                <li class="menu-item--_045b77c-8bd3-4033-8441-84076c653386 menu-name--main">
+        <a href="/about/outreach" data-drupal-link-system-path="node/1987">Outreach</a>
+              </li>
+                <li class="menu-item--f3003db3-a453-4f98-80af-28213a7abfff menu-name--main">
+        <a href="https://hpc.llnl.gov/hardware/platforms">Our Machines</a>
+              </li>
+                <li class="menu-item--ec197666-1d0a-428f-9642-c9febc6350b8 menu-name--main">
+        <a href="/about/machine-history" data-drupal-link-system-path="node/910">Machine History</a>
+              </li>
+                <li class="menu-item--_69d1be1-5ab8-4143-95db-554662d6a37f menu-name--main">
+        <a href="/contact" data-drupal-link-system-path="webform/contact">Contact Us</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_352ae71-7f9b-4997-8c60-3686992ac702 menu-name--main">
+        <a href="/careers" data-drupal-link-system-path="node/21">Careers</a>
+                                <ul>
+                    <li class="menu-item--fc2669af-5297-41fb-8eb0-1462eadb388c menu-name--main">
+        <a href="https://www.llnl.gov/join-our-team/careers/find-your-job/computing">Search Jobs</a>
+              </li>
+                <li class="menu-item--_5538e10-53fa-4547-9449-28688bccfac1 menu-name--main">
+        <a href="/careers/researchers" data-drupal-link-system-path="node/135">Researchers</a>
+              </li>
+                <li class="menu-item--d095e621-edfd-4f91-987c-12cddc14e1ff menu-name--main">
+        <a href="/careers/developers" data-drupal-link-system-path="node/141">Developers</a>
+              </li>
+                <li class="menu-item--_6a37f7f-9019-4bd5-a37c-e55037f03e62 menu-name--main">
+        <a href="/careers/technologists" data-drupal-link-system-path="node/134">Technologists</a>
+              </li>
+                <li class="menu-item--c5f8bf81-3549-4020-924d-b8f749efcccd menu-name--main">
+        <a href="/careers/postdocs" data-drupal-link-system-path="node/91">Postdocs</a>
+                                <ul>
+                    <li class="menu-item--_2ff920a-10f4-4dad-9cd7-620b273bdbc9 menu-name--main">
+        <a href="/careers/postdocs/faq" data-drupal-link-system-path="node/198">Postdoc FAQ</a>
+              </li>
+                <li class="menu-item--c36699a3-3786-47c4-ae58-0e0f8210aa81 menu-name--main">
+        <a href="/fernbach" data-drupal-link-system-path="node/672">Fernbach Postdoctoral Fellowship</a>
+              </li>
+        </ul>
+  
+              </li>
+                <li class="menu-item--_b895570-2633-45aa-8fbd-38c31692de4f menu-name--main">
+        <a href="/careers/interns" data-drupal-link-system-path="node/2644">Interns</a>
+                                <ul>
+                    <li class="menu-item--_c0a2cfc-f58a-4525-9d69-d5423c452bef menu-name--main">
+        <a href="/careers/interns/hpc-academy" data-drupal-link-system-path="node/2658">HPC Cluster Engineer Academy</a>
+              </li>
+                <li class="menu-item--_3456d0c-e212-4034-b8f7-520420d493d5 menu-name--main">
+        <a href="/careers/interns/doit" data-drupal-link-system-path="node/2659">DevOps Internship Team (DO IT)</a>
+              </li>
+                <li class="menu-item--bf297896-74d1-4933-aa23-f7e1ec97078e menu-name--main">
+        <a href="https://data-science.llnl.gov/dssi">Data Science Summer Institute (DSSI)</a>
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+              </li>
+        </ul>
+  
+
+</div></div>
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","pathPrefix":"","currentPath":"node\/1088","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"en"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"matomo":{"disableCookies":false,"trackColorbox":false,"trackMailto":true},"responsive_menu":{"position":"right","theme":"theme-dark","pagedim":"pagedim","modifyViewport":true,"use_bootstrap":true,"breakpoint":"(min-width: 960px)","drag":false},"back_to_top":{"back_to_top_button_trigger":100,"back_to_top_speed":1200,"back_to_top_prevent_on_mobile":true,"back_to_top_prevent_in_admin":false,"back_to_top_button_type":"image","back_to_top_button_text":"Back to top"},"data":{"extlink":{"extTarget":true,"extTargetAppendNewWindowDisplay":true,"extTargetAppendNewWindowLabel":"(opens in a new window)","extTargetNoOverride":false,"extNofollow":false,"extTitleNoOverride":false,"extNoreferrer":false,"extFollowNoOverride":false,"extClass":"ext","extLabel":"(link is external)","extImgClass":false,"extSubdomains":false,"extExclude":"computing-staging.llnl.gov | computing-temp.llnl.gov | computing.llnl.gov","extInclude":"","extCssExclude":"","extCssInclude":"","extCssExplicit":"","extAlert":false,"extAlertText":"This link will take you to an external web site. We are not responsible for their content.","extHideIcons":false,"mailtoClass":"mailto","telClass":"0","mailtoLabel":"(link sends email)","telLabel":"(link is a phone number)","extUseFontAwesome":false,"extIconPlacement":"append","extPreventOrphan":true,"extFaLinkClasses":"fa fa-external-link","extFaMailtoClasses":"fa fa-envelope-o","extAdditionalLinkClasses":"","extAdditionalMailtoClasses":"","extAdditionalTelClasses":"","extFaTelClasses":"fa fa-phone","allowedDomains":[],"extExcludeNoreferrer":""}},"ckeditorAccordion":{"accordionStyle":{"collapseAll":null,"keepRowsOpen":null,"animateAccordionOpenAndClose":1,"openTabsWithHash":1,"allowHtmlInTitles":0}},"ajaxTrustedUrl":{"\/search\/card":true},"antibot":{"forms":{"search-block-form--2":{"id":"search-block-form--2","key":"s35COgSwAsIXqsZWZ5oBrrHu68ixdUaKUoAdBXebbid"},"search-block-form":{"id":"search-block-form","key":"s35COgSwAsIXqsZWZ5oBrrHu68ixdUaKUoAdBXebbid"}}},"user":{"uid":0,"permissionsHash":"4c829e41feed33544ad1d4ca9917530644057ec587eba8685e4d4f02aa3627f7"}}</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js?v=4.0.0"></script>
+<script src="/sites/default/files/js/js_5miY7S-DwIMrdxriSP7bb75Ti1LFkNxCIMBb7n_hWQs.js?scope=footer&amp;delta=1&amp;language=en&amp;theme=computing&amp;include=eJx9kFFuxCAMRC9E8JGQASdlA5g1zra5fUlTRdF-rISYsR-YEVg1eVbAU-3MUozHsDrlsRrcvHt045m1q2BzHkUSw5LZY5667jnV5cZz8oKyw9WZQqwmrBSTsjgMgSUmrnA5OwtXpRpN4NI2HfPex9OPDl0hytYw2__SzOMeflPnQnDztr-WT8z2r1RMzjVDHPlGyLAer_x1Hs-NZJ96TpEOVHvSEfKExzYVqpspqFwYTjFCvfE4-SJ3UHir7fUZv2XklKE"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/modules/contrib/ckeditor_accordion/js/accordion.frontend.min.js?tnc3i2"></script>
+<script src="/sites/default/files/js/js_lm3r5Tdjtc5uGQJ0plFGYOr3GNj2Lj6Ym7kJyjACv00.js?scope=footer&amp;delta=5&amp;language=en&amp;theme=computing&amp;include=eJx9kFFuxCAMRC9E8JGQASdlA5g1zra5fUlTRdF-rISYsR-YEVg1eVbAU-3MUozHsDrlsRrcvHt045m1q2BzHkUSw5LZY5667jnV5cZz8oKyw9WZQqwmrBSTsjgMgSUmrnA5OwtXpRpN4NI2HfPex9OPDl0hytYw2__SzOMeflPnQnDztr-WT8z2r1RMzjVDHPlGyLAer_x1Hs-NZJ96TpEOVHvSEfKExzYVqpspqFwYTjFCvfE4-SJ3UHir7fUZv2XklKE"></script>
+<script src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOE&amp;amp;subagency=LLNL&amp;amp;sdor=fda.gov&amp;amp;dclink=true" id="_fed_an_ua_tag" type="text/javascript"></script>
+<script src="/sites/default/files/js/js_Hwrwq1I2Vle09SDWS57ptOPc0Es6k_oEFMT7sl-BHW0.js?scope=footer&amp;delta=7&amp;language=en&amp;theme=computing&amp;include=eJx9kFFuxCAMRC9E8JGQASdlA5g1zra5fUlTRdF-rISYsR-YEVg1eVbAU-3MUozHsDrlsRrcvHt045m1q2BzHkUSw5LZY5667jnV5cZz8oKyw9WZQqwmrBSTsjgMgSUmrnA5OwtXpRpN4NI2HfPex9OPDl0hytYw2__SzOMeflPnQnDztr-WT8z2r1RMzjVDHPlGyLAer_x1Hs-NZJ96TpEOVHvSEfKExzYVqpspqFwYTjFCvfE4-SJ3UHir7fUZv2XklKE"></script>
+
+  </body>
+</html>

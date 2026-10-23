@@ -1,0 +1,3061 @@
+{
+  "topic": "20261024_w2_candidate_urls_a",
+  "retrieved_at": "2026-10-24T02:32:35.3466468+08:00",
+  "cutoff": "2026-10-24",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "evidence_class": "search_trace_and_answer",
+  "prompt": "截止2026-10-24。请通过实际web_search查找以下直接相关主题的原始来源URL，不能模拟工具轨迹：\n1. Reaktoro、smart chemical equilibrium / on-demand machine learning chemical equilibrium，Allan Leal等原始论文和作者项目文档。\n2. C语言非线性求解库SUNDIALS KINSOL：官方说明、用户提供的residual/Jacobian、向量后端/线程安全、许可证。\n3. 物理约束/守恒的化学平衡学习或学习初值，优先与TP/HP等代数平衡直接相关，区分有限速率化学积分/PDE代理。\n最多给8个URL，每个只标题名/作者年份、官方URL、实际检索和原文可得状态。若当前路由不提供web_search，先明确说明，然后仅给你记忆中的少量候选原始URL，逐一标“未检索、未核实、仅供HTTP验证”，不要给任何引文、性能数值、创新或SOTA判断。不要给聚合搜索页，不输出推理过程，不向用户索取凭据。\n",
+  "search_calls": [
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Reaktoro Allan Leal smart chemical equilibrium",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"on-demand machine learning\" chemical equilibrium Reaktoro Leal",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Reaktoro official documentation site:reaktoro.org",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "SUNDIALS KINSOL official documentation residual Jacobian license thread safety",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "SUNDIALS KINSOL user-provided residual Jacobian vector backends",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "physics constrained chemical equilibrium learning TP HP algebraic conservation initial guess machine learning",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"chemical equilibrium\" \"machine learning\" \"Gibbs\" OR TP OR HP conservation OR \"physics informed\" OR PINN -kinetics -PDE -\"finite rate\"",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "SUNDIALS KINSOL thread safety N_Vector backends license BSD",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"chemical equilibrium\" machine learning \"initial guess\" OR \"initial values\" TP HP Gibbs conservation physics-constrained -kinetics",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://sundials.readthedocs.io/"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-12",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "SUNDIALS KINSOL thread-safe OR \"thread safety\" OR reentrant site:sundials.readthedocs.io",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-13",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://arxiv.org/html/1708.04825v1"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-14",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://github.com/reaktoro/reaktoro"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-15",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://computing.llnl.gov/projects/sundials/license"
+      }
+    },
+    {
+      "id": "ws_cc36e965-2d1b-9b1c-af05-8e28c7dc4753_call-efa21f46-0c0f-4a31-b501-489a6f9e50f0-16",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Leal Kyas Kulik Saar 2020 on-demand machine learning chemical equilibrium Reaktoro DOI",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://doi.org/10.3390/e28010009"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/paper/Accelerating-Reactive-Transport-Modeling%3A-On-Demand-Leal-Kyas/994c9c1c6e5d27ce3807271ba15693481089dcd5"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Constants_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/machine-learning/index.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41598-026-49635-4"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00103b"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v4"
+          },
+          {
+            "type": "url",
+            "url": "https://simtk.org/svn/sundials/trunk/kinsol/doc/kin_guide.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/jcisd8/article/66/17/10487/5256022/Differentiable-Thermodynamic-Phase-Equilibria-for"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-specifying-constraints.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumSolver_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://tcg.mae.cornell.edu/pubs/Pope_CUR_03.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.linuxlinks.com/reaktoro-framework-modelling-chemically-reactive-systems/"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2609.36947v1"
+          },
+          {
+            "type": "url",
+            "url": "https://colab.research.google.com/github/reaktoro/reaktoro-jupyter-book/blob/main/tutorials/equilibrium/equilibrium-basics.ipynb"
+          },
+          {
+            "type": "url",
+            "url": "https://www.researchgate.net/publication/399080651_A_Physics-Informed_Neural_Network_PINN_Approach_to_Over-Equilibrium_Dynamics_in_Conservatively_Perturbed_Linear_Equilibrium_Systems"
+          },
+          {
+            "type": "url",
+            "url": "https://documentsdelivered.com/source/040/503/040503270.php"
+          },
+          {
+            "type": "url",
+            "url": "https://portal.fis.tum.de/en/publications/thermodynamically-consistent-machine-learning-model-for-excess-gi/"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0010218025001439"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlelanding/2024/sc/d4sc04554h"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/arkode/Usage/User_supplied.html"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/project-reaktoro-framework-description/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/license"
+          },
+          {
+            "type": "url",
+            "url": "https://jcheminf.biomedcentral.com/articles/10.1186/s13321-025-01033-0"
+          },
+          {
+            "type": "url",
+            "url": "https://www.cambridge.org/core/journals/data-centric-engineering/article/physicsconstrained-machine-learning-for-reduced-composition-space-chemical-kinetics/D9C884C25F1B20D938B725F64609537C"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Mathematics_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/SmartEquilibriumOptions_8hpp_source.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/general/faq.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.frontiersin.org/journals/thermal-engineering/articles/10.3389/fther.2025.1594443/full"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/llnl/sundials"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378437126005418"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/pdf/2603.11249"
+          },
+          {
+            "type": "url",
+            "url": "https://www.nature.com/articles/s41467-026-71430-y"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.rsc.org/en/content/articlepdf/2025/me/d4me00168k"
+          },
+          {
+            "type": "url",
+            "url": "https://www.mdpi.com/1099-4300/28/1/9"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/reaktoro/reaktoro"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/examples/kinsol/introduction.html"
+          },
+          {
+            "type": "url",
+            "url": "https://dealii.org/current/doxygen/deal.II/classSUNDIALS_1_1KINSOL.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/"
+          },
+          {
+            "type": "url",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10596-021-10126-2.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/api/classReaktoro_1_1SmartEquilibriumSolver.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S000925092500329X"
+          },
+          {
+            "type": "url",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12168259/"
+          },
+          {
+            "type": "url",
+            "url": "https://github.com/SciML/Sundials.jl"
+          },
+          {
+            "type": "url",
+            "url": "http://inria-parkas.github.io/sundialsml/Kinsol.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/enfuem/article/38/20/19929/166219/Prediction-of-Chemical-Looping-Hydrogen-Production"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/1708.04825v1"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/tutorials/equilibrium/equilibrium-basics.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/v1/overview.html"
+          },
+          {
+            "type": "url",
+            "url": "https://reaktoro.org/index.html"
+          },
+          {
+            "type": "url",
+            "url": "http://gitmemories.com/LLNL/sundials/issues/120"
+          },
+          {
+            "type": "url",
+            "url": "https://computing.llnl.gov/projects/sundials/kinsol"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/kinsol/Introduction_link.html"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs.acs.org/iecred/article/64/40/19722/3734962/A-Multi-Stage-Graph-Neural-Network-Physics"
+          },
+          {
+            "type": "url",
+            "url": "https://sundials.readthedocs.io/en/develop/Python/sundials4py-kinsol-functions.html"
+          },
+          {
+            "type": "url",
+            "url": "https://arxiv.org/html/2603.11249v2"
+          },
+          {
+            "type": "url",
+            "url": "https://geg.ethz.ch/publications/accelerating-reactive-transport-modeling-on-demand-machine-learning-algorithm-for-chemical"
+          },
+          {
+            "type": "url",
+            "url": "https://scispace.com/papers/an-overview-of-computational-methods-for-chemical-2f1af7gbnf"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**1. Reaktoro Machine Learning（Allan Leal, 2022）**  \n官方URL: https://reaktoro.org/tutorials/machine-learning/index.html  \n实际检索：已检索；原文可得（完整官方教程页）。  \n支持片段：Reaktoro implements machine learning accelerated solvers... SmartEquilibriumSolver... on-demand machine learning (ODML) algorithm first introduced in Leal et al. [2017], then improved in Leal et al. [2020]... first-order Taylor approximation... mass conservation... intrinsically mass conservative because mass balance equations are linear.[[1]](https://reaktoro.org/tutorials/machine-learning/index.html)\n\n**2. Ultra-Fast Reactive Transport Simulations When Chemical Reactions Meet Machine Learning: Chemical Equilibrium（Allan M. M. Leal, Dmitrii A. Kulik, Martin O. Saar, 2017）**  \n官方URL: https://arxiv.org/html/1708.04825v1  \n实际检索：已检索；原文可得（arXiv HTML全文）。  \n支持片段：we present a machine learning method that enables new equilibrium states to be quickly and accurately estimated... smart chemical equilibrium method... on-demand machine learning method... implemented in Reaktoro... reaktoro.org.[[2]](https://arxiv.org/html/1708.04825v1)\n\n**3. Accelerating Reactive Transport Modeling: On-Demand Machine Learning Algorithm for Chemical Equilibrium Calculations（Allan M. M. Leal, Svetlana Kyas, Dmitrii A. Kulik, Martin O. Saar, 2020）**  \n官方URL: https://link.springer.com/article/10.1007/s11242-020-01412-1  \n实际检索：已检索；原文部分可得（Springer摘要/预览；DOI 10.1007/s11242-020-01412-1）。  \n支持片段：an on-demand machine learning algorithm that enables quick and accurate prediction of new chemical equilibrium states... mass conservative by construction... implementation and numerical tests are carried out in Reaktoro (reaktoro.org).[[3]](https://link.springer.com/article/10.1007/s11242-020-01412-1)\n\n**4. Reaktoro GitHub / 项目仓库（Allan Leal, 2014–2024）**  \n官方URL: https://github.com/reaktoro/reaktoro  \n实际检索：已检索；原文可得（README + LICENSE）。  \n支持片段：a unified framework for modeling chemically reactive systems... support to chemical equilibrium and kinetics calculations with general constraints... License: LGPL v2.1... Copyright © 2014-2024 Allan Leal. reaktoro.org.[[4]](https://github.com/reaktoro/reaktoro)\n\n**5. KINSOL Documentation（Alan C. Hindmarsh, Radu Serban, Cody J. Balos, David J. Gardner, Daniel R. Reynolds, Carol S. Woodward 等）**  \n官方URL: https://sundials.readthedocs.io/en/latest/kinsol/  \n实际检索：已检索；原文可得（官方文档）。  \n支持片段：KINSOL, a solver for nonlinear algebraic systems. It includes a Newton-Krylov solver as well as Picard and fixed point solvers... KINSOL is written in C, with C++ and Fortran interfaces. N_Vector module... serial, MPI-parallel, OpenMP and Pthreads thread-parallel N_Vector implementations, as well as multiple N_Vector implementations designed to leverage GPU architectures.[[5]](https://sundials.readthedocs.io/en/latest/kinsol/)\n\n**6. Using KINSOL for the Solution of Nonlinear Systems（SUNDIALS 官方用法文档）**  \n官方URL: https://sundials.readthedocs.io/en/latest/kinsol/Usage/  \n实际检索：已检索；原文可得。  \n支持片段：users are required to supply a function of type KINSysFn that defines the nonlinear system... KINInit(..., KINSysFn func, ...)... optionally supply... KINLsJacFn... Jacobian construction (matrix-based)... KINSetJacFn()... Jacobian-vector product (matrix-free)... KINLsJacTimesVecFn. N_Vector implementations... not all SUNLinearSolver and SUNMatrix objects are compatible with all N_Vector implementations... OpenMP... Pthreads.[[6]](https://sundials.readthedocs.io/en/latest/kinsol/Usage/)\n\n**7. SUNDIALS License and Notices / KINSOL（LLNL 官方）**  \n官方URL: https://sundials.readthedocs.io/ 及 https://computing.llnl.gov/projects/sundials/license  \n实际检索：已检索；原文可得。  \n支持片段：All SUNDIALS packages are released open source, under the BSD 3-Clause license... LLNL-CODE-665877 (KINSOL)... serial, MPI, OpenMP and Pthreads thread-parallel N_Vector... GPU. 线程安全方面：官方文档明确提供 OpenMP/Pthreads 向量后端及多线程环境初始化说明，但未检索到对同一 KINSOL 求解器实例并发调用的完整“thread-safe/reentrant”独立声明（无法进一步核实该点）。[[7]](https://sundials.readthedocs.io/)\n\n**8. Differentiable Thermodynamic Phase-Equilibria for Machine Learning（Karim K. Ben Hicham, Moreno Ascani, Jan G. Rittig, Alexander Mitsos, 2026）**  \n官方URL: https://arxiv.org/html/2603.11249v4  \n实际检索：已检索；原文可得（arXiv HTML）。  \n支持片段：Physics-consistent machine learning methods... equilibrium data arising from an extremum principle, such as liquid-liquid equilibria... differentiable algorithm for phase-equilibrium calculation that guarantees thermodynamic consistency... constrained minimization of the Δg mix... global optimality of Δg mix and stability conditions... algebraic（Gibbs 能量极值/相平衡，区别于有限速率积分或 PDE 代理）。其他检索到的 PINN/守恒学习多针对化学动力学 ODE/源项（如 over-equilibrium dynamics、NeuralODE kinetics），已按用户要求区分。[[8]](https://arxiv.org/html/2603.11249v4)\n\n以上为截止检索范围内直接相关的原始官方/作者来源（Reaktoro 官网/论文/仓库；SUNDIALS KINSOL 文档/许可证；代数 Gibbs/TP-HP 类相平衡物理约束学习）。无聚合搜索页。Reaktoro 的 ODML 直接针对化学平衡（Gibbs 能量最小化/参数化约束，含质量守恒）。KINSOL 为 C 语言非线性代数求解器，用户提供 residual（KINSysFn）与可选 Jacobian。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://reaktoro.org/tutorials/machine-learning/index.html",
+              "start_index": 492,
+              "end_index": 557,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://arxiv.org/html/1708.04825v1",
+              "start_index": 1046,
+              "end_index": 1088,
+              "title": "2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://link.springer.com/article/10.1007/s11242-020-01412-1",
+              "start_index": 1665,
+              "end_index": 1732,
+              "title": "3"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://github.com/reaktoro/reaktoro",
+              "start_index": 2094,
+              "end_index": 2137,
+              "title": "4"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sundials.readthedocs.io/en/latest/kinsol/",
+              "start_index": 2736,
+              "end_index": 2792,
+              "title": "5"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sundials.readthedocs.io/en/latest/kinsol/Usage/",
+              "start_index": 3386,
+              "end_index": 3448,
+              "title": "6"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sundials.readthedocs.io/",
+              "start_index": 3917,
+              "end_index": 3956,
+              "title": "7"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://arxiv.org/html/2603.11249v4",
+              "start_index": 4659,
+              "end_index": 4701,
+              "title": "8"
+            }
+          ]
+        }
+      ],
+      "id": "msg_cc36e965-2d1b-9b1c-af05-8e28c7dc4753",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 146151,
+    "input_tokens_details": {
+      "cached_tokens": 83712
+    },
+    "output_tokens": 4663,
+    "output_tokens_details": {
+      "reasoning_tokens": 2763
+    },
+    "total_tokens": 150814,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 17,
+    "cost_in_usd_ticks": 1512020800,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 17,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 62367,
+      "output_tokens": 3352
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

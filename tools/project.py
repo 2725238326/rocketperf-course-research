@@ -394,6 +394,9 @@ def check(root=ROOT, skip_hashes=False):
     from work2_sources import check_sources
     work2_report=check_sources(root,skip_hashes=skip_hashes)
     issues+=work2_report["issues"]
+    from work2_research import verify as verify_research
+    research_report=verify_research(root)
+    issues+=research_report["issues"]
     issues+=architecture_checks(root)
     import shutil, subprocess
     powershell=shutil.which('pwsh')
@@ -407,7 +410,7 @@ def check(root=ROOT, skip_hashes=False):
         if not (root/relative).is_file() or (root/relative).read_text(encoding="utf-8")!=expected:
             issues.append(f"Generated architecture drift: {relative}; run render_architecture.py")
     return {"kind":"project-check","status":"PASS" if not issues else "FAIL", "tasks":len(state["tasks"]),
-            "local_links":link_count,"powershell_scripts":ps_scripts,"source_hashes_checked":hashes,"work2_source_hashes_checked":work2_report["checked"],"known_unavailable_sources":[r['id'] for r in source_index if not r['available']],"issues":issues}
+            "local_links":link_count,"powershell_scripts":ps_scripts,"source_hashes_checked":hashes,"work2_source_hashes_checked":work2_report["checked"],"research_source_hashes_checked":research_report["checked"],"known_unavailable_sources":[r['id'] for r in source_index if not r['available']],"issues":issues}
 
 
 def staged_check(root=ROOT):
@@ -441,6 +444,10 @@ def staged_check(root=ROOT):
     if (root/work2_manifest).is_file():
         required.add(work2_manifest)
         required.update(row['path'] for row in read_json(root/work2_manifest)['files'])
+    from work2_research import INDEX as research_index
+    if (root/research_index).is_file():
+        required.add(research_index)
+        required.update(row['path'] for row in read_json(root/research_index)['sources'] if row['available'])
     for task in state['tasks']:
         if task['status'] in {'DONE','REVIEW'}:
             required.update(task['required_artifacts'])

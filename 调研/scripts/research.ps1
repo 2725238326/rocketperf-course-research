@@ -4,6 +4,7 @@ param(
     [string]$OutputDirectory,
     [ValidateRange(1,20)][int]$MaxCalls = 6,
     [switch]$Brief,
+    [switch]$RequireSearchTrace,
     [ValidatePattern('^\d{4}-\d{2}-\d{2}$')][string]$CutoffDate = (Get-Date -Format 'yyyy-MM-dd'),
     [string]$ConfigPath = 'E:\Demo\IDEA_collector\apikey\grok.txt',
     [switch]$DryRun
@@ -27,14 +28,16 @@ $body = @{
     input = @(@{role='system';content=$common}, @{role='user';content=$query})
     tools = @(@{type='web_search'})
     stream = $false
-} | ConvertTo-Json -Depth 8
+}
+if ($RequireSearchTrace) { $body.tool_choice = 'required' }
+$body = $body | ConvertTo-Json -Depth 8
 if ($DryRun) {
     [pscustomobject]@{
         Topic=$Topic; Cutoff=$CutoffDate; Model='grok-4.6'; PromptFile=$PromptFile
         OutputJson=$jsonPath; OutputMarkdown=$textPath
         CredentialRead=$false; NetworkRequest=$false; OutputsWritten=$false
         CallLimitNote='MaxCalls is prompt guidance, not a verified server-side hard limit.'
-        Request=($body | ConvertFrom-Json)
+        RequireSearchTrace=[bool]$RequireSearchTrace; Request=($body | ConvertFrom-Json)
     } | ConvertTo-Json -Depth 10
     return
 }
@@ -43,10 +46,18 @@ $configText = Get-Content -LiteralPath $ConfigPath -Raw
 $endpoint = [regex]::Match($configText, 'https?://[^\s"''<>]+').Value.TrimEnd('/')
 $apiKey = [regex]::Match($configText, '(?:sk-|xai-)[A-Za-z0-9_\-]+').Value
 if (-not $endpoint -or -not $apiKey) { throw 'Endpoint or credential missing.' }
+$endpointUri = [uri]$endpoint
+if ($endpointUri.Scheme -ne 'https' -or $endpointUri.Query -or $endpointUri.Fragment -or $endpointUri.UserInfo) { throw 'Use an HTTPS API base without query, fragment or user information.' }
+$endpoint = [regex]::Replace($endpoint, '/(?:v1/)?responses$', '')
+$endpoint = [regex]::Replace($endpoint.TrimEnd('/'), '/v1$', '')
 try {
     $response = Invoke-RestMethod -Uri ($endpoint + '/v1/responses') -Method Post -Headers @{Authorization=('Bearer ' + $apiKey)} -ContentType 'application/json' -Body ([System.Text.Encoding]::UTF8.GetBytes($body)) -TimeoutSec 300
 } catch {
-    throw ('Grok request failed: ' + $_.Exception.Message)
+    $statusCode = if ($_.Exception.Response) { [int]$_.Exception.Response.StatusCode } else { $null }
+    [System.IO.Directory]::CreateDirectory($outputDir) | Out-Null
+    $failure = [ordered]@{topic=$Topic; retrieved_at=([DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(8))).ToString('o'); cutoff=$CutoffDate; status='REQUEST_FAILED'; http_status=$statusCode; model_requested='grok-4.6'; require_search_trace=[bool]$RequireSearchTrace; note='Sanitized execution record; no credentials, request headers or response body retained.'}
+    [System.IO.File]::WriteAllText($jsonPath, ($failure | ConvertTo-Json -Depth 8), [System.Text.UTF8Encoding]::new($false))
+    throw ('Grok request failed; HTTP status=' + $statusCode + '; sanitized record saved. Endpoint and credentials withheld.')
 }
 $searches = @($response.output | Where-Object type -EQ 'web_search_call')
 $messages = @($response.output | Where-Object type -EQ 'message')
@@ -54,13 +65,14 @@ $answer = ($messages | ForEach-Object { $_.content | Where-Object type -EQ 'outp
 if ($searches.Count -eq 0 -or [string]::IsNullOrWhiteSpace($answer)) {
     Write-Warning 'Response has no search trace or no answer; retain as process evidence, not verified research.'
 }
-$retrievedAt = [DateTimeOffset]::Now
+$retrievedAt = [DateTimeOffset]::UtcNow.ToOffset([TimeSpan]::FromHours(8))
 $record = [ordered]@{
     topic = $Topic
     retrieved_at = $retrievedAt.ToString('o')
     cutoff = $CutoffDate
     model = $response.model
     response_status = $response.status
+    evidence_class = if ($searches.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace($answer)) { 'search_trace_and_answer' } else { 'process_only' }
     prompt = $query
     search_calls = $searches
     messages = $messages
@@ -70,4 +82,5 @@ $record = [ordered]@{
 [System.IO.Directory]::CreateDirectory($outputDir) | Out-Null
 [System.IO.File]::WriteAllText($jsonPath, ($record | ConvertTo-Json -Depth 30), [System.Text.UTF8Encoding]::new($false))
 [System.IO.File]::WriteAllText($textPath, "# $Topic`n`n检索日期：$($retrievedAt.ToString('yyyy-MM-dd'))；证据截止：$CutoffDate；来源：Grok联网检索。此文件是检索返回内容，需结合正文来源审核。`n`n$answer`n", [System.Text.UTF8Encoding]::new($false))
-[pscustomobject]@{Topic=$Topic; Status=$response.status; SearchCalls=$searches.Count; Characters=$answer.Length; TextFile=$textPath} | ConvertTo-Json -Compress
+[pscustomobject]@{Topic=$Topic; Status=$response.status; SearchCalls=$searches.Count; Characters=$answer.Length; EvidenceClass=$record.evidence_class; TextFile=$textPath} | ConvertTo-Json -Compress
+if ($RequireSearchTrace -and ($searches.Count -eq 0 -or [string]::IsNullOrWhiteSpace($answer))) { throw 'Required search trace or answer is absent; saved as process-only evidence.' }
