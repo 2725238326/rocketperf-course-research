@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "kind": "failed_search_attempt",
+  "topic": "20261023_w2_methods_a",
+  "attempt_date": "2026-10-23",
+  "cutoff_date": "2026-10-23",
+  "model_requested": "grok-4.6",
+  "prompt_path": "Work2/research/prompts/20261023_w2_methods_a.txt",
+  "dry_run": {"completed": true, "credential_read": false, "network_request": false, "outputs_written": false},
+  "actual_request": {"attempted": true, "http_status": 403, "status": "FORBIDDEN", "exit_code": 1},
+  "usable_search_output": false,
+  "provenance": "Sanitized execution-fact record created after the script failed; not a raw API response. No request headers, credentials or response body retained.",
+  "impact": "No new online source or frontier-research claim is verified by this request. Continue local reading and baseline preparation; retry with a new Topic after access is restored."
+}

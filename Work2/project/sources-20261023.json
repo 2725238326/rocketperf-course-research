@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-23",
+  "scope": "User-supplied originals; paths and bytes are immutable",
+  "files": [
+    {
+      "id": "W2SRC-001",
+      "path": "Work2/作业要求.png",
+      "bytes": 58540,
+      "sha256": "1960ae3a907d6ceea01dc7e99bc9e07ee3c502acf3be9c9380a48cf2793890d0"
+    },
+    {
+      "id": "W2SRC-002",
+      "path": "Work2/参考内容.png",
+      "bytes": 48227,
+      "sha256": "2dac5989c1462874703d2509f22734ed216a092e773301b9b92c5f837c98a814"
+    },
+    {
+      "id": "W2SRC-003",
+      "path": "Work2/提示词/start0.md",
+      "bytes": 30377,
+      "sha256": "1f85aaa34f3505370a740d0145470ae9d13886d19f4c6d4dd2b7b02164851fb2"
+    },
+    {
+      "id": "W2SRC-004",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/202610火箭发动机原理-第五章推力室的热力计算_第1、2、3节.pdf",
+      "bytes": 5665621,
+      "sha256": "f3c80a61eaf774e966289e692d6d958760b80339c6270746a264cb31538120d9"
+    },
+    {
+      "id": "W2SRC-005",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/202610火箭发动机原理-第五章推力室的热力计算_第4、5节.pdf",
+      "bytes": 2840205,
+      "sha256": "5ca0647f5bc578e8d5d9f28b13b39f3468b773272452e9e76f3f54a05a1cdfb2"
+    },
+    {
+      "id": "W2SRC-006",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/NASA关于热力学性质的九系数新形式数据库/1994NASA-RP-1311Computer Program for Calculation of Complex Chemical Equilibrium Compositions and ApplicationsⅠAnalysis.pdf",
+      "bytes": 3786040,
+      "sha256": "02bafdc19adf7defc4750ded8aefbbc33babc92f46d42ab9d7bb1367dfaf821f"
+    },
+    {
+      "id": "W2SRC-007",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/NASA关于热力学性质的九系数新形式数据库/1996NASA-RP-1311Computer Program for Calculation of Complex Chemical Equilibrium Compositions and ApplicationsⅡUsers Manual and Program Description.pdf",
+      "bytes": 7535438,
+      "sha256": "4ce554912b9dbe699528b236a192124a3d2e66fa3347ff89a5e8b98b36aa2ce1"
+    },
+    {
+      "id": "W2SRC-008",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/NASA关于热力学性质的九系数新形式数据库/thermo.inp",
+      "bytes": 1282336,
+      "sha256": "b1bc0707ec76c569b53aaa9fd0914538f37e261884105c2ba601c9e2e6ec5e27"
+    },
+    {
+      "id": "W2SRC-009",
+      "path": "Work2/火箭发动机原理-第五章推力室的热力计算/NASA关于热力学性质的九系数新形式数据库/trans.inp",
+      "bytes": 37847,
+      "sha256": "379c514a7f7638371d8d9254a1d653cd078084a9371061aa0b45c5a5c3334d41"
+    }
+  ]
+}

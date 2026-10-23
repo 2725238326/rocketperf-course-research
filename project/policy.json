@@ -7,7 +7,14 @@
     "调研/文献/",
     "调研/检索记录/",
     "作业要求/",
-    "Work2/"
+    "Work2/作业要求.png",
+    "Work2/参考内容.png",
+    "Work2/提示词/",
+    "Work2/火箭发动机原理-第五章推力室的热力计算/",
+    "Work2/project/sources-",
+    "Work2/archive/work1/baseline-",
+    "Work2/research/raw/",
+    "Work2/research/search/"
   ],
   "protected_file": "第2章推力室和发动机的主要参数20260911.pptx",
   "allowed_roots": [
@@ -45,9 +52,28 @@
   ],
   "generated_documents": [
     "worknow.md",
-    "docs/tasks.md"
+    "docs/tasks.md",
+    "Work2/worknow.md",
+    "Work2/docs/tasks.md"
   ],
   "canonical_documents": [
+    {"path":"Work2/README.md","role":"作业二的人类入口与最短工作路径","owner":"tooling"},
+    {"path":"Work2/AGENTS.md","role":"作业二agent接手入口与阶段边界","owner":"tooling"},
+    {"path":"Work2/rules.md","role":"作业二研究、C工程、证据与授权约束","owner":"tooling"},
+    {"path":"Work2/handoff.md","role":"作业二接续说明和最近执行证据","owner":"tooling"},
+    {"path":"Work2/docs/project-map.md","role":"作业二目录、文档归属与共享工程边界","owner":"tooling"},
+    {"path":"Work2/docs/governance.md","role":"作业二任务、质量和归档操作说明","owner":"tooling"},
+    {"path":"Work2/docs/requirements.md","role":"作业二教师原文、需求追踪和未明确项","owner":"tooling"},
+    {"path":"Work2/docs/quality-standard.md","role":"课程、工程和研究贡献分层质量标准","owner":"tooling"},
+    {"path":"Work2/docs/research-plan.md","role":"问题驱动的研究路线、里程碑和实验门槛","owner":"tooling"},
+    {"path":"Work2/docs/baseline-audit.md","role":"作业一能力继承、Illinois线索及补审范围","owner":"tooling"},
+    {"path":"Work2/docs/knowledge-map.md","role":"推力室热力计算知识路径与学习检查","owner":"thermo"},
+    {"path":"Work2/docs/decisions.md","role":"作业二技术和组织决定及依据","owner":"tooling"},
+    {"path":"Work2/docs/review.md","role":"作业二不确定性、风险、反证和未解决问题","owner":"tooling"},
+    {"path":"Work2/docs/prompt-review.md","role":"启动提示词适用性审阅及可执行收敛","owner":"tooling"},
+    {"path":"Work2/research/README.md","role":"作业二来源、原文、检索和笔记维护方式","owner":"tooling"},
+    {"path":"Work2/research/evidence.md","role":"作业二来源核验与主张边界台账","owner":"thermo"},
+    {"path":"Work2/archive/work1/README.md","role":"作业一就地归档、成果和遗留责任入口","owner":"tooling"},
     {
       "path": "docs/review.md",
       "role": "补审发现、运行库证据与未完成项",

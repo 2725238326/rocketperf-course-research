@@ -15,3 +15,8 @@ results/research/** -text -whitespace
 data/thermo/** -text -whitespace
 # Vendored SDK headers keep upstream CRLF bytes so third_party/README hashes hold.
 third_party/webview2/** -text -whitespace
+# Work2 user originals and saved evidence retain their byte identities.
+Work2/提示词/** -text -whitespace
+Work2/火箭发动机原理-第五章推力室的热力计算/** -text -whitespace
+Work2/research/raw/** -text -whitespace
+Work2/research/search/** -text -whitespace

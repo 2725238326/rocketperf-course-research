@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory=$true)][ValidatePattern('^[A-Za-z0-9][A-Za-z0-9_-]{0,100}$')][string]$Topic,
     [string]$PromptFile,
+    [string]$OutputDirectory,
     [ValidateRange(1,20)][int]$MaxCalls = 6,
     [switch]$Brief,
     [ValidatePattern('^\d{4}-\d{2}-\d{2}$')][string]$CutoffDate = (Get-Date -Format 'yyyy-MM-dd'),
@@ -13,7 +14,7 @@ $root = Split-Path -Parent $PSScriptRoot
 if (-not $PromptFile) { $PromptFile = Join-Path $root ('prompts/' + $Topic + '.txt') }
 $query = Get-Content -LiteralPath $PromptFile -Raw
 if ([string]::IsNullOrWhiteSpace($query)) { throw 'Prompt is empty.' }
-$outputDir = Join-Path $root '检索记录'
+$outputDir = if ($OutputDirectory) { [System.IO.Path]::GetFullPath($OutputDirectory) } else { Join-Path $root '检索记录' }
 $jsonPath = Join-Path $outputDir ($Topic + '.json')
 $textPath = Join-Path $outputDir ($Topic + '.md')
 $common = @'

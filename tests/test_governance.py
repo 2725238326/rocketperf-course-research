@@ -192,6 +192,36 @@ class GovernanceTests(unittest.TestCase):
             with self.assertRaises(ValueError): self.change('start')
         self.assertEqual(self.state(),before)
 
+    def test_work2_scope_and_generated_views_do_not_invalidate_acceptance(self):
+        project.amend_task(self.root,'WORK-001','root','Work2 deliverable',required_artifacts=['Work2/result.txt'])
+        target=self.root/'Work2/result.txt';target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_text('scoped result',encoding='utf-8')
+        self.change('start');proof=self.proof()
+        board=(self.root/'Work2/docs/tasks.md').read_text(encoding='utf-8')
+        self.assertIn('WORK-001',board)
+        self.assertNotIn('SIDE-001',board)
+        self.assertIn('SIDE-001',(self.root/'docs/tasks.md').read_text(encoding='utf-8'))
+        before=fingerprint(self.root)
+        self.change('submit',evidence=proof);self.change('complete')
+        self.assertEqual(before,fingerprint(self.root))
+        self.assertNotIn('WORK-001',(self.root/'Work2/worknow.md').read_text(encoding='utf-8'))
+        rules=self.root/'Work2/rules.md';rules.write_text('changed rule',encoding='utf-8')
+        self.assertNotEqual(before,fingerprint(self.root))
+
+    def test_work2_original_same_size_tamper_and_missing_manifest_rejected(self):
+        import work2_sources
+        for relative in work2_sources.RAW_PATHS:
+            path=self.root/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'original')
+        self.assertTrue(work2_sources.check_sources(self.root)['issues'])
+        work2_sources.capture(self.root)
+        self.assertEqual(work2_sources.check_sources(self.root)['issues'],[])
+        with self.assertRaises(ValueError): work2_sources.capture(self.root)
+        (self.root/work2_sources.RAW_PATHS[0]).write_bytes(b'modified')
+        report=work2_sources.check_sources(self.root)
+        self.assertTrue(any('bytes changed' in issue for issue in report['issues']))
+        (self.root/work2_sources.RAW_PATHS[1]).unlink()
+        self.assertTrue(any('missing' in issue for issue in work2_sources.check_sources(self.root)['issues']))
+
     def test_missing_proof_snapshot_detected(self):
         self.change('start');self.change('submit',evidence=self.proof())
         proof_path=self.task('WORK-001')['verification']['path']

@@ -1,10 +1,12 @@
 # 火箭发动机原理 · Rocketperf
 
+**当前阶段：第二次大作业。** 从[Work2入口](Work2/README.md)进入，[当前工作面](Work2/worknow.md)由统一任务登记生成。作业一的[归档导航与遗留责任](Work2/archive/work1/README.md)独立保留；下方是既有C工程与第一阶段能力说明。
+
 本项目研究朱雀三号与长征十号乙动力系统，用C17程序做热化学、喷管和条件性循环分析。公开资料不足以组成四级段真实性能卡；凡带型号名称的可运行输入都是研究情景，不能据此声称飞行实测性能。
 
 **第一阶段已收官（2026-10-23用户确认）。** 成果、冻结版本与遗留边界见[收官总览](docs/final-overview.md)，四项材料见[当前提交归档](deliverables/submission-20261020-v3/README.md)。
 
-**第一次接手：**[当前工作面](worknow.md) → [收官总览](docs/final-overview.md) → [文档导航](docs/README.md) → [四级段研究](docs/two-vehicle-study.md)。
+**继承作业一工程时：**[收官总览](docs/final-overview.md) → [文档导航](docs/README.md) → [四级段研究](docs/two-vehicle-study.md)。
 
 任务、代码、来源和算例职责见[项目地图](docs/project-map.md)；构建/任务/交付规范见[治理说明](docs/governance.md)。
 

@@ -1,0 +1,846 @@
+{
+  "schema_version": 1,
+  "captured_on": "2026-10-23",
+  "archive_mode": "in_place",
+  "repository_baseline": "f62f21b8de1f07515d5ea3d7cca87db1f30e45d4",
+  "delivery_source_commit": "3d4130c6db862c652bae7318cb85813ce0596d2e",
+  "payload_count": 162,
+  "payload_sha256": "PASS",
+  "zip_crc": "PASS",
+  "zip_member_sha256": "PASS",
+  "anchors": [
+    {
+      "path": "docs/final-overview.md",
+      "sha256": "282f0946661d9c15459d9ae48ea3f94a5ab1280b69e287eec4d9616a5a4b560b",
+      "bytes": 8424
+    },
+    {
+      "path": "taskshot/2026-10-23_077-phase-one-closeout.md",
+      "sha256": "94b1f2006c6f258a21cd18ce641f8ccb64ad0cd1b5c3cd6a57ff93d2acade46f",
+      "bytes": 4476
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/manifest.json",
+      "sha256": "1222a9980e6165c997104e8d874f453ff006b52d4fb4711f483cb9be54f28b2f",
+      "bytes": 21741
+    },
+    {
+      "path": "deliverables/第五组_第一次大作业_分工更新版_20261020.zip",
+      "sha256": "c6a29a5f411e10772a9d033845ac352819fc1e873a66ea2b1c3891bd56bce013",
+      "bytes": 11977891
+    }
+  ],
+  "files": [
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/benchmarks/air_mach2_ambient.ini",
+      "sha256": "b4124739200416added34cce7ee563137975d604f9dcd1662f766981c49eb3b8",
+      "bytes": 383
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/benchmarks/air_mach2_vacuum.ini",
+      "sha256": "4fbaaa246e939a0e816333aa259589f2c4411aab9ac301b3948e49861d70cb84",
+      "bytes": 369
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/benchmarks/prescribed_cycle.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec",
+      "bytes": 1135
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/research/propellant_comparison.ini",
+      "sha256": "8913150d1270390d91a37fdad3eb455317578a20cf16990e0463e697bd8fc15a",
+      "bytes": 793
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/research/s1_area_ratio_ambient.ini",
+      "sha256": "58381f9f38296e2e200d7e8f9737cd7c73a1315ba9542575c9cd30e42f9c855f",
+      "bytes": 401
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/research/s3_sealevel_regime.ini",
+      "sha256": "248f914353346466575bd37e539a9b76fd948613195e191601cf08643e24aa46",
+      "bytes": 447
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/vehicles/cz10b_first_stage1.ini",
+      "sha256": "74427bbb56262098bc23a5cac8cd363912268918e03d3995d617ebee0055a3ac",
+      "bytes": 1333
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/vehicles/cz10b_first_stage2.ini",
+      "sha256": "e2ad75e6404fd314482c47a9e483279383d1a600dab822599446aae5800eac4e",
+      "bytes": 1229
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/vehicles/cz10b_first_stage2_orsc.ini",
+      "sha256": "4414e41ea915b162a62ff27950b9ac0521d08bda38ed4467ad0da5a959a77266",
+      "bytes": 1226
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/vehicles/zq3_y1_stage1.ini",
+      "sha256": "d534172d32604bfb0a4264a82eaf248b0ebb846fc264a373cbd13fa592db4042",
+      "bytes": 1220
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/cases/vehicles/zq3_y1_stage2.ini",
+      "sha256": "8d0398d7d2e5330a57cac048d43b27449a697ebef2a9c5050206c565fa809c60",
+      "bytes": 1218
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/CMakeLists.txt",
+      "sha256": "4d44cc29ed1bafa56b2abf2eb772ac900c207c9d9173ed0781b0550477b0f9da",
+      "bytes": 3731
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/combustion.h",
+      "sha256": "e45d2f372276ade0bf9b9890a954ef4a6f55905b6eb0ff7fcae7a11d68f5b800",
+      "bytes": 8409
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/cycle.h",
+      "sha256": "cc33fdc6ca82eda3d0d1005716c9c5fcd4b4a742808f415ea7d1cf13f2932c8f",
+      "bytes": 4897
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/cycle_study.h",
+      "sha256": "a036fcca0ff25fef527e9c06412b6903016d5c21f68b858cf87c9fa85e26a389",
+      "bytes": 1988
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/engine_cycle.h",
+      "sha256": "12b8e91b2a035036c13092756f1fc172c31e73d4c441d952c29110faeeac2c4f",
+      "bytes": 3327
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/frozen_nozzle.h",
+      "sha256": "792317e5e5533670a56ac21cd5cad312b58531d50a8a4d605c65df9a55b9c2fd",
+      "bytes": 3742
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/liquid_combustion.h",
+      "sha256": "ddade9bfb61abd1bfd5cd66f9b928d82a26e0e9decfb2f908eb47620dea86555",
+      "bytes": 1929
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/liquid_feed.h",
+      "sha256": "b5e66b6aa81bd4d42b472786d0e3dec86fdbfae143fdf659cce173352bb06da8",
+      "bytes": 1505
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/liquid_nozzle.h",
+      "sha256": "bcc67d5b8469805ce4618a738b7304929cd11d05e6d759356e0c427776a6c5c4",
+      "bytes": 903
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/nozzle.h",
+      "sha256": "96f4d599ecbf356d160c70cc2d5b3bf141adfad6d33a29da818680eb64c6a7a5",
+      "bytes": 5440
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/numeric.h",
+      "sha256": "2bb017539635550f7a7d3dd47ecf0c1d8614d7b6f810a8bd92402bab26ee7308",
+      "bytes": 339
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/propellant_study.h",
+      "sha256": "2659b0025c078be6a3fd75ec295160a61b6212cf720b26d3505eae94d47e04e5",
+      "bytes": 1432
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/root.h",
+      "sha256": "7c2ca71434fd410a5f1b37e53cf9f27b975980d30e26ebbdac8f4721819ff11f",
+      "bytes": 844
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/status.h",
+      "sha256": "9a7fa15e736970d6e97528bb41ee50d378da07aba00273fff6f8abb051f2c457",
+      "bytes": 488
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/thermo.h",
+      "sha256": "99062fa8d51e66539b2bba194961ee9fad2ac8ef29c4f5853d53665b31ef4116",
+      "bytes": 978
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/include/rocketperf/version.h",
+      "sha256": "8edbb87f1ea28841e6866a8b53bc77f00a49883f78f9820a90b36425a26b5123",
+      "bytes": 191
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/project/modules.json",
+      "sha256": "0f49c37ff553d84353a3f384e32a1a119c7193f7d67684a7597e1eaa757ea8ba",
+      "bytes": 4966
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/README.md",
+      "sha256": "e37bc6d3960a601c5f3403b4643447de0f80c9ced7020d386b0cc9fdcbde2d65",
+      "bytes": 2560
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/rocketperf-run.bat",
+      "sha256": "c6deb73453c93b6dddc56e289c891d2b5bbda4b7d3fa9f8302c32e384097e7d2",
+      "bytes": 369
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/case_file.c",
+      "sha256": "682d46cbe05e4bccfad19c09a18b8824b1b7e0eec835e22ee96585f115cc996c",
+      "bytes": 4815
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/case_file.h",
+      "sha256": "c8700ca369c6026459a3921f79e7838df2f2dbfb47a908d0821cf793ffb010df",
+      "bytes": 1616
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/case_text.c",
+      "sha256": "41c05cdfafbfb8e743db7660e5b946ac9ab786ccc163f42101953fb43d793f34",
+      "bytes": 2945
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/case_text.h",
+      "sha256": "f6fb6281e0c13f7f4a7c5ef866425b19a764288c20237b29146e00c951cb8445",
+      "bytes": 794
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/combustion_report.c",
+      "sha256": "f8ab1cdbd472c101936f8734478a0a3f811ee69224a60eb36e134dc86b346ce6",
+      "bytes": 8539
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/combustion_report.h",
+      "sha256": "43b25421cf7fd03d87f010fb84b67484c11139efb758411d14690c65dcd8d2cc",
+      "bytes": 1092
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/cycle_case.c",
+      "sha256": "48e100beb41790691eb6a680383a19368246be94835fe32e1756a6e6a93ae271",
+      "bytes": 17000
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/cycle_case.h",
+      "sha256": "a3b3b618312c085e90f7d2fb022acfcf72e067cbec1a57c38b6d59c2117f3a5e",
+      "bytes": 1000
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/engine_case.c",
+      "sha256": "abafc7f99932673e4e16c7f4e3024280688334136ed617a2f1471c2d6c1aad1f",
+      "bytes": 19792
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/engine_case.h",
+      "sha256": "6553bb72ae8963520b9fac967c55426b6df3cc5ed11ede1fd415142783061e7c",
+      "bytes": 929
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/json_report.c",
+      "sha256": "94b2eba1c65e375553bdfafeec82178fc9ca858aeacce78c850f015dc36819bd",
+      "bytes": 14899
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/platform.c",
+      "sha256": "e3dbe551ca3faad0709e32af258348307b5793a5b66c7d55e6460d97e1733cd0",
+      "bytes": 2598
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/propellant_case.c",
+      "sha256": "20a6530b226f2c599953b4fe5a80301dd206dd326c201ac7729a9efd94b6e764",
+      "bytes": 7223
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/propellant_case.h",
+      "sha256": "045b89d7c8dd67a0c74bee2e87fba0a8c50e94354e87180c0a6dbffdd29a7e4a",
+      "bytes": 483
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/text_report.c",
+      "sha256": "68260393cad5b72ba672863aa9ac2694e57dc59a1c9866370b80354a50adcaca",
+      "bytes": 15545
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/adapters/text_report.h",
+      "sha256": "570e825db88ec482d3d578c3a935a7b271a3cc9f4bfde9ae77ce9a3ebc244e99",
+      "bytes": 2021
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/arguments.c",
+      "sha256": "ddfd8533d78e4de0ae38349e5fa40bd2fcba928b31ef756d7a1c0d35c9d2e7a7",
+      "bytes": 1256
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/arguments.h",
+      "sha256": "8f21244147361086c9306fd97df8e9faf66aea34699faaa2e996d27913714f24",
+      "bytes": 230
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/combustion_commands.c",
+      "sha256": "db7afd8fe946070fd9f619585150e1cffd4594d11ffc41e1e96d1de2ac735704",
+      "bytes": 24719
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/combustion_commands.h",
+      "sha256": "c5092f66675ce07e5ccde274c4d966bf83f32b15dc0769308df76e69ebed62f8",
+      "bytes": 272
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/interactive.c",
+      "sha256": "f22e851032ebea58e9186cd115d7ea23911c3011fd48b2099e5d7121aedbe901",
+      "bytes": 26197
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/interactive.h",
+      "sha256": "0e6b9600596c4b474ffb56b863870d4d6695c36695c13c0e414e26a4e90d779f",
+      "bytes": 771
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cli/main.c",
+      "sha256": "051063df593e9f008bb3fa3defc1bc6a0d9095f0ef0e456a9811e448def8c281",
+      "bytes": 21545
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/core/root.c",
+      "sha256": "3ec8a6a6ab5b4ee9080de4cdee4a8bd2ec62026d53461dc3606ea5ef89a7edb0",
+      "bytes": 3331
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/core/status.c",
+      "sha256": "2e0ac6905d9044f2bcd2a90c487b469717cd146226e9583454633e69c5911583",
+      "bytes": 921
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cycle/adiabatic.c",
+      "sha256": "6365226390f000966a360210430ce12037eaf9bd11bca1053a95a379a33535b3",
+      "bytes": 23705
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cycle/components.c",
+      "sha256": "07f034aace63e31be1c8cf2353ed4bb03e39777a1b3800bd1bc610d839dac82a",
+      "bytes": 6669
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cycle/prescribed.c",
+      "sha256": "159565a685edd50cb8712b217054826a8b34076af0c33a327bfb2718fdd43e69",
+      "bytes": 12086
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/cycle/study.c",
+      "sha256": "9857ba429ae75321c502739af7e61a68cf5e9bb1daf3b13cfd912866159da5dd",
+      "bytes": 5267
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui.rc",
+      "sha256": "d3e1c5821239c981133b9c35a62765605b2c3ec867d3440d6538ccd949835a1c",
+      "bytes": 781
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui_bridge.c",
+      "sha256": "f6b51afc1152d8b46c8f15944f3659567da0bc49ed2de07e35932fb4776c87ce",
+      "bytes": 52313
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui_bridge.h",
+      "sha256": "edf19470da63bf82e1c09b8820783555ff529ad14c22b799fa8e0111de669a36",
+      "bytes": 679
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui_json.c",
+      "sha256": "57b969bba9396744296bb92e910e1037f9029a1e24022ff9bf731bd392f90d1d",
+      "bytes": 12243
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui_json.h",
+      "sha256": "84fcffddb776770054e14c3549e602e2e2638164c2032c37bba3183bc2c35b32",
+      "bytes": 2129
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/gui_main.c",
+      "sha256": "a556e51beed1b3d631f23f7e4e99057cddc2cc1a434cfcbda3d215817ab89828",
+      "bytes": 6920
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/archive.js",
+      "sha256": "237331e05486f9add36497ce0f9fa5a336d0952166c93ee3bbc4eb150a6bc5ee",
+      "bytes": 126287
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/base.css",
+      "sha256": "5ec07987199bd5e04911a8971c3d0e8ba8ea3800ce9e6a031b52e09f2514ca82",
+      "bytes": 4173
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/charts.js",
+      "sha256": "5ce7dfaf0e0733c4b38bbba8ac3483cbfbe3a4366c1d0f8879b413efb21d80f0",
+      "bytes": 15081
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/components.css",
+      "sha256": "f57264459847995bea50dc45b804b0a7c259e0d4b2254062624bf50b80351514",
+      "bytes": 9474
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/core.js",
+      "sha256": "ee5d7d943bd4c1347fbfc2fb1a45b4fdf99f0af39d03a7509d7ff12e0a3065f7",
+      "bytes": 7928
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/extra.css",
+      "sha256": "00b58d8c0a4b20a9f48f65483c85b04c1ca646ecf329f105a5ac0eec75d4945d",
+      "bytes": 3956
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/index.html",
+      "sha256": "349fd88640f94bf4c517d014ac562486a2a5ef37634bf4b636c063b03a2eaf09",
+      "bytes": 1640
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/main.js",
+      "sha256": "f9a4eb63e530d077a5810c1dc58c71fc9f4a5f0f07d71f3a28f49e9667443f46",
+      "bytes": 3553
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/schematic.css",
+      "sha256": "e54ae88032cdd104a330fe6bebac115b98241d0a0991f3f137d9b2e81cca7f7b",
+      "bytes": 3143
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/schematic_cycle.js",
+      "sha256": "464274ccd637d6109fc7f86081af61804be88c7f36d1c984fc1983f32798205f",
+      "bytes": 6751
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/schematic_parts.js",
+      "sha256": "394aa83bdf6c4bcb67a1874fbd2aedb1078eed45add9f0489eff29943c767228",
+      "bytes": 11694
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_chamber.js",
+      "sha256": "52f3d4064c66aab5160d46d024d6fc47e03fae22f6345dcd599369485b80eac0",
+      "bytes": 10806
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_cycle.js",
+      "sha256": "90ff624e8a195a2ffc80b8594e7d225860b420865f4fd252af4b772d059c31bf",
+      "bytes": 22280
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_engineering.js",
+      "sha256": "b9347cef761f5fe5387b1d64b02b3985beb564ced40c9ee8d7a4355e55f30212",
+      "bytes": 6461
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_nozzle.js",
+      "sha256": "dac2037022a4720e9db218e53079b2b0e2c9f1a589a6296e32898c3a79f3cd8b",
+      "bytes": 11141
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_propellant.js",
+      "sha256": "11d88cfac1cfb3182882e5e75b5666888320be5f1f6bc559fdfdacc293a6943a",
+      "bytes": 8772
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/tab_validation.js",
+      "sha256": "e92845aa7c9504d0326ef305bd35828cce5a9293be8ed3df8006cdb3286789a6",
+      "bytes": 5895
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/gui/web/ui.js",
+      "sha256": "f9b4435bb85463d50bcc4ebef8fc628f248216036c3dc8b68f6067788303d219",
+      "bytes": 8872
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/nozzle/frozen.c",
+      "sha256": "aa9f7948d53c2ff22187a09b42334eb84eb3c933062831a01608062ded552212",
+      "bytes": 15118
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/nozzle/ideal.c",
+      "sha256": "63ac3e65428c956adfcd5fab77b64a5d4ca61d370d905eec79e79d086986545b",
+      "bytes": 12360
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/nozzle/liquid.c",
+      "sha256": "3774610e5452bc8db705f371223abcf52dd24ea57079fbf1e4766d117547fee9",
+      "bytes": 1621
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/nozzle/propellant_study.c",
+      "sha256": "b3230498a127450e021d1646bff7f6fcb8a68c678d3275c164cbfa25b10bc1d8",
+      "bytes": 3318
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/database.c",
+      "sha256": "9db7e4f47adcb322457fdeb70be11f3244927c4f2afb631c8ab00c7449ca89b9",
+      "bytes": 587
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/database_generated.h",
+      "sha256": "b1ed92c98dd61f59b55b7ec1be8f68f5918d5af2d5d8a2c5711a1ddabec16ad9",
+      "bytes": 6912
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/equilibrium.c",
+      "sha256": "fade75f9fe7fdb498ad2e4959856ec9f3754945449555966cd7276e4688a5f25",
+      "bytes": 28253
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/equilibrium_internal.h",
+      "sha256": "2dec8e2b2ab08b507c1dea55d2bd989558981f4d332c3161c7ea42873dd0c73e",
+      "bytes": 748
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/graphite_generated.h",
+      "sha256": "7b38e64a061d20cabe5adcc5d276d5df61fddeb0235dff12e9a64fe108899318",
+      "bytes": 1168
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/liquid_combustion.c",
+      "sha256": "e4789e7f45eb976c04b4e5e9170bea193f0e0bf3eaf893761ce65065690fe228",
+      "bytes": 5177
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/liquid_feed.c",
+      "sha256": "2c2fb8135a973f266eab398341432a6660352005aa0398cfd90304171c9148a6",
+      "bytes": 4266
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/liquid_feed_generated.h",
+      "sha256": "ba2085fad6f78d68dc5a44913c3559cbd5b2982b3e38554aa460210ea1b70b2c",
+      "bytes": 20291
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/mixture.c",
+      "sha256": "4737d4c0d0906032bf2cf3655fb2333e5700c714a1b04679a1f7f4ace1afeb74",
+      "bytes": 7602
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/nasa9.c",
+      "sha256": "ffe45ac55f920b7da55d7f4faa4300db1078eb9764beead80c2c2c021dccb4d1",
+      "bytes": 4432
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/reactants.c",
+      "sha256": "7251ac2fb488b7271bdf97569c4f5732ef6e1d013e1fc034ad060e43b4399e6d",
+      "bytes": 6254
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/src/thermo/reactants_generated.h",
+      "sha256": "e76b6cef8d5fefa88b8548086fccb0dc21ae68f9a155e6b5a61b4c012db8f45c",
+      "bytes": 739
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/fixtures/overexpanded.ini",
+      "sha256": "f0726e822c193bfce0952f85aa4d99520afa814a63bf5d7f33c1c13b84ac3ab6",
+      "bytes": 377
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/fixtures/sanitizer_probe.c",
+      "sha256": "0563159c14f9815bc90f48d54e360a81fbe0b0bc41576dd09c052da17b08e521",
+      "bytes": 617
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/reference/liquid_feed.h",
+      "sha256": "036592c5e3a5e88dbf2ef1696266538da79bc137ba9e703246487e3ef1170b98",
+      "bytes": 83613
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/reference/nasa9_cantera.h",
+      "sha256": "3f47bb940119735da5a28423edb0e8741856c647934f8d39833b84c0c38b5eaf",
+      "bytes": 11189
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_adapters.c",
+      "sha256": "ee881a7eed7e5114c727c0e393c7f18c06cf8de916295b83e23351061bc15526",
+      "bytes": 4728
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_combustion.c",
+      "sha256": "8afab5588b25eee4630076a634b5cbc60bd2f80e5c736b793fd3cee60ba8b21f",
+      "bytes": 62682
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_core.c",
+      "sha256": "284e0f5fd2cbdbf84cd7e0b425db32b09f617747446a30d3920a0b600c8bb80e",
+      "bytes": 16018
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_cycle.c",
+      "sha256": "2d0df932cdf8644ee86b824daa872e7d37facdc3c0aa8d4b5a771f5e927a075d",
+      "bytes": 32912
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_gui.py",
+      "sha256": "10f3f6f9e6d13299e27f9265fc4cbe39793151a9a9a3c98a20fe45b69a70e6b2",
+      "bytes": 11505
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_gui_frontend.mjs",
+      "sha256": "f4cddc693eed47c9726311c3cbaa5429997a122fd2286b21bb5a01f561775647",
+      "bytes": 2996
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tests/test_thermo.c",
+      "sha256": "b4bce414fc9bb20688b84595cb34737963abf7aa06756704bd8ed63b8c4e5452",
+      "bytes": 14116
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/cea/LICENSE.txt",
+      "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed",
+      "bytes": 9170
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/cea/NOTICE.txt",
+      "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e",
+      "bytes": 713
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/coolprop/BIBLIOGRAPHY.txt",
+      "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6",
+      "bytes": 134407
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/coolprop/LICENSE.txt",
+      "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2",
+      "bytes": 1103
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview/compat/EventToken.h",
+      "sha256": "d6305bb8c2c00ddf1ecf8bd9827411318c139ea8d2c8e7592bbe458d1eedd506",
+      "bytes": 704
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview/include/webview/webview.h",
+      "sha256": "b1ff6e11431d031e5f7917e5301f4bcdf3910a2763a0720abfd291994eee7f7b",
+      "bytes": 146580
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview/LICENSE",
+      "sha256": "22c4c38a605ae5362bdbd795b4358f3599c7a7e58d4824c4ed55e3be192386e0",
+      "bytes": 1112
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview/src/webview.cc",
+      "sha256": "37b3381fa4bcf4232c3f9ad99ad5d352cd4116f5773e727dea506535a3b83eaf",
+      "bytes": 21
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview2/include/WebView2.h",
+      "sha256": "557d5c751148732242b6ced2dbf99d35bed4c4cb471fa50ccf2069a342244cf4",
+      "bytes": 927399
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview2/include/WebView2EnvironmentOptions.h",
+      "sha256": "1257614926d44dbc231bf1ea96ba6c5f9c26c44a8cab100c4a849bbfa5b7f5be",
+      "bytes": 5739
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/third_party/webview2/LICENSE.txt",
+      "sha256": "0af8f1b807512aae39c2ac1aa4d0cae65cabecb6fd554b8439a5162a0d6eca55",
+      "bytes": 1487
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tools/gui_bridge_stdio.c",
+      "sha256": "a395304f8996b2194cc2dc63b243d0973df1579ed82a1eb84e8090e4888a06d3",
+      "bytes": 1308
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/tools/gui_build.py",
+      "sha256": "fbe4548f944ef21d4e86043f2658643e752274dd0ec28dde86930c781a2e9642",
+      "bytes": 7597
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/01_程序源代码/数据与许可.txt",
+      "sha256": "c00e0f25f4d3988be9338e217d0a7280a6bf01fb5893b9707ddb105fe64e7fd3",
+      "bytes": 534
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/使用说明.txt",
+      "sha256": "ca6f32445ebf88e01945e6c6a549cc0314f7a8358ce25c7d631aa938092832ab",
+      "bytes": 1136
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/cases/vehicles/cz10b_first_stage1.ini",
+      "sha256": "74427bbb56262098bc23a5cac8cd363912268918e03d3995d617ebee0055a3ac",
+      "bytes": 1333
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/cases/vehicles/cz10b_first_stage2.ini",
+      "sha256": "e2ad75e6404fd314482c47a9e483279383d1a600dab822599446aae5800eac4e",
+      "bytes": 1229
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/cases/vehicles/cz10b_first_stage2_orsc.ini",
+      "sha256": "4414e41ea915b162a62ff27950b9ac0521d08bda38ed4467ad0da5a959a77266",
+      "bytes": 1226
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/cases/vehicles/zq3_y1_stage1.ini",
+      "sha256": "d534172d32604bfb0a4264a82eaf248b0ebb846fc264a373cbd13fa592db4042",
+      "bytes": 1220
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/cases/vehicles/zq3_y1_stage2.ini",
+      "sha256": "8d0398d7d2e5330a57cac048d43b27449a697ebef2a9c5050206c565fa809c60",
+      "bytes": 1218
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/licenses/webview-MIT.txt",
+      "sha256": "22c4c38a605ae5362bdbd795b4358f3599c7a7e58d4824c4ed55e3be192386e0",
+      "bytes": 1112
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/licenses/WebView2-SDK-BSD.txt",
+      "sha256": "0af8f1b807512aae39c2ac1aa4d0cae65cabecb6fd554b8439a5162a0d6eca55",
+      "bytes": 1487
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/README.txt",
+      "sha256": "57c2a6d62cad05d9c870ceffdb9ab66c65c63901abd1cc0de168de72defffc30",
+      "bytes": 368
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/rocketperf-gui.exe",
+      "sha256": "8d791794e1ea710b4a3abaddc92b16b12aab9b0ae418bb32ddd19b116808bd8e",
+      "bytes": 709120
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/third_party/cea/LICENSE.txt",
+      "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed",
+      "bytes": 9170
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/third_party/cea/NOTICE.txt",
+      "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e",
+      "bytes": 713
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/third_party/coolprop/BIBLIOGRAPHY.txt",
+      "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6",
+      "bytes": 134407
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/third_party/coolprop/LICENSE.txt",
+      "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2",
+      "bytes": 1103
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/图形界面版/数据与许可.txt",
+      "sha256": "c00e0f25f4d3988be9338e217d0a7280a6bf01fb5893b9707ddb105fe64e7fd3",
+      "bytes": 534
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/benchmarks/air_mach2_ambient.ini",
+      "sha256": "b4124739200416added34cce7ee563137975d604f9dcd1662f766981c49eb3b8",
+      "bytes": 383
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/benchmarks/air_mach2_vacuum.ini",
+      "sha256": "4fbaaa246e939a0e816333aa259589f2c4411aab9ac301b3948e49861d70cb84",
+      "bytes": 369
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/benchmarks/prescribed_cycle.ini",
+      "sha256": "781a29388402e0ae98301cc8fd67a052fbf843df54e421ff381968e2c88778ec",
+      "bytes": 1135
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/research/propellant_comparison.ini",
+      "sha256": "8913150d1270390d91a37fdad3eb455317578a20cf16990e0463e697bd8fc15a",
+      "bytes": 793
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/research/s1_area_ratio_ambient.ini",
+      "sha256": "58381f9f38296e2e200d7e8f9737cd7c73a1315ba9542575c9cd30e42f9c855f",
+      "bytes": 401
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/research/s3_sealevel_regime.ini",
+      "sha256": "248f914353346466575bd37e539a9b76fd948613195e191601cf08643e24aa46",
+      "bytes": 447
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/vehicles/cz10b_first_stage1.ini",
+      "sha256": "74427bbb56262098bc23a5cac8cd363912268918e03d3995d617ebee0055a3ac",
+      "bytes": 1333
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/vehicles/cz10b_first_stage2.ini",
+      "sha256": "e2ad75e6404fd314482c47a9e483279383d1a600dab822599446aae5800eac4e",
+      "bytes": 1229
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/vehicles/cz10b_first_stage2_orsc.ini",
+      "sha256": "4414e41ea915b162a62ff27950b9ac0521d08bda38ed4467ad0da5a959a77266",
+      "bytes": 1226
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/vehicles/zq3_y1_stage1.ini",
+      "sha256": "d534172d32604bfb0a4264a82eaf248b0ebb846fc264a373cbd13fa592db4042",
+      "bytes": 1220
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/cases/vehicles/zq3_y1_stage2.ini",
+      "sha256": "8d0398d7d2e5330a57cac048d43b27449a697ebef2a9c5050206c565fa809c60",
+      "bytes": 1218
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/rocketperf-run.bat",
+      "sha256": "c6deb73453c93b6dddc56e289c891d2b5bbda4b7d3fa9f8302c32e384097e7d2",
+      "bytes": 369
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/rocketperf.exe",
+      "sha256": "33e2e7576418ea4fabac2ea9bf1764781f2163a260713fd7ab7701321b2991ce",
+      "bytes": 249517
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/tests/fixtures/overexpanded.ini",
+      "sha256": "f0726e822c193bfce0952f85aa4d99520afa814a63bf5d7f33c1c13b84ac3ab6",
+      "bytes": 377
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/third_party/cea/LICENSE.txt",
+      "sha256": "a60026be9384468d074c19425e552f1bb4a6f507f805e55a96fad586716168ed",
+      "bytes": 9170
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/third_party/cea/NOTICE.txt",
+      "sha256": "03b64364559d540d97615c31675a69e8eb1965e30de8859a2f8c5c9a38ecb55e",
+      "bytes": 713
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/third_party/coolprop/BIBLIOGRAPHY.txt",
+      "sha256": "84d767376da3313fb59cf593adea07ba7b1c79e41f76835b34b4b4606c21aec6",
+      "bytes": 134407
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/third_party/coolprop/LICENSE.txt",
+      "sha256": "9bf835333ef602af4cb19338b9f9d43671e174fa029b00280e9bdba6ea4719b2",
+      "bytes": 1103
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/使用说明.txt",
+      "sha256": "396d6aafe27387edd17da23cbb2a5d07753647af0b262092ece03b9400bddb35",
+      "bytes": 218
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/02_程序发布版/控制台版/数据与许可.txt",
+      "sha256": "c00e0f25f4d3988be9338e217d0a7280a6bf01fb5893b9707ddb105fe64e7fd3",
+      "bytes": 534
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/03_展示PPT/第五组_两型火箭动力系统性能研究.pptx",
+      "sha256": "6968507273dfccd8ca8b0f6b49877ca6beca1f08f9d309013f23b97d9fe5e2ff",
+      "bytes": 9618035
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/04_作业报告/第五组_两型火箭动力系统性能研究报告.pdf",
+      "sha256": "05fbff4b1d5ee8824bf3bbf9b0e1eb7c350e4b124d782e1284ce5b089ccfd848",
+      "bytes": 1739443
+    },
+    {
+      "path": "deliverables/submission-20261020-v3/提交说明.txt",
+      "sha256": "33689e4e33d075c71712e08201bd22670186e5c3a95e4dbb2ba69a3b276b5e47",
+      "bytes": 489
+    }
+  ],
+  "limits": "Integrity verification only. No new scientific validation, native GUI acceptance, upload or human rehearsal."
+}

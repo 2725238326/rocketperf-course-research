@@ -6,7 +6,7 @@
 
 | 内容 | 唯一维护位置 | 生成/引用位置 |
 |---|---|---|
-| 任务状态、依赖、负责人、产物、验收、事件 | `project/tasks.json`，通过工具变更 | `worknow.md`、`docs/tasks.md`自动生成 |
+| 任务状态、依赖、负责人、产物、验收、事件 | `project/tasks.json`，通过工具变更 | 根worknow/tasks及Work2专属筛选视图自动生成 |
 | 生产模块、源码清单、允许依赖、维护角色 | `project/modules.json` | GCC和CMake构建清单、架构图、边界检查 |
 | 文档职责、目录分类、WIP/Git约束 | `project/policy.json` | 项目检查和提交检查 |
 | 接手叙述、已知风险和方法 | `handoff.md` | 链接当前状态，不复制实时状态表 |
@@ -14,6 +14,8 @@
 | 老师要求和研究证据 | `作业要求/`、`调研/` | 研究报告/参数库引用，原始文件保持不变 |
 
 机器生成文件的顶部有GENERATED标记。手工改它们会被检查判定为漂移；应改任务契约或模块登记，再重新生成。
+
+作业二从[独立入口](../Work2/README.md)接续，使用同一任务/模块/质量体系；按产物路径生成`Work2/worknow.md`和`Work2/docs/tasks.md`。作业一采用[原址归档](../Work2/archive/work1/README.md)，原件和旧研究身份不改，旧任务不自动重启。详细阶段操作见[Work2治理](../Work2/docs/governance.md)。
 
 ## 2. 一项任务的完整周期
 

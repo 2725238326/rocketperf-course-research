@@ -1,13 +1,13 @@
 # 项目协作入口
 
-工作区：`E:/Work/火发原理`。目标是两型运载火箭动力系统的课程研究；当前理想气体基线不能冒充真实发动机模型。
+工作区：`E:/Work/火发原理`。作业二已启动，活动入口为[Work2](Work2/AGENTS.md)；作业一采用[就地归档](Work2/archive/work1/README.md)，保留共享C工程及未验事项。理想气体基线不能冒充真实发动机模型。
 
 ## 最短接手路径
 
-1. 读[worknow](worknow.md)与[rules](rules.md)，再读[handoff](handoff.md)。
+1. 作业二先读[Work2工作面](Work2/worknow.md)、[规则](Work2/rules.md)、[交接](Work2/handoff.md)；仓库通用约束仍见[rules](rules.md)。
 2. `python tools/project.py doctor`查看真实Git/任务实况。
 3. `python tools/project.py show TASK-ID`读取产物和验收契约，按[治理说明](docs/governance.md)领取任务。
-4. 看[架构三视图](docs/architecture/README.md)和相关模块契约，按需读取资料，不每次重读所有档案。
+4. 先按[作业二项目地图](Work2/docs/project-map.md)找到专题；继承C模块时再读[既有架构三视图](docs/architecture/README.md)和模块契约，不每次重读全部档案。
 
 ## 必须遵守的约束
 

@@ -1,5 +1,7 @@
 # 项目交接
 
+2026-10-23作业二启动后的活动交接见[Work2/handoff](Work2/handoff.md)，[作业一归档导航](Work2/archive/work1/README.md)保留冻结交付与遗留责任。下方第一阶段收官和时间线作为历史背景使用。
+
 从[当前工作面](worknow.md)读取任务，运行`python tools/project.py doctor`核对Git实况。领取和验收命令见[治理说明](docs/governance.md)。
 
 ## 第一阶段收官入口

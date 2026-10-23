@@ -12,7 +12,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_DIRS = {".git", "build", "__pycache__", ".venv", "node_modules", ".locks", ".claude"}
-DYNAMIC_PATHS = {"project/tasks.json", "worknow.md", "docs/tasks.md"}
+DYNAMIC_PATHS = {"project/tasks.json", "worknow.md", "docs/tasks.md", "Work2/worknow.md", "Work2/docs/tasks.md"}
 QUALITY_CHECKS = {"project", "governance", "debug", "release", "runner", "handoff"}
 
 
@@ -164,7 +164,7 @@ def fingerprint(root: Path) -> str:
     pairs = []
     for path in project_files(root):
         rel = path.relative_to(root).as_posix()
-        if rel in DYNAMIC_PATHS or rel.startswith(("taskshot/", "project/evidence/")):
+        if rel in DYNAMIC_PATHS or rel.startswith(("taskshot/", "Work2/taskshot/", "project/evidence/")):
             continue
         if path.suffix.lower() == ".pyc":
             continue
