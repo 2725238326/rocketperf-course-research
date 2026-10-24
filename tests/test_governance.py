@@ -269,6 +269,39 @@ function Invoke-RestMethod {
         self.assertNotEqual(done.returncode,0)
         self.assertEqual(read_json(failed/'fixture.json')['evidence_class'],'process_only')
 
+    def test_research_round_membership_does_not_expand_on_append(self):
+        from work2_survey_data import FIRST_ROUND_IDS, first_round_sources
+        self.assertEqual(len(FIRST_ROUND_IDS),46)
+        original=[{'id':sid,'available':True} for sid in sorted(FIRST_ROUND_IDS)]
+        expanded=original+[{'id':'W2-V01','available':True},{'id':'W2-V02','available':False}]
+        self.assertEqual(first_round_sources({'sources':expanded}),original)
+
+    def test_research_reuse_preserves_date_and_refuses_changed_original(self):
+        from work2_research import INDEX, LEGACY_INDEX, reuse
+        original=self.root/'调研/原始来源/paper.txt'
+        original.parent.mkdir(parents=True,exist_ok=True);original.write_bytes(b'paper')
+        atomic_json(self.root/LEGACY_INDEX,[{'id':'OLD','url':'https://example.invalid/paper',
+                    'available':True,'file':'paper.txt','bytes':5,
+                    'sha256':hashlib.sha256(b'paper').hexdigest(),'saved_at':'2026-09-29T00:00:00Z'}])
+        record=reuse('W2-VL01','OLD',self.root)
+        self.assertEqual(record['retrieved_at'],'2026-09-29T00:00:00Z')
+        self.assertEqual(read_json(self.root/INDEX)['sources'][0]['read_scope'],'downloaded_only')
+        original.write_bytes(b'other')
+        with self.assertRaisesRegex(ValueError,'identity mismatch'): reuse('W2-VL02','OLD',self.root)
+        self.assertEqual(len(read_json(self.root/INDEX)['sources']),1)
+
+    def test_vehicle_evidence_rejects_unknown_values_and_unread_sources(self):
+        from work2_research import INDEX
+        from work2_vehicle_data import verify
+        source=self.root/'original.txt';source.write_text('engine statement',encoding='utf-8')
+        atomic_json(self.root/INDEX,{'sources':[{'id':'W2-V01','available':True,'path':'original.txt',
+                    'read_scope':'downloaded_only'}]})
+        atomic_json(self.root/'Work2/research/data/vehicle-evidence-v1.json',{'observations':[
+                    {'id':'U001','classification':'unknown','value':0,'source_ids':['W2-V01'],'short_quote':'engine'}]})
+        issues=verify(self.root)
+        self.assertTrue(any('Unknown vehicle parameter contains a value' in issue for issue in issues))
+        self.assertTrue(any('Unread/unusable vehicle source' in issue for issue in issues))
+
     def test_missing_proof_snapshot_detected(self):
         self.change('start');self.change('submit',evidence=self.proof())
         proof_path=self.task('WORK-001')['verification']['path']

@@ -33,6 +33,7 @@ Work2/
 | 质量定义与研究路线 | [quality-standard](quality-standard.md)、[research-plan](research-plan.md) | 实验协议明确实例化 |
 | 业务能力、对象关系与演进边界 | [business-architecture](business-architecture.md) | 场景、模型、策略、运行与评估分责；目标设计与当前模块登记分开 |
 | 来源身份与支持的主张 | [evidence](../research/evidence.md) | 研究笔记/报告逐项引用 |
+| 两型深入调查、版本与事件 | [vehicles](../research/vehicles/README.md) | 复用来源主索引，单独说明本轮覆盖/缺口和对计算的影响 |
 | 决定与未解决问题 | [decisions](decisions.md)、[review](review.md) | 说明原因和解除条件 |
 | 运行结果与当时做过什么 | results版本、taskshot批次 | 绑定输入/版本/日志，不用叙述冒充结果 |
 

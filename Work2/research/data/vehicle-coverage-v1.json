@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-24",
+  "scope": "20 questions examined; documented_subset does not mean complete evidence",
+  "selected_source_records": 29,
+  "available_records": 28,
+  "content_read_records": 26,
+  "new_http_attempts": 10,
+  "historical_originals_reused": 12,
+  "prior_Work2_records_reused": 7,
+  "observation_count": 101,
+  "unknown_observations": 30,
+  "event_count": 12,
+  "conflict_count": 6,
+  "new_solver_runs": 0,
+  "coverage": [
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D01",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z001"
+      ],
+      "remaining_gap": "Exact future/flight fitted-subtype bridges still incomplete; related family is not a fit list"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z002",
+        "Z003",
+        "Z009",
+        "Z010",
+        "Z020",
+        "Z021",
+        "Z025",
+        "Z027",
+        "Z028",
+        "Z029"
+      ],
+      "remaining_gap": "Product capability is not measured delivered payload; recovery/orbit/input conditions differ"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D03",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z004",
+        "Z017",
+        "Z022",
+        "Z026"
+      ],
+      "remaining_gap": "Coverage is for selected published configurations, not an exhaustive configuration history"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D04",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z038"
+      ],
+      "remaining_gap": "Direct flight-subtype and full-cycle boundary evidence still incomplete"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z005",
+        "Z006",
+        "Z007",
+        "Z018",
+        "Z031",
+        "Z032",
+        "Z033",
+        "Z034",
+        "Z035"
+      ],
+      "remaining_gap": "Same-batch chamber/inlet/geometry and measurement uncertainty remain missing"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D06",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z043",
+        "Z044",
+        "Z045"
+      ],
+      "remaining_gap": "Cooling passages, wall heat transfer, pump maps, injector losses and material-life data not obtained"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z011",
+        "Z015",
+        "Z036",
+        "Z037",
+        "Z039"
+      ],
+      "remaining_gap": "Per-flight throttle/starting history and acceptance uncertainty not publicly established here"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D08",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z014",
+        "Z023",
+        "Z024",
+        "Z030"
+      ],
+      "remaining_gap": "Trial reuse, first recovery, orbital reflight and design lifetime must remain separate"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "Z008",
+        "Z012",
+        "Z013",
+        "Z016",
+        "Z019",
+        "Z040",
+        "Z041",
+        "Z042"
+      ],
+      "remaining_gap": "Selected milestones only; no complete mission/serial/test-event register verified"
+    },
+    {
+      "vehicle": "ZQ-3",
+      "dimension": "D10",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "B01"
+      ],
+      "remaining_gap": "Full technical-paper reading and broader bibliographic coverage remain incomplete; metadata/abstract not full text"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D01",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C023"
+      ],
+      "remaining_gap": "Exact future/flight fitted-subtype bridges still incomplete; related family is not a fit list"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C002",
+        "C004",
+        "C005",
+        "C006",
+        "C003",
+        "C007",
+        "C008"
+      ],
+      "remaining_gap": "Product capability is not measured delivered payload; recovery/orbit/input conditions differ"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D03",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C009",
+        "C010"
+      ],
+      "remaining_gap": "Coverage is for selected published configurations, not an exhaustive configuration history"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D04",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C013",
+        "C014",
+        "C015",
+        "C016"
+      ],
+      "remaining_gap": "Direct flight-subtype and full-cycle boundary evidence still incomplete"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "status": "gap",
+      "evidence_ids": [],
+      "remaining_gap": "Same-batch chamber/inlet/geometry and measurement uncertainty remain missing"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D06",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C024",
+        "C025"
+      ],
+      "remaining_gap": "Cooling passages, wall heat transfer, pump maps, injector losses and material-life data not obtained"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D07",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C011",
+        "C012"
+      ],
+      "remaining_gap": "Per-flight throttle/starting history and acceptance uncertainty not publicly established here"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D08",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C018",
+        "C019",
+        "C020"
+      ],
+      "remaining_gap": "Trial reuse, first recovery, orbital reflight and design lifetime must remain separate"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "C001",
+        "C017",
+        "C021",
+        "C022",
+        "C026"
+      ],
+      "remaining_gap": "Selected milestones only; no complete mission/serial/test-event register verified"
+    },
+    {
+      "vehicle": "CZ-10B",
+      "dimension": "D10",
+      "status": "documented_subset",
+      "evidence_ids": [
+        "B02"
+      ],
+      "remaining_gap": "Full technical-paper reading and broader bibliographic coverage remain incomplete; metadata/abstract not full text"
+    }
+  ],
+  "search_records": [
+    "20261024_w2_zq3_depth_a",
+    "20261024_w2_cz10b_depth_a",
+    "20261024_w2_zq3_sources_b"
+  ],
+  "continuation": "Prioritise original papers and same-batch inputs that change C model applicability; keep WBASE independent"
+}

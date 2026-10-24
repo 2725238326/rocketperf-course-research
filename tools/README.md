@@ -8,6 +8,7 @@
 | projectlib.py | 路径边界、原子写入、OS锁、指纹和Git只读调用 |
 | work2_sources.py | 首次捕获及逐字节核验Work2九份原件；拒绝覆盖清单，统一项目检查复用 |
 | work2_research.py / work2_survey_data.py | 调研原文HTTP采集/哈希/来源校验、选定物性数据比较，以及精选主张/软件/参数/缺口JSON生成；不作生产求解或训练 |
+| work2_vehicle_data.py | 两型十维专题的观察/事件/冲突/论文与覆盖精选；检查原文引文和未知值，不生成实机输入；work2_research的reuse保留旧原件身份/日期 |
 | pipeline.py | 不可变构建、测试报告、运行生命周期和输出协议校验 |
 | quality.py | 统一质量入口及完整PASS/FAIL证据 |
 | check_data.py | 字段级来源、数据角色、单位/范围及假设检查；四级段映射的身份、版本/级段、模型与产物关联 |

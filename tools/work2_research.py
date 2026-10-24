@@ -17,6 +17,7 @@ from projectlib import ROOT, atomic_json, atomic_text, digest, local_path, lock,
 
 INDEX = 'Work2/research/data/source-index.json'
 MAX_BYTES = 24_000_000
+LEGACY_INDEX = '调研/原始来源/来源文件索引.json'
 
 
 class PageText(HTMLParser):
@@ -71,6 +72,32 @@ def fetch(source_id,url,kind='text',discovery='existing-primary-source'):
     return {k:row[k] for k in ['id','status','http_status','bytes','path','error_type'] if k in row}
 
 
+def reuse(source_id,legacy_id,root=ROOT):
+    """Reference a hash-verified historical original without refreshing its date."""
+    if not re.fullmatch(r'W2-[A-Z]+\d{2,3}',source_id): raise ValueError('Use a stable W2 source ID')
+    legacy=next((r for r in read_json(root/LEGACY_INDEX) if r['id']==legacy_id),None)
+    if legacy is None or not legacy.get('available'): raise ValueError('Available historical source required')
+    path=local_path(root,'调研/原始来源/'+legacy['file'])
+    if not path.is_file() or path.stat().st_size!=legacy['bytes'] or digest(path)!=legacy['sha256'].lower():
+        raise ValueError('Historical source byte identity mismatch')
+    if not legacy.get('saved_at'): raise ValueError('Historical retrieval date required')
+    row={'id':source_id,'url':legacy['url'],'retrieved_at':legacy['saved_at'],
+         'registered_at':datetime.now(timezone.utc).isoformat(timespec='seconds'),
+         'discovery':'Historical original reused in place; no new online retrieval',
+         'available':True,'read_scope':'downloaded_only','status':'REUSED_IN_PLACE',
+         'path':path.relative_to(root).as_posix(),'bytes':legacy['bytes'],'sha256':digest(path),
+         'original_source_id':legacy_id,'original_index':LEGACY_INDEX}
+    with lock(root,'research-sources'):
+        index=read_json(root/INDEX) if (root/INDEX).is_file() else {'schema_version':1,'sources':[]}
+        if any(r['id']==source_id for r in index['sources']): raise ValueError('Source ID already registered')
+        index['sources'].append(row)
+        atomic_json(root/INDEX,index)
+    if path.suffix in {'.txt','.html'}:
+        reader=PageText();reader.feed(path.read_text(encoding='utf-8'))
+        atomic_text(root/f'build/work2/reading/20261024/{source_id}.txt',reader.text())
+    return {k:row[k] for k in ['id','status','path','retrieved_at','original_source_id']}
+
+
 def verify(root=ROOT):
     if not (root/INDEX).is_file(): return {'sources':0,'checked':0,'issues':[]}
     issues=[]; checked=0; ids=set()
@@ -109,6 +136,9 @@ def verify(root=ROOT):
             for relative,value in expected_data(index,root).items():
                 if not (root/relative).is_file() or read_json(root/relative)!=value:
                     issues.append('Curated research data drift: '+relative)
+        if (root/'Work2/research/data/vehicle-evidence-v1.json').is_file():
+            from work2_vehicle_data import verify as verify_vehicles
+            issues.extend(verify_vehicles(root))
     except (KeyError,TypeError,OSError,ValueError) as exc:
         issues.append('Research provenance check: '+str(exc))
     return {'sources':len(ids),'checked':checked,'issues':issues}
@@ -138,12 +168,15 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
     get=sub.add_parser('fetch');get.add_argument('id');get.add_argument('url');get.add_argument('--kind',choices=['text','html','json','pdf'],default='text');get.add_argument('--discovery',default='existing-primary-source')
+    use=sub.add_parser('reuse');use.add_argument('id');use.add_argument('legacy_id')
     sub.add_parser('verify')
     sub.add_parser('compare-thermo')
     args=parser.parse_args()
     if args.command=='compare-thermo':
         result=compare_thermo()
         atomic_json(ROOT/'Work2/research/data/thermo-comparison.json',result)
+    elif args.command=='reuse':
+        result=reuse(args.id,args.legacy_id)
     else:
         result=verify() if args.command=='verify' else fetch(args.id,args.url,args.kind,args.discovery)
     print(json.dumps(result,ensure_ascii=False,indent=2))

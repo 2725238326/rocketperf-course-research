@@ -2,6 +2,12 @@
 
 从[worknow](worknow.md)读取当前任务；在仓库根执行 `python tools/project.py doctor`，再 `show TASK-ID`。任务状态、负责人、依赖和验收以登记为准，本文件不维护第二套状态表。
 
+## 2026-10-24两型深化
+
+[两型专题](research/vehicles/README.md)按[十维方案](research/vehicles/survey-plan.md)组织朱雀三号、长十乙与[同口径比较](research/vehicles/comparison.md)。新增VTVL两次试验、B型地面考核和海上回收/原始采访核读；历史原件原址复用，获取日期保留。事件、产品和家族证据不升级为同批性能卡，未支持的YF-219型号/台数仅留线索。
+
+source-index累积，首轮46条成员保持；两型精选由`tools/work2_vehicle_data.py`生成，逐条查短引文、来源核读/可用性及未知值，覆盖表不给全网完整率。箱头起动论文只有元数据，130吨级论文只有摘要；主室/入口/冷却/精确装机/寿命仍有缺口，见U-016/017。没有新增生产算例、科学TP/HP数据或GPU实验。实际批次和质量见[004记录](taskshot/2026-10-24_004-vehicle-dossiers.md)。
+
 ## 2026-10-24业务架构
 
 [业务架构](docs/business-architecture.md)和[业务图](docs/business-architecture.svg)明确五项职责：对象/证据、场景/模型、C计算、实验/评估、结论/交付。场景、物理模型、数值策略、执行配置分别保留身份；型号名关联背景证据，计算接受完整输入。求解状态、结果评估和目标适用性分别说明，失败与参考分歧进入研究记录。

@@ -21,6 +21,7 @@
 | 了解先做什么、怎样收敛 | [研究规划](docs/research-plan.md)、[知识地图](docs/knowledge-map.md) |
 | 查依据与未解决问题 | [来源台账](research/evidence.md)、[审查与不确定性](docs/review.md) |
 | 阅读首轮调查与已采数据 | [调研入口](research/README.md)、[调查协议](research/survey-protocol.md)、[数据说明](research/data/README.md) |
+| 深入调查朱雀三号和长十乙 | [两型专题](research/vehicles/README.md)、[十维方案](research/vehicles/survey-plan.md)、[同口径比较](research/vehicles/comparison.md) |
 | 理解组织决定与提示词取舍 | [决策记录](docs/decisions.md)、[启动词审阅](docs/prompt-review.md) |
 | 找作业一正式成果与未完成责任 | [作业一就地归档](archive/work1/README.md) |
 | 新增资料、结果、交付与执行快照 | [调研规范](research/README.md)、[结果规则](results/README.md)、[交付规则](deliverables/README.md)、[执行记录](taskshot/README.md) |

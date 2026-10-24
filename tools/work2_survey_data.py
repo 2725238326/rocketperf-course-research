@@ -7,6 +7,16 @@ from projectlib import ROOT, atomic_json, digest, read_json
 from work2_research import INDEX, compare_thermo
 
 DATA='Work2/research/data/'
+# Keep the first campaign's denominator stable when later rounds append sources.
+FIRST_ROUND_IDS=frozenset(
+    f'W2-{prefix}{number:02}'
+    for prefix,count in [('N',7),('C',10),('P',7),('X',1),('L',2),('A',7),('S',8),('R',4)]
+    for number in range(1,count+1)
+)
+
+
+def first_round_sources(index):
+    return [row for row in index['sources'] if row['id'] in FIRST_ROUND_IDS]
 
 READ_SCOPE={
 'W2-N01':'NASA metadata: title, authors, abstract, original download links',
@@ -108,9 +118,10 @@ def expected_data(index,root=ROOT):
       {'id':'SW03','name':'SUNDIALS KINSOL','version':'7.2.1','commit':None,'version_pin':'official v7.2.1 tag, byte hashes retained; API commit lookup failed','core_language':'C','c_interface_is_c_core':True,'license':'BSD-3-Clause','source_ids':['W2-S01','W2-S04','W2-S07','W2-S08'],'role':'Algorithm/backend/interface reference; linking only after small-system cost comparison','tested_here':False},
       {'id':'SW04','name':'Reaktoro','version':None,'commit':'f587235e692b7168faa272c8892a4c079a1f7dd9','commit_date':'2026-02-02','core_language':'C++','c_interface_is_c_core':False,'license':'LGPL-2.1-or-later (README); LGPL2.1 text retained','source_ids':['W2-R01','W2-R02','W2-R03','W2-R04','W2-A01'],'role':'Prior art and ODML reference; not a promised whole-library C port','tested_here':False},
     ]
-    available=[s for s in index['sources'] if s['available']]
+    sources=first_round_sources(index)
+    available=[s for s in sources if s['available']]
     coverage={'schema_version':1,'as_of':'2026-10-24','scope':'First-round evidence collection; not exhaustive systematic review or new numerical benchmark',
-      'source_records':len(index['sources']),'available_records':len(available),'failed_records':len(index['sources'])-len(available),
+      'source_records':len(sources),'available_records':len(available),'failed_records':len(sources)-len(available),
       'usable_read_records':sum(s.get('content_usable',True) and s.get('read_scope')!='downloaded_only' for s in available),
       'claim_count':len(claims),'parameter_observations':len(observations()),'unknown_parameters':sum(o['classification']=='unknown' for o in observations()),
       'new_solver_runs':0,'new_training_samples':0,'new_gpu_runs':0,

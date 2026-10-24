@@ -1,0 +1,2166 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-24",
+  "scope": "Selected public evidence v1, not exhaustive or validated engine inputs",
+  "selected_source_ids": [
+    "W2-P01",
+    "W2-P02",
+    "W2-P03",
+    "W2-P04",
+    "W2-P05",
+    "W2-P06",
+    "W2-P07",
+    "W2-V01",
+    "W2-V02",
+    "W2-V03",
+    "W2-V04",
+    "W2-V05",
+    "W2-V06",
+    "W2-V07",
+    "W2-V08",
+    "W2-V09",
+    "W2-V10",
+    "W2-VL01",
+    "W2-VL02",
+    "W2-VL03",
+    "W2-VL04",
+    "W2-VL05",
+    "W2-VL06",
+    "W2-VL07",
+    "W2-VL08",
+    "W2-VL09",
+    "W2-VL10",
+    "W2-VL11",
+    "W2-VL12"
+  ],
+  "observations": [
+    {
+      "id": "Z001",
+      "vehicle": "ZQ-3",
+      "dimension": "D01",
+      "object": "early release",
+      "field": "public_release",
+      "value": "ZQ-3",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "2023-12-10 body, Dec9 context",
+      "short_quote": "正式发布了下一代可重复使用液氧甲烷运载火箭",
+      "scope": "Manufacturer-hosted New Beijing News report; release date inferred from explicit same-day context",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2023-12-09"
+    },
+    {
+      "id": "Z002",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "2023 early design",
+      "field": "length",
+      "value": 76.6,
+      "original_unit": "m",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, founder introduction",
+      "short_quote": "全箭总长76.6米",
+      "scope": "Early announced design, not 2025 Y1 measured geometry",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z003",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "2023 early design",
+      "field": "liftoff_mass",
+      "value": 660,
+      "original_unit": "t",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, founder introduction",
+      "short_quote": "起飞质量约660吨",
+      "scope": "Approximate early design",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z004",
+      "vehicle": "ZQ-3",
+      "dimension": "D03",
+      "object": "2023 early design",
+      "field": "engine_configuration",
+      "value": "9 x TQ-12B + 1 x TQ-15B",
+      "original_unit": null,
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, founder introduction",
+      "short_quote": "一子级配置9台",
+      "scope": "Early B-family announced configuration, not Y1 fit",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z005",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "2023 TQ-12B design",
+      "field": "sea_level_thrust",
+      "value": 1000,
+      "original_unit": "kN",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, engine introduction",
+      "short_quote": "海平面推力1000千牛",
+      "scope": "Reported design field, no same-batch chamber card",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z006",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "2023 TQ-15B design",
+      "field": "vacuum_thrust",
+      "value": 1183,
+      "original_unit": "kN",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, engine introduction",
+      "short_quote": "真空推力1183千牛",
+      "scope": "Reported design field, not 2025 Y1 TQ-15A",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z007",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "2023 TQ-15B design",
+      "field": "vacuum_exhaust_velocity_label",
+      "value": 3500,
+      "original_unit": "m/s",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL07"
+      ],
+      "locator": "body, engine introduction",
+      "short_quote": "真空比冲为3500米/秒",
+      "scope": "Original Isp notation is velocity; no silent treatment as seconds",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z008",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "VTVL-1 January flight",
+      "field": "flight_height",
+      "value": 350,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V08"
+      ],
+      "locator": "opening paragraph",
+      "short_quote": "飞行高度约350m",
+      "scope": "Approximate trial report; one-engine suborbital platform",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2024-01-19"
+    },
+    {
+      "id": "Z009",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "VTVL-1 January flight",
+      "field": "diameter",
+      "value": 3.35,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V08"
+      ],
+      "locator": "platform description",
+      "short_quote": "箭体直径3.35米",
+      "scope": "Trial vehicle, not 4.5m orbital vehicle",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z010",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "VTVL-1 January flight",
+      "field": "length",
+      "value": 18.3,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V08"
+      ],
+      "locator": "platform description",
+      "short_quote": "长度18.3米",
+      "scope": "Trial geometry",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z011",
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "object": "VTVL-1 January modified TQ-12",
+      "field": "throttle_range",
+      "value": "45%-110%",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V08"
+      ],
+      "locator": "platform description",
+      "short_quote": "45%~110%",
+      "scope": "Stated capability of this modified trial engine, not universal A/B specification",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z012",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "VTVL-1 September flight",
+      "field": "maximum_height",
+      "value": 10002,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V09"
+      ],
+      "locator": "trial trajectory paragraph",
+      "short_quote": "高度10002m",
+      "scope": "Trial report; flight condition is not chamber thermodynamic data",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2024-09-11"
+    },
+    {
+      "id": "Z013",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "VTVL-1 September flight",
+      "field": "flight_time",
+      "value": 200.7,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V09"
+      ],
+      "locator": "trial trajectory paragraph",
+      "short_quote": "空中飞行总时间为200.7s",
+      "scope": "Whole test-vehicle flight duration",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z014",
+      "vehicle": "ZQ-3",
+      "dimension": "D08",
+      "object": "VTVL-1 September flight",
+      "field": "reused_test_vehicle",
+      "value": true,
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V09"
+      ],
+      "locator": "reported validation item3",
+      "short_quote": "沿用原执行百米级飞行试验任务的试验箭",
+      "scope": "Actual reported trial-vehicle reuse; does not establish orbital-stage 20-flight life",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z015",
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "object": "VTVL-1 September modified TQ-12",
+      "field": "throttle_range",
+      "value": "45%-111%",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V09"
+      ],
+      "locator": "platform description",
+      "short_quote": "45%~111%",
+      "scope": "Keep separate from January range; nominal reference/technical changes not resolved",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z016",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "TQ-12B ground product",
+      "field": "ground_test_duration",
+      "value": 550,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V10"
+      ],
+      "locator": "latest TQ-12B paragraph",
+      "short_quote": "已完成550秒地面试验",
+      "scope": "Ground-test report, not evidence of Y1 B-engine fit",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-04-15"
+    },
+    {
+      "id": "Z017",
+      "vehicle": "ZQ-3",
+      "dimension": "D03",
+      "object": "ZQ-3 June stage1 ground test",
+      "field": "engines",
+      "value": "9 x TQ-12A",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL06"
+      ],
+      "locator": "trial engine paragraph",
+      "short_quote": "9机并联总推力达7542kN",
+      "scope": "Body separately identifies TQ-12A; ground test declared flight-like",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-06-20"
+    },
+    {
+      "id": "Z018",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 June stage1 ground test",
+      "field": "total_thrust",
+      "value": 7542,
+      "original_unit": "kN",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL06"
+      ],
+      "locator": "trial engine paragraph",
+      "short_quote": "9机并联总推力达7542kN",
+      "scope": "Nine-engine aggregate; not one main chamber",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z019",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "ZQ-3 June stage1 ground test",
+      "field": "stable_work_duration",
+      "value": 45,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL06"
+      ],
+      "locator": "trial engine paragraph",
+      "short_quote": "稳定工作45秒",
+      "scope": "Stated stable work interval, not total service life",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z020",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "ZQ-3 Y1 flight",
+      "field": "length",
+      "value": 66.1,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "vehicle description",
+      "short_quote": "全箭长66.1m",
+      "scope": "Specific Y1 announcement",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-12-03"
+    },
+    {
+      "id": "Z021",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "ZQ-3 Y1 flight",
+      "field": "liftoff_mass",
+      "value": 560,
+      "original_unit": "t",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "vehicle description",
+      "short_quote": "起飞质量约560t",
+      "scope": "Approximate flight-announcement value, separate from static-test approx570t",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z022",
+      "vehicle": "ZQ-3",
+      "dimension": "D03",
+      "object": "ZQ-3 Y1 flight",
+      "field": "engine_configuration",
+      "value": "9 x TQ-12A + 1 x TQ-15A",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "vehicle description",
+      "short_quote": "二级采用一台天鹊15A真空型发动机",
+      "scope": "Stage1 nine TQ-12A in same paragraph",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z023",
+      "vehicle": "ZQ-3",
+      "dimension": "D08",
+      "object": "ZQ-3 Y1 flight",
+      "field": "outcome",
+      "value": "orbit reached; stage1 soft landing failed",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "flight outcome paragraph",
+      "short_quote": "回收试验失败",
+      "scope": "No inferred failure mechanism beyond source; cause under investigation there",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z024",
+      "vehicle": "ZQ-3",
+      "dimension": "D08",
+      "object": "ZQ-3 Y2 flight",
+      "field": "outcome",
+      "value": "orbit reached; stage1 leg landing succeeded",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "opening and recovery paragraphs",
+      "short_quote": "成功软着陆于甘肃省民勤县朱雀三号着陆场坪",
+      "scope": "Subtype/count after landing-engine reduction not specified",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2026-08-19"
+    },
+    {
+      "id": "Z025",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "undated ZQ-3 product",
+      "field": "length",
+      "value": 76.6,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "locator": "ZQ-3 product fields",
+      "short_quote": "76.6m",
+      "scope": "Undated product, no inference of exact Y2 configuration",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z026",
+      "vehicle": "ZQ-3",
+      "dimension": "D03",
+      "object": "undated ZQ-3 product",
+      "field": "engine_configuration",
+      "value": "9 x TQ-12B + 1 x TQ-15B",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "locator": "ZQ-3 heading",
+      "short_quote": "一子级采用9台TQ-12B发动机",
+      "scope": "Current product description, distinct from Y1 and unspecified Y2",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z027",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "undated ZQ-3 product",
+      "field": "expendable_capacity",
+      "value": 21.3,
+      "original_unit": "t",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "locator": "LEO @450km product fields",
+      "short_quote": "一次性任务：21.3t",
+      "scope": "Product capability at 450km LEO; actual delivered payload not established",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z028",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "undated ZQ-3 product",
+      "field": "downrange_recovery_capacity",
+      "value": 18.3,
+      "original_unit": "t",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "locator": "LEO @450km product fields",
+      "short_quote": "航区回收任务：18.3t",
+      "scope": "Product capability at 450km LEO; actual delivered payload not established",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z029",
+      "vehicle": "ZQ-3",
+      "dimension": "D02",
+      "object": "undated ZQ-3 product",
+      "field": "return_to_launch_capacity",
+      "value": 12.5,
+      "original_unit": "t",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-P01"
+      ],
+      "locator": "LEO @450km product fields",
+      "short_quote": "返场回收任务：12.5t",
+      "scope": "Product capability at 450km LEO; actual delivered payload not established",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z030",
+      "vehicle": "ZQ-3",
+      "dimension": "D08",
+      "object": "ZQ-3 orbital stage design",
+      "field": "reuse_target",
+      "value": 20,
+      "original_unit": "flights",
+      "classification": "design_target",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "vehicle description",
+      "short_quote": "设计重复使用次数不低于20次",
+      "scope": "At least20 is a design target, not completed orbital flights",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z031",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "TQ-12A product section",
+      "field": "sea_level_thrust",
+      "value": 84.6,
+      "original_unit": "t (thrust label)",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "locator": "TQ-12A labelled product fields",
+      "short_quote": "84.6t",
+      "scope": "Product statement; same-batch chamber/whole-engine boundary and uncertainty absent",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z032",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "TQ-12A product section",
+      "field": "sea_level_specific_impulse",
+      "value": 293,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "locator": "TQ-12A labelled product fields",
+      "short_quote": "293s",
+      "scope": "Product statement; same-batch chamber/whole-engine boundary and uncertainty absent",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z033",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "TQ-12A product section",
+      "field": "reported_mixture_ratio",
+      "value": 2.9,
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "locator": "TQ-12A labelled product fields",
+      "short_quote": "2.9",
+      "scope": "Product statement; same-batch chamber/whole-engine boundary and uncertainty absent",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z034",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "TQ-12A product section",
+      "field": "reported_area_ratio",
+      "value": 20.5,
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P06"
+      ],
+      "locator": "TQ-12A labelled product fields",
+      "short_quote": "20.5",
+      "scope": "Product statement; same-batch chamber/whole-engine boundary and uncertainty absent",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z035",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "2022 TQ-15A / ZQ-2 batch02 design",
+      "field": "vacuum_thrust",
+      "value": 836,
+      "original_unit": "kN",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL03"
+      ],
+      "locator": "engine specification paragraph",
+      "short_quote": "真空推力达836kN",
+      "scope": "Historical ZQ-2 application, not a Y1 calibration point",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z036",
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "object": "2022 TQ-15A / ZQ-2 batch02 design",
+      "field": "throttle_range",
+      "value": "60%-110%",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL03"
+      ],
+      "locator": "engine specification paragraph",
+      "short_quote": "60%~110%",
+      "scope": "Original historical statement",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z037",
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "object": "2024 TQ-15A / ZQ-2 batch02 delivery",
+      "field": "throttle_range",
+      "value": "60%-100%",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL08"
+      ],
+      "locator": "batch02 delivery paragraph",
+      "short_quote": "60%~100%",
+      "scope": "Separate delivery statement; discrepancy not silently reconciled",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z038",
+      "vehicle": "ZQ-3",
+      "dimension": "D04",
+      "object": "2022 TQ-15A architecture",
+      "field": "turbine_exhaust_route",
+      "value": "nozzle extension",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL03"
+      ],
+      "locator": "listed improvement item",
+      "short_quote": "涡轮排气引入推力室喷管延伸段",
+      "scope": "Does not mean turbine gas returned to the main chamber",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z039",
+      "vehicle": "ZQ-3",
+      "dimension": "D07",
+      "object": "A-family ground programme",
+      "field": "reported_longest_single_unit_test_time",
+      "value": 2460,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL08"
+      ],
+      "locator": "ground verification paragraph",
+      "short_quote": "单台最长试车时间2460秒",
+      "scope": "Whether single firing or cumulative per-unit is not resolved; do not call orbital lifetime",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z040",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "series ground tests, January2024 report",
+      "field": "reported_cumulative_time_lower_bound",
+      "value": 100000,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V08"
+      ],
+      "locator": "validation item2",
+      "short_quote": "累计时间已超10万秒",
+      "scope": "Reported series-wide scope; denominator differs or unresolved against later Huzhou figure",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z041",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "Huzhou large-thrust tests, April2025 report",
+      "field": "reported_cumulative_time",
+      "value": 68000,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V10"
+      ],
+      "locator": "latest TQ-12B paragraph",
+      "short_quote": "累计6.8万秒",
+      "scope": "Huzhou large-thrust wording; do not force monotonic comparison with different scope",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z042",
+      "vehicle": "ZQ-3",
+      "dimension": "D09",
+      "object": "ZQ-3 Y1 preflight phase1",
+      "field": "event",
+      "value": "loading rehearsal and static firing",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P07"
+      ],
+      "locator": "opening paragraph",
+      "short_quote": "2025年10月18日-10月20日",
+      "scope": "Ground campaign interval; not orbital flight",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-10-18/2025-10-20"
+    },
+    {
+      "id": "Z043",
+      "vehicle": "ZQ-3",
+      "dimension": "D06",
+      "object": "2022 TQ-15A architecture",
+      "field": "turbine_layout",
+      "value": "two-stage turbine",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL03"
+      ],
+      "locator": "listed improvement item",
+      "short_quote": "涡轮泵改为双级涡轮",
+      "scope": "Historical architecture statement; no pump map or Y1 component identity",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z044",
+      "vehicle": "ZQ-3",
+      "dimension": "D06",
+      "object": "2022 TQ-15A architecture",
+      "field": "pump_seal",
+      "value": "end-face seal",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL03"
+      ],
+      "locator": "listed improvement item",
+      "short_quote": "涡轮泵应用端面密封技术",
+      "scope": "No leakage/thermal-life measurements supplied",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "Z045",
+      "vehicle": "ZQ-3",
+      "dimension": "D06",
+      "object": "ZQ-3 Y1 structure",
+      "field": "tank_material",
+      "value": "high-strength stainless steel",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P02"
+      ],
+      "locator": "reported breakthrough item3",
+      "short_quote": "高强度不锈钢",
+      "scope": "Manufacturing claim, not wall thickness/constitutive data or engine cooling law",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C001",
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "object": "CZ-10B first flight",
+      "field": "launch_time",
+      "value": "2026-07-10 12:15 Asia/Shanghai",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL01"
+      ],
+      "locator": "opening paragraph",
+      "short_quote": "2026年7月10日12时15分",
+      "scope": "Orbit and stage1 sea capture reported",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2026-07-10"
+    },
+    {
+      "id": "C002",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B first flight",
+      "field": "length_approx",
+      "value": 63,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "locator": "vehicle paragraph",
+      "short_quote": "全箭长度约63米",
+      "scope": "Vehicle aggregate/approximate statement; not individual engine input",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C004",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B first flight",
+      "field": "diameter",
+      "value": 5,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "locator": "vehicle paragraph",
+      "short_quote": "5米直径两级串联构型",
+      "scope": "Vehicle aggregate/approximate statement; not individual engine input",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C005",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B first flight",
+      "field": "liftoff_mass_approx",
+      "value": 760,
+      "original_unit": "t",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "locator": "vehicle paragraph",
+      "short_quote": "起飞重量约760吨",
+      "scope": "Vehicle aggregate/approximate statement; not individual engine input",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C006",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B first flight",
+      "field": "liftoff_thrust_approx",
+      "value": 890,
+      "original_unit": "吨 (thrust label)",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "locator": "vehicle paragraph",
+      "short_quote": "起飞推力约890吨",
+      "scope": "Vehicle aggregate/approximate statement; not individual engine input",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C003",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B first-flight interview",
+      "field": "length",
+      "value": 63.6,
+      "original_unit": "m",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "reporter introduction",
+      "short_quote": "全箭长度是63.6米",
+      "scope": "Interview precision and future70m extension separate from approximate product figure",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C007",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B recovery configuration",
+      "field": "payload_capacity_200km",
+      "value": 16,
+      "original_unit": "t",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "Chen Muye capacity statement",
+      "short_quote": "近地200公里轨道的运载能力为16吨",
+      "scope": "Reported capability, not actual payload mass",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C008",
+      "vehicle": "CZ-10B",
+      "dimension": "D02",
+      "object": "CZ-10B recovery configuration",
+      "field": "payload_capacity_900km_50deg",
+      "value": 11,
+      "original_unit": "t",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "Chen Muye capacity statement",
+      "short_quote": "900公里、50度倾角轨道的运载能力为11吨",
+      "scope": "Keep altitude/inclination and recovery condition",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C009",
+      "vehicle": "CZ-10B",
+      "dimension": "D03",
+      "object": "CZ-10B first flight",
+      "field": "stage_propellants",
+      "value": "stage1 LOX/kerosene; stage2 LOX/methane",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P03"
+      ],
+      "locator": "vehicle paragraph",
+      "short_quote": "芯二级采用液氧甲烷推进剂",
+      "scope": "Kerosene grade and stage2 exact engine subtype not supplied",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C010",
+      "vehicle": "CZ-10B",
+      "dimension": "D03",
+      "object": "CZ-10B stage1 interview",
+      "field": "engine_count_family",
+      "value": "7 x YF-100 family",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "Chen Muye engine paragraph",
+      "short_quote": "7台液发100系列发动机",
+      "scope": "Family disclosure; suffix not supplied",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C011",
+      "vehicle": "CZ-10B",
+      "dimension": "D07",
+      "object": "CZ-10B stage1 interview",
+      "field": "gimbal_layout",
+      "value": "5 gimballed; 2 fixed",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "Chen Muye engine paragraph",
+      "short_quote": "有5台是可以摇摆的，有2台是固定的",
+      "scope": "Original interview, no inferred individual ratings",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C012",
+      "vehicle": "CZ-10B",
+      "dimension": "D07",
+      "object": "CZ-10B stage1 interview",
+      "field": "restart_capability",
+      "value": "5 engines; 2 in deceleration and 3 in final landing description",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL02"
+      ],
+      "locator": "Chen Muye engine paragraph",
+      "short_quote": "这5台是可以二次启动的",
+      "scope": "Keep reported sequence; no telemetry-derived per-engine history",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C013",
+      "vehicle": "CZ-10B",
+      "dimension": "D04",
+      "object": "CZ-10B first-flight stage1 description",
+      "field": "engine_class",
+      "value": "130-ton pump-after-swing LOX/kerosene",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P04"
+      ],
+      "locator": "sixth-academy paragraph",
+      "short_quote": "一子级130吨级泵后摆液氧煤油发动机",
+      "scope": "Class description, not exact suffix or performance card",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C014",
+      "vehicle": "CZ-10B",
+      "dimension": "D04",
+      "object": "CZ-10B first-flight stage2 description",
+      "field": "engine_class",
+      "value": "140-ton LOX/methane",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-P04"
+      ],
+      "locator": "stage2 paragraph",
+      "short_quote": "二子级140吨级液氧甲烷发动机",
+      "scope": "Flight context supported; exact model/count and ground-product identity remain unresolved",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C015",
+      "vehicle": "CZ-10B",
+      "dimension": "D04",
+      "object": "130-ton pump-after-swing family paper",
+      "field": "cycle",
+      "value": "high-pressure staged combustion",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL05"
+      ],
+      "locator": "paper title and abstract",
+      "short_quote": "高压补燃液氧煤油发动机",
+      "scope": "Abstract/family context only, not complete CZ-10B flight-state specification",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C016",
+      "vehicle": "CZ-10B",
+      "dimension": "D04",
+      "object": "140-ton ground product, May2025 article",
+      "field": "cycle",
+      "value": "open cycle",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL09"
+      ],
+      "locator": "technology-products paragraph",
+      "short_quote": "最大推力的开式液氧甲烷发动机",
+      "scope": "Ground product; direct serial/subtype bridge to CZ-10B stage2 absent",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C017",
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "object": "140-ton ground product",
+      "field": "first_whole_engine_test",
+      "value": "successful",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL09"
+      ],
+      "locator": "opening paragraph",
+      "short_quote": "2025年4月26日",
+      "scope": "Exact event date from body, publication2025-05-14",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-04-26"
+    },
+    {
+      "id": "C018",
+      "vehicle": "CZ-10B",
+      "dimension": "D08",
+      "object": "CZ-10B first flight",
+      "field": "stage1_recovery",
+      "value": "sea-platform net capture succeeded",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL01"
+      ],
+      "locator": "opening paragraph",
+      "short_quote": "通过网系捕获方式成功回收",
+      "scope": "One recovered stage, not repeated orbital service life",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C019",
+      "vehicle": "CZ-10B",
+      "dimension": "D08",
+      "object": "CZ-10B first-flight recovery",
+      "field": "capture_hooks",
+      "value": 4,
+      "original_unit": "hooks",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V04"
+      ],
+      "locator": "sea capture narrative",
+      "short_quote": "四个挂钩精准切入井字形柔性网",
+      "scope": "Published recovery narrative; no dynamics or hardware load data",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C020",
+      "vehicle": "CZ-10B",
+      "dimension": "D08",
+      "object": "CZ-10B future reuse",
+      "field": "planned_reflight",
+      "value": "before end of2026",
+      "original_unit": null,
+      "classification": "design_target",
+      "source_ids": [
+        "W2-VL01"
+      ],
+      "locator": "future paragraph",
+      "short_quote": "预计将在今年年底前完成火箭一子级复用飞行",
+      "scope": "Plan in July article; no completion inferred at October cutoff",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C021",
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "object": "CZ-10-series low-altitude demonstration",
+      "field": "event",
+      "value": "low-altitude demonstration and spacecraft max-Q escape test",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V04"
+      ],
+      "locator": "first retrospective paragraph",
+      "short_quote": "今年2月",
+      "scope": "Month-level retrospective, not exact date or CZ-10B first flight",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2026-02"
+    },
+    {
+      "id": "C022",
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "object": "CZ-10-series test stage",
+      "field": "event",
+      "value": "seven-engine captive firing",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL12"
+      ],
+      "locator": "opening and trial paragraphs",
+      "short_quote": "一子级试验产品七台发动机同时点火",
+      "scope": "Series ground test, not seven-flight-engine identity card",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24",
+      "event_on": "2025-08-15"
+    },
+    {
+      "id": "C023",
+      "vehicle": "CZ-10B",
+      "dimension": "D01",
+      "object": "CZ-12 historical engine article",
+      "field": "engine_configuration",
+      "value": "4 x YF-100K",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL11"
+      ],
+      "locator": "engine introduction",
+      "short_quote": "4台YF-100K发动机",
+      "scope": "Explicit neighbouring-vehicle context; cannot substitute CZ-10B suffix",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C024",
+      "vehicle": "CZ-10B",
+      "dimension": "D06",
+      "object": "CZ-10B first-flight technology list",
+      "field": "reported_validation",
+      "value": "methane autogenous pressurisation",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL01"
+      ],
+      "locator": "validated technologies paragraph",
+      "short_quote": "甲烷自生增压技术",
+      "scope": "Technology announcement, not measured inlet thermodynamic state",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C025",
+      "vehicle": "CZ-10B",
+      "dimension": "D06",
+      "object": "CZ-10B preflight structural review",
+      "field": "reported_issue",
+      "value": "load-path manufacturing concern identified and addressed",
+      "original_unit": null,
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-V05"
+      ],
+      "locator": "preflight structural-test story",
+      "short_quote": "发动机与贮箱之间的一处传力结构",
+      "scope": "Engineering interview, no transferable stress/load or cooling data",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "C026",
+      "vehicle": "CZ-10B",
+      "dimension": "D09",
+      "object": "130-ton family paper abstract",
+      "field": "reported_whole_engine_test_time_lower_bound",
+      "value": 10000,
+      "original_unit": "s",
+      "classification": "reported_fact",
+      "source_ids": [
+        "W2-VL05"
+      ],
+      "locator": "abstract",
+      "short_quote": "逾1万秒整机热试车考核",
+      "scope": "Family programme; no CZ-10B life or cooling model validated",
+      "use": "context_only_not_validated_solver_input",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U001",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U002",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U003",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "fuel_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U004",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "oxidizer_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U005",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U006",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-12A",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-P06"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U007",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U008",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U009",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "fuel_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U010",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "oxidizer_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U011",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U012",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y1 TQ-15A",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P02",
+        "W2-VL03"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U013",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U014",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U015",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "fuel_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U016",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "oxidizer_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U017",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U018",
+      "vehicle": "ZQ-3",
+      "dimension": "D05",
+      "object": "ZQ-3 Y2 fitted engine subtype/count",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P05"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U019",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U020",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U021",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "fuel_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U022",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "oxidizer_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U023",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U024",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage1",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-VL02"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U025",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "main_chamber_pressure",
+      "value": null,
+      "original_unit": "Pa",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U026",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "main_chamber_oxidizer_fuel_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U027",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "fuel_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U028",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "oxidizer_inlet_state",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U029",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "nozzle_area_ratio",
+      "value": null,
+      "original_unit": null,
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    },
+    {
+      "id": "U030",
+      "vehicle": "CZ-10B",
+      "dimension": "D05",
+      "object": "CZ-10B first-flight stage2",
+      "field": "throat_area",
+      "value": null,
+      "original_unit": "m2",
+      "classification": "unknown",
+      "source_ids": [
+        "W2-P03",
+        "W2-P04"
+      ],
+      "locator": "Inspected material for the same subtype/batch",
+      "short_quote": "",
+      "scope": "Not established by this inspected corpus; no claim of absence from all public literature",
+      "use": "missing_input_not_zero_or_cross_batch_default",
+      "reviewed_on": "2026-10-24"
+    }
+  ],
+  "events": [
+    {
+      "observation_id": "Z001",
+      "vehicle": "ZQ-3",
+      "event_on": "2023-12-09"
+    },
+    {
+      "observation_id": "Z008",
+      "vehicle": "ZQ-3",
+      "event_on": "2024-01-19"
+    },
+    {
+      "observation_id": "Z012",
+      "vehicle": "ZQ-3",
+      "event_on": "2024-09-11"
+    },
+    {
+      "observation_id": "Z016",
+      "vehicle": "ZQ-3",
+      "event_on": "2025-04-15"
+    },
+    {
+      "observation_id": "Z017",
+      "vehicle": "ZQ-3",
+      "event_on": "2025-06-20"
+    },
+    {
+      "observation_id": "Z020",
+      "vehicle": "ZQ-3",
+      "event_on": "2025-12-03"
+    },
+    {
+      "observation_id": "Z024",
+      "vehicle": "ZQ-3",
+      "event_on": "2026-08-19"
+    },
+    {
+      "observation_id": "Z042",
+      "vehicle": "ZQ-3",
+      "event_on": "2025-10-18/2025-10-20"
+    },
+    {
+      "observation_id": "C001",
+      "vehicle": "CZ-10B",
+      "event_on": "2026-07-10"
+    },
+    {
+      "observation_id": "C017",
+      "vehicle": "CZ-10B",
+      "event_on": "2025-04-26"
+    },
+    {
+      "observation_id": "C021",
+      "vehicle": "CZ-10B",
+      "event_on": "2026-02"
+    },
+    {
+      "observation_id": "C022",
+      "vehicle": "CZ-10B",
+      "event_on": "2025-08-15"
+    }
+  ],
+  "conflicts": [
+    {
+      "id": "K01",
+      "evidence_ids": [
+        "Z002",
+        "Z020",
+        "Z025"
+      ],
+      "issue": "76.6m early/current product vs66.1m Y1",
+      "resolution": "Keep design/product and flight versions separate; Y2 geometry not inferred"
+    },
+    {
+      "id": "K02",
+      "evidence_ids": [
+        "Z036",
+        "Z037"
+      ],
+      "issue": "TQ-15A60-110% vs60-100% in different years",
+      "resolution": "Technical reference/condition unresolved; do not merge or assign to Y1"
+    },
+    {
+      "id": "K03",
+      "evidence_ids": [
+        "Z040",
+        "Z041"
+      ],
+      "issue": "Series>100000s vs later Huzhou68000s",
+      "resolution": "Denominators differ or remain unresolved; no monotonic cumulative-time claim"
+    },
+    {
+      "id": "K04",
+      "evidence_ids": [
+        "C002",
+        "C003",
+        "C006",
+        "C010"
+      ],
+      "issue": "Approx63m vs63.6m; approx890-ton vehicle vs interview approx900-ton aggregate",
+      "resolution": "Retain original precision and context; no averaging or precise engine division"
+    },
+    {
+      "id": "K05",
+      "evidence_ids": [
+        "C014",
+        "C016",
+        "C017"
+      ],
+      "issue": "Flight-stage140-ton description and earlier open-cycle ground product lack exact identity bridge",
+      "resolution": "Open-cycle product evidence remains product-specific; flight cycle/subtype not filled"
+    },
+    {
+      "id": "K06",
+      "evidence_ids": [
+        "Z011",
+        "Z015"
+      ],
+      "issue": "Trial engine45-110% vs45-111% descriptions",
+      "resolution": "Keep trial dates/reference conditions separate; no undocumented explanation"
+    }
+  ],
+  "bibliography": [
+    {
+      "id": "B01",
+      "source_ids": [
+        "W2-VL04"
+      ],
+      "access": "metadata_only",
+      "title": "Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine",
+      "doi": "10.1016/j.actaastro.2026.05.033",
+      "authors": [
+        {
+          "ORCID": "https://orcid.org/0009-0000-1823-3441",
+          "authenticated-orcid": false,
+          "given": "Hua",
+          "family": "Wei",
+          "sequence": "first",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "ORCID": "https://orcid.org/0009-0008-4634-1771",
+          "authenticated-orcid": false,
+          "given": "Yu",
+          "family": "Guan",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Fu",
+          "family": "Song",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Siyuan",
+          "family": "Zhang",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Xiuyu",
+          "family": "Yi",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Xin",
+          "family": "Ge",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hang",
+          "family": "Chen",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        },
+        {
+          "given": "Hanmo",
+          "family": "Shen",
+          "sequence": "additional",
+          "affiliation": [],
+          "role": [
+            {
+              "vocabulary": "crossref",
+              "role": "author"
+            }
+          ]
+        }
+      ],
+      "journal": [
+        "Acta Astronautica"
+      ],
+      "volume": "247",
+      "pages": "481-487",
+      "published_print": {
+        "date-parts": [
+          [
+            2026,
+            10
+          ]
+        ]
+      },
+      "limitation": "No publisher abstract/full text obtained; title alone does not identify a flight engine"
+    },
+    {
+      "id": "B02",
+      "source_ids": [
+        "W2-VL05"
+      ],
+      "access": "abstract_only",
+      "title": "130吨级泵后摆高压补燃液氧煤油发动机关键技术研究",
+      "authors": [
+        "李斌",
+        "刘站国",
+        "吕发正",
+        "高乐乐",
+        "张森"
+      ],
+      "issue_context": "载人航天2022年第4期; web publication2023-02-21",
+      "limitation": "Family abstract only; full paper/DOI and precise flight subtype not established here"
+    }
+  ],
+  "unsupported_leads": [
+    {
+      "claim": "CZ-10B stage2 fits one YF-219",
+      "status": "not_supported_by_inspected_primary_sources",
+      "process_record": "Work2/research/search/20261024_w2_cz10b_depth_a.md",
+      "reason": "Generated narrative names the model/count, but its checked CALT/CASC/interview originals do not; retained only as unverified lead, not disproved"
+    }
+  ]
+}

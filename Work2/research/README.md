@@ -20,6 +20,7 @@
 | C算子与引擎怎样建设 | [C引擎调查](c-engine-review.md) |
 | AI有什么已有先例和可检验空间 | [AI调查](ai-review.md) |
 | 两型数据补齐了什么、还缺什么 | [参数调查](parameter-review.md) |
+| 两型版本/动力/事件怎样进一步深查 | [公开证据专题](vehicles/README.md)、[十维方案](vehicles/survey-plan.md)、[比较与计算落点](vehicles/comparison.md) |
 | 后续如何形成可比较的数据 | [基准契约](benchmark-contract.md) |
 | 实际下载、失败、主张和观察数量 | [数据说明](data/README.md)、[覆盖与缺口](data/coverage.json) |
 

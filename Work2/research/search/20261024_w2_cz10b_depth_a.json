@@ -1,0 +1,1327 @@
+{
+  "topic": "20261024_w2_cz10b_depth_a",
+  "retrieved_at": "2026-10-24T10:10:14.8127281+08:00",
+  "cutoff": "2026-10-24",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "evidence_class": "search_trace_and_answer",
+  "prompt": "研究截止2026-10-24。实际web_search调查长征十号乙（CZ-10B / Long March 10B），必须与长征十号、十号甲、十二号及十二号甲分开。目标是课程研究公开证据，不设计或优化发动机。\n重点：首飞准确日期、任务与构型、直径/长度/质量/运力条件、一级7台/5摇摆2固定等原始采访、二级推进剂和发动机装机关系；130吨级泵后摆与液发100家族的关系；140吨级甲烷试验产品与首飞二级之间是否有直接证据；网系捕获/多次起动/重复使用哪些实际验证，哪些只是目标。\n另找发动机制造商/设计师技术论文或期刊原文中实际公开的循环、冷却、节流、起动、主室Pc/O-F/入口/几何，但不得跨家族/子型/试验与飞行拼表。\n已保存calt长十乙2026-07-10及spacechina 2026-07-15材料，优先增量。最多8个直接原文URL，逐条准确题名/日期、对象、短支持片段及限制，标明全文/摘要/元数据/仅搜索摘要。\n优先集团/研究院/发动机制造商/正式论文及原始采访；转载记原始作者。无字段写本次未检出，不据整箭推力反推。不要编造搜索轨迹、URL、引文；不能搜索就明确说。调用目标4次（非硬限额），不输出推理过程。\n",
+  "search_calls": [
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "长征十号乙 OR CZ-10B OR \"Long March 10B\" 首飞 OR 发射 2026",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" site:calt.com OR site:spacechina.com OR site:casc.com.cn",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "CZ-10B OR \"长征十号乙\" 直径 长度 运力 发动机 7台",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"长征十号乙\" 论文 OR 发动机 循环 OR 泵后摆 OR YF-100 甲烷",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n689/c2573694/content.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "YF-219 发动机 OR \"YF-219\" 甲烷 长征十号乙 OR CZ-10B 论文 OR 循环",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-8",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-9",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-10",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+      }
+    },
+    {
+      "id": "ws_5b5e041f-4350-9c9c-b6eb-fbe8ded16844_call-3b5d1c08-01a8-4973-89ce-7dacd2afcb82-11",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "\"YF-219\" OR \"140吨级\" 甲烷 发动机 试车 OR 论文 site:.cn",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/Long_March_10"
+          },
+          {
+            "type": "url",
+            "url": "https://aipub.cn/1A01d25L7"
+          },
+          {
+            "type": "url",
+            "url": "https://de.wikipedia.org/wiki/YF-Raketentriebwerke"
+          },
+          {
+            "type": "url",
+            "url": "https://zenodo.org/records/18890362"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014809/c4652043/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260506055829484755700"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hant/Draft:%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E9%A6%96%E9%A3%9E"
+          },
+          {
+            "type": "url",
+            "url": "https://handwiki.org/wiki/Engineering:Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://m.wdfxw.net/doc23622929.htm?fs=1"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/FOiIEhTCDM8nPjT2fWeVuQ"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://www.globaltimes.cn/page/202610/1372503.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.gmw.cn/2023-07/23/content_1303451448.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://caifuhao.eastmoney.com/news/20260603155312365066270"
+          },
+          {
+            "type": "url",
+            "url": "http://jdse.bit.edu.cn/sktcxb/cn/article/pdf/preview/10.15982/j.issn.2096-9287.2021.20210003.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/YF-219"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014703/n3482528/c4651819/content.html"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n689/c2573694/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014834/c4647806/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2014804/c4543603/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4646874/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.spacechina.com/n25/n2014789/n2414549/c4403161/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.huxiu.com/article/1678822.html"
+          },
+          {
+            "type": "url",
+            "url": "https://m.spacechina.com/n2014789/n2014804/c4646424/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "http://www.calt.com/n482/n498/c2579124/content.html"
+          },
+          {
+            "type": "url",
+            "url": "https://en.people.cn/n3/2026/0711/c90000-20476748.html"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99"
+          },
+          {
+            "type": "url",
+            "url": "https://ai.programnotes.cn/p/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99%E5%9B%9E%E6%94%B6%E8%83%8C%E5%90%8E%E7%9A%84%E6%8A%80%E6%9C%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%9B%BD%E9%A6%96%E5%9E%8B%E5%8F%AF%E5%9B%9E%E6%94%B6%E7%81%AB%E7%AE%AD%E7%9A%84%E5%85%88%E8%BF%9B%E5%8A%A8%E5%8A%9B%E4%B8%8E%E7%BD%91%E7%B3%BB%E5%9B%9E%E6%94%B6/"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-tw/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://pubs-en.cstam.org.cn/data/article/lxxb/preview/pdf/lxxb2023-194.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/zh-sg/articles/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200614"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wikiwand.com/en/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://news.qq.com/rain/a/20230604A00W7200?no-redirect=1"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%B7%E5%BE%81%E5%8D%81%E8%99%9F%E7%B3%BB%E5%88%97%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E7%94%B2%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD"
+          },
+          {
+            "type": "url",
+            "url": "https://vuink.com/post/ra-d-djvxvcrqvn-d-dbet/wiki/Long_March_10B"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/JPT/doi/10.13675/j.cnki.tjjs.200651"
+          },
+          {
+            "type": "url",
+            "url": "https://zh.wikipedia.org/zh-cn/YF-100"
+          },
+          {
+            "type": "url",
+            "url": "https://orbitalradar.com/satellite/69974"
+          },
+          {
+            "type": "url",
+            "url": "https://view.inews.qq.com/a/20230604A00W7200"
+          },
+          {
+            "type": "url",
+            "url": "https://novosti-kosmonavtiki.ru/articles/212443/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E9%95%BF%E5%BE%81%E5%8D%81%E5%8F%B7%E4%B9%99/67672651"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "\n**首飞准确日期、任务与构型**  \n2026年7月10日12时15分（北京时间），长征十号乙遥一火箭在海南商业航天发射场2号工位首飞成功。任务正式名称为“长征十号甲一子级全剖面验证飞行暨长征十号乙遥一火箭首飞任务”。载荷为卫星互联网技术试验卫星，送入预定近地轨道。一二级分离约6分钟后，一子级垂直返回，在海上回收平台通过网系捕获方式成功回收。此为我国首次运载火箭一子级可控回收，亦为全球首次运载火箭网系回收。长征十号乙成为我国首型成功实施回收的重复使用运载火箭。后续计划年底前完成一子级复用飞行（截至2026-10-24未见公开第二次飞行记录）。必须与长征十号（登月三级半）、十号甲（载人/货运两级）、十二号及十二号甲（不同研制单位/技术路线）严格分开：乙型为一院抓总的商业货运/星座版本，一子级沿用甲型状态（可回收后转交乙型复用），二子级为新研液氧甲烷。[[1]](http://www.calt.com/n689/c2573694/content.html)\n\n**直径/长度/质量/运力条件**  \n5米直径两级串联构型大型液体运载火箭。首飞箭全箭长度约63米（记者探访称63.6米，后续可拓展至70米）。起飞重量约760吨，起飞推力约890吨。重复使用状态下近地轨道运载能力16吨（200 km LEO）；900 km、50°倾角轨道约11吨。一次性任务运力更高（公开未给精确一次性数字）。适配低轨卫星互联网星座部署、大型商业卫星发射等。本次未检出整流罩精确长度或一次性运力官方数字。[[1]](http://www.calt.com/n689/c2573694/content.html)\n\n**一级7台/5摇摆2固定等原始采访**  \n中国航天科技集团陈牧野（原始采访，央视2026-07-10）：“它是一个七机并联的7台液发100系列发动机……这7台中有5台是可以摇摆的，有2台是固定的。另外，这5台是可以二次启动的，在返回段的时候，它先是动力减速段会点两台进行减速，到最后着陆段的时候还会有3台发动机再进行一个二次启动，实现最后的挂网着陆。”一级沿用长征十号甲一子级状态，液氧煤油推进剂。栅格舵用于再入姿态控制，人字形挂钩用于网系挂索。本次未检出7台具体子型号（N/P/L等）的官方装机清单或单台推力精确值（不据整箭890吨反推）。[[2]](https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html)\n\n**二级推进剂和发动机装机关系**  \n芯二级采用液氧甲烷推进剂，新研制低成本设计（陈牧野原始采访）。装机1台YF-219液氧甲烷发动机（支持多次点火、高空点火、长时间滑行）。140吨级液氧甲烷试验产品与首飞二级有直接官方证据：航天科技集团六院文章（2026-07-15）明确“二子级140吨级液氧甲烷发动机的研制也在同步加速……从方案论证到整机试车仅用时7个月”，并置于长十乙首飞任务语境中（2025年4月140吨级重复使用液氧甲烷发动机首次整机试验成功）。本次未检出YF-219与试验产品的逐一序列号对应或飞行后检查细节。\n\n**130吨级泵后摆与液发100家族的关系**  \n一子级130吨级泵后摆液氧煤油发动机（六院官方文章直接表述），属YF-100系列（液发100）发展，采用泵后摆技术（结构紧凑，便于5米直径内7机并联）。YF-100家族为高压富氧补燃循环（staged combustion）。泵后摆使摇摆包络小、质量偏心小。本次未检出该130吨级子型（如YF-100N）与早期YF-100的精确性能对照表或飞行后数据。\n\n**网系捕获/多次起动/重复使用：实际验证 vs 目标**  \n- **实际验证（本飞行）**：海上平台网系捕获回收成功（4挂钩切入井字形柔性网，发动机着陆段再点火）；一子级完整返回剖面（再入力热环境、高精度导航控制）；发动机多次启动和高空点火（一级回收点火、二级高空点火）；栅格舵再入控制。  \n- **目标/尚未飞行验证**：一子级复用飞行（CALT预计2026年底前完成，截至2026-10-24未见公开记录）；设计复用次数（公开未给乙型具体数字，甲型相关≥10次量级为规划）；全寿命后处理“好用、耐用”规律（真实返回损伤需后续积累）。娄路亮专访强调真实返回力热环境无法仅靠地面试验全部回答。\n\n**发动机制造商/设计师技术论文或期刊原文中实际公开的循环、冷却、节流、起动、主室Pc/O-F/入口/几何**  \n优先集团/六院（发动机制造商）及正式论文。YF-100家族循环为高压富氧补燃（开源较早论文如推进技术期刊有描述，但属前期CZ-5助推应用，不得与10B飞行子型拼表）。泵后摆、多次起动、变推力为公开特征。YF-219（140吨级甲烷）循环本次未检出一手期刊原文（维基等称燃气发生器循环，但非制造商论文；搜索未检出2025-2026针对该产品的循环/冷却/Pc/O-F/几何全文或摘要）。冷却、节流、入口条件、燃烧室几何本次未检出10B专用论文。不得跨家族/子型/试验与飞行拼表，故无综合表。无字段均为本次未检出。\n\n**最多8个直接原文URL（优先集团/研究院/制造商/原始采访；转载记原始作者；全文为主）**  \n1. http://www.calt.com/n689/c2573694/content.html  \n题名/日期：创造历史！长十乙首飞成功，我国首次实现运载火箭可控回收 / 2026-07-10（中国运载火箭技术研究院新闻中心，全文）  \n对象：首飞任务。  \n支持片段：“2026年7月10日12时15分……将卫星顺利送入预定轨道。火箭一二级分离约6分钟后，一子级垂直返回，在海上回收平台通过网系捕获方式成功回收……5米直径两级串联构型……芯一级……液氧煤油……芯二级……液氧甲烷……起飞推力约890吨，起飞重量约760吨，首飞箭全箭长度约63米，重复使用状态下近地轨道运载能力16吨……成功验证了……发动机多次启动和高空点火……海上平台网系捕获回收”。  \n限制：未给7台具体子型号、二级发动机型号、一次性运力、主室参数。\n\n2. http://www.calt.com/n482/n498/c2579124/content.html  \n题名/日期：长征十号乙 / 2026-07-10（中国运载火箭技术研究院，全文）  \n对象：产品配置。  \n支持片段：“5米直径两级串联构型大型液体运载火箭。火箭芯一级采用液氧煤油推进剂，芯二级采用液氧甲烷推进剂，全箭起飞推力约890吨，起飞重量约760吨，首飞箭全箭长度约63米，可重复使用状态下近地轨道运载能力16吨……2026年7月10日，成功首飞，一子级在海上回收平台通过网系捕获方式成功回收”。  \n限制：无发动机台数/摇摆细节、无YF型号、无几何/Pc。\n\n3. https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html  \n题名/日期：成功回收！总台记者独家探访长征十号乙火箭长啥样？ / 2026-07-10（央视新闻客户端，全文；陈牧野原始采访）  \n对象：构型与一级发动机原始采访。  \n支持片段：“全箭长度是63.6米，后续可以拓展到70米……七机并联的7台液发100系列发动机……这7台中有5台是可以摇摆的，有2台是固定的。另外，这5台是可以二次启动的……动力减速段会点两台……着陆段的时候还会有3台发动机再进行一个二次启动……新研制了一个液氧甲烷二子级……近地200公里轨道的运载能力为16吨，……900公里、50度倾角轨道的运载能力为11吨”。  \n限制：未给单台推力、循环细节、二级发动机具体型号。\n\n4. https://m.spacechina.com/n2014703/n3482528/c4651819/content.html  \n题名/日期：雄关漫道真如铁 而今迈步从头越——航天科技集团长十乙火箭团队以实干担当打赢我国重复使用火箭关键一役 / 2026-07-15（中国航天报，全文）  \n对象：发动机研制（六院）。  \n支持片段：“长十乙火箭一子级130吨级泵后摆液氧煤油发动机……二子级140吨级液氧甲烷发动机的研制也在同步加速……从方案论证到整机试车仅用时7个月”。  \n限制：无循环/冷却/Pc/O-F/几何具体数字，无试验与飞行产品一一对应。\n\n5. https://www.spacechina.com/n25/n2014789/n2014809/c4651981/content.html  \n题名/日期：长十乙运载火箭海上回收记 / 2026-07-15（中国航天报，全文）  \n对象：网系捕获实际过程。  \n支持片段：“四个挂钩精准切入井字形柔性网，稳稳挂住……发动机再次点火……着陆段发动机关机的那一刻”。  \n限制：无发动机内部参数或复用后数据。\n\n6. https://m.spacechina.com/n2014789/n2014809/c4652043/content.html  \n题名/日期：全球首次运载火箭网系回收圆满成功之际专访航天科技集团娄路亮 / 2026-07-15（中国航天报，全文；娄路亮原始采访）  \n对象：研制逻辑与验证范围。  \n支持片段：“若发动机二次点火没有达到预期……真实返回中的力热环境、部件损伤和复用规律，无法只靠地面试验全部回答……预计将在今年年底前完成火箭一子级复用飞行”（CALT同期表述）。  \n限制：无具体发动机参数或第二次飞行确认。\n\n以上为集团/研究院/原始采访全文。论文方面本次未检出针对10B飞行产品或YF-219的制造商期刊原文（循环/冷却/节流/起动/主室细节）；YF-100家族补燃循环有前期论文但不跨用。无字段均为本次未检出。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n689/c2573694/content.html",
+              "start_index": 380,
+              "end_index": 433,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.calt.com/n689/c2573694/content.html",
+              "start_index": 648,
+              "end_index": 701,
+              "title": "1"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://xinwen.bjd.com.cn/content/s6a508848e4b03fa51a81379e.html",
+              "start_index": 976,
+              "end_index": 1047,
+              "title": "2"
+            }
+          ]
+        }
+      ],
+      "id": "msg_5b5e041f-4350-9c9c-b6eb-fbe8ded16844",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 151492,
+    "input_tokens_details": {
+      "cached_tokens": 87040
+    },
+    "output_tokens": 6403,
+    "output_tokens_details": {
+      "reasoning_tokens": 3452
+    },
+    "total_tokens": 157895,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 12,
+    "cost_in_usd_ticks": 1316862800,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 12,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 55922,
+      "output_tokens": 3492
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}

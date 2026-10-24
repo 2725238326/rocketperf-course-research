@@ -1,0 +1,1463 @@
+{
+  "topic": "20261024_w2_zq3_sources_b",
+  "retrieved_at": "2026-10-24T10:17:29.4975405+08:00",
+  "cutoff": "2026-10-24",
+  "model": "grok-4.6-build",
+  "response_status": "completed",
+  "evidence_class": "search_trace_and_answer",
+  "prompt": "截至2026-10-24，实际web_search发现朱雀三号和天鹊发动机的原始URL，最多6个链接。上一条朱雀三号请求没有工具轨迹，不当检索证据；本次聚焦来源发现。\n1. 2024年朱雀三号VTVL-1两次试验原始公告，十公里级试验、发动机空中起动和安全落地的直接描述。\n2. 2025年朱雀三号九机并联地面试验（landspace itemid=64已归档，不重复），TQ-12B/TQ-15B产品演进及试车的原始制造商公告，明确对象和年月。\n3. 论文Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine，DOI 10.1016/j.actaastro.2026.05.033的出版者摘要、作者开放稿或可靠元数据。不要把摘要当全文。\n已知制造商about/product/wisdom页、遥一itemid=66/遥二76/TQ15A历史20均可HTTP读取，优先真正增量。每条仅列题名、日期、原文URL、可得性和对象，不需长篇综述、引文或性能数字。若不能实际调用搜索，明确说无工具；可以给记忆候选URL但必须逐条标未检索未核实，不能编造轨迹。搜索调用目标4次，非硬限额。\n",
+  "search_calls": [
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-0",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 VTVL-1 2024 试验 公告 十公里 空中起动 site:landspace.com",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=57"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/summary/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://www.proceedings.com/083090-0005.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+          },
+          {
+            "type": "url",
+            "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=58"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=51"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=56"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://news.zol.com.cn/999/9999526.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.itbear.com.cn/html/2025-10/994415.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "http://www.landspace.com/news?id=1018"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/news-detail.html?itemid=18"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          },
+          {
+            "type": "url",
+            "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=52"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=68"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/NewsIADN/status/2111858766773915667"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-1",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "朱雀三号 九机并联 地面试验 2025 TQ-12B TQ-15B 天鹊 原始公告",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=57"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/summary/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://www.proceedings.com/083090-0005.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+          },
+          {
+            "type": "url",
+            "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=58"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=51"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=56"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://news.zol.com.cn/999/9999526.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.itbear.com.cn/html/2025-10/994415.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "http://www.landspace.com/news?id=1018"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/news-detail.html?itemid=18"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          },
+          {
+            "type": "url",
+            "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=52"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=68"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/NewsIADN/status/2111858766773915667"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-2",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine DOI 10.1016/j.actaastro.2026.05.033",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=57"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/summary/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://www.proceedings.com/083090-0005.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+          },
+          {
+            "type": "url",
+            "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=58"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=51"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=56"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://news.zol.com.cn/999/9999526.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.itbear.com.cn/html/2025-10/994415.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "http://www.landspace.com/news?id=1018"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/news-detail.html?itemid=18"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          },
+          {
+            "type": "url",
+            "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=52"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=68"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/NewsIADN/status/2111858766773915667"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-3",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "landspace.com 朱雀三号 遥一 遥二 itemid 天鹊 TQ-12B TQ-15B 产品",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=57"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/summary/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://www.proceedings.com/083090-0005.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+          },
+          {
+            "type": "url",
+            "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=58"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=51"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=56"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://news.zol.com.cn/999/9999526.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.itbear.com.cn/html/2025-10/994415.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "http://www.landspace.com/news?id=1018"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/news-detail.html?itemid=18"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          },
+          {
+            "type": "url",
+            "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=52"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=68"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/NewsIADN/status/2111858766773915667"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-4",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=57"
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-5",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/news-detail.html?itemid=53"
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-6",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "open_page",
+        "url": "https://www.landspace.com/product.html"
+      }
+    },
+    {
+      "id": "ws_0f11a811-ee33-95f8-804c-7d4e08f14df5_call-4032ecc0-e1c8-4794-b6c8-603c3c46c60d-7",
+      "type": "web_search_call",
+      "status": "completed",
+      "action": {
+        "type": "search",
+        "query": "site:landspace.com 朱雀三号 九机并联 一级动力系统试车 2025 itemid",
+        "sources": [
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=65"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=57"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=66"
+          },
+          {
+            "type": "url",
+            "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/summary/"
+          },
+          {
+            "type": "url",
+            "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/CNSAWatcher/status/1737020443079454745"
+          },
+          {
+            "type": "url",
+            "url": "https://www.proceedings.com/083090-0005.html"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "https://www.hangyan.co/charts/3780795018101393310"
+          },
+          {
+            "type": "url",
+            "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=62"
+          },
+          {
+            "type": "url",
+            "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+          },
+          {
+            "type": "url",
+            "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=58"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=53"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=51"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=56"
+          },
+          {
+            "type": "url",
+            "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=64"
+          },
+          {
+            "type": "url",
+            "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+          },
+          {
+            "type": "url",
+            "url": "https://news.zol.com.cn/999/9999526.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.itbear.com.cn/html/2025-10/994415.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/product.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+          },
+          {
+            "type": "url",
+            "url": "http://www.landspace.com/news?id=1018"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/news-detail.html?itemid=18"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news.html?catid=1&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/about"
+          },
+          {
+            "type": "url",
+            "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+          },
+          {
+            "type": "url",
+            "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+          },
+          {
+            "type": "url",
+            "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/?channel=chinapp.com"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=49"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=52"
+          },
+          {
+            "type": "url",
+            "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/news-detail.html?itemid=68"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-15"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/new2.html?catid=2"
+          },
+          {
+            "type": "url",
+            "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+          },
+          {
+            "type": "url",
+            "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+          },
+          {
+            "type": "url",
+            "url": "https://x.com/NewsIADN/status/2111858766773915667"
+          },
+          {
+            "type": "url",
+            "url": "https://en.wikipedia.org/wiki/TQ-12"
+          },
+          {
+            "type": "url",
+            "url": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+          },
+          {
+            "type": "url",
+            "url": "https://m-robo.datayes.com/feed/detail?id=571163"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "type": "output_text",
+          "text": "**2024年朱雀三号VTVL-1两次试验原始公告**  \n题名：蓝箭航天朱雀三号可复用火箭首次大型垂直起降飞行试验任务取得圆满成功！  \n日期：2024-01-19  \n原文URL：https://www.landspace.com/news-detail.html?itemid=53  \n可得性：全文可读（制造商蓝箭航天官网）  \n对象：VTVL-1首次试验（百米级）。  \n\n题名：朱雀三号可复用火箭十公里级垂直起降飞行试验任务圆满成功！  \n日期：2024-09-11  \n原文URL：https://www.landspace.com/news-detail.html?itemid=57  \n可得性：全文可读（制造商蓝箭航天官网）  \n对象：VTVL-1十公里级试验、发动机空中二次起动、软着陆。  \n\n**2025年朱雀三号九机并联地面试验及TQ-12B/TQ-15B产品演进试车原始制造商公告**  \n（itemid=64已按限定不重复；本次检索未检出其他独立于该条的九机并联全文公告，仅时间线/列表提及）  \n题名：蓝箭航天第100台液氧甲烷发动机正式下线  \n日期：2025-04-15  \n原文URL：https://www.landspace.com/news-detail.html?itemid=62  \n可得性：全文可读（制造商蓝箭航天官网）  \n对象：TQ-12B等产品演进及地面试验。  \n\n题名：LANDSPACE 产品与服务  \n日期：当前页（无发布日期标注）  \n原文URL：https://www.landspace.com/product.html  \n可得性：全文可读（制造商蓝箭航天官网）  \n对象：朱雀三号TQ-12B/TQ-15B配置。  \n\n题名：LANDSPACE 关于我们  \n日期：当前页（无发布日期标注）  \n原文URL：https://www.landspace.com/about  \n可得性：全文可读（制造商蓝箭航天官网）  \n对象：时间线含2025年九机并联地面点火试验成功。  \n\n**论文Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine**  \n题名：Tank-head start approach for a 80 ton-class gas-generator cycle methane/LOX rocket engine  \n日期：2026年10月（Acta Astronautica Volume 247）  \n原文URL：https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462  \n可得性：出版者摘要及元数据可读（DOI 10.1016/j.actaastro.2026.05.033；全文付费，未检出作者开放稿）  \n对象：80吨级燃气发生器循环甲烷/液氧火箭发动机箱头起动方法（作者含蓝箭航天）。  \n\n以上均为实际web_search及open_page检索所得原始制造商/出版者来源（已知about/product/itemid=66等优先增量，未编造）。无字段或未单独检出项均为本次未检出。",
+          "logprobs": [],
+          "annotations": [
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=65",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=65"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=57",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=57"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=66",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=66"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.wenweipo.com/a/202506/21/AP6855fb71e4b0586324534322.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://iafastro.directory/iac/paper/id/96151/summary/",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://iafastro.directory/iac/paper/id/96151/summary/"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://baike.baidu.com/item/%E2%80%9C%E5%A4%A9%E9%B9%8A%E2%80%9D%E5%8F%91%E5%8A%A8%E6%9C%BA/23499460"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://x.com/CNSAWatcher/status/1737020443079454745",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://x.com/CNSAWatcher/status/1737020443079454745"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.proceedings.com/083090-0005.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.proceedings.com/083090-0005.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/l0HitsBfMN1Fm1uXBBCcoA"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sciencedirect.com/science/article/abs/pii/S0094576526003462"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.hangyan.co/charts/3780795018101393310",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.hangyan.co/charts/3780795018101393310"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://iafastro.directory/iac/paper/id/96151/abstract-pdf/IAC-25,C4,1,6,x96151.brief.pdf"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://sat.huijiwiki.com/wiki/%E6%9C%B1%E9%9B%80%E4%B8%89%E5%8F%B7"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=62",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=62"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.semanticscholar.org/author/Yu-Guan/2406335700",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.semanticscholar.org/author/Yu-Guan/2406335700"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://dw-media.tkww.hk/epaper/wwp/20250621/a07-0621.pdf"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=58",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=58"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=53",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=53"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=51",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=51"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=56",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=56"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://china.cnr.cn/gdgg/20250621/t20250621_527222192.shtml"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=64",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=64"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://mp.weixin.qq.com/s/2Z5mfHc1yqMjksgbc8Jt5w"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://news.zol.com.cn/999/9999526.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://news.zol.com.cn/999/9999526.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.itbear.com.cn/html/2025-10/994415.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.itbear.com.cn/html/2025-10/994415.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/product.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/product.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sciencedirect.com/science/article/pii/S0094576526003462",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sciencedirect.com/science/article/pii/S0094576526003462"
+            },
+            {
+              "type": "url_citation",
+              "url": "http://www.landspace.com/news?id=1018",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "http://www.landspace.com/news?id=1018"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/en/news-detail.html?itemid=18",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/en/news-detail.html?itemid=18"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news.html?catid=1&page=2",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news.html?catid=1&page=2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/about",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/about"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://finance.sina.com.cn/tech/roll/2025-06-20/doc-infateun0779778.shtml"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://scite.ai/reports/tank-head-start-approach-for-a-lZzKNlZM"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://k.sina.cn/article_7879923516_1d5ae173c068092kcw.html?vt=4&from=mil"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/?channel=chinapp.com",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/?channel=chinapp.com"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/index.php%25EF%25B9%2596lang=gbjob.html"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/en/new2.html?catid=2",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/en/new2.html?catid=2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=49",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=49"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=52",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=52"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://web.archive.org/web/20250517050710/https:/mp.weixin.qq.com/s/toaaO68Aq9jhd7qSFFig8Q"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/news-detail.html?itemid=68",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/news-detail.html?itemid=68"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/TQ-15",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/TQ-15"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/new2.html?catid=2",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/new2.html?catid=2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.ebiotrade.com/newsf/2026-5/20260519084303344.htm"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.sciengine.com/doi/10.16329/j.cnki.zrht.2023.01.011"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://x.com/NewsIADN/status/2111858766773915667",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://x.com/NewsIADN/status/2111858766773915667"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://en.wikipedia.org/wiki/TQ-12",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://en.wikipedia.org/wiki/TQ-12"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://www.landspace.com/en/new2.html?catid=2&page=2",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://www.landspace.com/en/new2.html?catid=2&page=2"
+            },
+            {
+              "type": "url_citation",
+              "url": "https://m-robo.datayes.com/feed/detail?id=571163",
+              "start_index": 0,
+              "end_index": 0,
+              "title": "https://m-robo.datayes.com/feed/detail?id=571163"
+            }
+          ]
+        }
+      ],
+      "id": "msg_0f11a811-ee33-95f8-804c-7d4e08f14df5",
+      "role": "assistant",
+      "type": "message",
+      "status": "completed"
+    }
+  ],
+  "usage": {
+    "input_tokens": 87992,
+    "input_tokens_details": {
+      "cached_tokens": 35968
+    },
+    "output_tokens": 4708,
+    "output_tokens_details": {
+      "reasoning_tokens": 3741
+    },
+    "total_tokens": 92700,
+    "num_sources_used": 0,
+    "num_server_side_tools_used": 8,
+    "cost_in_usd_ticks": 910952000,
+    "server_side_tool_usage_details": {
+      "web_search_calls": 8,
+      "x_search_calls": 0,
+      "x_posts_fetched": 0,
+      "x_users_fetched": 0,
+      "code_interpreter_calls": 0,
+      "file_search_calls": 0,
+      "mcp_calls": 0,
+      "document_search_calls": 0,
+      "image_generation_calls": 0
+    },
+    "context_details": {
+      "input_tokens": 46169,
+      "output_tokens": 3052
+    }
+  },
+  "note": "Grok搜索记录与摘要，非独立原文核验；未保存密钥、请求头或模型推理。"
+}
