@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "PASS",
+  "started_at": "2026-10-24T01:38:00+00:00",
+  "input_fingerprint": "f5375af652e379a1468194dabe9c791e88df4dd48e66840dfce05291d171a900",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/quality/debug.log"
+    },
+    {
+      "name": "release",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Release"
+      ],
+      "log": "build/quality/release.log",
+      "additional_commands": [
+        [
+          "C:\\Python313\\python.exe",
+          "tools/gui_build.py",
+          "--dist"
+        ],
+        [
+          "C:\\Python313\\python.exe",
+          "tests/test_gui.py"
+        ]
+      ]
+    },
+    {
+      "name": "runner",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "log": "build/quality/runner.log"
+    },
+    {
+      "name": "handoff",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_handoff.py",
+        "-v"
+      ],
+      "log": "build/quality/handoff.log"
+    }
+  ],
+  "finished_at": "2026-10-24T01:45:45+00:00"
+}

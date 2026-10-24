@@ -34,6 +34,7 @@
 | propellant_comparison.py | 成对C方法研究的57次运行/8张新CEA参考、输入/状态/差值和拒绝复核；读取保存C结果作图 |
 | combustion_reference.py | 从新鲜已测C构建复跑TP/HP/冻结A10/A40，对照固定CEA，检查守恒并存档 |
 | assignment_diagram.py / render_architecture.py | 作业对接SVG、工程三视图、Mermaid与离线HTML；生成后需视觉核验 |
+| work2_architecture.py | 作业二目标业务能力SVG/Mermaid布局；由render_architecture统一生成和检查，与当前生产模块图分别说明 |
 | migrate_governance.py | 一次性迁移旧手工任务板；已有任务登记时拒绝再次运行 |
 | wsl_gcc.ps1 | 历史Linux运行库准备工具；当前Windows任务不运行它 |
 

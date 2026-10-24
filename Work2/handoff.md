@@ -2,6 +2,14 @@
 
 从[worknow](worknow.md)读取当前任务；在仓库根执行 `python tools/project.py doctor`，再 `show TASK-ID`。任务状态、负责人、依赖和验收以登记为准，本文件不维护第二套状态表。
 
+## 2026-10-24业务架构
+
+[业务架构](docs/business-architecture.md)和[业务图](docs/business-architecture.svg)明确五项职责：对象/证据、场景/模型、C计算、实验/评估、结论/交付。场景、物理模型、数值策略、执行配置分别保留身份；型号名关联背景证据，计算接受完整输入。求解状态、结果评估和目标适用性分别说明，失败与参考分歧进入研究记录。
+
+该批是目标设计和后续任务契约收敛，没有改生产C模块或生成新的科学基准/AI收益证据。共享工程图继续描述当前登记，新增Work2图经同一生成入口检查漂移。WBASE/WREF/WDEV承接实际契约与实现；细到科学主张的自动失效传播仍是目标。设计走查与验证范围见[003执行记录](taskshot/2026-10-24_003-business-architecture.md)。
+
+质量检查出现一次Debug循环测试0xC0000005，随后同一二进制单次及固定10次均通过505项检查，原因未定位；[U-015](docs/review.md)保留给WBASE补核，不把后续通过说成已修复。
+
 ## 2026-10-24首轮调查
 
 [调查协议](research/survey-protocol.md)覆盖方法/验证/C引擎/AI/参数五条主线。[调研入口](research/README.md)连接实际原文、分级主张、软件版本/许可、参数观察和缺口；精选JSON由根`tools/work2_survey_data.py`生成，原件由`tools/work2_research.py verify`及统一质量复核。

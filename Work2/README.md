@@ -17,6 +17,7 @@
 |---|---|
 | 明确必须交什么 | [要求原图](作业要求.png)、[要求解析](docs/requirements.md) |
 | 判断什么算高质量 | [质量标准](docs/quality-standard.md)、[实验模板](templates/experiment.md) |
+| 理解业务架构和计算边界 | [业务架构](docs/business-architecture.md)、[架构图](docs/business-architecture.svg)；当前C模块另见[共享工程架构](../docs/architecture/README.md) |
 | 了解先做什么、怎样收敛 | [研究规划](docs/research-plan.md)、[知识地图](docs/knowledge-map.md) |
 | 查依据与未解决问题 | [来源台账](research/evidence.md)、[审查与不确定性](docs/review.md) |
 | 阅读首轮调查与已采数据 | [调研入口](research/README.md)、[调查协议](research/survey-protocol.md)、[数据说明](research/data/README.md) |

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "revision": 409,
+  "revision": 419,
   "context": {
-    "phase": "作业二首轮证据采集与基线审查准备",
+    "phase": "作业二业务架构与基线审查准备",
     "evidence_cutoff": "2026-10-06",
     "next_tasks": [
       "WBASE-001",
@@ -13,13 +13,13 @@
       "WDEL-001"
     ],
     "facts": [
-      "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
-      "本批登记46条来源记录、40条已保存或原址复用记录（其中1条仅为挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
-      "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
-      "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
-      "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
-      "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
-      "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+      "作业二业务架构见Work2/docs/business-architecture.md；五项职责贯通来源到交付，场景/模型/数值策略/执行身份分别维护，目标设计与当前C模块分开。",
+      "架构约束已接入WBASE/WREF/WDEV契约；累计诊断、可替换策略和逐量评估待实际审查/实现，尚无本阶段新TP/HP或AI/GPU实验。",
+      "首轮调查覆盖方法/验证/C引擎/AI/两型参数；46条来源记录、40条保存或原址复用（1条仅挑战页）、19条主张、43条参数/缺口观察，30个同批关键字段为空。",
+      "Grok地址拼接已修复，逐次核对搜索轨迹并独立HTTP核原文；旧1805.07762化学平衡题名已被原站否证，2020 ODML全文仍待补核。",
+      "课程与固定CEA物性完整字节不同，选定10种中性气体字段一致；同源数据不构成独立物理验证。",
+      "TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；缺参按所求输出与模型判断可算范围，未知不自动补值。",
+      "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用，Work2新来源按2026-10-24索引和核读范围使用。",
       "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
     ]
   },
@@ -1829,7 +1829,8 @@
       "status": "READY",
       "priority": 0,
       "depends_on": [
-        "WORG-001"
+        "WORG-001",
+        "WARC-001"
       ],
       "required_artifacts": [
         "Work2/research/baseline-validation-v1.md",
@@ -1837,10 +1838,12 @@
       ],
       "acceptance": [
         "固定源码、数据、物种/相态、单位、入口焓和冻结假设，复跑成功/失败与边界案例",
-        "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果"
+        "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果",
+        "按Work2业务架构分别固定场景/物理模型/数值策略/执行身份；审查累计TP调用、内层工作、失败与端到端成本，明确已有诊断及需补差距；型号名不代替完整输入",
+        "补核U-015记录的Debug循环进程0xC0000005与独立新构建/运行环境；若再现留崩溃定位和修正证据，未定位时不以重试成功宣称已修复"
       ],
       "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "note": "架构批次质量发现一次循环测试访问异常，固定10次复跑未再现；保留给基线审查补核，不据重试成功关闭根因问题",
       "verification": null
     },
     {
@@ -1898,10 +1901,11 @@
       "acceptance": [
         "先冻结工况、量纲、指标、判据、拒绝边界、版本及数据来源，再运行比较",
         "覆盖解析/守恒、独立数值实现、模型假设差异及可得实验四层；同源物性不冒充独立物理证据",
-        "报告失败分母、最大误差/分位数、重复计时、训练开销、域外检查和负面结果"
+        "报告失败分母、最大误差/分位数、重复计时、训练开销、域外检查和负面结果",
+        "区分同模型策略、物理模型、输入敏感性和两型条件比较，给出不变量/变化量及所求输出；逐量/逐范围定义数值接受与目标适用性，说明主导缺参、探测/保留集隔离和结论追溯方式"
       ],
       "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "note": "将业务架构中的比较类型、缺参影响和结果评估落实为实验协议，保留原全部验收条款",
       "verification": null
     },
     {
@@ -1940,10 +1944,11 @@
       "acceptance": [
         "新功能先登记模块、失败语义与算例；Windows生产程序直接由C计算",
         "有意义的数值、失败、内存/警告及回归检查通过；更改模块后再生架构并视觉核对",
-        "量化相对基线的准确性、失败率和成本；若研究改进被否决，交付可靠基线并说明原因"
+        "量化相对基线的准确性、失败率和成本；若研究改进被否决，交付可靠基线并说明原因",
+        "实现契约分别说明物理模型、数值策略、workspace/缓存归属及累计诊断；完整输入决定计算，失败不污染有效输出，候选预测遵守相同检查/回退；运行到评估/结论链可复核，旧API与运行依赖变化显式记录"
       ],
       "owner": null,
-      "note": "Created with an explicit acceptance contract",
+      "note": "将业务架构的场景/策略/工作区/失败及追溯边界接入实际C实现；按实验证据选择接口，不新增未经验证模型承诺",
       "verification": null
     },
     {
@@ -1990,6 +1995,32 @@
       "owner": null,
       "note": "Created with an explicit acceptance contract",
       "verification": null
+    },
+    {
+      "id": "WARC-001",
+      "title": "作业二业务架构与领域契约设计",
+      "status": "DONE",
+      "priority": 0,
+      "depends_on": [
+        "WORG-001",
+        "WRES-001"
+      ],
+      "required_artifacts": [
+        "Work2/docs/business-architecture.md",
+        "Work2/docs/business-architecture.svg"
+      ],
+      "acceptance": [
+        "说明业务目标、用例、能力边界、对象关系及证据到交付的追溯；图文可阅读且无虚构已实现能力",
+        "明确场景/物理模型/数值策略/运行/评估分责、失败语义和AI准入；映射当前模块与分阶段迁移，不替代现有源码登记",
+        "将架构约束接入后续任务与文档导航，维护交接和执行记录，通过统一质量与暂存审查并建立本地检查点"
+      ],
+      "owner": "codex",
+      "note": "目标业务架构、图形、规范归属、后续契约与执行交接已闭合；设计走查和机械质量支持本批文档/工具范围，不等于独立科学审查或新C功能完成。WBASE承接基线与U-015补核；完成暂存审查后建立本地检查点，不外推已验证物理能力。",
+      "verification": {
+        "kind": "quality",
+        "path": "project/evidence/WARC-001_15e1b066d935.json",
+        "sha256": "f2deaf4801caa86bcc95334561ce11a8585e7eeff1a588d286c08e2b755eb664"
+      }
     }
   ],
   "events": [
@@ -10695,6 +10726,355 @@
       "note": "Prerequisites completed; task is now ready",
       "previous_hash": "dd075addb3bef66849fe79ea1d0cfe893e5ad3e34d94352610fd4f778751f717",
       "hash": "eb79f1feb1959111747ec7a9d51bc81562ebc14e7d63f465e54b42618ec6ee80"
+    },
+    {
+      "seq": 427,
+      "at": "2026-10-24T01:19:07+00:00",
+      "task": "WARC-001",
+      "from": null,
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Created with an explicit acceptance contract",
+      "previous_hash": "eb79f1feb1959111747ec7a9d51bc81562ebc14e7d63f465e54b42618ec6ee80",
+      "hash": "92d6e80766633a125cdedf57f394ed78b8e801d7392963969fcdf50231cca76e"
+    },
+    {
+      "seq": 428,
+      "at": "2026-10-24T01:19:16+00:00",
+      "task": "WARC-001",
+      "from": "READY",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "根据用户业务架构问题，将首轮研究、两型场景、C计算及验证交付整合为可审阅设计；不扩充物理模型或启动GPU任务",
+      "previous_hash": "92d6e80766633a125cdedf57f394ed78b8e801d7392963969fcdf50231cca76e",
+      "hash": "1518612412af13118d0e402a00ef4cd74b4509c8948430b30a19c8e936bb9ffa"
+    },
+    {
+      "seq": 429,
+      "at": "2026-10-24T01:24:58+00:00",
+      "task": "WBASE-001",
+      "from": "READY",
+      "to": "PLANNED",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "承接业务架构，先固定场景/模型/策略/执行身份并审查完整成本；本任务不预设重写或扩模型",
+      "previous_hash": "1518612412af13118d0e402a00ef4cd74b4509c8948430b30a19c8e936bb9ffa",
+      "details": {
+        "contract_before": {
+          "id": "WBASE-001",
+          "title": "作业一C基线继承与数值质量审查",
+          "status": "READY",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/baseline-validation-v1.md",
+            "Work2/results/baseline_v1/manifest.json"
+          ],
+          "acceptance": [
+            "固定源码、数据、物种/相态、单位、入口焓和冻结假设，复跑成功/失败与边界案例",
+            "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果"
+          ],
+          "owner": null,
+          "note": "Created with an explicit acceptance contract",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WBASE-001",
+          "title": "作业一C基线继承与数值质量审查",
+          "status": "PLANNED",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001",
+            "WARC-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/baseline-validation-v1.md",
+            "Work2/results/baseline_v1/manifest.json"
+          ],
+          "acceptance": [
+            "固定源码、数据、物种/相态、单位、入口焓和冻结假设，复跑成功/失败与边界案例",
+            "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果",
+            "按Work2业务架构分别固定场景/物理模型/数值策略/执行身份；审查累计TP调用、内层工作、失败与端到端成本，明确已有诊断及需补差距；型号名不代替完整输入"
+          ],
+          "owner": null,
+          "note": "承接业务架构，先固定场景/模型/策略/执行身份并审查完整成本；本任务不预设重写或扩模型",
+          "verification": null
+        }
+      },
+      "hash": "c04381acc8518ad0ac7d3b53ebcc25f66bf361a2d3b2655fd6eaaed3fbc3db84"
+    },
+    {
+      "seq": 430,
+      "at": "2026-10-24T01:25:13+00:00",
+      "task": "WREF-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "将业务架构中的比较类型、缺参影响和结果评估落实为实验协议，保留原全部验收条款",
+      "previous_hash": "c04381acc8518ad0ac7d3b53ebcc25f66bf361a2d3b2655fd6eaaed3fbc3db84",
+      "details": {
+        "contract_before": {
+          "id": "WREF-001",
+          "title": "验证矩阵、误差预算与实验协议",
+          "status": "PLANNED",
+          "priority": 0,
+          "depends_on": [
+            "WBASE-001",
+            "WRES-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/validation-protocol.md",
+            "Work2/research/experiment-protocol.md"
+          ],
+          "acceptance": [
+            "先冻结工况、量纲、指标、判据、拒绝边界、版本及数据来源，再运行比较",
+            "覆盖解析/守恒、独立数值实现、模型假设差异及可得实验四层；同源物性不冒充独立物理证据",
+            "报告失败分母、最大误差/分位数、重复计时、训练开销、域外检查和负面结果"
+          ],
+          "owner": null,
+          "note": "Created with an explicit acceptance contract",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WREF-001",
+          "title": "验证矩阵、误差预算与实验协议",
+          "status": "PLANNED",
+          "priority": 0,
+          "depends_on": [
+            "WBASE-001",
+            "WRES-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/validation-protocol.md",
+            "Work2/research/experiment-protocol.md"
+          ],
+          "acceptance": [
+            "先冻结工况、量纲、指标、判据、拒绝边界、版本及数据来源，再运行比较",
+            "覆盖解析/守恒、独立数值实现、模型假设差异及可得实验四层；同源物性不冒充独立物理证据",
+            "报告失败分母、最大误差/分位数、重复计时、训练开销、域外检查和负面结果",
+            "区分同模型策略、物理模型、输入敏感性和两型条件比较，给出不变量/变化量及所求输出；逐量/逐范围定义数值接受与目标适用性，说明主导缺参、探测/保留集隔离和结论追溯方式"
+          ],
+          "owner": null,
+          "note": "将业务架构中的比较类型、缺参影响和结果评估落实为实验协议，保留原全部验收条款",
+          "verification": null
+        }
+      },
+      "hash": "5152774ad076b4e65ffb9b26ff5c461c875f81aa730b3d05fef418999c6ba04b"
+    },
+    {
+      "seq": 431,
+      "at": "2026-10-24T01:25:25+00:00",
+      "task": "WDEV-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "将业务架构的场景/策略/工作区/失败及追溯边界接入实际C实现；按实验证据选择接口，不新增未经验证模型承诺",
+      "previous_hash": "5152774ad076b4e65ffb9b26ff5c461c875f81aa730b3d05fef418999c6ba04b",
+      "details": {
+        "contract_before": {
+          "id": "WDEV-001",
+          "title": "经验证路线的C工程实现与整合",
+          "status": "PLANNED",
+          "priority": 1,
+          "depends_on": [
+            "WEXP-001"
+          ],
+          "required_artifacts": [
+            "Work2/docs/implementation-contract.md",
+            "Work2/results/implementation_v1/manifest.json"
+          ],
+          "acceptance": [
+            "新功能先登记模块、失败语义与算例；Windows生产程序直接由C计算",
+            "有意义的数值、失败、内存/警告及回归检查通过；更改模块后再生架构并视觉核对",
+            "量化相对基线的准确性、失败率和成本；若研究改进被否决，交付可靠基线并说明原因"
+          ],
+          "owner": null,
+          "note": "Created with an explicit acceptance contract",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WDEV-001",
+          "title": "经验证路线的C工程实现与整合",
+          "status": "PLANNED",
+          "priority": 1,
+          "depends_on": [
+            "WEXP-001"
+          ],
+          "required_artifacts": [
+            "Work2/docs/implementation-contract.md",
+            "Work2/results/implementation_v1/manifest.json"
+          ],
+          "acceptance": [
+            "新功能先登记模块、失败语义与算例；Windows生产程序直接由C计算",
+            "有意义的数值、失败、内存/警告及回归检查通过；更改模块后再生架构并视觉核对",
+            "量化相对基线的准确性、失败率和成本；若研究改进被否决，交付可靠基线并说明原因",
+            "实现契约分别说明物理模型、数值策略、workspace/缓存归属及累计诊断；完整输入决定计算，失败不污染有效输出，候选预测遵守相同检查/回退；运行到评估/结论链可复核，旧API与运行依赖变化显式记录"
+          ],
+          "owner": null,
+          "note": "将业务架构的场景/策略/工作区/失败及追溯边界接入实际C实现；按实验证据选择接口，不新增未经验证模型承诺",
+          "verification": null
+        }
+      },
+      "hash": "34f74bf66d0eca25097915211c85a324c88fffe8b4890cad47e4c24bcf442544"
+    },
+    {
+      "seq": 432,
+      "at": "2026-10-24T01:26:04+00:00",
+      "task": "WARC-001",
+      "from": "ACTIVE",
+      "to": "ACTIVE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "业务架构将证据、场景、C计算、评估和交付分责；继承首轮来源事实，架构设计不增加科学实验结论",
+      "previous_hash": "34f74bf66d0eca25097915211c85a324c88fffe8b4890cad47e4c24bcf442544",
+      "details": {
+        "context_before": {
+          "phase": "作业二首轮证据采集与基线审查准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WREF-001",
+            "WRES-002",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "作业二首轮调查见Work2/research/README.md与survey-protocol.md，方法/验证/C引擎/AI/两型参数五条主线已有证据和缺口。",
+            "本批登记46条来源记录、40条已保存或原址复用记录（其中1条仅为挑战页）、19条分级主张、43条参数/缺口观察；30个同批关键字段为空。",
+            "Grok地址拼接已修复；本批一次无轨迹、两次返回17/10条结构化调用记录；原文另行HTTP核验，旧1805.07762化学平衡题名已被原站否证。",
+            "课程与固定CEA物性文件完整字节不同，选定10种中性气体比较字段一致；同源数据不构成独立物理验证。",
+            "英文TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；两型真实主室/入口/几何数据仍有缺口。",
+            "尚无本阶段新TP/HP运行、训练集或GPU实验；先做WBASE/WREF，再以同精度/失败门槛和总成本评价C引擎/学习辅助。",
+            "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用。作业二新来源按2026-10-24索引和核读范围使用。",
+            "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
+          ]
+        },
+        "context_after": {
+          "phase": "作业二业务架构与基线审查准备",
+          "evidence_cutoff": "2026-10-06",
+          "next_tasks": [
+            "WBASE-001",
+            "WREF-001",
+            "WRES-002",
+            "WEXP-001",
+            "WDEV-001",
+            "WDEL-001"
+          ],
+          "facts": [
+            "作业二业务架构见Work2/docs/business-architecture.md；五项职责贯通来源到交付，场景/模型/数值策略/执行身份分别维护，目标设计与当前C模块分开。",
+            "架构约束已接入WBASE/WREF/WDEV契约；累计诊断、可替换策略和逐量评估待实际审查/实现，尚无本阶段新TP/HP或AI/GPU实验。",
+            "首轮调查覆盖方法/验证/C引擎/AI/两型参数；46条来源记录、40条保存或原址复用（1条仅挑战页）、19条主张、43条参数/缺口观察，30个同批关键字段为空。",
+            "Grok地址拼接已修复，逐次核对搜索轨迹并独立HTTP核原文；旧1805.07762化学平衡题名已被原站否证，2020 ODML全文仍待补核。",
+            "课程与固定CEA物性完整字节不同，选定10种中性气体字段一致；同源数据不构成独立物理验证。",
+            "TQ-12A产品栏面积比20.5有原文，不能代替遥一/B型同批输入；缺参按所求输出与模型判断可算范围，未知不自动补值。",
+            "作业一就地归档及遗留责任保留；其冻结证据截止按旧记录使用，Work2新来源按2026-10-24索引和核读范围使用。",
+            "教师要求10分钟汇报、5分钟提问；12月5日周五与2026日历冲突仍待核。"
+          ]
+        }
+      },
+      "hash": "8d817ff2ce8a85de211c356cb90c2cf8735f14a10fce1331ce978064d56b60d4"
+    },
+    {
+      "seq": 433,
+      "at": "2026-10-24T01:37:15+00:00",
+      "task": "WBASE-001",
+      "from": "PLANNED",
+      "to": "PLANNED",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "架构批次质量发现一次循环测试访问异常，固定10次复跑未再现；保留给基线审查补核，不据重试成功关闭根因问题",
+      "previous_hash": "8d817ff2ce8a85de211c356cb90c2cf8735f14a10fce1331ce978064d56b60d4",
+      "details": {
+        "contract_before": {
+          "id": "WBASE-001",
+          "title": "作业一C基线继承与数值质量审查",
+          "status": "PLANNED",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001",
+            "WARC-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/baseline-validation-v1.md",
+            "Work2/results/baseline_v1/manifest.json"
+          ],
+          "acceptance": [
+            "固定源码、数据、物种/相态、单位、入口焓和冻结假设，复跑成功/失败与边界案例",
+            "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果",
+            "按Work2业务架构分别固定场景/物理模型/数值策略/执行身份；审查累计TP调用、内层工作、失败与端到端成本，明确已有诊断及需补差距；型号名不代替完整输入"
+          ],
+          "owner": null,
+          "note": "承接业务架构，先固定场景/模型/策略/执行身份并审查完整成本；本任务不预设重写或扩模型",
+          "verification": null
+        },
+        "contract_after": {
+          "id": "WBASE-001",
+          "title": "作业一C基线继承与数值质量审查",
+          "status": "PLANNED",
+          "priority": 0,
+          "depends_on": [
+            "WORG-001",
+            "WARC-001"
+          ],
+          "required_artifacts": [
+            "Work2/research/baseline-validation-v1.md",
+            "Work2/results/baseline_v1/manifest.json"
+          ],
+          "acceptance": [
+            "固定源码、数据、物种/相态、单位、入口焓和冻结假设，复跑成功/失败与边界案例",
+            "将Illinois外层与化学平衡内层分开验证；预注册容差、误差预算和独立性边界；不继承旧提速数字作为本轮结果",
+            "按Work2业务架构分别固定场景/物理模型/数值策略/执行身份；审查累计TP调用、内层工作、失败与端到端成本，明确已有诊断及需补差距；型号名不代替完整输入",
+            "补核U-015记录的Debug循环进程0xC0000005与独立新构建/运行环境；若再现留崩溃定位和修正证据，未定位时不以重试成功宣称已修复"
+          ],
+          "owner": null,
+          "note": "架构批次质量发现一次循环测试访问异常，固定10次复跑未再现；保留给基线审查补核，不据重试成功关闭根因问题",
+          "verification": null
+        }
+      },
+      "hash": "ba7daa09693a6d168f698da50567450a8b71017e0c6fc27396d61fc1a31db577"
+    },
+    {
+      "seq": 434,
+      "at": "2026-10-24T01:47:05+00:00",
+      "task": "WARC-001",
+      "from": "ACTIVE",
+      "to": "REVIEW",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "业务架构正文与SVG/Mermaid完整覆盖五项能力、对象/用例、身份边界、失败/评估和C/AI演进；图已实际视觉检查并纳入生成漂移核验，后续任务契约及导航已接入。最终六组质量PASS；本批未改生产C或证明科学收益。一次Debug访问异常未再现，U-015交WBASE补核，不宣称根因已修复。",
+      "previous_hash": "ba7daa09693a6d168f698da50567450a8b71017e0c6fc27396d61fc1a31db577",
+      "hash": "71f49a9111a2a018ba63eaffd5c3814579a4439e64433107b061d02f77467acb"
+    },
+    {
+      "seq": 435,
+      "at": "2026-10-24T01:47:27+00:00",
+      "task": "WARC-001",
+      "from": "REVIEW",
+      "to": "DONE",
+      "actor": "codex",
+      "owner_after": "codex",
+      "note": "目标业务架构、图形、规范归属、后续契约与执行交接已闭合；设计走查和机械质量支持本批文档/工具范围，不等于独立科学审查或新C功能完成。WBASE承接基线与U-015补核；完成暂存审查后建立本地检查点，不外推已验证物理能力。",
+      "previous_hash": "71f49a9111a2a018ba63eaffd5c3814579a4439e64433107b061d02f77467acb",
+      "hash": "dac49b0e1df5fc1fca89e11f058f7e1d5669644426bec616e2a8a24fc0c51289"
+    },
+    {
+      "seq": 436,
+      "at": "2026-10-24T01:47:27+00:00",
+      "task": "WBASE-001",
+      "from": "PLANNED",
+      "to": "READY",
+      "actor": "codex",
+      "owner_after": null,
+      "note": "Prerequisites completed; task is now ready",
+      "previous_hash": "dac49b0e1df5fc1fca89e11f058f7e1d5669644426bec616e2a8a24fc0c51289",
+      "hash": "4cd5a4b46f8e1ee3aa57419c150d929a3e6548d198d98b815a32c2e6ef39e2f7"
     }
   ]
 }

@@ -3,6 +3,7 @@ from html import escape
 import json
 from assignment_diagram import assignment, MERMAID as ASSIGNMENT_MERMAID
 from architecture_views import business, components, workflow
+from work2_architecture import expected_outputs as work2_outputs
 from projectlib import ROOT, atomic_text, read_json
 
 
@@ -36,9 +37,10 @@ def expected_architecture(root):
 <main>'''+sections+'''<aside><h2>模块维护契约</h2><table><thead><tr><th>模块</th><th>维护职责</th><th>边界</th><th>实现状态</th></tr></thead><tbody>'''+contracts+'''</tbody></table></aside></main><footer>离线可用，无CDN或网络请求。生成源：project/modules.json、tools/render_architecture.py与tools/assignment_diagram.py；SVG与Mermaid源同目录保留。</footer>
 <script>document.querySelectorAll('button[data-view]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('button[data-view]').forEach(x=>x.setAttribute('aria-selected',String(x===b)));document.querySelectorAll('.view').forEach(s=>s.classList.toggle('selected',s.id===b.dataset.view));}));</script></html>
 '''
+    outputs.update(work2_outputs())
     return outputs
 
 
 if __name__=="__main__":
     for relative,content in expected_architecture(ROOT).items(): atomic_text(ROOT/relative,content)
-    print("Rendered 4 SVG, 4 Mermaid sources and offline HTML architecture browser")
+    print("Rendered 5 SVG, 5 Mermaid sources and existing-engine offline HTML architecture browser")

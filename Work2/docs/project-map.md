@@ -31,6 +31,7 @@ Work2/
 | 老师要求与逐项追踪 | [requirements](requirements.md) | 报告/交付闭合清单；任务进度只引用生成板 |
 | 执行规则及操作 | [rules](../rules.md)、[governance](governance.md) | agent接手，不复制状态 |
 | 质量定义与研究路线 | [quality-standard](quality-standard.md)、[research-plan](research-plan.md) | 实验协议明确实例化 |
+| 业务能力、对象关系与演进边界 | [business-architecture](business-architecture.md) | 场景、模型、策略、运行与评估分责；目标设计与当前模块登记分开 |
 | 来源身份与支持的主张 | [evidence](../research/evidence.md) | 研究笔记/报告逐项引用 |
 | 决定与未解决问题 | [decisions](decisions.md)、[review](review.md) | 说明原因和解除条件 |
 | 运行结果与当时做过什么 | results版本、taskshot批次 | 绑定输入/版本/日志，不用叙述冒充结果 |

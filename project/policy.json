@@ -66,6 +66,7 @@
     {"path":"Work2/docs/requirements.md","role":"作业二教师原文、需求追踪和未明确项","owner":"tooling"},
     {"path":"Work2/docs/quality-standard.md","role":"课程、工程和研究贡献分层质量标准","owner":"tooling"},
     {"path":"Work2/docs/research-plan.md","role":"问题驱动的研究路线、里程碑和实验门槛","owner":"tooling"},
+    {"path":"Work2/docs/business-architecture.md","role":"作业二业务能力、对象/场景/模型/策略/评估契约与现有C工程演进边界","owner":"tooling"},
     {"path":"Work2/docs/baseline-audit.md","role":"作业一能力继承、Illinois线索及补审范围","owner":"tooling"},
     {"path":"Work2/docs/knowledge-map.md","role":"推力室热力计算知识路径与学习检查","owner":"thermo"},
     {"path":"Work2/docs/decisions.md","role":"作业二技术和组织决定及依据","owner":"tooling"},
