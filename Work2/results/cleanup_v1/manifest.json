@@ -1,0 +1,689 @@
+{
+  "kind": "w2-cleanup-v1",
+  "phase": "executed",
+  "date": "2026-10-28",
+  "repo_head": "7a3774b",
+  "scan_tool": "build/work2/cleanup_plan_scan.py",
+  "scan_tool_sha256": "a5d8ec7ec86415b27738c3df58429dceb5dedc8d491a185c70a863c572dcc6a9",
+  "files_scanned": 5339,
+  "scan_paths": [
+    "results",
+    "docs",
+    "taskshot",
+    "Work2",
+    "project",
+    "tools",
+    "tests",
+    "scripts",
+    "cases",
+    "data",
+    ".github",
+    ".githooks",
+    "调研",
+    "AGENTS.md",
+    "README.md",
+    "handoff.md",
+    "worknow.md",
+    "rules.md",
+    "CMakeLists.txt",
+    "CONTRIBUTING.md",
+    ".gitignore",
+    ".gitattributes"
+  ],
+  "latest_pointers": {
+    "debug": "",
+    "release": ""
+  },
+  "artifact_dirs": {
+    "total": 94,
+    "keep": [
+      "build/artifacts/release/0119980e29e14c86965e0204a4082bab",
+      "build/artifacts/release/09272c89a9084415b8a2834c4646a87e",
+      "build/artifacts/release/0a3f7d0a0cf346468785ca1e17296346",
+      "build/artifacts/release/0b241f3c759c44f392260210e0c0da2e",
+      "build/artifacts/release/0dcbcc2eb3dd47fd8567df291979b549",
+      "build/artifacts/release/146c4f34ed094197803b29496dce0c78",
+      "build/artifacts/release/179011df85664ac786f0a0ab8356c193",
+      "build/artifacts/release/206a1448fd8f4b089b5e3407c970dd93",
+      "build/artifacts/release/252f6e60cd8d460cad8ce14e5600ba18",
+      "build/artifacts/release/2b0fde3b8d3540e1b8a638d46ee387a2",
+      "build/artifacts/release/2d06c81a32ad4092b543b7e394c94518",
+      "build/artifacts/release/3654a084f7c44cb3a63b4600c48f1200",
+      "build/artifacts/release/3a45d3baded54193b8217e1a4390ff60",
+      "build/artifacts/release/410b698fa2494bc6989ea0b69afae930",
+      "build/artifacts/release/481fca0c00354336ada10f5238fc5d74",
+      "build/artifacts/release/4aa4778dba5b4da594c4733cde18ef1a",
+      "build/artifacts/release/5c6d005f636e4294b62cef76db24f83c",
+      "build/artifacts/release/69d86c3d7880415c9acbb4904cf794bb",
+      "build/artifacts/release/73b6a4f1eab84419b8a014a0864f28c7",
+      "build/artifacts/release/76593cf646154643a834b94a308e204b",
+      "build/artifacts/release/80dbb860152c47cabf4a89c5f8b8f47f",
+      "build/artifacts/release/97de9a4472b24268a3a1bc33cd9add3e",
+      "build/artifacts/release/988dd186dae34a128634451ca5fcac46",
+      "build/artifacts/release/9a8e8c63f0044c6db5e3155bf866b629",
+      "build/artifacts/release/a51d94b107d948c7b13517f8f0fe40d9",
+      "build/artifacts/release/a80a14fb4618483898a79a4e7b0ae496",
+      "build/artifacts/release/bdae60eca0704dd98eb896d0104c4116",
+      "build/artifacts/release/c072e4e4e58e498c8660040155a6ddf7",
+      "build/artifacts/release/c73c8fe4dd6d4113b2614f4158b44f63",
+      "build/artifacts/release/c81e1e0ba8024324a260310c8073e81d",
+      "build/artifacts/release/c8d86d7d995443d6acfb355bf0023ecf",
+      "build/artifacts/release/e51e7576380844e59e38ac0ddc0d5a7a",
+      "build/artifacts/release/e73a827d288c40e6bab3711cb488148b",
+      "build/artifacts/release/eff1b2ce89484fbda89407ff5199ca66",
+      "build/artifacts/release/f0017ab6ca314010bd20612257c8d5b8",
+      "build/artifacts/release/f2b9440f8b144491a21a9844c8e1f22c"
+    ],
+    "delete_candidates": [
+      {
+        "path": "build/artifacts/debug/010045112a254b0a9cb63c45d1102882",
+        "bytes": 12211117,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/01795995dcd74507bc2107e67d255f51",
+        "bytes": 12212882,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/04dc045a967140779b5dbe356ed9d9fb",
+        "bytes": 12211258,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/098d4709226b46e791b087195e681af0",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/0bc32242ca4b4aa596f7c75830ab17ee",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/0e3437a57ae149c9a45700dc70aa362a",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/14290e5bd3aa44c185c4953bce2dd36b",
+        "bytes": 12180105,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/2326f0b7b6a742c6931b72c0f9611b38",
+        "bytes": 12211117,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/2f4e51a5d5fd43078c952098967b6a3a",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/31091731c785481bab33dac4399425ca",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/31ee3e4ae5784720a4aff1e5722bc039",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/3795237453e34b72830ae75f24e5c7cc",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/46f4adf7797642d688e8350f4d23ee3c",
+        "bytes": 12211258,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/473e41c235b542cfbc1e30b52f3ad667",
+        "bytes": 4316,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/47ade60bf9a647f5b8780125b0b7d297",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/4a26c3a62a834bf5afa961c56b984ad8",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/4b041b3177bc43fcb5e39138c8c4be1c",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/4b8e5771d092401d854873e58750d9e3",
+        "bytes": 12180105,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/5af833522da14ea2b99ff445ca4796ad",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/5d0286202fff49b7b5332b1694bdfc2b",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/6f33fa8a2a60445f999006a7b8ba4098",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/749fd52459cd49c485f630191ad62d87",
+        "bytes": 12211258,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/7e77deff0e494e50befdc892fa900bb4",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/83908cf48d3b458a986fec9efa1d01de",
+        "bytes": 12213969,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/84c012a86beb45b1ace8a61acc718f9b",
+        "bytes": 12210322,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/85a23407c5174bc8b7e53e2ba7f6f8fa",
+        "bytes": 12193652,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/8c35bac25fc44c91b66e8383c4a72316",
+        "bytes": 12211260,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/9c581576262f498db398f1e3ce1a1058",
+        "bytes": 12211260,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/9ebd7a4968f34682a43baeaefdd9c9cb",
+        "bytes": 12180105,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/aaf5276142474ce4bb7aae79e726513b",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/af2a76f9b78e4bff983f7912506c8ce5",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/bc516dd3dd46405aae445d44abf9ee27",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/c2468b9339104172a1965f27e6f10f94",
+        "bytes": 12205738,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/c4f5eec6916f4c1fabff96ffd07161f4",
+        "bytes": 12211118,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/c52e3259735243fa954bc23fafe01411",
+        "bytes": 12210324,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/db56abb8b16e4b2cada087d9b189d987",
+        "bytes": 12210322,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/e3f5023d5df54954a0d1a1ec2e03c826",
+        "bytes": 12211258,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/e9bb25381c814132aa2538381f1e5902",
+        "bytes": 12210322,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/f45ec159daf24e359b36717cc1e94398",
+        "bytes": 12201958,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/f9693c950cf34827a6618fcb9192e0cb",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/fa4df5859103462e8c7ba79cf765a1f0",
+        "bytes": 12210323,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/fa7c35a066b14aee8ffbe5ef2a4b1946",
+        "bytes": 12211259,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/debug/ff37748cb6e74a5298b9f5019ac74d28",
+        "bytes": 12213968,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/03043f9adc9d41d89229053fc2ef02ee",
+        "bytes": 4754,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/0b648ee5de454579b3ccb4ceda3c74d4",
+        "bytes": 1484640,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/1b23f7593ef9406c913110e15d346ae5",
+        "bytes": 1502984,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/276277359f344534bb3e934d888d907b",
+        "bytes": 1502984,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/39f45855be2c41b4ab5f0eb5667d7bdb",
+        "bytes": 1493876,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/3a7a9a343d6f46a1a1ddc44d7215b546",
+        "bytes": 1502434,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/43bf00c057bf4033bbcd860e0c861744",
+        "bytes": 1496462,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/57ee61c162ed428c8095e3acdf82eb67",
+        "bytes": 1502922,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/79b7cc134cec4f29a9f37fd6f879fbcb",
+        "bytes": 1496584,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/891be9807ba84236880ec66134f858b2",
+        "bytes": 1492355,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/8dd1240db8e34355b0445b4407bceef1",
+        "bytes": 1485299,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/9a941b3b01ee472dba2f6026ca70c439",
+        "bytes": 1495374,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/be74c512c57446c0bfabf25d081a777b",
+        "bytes": 1502921,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/c56c2ed2e4a34ff9b818f770b992cc34",
+        "bytes": 4754,
+        "running": false
+      },
+      {
+        "path": "build/artifacts/release/ce926a0bf60b455eafd616b9587bfffe",
+        "bytes": 1501897,
+        "running": false
+      }
+    ],
+    "delete_reclaim_bytes": 532229538
+  },
+  "loose_build_dirs": {
+    "keep": [
+      {
+        "path": "build/artifacts",
+        "bytes": 586278159,
+        "referenced": true
+      },
+      {
+        "path": "build/contributions-20261020",
+        "bytes": 251645,
+        "referenced": true
+      },
+      {
+        "path": "build/debug",
+        "bytes": 12193926,
+        "referenced": true
+      },
+      {
+        "path": "build/delivery-course-20261020",
+        "bytes": 5115293,
+        "referenced": true,
+        "rescue": "bare-name second pass"
+      },
+      {
+        "path": "build/delivery-course-20261020-v2",
+        "bytes": 5536138,
+        "referenced": true
+      },
+      {
+        "path": "build/delivery-course-reviewed-20261020",
+        "bytes": 5531908,
+        "referenced": true
+      },
+      {
+        "path": "build/gui",
+        "bytes": 3679689,
+        "referenced": true
+      },
+      {
+        "path": "build/perf",
+        "bytes": 1015834,
+        "referenced": true
+      },
+      {
+        "path": "build/phase-one-closeout",
+        "bytes": 15340,
+        "referenced": true
+      },
+      {
+        "path": "build/ppt-audit-20261015",
+        "bytes": 383402826,
+        "referenced": true
+      },
+      {
+        "path": "build/ppt-images-20261016",
+        "bytes": 42440284,
+        "referenced": true
+      },
+      {
+        "path": "build/ppt-review-20261016",
+        "bytes": 408778501,
+        "referenced": true
+      },
+      {
+        "path": "build/preproduction-audit-20261015",
+        "bytes": 456131,
+        "referenced": true
+      },
+      {
+        "path": "build/presentation-guidance-20261015",
+        "bytes": 12599,
+        "referenced": true
+      },
+      {
+        "path": "build/presentation-production-20261015",
+        "bytes": 422101824,
+        "referenced": true
+      },
+      {
+        "path": "build/quality",
+        "bytes": 15648,
+        "referenced": true
+      },
+      {
+        "path": "build/release",
+        "bytes": 1485503,
+        "referenced": true
+      },
+      {
+        "path": "build/report-audit-v2",
+        "bytes": 9121001,
+        "referenced": true
+      },
+      {
+        "path": "build/report-qa",
+        "bytes": 38538661,
+        "referenced": true
+      },
+      {
+        "path": "build/scientific-figure-collection",
+        "bytes": 266,
+        "referenced": true
+      },
+      {
+        "path": "build/submission-checks-20261020",
+        "bytes": 6935541,
+        "referenced": true
+      },
+      {
+        "path": "build/submission-review",
+        "bytes": 104503692,
+        "referenced": true
+      },
+      {
+        "path": "build/test-tmp",
+        "bytes": 468,
+        "referenced": true,
+        "rescue": "bare-name second pass"
+      },
+      {
+        "path": "build/tooling",
+        "bytes": 85742463,
+        "referenced": true
+      },
+      {
+        "path": "build/work2",
+        "bytes": 3742513,
+        "referenced": true
+      }
+    ],
+    "delete_candidates": [
+      {
+        "path": "build/.cmake",
+        "bytes": 144,
+        "referenced": false
+      },
+      {
+        "path": "build/CMakeFiles",
+        "bytes": 478323,
+        "referenced": false
+      },
+      {
+        "path": "build/Testing",
+        "bytes": 1386,
+        "referenced": false
+      },
+      {
+        "path": "build/blue-template-review",
+        "bytes": 19298686,
+        "referenced": false
+      },
+      {
+        "path": "build/gui-dev",
+        "bytes": 747828,
+        "referenced": false
+      },
+      {
+        "path": "build/gui-probe",
+        "bytes": 11054183,
+        "referenced": false
+      },
+      {
+        "path": "build/liquid-hp-rya4q73l",
+        "bytes": 0,
+        "referenced": false
+      },
+      {
+        "path": "build/live-panel-skill-reference",
+        "bytes": 34015134,
+        "referenced": false
+      },
+      {
+        "path": "build/ppt-final",
+        "bytes": 389762440,
+        "referenced": false
+      },
+      {
+        "path": "build/ppt-speaker-notes",
+        "bytes": 8129415,
+        "referenced": false
+      },
+      {
+        "path": "build/ppt-tables-20261016",
+        "bytes": 374675508,
+        "referenced": false
+      },
+      {
+        "path": "build/presentation-enrichment-20261015",
+        "bytes": 1824,
+        "referenced": false
+      },
+      {
+        "path": "build/submission-20261020-v2-checks",
+        "bytes": 6921799,
+        "referenced": false
+      },
+      {
+        "path": "build/template-course-report",
+        "bytes": 9704609,
+        "referenced": false
+      },
+      {
+        "path": "build/template-modern-nju-thesis",
+        "bytes": 20706644,
+        "referenced": false
+      },
+      {
+        "path": "build/template-modern-sjtu-report",
+        "bytes": 4319104,
+        "referenced": false
+      },
+      {
+        "path": "build/template31-review",
+        "bytes": 8749625,
+        "referenced": false
+      },
+      {
+        "path": "build/tpl-review",
+        "bytes": 12297121,
+        "referenced": false
+      }
+    ],
+    "delete_reclaim_bytes": 900863773
+  },
+  "retention_rule": "keep if referenced by scanned files, pointed to by latest.json, or containing RUNNING; everything else under build/ is regenerable",
+  "execution": {
+    "date": "2026-10-28",
+    "deleted_count": 73,
+    "deleted_bytes": 1433093311,
+    "deleted_paths": [
+      "build/artifacts/debug/010045112a254b0a9cb63c45d1102882",
+      "build/artifacts/debug/01795995dcd74507bc2107e67d255f51",
+      "build/artifacts/debug/04dc045a967140779b5dbe356ed9d9fb",
+      "build/artifacts/debug/098d4709226b46e791b087195e681af0",
+      "build/artifacts/debug/0bc32242ca4b4aa596f7c75830ab17ee",
+      "build/artifacts/debug/0e3437a57ae149c9a45700dc70aa362a",
+      "build/artifacts/debug/14290e5bd3aa44c185c4953bce2dd36b",
+      "build/artifacts/debug/2326f0b7b6a742c6931b72c0f9611b38",
+      "build/artifacts/debug/2f4e51a5d5fd43078c952098967b6a3a",
+      "build/artifacts/debug/31091731c785481bab33dac4399425ca",
+      "build/artifacts/debug/31ee3e4ae5784720a4aff1e5722bc039",
+      "build/artifacts/debug/3795237453e34b72830ae75f24e5c7cc",
+      "build/artifacts/debug/46f4adf7797642d688e8350f4d23ee3c",
+      "build/artifacts/debug/473e41c235b542cfbc1e30b52f3ad667",
+      "build/artifacts/debug/47ade60bf9a647f5b8780125b0b7d297",
+      "build/artifacts/debug/4a26c3a62a834bf5afa961c56b984ad8",
+      "build/artifacts/debug/4b041b3177bc43fcb5e39138c8c4be1c",
+      "build/artifacts/debug/4b8e5771d092401d854873e58750d9e3",
+      "build/artifacts/debug/5af833522da14ea2b99ff445ca4796ad",
+      "build/artifacts/debug/5d0286202fff49b7b5332b1694bdfc2b",
+      "build/artifacts/debug/6f33fa8a2a60445f999006a7b8ba4098",
+      "build/artifacts/debug/749fd52459cd49c485f630191ad62d87",
+      "build/artifacts/debug/7e77deff0e494e50befdc892fa900bb4",
+      "build/artifacts/debug/83908cf48d3b458a986fec9efa1d01de",
+      "build/artifacts/debug/84c012a86beb45b1ace8a61acc718f9b",
+      "build/artifacts/debug/85a23407c5174bc8b7e53e2ba7f6f8fa",
+      "build/artifacts/debug/8c35bac25fc44c91b66e8383c4a72316",
+      "build/artifacts/debug/9c581576262f498db398f1e3ce1a1058",
+      "build/artifacts/debug/9ebd7a4968f34682a43baeaefdd9c9cb",
+      "build/artifacts/debug/aaf5276142474ce4bb7aae79e726513b",
+      "build/artifacts/debug/af2a76f9b78e4bff983f7912506c8ce5",
+      "build/artifacts/debug/bc516dd3dd46405aae445d44abf9ee27",
+      "build/artifacts/debug/c2468b9339104172a1965f27e6f10f94",
+      "build/artifacts/debug/c4f5eec6916f4c1fabff96ffd07161f4",
+      "build/artifacts/debug/c52e3259735243fa954bc23fafe01411",
+      "build/artifacts/debug/db56abb8b16e4b2cada087d9b189d987",
+      "build/artifacts/debug/e3f5023d5df54954a0d1a1ec2e03c826",
+      "build/artifacts/debug/e9bb25381c814132aa2538381f1e5902",
+      "build/artifacts/debug/f45ec159daf24e359b36717cc1e94398",
+      "build/artifacts/debug/f9693c950cf34827a6618fcb9192e0cb",
+      "build/artifacts/debug/fa4df5859103462e8c7ba79cf765a1f0",
+      "build/artifacts/debug/fa7c35a066b14aee8ffbe5ef2a4b1946",
+      "build/artifacts/debug/ff37748cb6e74a5298b9f5019ac74d28",
+      "build/artifacts/release/03043f9adc9d41d89229053fc2ef02ee",
+      "build/artifacts/release/0b648ee5de454579b3ccb4ceda3c74d4",
+      "build/artifacts/release/1b23f7593ef9406c913110e15d346ae5",
+      "build/artifacts/release/276277359f344534bb3e934d888d907b",
+      "build/artifacts/release/39f45855be2c41b4ab5f0eb5667d7bdb",
+      "build/artifacts/release/3a7a9a343d6f46a1a1ddc44d7215b546",
+      "build/artifacts/release/43bf00c057bf4033bbcd860e0c861744",
+      "build/artifacts/release/57ee61c162ed428c8095e3acdf82eb67",
+      "build/artifacts/release/79b7cc134cec4f29a9f37fd6f879fbcb",
+      "build/artifacts/release/891be9807ba84236880ec66134f858b2",
+      "build/artifacts/release/8dd1240db8e34355b0445b4407bceef1",
+      "build/artifacts/release/9a941b3b01ee472dba2f6026ca70c439",
+      "build/artifacts/release/be74c512c57446c0bfabf25d081a777b",
+      "build/artifacts/release/c56c2ed2e4a34ff9b818f770b992cc34",
+      "build/artifacts/release/ce926a0bf60b455eafd616b9587bfffe",
+      "build/blue-template-review",
+      "build/gui-dev",
+      "build/gui-probe",
+      "build/liquid-hp-rya4q73l",
+      "build/live-panel-skill-reference",
+      "build/ppt-final",
+      "build/ppt-speaker-notes",
+      "build/ppt-tables-20261016",
+      "build/presentation-enrichment-20261015",
+      "build/submission-20261020-v2-checks",
+      "build/template-course-report",
+      "build/template-modern-nju-thesis",
+      "build/template-modern-sjtu-report",
+      "build/template31-review",
+      "build/tpl-review"
+    ],
+    "not_deleted_after_confirm": [
+      "build/.cmake",
+      "build/CMakeFiles",
+      "build/Testing"
+    ],
+    "not_deleted_reason": "deleted during cleanup, then recreated at 2026-10-28 01:07 by the verification builds / VSCode CMake query (live tooling byproduct, ~0.5 MB, regenerable by design)",
+    "keep_set_missing": [],
+    "rebuild_verification": {
+      "debug_build": "PASS 6ae73d85",
+      "debug_test": "PASS 2e9c0672: 250 core + 41 adapters + 8978 thermo + 3948 combustion + 505 cycle checks, 50 CLI groups, 0 failures",
+      "release_build": "PASS 33be5856",
+      "release_test": "PASS eb88213a: same check counts, 0 failures"
+    }
+  }
+}

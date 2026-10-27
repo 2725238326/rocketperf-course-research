@@ -2,6 +2,10 @@
 
 从[worknow](worknow.md)读取当前任务；在仓库根执行 `python tools/project.py doctor`，再 `show TASK-ID`。任务状态、负责人、依赖和验收以登记为准，本文件不维护第二套状态表。
 
+## 2026-10-28清理盘点
+
+WGOV-001（devin）完成未引用构建产物清理：删除73项（58个未引用artifacts构建+15个作业一scratch目录），释放约1.43 GB；引用扫描覆盖5339份文本并留证于[manifest](results/cleanup_v1/manifest.json)。`.cmake`/`CMakeFiles`/`Testing`删后被构建与IDE重新生成，保留为工具副产物。Debug/Release重建测试与统一质量六组PASS，详见[005记录](taskshot/2026-10-28_005-build-cleanup.md)。[用户材料证据清单](results/cleanup_v1/user-materials-evidence.md)仅列事实：四份交付zip版本互异、PPT/PPT/嵌套约549 MB，删除决定权留用户。本批不涉科学验证；WBASE-001仍为下一棒，含U-015补核。
+
 ## 2026-10-24两型深化
 
 [两型专题](research/vehicles/README.md)按[十维方案](research/vehicles/survey-plan.md)组织朱雀三号、长十乙与[同口径比较](research/vehicles/comparison.md)。新增VTVL两次试验、B型地面考核和海上回收/原始采访核读；历史原件原址复用，获取日期保留。事件、产品和家族证据不升级为同批性能卡，未支持的YF-219型号/台数仅留线索。
