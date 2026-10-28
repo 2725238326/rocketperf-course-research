@@ -1,0 +1,21 @@
+test_actual_frozen_archive_and_existing_destination (test_cea_reference.CeaReferenceTests.test_actual_frozen_archive_and_existing_destination) ... ok
+test_actual_study_tp_archive_without_external_runtime (test_cea_reference.CeaReferenceTests.test_actual_study_tp_archive_without_external_runtime) ... ok
+test_bad_output_and_wrong_chemistry_fail (test_cea_reference.CeaReferenceTests.test_bad_output_and_wrong_chemistry_fail) ... ok
+test_current_method_archive_under_extended_checks (test_cea_reference.CeaReferenceTests.test_current_method_archive_under_extended_checks) ... ok
+test_custom_tp_conditions_must_match_report_and_types (test_cea_reference.CeaReferenceTests.test_custom_tp_conditions_must_match_report_and_types) ... ok
+test_declared_trace_threshold_is_verified_not_silently_relaxed (test_cea_reference.CeaReferenceTests.test_declared_trace_threshold_is_verified_not_silently_relaxed) ... ok
+test_existing_archive_cannot_be_overwritten (test_cea_reference.CeaReferenceTests.test_existing_archive_cannot_be_overwritten) ... ok
+test_fixed_archive (test_cea_reference.CeaReferenceTests.test_fixed_archive) ... ok
+test_frozen_numeric_mutations_rejected_after_rehash (test_cea_reference.CeaReferenceTests.test_frozen_numeric_mutations_rejected_after_rehash) ... ok
+test_frozen_provenance_and_geometry_types_rejected (test_cea_reference.CeaReferenceTests.test_frozen_provenance_and_geometry_types_rejected) ... ok
+test_initial_invalid_bytes_not_silently_cleaned (test_cea_reference.CeaReferenceTests.test_initial_invalid_bytes_not_silently_cleaned) ... ok
+test_negative_properties_bool_schema_and_fake_station_rejected (test_cea_reference.CeaReferenceTests.test_negative_properties_bool_schema_and_fake_station_rejected) ... ok
+test_reference_timeout_preserves_partial_logs_and_raises (test_cea_reference.CeaReferenceTests.test_reference_timeout_preserves_partial_logs_and_raises) ... ok
+test_tp_archive_manifest_shape_and_typed_identity (test_cea_reference.CeaReferenceTests.test_tp_archive_manifest_shape_and_typed_identity) ... ok
+test_tp_numeric_and_trace_mutations_rejected_even_after_rehash (test_cea_reference.CeaReferenceTests.test_tp_numeric_and_trace_mutations_rejected_even_after_rehash) ... ok
+test_trace_omission_must_be_explicit_and_species_unique (test_cea_reference.CeaReferenceTests.test_trace_omission_must_be_explicit_and_species_unique) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 7.744s
+
+OK

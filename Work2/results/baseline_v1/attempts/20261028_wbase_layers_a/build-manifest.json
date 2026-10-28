@@ -1,0 +1,617 @@
+{
+  "schema_version": 2,
+  "kind": "build",
+  "status": "PASS",
+  "started_at": "2026-10-27T17:45:43+00:00",
+  "configuration": "Debug",
+  "compiler": "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+  "sanitizer_enabled": false,
+  "inputs": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "4d44cc29ed1bafa56b2abf2eb772ac900c207c9d9173ed0781b0550477b0f9da"
+    },
+    {
+      "path": "include/rocketperf/combustion.h",
+      "sha256": "e45d2f372276ade0bf9b9890a954ef4a6f55905b6eb0ff7fcae7a11d68f5b800"
+    },
+    {
+      "path": "include/rocketperf/cycle.h",
+      "sha256": "cc33fdc6ca82eda3d0d1005716c9c5fcd4b4a742808f415ea7d1cf13f2932c8f"
+    },
+    {
+      "path": "include/rocketperf/cycle_study.h",
+      "sha256": "a036fcca0ff25fef527e9c06412b6903016d5c21f68b858cf87c9fa85e26a389"
+    },
+    {
+      "path": "include/rocketperf/engine_cycle.h",
+      "sha256": "12b8e91b2a035036c13092756f1fc172c31e73d4c441d952c29110faeeac2c4f"
+    },
+    {
+      "path": "include/rocketperf/frozen_nozzle.h",
+      "sha256": "792317e5e5533670a56ac21cd5cad312b58531d50a8a4d605c65df9a55b9c2fd"
+    },
+    {
+      "path": "include/rocketperf/liquid_combustion.h",
+      "sha256": "ddade9bfb61abd1bfd5cd66f9b928d82a26e0e9decfb2f908eb47620dea86555"
+    },
+    {
+      "path": "include/rocketperf/liquid_feed.h",
+      "sha256": "b5e66b6aa81bd4d42b472786d0e3dec86fdbfae143fdf659cce173352bb06da8"
+    },
+    {
+      "path": "include/rocketperf/liquid_nozzle.h",
+      "sha256": "bcc67d5b8469805ce4618a738b7304929cd11d05e6d759356e0c427776a6c5c4"
+    },
+    {
+      "path": "include/rocketperf/nozzle.h",
+      "sha256": "96f4d599ecbf356d160c70cc2d5b3bf141adfad6d33a29da818680eb64c6a7a5"
+    },
+    {
+      "path": "include/rocketperf/numeric.h",
+      "sha256": "2bb017539635550f7a7d3dd47ecf0c1d8614d7b6f810a8bd92402bab26ee7308"
+    },
+    {
+      "path": "include/rocketperf/propellant_study.h",
+      "sha256": "2659b0025c078be6a3fd75ec295160a61b6212cf720b26d3505eae94d47e04e5"
+    },
+    {
+      "path": "include/rocketperf/root.h",
+      "sha256": "7c2ca71434fd410a5f1b37e53cf9f27b975980d30e26ebbdac8f4721819ff11f"
+    },
+    {
+      "path": "include/rocketperf/status.h",
+      "sha256": "9a7fa15e736970d6e97528bb41ee50d378da07aba00273fff6f8abb051f2c457"
+    },
+    {
+      "path": "include/rocketperf/thermo.h",
+      "sha256": "271fd0313ce020a54acb16857753b50227c3b5a9f185376e11ccd94972772afd"
+    },
+    {
+      "path": "include/rocketperf/version.h",
+      "sha256": "8edbb87f1ea28841e6866a8b53bc77f00a49883f78f9820a90b36425a26b5123"
+    },
+    {
+      "path": "project/modules.json",
+      "sha256": "0f49c37ff553d84353a3f384e32a1a119c7193f7d67684a7597e1eaa757ea8ba"
+    },
+    {
+      "path": "scripts/build.ps1",
+      "sha256": "dd5a2c25081e9bf15caaf9115840d086c00ec11c7268551d621c888414400303"
+    },
+    {
+      "path": "src/adapters/case_file.c",
+      "sha256": "682d46cbe05e4bccfad19c09a18b8824b1b7e0eec835e22ee96585f115cc996c"
+    },
+    {
+      "path": "src/adapters/case_file.h",
+      "sha256": "c8700ca369c6026459a3921f79e7838df2f2dbfb47a908d0821cf793ffb010df"
+    },
+    {
+      "path": "src/adapters/case_text.c",
+      "sha256": "41c05cdfafbfb8e743db7660e5b946ac9ab786ccc163f42101953fb43d793f34"
+    },
+    {
+      "path": "src/adapters/case_text.h",
+      "sha256": "f6fb6281e0c13f7f4a7c5ef866425b19a764288c20237b29146e00c951cb8445"
+    },
+    {
+      "path": "src/adapters/combustion_report.c",
+      "sha256": "f8ab1cdbd472c101936f8734478a0a3f811ee69224a60eb36e134dc86b346ce6"
+    },
+    {
+      "path": "src/adapters/combustion_report.h",
+      "sha256": "43b25421cf7fd03d87f010fb84b67484c11139efb758411d14690c65dcd8d2cc"
+    },
+    {
+      "path": "src/adapters/cycle_case.c",
+      "sha256": "48e100beb41790691eb6a680383a19368246be94835fe32e1756a6e6a93ae271"
+    },
+    {
+      "path": "src/adapters/cycle_case.h",
+      "sha256": "a3b3b618312c085e90f7d2fb022acfcf72e067cbec1a57c38b6d59c2117f3a5e"
+    },
+    {
+      "path": "src/adapters/engine_case.c",
+      "sha256": "abafc7f99932673e4e16c7f4e3024280688334136ed617a2f1471c2d6c1aad1f"
+    },
+    {
+      "path": "src/adapters/engine_case.h",
+      "sha256": "6553bb72ae8963520b9fac967c55426b6df3cc5ed11ede1fd415142783061e7c"
+    },
+    {
+      "path": "src/adapters/json_report.c",
+      "sha256": "94b2eba1c65e375553bdfafeec82178fc9ca858aeacce78c850f015dc36819bd"
+    },
+    {
+      "path": "src/adapters/platform.c",
+      "sha256": "e3dbe551ca3faad0709e32af258348307b5793a5b66c7d55e6460d97e1733cd0"
+    },
+    {
+      "path": "src/adapters/propellant_case.c",
+      "sha256": "20a6530b226f2c599953b4fe5a80301dd206dd326c201ac7729a9efd94b6e764"
+    },
+    {
+      "path": "src/adapters/propellant_case.h",
+      "sha256": "045b89d7c8dd67a0c74bee2e87fba0a8c50e94354e87180c0a6dbffdd29a7e4a"
+    },
+    {
+      "path": "src/adapters/text_report.c",
+      "sha256": "68260393cad5b72ba672863aa9ac2694e57dc59a1c9866370b80354a50adcaca"
+    },
+    {
+      "path": "src/adapters/text_report.h",
+      "sha256": "570e825db88ec482d3d578c3a935a7b271a3cc9f4bfde9ae77ce9a3ebc244e99"
+    },
+    {
+      "path": "src/cli/arguments.c",
+      "sha256": "ddfd8533d78e4de0ae38349e5fa40bd2fcba928b31ef756d7a1c0d35c9d2e7a7"
+    },
+    {
+      "path": "src/cli/arguments.h",
+      "sha256": "8f21244147361086c9306fd97df8e9faf66aea34699faaa2e996d27913714f24"
+    },
+    {
+      "path": "src/cli/combustion_commands.c",
+      "sha256": "db7afd8fe946070fd9f619585150e1cffd4594d11ffc41e1e96d1de2ac735704"
+    },
+    {
+      "path": "src/cli/combustion_commands.h",
+      "sha256": "c5092f66675ce07e5ccde274c4d966bf83f32b15dc0769308df76e69ebed62f8"
+    },
+    {
+      "path": "src/cli/interactive.c",
+      "sha256": "f22e851032ebea58e9186cd115d7ea23911c3011fd48b2099e5d7121aedbe901"
+    },
+    {
+      "path": "src/cli/interactive.h",
+      "sha256": "0e6b9600596c4b474ffb56b863870d4d6695c36695c13c0e414e26a4e90d779f"
+    },
+    {
+      "path": "src/cli/main.c",
+      "sha256": "051063df593e9f008bb3fa3defc1bc6a0d9095f0ef0e456a9811e448def8c281"
+    },
+    {
+      "path": "src/core/root.c",
+      "sha256": "3ec8a6a6ab5b4ee9080de4cdee4a8bd2ec62026d53461dc3606ea5ef89a7edb0"
+    },
+    {
+      "path": "src/core/status.c",
+      "sha256": "2e0ac6905d9044f2bcd2a90c487b469717cd146226e9583454633e69c5911583"
+    },
+    {
+      "path": "src/cycle/adiabatic.c",
+      "sha256": "6365226390f000966a360210430ce12037eaf9bd11bca1053a95a379a33535b3"
+    },
+    {
+      "path": "src/cycle/components.c",
+      "sha256": "07f034aace63e31be1c8cf2353ed4bb03e39777a1b3800bd1bc610d839dac82a"
+    },
+    {
+      "path": "src/cycle/prescribed.c",
+      "sha256": "159565a685edd50cb8712b217054826a8b34076af0c33a327bfb2718fdd43e69"
+    },
+    {
+      "path": "src/cycle/study.c",
+      "sha256": "9857ba429ae75321c502739af7e61a68cf5e9bb1daf3b13cfd912866159da5dd"
+    },
+    {
+      "path": "src/gui/gui_bridge.c",
+      "sha256": "f6b51afc1152d8b46c8f15944f3659567da0bc49ed2de07e35932fb4776c87ce"
+    },
+    {
+      "path": "src/gui/gui_bridge.h",
+      "sha256": "edf19470da63bf82e1c09b8820783555ff529ad14c22b799fa8e0111de669a36"
+    },
+    {
+      "path": "src/gui/gui_json.c",
+      "sha256": "57b969bba9396744296bb92e910e1037f9029a1e24022ff9bf731bd392f90d1d"
+    },
+    {
+      "path": "src/gui/gui_json.h",
+      "sha256": "84fcffddb776770054e14c3549e602e2e2638164c2032c37bba3183bc2c35b32"
+    },
+    {
+      "path": "src/gui/gui_main.c",
+      "sha256": "a556e51beed1b3d631f23f7e4e99057cddc2cc1a434cfcbda3d215817ab89828"
+    },
+    {
+      "path": "src/nozzle/frozen.c",
+      "sha256": "aa9f7948d53c2ff22187a09b42334eb84eb3c933062831a01608062ded552212"
+    },
+    {
+      "path": "src/nozzle/ideal.c",
+      "sha256": "63ac3e65428c956adfcd5fab77b64a5d4ca61d370d905eec79e79d086986545b"
+    },
+    {
+      "path": "src/nozzle/liquid.c",
+      "sha256": "3774610e5452bc8db705f371223abcf52dd24ea57079fbf1e4766d117547fee9"
+    },
+    {
+      "path": "src/nozzle/propellant_study.c",
+      "sha256": "b3230498a127450e021d1646bff7f6fcb8a68c678d3275c164cbfa25b10bc1d8"
+    },
+    {
+      "path": "src/thermo/database.c",
+      "sha256": "9db7e4f47adcb322457fdeb70be11f3244927c4f2afb631c8ab00c7449ca89b9"
+    },
+    {
+      "path": "src/thermo/database_generated.h",
+      "sha256": "b1ed92c98dd61f59b55b7ec1be8f68f5918d5af2d5d8a2c5711a1ddabec16ad9"
+    },
+    {
+      "path": "src/thermo/equilibrium.c",
+      "sha256": "fade75f9fe7fdb498ad2e4959856ec9f3754945449555966cd7276e4688a5f25"
+    },
+    {
+      "path": "src/thermo/equilibrium_internal.h",
+      "sha256": "2dec8e2b2ab08b507c1dea55d2bd989558981f4d332c3161c7ea42873dd0c73e"
+    },
+    {
+      "path": "src/thermo/graphite_generated.h",
+      "sha256": "7b38e64a061d20cabe5adcc5d276d5df61fddeb0235dff12e9a64fe108899318"
+    },
+    {
+      "path": "src/thermo/liquid_combustion.c",
+      "sha256": "e4789e7f45eb976c04b4e5e9170bea193f0e0bf3eaf893761ce65065690fe228"
+    },
+    {
+      "path": "src/thermo/liquid_feed.c",
+      "sha256": "2c2fb8135a973f266eab398341432a6660352005aa0398cfd90304171c9148a6"
+    },
+    {
+      "path": "src/thermo/liquid_feed_generated.h",
+      "sha256": "ba2085fad6f78d68dc5a44913c3559cbd5b2982b3e38554aa460210ea1b70b2c"
+    },
+    {
+      "path": "src/thermo/mixture.c",
+      "sha256": "4737d4c0d0906032bf2cf3655fb2333e5700c714a1b04679a1f7f4ace1afeb74"
+    },
+    {
+      "path": "src/thermo/nasa9.c",
+      "sha256": "ffe45ac55f920b7da55d7f4faa4300db1078eb9764beead80c2c2c021dccb4d1"
+    },
+    {
+      "path": "src/thermo/reactants.c",
+      "sha256": "7251ac2fb488b7271bdf97569c4f5732ef6e1d013e1fc034ad060e43b4399e6d"
+    },
+    {
+      "path": "src/thermo/reactants_generated.h",
+      "sha256": "e76b6cef8d5fefa88b8548086fccb0dc21ae68f9a155e6b5a61b4c012db8f45c"
+    },
+    {
+      "path": "tests/fixtures/sanitizer_probe.c",
+      "sha256": "0563159c14f9815bc90f48d54e360a81fbe0b0bc41576dd09c052da17b08e521"
+    },
+    {
+      "path": "tests/reference/liquid_feed.h",
+      "sha256": "036592c5e3a5e88dbf2ef1696266538da79bc137ba9e703246487e3ef1170b98"
+    },
+    {
+      "path": "tests/reference/nasa9_cantera.h",
+      "sha256": "3f47bb940119735da5a28423edb0e8741856c647934f8d39833b84c0c38b5eaf"
+    },
+    {
+      "path": "tests/test_adapters.c",
+      "sha256": "ee881a7eed7e5114c727c0e393c7f18c06cf8de916295b83e23351061bc15526"
+    },
+    {
+      "path": "tests/test_combustion.c",
+      "sha256": "8afab5588b25eee4630076a634b5cbc60bd2f80e5c736b793fd3cee60ba8b21f"
+    },
+    {
+      "path": "tests/test_core.c",
+      "sha256": "284e0f5fd2cbdbf84cd7e0b425db32b09f617747446a30d3920a0b600c8bb80e"
+    },
+    {
+      "path": "tests/test_cycle.c",
+      "sha256": "2d0df932cdf8644ee86b824daa872e7d37facdc3c0aa8d4b5a771f5e927a075d"
+    },
+    {
+      "path": "tests/test_thermo.c",
+      "sha256": "b4bce414fc9bb20688b84595cb34737963abf7aa06756704bd8ed63b8c4e5452"
+    },
+    {
+      "path": "tools/pipeline.py",
+      "sha256": "c4f993f4ca081fc7b63adcd3d3087d4032d5171d13b3779f3aaababf678d18f3"
+    },
+    {
+      "path": "tools/projectlib.py",
+      "sha256": "1b57d7c0e5d205f0607b974059b210d4001550d13f1eaffcc24c1770f78a44de"
+    }
+  ],
+  "commands": [
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "-municode",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "src/adapters/case_file.c",
+      "src/adapters/case_text.c",
+      "src/adapters/cycle_case.c",
+      "src/adapters/engine_case.c",
+      "src/adapters/propellant_case.c",
+      "src/adapters/combustion_report.c",
+      "src/adapters/text_report.c",
+      "src/adapters/json_report.c",
+      "src/adapters/platform.c",
+      "src/cli/main.c",
+      "src/cli/arguments.c",
+      "src/cli/combustion_commands.c",
+      "src/cli/interactive.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\rocketperf.exe"
+    ],
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "tests/test_core.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\test_core.exe"
+    ],
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "src/adapters/case_file.c",
+      "src/adapters/case_text.c",
+      "src/adapters/cycle_case.c",
+      "src/adapters/engine_case.c",
+      "src/adapters/propellant_case.c",
+      "src/adapters/combustion_report.c",
+      "src/adapters/text_report.c",
+      "src/adapters/json_report.c",
+      "src/adapters/platform.c",
+      "tests/test_adapters.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\test_adapters.exe"
+    ],
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "tests/test_thermo.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\test_thermo.exe"
+    ],
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "tests/test_combustion.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\test_combustion.exe"
+    ],
+    [
+      "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wstrict-prototypes",
+      "-Wmissing-prototypes",
+      "-fno-common",
+      "-Iinclude",
+      "-Isrc/adapters",
+      "-O0",
+      "-g3",
+      "src/core/status.c",
+      "src/core/root.c",
+      "src/nozzle/ideal.c",
+      "src/nozzle/frozen.c",
+      "src/nozzle/liquid.c",
+      "src/nozzle/propellant_study.c",
+      "src/thermo/nasa9.c",
+      "src/thermo/database.c",
+      "src/thermo/mixture.c",
+      "src/thermo/equilibrium.c",
+      "src/thermo/reactants.c",
+      "src/thermo/liquid_feed.c",
+      "src/thermo/liquid_combustion.c",
+      "src/cycle/components.c",
+      "src/cycle/prescribed.c",
+      "src/cycle/adiabatic.c",
+      "src/cycle/study.c",
+      "tests/test_cycle.c",
+      "-lm",
+      "-o",
+      "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\test_cycle.exe"
+    ]
+  ],
+  "compiler_version": "gcc.EXE (x86_64-win32-seh-rev0, Built by MinGW-Builds project) 14.2.0",
+  "flags": [
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Wconversion",
+    "-Wshadow",
+    "-Wstrict-prototypes",
+    "-Wmissing-prototypes",
+    "-fno-common",
+    "-Iinclude",
+    "-Isrc/adapters",
+    "-O0",
+    "-g3"
+  ],
+  "application": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/rocketperf.exe",
+    "sha256": "f1d74c3a88dd9791975f6ebb22571efc7337afe381b000e340259077558644bd"
+  },
+  "core_test": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/test_core.exe",
+    "sha256": "34fd87f7add521d5188024aa188a885ad5bc5514af90eb8ecd38e109a098f3f6"
+  },
+  "adapter_test": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/test_adapters.exe",
+    "sha256": "2bbca16a366c6b62d283b66225a41617160847896c778ae5dee2ba90e9723230"
+  },
+  "thermo_test": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/test_thermo.exe",
+    "sha256": "ee7ea7fa38069db00da649d766114391048908ba05ea44c88379c6b2d7cc70b7"
+  },
+  "combustion_test": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/test_combustion.exe",
+    "sha256": "75f1f795aca892d8f41cb536759503cdc8c50e1e33df30c37eb6dddcdd80edd3"
+  },
+  "cycle_test": {
+    "path": "build/artifacts/debug/212d074ac060421a8f91a9c4e314272b/test_cycle.exe",
+    "sha256": "d1a68f0758260640a1c5345c1bd92f914092516fd6fb8f89ac08415b72e18c51"
+  },
+  "finished_at": "2026-10-27T17:46:07+00:00"
+}

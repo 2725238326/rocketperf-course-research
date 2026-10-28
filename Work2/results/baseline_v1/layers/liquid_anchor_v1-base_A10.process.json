@@ -1,0 +1,22 @@
+{
+  "command": [
+    "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\rocketperf.exe",
+    "combustion",
+    "frozen-liquid",
+    "cea-v3.3.4-ch4l-o2l-assigned-v1",
+    "liquid",
+    "CH4(L)",
+    "O2(L)",
+    "10000000",
+    "3.3999999999999999",
+    "111.643",
+    "90.170000000000002",
+    "10",
+    "0",
+    "0.01"
+  ],
+  "exit_code": 0,
+  "exit_code_hex": "0x00000000",
+  "wall_seconds": 0.01440730004105717,
+  "timed_out": false
+}

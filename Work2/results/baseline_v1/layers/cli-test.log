@@ -1,0 +1,55 @@
+test_adiabatic_cycle_schema_and_physical_refusals (__main__.CliTests.test_adiabatic_cycle_schema_and_physical_refusals) ... ok
+test_adiabatic_cycles_and_total_engine_boundary (__main__.CliTests.test_adiabatic_cycles_and_total_engine_boundary) ... ok
+test_adiabatic_report_tampering_is_rejected (__main__.CliTests.test_adiabatic_report_tampering_is_rejected) ... ok
+test_ambient_pressure_difference (__main__.CliTests.test_ambient_pressure_difference) ... ok
+test_analytic_reference_and_unicode_path (__main__.CliTests.test_analytic_reference_and_unicode_path) ... ok
+test_area_ambient_study_grid_option_validation (__main__.CliTests.test_area_ambient_study_grid_option_validation) ... ok
+test_area_ambient_study_scan_reports_domain_points (__main__.CliTests.test_area_ambient_study_scan_reports_domain_points) ... ok
+test_bom_crlf_and_whitespace (__main__.CliTests.test_bom_crlf_and_whitespace) ... ok
+test_cases_command_lists_bundled_cases (__main__.CliTests.test_cases_command_lists_bundled_cases) ... ok
+test_combustion_matches_pinned_cea (__main__.CliTests.test_combustion_matches_pinned_cea) ... ok
+test_combustion_rejects_invalid_inputs_without_output (__main__.CliTests.test_combustion_rejects_invalid_inputs_without_output) ... ok
+test_combustion_validator_rejects_false_success (__main__.CliTests.test_combustion_validator_rejects_false_success) ... ok
+test_condensed_carbon_guard_is_reported_and_enforced (__main__.CliTests.test_condensed_carbon_guard_is_reported_and_enforced) ... ok
+test_continuous_liquid_hp_nozzle_and_rejections (__main__.CliTests.test_continuous_liquid_hp_nozzle_and_rejections) ... ok
+test_cycle_accounting_and_unicode_path (__main__.CliTests.test_cycle_accounting_and_unicode_path) ... ok
+test_cycle_domain_and_zero_branch (__main__.CliTests.test_cycle_domain_and_zero_branch) ... ok
+test_cycle_schema_and_numeric_rejections (__main__.CliTests.test_cycle_schema_and_numeric_rejections) ... ok
+test_cycle_study_axes_and_domain_exclusions (__main__.CliTests.test_cycle_study_axes_and_domain_exclusions) ... ok
+test_cycle_study_cost_and_finite_step_response (__main__.CliTests.test_cycle_study_cost_and_finite_step_response) ... ok
+test_cycle_study_invalid_cli_and_baseline (__main__.CliTests.test_cycle_study_invalid_cli_and_baseline) ... ok
+test_cycle_validator_detects_wrong_accounting (__main__.CliTests.test_cycle_validator_detects_wrong_accounting) ... ok
+test_deterministic_output (__main__.CliTests.test_deterministic_output) ... ok
+test_embedded_nul_long_lines_and_file_limits (__main__.CliTests.test_embedded_nul_long_lines_and_file_limits) ... ok
+test_explicit_enthalpy_equivalence_and_fixed_nozzle (__main__.CliTests.test_explicit_enthalpy_equivalence_and_fixed_nozzle) ... ok
+test_explicit_enthalpy_rejections_and_protocol (__main__.CliTests.test_explicit_enthalpy_rejections_and_protocol) ... ok
+test_explicit_enthalpy_validator_rejects_false_success (__main__.CliTests.test_explicit_enthalpy_validator_rejects_false_success) ... ok
+test_fixed_liquid_anchor_failure_protocol_and_strict_syntax (__main__.CliTests.test_fixed_liquid_anchor_failure_protocol_and_strict_syntax) ... ok
+test_fixed_liquid_anchor_success_and_geometry (__main__.CliTests.test_fixed_liquid_anchor_success_and_geometry) ... ok
+test_help_version_usage_and_missing_file (__main__.CliTests.test_help_version_usage_and_missing_file) ... ok
+test_interactive_liquid_overexpansion_and_long_input (__main__.CliTests.test_interactive_liquid_overexpansion_and_long_input) ... ok
+test_interactive_menu_flows_and_limits (__main__.CliTests.test_interactive_menu_flows_and_limits) ... ok
+test_interactive_overexpanded_regime_assessment (__main__.CliTests.test_interactive_overexpanded_regime_assessment) ... ok
+test_interactive_reprompt_cancel_and_eof (__main__.CliTests.test_interactive_reprompt_cancel_and_eof) ... ok
+test_invalid_numbers (__main__.CliTests.test_invalid_numbers) ... ok
+test_liquid_table_success_and_rejections (__main__.CliTests.test_liquid_table_success_and_rejections) ... ok
+test_menu_cycle_cases_resolve_beside_executable (__main__.CliTests.test_menu_cycle_cases_resolve_beside_executable) ... ok
+test_metadata_json_escaping (__main__.CliTests.test_metadata_json_escaping) ... ok
+test_nozzle_regime_assessment_json_and_text (__main__.CliTests.test_nozzle_regime_assessment_json_and_text) ... ok
+test_numeric_failure_is_not_a_successful_study (__main__.CliTests.test_numeric_failure_is_not_a_successful_study) ... ok
+test_physical_domain (__main__.CliTests.test_physical_domain) ... ok
+test_propellant_case_file_matches_arguments_and_rejects_bad_fields (__main__.CliTests.test_propellant_case_file_matches_arguments_and_rejects_bad_fields) ... ok
+test_propellant_comparison_same_geometry_and_failures (__main__.CliTests.test_propellant_comparison_same_geometry_and_failures) ... ok
+test_real_nasa9_species_reference (__main__.CliTests.test_real_nasa9_species_reference) ... ok
+test_regime_liquid_state_json_and_text (__main__.CliTests.test_regime_liquid_state_json_and_text) ... ok
+test_required_fields_duplicates_unknown_and_model (__main__.CliTests.test_required_fields_duplicates_unknown_and_model) ... ok
+test_rp1_success_and_input_rejection (__main__.CliTests.test_rp1_success_and_input_rejection) ... ok
+test_run_and_propellant_text_mode (__main__.CliTests.test_run_and_propellant_text_mode) ... ok
+test_thermo_invalid_inputs_are_not_success_results (__main__.CliTests.test_thermo_invalid_inputs_are_not_success_results) ... ok
+test_tp_frozen_fixed_geometry_scaling_and_backpressure (__main__.CliTests.test_tp_frozen_fixed_geometry_scaling_and_backpressure) ... ok
+test_tp_frozen_rejects_invalid_geometry_and_temperature (__main__.CliTests.test_tp_frozen_rejects_invalid_geometry_and_temperature) ... ok
+
+----------------------------------------------------------------------
+Ran 50 tests in 15.897s
+
+OK

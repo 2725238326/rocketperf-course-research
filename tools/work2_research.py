@@ -36,8 +36,9 @@ class PageText(HTMLParser):
         return '\n'.join(line.strip() for line in ''.join(self.parts).splitlines() if line.strip())+'\n'
 
 
-def fetch(source_id,url,kind='text',discovery='existing-primary-source'):
+def fetch(source_id,url,kind='text',discovery='existing-primary-source',archive_date='20261024'):
     if not re.fullmatch(r'W2-[A-Z]+\d{2,3}',source_id): raise ValueError('Use a stable W2 source ID')
+    datetime.strptime(archive_date,'%Y%m%d')
     parsed=urlsplit(url)
     if parsed.scheme not in {'https','http'} or not parsed.hostname or parsed.username or parsed.password:
         raise ValueError('Public HTTP(S) URL required')
@@ -53,13 +54,13 @@ def fetch(source_id,url,kind='text',discovery='existing-primary-source'):
             row.update(final_url=response.url,http_status=response.status,content_type=response.headers.get('Content-Type',''))
         suffix={'text':'.txt','html':'.html','json':'.json','pdf':'.pdf'}[kind]
         if kind=='pdf' and not body.startswith(b'%PDF-'): raise ValueError('Expected PDF signature absent')
-        target=ROOT/f'Work2/research/raw/20261024/{source_id}{suffix}'
+        target=ROOT/f'Work2/research/raw/{archive_date}/{source_id}{suffix}'
         target.parent.mkdir(parents=True,exist_ok=True)
         with target.open('xb') as stream: stream.write(body)
         row.update(available=True,status='SAVED',path=target.relative_to(ROOT).as_posix(),bytes=len(body),sha256=hashlib.sha256(body).hexdigest())
         if kind=='html':
             reader=PageText(); reader.feed(body.decode('utf-8',errors='replace'))
-            atomic_text(ROOT/f'build/work2/reading/20261024/{source_id}.txt',reader.text())
+            atomic_text(ROOT/f'build/work2/reading/{archive_date}/{source_id}.txt',reader.text())
     except HTTPError as exc:
         row.update(http_status=exc.code,error_type='HTTPError')
     except (URLError,TimeoutError,OSError,ValueError) as exc:
@@ -139,6 +140,13 @@ def verify(root=ROOT):
         if (root/'Work2/research/data/vehicle-evidence-v1.json').is_file():
             from work2_vehicle_data import verify as verify_vehicles
             issues.extend(verify_vehicles(root))
+        if (root/'Work2/research/data/frontier-20261028-v1.json').is_file():
+            from work2_frontier_data import expected as expected_frontier, OUTPUT
+            if read_json(root/OUTPUT)!=expected_frontier(read_json(root/INDEX)):
+                issues.append('Frontier selected data drift')
+        if (root/'Work2/results/baseline_v1/manifest.json').is_file():
+            from work2_baseline_layers import verify_bundle
+            verify_bundle(root/'Work2/results/baseline_v1',root)
     except (KeyError,TypeError,OSError,ValueError) as exc:
         issues.append('Research provenance check: '+str(exc))
     return {'sources':len(ids),'checked':checked,'issues':issues}
@@ -168,6 +176,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
     get=sub.add_parser('fetch');get.add_argument('id');get.add_argument('url');get.add_argument('--kind',choices=['text','html','json','pdf'],default='text');get.add_argument('--discovery',default='existing-primary-source')
+    get.add_argument('--archive-date',default='20261024',help='Explicit YYYYMMDD archive identity; default preserves the original campaign layout')
     use=sub.add_parser('reuse');use.add_argument('id');use.add_argument('legacy_id')
     sub.add_parser('verify')
     sub.add_parser('compare-thermo')
@@ -178,7 +187,7 @@ def main():
     elif args.command=='reuse':
         result=reuse(args.id,args.legacy_id)
     else:
-        result=verify() if args.command=='verify' else fetch(args.id,args.url,args.kind,args.discovery)
+        result=verify() if args.command=='verify' else fetch(args.id,args.url,args.kind,args.discovery,args.archive_date)
     print(json.dumps(result,ensure_ascii=False,indent=2))
     return int(bool(result.get('issues')))
 

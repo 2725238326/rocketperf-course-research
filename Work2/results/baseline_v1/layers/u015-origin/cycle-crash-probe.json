@@ -1,0 +1,7 @@
+{
+  "binary": "E:\\Work\\火发原理\\build\\artifacts\\debug\\85a23407c5174bc8b7e53e2ba7f6f8fa\\test_cycle.exe",
+  "sha256": "d2bea05d71bde9f5b4398cf667ac96ed2bcb11cab3b1b4e7b31d05b2720c84dc",
+  "returncode": 0,
+  "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+  "stderr": ""
+}

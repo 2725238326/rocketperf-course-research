@@ -1,0 +1,31 @@
+test_adiabatic_archive_rejects_tampering (test_thermo_data.ThermoDataTests.test_adiabatic_archive_rejects_tampering) ... ok
+test_adiabatic_response_svg_matches_saved_c_results (test_thermo_data.ThermoDataTests.test_adiabatic_response_svg_matches_saved_c_results) ... ok
+test_adiabatic_study_archives (test_thermo_data.ThermoDataTests.test_adiabatic_study_archives) ... ok
+test_adiabatic_study_design_and_type_guards (test_thermo_data.ThermoDataTests.test_adiabatic_study_design_and_type_guards) ... ok
+test_adiabatic_study_rejects_semantic_tampering (test_thermo_data.ThermoDataTests.test_adiabatic_study_rejects_semantic_tampering) ... ok
+test_archived_validation_results_are_consistent (test_thermo_data.ThermoDataTests.test_archived_validation_results_are_consistent) ... ok
+test_cli_skip_and_empty_evidence_are_rejected (test_thermo_data.ThermoDataTests.test_cli_skip_and_empty_evidence_are_rejected) ... ok
+test_continuous_liquid_archive_and_explicit_enthalpy_cards (test_thermo_data.ThermoDataTests.test_continuous_liquid_archive_and_explicit_enthalpy_cards) ... ok
+test_continuous_liquid_final_validation_failure_is_retained (test_thermo_data.ThermoDataTests.test_continuous_liquid_final_validation_failure_is_retained) ... ok
+test_continuous_liquid_preparation_failure_is_retained (test_thermo_data.ThermoDataTests.test_continuous_liquid_preparation_failure_is_retained) ... ok
+test_continuous_liquid_semantic_tampering (test_thermo_data.ThermoDataTests.test_continuous_liquid_semantic_tampering) ... ok
+test_conversion_retains_true_temperature_limits (test_thermo_data.ThermoDataTests.test_conversion_retains_true_temperature_limits) ... ok
+test_duplicate_record_and_nonfinite_coefficients_fail (test_thermo_data.ThermoDataTests.test_duplicate_record_and_nonfinite_coefficients_fail) ... ok
+test_generated_database_and_reference (test_thermo_data.ThermoDataTests.test_generated_database_and_reference) ... ok
+test_kerosene_false_success_and_changed_reference_are_rejected (test_thermo_data.ThermoDataTests.test_kerosene_false_success_and_changed_reference_are_rejected) ... ok
+test_kerosene_reference_records_product_boundaries_and_c_results (test_thermo_data.ThermoDataTests.test_kerosene_reference_records_product_boundaries_and_c_results) ... ok
+test_liquid_anchor_archive_and_semantic_tampering (test_thermo_data.ThermoDataTests.test_liquid_anchor_archive_and_semantic_tampering) ... ok
+test_liquid_anchor_preparation_failure_is_archived (test_thermo_data.ThermoDataTests.test_liquid_anchor_preparation_failure_is_archived) ... ok
+test_liquid_feed_archive_recomputes_without_coolprop (test_thermo_data.ThermoDataTests.test_liquid_feed_archive_recomputes_without_coolprop) ... ok
+test_liquid_feed_query_and_failure_record (test_thermo_data.ThermoDataTests.test_liquid_feed_query_and_failure_record) ... ok
+test_liquid_feed_semantic_tampering_with_rehashed_files (test_thermo_data.ThermoDataTests.test_liquid_feed_semantic_tampering_with_rehashed_files) ... ok
+test_liquid_table_data_and_archives (test_thermo_data.ThermoDataTests.test_liquid_table_data_and_archives) ... ok
+test_liquid_table_failures_keep_truthful_attempt (test_thermo_data.ThermoDataTests.test_liquid_table_failures_keep_truthful_attempt) ... ok
+test_liquid_table_report_and_archival_tampering (test_thermo_data.ThermoDataTests.test_liquid_table_report_and_archival_tampering) ... ok
+test_paired_propellant_archive_and_rehashed_errors (test_thermo_data.ThermoDataTests.test_paired_propellant_archive_and_rehashed_errors) ... ok
+test_public_rp1_validation_and_rehashed_semantic_errors (test_thermo_data.ThermoDataTests.test_public_rp1_validation_and_rehashed_semantic_errors) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 92.369s
+
+OK

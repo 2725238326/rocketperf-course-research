@@ -1,0 +1,62 @@
+[
+  {
+    "attempt": 1,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 2,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 3,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 4,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 5,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 6,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 7,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 8,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 9,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  },
+  {
+    "attempt": 10,
+    "returncode": 0,
+    "stdout": "Cycle: branch=0.674224777 kg/s, pump=1137201.607646175 W, F=296254.198768888 N, Isp=302.095209647 s, energy=3.09155439e-08 W\ncycle: 505 checks, 0 failures\n",
+    "stderr": ""
+  }
+]

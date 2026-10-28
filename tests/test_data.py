@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
 import check_data
 import feed_candidates
+from test_work2_baseline import BaselineEvidenceTests
 
 
 class DataContractTests(unittest.TestCase):

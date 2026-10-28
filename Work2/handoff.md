@@ -2,6 +2,18 @@
 
 从[worknow](worknow.md)读取当前任务；在仓库根执行 `python tools/project.py doctor`，再 `show TASK-ID`。任务状态、负责人、依赖和验收以登记为准，本文件不维护第二套状态表。
 
+## 2026-10-28基线与前沿
+
+[基线审查](research/baseline-validation-v1.md)与[选定清单](results/baseline_v1/selection-manifest.json)固定源码/数据、四类身份、事前协议及失败记录：84项主矩阵（67成功/17正确拒绝）、54同源物性独立实现比较状态、13层级参考及3CLI拒绝均按门槛通过。生产src/include未改；研究侧计数与原始输出逐例一致，中心HP累计201步而末次字段仅1步。全链物性/失败API、暖失败冷回退、Jacobian/初值条件性仍有差距，不能据矩阵声称实机精度。
+
+两份独立新Debug共60次循环进程各505项零失败，U-015仍未定位。原异常构建已由WGOV清单删除，不能精确复跑；原报告/哈希/当时复跑记录已复制进选定档案。后续清理必须保留未决异常构建ID/裸哈希，不能以这批通过关闭原因问题。
+
+用户再次强调前沿获取。[本批核读](research/frontier-review-20261028.md)含FastChem4（2026）、CT原稿/2026期刊元数据、JCP2025作者全文选定页；Grok一次502、一次7条工具轨迹，HTTP核读纠正摘要的物种/跨体系HP适用性错误。来源主索引75条、67可核字节，首轮成员不变。后续路线冻结前继续有截止的定向查新；新不等于适用，先传统强对照和总成本小实验。
+
+本批执行与实际质量补记见[006记录](taskshot/2026-10-28_006-baseline-frontier.md)。submit和commit前按本轮用户要求分别确认；在确认前不流转REVIEW/DONE或创建提交。之后WREF另冻结正式保留集，本批已接触点不能当未探测测试集；WRES-002全文/软件版本/同批输入缺口继续按契约承接。
+
+用户随后已确认WBASE验收；暂存预检补齐baseline_v1的Git字节保留规则和真实clean过滤回归，完整质量与任务流转的最后事实见006补记/任务登记。commit仍需单独确认；不把原第一轮质量当修正规则后的新鲜证据。
+
 ## 2026-10-28清理盘点
 
 WGOV-001（devin）完成未引用构建产物清理：删除73项（58个未引用artifacts构建+15个作业一scratch目录），释放约1.43 GB；引用扫描覆盖5339份文本并留证于[manifest](results/cleanup_v1/manifest.json)。`.cmake`/`CMakeFiles`/`Testing`删后被构建与IDE重新生成，保留为工具副产物。Debug/Release重建测试与统一质量六组PASS，详见[005记录](taskshot/2026-10-28_005-build-cleanup.md)。[用户材料证据清单](results/cleanup_v1/user-materials-evidence.md)仅列事实：四份交付zip版本互异、PPT/PPT/嵌套约549 MB，删除决定权留用户。本批不涉科学验证；WBASE-001仍为下一棒，含U-015补核。

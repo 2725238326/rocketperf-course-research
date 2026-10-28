@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "quality",
+  "status": "FAIL",
+  "started_at": "2026-10-24T01:33:36+00:00",
+  "input_fingerprint": "ea81773457e10d68ee838925e8d5c6b80ccab6e16cb8e7168c33ee7531f7e74f",
+  "checks": [
+    {
+      "name": "project",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/project.py",
+        "check"
+      ],
+      "log": "build/quality/project.log"
+    },
+    {
+      "name": "governance",
+      "status": "PASS",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_governance.py",
+        "-v"
+      ],
+      "log": "build/quality/governance.log"
+    },
+    {
+      "name": "debug",
+      "status": "FAIL",
+      "command": [
+        "C:\\Python313\\python.exe",
+        "tools/pipeline.py",
+        "test",
+        "--configuration",
+        "Debug"
+      ],
+      "log": "build/quality/debug.log"
+    }
+  ],
+  "error": "debug failed; see E:\\Work\\火发原理\\build\\quality\\debug.log\nBuild PASS: debug (85a23407)\npipeline: Command exited 3221225477; log: E:\\Work\\火发原理\\build\\artifacts\\debug\\85a23407c5174bc8b7e53e2ba7f6f8fa\\cycle-test.log\n\n",
+  "finished_at": "2026-10-24T01:34:17+00:00"
+}

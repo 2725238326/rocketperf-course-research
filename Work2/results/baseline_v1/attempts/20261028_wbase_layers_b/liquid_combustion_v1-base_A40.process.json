@@ -1,0 +1,23 @@
+{
+  "command": [
+    "E:\\Work\\火发原理\\build\\artifacts\\debug\\212d074ac060421a8f91a9c4e314272b\\rocketperf.exe",
+    "combustion",
+    "frozen-liquid-state",
+    "coolprop710-cea334-liquid-molar-v1",
+    "heos710-cea334-ideal-zero-298.15-v1",
+    "liquid",
+    "120",
+    "10000000",
+    "100",
+    "10000000",
+    "10000000",
+    "3.3999999999999999",
+    "40",
+    "0",
+    "0.01"
+  ],
+  "exit_code": 0,
+  "exit_code_hex": "0x00000000",
+  "wall_seconds": 0.01071489998139441,
+  "timed_out": false
+}

@@ -1,0 +1,1 @@
+out_of_domain: Gas equilibrium out of range: T=199.0 K (need 1000-6000 K), P=1.000e+07 Pa (need 100 Pa-1 GPa). NASA9 polynomials and ideal-gas assumption are only valid in this domain.

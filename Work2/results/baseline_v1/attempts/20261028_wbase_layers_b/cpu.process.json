@@ -1,0 +1,12 @@
+{
+  "command": [
+    "pwsh",
+    "-NoProfile",
+    "-Command",
+    "Get-CimInstance Win32_Processor | Select-Object Name,NumberOfCores,NumberOfLogicalProcessors | ConvertTo-Json -Compress"
+  ],
+  "exit_code": 0,
+  "exit_code_hex": "0x00000000",
+  "wall_seconds": 2.9414059000555426,
+  "timed_out": false
+}

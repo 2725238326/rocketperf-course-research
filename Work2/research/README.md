@@ -22,6 +22,8 @@
 | 两型数据补齐了什么、还缺什么 | [参数调查](parameter-review.md) |
 | 两型版本/动力/事件怎样进一步深查 | [公开证据专题](vehicles/README.md)、[十维方案](vehicles/survey-plan.md)、[比较与计算落点](vehicles/comparison.md) |
 | 后续如何形成可比较的数据 | [基准契约](benchmark-contract.md) |
+| 当前C基线复跑与累计工作量 | [WBASE审查](baseline-validation-v1.md)、[事前协议及偏离](baseline-protocol-v1.md) |
+| 2026新方法对本项目有什么用 | [2026-10-28前沿核读](frontier-review-20261028.md) |
 | 实际下载、失败、主张和观察数量 | [数据说明](data/README.md)、[覆盖与缺口](data/coverage.json) |
 
 初读原件与新增原文分别保留身份；可维护台账做导航，机器可读source-index记录每次获取及阅读范围，claims才记录具体分级主张，不再复制第二份参数表。

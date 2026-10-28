@@ -1,0 +1,10 @@
+{
+  "command": [
+    "D:\\program\\mingw\\mingw64\\bin\\gcc.EXE",
+    "--version"
+  ],
+  "exit_code": 0,
+  "exit_code_hex": "0x00000000",
+  "wall_seconds": 0.016526299994438887,
+  "timed_out": false
+}

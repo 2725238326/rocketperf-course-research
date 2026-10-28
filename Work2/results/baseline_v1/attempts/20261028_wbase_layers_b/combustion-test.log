@@ -1,0 +1,4 @@
+HP: T=3673.614568185 K, h_residual=-6.55348413e-06 J/kg, hp_iterations=9
+Frozen A=10: T=1691.557875879 K, p=119871.322421096 Pa, cstar=1839.387209718, Ivac=3192.263179981 m/s
+Frozen A=40: T=1173.071438922 K, p=18728.774320463 Pa, cstar=1839.387209718, Ivac=3435.407478226 m/s
+combustion: 3948 checks, 0 failures

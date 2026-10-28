@@ -210,6 +210,13 @@ def test_records(root):
               'tools/liquid_eos.py','tools/liquid_table.py','tools/liquid_combustion.py',
               'tools/kerosene_reference.py','tools/kerosene_validation.py','tools/kerosene_probe.c','tools/propellant_comparison.py',
               'tools/engine_cycles.py','tools/engine_sources.py','调研/feed_sources.json']
+    # WBASE tests consume selected raw runs, failure records and frontier identity.
+    files += [p.relative_to(root).as_posix() for p in (root/'Work2/results/baseline_v1').rglob('*') if p.is_file()]
+    files += [p for p in ('.gitattributes','tools/work2_baseline.py','tools/work2_baseline_layers.py',
+                         'tools/work2_baseline_probe.c','tools/work2_baseline_counters.h',
+                         'tools/work2_frontier_data.py','tools/work2_research.py',
+                         'Work2/research/data/source-index.json','Work2/research/data/frontier-20261028-v1.json')
+              if (root/p).is_file()]
     # Parameter checks resolve source IDs and local references; those inputs must
     # invalidate a previous data PASS too. Task states are intentionally dynamic.
     for dataset in (root/'data/parameters').glob('*.json'):

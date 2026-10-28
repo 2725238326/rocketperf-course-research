@@ -1,0 +1,20 @@
+{
+  "command": [
+    "E:\\Work\\火发原理\\build\\work2\\baseline\\20261028_wbase_a\\counted.exe",
+    "tp",
+    "10000000.0",
+    "3.4",
+    "999",
+    "1e-10",
+    "0.01",
+    "400",
+    "80",
+    "1000",
+    "6000",
+    "1"
+  ],
+  "exit_code": 0,
+  "exit_code_hex": "0x00000000",
+  "wall_seconds": 0.009737399988807738,
+  "timed_out": false
+}
